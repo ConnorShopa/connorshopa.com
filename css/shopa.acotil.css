@@ -1,0 +1,207 @@
+@import url(satoshi.css);
+
+#mouse-circle {
+    z-index: 1;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    margin: -13px 0 0 -13px;
+    background: rgba(54, 153, 122, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+
+}
+
+
+/* HEADER THINGS */
+#headerBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: space-between;
+
+    width: 90vw;
+
+    /* align-self: stretch; */
+    /* flex-grow: 1; */
+
+    position: fixed;
+    /* Make it stick/fixed */
+    top: 0;
+    /* Stay on top */
+
+    transition: top 0.3s;
+    /* Transition effect when sliding down (and up) */
+
+    padding-left: 1.6vw;
+    padding-top: 1.6vh;
+}
+
+
+
+/* LOGO THINGS */
+.logoBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 72px;
+    min-width: 60px;
+    max-width: 100px;
+    background-color: #f6e58d;
+    border-radius: 16px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+
+
+
+}
+
+.soundTrack{
+    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+}
+
+.logoBox:hover {
+    cursor: url('cursorHover.png'), pointer;
+}
+
+
+
+html {
+    /* cursor: url("cursorDark.png"), auto; */
+    height: 100%;
+    display: flex;
+    flex: auto;
+    background: #1e272e;
+    min-height: 100%;
+    min-width: 100%;
+
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 40px;
+}
+
+
+
+.entry {
+
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    gap: 24px;
+    padding: 24px;
+
+}
+
+.seperatorLine{
+    height: 2px;
+    width: 90vw;
+    background-color: #d2dae2;
+}
+
+.Description {
+
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+
+.Title {
+    color: White;
+    font-family: "Satoshi-Medium";
+    font-size: 20px;
+    height: 4px;
+}
+
+.Credit {
+    color: White;
+    font-family: "Satoshi-Italic";
+    font-size: 18px;
+    height: 18px;
+}
+
+.Link a {
+    color: grey;
+    font-family: "Satoshi-Medium";
+    font-size: 14px;
+    height: 12px;
+    text-decoration: none;
+
+}
+
+
+
+
+.entry img {
+    max-height: 40vh;
+    max-width: 80vw;
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+
+#footerBox {
+    /* margin-right: 1.6vw;
+    margin-bottom: 0.8vh; */
+    display: flex;
+    flex-grow: 0;
+    flex-direction: row;
+    width: 100%;
+    /* background-color: aqua; */
+    justify-content: flex-end;
+    align-items: top;
+    opacity: 100;
+    padding-bottom: 24px;
+
+    position:fixed;
+    transition: bottom 0.3s;
+    padding-right: 24px;
+    
+    bottom:24px;
+
+}
+
+#footerContent {
+    display: flex;
+    width: auto;
+    height: 2.2vh;
+    align-items: center;
+    border-radius: 8px;
+
+
+    padding: 3px 24px;
+    gap: 4px;
+
+    font-family: 'Satoshi-Medium';
+    font-style: medium;
+    font-size: 0.8em;
+    background-color: #f6e58d;
+    color: #0A3D62;
+
+}
