@@ -121,7 +121,7 @@ body {
 
 #extraneousLinks {
     text-decoration: none;
-    
+    font-family: 'Satoshi-Medium';
     height: 16vh;
     display: flex;
     align-items: center;
@@ -136,7 +136,7 @@ a{
 }
 
 a:hover {
-    
+    font-family: 'Satoshi-Medium';
     cursor: url('studio.cursorHover.png'), pointer;
     
 }
@@ -164,20 +164,28 @@ button:hover {
     align-items: center;
 }
 #footerContent {
+    
+
+
+
     display: flex;
     width: auto;
-    height: 32px;
+    height: 2.2vh;
     align-items: center;
     border-radius: 8px;
-    
-    
-    padding: 3px 24px;
-    gap: 4px;
 
-    font-family: 'Satoshi-Medium';
-    font-style: medium;
+
+    padding: 4px 24px;
+    gap: 8px;
+
+    font-family: 'Satoshi-Regular';
+    font-style: Regular;
     font-size: 0.8em;
     background-color: #0A3D62;
     color: white;
+    white-space: nowrap;
+
+
 
 }
+

@@ -195,13 +195,14 @@ body {
     border-radius: 8px;
 
 
-    padding: 3px 24px;
-    gap: 4px;
+    padding: 4px 24px;
+    gap: 8px;
 
-    font-family: 'Satoshi-Medium';
-    font-style: medium;
+    font-family: 'Satoshi-Regular';
+    font-style: Regular;
     font-size: 0.8em;
     background-color: #f6e58d;
-    color: #0A3D62;
+    color: #031421;
+    white-space: nowrap;
 
 }
