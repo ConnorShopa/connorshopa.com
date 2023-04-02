@@ -1,1 +1,0 @@
-# shopa.studio
