@@ -24,7 +24,7 @@ iconMenu.addEventListener('mouseleave', (e) => {
 // GO BACK TO SHOPA.STUDIO FUCNTION CALLED ON CLICK
 function etGoHome() {
   
-  window.location.href = "./index";
+  window.location.href = "./";
 
 }
 
