@@ -38,7 +38,7 @@ $(document).ready(function () {
     }
 
     function etGoAcotil() {
-        window.location.href = "shopa.acotil.html"
+        window.location.href = "shopa.acotil.images.html"
     }
 
     function openAcotilTab() {

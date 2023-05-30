@@ -28,6 +28,14 @@ function etGoHome() {
 
 }
 
+function etGoTextTab() {
+  window.location.href = "acotil.text.html"
+}
+
+function etGoImagesTab() {
+  window.location.href = "acotil.images.html"
+}
+
 /* When the user scrolls down, hide the logoBar. When the user scrolls up, show the navbar */
 var prevScrollpos = window.pageYOffset;
 window.onscroll = function() {
