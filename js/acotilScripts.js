@@ -6,7 +6,7 @@ let animateLogo = bodymovin.loadAnimation({
   renderer: 'svg',
   loop: false,
   autoplay: false,
-  path: "resources/lottiefiles/shopaAnimDark.json"
+  path: "resources/lottiefiles/shopaAnimLight.json"
 });
 
 var directionMenu = 1;
