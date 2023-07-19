@@ -132,7 +132,7 @@ body {
 #extraneousLinks {
     position: fixed;
     /* Make it stick/fixed */
-    bottom: 1vh;
+    bottom: 0px;
     /* Stay on top */
     text-decoration: none;
     font-family: 'Satoshi-Medium';
