@@ -5,7 +5,7 @@ html {
     height: 100%;
     display: flex;
     flex: auto;
-    background: #1e272e;
+    background: #92DD96;
     min-height: 100%;
     min-width: 100%;
 
@@ -55,7 +55,7 @@ body {
     width: 72px;
     min-width: 60px;
     max-width: 100px;
-    background-color: #f6e58d;
+    background-color: #F5F6FA;
     border-radius: 16px;
     padding-top: 12px;
     padding-bottom: 10px;
@@ -76,117 +76,106 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     flex-grow: 1;
     gap: 40px;
+    width: 100%;
 }
 
 
-#tabBox {
 
+
+#sketchbookSection{
     
     display: flex;
-    flex-direction: row;
-    gap: 24px;
+    width: 80vw;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 4vw;
+    flex-shrink: 0;
+    flex-wrap: wrap;  
+    justify-content: center; 
+    padding-bottom: 1.6vh;
+}
+
+.imageAndText {
     
-
-}
-#tabBox:hover{
-    cursor: url('cursorHover.png'), pointer;
-}
-
-#selectedTabTitle{
-    color: white;
-    font-family: "Satoshi-Bold";
-    font-size: 16px;
-    text-decoration: underline;
-}
-
-#deselectedTabTitle{
-    color: #CED8E0;
-    font-family: "Satoshi-Regular";
-    font-size: 16px;
-    text-decoration: none;
-}
-
-#deselectedTabTitle:hover{
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-#selectedTabTitle:hover{
-    text-decoration: none;
-}
-
-
-
-
-
-
-
-.entry {
-
     display: flex;
+    
     flex-direction: column;
-    align-items: left;
-    gap: 24px;
-    padding: 24px;
-
+    gap: 1vh;
+    max-width: 30vw;
+    
 }
 
-.seperatorLine{
-    height: 2px;
-    width: 90vw;
-    background-color: #d2dae2;
-}
-
-.Description {
-
-    display: flex;
-    flex-direction: column;
-    gap: 36px;
-}
-
-
-.Title {
-    color: White;
-    font-family: "Satoshi-Medium";
-    font-size: 20px;
-    height: 4px;
-}
-
-.Credit {
-    color: White;
-    font-family: "Satoshi-Italic";
-    font-size: 18px;
-    height: 18px;
-}
-
-.Link a {
-    color: grey;
-    font-family: "Satoshi-Medium";
-    font-size: 14px;
-    height: 12px;
+.imageAndText a{
+    
     text-decoration: none;
-
+    font-family: 'Satoshi-Medium';
+    
+    display: flex;
+    align-items: center;
+    flex-grow: 0;
+    gap: 10px;
 }
 
-
-
-
-.entry img {
-    max-height: 40vh;
-    max-width: 80vw;
+.imageAndText img{
+    
+    max-width: 20vw;
     border-radius: 4px;
+    box-shadow: 0px 1.6px 4px rgba(7, 66, 47, 0.1);
+    
 }
 
+#extraneousLinks {
+    position: fixed;
+    /* Make it stick/fixed */
+    bottom: 1vh;
+    
+    /* Stay on top */
+    text-decoration: none;
+    font-family: 'Satoshi-Medium';
+    
+    display: flex;
+    border-radius: 24px;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    background-color: #E2EBF1;
+    padding: 2vw;
+
+    flex-direction: row;
+    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+    
+
+    transition: bottom 0.3s;
+    /* Transition effect when sliding down (and up) */
 
 
+}
 
+a{
+    color: #0A3D62;
+    text-decoration: none;
+}
 
+a:hover {
+    font-family: 'Satoshi-Medium';
+    cursor: url('studio.cursorHover.png'), pointer;
+    color: #0A3D62;
+    
+}
 
+a:visited {
+    text-decoration: none;
+    color: #0A3D62;
+    
+}
 
-
-
+button:hover {
+    cursor: url('studio.cursorHover.png'), pointer;
+    
+}
 
 
 #footerBox {
@@ -208,8 +197,8 @@ body {
     bottom: 0px;
 
 }
-
 #footerContent {
+
     display: flex;
     width: auto;
     height: 2.2vh;
@@ -223,8 +212,12 @@ body {
     font-family: 'Satoshi-Regular';
     font-style: Regular;
     font-size: 0.8em;
-    background-color: #f6e58d;
-    color: #031421;
+    background-color: #F5F6FA;
+    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+    color: #0A3D62;
     white-space: nowrap;
 
+
+
 }
+

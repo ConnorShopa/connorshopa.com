@@ -96,7 +96,7 @@ $(document).ready(function () {
         // $(this).css("border-bottom", "1px solid #0A3D62");
     }, function () {
         gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
-        $(this).css("color", "#335D7C");
+        $(this).css("color", "#0A3D62");
         $(this).css("text-decoration", "none");
     });
 

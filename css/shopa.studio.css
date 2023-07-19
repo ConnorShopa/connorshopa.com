@@ -8,7 +8,6 @@ html {
     background: #E2EBF1;
     min-height: 100%;
     min-width: 100%;
-    /* background-color: yellow; */
 
 }
 
@@ -61,15 +60,26 @@ body {
 /* HEADER THINGS */
 .headerBox {
     
-    flex: none;
-    align-self: stretch;
-    flex-grow: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: space-between;
 
+    width: 95vw;
+
+    /* align-self: stretch; */
+    /* flex-grow: 1; */
+
+    position: fixed;
+    /* Make it stick/fixed */
+    top: 0;
+    /* Stay on top */
+
+    transition: top 0.3s;
+    /* Transition effect when sliding down (and up) */
 
     padding-left: 1.6vw;
     padding-top: 1.6vh;
-
-    /* background-color: orange; */
 }
 
 
@@ -120,13 +130,28 @@ body {
 }
 
 #extraneousLinks {
+    position: fixed;
+    /* Make it stick/fixed */
+    bottom: 1vh;
+    /* Stay on top */
     text-decoration: none;
     font-family: 'Satoshi-Medium';
-    height: 16vh;
+    z-index: 0;
     display: flex;
+    border-radius: 24px;
     align-items: center;
-    flex-grow: 0;
+    justify-content: center;
     gap: 36px;
+    /* background-color: #E2EBF1; */
+    padding: 2vw;
+
+    flex-direction: row;
+    
+    
+
+    transition: top 0.3s;
+    /* Transition effect when sliding down (and up) */
+
 
 }
 
@@ -153,15 +178,21 @@ button:hover {
 
 
 #footerBox{
-    margin-right: 1.6vw;
-    margin-bottom: 0.8vh;
     display: flex;
     flex-grow: 0;
     flex-direction: row;
-    width: 100%;
-    /* background-color: aqua; */
+    width: 95vw;
+    
     justify-content: flex-end;
-    align-items: center;
+    align-items: top;
+    opacity: 100;
+    padding-bottom: 24px;
+
+    position:fixed;
+    transition: bottom 0.3s;
+    padding-right: 24px;
+    
+    bottom: 0px;
 }
 #footerContent {
     
