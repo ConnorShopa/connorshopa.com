@@ -92,7 +92,7 @@ window.onscroll = function() {
     
     document.getElementById("footerBox").style.bottom = "0";
 
-    document.getElementById("extraneousLinks").style.bottom = "1vh";
+    document.getElementById("extraneousLinks").style.bottom = "1.6vh";
 
     // document.getElementById("footerBox").style.opacity = "100";
   } else {
