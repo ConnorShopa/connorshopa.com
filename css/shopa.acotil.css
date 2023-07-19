@@ -235,13 +235,12 @@ button:hover {
 
 
 
-#footerBox {
-   
+#footerBox{
     display: flex;
     flex-grow: 0;
     flex-direction: row;
     width: 95vw;
-    
+    align-self: center;
     justify-content: flex-end;
     align-items: top;
     opacity: 100;
@@ -252,7 +251,6 @@ button:hover {
     padding-right: 24px;
     
     bottom: 0px;
-
 }
 
 #footerContent {
