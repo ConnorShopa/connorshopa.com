@@ -45,13 +45,36 @@ window.onscroll = function() {
     
     document.getElementById("footerBox").style.bottom = "0";
 
+    document.getElementById("extraneousLinks").style.bottom = "1.6vh";
+
     // document.getElementById("footerBox").style.opacity = "100";
   } else {
     document.getElementById("headerBox").style.top = "-100px";
     document.getElementById("footerBox").style.bottom = "-140px";
+    document.getElementById("extraneousLinks").style.bottom = "-140px";
     
     // document.getElementById("footerBox").style.opacity = "0";
   }
   prevScrollpos = currentScrollPos;
 } 
 
+// GSAP ANIMATIONS
+// LINK HOVER ANIMATION
+
+
+$("a",).hover(function () {
+  gsap.to("#mouse-circle", { duration: 0.1, scale: 2 });
+  $(this).css("color", "blue");
+  $(this).css("text-decoration", "underline");
+  // $(this).css("border-bottom", "1px solid #0A3D62");
+  }, function () {
+  gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
+  $(this).css("color", "#0A3D62");
+  $(this).css("text-decoration", "none");
+  });
+  
+  $("#logoBox").hover(function () {
+  gsap.to("#mouse-circle", { duration: 0.1, scale: 2 });
+  }, function () {
+  gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
+  });
