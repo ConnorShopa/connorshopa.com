@@ -14,7 +14,7 @@ html {
 
 #mouse-circle {
 
-    z-index: 0;
+    z-index: 1;
 
     
     position: absolute;
@@ -78,8 +78,8 @@ body {
     transition: top 0.3s;
     /* Transition effect when sliding down (and up) */
 
-    padding-left: 1.6vw;
-    padding-top: 1.6vh;
+    padding-left: 24px;
+    padding-top: 24px;
 }
 
 
@@ -132,16 +132,22 @@ body {
 #extraneousLinks {
     position: fixed;
     /* Make it stick/fixed */
-    bottom: 1.6vh;
+    bottom: 8vh;
+    z-index: 0;
+
+    border-radius: 12px;
+    background: #FFF;
+
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
     /* Stay on top */
     text-decoration: none;
     font-family: 'Satoshi-Medium';
     
-    display: flex;
-    border-radius: 24px;
-    align-items: center;
+    display: inline-flex;
+    padding: 24px;
     justify-content: center;
-    gap: 36px;
+    align-items: center;
+    gap: 24px;
     /* background-color: #E2EBF1; */
     padding: 2vw;
 
@@ -153,6 +159,19 @@ body {
     /* Transition effect when sliding down (and up) */
 
 
+}
+
+#videoCollection{
+    background-color: red;
+    width: 1vw;
+}
+
+
+
+.linesRule {
+    width: 1px;
+    height: 22px;
+    background: #D9D9D9;
 }
 
 a{

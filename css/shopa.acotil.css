@@ -207,20 +207,20 @@ body {
 
 }
 
-a{
+#extraneousLinks a{
     color: #0A3D62;
     text-decoration: none;
 }
 
-a:hover {
+#extraneousLinks a:hover {
     font-family: 'Satoshi-Medium';
     cursor: url('studio.cursorHover.png'), pointer;
     color: #0A3D62;
     
 }
 
-a:visited {
-    text-decoration: none;
+#extraneousLinks a:visited {
+    text-decoration: none !important ;
     color: #0A3D62;
     
 }
@@ -229,8 +229,6 @@ button:hover {
     cursor: url('studio.cursorHover.png'), pointer;
     
 }
-
-
 
 
 
