@@ -130,6 +130,14 @@ body {
 }
 
 #extraneousLinks {
+
+    display: inline-flex;
+    flex-wrap: wrap;
+    margin: 24px;
+    padding: 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
     position: fixed;
     /* Make it stick/fixed */
     bottom: 8vh;
@@ -143,20 +151,15 @@ body {
     text-decoration: none;
     font-family: 'Satoshi-Medium';
     
-    display: inline-flex;
-    padding: 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
+    
     /* background-color: #E2EBF1; */
-    padding: 2vw;
+    padding: 24px;
 
     flex-direction: row;
     
     
 
     transition: top 0.3s;
-    /* Transition effect when sliding down (and up) */
 
 
 }
@@ -181,7 +184,8 @@ a{
 
 a:hover {
     font-family: 'Satoshi-Medium';
-    cursor: url('studio.cursorHover.png'), pointer;
+    /* cursor: url('studio.cursorHover.png'), pointer; */
+    cursor: none;
     
 }
 
@@ -238,4 +242,21 @@ button:hover {
 
 
 }
+
+/* Media query for mobile devices */
+@media screen and (max-width: 768px) {
+    #extraneousLinks {
+        display: none; /* Change to block layout for mobile devices */
+    }
+
+    .workLink {
+        margin: 5px 0; /* Adjust spacing for mobile view */
+        display: block; /* Display links as block elements */
+    }
+
+    #mobileMenuButton {
+        display: block; /* Display the button for mobile devices */
+    }
+}
+
 

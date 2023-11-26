@@ -1,5 +1,11 @@
 $(document).ready(function () {
 
+
+    function toggleMobileMenu() {
+        var mobileMenu = document.getElementById("extraneousLinks");
+        mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
+    }
+
     // Loop logo on hover
     let iconMenu = document.querySelector('.logoAnimation');
     let animationMenu = bodymovin.loadAnimation({
@@ -70,41 +76,95 @@ $(document).ready(function () {
     function startMouseFollow() {
         requestAnimationFrame(startMouseFollow);
 
-
         revisedMousePosX += (mousePosX - revisedMousePosX) / delay;
         revisedMousePosY += (mousePosY - revisedMousePosY) / delay;
 
         mouseCircle.style.top = revisedMousePosY + 'px';
         mouseCircle.style.left = revisedMousePosX + 'px';
-
-
     }
 
-
-    //ON LOAD FUNC CALLS
+    // ON LOAD FUNC CALLS
     startMouseFollow();
 
+// GSAP ANIMATIONS
+    // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
+    $("a").hover(
+        function () {
+            // Get the position and width of the hovered link
+            let linkPos = $(this).offset();
+            let linkWidth = $(this).outerWidth() - "12";
+    
+            // Set revisedMousePosX and revisedMousePosY to the link's position
+            revisedMousePosX = linkPos.left;
+            revisedMousePosY = linkPos.top;
+    
+            // Update the mouse circle position without considering link height
+            updateMouseCirclePosition(true, linkWidth); // Pass true to indicate hover
+    
+            // Apply hover animations
+            gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+            $(this).css("color", "blue");
+            $(this).css("text-decoration", "underline");
+    
+            // Add a black border to the mouse circle
+            mouseCircle.style.border = '0.5px solid #0A3D62';
+        },
+        function () {
+            // Update the mouse circle position without considering link height
+            updateMouseCirclePosition(false); // Pass false to indicate un-hover
+    
+            // Apply hover out animations
+            gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
+            $(this).css("color", "#0A3D62");
+            $(this).css("text-decoration", "none");
+    
+            // Remove the black border on un-hover
+            mouseCircle.style.border = 'none';
+        }
+    );
+    
+    function updateMouseCirclePosition(isHover, linkWidth) {
+        // Update the position of the mouse circle
+        mouseCircle.style.top = revisedMousePosY + 'px';
+        mouseCircle.style.left = revisedMousePosX - linkWidth*0.8;
+    
+        // Set the width of the rectangle to the link's text width
+        mouseCircle.style.width = isHover ? linkWidth + 'px' : '';
+    
+        // Check if you should transition to a rectangle
+        if (isHover) {
+            // Adjust the height of the rectangle
+            mouseCircle.style.height = '20px'; // Set the desired height
+            mouseCircle.style.borderRadius = '8px'; // Set the desired border radius
+        } else {
+            // Reset to circle
+            mouseCircle.style.height = ''; // Reset the height
+            mouseCircle.style.borderRadius = '50%';
+        }
+    }
 
-    // GSAP ANIMATIONS
-    // LINK HOVER ANIMATION
+    function shouldTransitionToRectangle(isHover) {
+        // Adjust this condition based on your requirements
+        // For example, you might want to transition to a rectangle only on hover
+        return isHover;
+    }
 
-
-    $("a",).hover(function () {
-        gsap.to("#mouse-circle", { duration: 0.1, scale: 2 });
+    $("a").hover(function () {
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
         $(this).css("color", "blue");
         $(this).css("text-decoration", "underline");
-        // $(this).css("border-bottom", "1px solid #0A3D62");
     }, function () {
-        gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
         $(this).css("color", "#0A3D62");
         $(this).css("text-decoration", "none");
     });
 
     $("#logoBox").hover(function () {
-        gsap.to("#mouse-circle", { duration: 0.1, scale: 2 });
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
     }, function () {
-        gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
     });
 
+    
 });
 
