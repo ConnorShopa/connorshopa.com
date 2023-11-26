@@ -107,7 +107,7 @@ $(document).ready(function () {
             $(this).css("text-decoration", "underline");
     
             // Add a black border to the mouse circle
-            mouseCircle.style.border = '0.5px solid #0A3D62';
+            mouseCircle.style.border = '0.3px solid #0A3D62';
         },
         function () {
             // Update the mouse circle position without considering link height

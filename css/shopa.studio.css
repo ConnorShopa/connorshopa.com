@@ -1,16 +1,39 @@
 @import url(satoshi.css);
 
+
+
 html {
     cursor: url("studio.cursor.png"), auto;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
     height: 100%;
     display: flex;
     flex: auto;
-    background: #E2EBF1;
+    
     min-height: 100%;
     min-width: 100%;
 
 }
 
+
+
+
+
+body {
+    background-color: red;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #E2EBF1;
+}
+
+habbotSiteBody {
+
+}
 
 #mouse-circle {
 
@@ -18,8 +41,8 @@ html {
 
     
     position: absolute;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     margin: -13px 0 0 -13px;
     background: rgba(10, 61, 98, 0.14);
     border-radius: 50%;
@@ -29,18 +52,27 @@ html {
     transition: height 0.2s; /* Transition effect when sliding down (and up) */
 }
 
-
-body {
+#extraneousLinks {
 
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 24px;
+    margin: 24px;
+    justify-content: center;
     align-items: center;
-    flex-grow: 1;
-
-    
-    gap: 0.1vw;
-
-    background-color: #E2EBF1;
+    gap: 24px;
+    position: fixed;
+    /* Make it stick/fixed */
+    bottom: 4vh;
+    z-index: 0;
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    text-decoration: none;
+    font-family: 'Satoshi-Medium';
+    padding: 24px;
+    flex-direction: row;
+    transition: top 0.3s;
 
 }
 
@@ -65,14 +97,15 @@ body {
     justify-content: space-between;
     align-content: space-between;
 
-    width: 95vw;
+    min-height: 100%;
+    min-width: 100%;
 
     /* align-self: stretch; */
     /* flex-grow: 1; */
 
     position: fixed;
     /* Make it stick/fixed */
-    top: 0;
+   
     /* Stay on top */
 
     transition: top 0.3s;
@@ -110,9 +143,9 @@ body {
 #content{
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    
     align-items: center;
-    width: 100vw;
+    
 }
 
 #aboutMe{
@@ -138,40 +171,7 @@ body {
     height: 0px;
 }
 
-#extraneousLinks {
 
-    display: inline-flex;
-    flex-wrap: wrap;
-    
-    padding: 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    position: fixed;
-    /* Make it stick/fixed */
-    bottom: 8vh;
-    z-index: 0;
-
-    border-radius: 12px;
-    background: #FFF;
-
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
-    /* Stay on top */
-    text-decoration: none;
-    font-family: 'Satoshi-Medium';
-    
-    
-    /* background-color: #E2EBF1; */
-    padding: 24px;
-
-    flex-direction: row;
-    
-    
-
-    transition: top 0.3s;
-
-
-}
 
 #videoCollection{
     background-color: red;
