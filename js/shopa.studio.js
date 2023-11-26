@@ -125,7 +125,7 @@ $(document).ready(function () {
     
     function updateMouseCirclePosition(isHover, linkWidth) {
         // Update the position of the mouse circle
-        mouseCircle.style.top = revisedMousePosY + 'px';
+        mouseCircle.style.top = revisedMousePosY ;
         mouseCircle.style.left = revisedMousePosX - linkWidth*0.8;
     
         // Set the width of the rectangle to the link's text width
@@ -135,7 +135,7 @@ $(document).ready(function () {
         if (isHover) {
             // Adjust the height of the rectangle
             mouseCircle.style.height = '20px'; // Set the desired height
-            mouseCircle.style.borderRadius = '8px'; // Set the desired border radius
+            mouseCircle.style.borderRadius = '10px'; // Set the desired border radius
         } else {
             // Reset to circle
             mouseCircle.style.height = ''; // Reset the height
