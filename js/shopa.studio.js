@@ -86,7 +86,7 @@ $(document).ready(function () {
     // ON LOAD FUNC CALLS
     startMouseFollow();
 
-// GSAP ANIMATIONS
+    // GSAP ANIMATIONS
     // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
     $("a").hover(
         function () {
@@ -146,12 +146,7 @@ $(document).ready(function () {
         }
     }
 
-    // GO BACK TO SHOPA.STUDIO FUCNTION CALLED ON CLICK
-function etGoHome() {
-  
-    window.location.href = "./";
-  
-  }
+
 
     $("a").hover(function () {
         gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });

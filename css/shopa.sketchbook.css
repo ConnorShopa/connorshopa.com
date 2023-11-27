@@ -5,7 +5,7 @@ html {
     height: 100%;
     display: flex;
     flex: auto;
-    background: #A3DA9D;
+    background: #306252;
     min-height: 100%;
     min-width: 100%;
 
@@ -29,7 +29,7 @@ body {
     width: 32px;
     height: 32px;
     margin: -13px 0 0 -13px;
-    background:rgba(244, 219, 138, 0.50);
+    background:rgba(244, 219, 138, 0.2);
     border-radius: 50%;
     pointer-events: none;
 
@@ -125,9 +125,12 @@ body {
 .imageAndText a{
     
     text-decoration: none;
-    font-family: 'Satoshi-Medium';
     
+    font-family: 'Satoshi-Medium';
+    max-width: 30vw;
+    flex-wrap: wrap;
     display: flex;
+    max-width: 20vw;
     align-items: center;
     flex-grow: 0;
     gap: 10px;
@@ -174,30 +177,39 @@ body {
     }
 
 a{
-    color: #0A3D62;
+    color: white;
     text-decoration: none;
 }
 
 a:hover {
     font-family: 'Satoshi-Medium';
-    cursor: url('studio.cursorHover.png'), pointer;
+    cursor: none;
     color: #0A3D62;
     
 }
 
-.extraneousLinks a:hover{
-    cursor: none;
-}
+
 
 a:visited {
     text-decoration: none;
-    color: #0A3D62;
+    color: white;
     
 }
 
 button:hover {
     cursor: url('studio.cursorHover.png'), pointer;
     
+}
+
+#extraneousLinks a {
+
+    color: #0A3D62;
+    text-decoration: none;
+}
+
+#extraneousLinks a:visited {
+    color: #0A3D62;
+    text-decoration: none;
 }
 
 
@@ -220,6 +232,7 @@ button:hover {
     bottom: 0px;
 
 }
+
 #footerContent {
 
     display: flex;
