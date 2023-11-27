@@ -4,14 +4,13 @@
 
 html {
     background-color: #E2EBF1;
-    cursor: url("studio.cursor.png"), auto;
+    cursor: url("cursorMonk.png"), auto;
     align-items: center;
     align-content: center;
     flex-direction: column;
-    height: 100%;
     display: flex;
     flex: auto;
-    
+    background: linear-gradient(180deg, #051324 0%, #D9EAFF 100%);
     min-height: 100%;
     min-width: 100%;
 
@@ -23,8 +22,8 @@ html {
 
 body {
     
-    min-height: 100%;
-    min-width: 100%;
+    /* min-height: 100%;
+    min-width: 100%; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,7 +42,7 @@ body {
     width: 32px;
     height: 32px;
     margin: -13px 0 0 -13px;
-    background: rgba(10, 61, 98, 0.14);
+    background: rgba(250, 152, 58, 0.20);
     border-radius: 50%;
     pointer-events: none;
 
@@ -85,7 +84,73 @@ body {
     flex-grow: 1;
 }
 
+#habbotSiteBody{
+    padding-top: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 
+}
+
+#habbotHeroText{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding-left: 24px;
+    padding-right: 24px;
+    
+}
+
+#heroButton{
+    display: inline-flex;
+    padding: 0px 18px;
+    justify-content: center;
+    height: 64px;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 16px;
+    background: #FA983A;
+
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+
+    color: #FFFAF6;
+
+    text-align: center;
+
+    font-family: 'Satoshi-Regular';
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
+
+h1{
+    color: #FFFAF6;
+
+    text-align: center;
+    font-family: 'Satoshi-Bold';
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: -2.24px;
+}
+
+h2{
+    color: #FFFAF6;
+
+    text-align: center;
+    font-family: 'Satoshi-Regular';
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.8px;
+}
 
 .headerBox {
     
@@ -109,7 +174,7 @@ body {
     width: 72px;
     min-width: 60px;
     max-width: 100px;
-    background-color: #0A3D62;
+    background-color: #91AFEF;
     border-radius: 16px;
     padding-top: 12px;
     padding-bottom: 10px;
@@ -129,44 +194,6 @@ body {
 
 }
 
-#content{
-    display: flex;
-    flex-wrap: wrap;
-    
-    align-items: center;
-    
-}
-
-#aboutMe{
-    z-index: 1;
-    display: flex;
-    flex-wrap: wrap;
-    flex-grow: 1;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0px;
-}
-
-#aboutMe h4{
-    font-family: 'Satoshi-Regular';
-    font-size: 18px;
-    color: #335D7C;
-    line-height: 320%;
-}
-
-#aboutMe a{
-    font-family: 'Satoshi-Regular';
-    font-size: 18px;
-    color: #335D7C;
-    height: 0px;
-}
-
-
-
-#videoCollection{
-    background-color: red;
-    width: 1vw;
-}
 
 
 
@@ -193,11 +220,6 @@ a:visited {
     color: #0A3D62;
 }
 
-button:hover {
-    cursor: url('studio.cursorHover.png'), pointer;
-    
-}
-
 
 #footerBox{
     display: flex;
@@ -216,28 +238,7 @@ button:hover {
     
     bottom: 0px;
 }
-#footerContent {
-  
-    display: flex;
-    width: auto;
-    height: 2.2vh;
-    align-items: center;
-    border-radius: 8px;
 
-
-    padding: 4px 24px;
-    gap: 8px;
-
-    font-family: 'Satoshi-Regular';
-    font-style: Regular;
-    font-size: 0.8em;
-    background-color: #0A3D62;
-    color: white;
-    white-space: nowrap;
-
-
-
-}
 
 #mobileMenuButton{
     display: flex;

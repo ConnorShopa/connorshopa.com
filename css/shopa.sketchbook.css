@@ -2,7 +2,7 @@
 
 html {
     cursor: url("cursorDark.png"), auto;
-    height: 100%;
+    
     display: flex;
     flex: auto;
     background: #306252;
@@ -29,7 +29,9 @@ body {
     width: 32px;
     height: 32px;
     margin: -13px 0 0 -13px;
-    background:rgba(244, 219, 138, 0.2);
+    background:linear-gradient(132deg, #EBF1F5 15.23%, #E2EBF1 86.21%);
+
+
     border-radius: 50%;
     pointer-events: none;
 
