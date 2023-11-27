@@ -1,10 +1,10 @@
 $(document).ready(function () {
 
 
-    function toggleMobileMenu() {
-        var mobileMenu = document.getElementById("extraneousLinks");
-        mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
-    }
+    // function toggleMobileMenu() {
+    //     var mobileMenu = document.getElementById("extraneousLinks");
+    //     mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
+    // }
 
     // Loop logo on hover
     let iconMenu = document.querySelector('.logoAnimation');
@@ -50,11 +50,11 @@ $(document).ready(function () {
     function openAcotilTab() {
         window.open("https://acollectionofthingsilike.com", "_blank");
     }
-    $('#who').click(function () {
-        setWhoContent();
-        let contentState = "whoState"
-        console.log(contentState)
-    })
+    // $('#who').click(function () {
+    //     setWhoContent();
+    //     let contentState = "whoState"
+    //     console.log(contentState)
+    // })
 
 
 
@@ -92,41 +92,44 @@ $(document).ready(function () {
         function () {
             // Get the position and width of the hovered link
             let linkPos = $(this).offset();
-            let linkWidth = $(this).outerWidth() - "12";
-    
+            let linkWidth = $(this).outerWidth();
+
             // Set revisedMousePosX and revisedMousePosY to the link's position
             revisedMousePosX = linkPos.left;
             revisedMousePosY = linkPos.top;
-    
+
             // Update the mouse circle position without considering link height
             updateMouseCirclePosition(true, linkWidth); // Pass true to indicate hover
-    
+
             // Apply hover animations
             gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
             $(this).css("color", "blue");
             $(this).css("text-decoration", "underline");
-    
+
             // Add a black border to the mouse circle
-            mouseCircle.style.border = '0.3px solid #0A3D62';
+            mouseCircle.style.border = '0.5px solid #0A3D62';
         },
         function () {
             // Update the mouse circle position without considering link height
             updateMouseCirclePosition(false); // Pass false to indicate un-hover
-    
+
             // Apply hover out animations
             gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
             $(this).css("color", "#0A3D62");
             $(this).css("text-decoration", "none");
-    
+
             // Remove the black border on un-hover
             mouseCircle.style.border = 'none';
         }
     );
     
     function updateMouseCirclePosition(isHover, linkWidth) {
+        console.log(isHover)
+        console.log(revisedMousePosX)
+        console.log(linkWidth)
         // Update the position of the mouse circle
-        mouseCircle.style.top = revisedMousePosY ;
-        mouseCircle.style.left = revisedMousePosX - linkWidth*0.8;
+        mouseCircle.style.top = (revisedMousePosY + linkWidth); // Adjusted for better vertical alignment
+        mouseCircle.style.left = (revisedMousePosX - linkWidth / 2); // Center the rectangle over the link
     
         // Set the width of the rectangle to the link's text width
         mouseCircle.style.width = isHover ? linkWidth + 'px' : '';
@@ -143,11 +146,7 @@ $(document).ready(function () {
         }
     }
 
-    function shouldTransitionToRectangle(isHover) {
-        // Adjust this condition based on your requirements
-        // For example, you might want to transition to a rectangle only on hover
-        return isHover;
-    }
+   
 
     $("a").hover(function () {
         gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
