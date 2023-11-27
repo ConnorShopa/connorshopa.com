@@ -1,7 +1,10 @@
 @import url(satoshi.css);
 
+
+
+
 html {
-    /* cursor: url("cursorDark.png"), auto; */
+    cursor: url("cursorDark.png"), auto;
     height: 100%;
     display: flex;
     flex: auto;
@@ -12,36 +15,26 @@ html {
 }
 
 body {
-    min-height: 100vh;
-    padding-top: 4vh;
+    
+    min-height: 100%;
+    min-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1;
+    justify-content: flex-start;
+    
+   
 }
 
 /* HEADER THINGS */
 #headerBox {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: space-between;
-
-    width: 95vw;
-
-    /* align-self: stretch; */
-    /* flex-grow: 1; */
-
+    
+ 
+    width: 100vw;
     position: fixed;
-    /* Make it stick/fixed */
     top: 0;
-    /* Stay on top */
-
     transition: top 0.3s;
-    /* Transition effect when sliding down (and up) */
 
-    padding-left: 1.6vw;
-    padding-top: 1.6vh;
 }
 
 
@@ -55,14 +48,17 @@ body {
     width: 72px;
     min-width: 60px;
     max-width: 100px;
-    background-color: #20418A;
+    background-color: #0A3D62;
     border-radius: 16px;
     padding-top: 12px;
     padding-bottom: 10px;
     padding-left: 16px;
     padding-right: 16px;
+    margin: 24px;
 
     box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+    background-color: #20418A;
+    
 
 
 
@@ -72,22 +68,51 @@ body {
     cursor: url('cursorHover.png'), pointer;
 }
 
-#content {
+#mouse-circle {
+
+    z-index: 2;
+
+    
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    margin: -13px 0 0 -13px;
+    background:rgba(244, 219, 138, 0.2);
+    border-radius: 50%;
+    pointer-events: none;
+
+}
+
+#title{
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
-    flex-grow: 1;
-    gap: 40px;
+}
+
+#title h4{
+    color: #F4E598;
+
+    leading-trim: both;
+
+    text-edge: cap;
+    font-family: Satoshi;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 200%; /* 72px */
+    letter-spacing: -1.44px;
 }
 
 
 #tabBox {
-
-    
+    z-index: 1;
+    /* background-color: blue; */
     display: flex;
     flex-direction: row;
-    gap: 24px;
-    
+    justify-content: center;
+    gap: 24px; 
 
 }
 #tabBox:hover{
@@ -116,11 +141,17 @@ body {
 #selectedTabTitle:hover{
     text-decoration: none;
 }
+.linesRule {
+    width: 1px;
+    height: 22px;
+    background: #D9D9D9;
+}
 
-
-
-
-
+#entriesBox{
+ display: flex;
+ flex-direction: column;   
+ /* background-color: red; */
+}
 
 
 .entry {
@@ -181,60 +212,39 @@ body {
 
 
 #extraneousLinks {
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 24px;
+    margin: 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
     position: fixed;
     /* Make it stick/fixed */
-    bottom: 1vh;
-    align-self: center;
-    /* Stay on top */
+    bottom: 4vh;
+    
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
     text-decoration: none;
     font-family: 'Satoshi-Medium';
-    
-    display: flex;
-    border-radius: 24px;
-    align-items: center;
-    justify-content: center;
-    gap: 36px;
-    background-color: #E2EBF1;
-    padding: 2vw;
-
+    padding: 24px;
     flex-direction: row;
-    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
-    
-
     transition: bottom 0.3s;
-    /* Transition effect when sliding down (and up) */
-
 
 }
 
-#extraneousLinks {
-    z-index: 1;
-        display: flex;
-        flex-wrap: wrap;
-        padding: 24px;
-        margin: 24px;
-        justify-content: center;
-        align-items: center;
-        gap: 24px;
-        position: fixed;
-        /* Make it stick/fixed */
-        bottom: 4vh;
-        
-        border-radius: 12px;
-        background: #FFF;
-        box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
-        text-decoration: none;
-        font-family: 'Satoshi-Medium';
-        padding: 24px;
-        flex-direction: row;
-        transition: top 0.3s;
-    
-    }
+#extraneousLinks a{
+    text-decoration: none !important ;
+    color: #0A3D62;
+}
 
 #extraneousLinks a:hover {
     font-family: 'Satoshi-Medium';
-    cursor: url('studio.cursorHover.png'), pointer;
+    cursor: none;
     color: #0A3D62;
+    text-decoration: underline !important ;
     
 }
 

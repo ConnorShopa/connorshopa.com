@@ -3,7 +3,7 @@
 
 
 html {
-    background-color: #E2EBF1;
+    background: linear-gradient(132deg, #EBF1F5 1.23%, #E2EBF1 86.21%);
     cursor: url("studio.cursor.png"), auto;
     align-items: center;
     align-content: center;
@@ -87,7 +87,7 @@ body {
 
 
 
-.headerBox {
+#headerBox {
     
  
     width: 100vw;

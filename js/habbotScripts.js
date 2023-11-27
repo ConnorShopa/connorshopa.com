@@ -1,3 +1,20 @@
+// GO BACK TO SHOPA.STUDIO FUCNTION CALLED ON CLICK
+function etGoHome() {
+  
+    window.location.href = "./";
+  
+  }
+  
+  function etGoTextTab() {
+    window.location.href = "acotil.text.html"
+  }
+  
+  function etGoImagesTab() {
+    window.location.href = "acotil.images.html"
+  }
+
+
+
 $(document).ready(function () {
     // Loop logo on hover
     let iconMenu = document.querySelector('.logoBox');
@@ -73,7 +90,7 @@ $(document).ready(function () {
             $(this).css("text-decoration", "underline");
   
             // Add a black border to the mouse circle
-            mouseCircle.style.border = '0.5px solid #E7CE7E';
+            mouseCircle.style.border = '0.5px solid #FA983A';
         },
         function () {
             // Update the mouse circle position without considering link height

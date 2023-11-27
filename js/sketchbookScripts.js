@@ -1,3 +1,22 @@
+// GO BACK TO SHOPA.STUDIO FUCNTION CALLED ON CLICK
+function etGoHome() {
+  
+  window.location.href = "./";
+
+}
+
+function etGoTextTab() {
+  window.location.href = "acotil.text.html"
+}
+
+function etGoImagesTab() {
+  window.location.href = "acotil.images.html"
+}
+
+
+
+
+
 $(document).ready(function () {
   // Loop logo on hover
   let iconMenu = document.querySelector('.logoBox');
