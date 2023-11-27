@@ -5,7 +5,7 @@ html {
     height: 100%;
     display: flex;
     flex: auto;
-    background: #92DD96;
+    background: #A3DA9D;
     min-height: 100%;
     min-width: 100%;
 
@@ -29,12 +29,10 @@ body {
     width: 32px;
     height: 32px;
     margin: -13px 0 0 -13px;
-    background: rgba(10, 61, 98, 0.14);
+    background:rgba(244, 219, 138, 0.50);
     border-radius: 50%;
     pointer-events: none;
 
-    transition: width 0.2s; /* Transition effect when sliding down (and up) */
-    transition: height 0.2s; /* Transition effect when sliding down (and up) */
 }
 
 /* HEADER THINGS */
@@ -102,7 +100,7 @@ body {
 
 
 #sketchbookSection{
-    
+    z-index: 1;
     display: flex;
     width: 80vw;
     align-items: flex-start;
@@ -185,6 +183,10 @@ a:hover {
     cursor: url('studio.cursorHover.png'), pointer;
     color: #0A3D62;
     
+}
+
+.extraneousLinks a:hover{
+    cursor: none;
 }
 
 a:visited {

@@ -88,13 +88,10 @@ body {
 
 
 
-#headerBox {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: space-between;
-
-    width: 100;
+.headerBox {
+    
+ 
+    width: 100vw;
     position: fixed;
     top: 0;
     transition: top 0.3s;
