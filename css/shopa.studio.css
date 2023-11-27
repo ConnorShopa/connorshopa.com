@@ -80,7 +80,7 @@ z-index: 1;
     gap: 0px;
     justify-content: center;
     align-items: center;
-
+    margin: 24px;
     flex-grow: 1;
 }
 
