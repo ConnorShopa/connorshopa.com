@@ -7,7 +7,7 @@ $(document).ready(function () {
     // }
 
     // Loop logo on hover
-    let iconMenu = document.querySelector('.logoAnimation');
+    let iconMenu = document.querySelector('.logoBox');
     let animationMenu = bodymovin.loadAnimation({
 
         container: iconMenu,
@@ -65,8 +65,8 @@ $(document).ready(function () {
         mouseCircle = document.getElementById('mouse-circle');
 
     document.onmousemove = (e) => {
-        mousePosX = e.clientX;
-        mousePosY = e.clientY;
+        mousePosX = e.clientX+2;
+        mousePosY = e.clientY+8;
     }
 
     let delay = 6,
@@ -92,11 +92,11 @@ $(document).ready(function () {
         function () {
             // Get the position and width of the hovered link
             let linkPos = $(this).offset();
-            let linkWidth = $(this).outerWidth();
+            let linkWidth = $(this).innerWidth()*0.8;
 
             // Set revisedMousePosX and revisedMousePosY to the link's position
-            revisedMousePosX = linkPos.left;
-            revisedMousePosY = linkPos.top;
+            revisedCirclePosX = linkPos.left+20;
+            revisedCirclePosY = linkPos.top;
 
             // Update the mouse circle position without considering link height
             updateMouseCirclePosition(true, linkWidth); // Pass true to indicate hover
@@ -125,11 +125,11 @@ $(document).ready(function () {
     
     function updateMouseCirclePosition(isHover, linkWidth) {
         console.log(isHover)
-        console.log(revisedMousePosX)
+        console.log(revisedCirclePosX)
         console.log(linkWidth)
         // Update the position of the mouse circle
-        mouseCircle.style.top = (revisedMousePosY + linkWidth); // Adjusted for better vertical alignment
-        mouseCircle.style.left = (revisedMousePosX - linkWidth / 2); // Center the rectangle over the link
+        mouseCircle.style.top = (revisedCirclePosY - 40); // Adjusted for better vertical alignment
+        mouseCircle.style.left = (revisedCirclePosX - linkWidth / 2); // Center the rectangle over the link
     
         // Set the width of the rectangle to the link's text width
         mouseCircle.style.width = isHover ? linkWidth + 'px' : '';
@@ -146,7 +146,12 @@ $(document).ready(function () {
         }
     }
 
-   
+    // GO BACK TO SHOPA.STUDIO FUCNTION CALLED ON CLICK
+function etGoHome() {
+  
+    window.location.href = "./";
+  
+  }
 
     $("a").hover(function () {
         gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
@@ -163,6 +168,8 @@ $(document).ready(function () {
     }, function () {
         gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
     });
+
+    
 
     
 });

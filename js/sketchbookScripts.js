@@ -90,14 +90,14 @@ window.onscroll = function() {
   if (prevScrollpos > currentScrollPos) {
     document.getElementById("headerBox").style.top = "0";
     
-    document.getElementById("footerBox").style.bottom = "0";
+    // document.getElementById("footerBox").style.bottom = "0";
 
     document.getElementById("extraneousLinks").style.bottom = "1.6vh";
 
     // document.getElementById("footerBox").style.opacity = "100";
   } else {
     document.getElementById("headerBox").style.top = "-100px";
-    document.getElementById("footerBox").style.bottom = "-140px";
+    // document.getElementById("footerBox").style.bottom = "-140px";
     document.getElementById("extraneousLinks").style.bottom = "-140px";
     
     // document.getElementById("footerBox").style.opacity = "0";
