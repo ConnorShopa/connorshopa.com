@@ -1,0 +1,282 @@
+@import url(satoshi.css);
+
+html {
+    cursor: url("cursor.png"), auto;
+    height: 100%;
+    display: flex;
+    flex: auto;
+    background: #CCF2FF;
+    min-height: 100%;
+    min-width: 100%;
+
+}
+
+body {
+    
+    
+    padding-top: 4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+}
+
+#mouse-circle {
+
+    z-index: 2;
+
+    
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    margin: -13px 0 0 -13px;
+    background: rgba(10, 61, 98, 0.14);
+    border-radius: 50%;
+    pointer-events: none;
+
+}
+
+#videoCollection{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100vw;
+    
+    
+}
+
+#videoFrame{
+    margin: 24px;
+    min-width: 560px;
+    height: 315px;
+    border-radius: 12px;
+}
+
+#plunkValueFrame{
+    border-radius: 12px;
+    width: 560px;
+    margin: 24px;
+}
+
+/* HEADER THINGS */
+#headerBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: space-between;
+
+    width: 100vw;
+
+
+    position: fixed;
+    /* Make it stick/fixed */
+    top: 0;
+    /* Stay on top */
+
+    transition: top 0.3s;
+    /* Transition effect when sliding down (and up) */
+
+    /* padding-left: 24px;
+    padding-top: 24px; */
+}
+
+
+
+/* LOGO THINGS */
+.logoBox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 72px;
+    min-width: 60px;
+    max-width: 100px;
+    background-color: #ff5e57;
+    border-radius: 16px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 24px;
+
+    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+
+
+
+}
+
+.logoBox:hover {
+    cursor: url('cursorHover.png'), pointer;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    gap: 40px;
+    width: 100%;
+}
+
+
+
+#sketchbookSection{
+    z-index: 1;
+    display: flex;
+    width: 80vw;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 4vw;
+    flex-shrink: 0;
+    flex-wrap: wrap;  
+    justify-content: center; 
+    padding-bottom: 1.6vh;
+}
+
+.imageAndText {
+    
+    display: flex;
+    
+    flex-direction: column;
+    gap: 1vh;
+    max-width: 30vw;
+    
+}
+
+.imageAndText a{
+    
+    text-decoration: none;
+    
+    font-family: 'Satoshi-Medium';
+    max-width: 30vw;
+    flex-wrap: wrap;
+    display: flex;
+    max-width: 20vw;
+    align-items: center;
+    flex-grow: 0;
+    gap: 10px;
+}
+
+.imageAndText img{
+    
+    max-width: 20vw;
+    border-radius: 4px;
+    box-shadow: 0px 1.6px 4px rgba(7, 66, 47, 0.1);
+    
+}
+
+.linesRule {
+    width: 1px;
+    height: 22px;
+    background: #D9D9D9;
+}
+
+#extraneousLinks {
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 24px;
+        margin: 24px;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+        position: fixed;
+        /* Make it stick/fixed */
+        bottom: 4vh;
+        
+        border-radius: 12px;
+        background: #FFF;
+        box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+        text-decoration: none;
+        font-family: 'Satoshi-Medium';
+        padding: 24px;
+        flex-direction: row;
+        position:fixed;
+        transition: bottom 0.3s;
+        
+    
+    }
+
+a{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    font-family: 'Satoshi-Medium';
+    cursor: none;
+    color: #0A3D62;
+    
+}
+
+
+
+a:visited {
+    text-decoration: none;
+    color: white;
+    
+}
+
+button:hover {
+    cursor: url('studio.cursorHover.png'), pointer;
+    
+}
+
+#extraneousLinks a {
+
+    color: #0A3D62;
+    text-decoration: none;
+}
+
+#extraneousLinks a:visited {
+    color: #0A3D62;
+    text-decoration: none;
+}
+
+
+#footerBox {
+   
+    display: flex;
+    flex-grow: 0;
+    flex-direction: row;
+    width: 95vw;
+    
+    justify-content: flex-end;
+    align-items: top;
+    opacity: 100;
+    padding-bottom: 24px;
+
+    position:fixed;
+    transition: bottom 0.3s;
+    padding-right: 24px;
+    
+    bottom: 0px;
+
+}
+
+#footerContent {
+
+    display: flex;
+    width: auto;
+    height: 2.2vh;
+    align-items: center;
+    border-radius: 8px;
+
+
+    padding: 4px 24px;
+    gap: 8px;
+
+    font-family: 'Satoshi-Regular';
+    font-style: Regular;
+    font-size: 0.8em;
+    background-color: #F5F6FA;
+    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+    color: #0A3D62;
+    white-space: nowrap;
+
+
+
+}
+

@@ -29,35 +29,8 @@ $(document).ready(function () {
     });
 
 
-    // Refresh page on logo click
-
-    function refreshPage() {
-        window.location.reload();
-    }
-
-
-    //JUMP FUNCTIONS
-    function etGoHome() {
-
-        window.location.href = "shopa.studio.html";
-
-    }
-
-    function etGoAcotil() {
-        window.location.href = "shopa.acotil.images.html"
-    }
-
-    function openAcotilTab() {
-        window.open("https://acollectionofthingsilike.com", "_blank");
-    }
-    // $('#who').click(function () {
-    //     setWhoContent();
-    //     let contentState = "whoState"
-    //     console.log(contentState)
-    // })
-
-
-
+ 
+   
 
     // CIRCLE FOLLOWS CURSOR FUNCTION//
     let mousePosX = 0,
@@ -73,15 +46,18 @@ $(document).ready(function () {
         revisedMousePosX = 0,
         revisedMousePosY = 0;
 
-    function startMouseFollow() {
-        requestAnimationFrame(startMouseFollow);
-
-        revisedMousePosX += (mousePosX - revisedMousePosX) / delay;
-        revisedMousePosY += (mousePosY - revisedMousePosY) / delay;
-
-        mouseCircle.style.top = revisedMousePosY + 'px';
-        mouseCircle.style.left = revisedMousePosX + 'px';
-    }
+        function startMouseFollow() {
+            requestAnimationFrame(startMouseFollow);
+        
+            // Include scroll offset
+            let scrollOffsetY = window.pageYOffset || document.documentElement.scrollTop;
+        
+            revisedMousePosX += (mousePosX - revisedMousePosX) / delay;
+            revisedMousePosY += (mousePosY - revisedMousePosY) / delay;
+        
+            mouseCircle.style.top = revisedMousePosY + scrollOffsetY + 'px';
+            mouseCircle.style.left = revisedMousePosX + 'px';
+          }
 
     // ON LOAD FUNC CALLS
     startMouseFollow();
@@ -168,4 +144,26 @@ $(document).ready(function () {
 
     
 });
+
+   // Refresh page on logo click
+
+   function etRefresh() {
+    window.location.reload();
+}
+
+
+//JUMP FUNCTIONS
+function etGoHome() {
+
+    window.location.href = "index.html";
+
+}
+
+function etGoAcotil() {
+    window.location.href = "shopa.acotil.images.html"
+}
+
+function openAcotilTab() {
+    window.open("https://acollectionofthingsilike.com", "_blank");
+}
 

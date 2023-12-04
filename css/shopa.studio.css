@@ -51,6 +51,8 @@ body {
     transition: height 0.2s; /* Transition effect when sliding down (and up) */
 }
 
+
+
 #extraneousLinks {
     z-index: 1;
     display: flex;
@@ -129,13 +131,6 @@ body {
 
 }
 
-#content{
-    display: flex;
-    flex-wrap: wrap;
-    
-    align-items: center;
-    
-}
 
 #aboutMe{
     z-index: 1;
@@ -163,10 +158,6 @@ body {
 
 
 
-#videoCollection{
-    background-color: red;
-    width: 1vw;
-}
 
 
 
@@ -216,6 +207,7 @@ button:hover {
     
     bottom: 0px;
 }
+
 #footerContent {
   
     display: flex;
