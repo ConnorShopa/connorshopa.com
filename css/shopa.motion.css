@@ -24,8 +24,6 @@ body {
 #mouse-circle {
 
     z-index: 2;
-
-    
     position: absolute;
     width: 32px;
     height: 32px;
@@ -36,28 +34,32 @@ body {
 
 }
 
-#videoCollection{
+#motionContent{
+    
+    width: 80vw;
+    
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100vw;
-    
-    
+    align-items: center;
 }
 
-#videoFrame{
-    margin: 24px;
-    min-width: 560px;
-    height: 315px;
+#videoCollection {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16vw, 1fr));
+    justify-content: center;
+    align-items: cente;
+    grid-gap: 10px;
+}
+
+#videoCollection iframe,
+#videoCollection video {
+    width: 100%;
+    /* height: 200px; */
+    object-fit: cover;
     border-radius: 12px;
 }
 
-#plunkValueFrame{
-    border-radius: 12px;
-    width: 560px;
-    margin: 24px;
-}
+
 
 /* HEADER THINGS */
 #headerBox {
