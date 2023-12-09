@@ -87,6 +87,7 @@ body {
 }
 
 #content {
+    padding-top: 8vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -97,7 +98,9 @@ body {
 }
 
 
-
+.imageAndText a{
+    display: none;
+}
 
 #sketchbookSection{
     z-index: 1;
@@ -122,7 +125,7 @@ body {
     
 }
 
-.imageAndText a{
+/* .imageAndText a{
     
     text-decoration: none;
     
@@ -134,7 +137,7 @@ body {
     align-items: center;
     flex-grow: 0;
     gap: 10px;
-}
+} */
 
 .imageAndText img{
     

@@ -144,6 +144,16 @@ $(document).ready(function () {
       $(this).css("text-decoration", "none");
   });
 
+  $(".Link a").hover(function () {
+    gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+    $(this).css("color", "blue");
+    $(this).css("text-decoration", "underline");
+}, function () {
+    gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
+    $(this).css("color", "grey");
+    $(this).css("text-decoration", "none");
+});
+
   $("#logoBox").hover(function () {
       gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
   }, function () {

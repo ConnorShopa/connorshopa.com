@@ -1,11 +1,5 @@
 $(document).ready(function () {
 
-
-    // function toggleMobileMenu() {
-    //     var mobileMenu = document.getElementById("extraneousLinks");
-    //     mobileMenu.style.display = (mobileMenu.style.display === "block") ? "none" : "block";
-    // }
-
     // Loop logo on hover
     let iconMenu = document.querySelector('.logoBox');
     let animationMenu = bodymovin.loadAnimation({
@@ -139,6 +133,57 @@ $(document).ready(function () {
     }, function () {
         gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
     });
+
+
+    let mobileMenuExpanded = false; // Track the menu state
+
+ 
+
+    $("#mobileMenuButton").click(function () {
+        if (!mobileMenuExpanded) {
+            // Expand the menu
+            gsap.to("#mobileMenuScreen", {
+                duration: 0.62,
+                
+                display: "flex",
+                bottom: 0,
+                width: "460vw",
+                height: "300vh",
+                borderRadius: "100%",
+                
+            });
+            gsap.to("#mobileMenuButton", {
+                background: "#EBF1F5",
+            });
+            gsap.to("#mobileLinks", { 
+                duration: 0.3, 
+                ease: "elastic.out(2, 1.6)", 
+                gap: "24px", 
+                display: "flex" });
+        } else {
+            
+            gsap.to("#mobileMenuScreen", {
+                duration: 0.32,
+                width: "1px",
+                height: "1px",
+                borderRadius: "100%",
+                display: "none",
+            });
+            gsap.to("#mobileLinks", {
+                duration: 0.24,
+                ease: "elastic.in(0.5, 0.5)",
+                gap: "-24px",
+                display: "none",
+                
+            });
+            gsap.to("#mobileMenuButton", {
+                background: "white",
+            });
+        }
+    
+        mobileMenuExpanded = !mobileMenuExpanded;
+    });
+
 
     
 
