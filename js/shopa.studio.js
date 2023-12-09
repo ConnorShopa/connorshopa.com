@@ -137,10 +137,20 @@ $(document).ready(function () {
 
     let mobileMenuExpanded = false; // Track the menu state
 
+    let menuButtonAnim = bodymovin.loadAnimation({
+        // Adjust these options based on your animation requirements
+        container: document.getElementById('menuButtonAnim'),
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        path: 'animations/menuButtonAnim.json'
+    });
  
 
     $("#mobileMenuButton").click(function () {
         if (!mobileMenuExpanded) {
+            menuButtonAnim.setDirection(1)
+            menuButtonAnim.play();
             // Expand the menu
             gsap.to("#mobileMenuScreen", {
                 duration: 0.62,
@@ -162,6 +172,9 @@ $(document).ready(function () {
                 display: "flex" });
         } else {
             
+
+            menuButtonAnim.setDirection(-1)
+            menuButtonAnim.play();
             gsap.to("#mobileMenuScreen", {
                 duration: 0.32,
                 width: "1px",
@@ -179,6 +192,7 @@ $(document).ready(function () {
             gsap.to("#mobileMenuButton", {
                 background: "white",
             });
+            
         }
     
         mobileMenuExpanded = !mobileMenuExpanded;
