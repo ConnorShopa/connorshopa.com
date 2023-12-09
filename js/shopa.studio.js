@@ -135,6 +135,9 @@ $(document).ready(function () {
     });
 
 
+
+
+    //MOBILE MENU ANIM AND LOGIC
     let mobileMenuExpanded = false; // Track the menu state
 
     let menuButtonAnim = bodymovin.loadAnimation({

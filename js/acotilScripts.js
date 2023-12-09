@@ -173,4 +173,70 @@ $(document).ready(function () {
     }
     prevScrollpos = currentScrollPos;
   }
+
+
+
+    //MOBILE MENU ANIM AND LOGIC
+    let mobileMenuExpanded = false; // Track the menu state
+
+    let menuButtonAnim = bodymovin.loadAnimation({
+        // Adjust these options based on your animation requirements
+        container: document.getElementById('menuButtonAnim'),
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+        path: 'animations/menuButtonAnim.json'
+    });
+ 
+
+    $("#mobileMenuButton").click(function () {
+        if (!mobileMenuExpanded) {
+            menuButtonAnim.setDirection(1)
+            menuButtonAnim.play();
+            // Expand the menu
+            gsap.to("#mobileMenuScreen", {
+                duration: 0.62,
+                
+                display: "flex",
+                bottom: 0,
+                width: "460vw",
+                height: "300vh",
+                borderRadius: "100%",
+                
+            });
+            gsap.to("#mobileMenuButton", {
+                background: "#EBF1F5",
+            });
+            gsap.to("#mobileLinks", { 
+                duration: 0.3, 
+                ease: "elastic.out(2, 1.6)", 
+                gap: "24px", 
+                display: "flex" });
+        } else {
+            
+
+            menuButtonAnim.setDirection(-1)
+            menuButtonAnim.play();
+            gsap.to("#mobileMenuScreen", {
+                duration: 0.32,
+                width: "1px",
+                height: "1px",
+                borderRadius: "100%",
+                display: "none",
+            });
+            gsap.to("#mobileLinks", {
+                duration: 0.24,
+                ease: "elastic.in(0.5, 0.5)",
+                gap: "-24px",
+                display: "none",
+                
+            });
+            gsap.to("#mobileMenuButton", {
+                background: "white",
+            });
+            
+        }
+    
+        mobileMenuExpanded = !mobileMenuExpanded;
+    });
 });

@@ -215,48 +215,97 @@ button:hover {
     text-decoration: none;
 }
 
-
-#footerBox {
-   
-    display: flex;
-    flex-grow: 0;
-    flex-direction: row;
-    width: 95vw;
-    
-    justify-content: flex-end;
-    align-items: top;
-    opacity: 100;
-    padding-bottom: 24px;
-
-    position:fixed;
-    transition: bottom 0.3s;
-    padding-right: 24px;
-    
-    bottom: 0px;
-
+#mobileMenuButton {
+    display: none; /* Hide the mobileMenuButton by default */
 }
 
-#footerContent {
+/* Media query to show the mobileMenuButton when the device width is less than 1488 pixels */
+@media (max-width: 1000px) {
 
-    display: flex;
-    width: auto;
-    height: 2.2vh;
+
+    #extraneousLinks{
+        display: none;
+    }
+
+    #mobileMenuButton {
+        z-index: 2;
+        display: flex;
+     
+        margin: 24px;
+
+        gap: 24px;
+        position: fixed;
+        /* Make it stick/fixed */
+        bottom: 4vh;
+        flex-direction: column;
+        
+        transition: top 0.3s;
+    
+    
+        width: 48px;
+        height: 48px;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    
+        border-radius: 100%;
+        background: #FFF;
+    
+        box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    }
+}
+
+#mobileMenuScreen {
+    z-index: 1;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
     align-items: center;
-    border-radius: 8px;
+    
+    
+    /* Make it stick/fixed */
+    bottom: 4vh;
+    flex-direction: column;
+    
+    transition: top 0.3s;
 
+    width: 48px;
+    height: 48px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
 
-    padding: 4px 24px;
-    gap: 8px;
+    border-radius: 100%;
+    background: white;
 
-    font-family: 'Satoshi-Regular';
-    font-style: Regular;
-    font-size: 0.8em;
-    background-color: #F5F6FA;
-    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
-    color: #0A3D62;
-    white-space: nowrap;
-
-
-
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
 }
+
+#mobileLinks{
+    z-index: 1;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: -800px;
+    font-family: 'Satoshi-Medium';
+}
+
+#mobileLinks a{
+    color: #306252;
+    font-family: 'Satoshi-Medium';
+}
+
+#menuButtonAnim{
+    z-index: 0;
+    height: 22px;
+}
+
 
