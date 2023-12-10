@@ -206,6 +206,8 @@ $(document).ready(function () {
                height: "1px",
                borderRadius: "100%",
                display: "none",
+               
+               
            });
            gsap.to("#mobileLinks", {
                duration: 0.24,
@@ -222,5 +224,31 @@ $(document).ready(function () {
    
        mobileMenuExpanded = !mobileMenuExpanded;
    });
+
+   $("#heroButton").hover(
+    function() {
+      gsap.to("#heroButton", {
+        duration: 0.16,
+        scale: 0.96,
+        background: "#FA983A",
+        border: "1px solid #FFF",
+        
+      });
+    },
+    function() {
+      gsap.to("#heroButton", {
+        scale: 1, // Set it back to the original scale
+        background: "#FA983A",
+        border: "none",
+        boxshadow: "none", // Set it back to the original background color or remove this line if not needed
+      });
+    }
+  );
+
+
+
+
+
+
   });
   
