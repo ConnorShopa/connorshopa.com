@@ -229,22 +229,139 @@ $(document).ready(function () {
     function() {
       gsap.to("#heroButton", {
         duration: 0.16,
-        scale: 0.96,
+        scale: 0.9,
         background: "#FA983A",
         border: "1px solid #FFF",
+        transformOrigin: "center center",
+        
         
       });
     },
     function() {
       gsap.to("#heroButton", {
-        scale: 1, // Set it back to the original scale
+        duration: 0.16,
+        scale: 1, 
         background: "#FA983A",
         border: "none",
-        boxshadow: "none", // Set it back to the original background color or remove this line if not needed
+        boxshadow: "none",
+        transformOrigin: "center center", 
       });
     }
   );
 
+  $("#timeButton01").click(
+    function(){
+      //SPACE DOTS
+      gsap.to("#fig02", {
+        duration: 0.8,
+        gap: "2px",
+        ease: "elastic.out(1, 0.75)",
+      });
+      //DESELCT OTHER BUTTONS
+      gsap.to("#timeText02", { 
+        duration: 0.1,
+        color: "#FA983A" });
+      gsap.to("#timeButton02", {
+        duration: 0.16,
+        background: "white",
+        border: "none",
+      });
+      gsap.to("#timeText03", { 
+        duration: 0.1,
+        color: "#FA983A" });
+      gsap.to("#timeButton03", {
+        duration: 0.16,
+        background: "white",
+        border: "none",
+      });
+      //SELECT BUTTON
+      gsap.to("#timeText01", { 
+        duration: 0.1,
+        color: "white" });
+      gsap.to("#timeButton01", {
+        duration: 0.16,
+        background: "#FA983A",
+        border: "1px solid #FFF",
+      });
+      
+    }
+  );
+
+  $("#timeButton02").click(
+    function(){
+      //SPACE DOTS
+      gsap.to("#fig02", {
+        duration: 0.8,
+        gap: "80px",
+        ease: "elastic.out(1, 0.75)",
+      });
+      //DESELCT OTHER BUTTONS
+      gsap.to("#timeText01", { 
+        duration: 0.1,
+        color: "#FA983A" });
+      gsap.to("#timeButton01", {
+        duration: 0.16,
+        background: "white",
+        border: "none",
+      });
+      gsap.to("#timeText03", { 
+        duration: 0.1,
+        color: "#FA983A" });
+      gsap.to("#timeButton03", {
+        duration: 0.16,
+        background: "white",
+        border: "none",
+      });
+      //SELECT BUTTON
+      gsap.to("#timeText02", { 
+        duration: 0.1,
+        color: "white" });
+      gsap.to("#timeButton02", {
+        duration: 0.16,
+        background: "#FA983A",
+        border: "1px solid #FFF",
+      });
+      
+    }
+  );
+
+  $("#timeButton03").click(
+    function(){
+      //SPACE DOTS
+      gsap.to("#fig02", {
+        duration: 0.8,
+        gap: "240px",
+        ease: "elastic.out(1, 0.75)",
+      });
+      //DESELCT OTHER BUTTONS
+      gsap.to("#timeText01", { 
+        duration: 0.1,
+        color: "#FA983A" });
+      gsap.to("#timeButton01", {
+        duration: 0.16,
+        background: "white",
+        border: "none",
+      });
+      gsap.to("#timeText02", { 
+        duration: 0.1,
+        color: "#FA983A" });
+      gsap.to("#timeButton02", {
+        duration: 0.16,
+        background: "white",
+        border: "none",
+      });
+      //SELECT BUTTON
+      gsap.to("#timeText03", { 
+        duration: 0.1,
+        color: "white" });
+      gsap.to("#timeButton03", {
+        duration: 0.16,
+        background: "#FA983A",
+        border: "1px solid #FFF",
+      });
+      
+    }
+  );
 
 
 

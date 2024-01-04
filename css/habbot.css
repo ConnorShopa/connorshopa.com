@@ -10,7 +10,7 @@ html {
     flex-direction: column;
     display: flex;
     flex: auto;
-    background: linear-gradient(180deg, #051324 0%, #D9EAFF 100%);
+    background: linear-gradient(180deg, #051324 30%, #D9EAFF 160%);
     min-height: 100%;
     min-width: 100%;
 
@@ -21,168 +21,13 @@ html {
 
 
 body {
-    
-    /* min-height: 100%;
-    min-width: 100%; */
+ 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: clamp(1vh, 0vh, 2vh);
    
-}
-
-
-
-#mouse-circle {
-
-    z-index: 2;
-
-    
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    margin: -13px 0 0 -13px;
-    background: rgba(250, 152, 58, 0.20);
-    border-radius: 50%;
-    pointer-events: none;
-
-    transition: width 0.2s; /* Transition effect when sliding down (and up) */
-    transition: height 0.2s; /* Transition effect when sliding down (and up) */
-}
-
-#extraneousLinks {
-    z-index: 1;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 24px;
-    margin: 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    position: fixed;
-    /* Make it stick/fixed */
-    bottom: 4vh;
-    
-    border-radius: 12px;
-    background: #FFF;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
-    text-decoration: none;
-    font-family: 'Satoshi-Medium';
-    padding: 24px;
-    flex-direction: row;
-    transition: top 0.3s;
-
-}
-
-#content{
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-    justify-content: center;
-    align-items: center;
-    margin: 24px;
-    flex-grow: 1;
-}
-
-#habbotSiteBody{
-    padding-top: 8vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-
-}
-
-#habbotHeroText{
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    padding-left: 24px;
-    padding-right: 24px;
-    
-    
-}
-
-#heroButton{
-    display: flex;
-    padding: 0px 24px 2px 24px;
-    justify-content: center;
-    height: 64px;
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    border-radius: 48px;
-    background: #FA983A;
-
-    
-
-    color: #FFFAF6;
-
-    font-family: 'Satoshi-Regular';
-    
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 0px;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
-
-    
-}
-
-#heroButton img{
-    padding-top: 3px;
-}
-
-h4{
-    font-size: clamp(12px, 18px, 18px );
-    padding-bottom: px;
-    
-}
-
-#heroImage{
-    display: flex;
-    justify-content: center;
-}
-
-#heroImage img{
-    width: 60vw;
-}
-
-#habbotIllustration img{
-    width: 80vw;
-    opacity: 0.3;
-}
-
-
-#heroButton:hover{
-    cursor: url('studio.cursorHover.png'), pointer;
-
-}
-
-h1{
-    color: #FFFAF6;
-
-    text-align: center;
-    font-family: 'Satoshi-Bold';
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 100%;
-    letter-spacing: -2.24px;
-}
-
-h2{
-    color: #FFFAF6;
-
-    text-align: center;
-    font-family: 'Satoshi-Regular';
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.8px;
 }
 
 .headerBox {
@@ -228,138 +73,309 @@ h2{
 }
 
 
+#mouse-circle {
+
+    z-index: 2;
+
+    
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    margin: -13px 0 0 -13px;
+    background: rgba(250, 152, 58, 0.20);
+    border-radius: 50%;
+    pointer-events: none;
+
+    transition: width 0.2s; /* Transition effect when sliding down (and up) */
+    transition: height 0.2s; /* Transition effect when sliding down (and up) */
+}
+
+#extraneousLinks {
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 24px;
+    margin: 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    position: fixed;
+    /* Make it stick/fixed */
+    bottom: 4vh;
+    
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    text-decoration: none;
+    font-family: 'Satoshi-Medium';
+    padding: 24px;
+    flex-direction: row;
+    transition: top 0.3s;
+
+}
+
+#habbotSiteBody{
+    padding-top: 12vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    background-image: url("../assets/habbotBG.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+    
+}
+
+#habbotHeroText{
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding-left: 24px;
+    padding-right: 24px;
+    
+    
+}
+
+#heroButton{
+    display: flex;
+    padding: 0px 24px 2px 24px;
+    justify-content: center;
+    height: clamp(48px, 60px, 32px);
+    margin: clamp(12px, 0px, 0px);
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 48px;
+    background: #FA983A;
+
+    
+
+    color: #FFFAF6;
+
+    font-family: 'Satoshi-Regular';
+    
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+
+    
+}
 
 
-.linesRule {
-    width: 1px;
-    height: 22px;
+
+#heroButton img{
+    padding-top: 3px;
+}
+
+h4{
+    font-size: clamp(12px, 18px, 18px );
+    padding-bottom: px;
+    
+}
+
+#heroImage{
+    display: flex;
+    justify-content: center;
+}
+
+#heroImage img{
+    width: clamp(40vw, 40vw, 60vw);
+}
+
+
+
+
+#heroButton:hover{
+    cursor: url('studio.cursorHover.png'), pointer;
+
+}
+
+h1{
+    color: #FFFAF6;
+
+    text-align: center;
+    font-family: 'Satoshi-Medium';
+    font-size: clamp(4vw, 24px, 6vw);
+    font-style: medium;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: clamp(-2.2px, -2.2px, -1.6px);
+}
+
+
+h2{
+    color: #FFFAF6;
+
+    text-align: center;
+    font-family: 'Satoshi-Regular';
+    font-size: clamp(32px, 18px, 24px);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.8px;
+    margin-bottom: 4vh;
+}
+
+
+
+
+#moreInfoButton{
+    display: flex;
+    padding: 0px 24px 2px 24px;
+    justify-content: center;
+    height: clamp(48px, 60px, 32px);
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 48px;
+    background: white;
+
+    
+
+    color: #FA983A;
+
+    font-family: 'Satoshi-Regular';
+    
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+
+    
+}
+
+#moreInfoButton img{
+    fill: #FA983A;
+    padding-top: 3px;
+    rotate: 90;
+}
+
+#explanationContentBox{
+ 
+
+    margin-bottom: 4vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h3{
+    color: white;
+
+    text-align: center;
+    font-family: 'Satoshi-Regular';
+    font-size: clamp(28px, 16px, 20px);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.8px;
+    
+}
+
+
+#fig01{
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+}
+
+#fig02{
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+}
+
+#circle01, #circle02, #circle03{
+    z-index: 1;
+    width: 3vw;
+    height: 3vw;
+    flex-shrink: 0;
+    border-radius: 64px;
+    background: #91AFEF;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+#timeBtnRack{
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+
+}
+#timeButton01{
+    display: flex;
+    padding: 0px 24px 2px 24px;
+    justify-content: center;
+    height: clamp(48px, 60px, 32px);
+    margin: clamp(12px, 0px, 0px);
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 48px;
+    background: #FA983A;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    border: 1px solid white;
+}
+
+
+
+#timeButton02, #timeButton03{
+    display: flex;
+    padding: 0px 24px 2px 24px;
+    justify-content: center;
+    height: clamp(48px, 60px, 32px);
+    margin: clamp(12px, 0px, 0px);
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    border-radius: 48px;
+    background: white;
+}
+
+#timeButton01 h4{
+    color: white;
+    font-family: 'Satoshi-Regular';
+    font-size: 16px;
+    
+    
+    
+}
+
+#timeButton02 h4, #timeButton03 h4{
+    color: #FA983A;
+    font-family: 'Satoshi-Regular';
+    font-size: 16px;
+    
+}
+
+#linesRule {
+    opacity: 0.5;
+    margin-top: 2vh;
+    width: 60vw;
+    height: 2px;
     background: #D9D9D9;
 }
 
-a{
-    color: #0A3D62;
-    text-decoration: none;
-}
-
-a:hover {
-    font-family: 'Satoshi-Medium';
-    /* cursor: url('studio.cursorHover.png'), pointer; */
-    cursor: none;
-    
-}
-
-a:visited {
-    text-decoration: none;
-    color: #0A3D62;
-}
-
-
-#footerBox{
+#phoneScreenRack{
     display: flex;
-    flex-grow: 0;
     flex-direction: row;
-    width: 95vw;
-    
-    justify-content: flex-end;
-    align-items: top;
-    opacity: 100;
-    padding-bottom: 24px;
-
-    position:fixed;
-    transition: bottom 0.3s;
-    padding-right: 24px;
-    
-    bottom: 0px;
-}
-
-#mobileMenuButton {
-    display: none; /* Hide the mobileMenuButton by default */
-}
-
-/* Media query to show the mobileMenuButton when the device width is less than 1488 pixels */
-@media (max-width: 1000px) {
-
-
-    #extraneousLinks{
-        display: none;
-    }
-
-    #mobileMenuButton {
-        z-index: 2;
-        display: flex;
-     
-        margin: 24px;
-
-        gap: 24px;
-        position: fixed;
-        /* Make it stick/fixed */
-        bottom: 4vh;
-        flex-direction: column;
-        
-        transition: top 0.3s;
-    
-    
-        width: 48px;
-        height: 48px;
-        padding: 8px;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        flex-shrink: 0;
-    
-        border-radius: 100%;
-        background: #FFF;
-    
-        box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
-    }
-}
-
-#mobileMenuScreen {
-    z-index: 1;
-    display: none;
-    flex-direction: column;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    flex-wrap: wrap;
+    max-width: 90vw;
+    gap: 48px;
     justify-content: center;
     align-items: center;
+
+}
+
+#phoneScreenRack img{
+
+    width: 12vw;
     
-    
-    /* Make it stick/fixed */
-    bottom: 4vh;
-    flex-direction: column;
-    
-    transition: top 0.3s;
-
-    width: 48px;
-    height: 48px;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-
-    border-radius: 100%;
-    background: white;
-
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
 }
-
-#mobileLinks{
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: -800px;
-    font-family: 'Satoshi-Medium';
-}
-
-#menuButtonAnim{
-    z-index: 0;
-    height: 22px;
-}
-
-#mobileLinks a{
-    color: #FA983A;
-}
-
