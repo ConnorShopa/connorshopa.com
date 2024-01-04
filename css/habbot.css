@@ -27,6 +27,8 @@ body {
     align-items: center;
     justify-content: center;
     gap: clamp(1vh, 0vh, 2vh);
+    margin: 0;
+    
    
 }
 
@@ -378,4 +380,24 @@ h3{
 
     width: 12vw;
     
+}
+
+h5{
+    font-family: "Satoshi-Regular";
+    font-size: 12px;
+}
+
+footer{
+    color: white;
+    background-color: #91AFEF;
+    height: 4vh;
+    width: 100vw;
+    gap: 12px;
+    margin-top: 4vh;
+    padding-right: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+
 }
