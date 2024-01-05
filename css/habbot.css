@@ -152,7 +152,7 @@ body {
     flex-shrink: 0;
     border-radius: 48px;
     background: #FA983A;
-
+    border: 1px solid #FA983A;
     
 
     color: #FFFAF6;
@@ -266,6 +266,7 @@ h2{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 4vh;
 }
 
 h3{

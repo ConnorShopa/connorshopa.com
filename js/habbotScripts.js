@@ -272,7 +272,7 @@ $(document).ready(function () {
       gsap.to("#timeButton03", {
         duration: 0.16,
         background: "white",
-        border: "none",
+        border: "1px solid white",
       });
       //SELECT BUTTON
       gsap.to("#timeText01", { 
@@ -281,7 +281,7 @@ $(document).ready(function () {
       gsap.to("#timeButton01", {
         duration: 0.16,
         background: "#FA983A",
-        border: "1px solid #FFF",
+        border: "1px solid white",
       });
       
     }
@@ -302,7 +302,7 @@ $(document).ready(function () {
       gsap.to("#timeButton01", {
         duration: 0.16,
         background: "white",
-        border: "none",
+        border: "1px solid white",
       });
       gsap.to("#timeText03", { 
         duration: 0.1,
@@ -310,7 +310,7 @@ $(document).ready(function () {
       gsap.to("#timeButton03", {
         duration: 0.16,
         background: "white",
-        border: "none",
+        border: "1px solid white",
       });
       //SELECT BUTTON
       gsap.to("#timeText02", { 
@@ -319,7 +319,7 @@ $(document).ready(function () {
       gsap.to("#timeButton02", {
         duration: 0.16,
         background: "#FA983A",
-        border: "1px solid #FFF",
+        border: "1px solid white",
       });
       
     }
@@ -340,7 +340,7 @@ $(document).ready(function () {
       gsap.to("#timeButton01", {
         duration: 0.16,
         background: "white",
-        border: "none",
+        border: "1px solid white",
       });
       gsap.to("#timeText02", { 
         duration: 0.1,
@@ -348,7 +348,7 @@ $(document).ready(function () {
       gsap.to("#timeButton02", {
         duration: 0.16,
         background: "white",
-        border: "none",
+        border: "1px solid white",
       });
       //SELECT BUTTON
       gsap.to("#timeText03", { 
@@ -357,7 +357,7 @@ $(document).ready(function () {
       gsap.to("#timeButton03", {
         duration: 0.16,
         background: "#FA983A",
-        border: "1px solid #FFF",
+        border: "1px solid white",
       });
       
     }
