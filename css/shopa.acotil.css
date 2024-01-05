@@ -15,20 +15,19 @@ html {
     height: 100%;
     display: flex;
     flex: auto;
+    padding-bottom: 4vh;
     
-    max-height: 100%;
-    max-width: 100%;
 
 }
 
 body {
     
-    min-height: 100%;
+    
     max-width: 98%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
+
    
 }
 
@@ -98,6 +97,7 @@ body {
     flex-direction: row;
     justify-content: center;
     gap: 24px; 
+    margin-bottom: 2vh;
 
 }
 #tabBox:hover{
@@ -151,7 +151,7 @@ body {
     flex-direction: column;
     gap: 24px;
     max-width: 100vw;
-   
+    margin-bottom: 4vh;
     padding-left: 24px; 
 }
 
