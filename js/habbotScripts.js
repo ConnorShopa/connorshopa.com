@@ -13,6 +13,10 @@ function etGoHome() {
     window.location.href = "acotil.images.html"
   }
 
+  function etGoHabbotTestflight() {
+    window.location.href = "https://testflight.apple.com/join/pagCNvNc";
+}
+
 
 
 $(document).ready(function () {
@@ -225,26 +229,24 @@ $(document).ready(function () {
        mobileMenuExpanded = !mobileMenuExpanded;
    });
 
-   $("#heroButton").hover(
+   $("#heroButton, #heroButton02").hover(
     function() {
-      gsap.to("#heroButton", {
+      gsap.to($(this), {
         duration: 0.16,
         scale: 0.9,
         background: "#FA983A",
         border: "1px solid #FFF",
         transformOrigin: "center center",
-        
-        
       });
     },
     function() {
-      gsap.to("#heroButton", {
+      gsap.to($(this), {
         duration: 0.16,
-        scale: 1, 
+        scale: 1,
         background: "#FA983A",
         border: "none",
         boxshadow: "none",
-        transformOrigin: "center center", 
+        transformOrigin: "center center",
       });
     }
   );

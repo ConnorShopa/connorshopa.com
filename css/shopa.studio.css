@@ -206,9 +206,9 @@ button:hover {
     }
 
     #mobileMenuButton {
-        z-index: 2;
+       
         display: flex;
-     
+        z-index: 2;
         margin: 24px;
 
         gap: 24px;
