@@ -186,7 +186,7 @@ h4{
 }
 
 #heroImage img{
-    width: clamp(40vw, 40vw, 60vw);
+    width: 40vw;
 }
 
 
@@ -413,6 +413,10 @@ footer{
 }
 
 @media (max-width: 1000px) {
+
+    #heroImage img{
+        width: 80vw;
+    }
 
     #phoneScreenRack img{
         width: 30vw;
