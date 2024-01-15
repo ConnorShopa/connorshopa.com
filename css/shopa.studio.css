@@ -144,6 +144,26 @@ body {
     gap: 0px;
 }
 
+#portraitAndNameBox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+#portraitAndNameBox img{
+    height: "64px";
+    width: "64px";
+}
+
+
+#aboutMe h3{
+    font-family: 'Satoshi-Medium';
+    font-size: clamp(0.8vw, 22px, 3.2vw);
+    color: #0C6DE0;
+    line-height: 0%;
+}
+
+
 #aboutMe h4{
     font-family: 'Satoshi-Regular';
     font-size: clamp(0.6vw, 18px, 3vw);
