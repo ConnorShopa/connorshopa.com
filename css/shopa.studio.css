@@ -138,29 +138,26 @@ body {
     z-index: 1;
     display: flex;
     flex-wrap: wrap;
-    flex-grow: 1;
+    
     justify-content: center;
     flex-direction: column;
     gap: 0px;
 }
 
-#portraitAndNameBox{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
+#aboutMe a{
+    text-decoration: underline;
+    color: #0C6DE0;
 }
-#portraitAndNameBox img{
-    height: "64px";
-    width: "64px";
-}
+
+
 
 
 #aboutMe h3{
     font-family: 'Satoshi-Medium';
-    font-size: clamp(0.8vw, 22px, 3.2vw);
+    font-size: clamp(0.6vw, 18px, 3vw);
     color: #0C6DE0;
-    line-height: 0%;
+    
+    
 }
 
 
@@ -168,7 +165,7 @@ body {
     font-family: 'Satoshi-Regular';
     font-size: clamp(0.6vw, 18px, 3vw);
     color: #335D7C;
-    line-height: 320%;
+    line-height: 200%;
 }
 
 #aboutMe a{
@@ -180,7 +177,9 @@ body {
 
 
 
-
+#selfPortrait{
+    width: 40vw;
+}
 
 
 .linesRule {
@@ -194,14 +193,14 @@ a{
     text-decoration: none;
 }
 
-a:hover {
+#extraneousLinks a:hover {
     font-family: 'Satoshi-Medium';
     /* cursor: url('studio.cursorHover.png'), pointer; */
     cursor: none;
     
 }
 
-a:visited {
+#extraneousLinks a:visited {
     text-decoration: none;
     color: #0A3D62;
 }

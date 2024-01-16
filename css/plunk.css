@@ -1,0 +1,388 @@
+@import url(satoshi.css);
+
+
+
+html {
+    background-image: url("../assets/plunkGradientBG.png");
+ 
+    cursor: url("studio.cursor.png"), auto;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+    height: 100%;
+    display: flex;
+    flex: auto;
+    
+    min-height: 100%;
+    min-width: 100%;
+    margin: 0;
+
+}
+
+
+
+
+
+body {
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+
+
+#mouse-circle {
+
+    z-index: 2;
+
+    
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    margin: -13px 0 0 -13px;
+    background: rgba(10, 61, 98, 0.14);
+    border-radius: 50%;
+    pointer-events: none;
+
+    transition: width 0.2s; /* Transition effect when sliding down (and up) */
+    transition: height 0.2s; /* Transition effect when sliding down (and up) */
+}
+
+
+
+#extraneousLinks {
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 24px;
+    margin: 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    position: fixed;
+    /* Make it stick/fixed */
+    bottom: 4vh;
+    
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    text-decoration: none;
+    font-family: 'Satoshi-Medium';
+    padding: 24px;
+    flex-direction: row;
+    transition: top 0.3s;
+
+}
+
+
+
+
+#headerBox {
+    
+    z-index: 2;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    transition: top 0.3s;
+
+}
+
+
+/* LOGO THINGS */
+
+
+.logoBox {
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 72px;
+    min-width: 60px;
+    max-width: 100px;
+    background-color: #0A3D62;
+    border-radius: 16px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 24px;
+
+    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+
+
+
+}
+
+
+.logoBox:hover{
+    cursor: url('studio.cursorHover.png'), pointer;
+
+}
+
+
+#content{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    justify-content: center;
+    align-items: center;
+    margin: 24px;
+    flex-grow: 1;
+}
+
+#banner{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+
+#liveProjectBanner{
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Satoshi-Medium';
+    color: white;
+    background-color: #2F82FF;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+
+    padding: 0px 24px 2px 24px;
+    justify-content: center;
+    height: clamp(48px, 60px, 32px);
+    margin: clamp(12px, 0px, 0px);
+    align-items: center;
+    flex-shrink: 0;
+    border-radius: 48px;
+
+    
+
+    color: #FFFAF6;
+
+    font-family: 'Satoshi-Regular';
+    
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    
+}
+
+#liveProjectBanner img{
+    padding-top: 3px;
+}
+
+#liveProjectBanner h4{
+    color: white;
+    
+}
+
+#liveProjectBanner h4:visited{
+    text-decoration: none;
+    color: white;
+}
+#liveProjectBanner h4:hover{
+    color: white;
+    text-decoration: none;
+}
+
+#liveButton{
+    height: 12px;
+    width: 12px;
+    background-color: red;
+    border-radius: 100%;
+}
+
+
+#plunkContent{
+    padding-top: 12vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+    width: 70vw;
+    font-family: 'Satoshi-Bold';
+    color: #0A3D62;
+
+}
+
+#plunkContent h4{
+    font-family: 'Satoshi-Regular';
+    max-width: 80%;
+    line-height: 200%;
+
+}
+
+#pastPresentFuture {
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+}
+
+#pastBox{
+    max-width: 100%;
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+
+}
+
+#presentBox{
+    max-width: 100%;
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+    
+}
+
+#futureBox{
+    max-width: 100%;
+    background-color: white;
+    padding: 24px;
+    border-radius: 12px;
+    
+}
+
+
+
+.linesRule {
+    width: 1px;
+    height: 22px;
+    background: #D9D9D9;
+}
+
+#plunkValueFrame{
+    width: 400px;
+    border-radius: 12px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+
+a{
+    color: #0A3D62;
+    text-decoration: none;
+}
+
+#extraneousLinks a:hover {
+    font-family: 'Satoshi-Medium';
+    /* cursor: url('studio.cursorHover.png'), pointer; */
+    cursor: none;
+    
+}
+
+#extraneousLinks a:visited {
+    text-decoration: none;
+    color: #0A3D62;
+}
+
+button:hover {
+    cursor: url('studio.cursorHover.png'), pointer;
+    
+}
+
+
+
+#mobileMenuButton {
+    display: none; /* Hide the mobileMenuButton by default */
+}
+
+/* Media query to show the mobileMenuButton when the device width is less than 1488 pixels */
+@media (max-width: 1000px) {
+
+
+    #extraneousLinks{
+        display: none;
+    }
+
+    #mobileMenuButton {
+       
+        display: flex;
+        z-index: 2;
+        margin: 24px;
+
+        gap: 24px;
+        position: fixed;
+        /* Make it stick/fixed */
+        bottom: 4vh;
+        flex-direction: column;
+        
+        transition: top 0.3s;
+    
+    
+        width: 48px;
+        height: 48px;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    
+        border-radius: 100%;
+        background: #FFF;
+    
+        box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    }
+}
+
+#mobileMenuScreen {
+    z-index: 1;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    
+    
+    /* Make it stick/fixed */
+    bottom: 4vh;
+    flex-direction: column;
+    
+    transition: top 0.3s;
+
+    width: 48px;
+    height: 48px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+
+    border-radius: 100%;
+    background: white;
+
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+
+#mobileLinks{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: -800px;
+    font-family: 'Satoshi-Medium';
+}
+
+#menuButtonAnim{
+    z-index: 0;
+    height: 22px;
+}
+
+@media (max-width: 800px) {
+
+    #content{
+        padding-top: 8vh;
+    }
+    
+}

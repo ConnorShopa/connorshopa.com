@@ -118,7 +118,7 @@ $(document).ready(function () {
 
 
 
-    $("a").hover(function () {
+    $("#extraneousLinks a").hover(function () {
         gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
         $(this).css("color", "blue");
         $(this).css("text-decoration", "underline");
@@ -148,6 +148,15 @@ $(document).ready(function () {
         autoplay: false,
         path: 'animations/menuButtonAnim.json'
     });
+
+        // Select the liveButton element
+        var liveButton = $("#liveButton");
+
+        // Create a GSAP timeline for the pulsating animation
+        var pulseTimeline = gsap.timeline({ repeat: -1, yoyo: true });
+    
+        // Add a pulsating animation to the timeline
+        pulseTimeline.to(liveButton, { scale: 0.2, duration: 0.5, ease: "power1.inOut" });
  
 
     $("#mobileMenuButton").click(function () {
@@ -216,8 +225,8 @@ $(document).ready(function () {
 
 //JUMP FUNCTIONS
 function etGoHome() {
-
-    window.location.href = "index.html";
+    console.log("etGoHome() function called!");
+    window.location.href = "./index.html";
 
 }
 
