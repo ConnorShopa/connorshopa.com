@@ -1,0 +1,501 @@
+@import url(satoshi.css);
+
+
+
+html {
+    background: white;
+    cursor: url("studio.cursor.png"), auto;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+
+    display: flex;
+    flex: auto;
+
+    margin: 0;
+
+}
+
+
+
+
+
+body {
+
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Satoshi';
+   
+}
+
+
+
+
+#mouse-circle {
+
+    z-index: 2;
+
+    
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    margin: -13px 0 0 -13px;
+    background: rgba(10, 61, 98, 0.14);
+    border-radius: 50%;
+    pointer-events: none;
+
+    transition: width 0.2s; /* Transition effect when sliding down (and up) */
+    transition: height 0.2s; /* Transition effect when sliding down (and up) */
+}
+
+
+
+#extraneousLinks {
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 24px;
+    margin: 24px;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    position: fixed;
+    /* Make it stick/fixed */
+    bottom: 4vh;
+    
+    border-radius: 12px;
+    background: #FFF;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    text-decoration: none;
+    font-family: 'Satoshi-Medium';
+    padding: 24px;
+    flex-direction: row;
+    transition: top 0.3s;
+
+}
+
+
+
+#headerBox {
+    
+    z-index: 2;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    transition: top 0.3s;
+
+}
+
+
+/* LOGO THINGS */
+
+
+.logoBox {
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 72px;
+    min-width: 60px;
+    max-width: 100px;
+    background: #FFF;
+    border-radius: 16px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 24px;
+
+    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+
+
+
+}
+
+
+.logoBox:hover, .linkOut:hover{
+    cursor: url('studio.cursorHover.png'), pointer;
+
+}
+
+
+
+#content{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12vh;
+    flex-grow: 1;
+}
+
+
+#workBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    
+    
+
+}
+
+
+#workBox01 {
+    display: flex;
+    flex-direction: column;
+    max-width: 40vw;
+    align-items: flex-end;
+    
+}
+
+#workBox02{
+    display: flex;
+    flex-direction: column;
+    max-width: 40vw;
+}
+
+.workBoxItem{
+    margin: 1vw;
+    max-width: 400px;
+}
+
+
+.linkOut{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.linkOut img{
+    padding-top: 3px;
+
+}
+
+
+
+#plunkBox{
+    line-height: 0px;
+    display: flex;
+    min-width: 24vw;
+    flex-direction: column;
+    height: fit-content;
+
+    padding: 48px 0px 12px 24px;
+    color: #0A3D62;
+
+    border-radius: 6px;
+    background: linear-gradient(180deg, rgba(67, 231, 176, 0.50) -7.98%, rgba(67, 231, 176, 0.50) 24.74%, rgba(67, 134, 245, 0.50) 131.8%, rgba(67, 134, 245, 0.50) 140.72%);
+
+}
+
+#plunkBox h2{
+    margin-bottom: 40px;
+    font-family: "Satoshi-Bold";
+}
+
+#plunkBox h4{
+    font-family: "Satoshi-Medium";
+    color: #0A3D62;
+    
+}
+
+#plunkBox img{
+    fill: #0A3D62;
+    color: #0A3D62;
+}
+
+#spotifyBox h2{
+    margin-bottom: 40px;
+    font-family: "Satoshi-Bold";
+}
+
+#spotifyBox h4{
+    font-family: "Satoshi-Medium";
+    color: black;
+    
+}
+
+
+#spotifyBox{
+    line-height: 0px;
+    display: flex;
+    min-width: 24vw;
+    flex-direction: column;
+
+    padding: 48px 0px 12px 24px;
+    color: black;
+    border-radius: 6px;
+    border-radius: 8px;
+    border: 2px solid #000;
+    background: radial-gradient(201.39% 99.17% at 30.76% 46.47%, #89FF86 0%, rgba(137, 255, 134, 0.00) 75.26%);
+}
+
+
+#habbotBox{
+    line-height: 0px;
+    display: flex;
+    min-width: 24vw;
+    flex-direction: column;
+    height: fit-content;
+
+    padding: 48px 0px 12px 24px;
+    color: white;
+
+    border-radius: 6px;
+    background-color: #051324;
+
+}
+
+#habbotBox h2{
+    margin-bottom: 40px;
+    font-family: "Satoshi-Bold";
+}
+
+#habbotBox h4{
+    font-family: "Satoshi-Medium";
+    color: white;
+    
+}
+
+#habbotBox img[src$="arrow_right.svg"] {
+    filter: brightness(0) invert(1);
+}
+#pollinBox img[src$="arrow_right.svg"] {
+    filter: brightness(1) invert(0) sepia(1) hue-rotate(200deg);
+}
+
+#plunkBox img[src$="arrow_right.svg"] {
+    filter: hue-rotate(200deg) brightness(0.6) contrast(1.2);
+}
+
+#fiftyChairsBox{
+    line-height: 0px;
+    display: flex;
+    min-width: 24vw;
+    flex-direction: column;
+    height: fit-content;
+
+    padding: 48px 0px 12px 24px;
+    color: black;
+
+    border-radius: 6px;
+    border: 2.2px solid #000;
+    background-color: white;
+
+}
+
+#fiftyChairsBox h2{
+    margin-bottom: 40px;
+    font-family: "Satoshi-Bold";
+}
+
+#fiftyChairsBox h4{
+    font-family: "Satoshi-Medium";
+    color: black;
+    
+}
+
+#fiftyChairsBox img{
+    fill: black;
+    color: black;
+}
+
+
+#pollinBox{
+    line-height: 0px;
+    display: flex;
+    min-width: 24vw;
+    flex-direction: column;
+    height: fit-content;
+
+    padding: 48px 0px 12px 24px;
+    color: #183354;
+
+    background: #D4E1F5;
+
+    border-radius: 6px;
+    border: solid 2px #5A87CB;
+
+
+}
+
+#pollinBox h2{
+    margin-bottom: 40px;
+    font-family: "Satoshi-Bold";
+}
+
+
+#pollinBox h4{
+    font-family: "Satoshi-Medium";
+    color: #183354;
+    
+}
+
+
+
+
+.linesRule {
+    width: 1px;
+    height: 22px;
+    background: #D9D9D9;
+}
+
+a{
+    color: #0A3D62;
+    text-decoration: none;
+}
+
+#extraneousLinks a:hover {
+    font-family: 'Satoshi-Medium';
+    /* cursor: url('studio.cursorHover.png'), pointer; */
+    cursor: none;
+    
+}
+
+#extraneousLinks a:visited {
+    text-decoration: none;
+    color: #0A3D62;
+}
+
+
+
+
+
+#mobileMenuButton {
+    display: none; /* Hide the mobileMenuButton by default */
+}
+
+/* Media query to show the mobileMenuButton when the device width is less than 1488 pixels */
+@media (max-width: 1000px) {
+
+
+
+    #extraneousLinks{
+        display: none;
+    }
+
+    #mobileMenuButton {
+       
+        display: flex;
+        z-index: 2;
+        margin: 24px;
+
+        gap: 24px;
+        position: fixed;
+        /* Make it stick/fixed */
+        bottom: 4vh;
+        flex-direction: column;
+        
+        transition: top 0.3s;
+    
+    
+        width: 48px;
+        height: 48px;
+        padding: 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-shrink: 0;
+    
+        border-radius: 100%;
+        background: #FFF;
+    
+        box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    }
+}
+
+#mobileMenuScreen {
+    z-index: 1;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    
+    
+    /* Make it stick/fixed */
+    bottom: 4vh;
+    flex-direction: column;
+    
+    transition: top 0.3s;
+
+    width: 48px;
+    height: 48px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+
+    border-radius: 100%;
+    background: white;
+
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+
+#mobileLinks{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: -800px;
+    font-family: 'Satoshi-Medium';
+}
+
+#menuButtonAnim{
+    z-index: 0;
+    height: 22px;
+}
+
+
+@media (max-width: 1000px) {
+
+
+    #workBox{
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 90vw;
+        
+    }
+
+    #workBox01{
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        align-items: flex-start;
+    }
+
+    #workBox02{
+        display: flex;
+        flex-direction: column;
+        width:90vw;
+        align-items: flex-start;
+    }
+
+    .workBoxItem{
+        padding-top: 12px;
+        width: 80vw;
+    }
+
+    #workBox h2{
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+    .linkOut{
+        margin: ;
+    }
+
+}
