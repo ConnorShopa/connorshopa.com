@@ -235,7 +235,7 @@ body {
     border-radius: 6px;
     border-radius: 8px;
     border: 2px solid #000;
-    background: radial-gradient(201.39% 99.17% at 30.76% 46.47%, #89FF86 0%, rgba(137, 255, 134, 0.00) 75.26%);
+    background: radial-gradient(201.39% 99.17% at 45.76% 26.47%, #89FF86 0%, rgba(137, 255, 134, 0.00) 65.26%);
 }
 
 
@@ -323,6 +323,36 @@ body {
 
     border-radius: 6px;
     border: solid 2px #5A87CB;
+
+
+}
+
+#pollinBox h2{
+    margin-bottom: 40px;
+    font-family: "Satoshi-Bold";
+}
+
+
+#pollinBox h4{
+    font-family: "Satoshi-Medium";
+    color: #183354;
+    
+}
+
+#dashChallengeBox{
+    line-height: 0px;
+    display: flex;
+    min-width: 24vw;
+    flex-direction: column;
+    height: fit-content;
+
+    padding: 48px 0px 12px 24px;
+    color: #183354;
+
+    background: #F79990;
+
+    border-radius: 6px;
+
 
 
 }

@@ -256,12 +256,19 @@ body {
 
 #pastBox{
     
-    
     color: white;
 
 }
 
 #pastContentBox{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    
+    gap: 24px;
+}
+
+#presentContentBox{
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
@@ -284,7 +291,12 @@ body {
 }
 
 h3{
-    text-decoration: underline;
+    color: #0A3D62;
+}
+
+#rightContentFrame h3{
+    color: white;
+
 }
 
 #leftContentFrame h4{
@@ -296,6 +308,19 @@ h3{
     color: white;
     
 }
+
+#presentBox img{
+
+    border-radius: 8px;
+    
+}
+
+#refinedValueVideo{
+    border-radius: 8px;
+
+}
+
+
 
 #futureBox{
 
@@ -372,6 +397,17 @@ button:hover {
 
     }
 
+    #presentContentBox img, video{
+
+        width: 100%;
+        
+    }
+
+    #pastContentBox video, img{
+
+        width: 100%;
+        
+    }
     
 
     #content h4{
