@@ -20,7 +20,7 @@ html {
 
 
 body {
-    background-color: ;
+    
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -184,6 +184,7 @@ body {
 }
 
 #liveProjectBanner h4{
+    min-width: 120px;
     color: white;
     
 }
@@ -198,8 +199,8 @@ body {
 }
 
 #liveButton{
-    height: 12px;
-    width: 12px;
+    min-height: 12px;
+    min-width: 12px;
     background-color: red;
     border-radius: 100%;
 }
@@ -390,6 +391,8 @@ button:hover {
         width: 100%;
 
     }
+
+    
 
     #plunkContent {
         width: 90%; /* Ensure content takes full width */
