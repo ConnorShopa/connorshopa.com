@@ -183,6 +183,8 @@ body {
     filter: brightness(0) invert(1);
 }
 
+
+
 #liveProjectBanner h4{
     min-width: 120px;
     color: white;
@@ -206,48 +208,193 @@ body {
 }
 
 
+
+
+
 #plunkContent{
     padding-top: 4vh;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     flex-grow: 1;
-    width: 100vw;
+    
     font-family: 'Satoshi-Bold';
     
 
 }
 
+
+
+#rightContentFrame{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 75%;
+    
+
+}
+
+
+
 #leftContentFrame{
     
     height: 100vh;
     margin-right: 1vw;
-    width: 24vw;
+    width: 20%;
     padding-left: 24px;
 
 }
 
-#rightContentFrame{
+#leftContentFrame h3{
+
+    color: #002644;
+    letter-spacing: -0.8px;
+    font-size: 20px;
+
+}
+
+#leftContentFrame h4{
+
+    color: #0A3D62;
+    letter-spacing: -0.4px;
+    font-size: 16px;
+    font-family: "Satoshi-Regular";
+
+}
+
+
+
+
+#systemContentFrame{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background:  #DAEAFD;
+
+    box-shadow: 6px 6px 24px 0px rgba(1, 47, 11, 0.10);
+    padding: 48px 24px 24px 32px;
+    
+   
+    width: 100%;
+}
+
+#systemContentFrame h1{
+    font-size: 70px;
+    color: #002644;
+    letter-spacing: -4px;
+    margin: 0;
+
+}
+
+
+
+#systemContentFrame h3{
+    font-size: 20px;
+    color: #0A3D62;
+    letter-spacing: -0.8px;
+
+}
+
+#systemContentFrame h4{
+    font-size: 16px;
+    text-align: center;
+    color: #0A3D62;
+    letter-spacing: -0.4px;
+    width: 60%;
+
+}
+
+
+.styleScreen{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.styleScreen img{
+    width: 60%;
+}
+
+.styleScreen h4{
+    max-width: 30%;
+}
+
+
+#designSystemBox{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+#systemFlowImage{
+    margin-top: 40px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#systemFlowImage img{
+    width: 40vw;
+}
+
+
+
+#fullSystemSpan img{
+    width: 100%;
+}
+
+
+
+
+#storyContentFrame{
+    display: flex;
+    flex-direction: column;
+    
+    justify-content: center;
+    align-items: center;
     
     border-radius: 16px;
     background:  #002644;
 
     box-shadow: 6px 6px 24px 0px rgba(1, 47, 11, 0.10);
     padding: 48px 24px 24px 32px;
+    
    
-    width: 80vw;
-    margin-right: 2vw;
-
-
-}
-
-#plunkContent h4{
-    font-family: 'Satoshi-Regular';
     width: 100%;
-    line-height: 200%;
-    color: white;
+    
+
 
 }
+
+#storyContentFrame h3{
+    color: white;
+    font-family: 'Satoshi-Medium';
+    font-size: 18px; 
+
+}
+
+#storyContentFrame h4{
+    color: white;
+    font-family: 'Satoshi-Regular';
+    font-size: 16px; 
+    text-align: center;
+    width: 60%;
+
+
+}
+
+
+
 
 #pastPresentFuture {
     display: flex;
@@ -291,18 +438,9 @@ body {
     background-color: #3884B9;
 }
 
-h3{
-    color: #0A3D62;
-}
 
-#rightContentFrame h3{
-    color: white;
 
-}
 
-#leftContentFrame h4{
-    color: #002644;
-}
 
 #presentBox{
 
@@ -413,16 +551,12 @@ button:hover {
     }
     
 
-    #content h4{
-        
-        font-size: 12px;
-    }
 
     #leftContentFrame{
         display: none;
     }
 
-    #rightContentFrame{
+    #storyContentFrame{
         border-radius: 16px;
         background:  #002644;
 
