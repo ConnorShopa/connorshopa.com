@@ -28,6 +28,7 @@ body {
     align-items: center;
     justify-content: center;
     font-family: 'Satoshi';
+    margin-bottom: 30vh;
    
 }
 
@@ -357,13 +358,13 @@ body {
 
 }
 
-#pollinBox h2{
+#dashChallengeBox h2{
     margin-bottom: 40px;
     font-family: "Satoshi-Bold";
 }
 
 
-#pollinBox h4{
+#dashChallengeBox h4{
     font-family: "Satoshi-Medium";
     color: #183354;
     

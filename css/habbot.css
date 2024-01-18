@@ -74,6 +74,10 @@ body {
 
 }
 
+img[src$="arrow_right.svg"] {
+    filter: brightness(0) invert(1);
+}
+
 
 #mouse-circle {
 

@@ -58,7 +58,7 @@ $(document).ready(function () {
 
     // GSAP ANIMATIONS
     // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
-    $("a").hover(
+    $("#extraneousLinks a").hover(
         function () {
             // Get the position and width of the hovered link
             let linkPos = $(this).offset();
