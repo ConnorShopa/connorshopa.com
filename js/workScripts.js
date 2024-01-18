@@ -24,7 +24,52 @@ $(document).ready(function () {
 
 
  
-   
+    document.addEventListener("scroll", function () {
+        var designSystemSection = document.getElementById("systemContentFrame");
+        var designStyleSystemText = document.getElementById("designStyleSystemText");
+      
+        if (isElementInViewport(designSystemSection)) {
+          designStyleSystemText.classList.add("underline");
+        } else {
+          designStyleSystemText.classList.remove("underline");
+        }
+      });
+      
+      // Function to check if an element is in the viewport
+      function isElementInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
+
+
+      document.addEventListener("scroll", function () {
+        var dataStorySection = document.getElementById("dataTitle");
+        var dataStoryText = document.getElementById("dataStoryText");
+      
+        if (isElementInViewport(dataStorySection)) {
+          dataStoryText.classList.add("underline");
+        } else {
+          designStyleSystemText.classList.remove("underline");
+        }
+      });
+      
+      // Function to check if an element is in the viewport
+      function isElementInViewport(el) {
+        var rect = el.getBoundingClientRect();
+        return (
+          rect.top >= 0 &&
+          rect.left >= 0 &&
+          rect.bottom <=
+            (window.innerHeight || document.documentElement.clientHeight) &&
+          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+      }
 
     // CIRCLE FOLLOWS CURSOR FUNCTION//
     let mousePosX = 0,
