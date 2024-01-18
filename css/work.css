@@ -135,6 +135,14 @@ body {
     flex-grow: 1;
 }
 
+.logoTitleBox{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 18px;;
+}
+
+
 
 #workBox{
     display: flex;
