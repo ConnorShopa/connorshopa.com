@@ -407,9 +407,9 @@ body {
 }
 
 #storyContentFrame h3{
+    font-size: 20px;
     color: white;
-    font-family: 'Satoshi-Medium';
-    font-size: 18px; 
+    letter-spacing: -0.8px;
 
 }
 
@@ -418,11 +418,13 @@ body {
     font-family: 'Satoshi-Regular';
     font-size: 16px; 
     text-align: center;
-    width: 60%;
+    width: 80%;
 
 
 }
-
+#centeredText{
+    text-align: center;
+}
 
 
 
@@ -433,15 +435,39 @@ body {
 }
 
 #pastBox{
-    
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
     color: white;
 
 }
 
+#presentBox{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+#futureBox{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
 #pastContentBox{
+    
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     
     gap: 24px;
 }
@@ -450,7 +476,20 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     
+    gap: 24px;
+}
+
+#futureContentBox{
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
     gap: 24px;
 }
 
@@ -470,13 +509,6 @@ body {
 
 
 
-
-
-#presentBox{
-
-    color: white;
-    
-}
 
 #presentBox img{
 
@@ -633,6 +665,19 @@ button:hover {
     
     }
 
+    #storyContentFrame h3{
+        margin: 0px;
+        font-size: 14px;
+        max-width: 100%;
+        color: white;
+        letter-spacing: -0.4px;
+        
+        margin-top: 24px;
+        margin-bottom: 24px;
+        
+    
+    }
+
     .atomicScreen{
         width: 100%;
         display: flex;
@@ -661,6 +706,22 @@ button:hover {
         
     
     }
+
+    #storyContentFrame h4{
+        font-size: 16px;
+        
+        color: white;
+        letter-spacing: -0.4px;
+        text-align: center;
+        width: 100%;
+        
+    
+    }
+
+   #dataTitle{
+    padding-top: 24px;
+    width: 50%;
+   } 
 
 
   
