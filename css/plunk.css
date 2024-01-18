@@ -216,7 +216,7 @@ body {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    flex-grow: 1;
+    margin-right: 24px;
     
     font-family: 'Satoshi-Bold';
     
@@ -301,6 +301,7 @@ body {
 #systemContentFrame h4{
     font-size: 16px;
     text-align: center;
+    font-family: 'Satoshi-Regular';
     color: #0A3D62;
     letter-spacing: -0.4px;
     width: 60%;
@@ -347,12 +348,41 @@ body {
     width: 40vw;
 }
 
+#fullSystemSpan{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 
+#fullSystemSpan video{
+    width: 80%;
+}
 
 #fullSystemSpan img{
     width: 100%;
 }
 
+
+.atomicScreen{
+    margin-top: 24px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.atomicScreen img{
+    width: 40%;
+}
+
+.atomicScreen h4{
+    max-width: 30%;
+}
 
 
 
@@ -509,151 +539,131 @@ button:hover {
 }
 
 
-@media (max-width: 1000px) {
-
-
-    #body {
-        margin: 0; /* Reset body margin */
-        width: 100%;
-        
-        
-    }
-
-    #content{
-        padding-top: 8vh;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-
-    }
+@media (max-width: 1200px) {
 
     
-
-    #plunkContent {
-        width: 90%; /* Ensure content takes full width */
-        justify-content: center;
-
-    }
-
-    #presentContentBox img, video{
-
-        width: 100%;
-        
-    }
-
-    #pastContentBox video, img{
-
-        width: 100%;
-        
-    }
-    
-
 
     #leftContentFrame{
         display: none;
     }
 
-    #storyContentFrame{
-        border-radius: 16px;
-        background:  #002644;
+    #body {
+        
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
 
-        box-shadow: 6px 6px 24px 0px rgba(1, 47, 11, 0.10);
-        padding: 16px;
-        padding-top: 32px;
-    
-        width: 90%;
+    #content{
+        
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        
+
+        padding: 0px 0px 0px 0px;
+        padding-top: 8vh;
+        margin: 0;
+
+    }
+
+    #plunkContent{
+        display: flex;
+
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        
+        margin: 0px;
+        padding: 0px;
+    }
+
+    #rightContentFrame{
+
+        justify-content: center;
+        align-items: center;
+        
+        width: 100%;
         margin: 0px;
     }
 
-    #pastContentBox{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-    }
-    #pastContentBox video{
-        width: 80%;
+    #systemContentFrame{
+        padding: 24px;
+        width: 90%;
         
     }
 
-    #extraneousLinks{
-        display: none;
+    #storyContentFrame{
+        padding: 24px;
+        width: 90%;
+        
     }
 
-    #mobileMenuButton {
-       
+    #systemContentFrame h1{
+        font-size: 24px;
+        max-width: 100%;
+        color: #002644;
+        letter-spacing: -1.6px;
+        margin: 0;
+    
+        
+    }
+
+
+    #systemContentFrame h3{
+        margin: 0px;
+        font-size: 14px;
+        max-width: 100%;
+        color: #002644;
+        letter-spacing: -0.4px;
+        
+        margin-top: 24px;
+        margin-bottom: 24px;
+        
+    
+    }
+
+    .atomicScreen{
+        width: 90%;
         display: flex;
-        z-index: 2;
-        margin: 24px;
-
-        gap: 24px;
-        position: fixed;
-        /* Make it stick/fixed */
-        bottom: 4vh;
         flex-direction: column;
-        
-        transition: top 0.3s;
-    
-    
-        width: 48px;
-        height: 48px;
-        padding: 8px;
-        justify-content: center;
-        align-items: center;
-        gap: 8px;
-        flex-shrink: 0;
-    
-        border-radius: 100%;
-        background: #FFF;
-    
-        box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
     }
-}
 
-#mobileMenuScreen {
-    z-index: 1;
-    display: none;
-    flex-direction: column;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    justify-content: center;
-    align-items: center;
+    .atomicScreen img{
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .atomicScreen h4{
+        min-width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #systemContentFrame h4{
+        font-size: 12px;
+        
+        color: #002644;
+        letter-spacing: -0.4px;
+        text-align: center;
+        width: 100%;
+        
     
+    }
+
+
+  
+
+
     
-    /* Make it stick/fixed */
-    bottom: 4vh;
-    flex-direction: column;
-    
-    transition: top 0.3s;
-
-    width: 48px;
-    height: 48px;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-
-    border-radius: 100%;
-    background: white;
-
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
 }
 
-#mobileLinks{
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    margin: -800px;
-    font-family: 'Satoshi-Medium';
-}
-
-#menuButtonAnim{
-    z-index: 0;
-    height: 22px;
-}
