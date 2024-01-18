@@ -618,6 +618,8 @@ button:hover {
     }
 
 
+
+
     #systemContentFrame h3{
         margin: 0px;
         font-size: 14px;
@@ -632,7 +634,7 @@ button:hover {
     }
 
     .atomicScreen{
-        width: 90%;
+        width: 100%;
         display: flex;
         flex-direction: column;
     }
@@ -650,7 +652,7 @@ button:hover {
     }
 
     #systemContentFrame h4{
-        font-size: 12px;
+        font-size: 16px;
         
         color: #002644;
         letter-spacing: -0.4px;
