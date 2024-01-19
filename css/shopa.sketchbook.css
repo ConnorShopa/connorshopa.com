@@ -6,13 +6,14 @@ html {
     display: flex;
     flex: auto;
     background: #306252;
-    min-height: 100%;
-    min-width: 100%;
+    min-height: 100vw;
+    min-width: 100vw;
 
 }
 
 body {
     min-height: 100vh;
+    min-width: 100vw;
     padding-top: 4vh;
     display: flex;
     flex-direction: column;
@@ -98,30 +99,14 @@ body {
 }
 
 
-.imageAndText a{
-    display: none;
-}
 
-.wideImage {
-    display: flex;
-    justify-content: center;
-    
-    background-color: #F3F7FC;
-    padding: 24px;
-    width: 80%;
-    border-radius: 4px;
-    box-shadow: 0px 1.6px 4px rgba(7, 66, 47, 0.1);
-}
-
-.wideImage img{
-    width: 80%;
-}
 
 #sketchbookSection{
+
     z-index: 1;
     display: flex;
     width: 80vw;
-    align-items: flex-start;
+    align-items: flex;
     align-content: flex-start;
     gap: 4vw;
     flex-shrink: 0;
@@ -131,7 +116,7 @@ body {
 }
 
 .imageAndText {
-    
+
     display: flex;
     
     flex-direction: column;
@@ -140,7 +125,7 @@ body {
     
 }
 
-/* .imageAndText a{
+.imageAndText a{
     
     text-decoration: none;
     
@@ -152,7 +137,36 @@ body {
     align-items: center;
     flex-grow: 0;
     gap: 10px;
-} */
+}
+
+.wideImage{
+    display: flex;
+ 
+    
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: 100%;
+    margin-right: 6vw;
+    margin-left: 6vw;
+   
+}
+
+.wideImage img{
+    border-radius: 4px;
+    box-shadow: 0px 1.6px 4px rgba(7, 66, 47, 0.1);
+    background-color: #F5F6FA;
+    padding: 24px;
+    max-width: 100%;
+}
+
+.wideImage a {
+    text-decoration: none;
+    font-family: 'Satoshi-Medium'; 
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
+   
+}
 
 .imageAndText img{
     
@@ -269,6 +283,10 @@ button:hover {
         background: #FFF;
     
         box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+    }
+
+    a{
+        font-size: 12px;
     }
 }
 
