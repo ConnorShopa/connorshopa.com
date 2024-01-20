@@ -140,6 +140,7 @@ body {
     flex-wrap: wrap;
     
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     gap: 0px;
 }
@@ -152,25 +153,19 @@ body {
 
 
 
-#aboutMe h3{
-    font-family: 'Satoshi-Medium';
-    font-size: clamp(0.6vw, 18px, 3vw);
-    color: #0C6DE0;
-    
-    
-}
 
 
 #aboutMe h4{
     font-family: 'Satoshi-Regular';
-    font-size: clamp(0.6vw, 18px, 3vw);
+    font-size: 16px;
     color: #335D7C;
+    
     line-height: 200%;
 }
 
 #aboutMe a{
     font-family: 'Satoshi-Regular';
-    font-size: clamp(0.6vw, 18px, 3vw);
+    font-size: 16px;
     color: #335D7C;
     height: 0px;
 }
@@ -222,6 +217,32 @@ button:hover {
 
     #extraneousLinks{
         display: none;
+    }
+
+    #aboutMe{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-items: center;
+        justify-content: center;
+        
+        
+    }
+
+    #aboutMe h4{
+        font-family: 'Satoshi-Regular';
+        font-size: 14px;
+        color: #335D7C;
+        
+        align-items: center;
+        justify-content: center;
+    }
+
+    #aboutMe a{
+        font-family: 'Satoshi-Regular';
+        font-size: 14px;
+        color: #335D7C;
+        
     }
 
     #mobileMenuButton {
