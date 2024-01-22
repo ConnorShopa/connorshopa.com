@@ -258,6 +258,38 @@ h3{
 }
 
 
+.oneTwoTwoSpan{
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+
+}
+
+.oneBox{
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    width: 20%;
+    border-radius: 12px;
+    box-shadow: 0px 7px 8px 0px rgba(129, 129, 129, 0.20), 0px 5px 22px 0px rgba(129, 129, 129, 0.12), 0px 12px 17px 0px rgba(129, 129, 129, 0.14);
+
+}
+
+.twoBox{
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    flex-grow: 1;
+    border-radius: 12px;
+    box-shadow: 0px 7px 8px 0px rgba(129, 129, 129, 0.20), 0px 5px 22px 0px rgba(129, 129, 129, 0.12), 0px 12px 17px 0px rgba(129, 129, 129, 0.14);
+
+}
+
+
 .bodyText{
     font-family: 'Satoshi-Regular';
     font-size: 16px;
@@ -315,7 +347,68 @@ h3{
 }
 
 #summaryBox{
+    background-color: #BFE3C5;
+}
+
+#ideationBox{
+    background-color: #FFFCAB;
+}
+
+#analogueSketchesBox{
     background-color: #E4FB9B;
+}
+#digitalSketchesBox{
+    background-color: #E4FB9B;
+}
+
+#outputBox{
+    background-color: white;
+}
+
+#resourcesBox{
+    background: #C2DFEB;
+}
+
+#explanationsBox{
+    background-color: #BFE3C5;
+}
+
+#screensBox{
+    background-color: #FFFCAB;
+}
+
+.linkOut{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin: 0px;
+
+
+}
+
+.linkOut img{
+    padding-top: 3px;
+
+}
+
+
+.linkOut h4{
+    margin: 0;
+
+}
+
+a{
+    color: #20272D;
+    font-family: 'Satoshi-Regular';
+}
+
+a{
+    text-decoration: underline;
+}
+
+a:visited{
+    text-decoration: underline;
 }
 
 
