@@ -77,6 +77,7 @@ body{
     width: 100vw;
     min-height: 100vh;
     gap: 48px;
+    max-width: 2400px;
 }
 
 #titleContent{
@@ -84,9 +85,9 @@ body{
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 100vw;
+    width: 88%;
+    max-width: 2400px;
 
-    width: 88vw;
 
 }
 
@@ -96,8 +97,7 @@ body{
     flex-direction: column;
     gap: 4px;
     
-    width: 100vw;
-
+    max-width: 2400px;
     width: 96vw;
 
 }
