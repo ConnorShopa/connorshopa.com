@@ -1,0 +1,330 @@
+@import url(satoshi.css);
+
+
+
+html {
+    background: #20272D;
+    
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+
+    display: flex;
+    flex: auto;
+ 
+
+
+}
+
+
+
+
+
+
+
+
+#headerBox {
+    
+    z-index: 2;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    transition: top 0.3s;
+
+}
+
+
+/* LOGO THINGS */
+
+
+.logoBox {
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: 72px;
+    min-width: 60px;
+    max-width: 100px;
+    background-color: #BFE3C5;
+    border-radius: 16px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin: 24px;
+
+    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
+
+
+
+}
+
+
+.logoBox:hover{
+    cursor: url('studio.cursorHover.png'), pointer;
+
+}
+
+/* BODY + TITLE THINGS */
+
+body{
+    margin-top: 16vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100vw;
+    min-height: 100vh;
+    gap: 48px;
+}
+
+#titleContent{
+ 
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100vw;
+
+    width: 88vw;
+
+}
+
+#presentationContent{
+ 
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    
+    width: 100vw;
+
+    width: 96vw;
+
+}
+
+
+
+#title h2{
+    margin: 0;
+    font-family: "Satoshi-Bold";
+    color: white;
+    font-size: 42px;
+    letter-spacing: -1.6 px;
+}
+
+#title h4{
+    margin: 0;
+
+    font-family: "Satoshi-Regular";
+    color: #D2D4D5;
+    font-size: 18px;
+    letter-spacing: -0.8px;
+}
+
+#navMenu{
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+    
+}
+
+h3{
+    margin: 0;
+}
+
+.tabOut{
+
+   justify-content: center;
+   align-items: center;
+
+    background-color: #222222;
+    font-family: "Satoshi-Regular";
+    color: #787878;
+    font-size: 16px;
+    margin: 0px;
+    padding: 8px 24px 8px 24px;
+    border-radius: 24px;
+    
+}
+
+#selectedTab{
+    background-color: white;
+    font-family: "Satoshi-Medium";
+    color: black;
+    font-size: 16px;
+    margin: 0px;
+    padding: 8px 24px 8px 24px;
+    border-radius: 24px;
+}
+
+
+/* – PRESENTATION LAYOUT THINGS – */
+
+/* title layout and design */
+.boxTitle h4{
+    font-size: 14px;
+    margin: 0;
+    font-family: 'Satoshi';
+    letter-spacing: 1.6px;
+
+}
+
+.boxTitle{
+    color: #D2D4D5;
+    background-color: #20272D;
+    padding: 6px 18px 6px 18px;
+    border-radius: 24px;
+}
+
+/* half and half span layout */
+.halfHalfSpan{
+    
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    gap: 4px;
+
+}
+
+.halfSpan{
+    
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+}
+
+.halfBox{
+    
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    flex-grow: 0;
+
+    height: fit-content;
+    
+    border-radius: 12px;
+    box-shadow: 0px 7px 8px 0px rgba(129, 129, 129, 0.20), 0px 5px 22px 0px rgba(129, 129, 129, 0.12), 0px 12px 17px 0px rgba(129, 129, 129, 0.14);
+}
+
+
+.fullSpan{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+}
+
+.fullBox{
+    
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    flex-grow: 0;
+
+    height: fit-content;
+    
+    border-radius: 12px;
+    box-shadow: 0px 7px 8px 0px rgba(129, 129, 129, 0.20), 0px 5px 22px 0px rgba(129, 129, 129, 0.12), 0px 12px 17px 0px rgba(129, 129, 129, 0.14);
+}
+
+.fifthSpan{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.fifthBox{
+    display: flex;
+    padding: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    flex-grow: 1;
+    width: 16%;
+    
+    background-color: #C2DFEB;
+
+    
+    border-radius: 12px;
+    box-shadow: 0px 7px 8px 0px rgba(129, 129, 129, 0.20), 0px 5px 22px 0px rgba(129, 129, 129, 0.12), 0px 12px 17px 0px rgba(129, 129, 129, 0.14);
+
+}
+
+
+.bodyText{
+    font-family: 'Satoshi-Regular';
+    font-size: 16px;
+    align-self: stretch;
+    margin: 0;
+    max-width: 100%;
+    line-height: 150%;
+}
+
+#problemBox{
+    background: white;
+}
+
+#planBox{
+    background: #C2DFEB;
+}
+
+#currentScreensBox{
+    flex-grow: 1;
+    background-color: #E4FB9B;
+}
+
+#currentScreensBox img{
+    max-width: 49%;
+}
+
+#screensRack{
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    flex-wrap: wrap;
+
+}
+#howBox{
+    background-color: #BFE3C5;
+}
+
+#musicBox{
+    background-color: #FFFCAB;
+    flex-grow: 1;
+}
+
+#musicRack{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+#breakdownBox{
+    background-color: white;
+}
+
+#summaryBox{
+    background-color: #E4FB9B;
+}
+
+
+
+@media (max-width: 1000px) {
+    #currentScreensBox img{
+        max-width: 100%;
+    }
+}
+
+
+
