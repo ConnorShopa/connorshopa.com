@@ -375,13 +375,18 @@ h3{
 
 }
 
-#centeredContent{
+.centeredContent{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 
+}
+
+.centeredContent img{
+    width: 50%;
 }
 
 #resourcesBox{
