@@ -146,8 +146,8 @@ body {
 }
 
 #aboutMe a{
-    text-decoration: underline;
-    color: #0C6DE0;
+    text-decoration: none;
+    color: black;
 }
 
 
@@ -312,6 +312,14 @@ button:hover {
     align-items: center;
     position: relative;
     margin: -800px;
+    font-family: 'Satoshi-Medium';
+}
+
+#mobileLinks a{
+    color: #0A3D62;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
     font-family: 'Satoshi-Medium';
 }
 

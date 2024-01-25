@@ -38,6 +38,7 @@ body {
 
 /* HEADER THINGS */
 #headerBox {
+    z-index: 2;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -52,10 +53,7 @@ body {
     /* Stay on top */
 
     transition: top 0.3s;
-    /* Transition effect when sliding down (and up) */
-
-    /* padding-left: 24px;
-    padding-top: 24px; */
+ 
 }
 
 
@@ -335,6 +333,8 @@ button:hover {
 }
 
 #mobileLinks a{
+    font-size: 12px;
+    text-align: center;
     color: #306252;
     font-family: 'Satoshi-Medium';
 }

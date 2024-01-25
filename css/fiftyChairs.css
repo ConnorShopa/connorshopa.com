@@ -379,6 +379,14 @@ button:hover {
     font-family: 'Satoshi-Medium';
 }
 
+#mobileLinks a{
+    color: #0C6F4F;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Satoshi-Medium';
+}
+
 #menuButtonAnim{
     z-index: 0;
     height: 22px;

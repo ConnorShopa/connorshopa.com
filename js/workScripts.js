@@ -103,7 +103,7 @@ $(document).ready(function () {
 
     // GSAP ANIMATIONS
     // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
-    $("#extraneousLinks a").hover(
+    $("a").hover(
         function () {
             // Get the position and width of the hovered link
             let linkPos = $(this).offset();
@@ -130,13 +130,16 @@ $(document).ready(function () {
 
             // Apply hover out animations
             gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
-            $(this).css("color", "#0A3D62");
+            $(this).css("color", "black");
             $(this).css("text-decoration", "none");
 
             // Remove the black border on un-hover
             mouseCircle.style.border = 'none';
         }
     );
+
+
+
     
     function updateMouseCirclePosition(isHover, linkWidth) {
         console.log(isHover)
@@ -161,37 +164,6 @@ $(document).ready(function () {
         }
     }
 
-
-
-    $("#extraneousLinks a").hover(function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
-        $(this).css("color", "blue");
-        $(this).css("text-decoration", "underline");
-    }, function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-        $(this).css("color", "#0A3D62");
-        $(this).css("text-decoration", "none");
-    });
-
-    $("#logoBox", ).hover(function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
-    }, function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-    });
-
-    $(".linkOut").hover(
-        function () {
-            gsap.to(this, { duration: 0.3, ease: "elastic.out(2, 1.6)", gap: "18px" });
-            gsap.to("#mouse-circle", { duration: 0.32, ease: "elastic.out(2, 1.6)", scale: 2 });
-            
-            $(this).css("text-decoration", "underline");
-        },
-        function () {
-            gsap.to(this, { duration: 0.3, ease: "elastic.out(2, 1.6)", gap: "8px" });
-            gsap.to("#mouse-circle", { duration: 0.32,ease: "elastic.out(2, 1.6)", scale: 1 });
-            $(this).css("text-decoration", "none");
-        }
-    );
 
 
 

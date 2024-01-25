@@ -94,6 +94,7 @@ body {
 
 /* HEADER THINGS */
 #headerBox {
+    z-index: 2;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -299,6 +300,12 @@ button:hover {
     height: 22px;
 }
 
+
+
 #mobileLinks a{
+    text-decoration: none;
+    font-size: 12px;
+    text-align: center;
     color: #ff5e57;
+    font-family: 'Satoshi-Medium';
 }
