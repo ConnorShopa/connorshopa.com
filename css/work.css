@@ -170,11 +170,13 @@ body {
     color: #20272D;
     font-family: 'Satoshi-Medium';
     font-size: 20px;
+    font-weight: 400;
 }
 
 .workBoxItem h3{
     font-size: 14px;
     font-family: 'Satoshi-Regular';
+    font-weight: 400;
     color: #151A1E;
     margin: 0;
 }
@@ -202,6 +204,8 @@ body {
 }
 
 .linkOut{
+
+    font-family: 'Satoshi-Regular';
     align-self: flex-start;
    
     flex-grow: 0;
