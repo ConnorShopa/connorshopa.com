@@ -25,16 +25,31 @@ $(document).ready(function () {
 
  
 
-
-
-
-
-
-
-    
-
     
 });
+
+
+$("#fullscreenLink").hover(
+    function() {
+      gsap.to($(this), {
+        duration: 0.16,
+        scale: 0.9,
+        background: "white",
+        cursor: "pointer",
+        transformOrigin: "center center",
+      });
+    },
+    function() {
+      gsap.to($(this), {
+        duration: 0.16,
+        scale: 1,
+        background: "#222222",
+        border: "none",
+        boxshadow: "none",
+        transformOrigin: "center center",
+      });
+    }
+  );
 
 // REFRESH FUNCTION
 
@@ -48,6 +63,14 @@ function etGoHome() {
     console.log("etGoHome() function called!");
     window.location.href = "./index.html";
 
+}
+
+function etGoRecordShelf(){
+    window.location.href = "./spotifyRecordShelf.html"
+}
+
+function etGoSpotifyFullscreen(){
+    window.location.href = "./spotifyFullscreen.html"
 }
 
 function etGoAcotil() {

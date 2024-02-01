@@ -401,6 +401,8 @@ h5 {
     width: 50%;
 }
 
+
+
 #resourcesBox{
     background: #C2DFEB;
 }
@@ -452,6 +454,29 @@ a:visited{
 #keyElementsBox img{
     width: 100%;
     object-fit: contain;
+    
+}
+
+#ideaBox{
+    background-color: #E4FB9B;
+}
+
+#skellingtonBox{
+    background-color: #C2DFEB;
+    width: 30%;
+}
+
+#skeletonPrototypeBox{
+    background-color: white;
+    width: 100%;
+}
+
+.twoSpanImage{
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
     
 }
 
