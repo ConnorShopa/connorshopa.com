@@ -555,6 +555,25 @@ a:visited{
         
     }
 
+    #ideaBox{
+        display: flex;
+        flex-grow: 1;
+        width: auto;
+
+    }
+
+    #skellingtonBox{
+        display: flex;
+        flex-grow: 1;
+        width: auto;
+    }
+
+    #skeletonPrototypeBox{
+        display: flex;
+        flex-grow: 1;
+        width: auto;
+    }
+
     #ideationBox{
         display: flex;
         flex-grow: 1;
@@ -603,10 +622,11 @@ a:visited{
 
     #navMenu{
         flex-wrap: wrap;
+        gap: 16px;
     }
 
     #selectedTab{
-        padding: 4px 2px 4px 2px;
+        padding: 2px 8px 2px 8px;
         border-radius: 8px;
         font-size: 12px;
     }
@@ -615,10 +635,11 @@ a:visited{
         font-size: 12px;
         width: auto;
         min-width: 100%;
+        
     }
 
     .tabOut{
-        padding: 4px 2px 4px 2px;
+        padding: 2px 8px 2px 8px;
         border-radius: 8px;
         font-size: 12px;
     }
