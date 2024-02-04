@@ -525,6 +525,10 @@ a:visited{
     background-color: #FFFCAB;
 }
 
+#theSummaryBox{
+    background-color: #E4FB9B;
+}
+
 .twoSpanImage {
     display: flex;
     gap: 48px;
@@ -635,6 +639,12 @@ a:visited{
     }
 
     #skellingtonBox{
+        display: flex;
+        flex-grow: 1;
+        width: auto;
+    }
+
+    #curatedContentBox{
         display: flex;
         flex-grow: 1;
         width: auto;
