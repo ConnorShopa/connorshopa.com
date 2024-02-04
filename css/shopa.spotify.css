@@ -516,6 +516,15 @@ a:visited{
     background-color: white;
 }
 
+#curatedContentBox{
+    background-color: #FFFCAB;
+    width: 60%;
+}
+
+#curatedContentPrototypeBox{
+    background-color: #FFFCAB;
+}
+
 .twoSpanImage {
     display: flex;
     gap: 48px;
