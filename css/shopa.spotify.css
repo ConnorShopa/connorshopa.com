@@ -461,15 +461,49 @@ a:visited{
     background-color: #E4FB9B;
 }
 
-#skellingtonBox{
-    background-color: #C2DFEB;
-    width: 30%;
-}
-
 #skeletonPrototypeBox{
     background-color: white;
     width: 100%;
 }
+
+#useCasesBox{
+    background-color: #FFFCAB;
+}
+
+#skellingtonBox{
+    background-color: #C2DFEB;
+    width: 40%;
+}
+
+#discographyBox{
+    background-color: #E4FB9B;
+    width: 80%;
+}
+
+#discographyPrototypeBox img{
+    width: 40%;
+}
+
+#discographyPrototypeBox{
+    background-color: #E4FB9B;
+}
+
+
+#internalLibraryBox{
+    background-color: #C2DFEB;
+    width: 80%;
+}
+
+#internalLibraryPrototypeBox{
+    background-color: #C2DFEB;
+   
+}
+
+#internalLibraryPrototypeBox img{
+    width: 40%;
+   
+}
+
 
 .twoSpanImage{
     width: 100%;
