@@ -29,7 +29,7 @@ $(document).ready(function () {
 });
 
 
-$("#fullscreenLink").hover(
+$("#fullscreenLink, #ramblingLink, #recordShelfLink").hover(
     function() {
       gsap.to($(this), {
         duration: 0.16,
@@ -71,6 +71,10 @@ function etGoRecordShelf(){
 
 function etGoSpotifyFullscreen(){
     window.location.href = "./spotifyFullscreen.html"
+}
+
+function etGoDreamRambling(){
+    window.location.href = "./spotifyDreamRambling.html"
 }
 
 function etGoAcotil() {

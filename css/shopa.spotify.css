@@ -529,6 +529,15 @@ a:visited{
     background-color: #E4FB9B;
 }
 
+#ramblingBox{
+    background-color: white;
+}
+
+#ramblingBox h4{
+    font-weight: 500;
+    font-family: 'Satoshi-Medium';
+}
+
 .twoSpanImage {
     display: flex;
     gap: 48px;
