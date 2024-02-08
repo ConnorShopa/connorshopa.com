@@ -225,9 +225,14 @@ $(document).ready(function () {
 
 //JUMP FUNCTIONS
 function etGoHome() {
-    console.log("etGoHome() function called!");
+    
     window.location.href = "./index.html";
 
+}
+
+function etGoPollin(){
+    
+    window.location.href = "https://pollin-client-5gdey.kinsta.app/";
 }
 
 function etGoAcotil() {
