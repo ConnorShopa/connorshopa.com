@@ -30,6 +30,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    
    
 }
 
@@ -86,6 +87,8 @@ body {
     align-items: center;
     margin: 24px;
     flex-grow: 1;
+    width: 100vw;
+  
 }
 
 
@@ -172,30 +175,6 @@ body {
     height: 0px;
 }
 
-#titleBox{
-
-
-    display: flex;
-    flex-grow: 1;
-    align-items: flex-end;
-
-
-    font-family: "Satoshi-Bold";
-    font-weight: 4500;
-}
-
-.bodyTextBox{
-    background-color: green;
-    margin-top: 24px;
-    font-size: 16px;
-    display: flex;
-    flex-grow: 1;
-    align-items: flex-start;
-    width: 60vw;
-
-    font-family: "Satoshi-Regular";
-    font-weight: 4500;
-}
 
 
 #selfPortrait{
