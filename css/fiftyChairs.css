@@ -87,6 +87,7 @@ body {
     align-items: center;
     margin: 24px;
     flex-grow: 1;
+    width: 100vw;
 }
 
 
