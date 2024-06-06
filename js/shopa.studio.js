@@ -141,6 +141,32 @@ $(document).ready(function () {
     }
   );
 
+  $(".previewButtonDark").hover(
+    function () {
+      gsap.to(this, { duration: 0.32, backgroundColor: "#041426" });
+      gsap.to(this, { duration: 0.32, scale: 0.95 });
+      gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+    },
+    function () {
+      gsap.to(this, { duration: 0.32, scale: 1 });
+      gsap.to(this, { duration: 0.32, backgroundColor: "#003960" });
+      gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
+    }
+  );
+
+  $(".previewButtonLight").hover(
+    function () {
+      gsap.to(this, { duration: 0.32, backgroundColor: "#E2EBF1" });
+      gsap.to(this, { duration: 0.32, scale: 0.95 });
+      gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+    },
+    function () {
+      gsap.to(this, { duration: 0.32, scale: 1 });
+      gsap.to(this, { duration: 0.32, backgroundColor: "#FFFFFF" });
+      gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
+    }
+  );
+
   //MOBILE MENU ANIM AND LOGIC
   let mobileMenuExpanded = false; // Track the menu state
 
@@ -235,4 +261,28 @@ function etGoAcotil() {
 
 function openAcotilTab() {
   window.open("https://acollectionofthingsilike.com", "_blank");
+}
+
+function etGoPlunk() {
+  window.location.href = "plunk.html";
+}
+
+function etGoPollinDoc() {
+  window.location.href = "pollinDoc.html";
+}
+
+function etGoSpotify() {
+  window.location.href = "spotifyFullscreen.html";
+}
+
+function etGoHabbotDoc() {
+  window.location.href = "habbot.html";
+}
+
+function etGoHabbotBeta() {
+  window.location.href = "https://testflight.apple.com/join/pagCNvNc";
+}
+
+function etGoWork() {
+  window.location.href = "work.html";
 }

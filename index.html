@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/satoshi.css">
 
     <title>shopa.studio</title>
-    
+
 
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
@@ -28,7 +28,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-    
+
 
 </head>
 
@@ -49,103 +49,310 @@
     </div>
 
 
+
+
     <div id="content">
+        <div id="aboutPlusWorkContainer">
+            <div id="aboutMe">
 
-        <div id="aboutMe">
-            
 
-            <h4>My name's Connor Shopa, <br> I'm a product designer fascinated by humans, and the way we interact with technology. <br>Right now I'm in Montreal helping build <a href="https://app.getplunk.com/">Plunk®</a><br>and I'm working through my <a href="./fiftyChairs.html">fifty–chairs</a> project.<br>Before that, I was studying design in Toronto, at OCAD. <br> Some of my <a href="./work.html">work</a> is below.</h4>
+                <h4>Howdy! My name's</h4>
+                <h1>Connor Shopa</h1>
+                <h4> I'm a digital product designer based in Canada, who finds joy in using creativity to craft tools
+                    that help humans.
+                    <br> Right now I'm in Montreal helping build <a href="https://app.getplunk.com/">Plunk®</a>
+
+                    <br> Before that, I was studying design in Toronto, at OCAD.
+
+                    <br> I'm working through my <a href="./fiftyChairs.html">fifty–chairs</a> project.
+
+                    <br> I'm always around to <a href="./sayHello.html"> chat </a> design, music and homemade jam.
+
+                    <!-- <br> Some of my <a href="./work.html">work</a> is below.</h4> -->
+            </div>
+
+            <div class="workContainer">
+                <div class="projectSection" id="plunkSection">
+                    <img src="assets/plunkLogo.svg" alt="" height="40px">
+                    <h4>Design system, and product launches</h4>
+                    <div class="projectTagContainer" id="plunkTagContainer">
+                        <div class="tagChip">
+                            PRODUCT DESIGN
+                        </div>
+                        <div class="tagChip">
+                            VISUAL DESIGN
+                        </div>
+                        <div class="tagChip">
+                            MOBILE + WEB
+                        </div>
+                        <div class="tagChip">
+                            USER RESEARCH
+                        </div>
+                        <div class="tagChip">
+                            DESIGN THINKING
+                        </div>
+                        <div class="tagChip">
+                            SHIPPED PRODUCTS
+                        </div>
+                        <div class="tagChip">
+                            HIGH-FIDELITY PROTOTYPING
+                        </div>
+                    </div>
+                    <div class="previewLinkOff">
+                        <img src="assets/workSectionAssets/dataAsStoryPreview.png" alt="dataAsAStory" width="100%">
+                        <div class="buttonRack">
+
+                            <div class="previewButtonDark" onClick="etGoPlunk()">
+                                <h5>Data as a Story</h5>
+                                <img src="icons/arrow_right_white.svg" alt="" height="16px">
+                            </div>
+                            <div class="previewButtonDark" onClick="etGoPlunk()">
+                                <h5>A Living Design System</h5>
+                                <img src="icons/arrow_right_white.svg" alt="" height="16px">
+                            </div>
+                            <div class="previewButtonDark" onClick="etGoPlunk()">
+                                <h5>Motion</h5>
+                                <img src="icons/arrow_right_white.svg" alt="" height="16px">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="threeOneSpan">
+                    
+                    
+                    
+                    <div class="projectSection" id="pollinSection">
+                        <img src="assets/pollinLogo.svg" alt="" height="60px">
+                        <h4>An ephemeral social polling application. Built to teach me react</h4>
+                        <div class="projectTagContainer" id="pollinTagContainer">
+                            <div class="tagChip">
+                                PRODUCT IDEATION
+                            </div>
+                            <div class="tagChip">
+                                PRODUCT BUILD
+                            </div>
+                           
+                            
+    
+                        </div>
+    
+    
+                        <div class="previewLinkOff">
+                            <img src="assets/workSectionAssets/pollinPreview.png" alt="dataAsAStory" width="100%">
+                            <div class="buttonRack">
+    
+                                <div class="previewButtonLight" onClick="etGoPollinDoc()">
+                                    <h5>Design document  </h5>
+                                    <img src="icons/arrow_right.svg" alt="" height="16px">
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+    
+                    </div>
+
+                    <div class="projectSection" id="spotifySection">
+                        <img src="assets/spotifyDreams.svg" alt="" height="60px">
+                        <h4> Product ideation + High-fidelity prototyping </h4>
+                        <div class="projectTagContainer" id="spotifyTagContainer">
+                            <div class="tagChipLight">
+                                PRODUCT IDEATION
+                            </div>
+                            <div class="tagChipLight">
+                                PRODUCT PROPOSAL
+                            </div>
+                            <div class="tagChipLight">
+                                PROTOTYPING
+                            </div>
+                            <div class="tagChipLight">
+                                CASE STUDY
+                            </div>
+                            <div class="tagChipLight">
+                                INTERACTION DESIGN
+                            </div>
+    
+                        </div>
+    
+    
+                        <div class="previewLinkOff">
+                            <img src="assets/workSectionAssets/spotifyDreamsPreview.png" alt="dataAsAStory" width="100%">
+                            <div class="buttonRack">
+    
+                                <div class="previewButtonLight" onClick="etGoSpotify()">
+                                    <h5>View Case Study</h5>
+                                    <img src="icons/arrow_right.svg" alt="" height="16px">
+                                </div>
+    
+                            </div>
+    
+                        </div>
+    
+    
+                    </div>
+                </div>
+
+                <div class="projectSection" id="habbotSection">
+                    <div class="projectLogo" >
+                        <img id="habbotLogo" src="assets/habbotLogoHZ.svg" alt="" height="30px">
+                    </div>
+                    
+                    <h4>Mobile Application Design + Beta Launch</h4>
+                    <div class="projectTagContainer" id="habbotTagContainer">
+                        <div class="tagChip">
+                            PRODUCT DESIGN
+                        </div>
+                        <div class="tagChip">
+                            VISUAL DESIGN
+                        </div>
+                        <div class="tagChip">
+                            iOS DEVELOPMENT
+                        </div>
+                        <div class="tagChip">
+                            MARKETING
+                        </div>
+                        
+                        <div class="tagChip">
+                            SHIPPED PRODUCTS
+                        </div>
+                        
+                    </div>
+                    <div class="previewLinkOff">
+                        <div id="centeredImage" >
+                            <img src="assets/workSectionAssets/habbotPreview.svg" alt="" width="50%">
+                        </div>
+                        <div class="buttonRack">
+
+                            <div class="previewButtonLight" onClick = "etGoHabbotBeta()">
+                                <h5>Try the Beta</h5>
+                                <img src="icons/arrow_right.svg" alt="" height="16px">
+                            </div>
+                            
+                            <div class="previewButtonLight" onClick = "etGoHabbotDoc()">
+                                <h5>Learn More</h5>
+                                <!-- <img src="icons/arrow_right_white.svg" alt="" height="16px"> -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="projectSection" id="allWorkSection">
+                    <div class="projectLogo" >
+                        
+                    </div>
+                    
+                    <h4>View all selected works</h4>
+                    
+                    <div class="previewLinkOff">
+                        
+                        <div class="buttonRack">
+
+                            
+                            
+                            <div class="previewButtonDark" onClick = "etGoWork()">
+                                <h5>See more work</h5>
+                                <img src="icons/arrow_right_white.svg" alt="" height="16px">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
-        
-        
-        <div id="extraneousLinks">
+    </div>
 
-            <a class="workLink" href="./work.html">work</a> 
 
-            <div class="linesRule"></div>
+    <div id="extraneousLinks">
 
-            <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a> 
+        <a class="workLink" href="./work.html">work</a>
 
-            <div class="linesRule"></div>
+        <div class="linesRule"></div>
 
-            <a class="workLink" href="./plunk.html">Plunk®</a> 
-    
-            <div class="linesRule"></div>
-            
-            <a class="workLink" href="habbot.html">Habbot</a> 
-    
-            <div class="linesRule"></div>
-    
-            <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/">Pollin</a> 
-    
-            <div class="linesRule"></div>
+        <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
 
-            <a class="workLink" href="./acotil.images.html">ACOTIL</a> 
-    
-            <div class="linesRule"></div>
-    
-    
-            <a class="workLink" href="./sketchbook.html">sketchbook</a> 
-    
-            <div class="linesRule"></div>
-            
-            <a class="workLink" href="./motion.html">motion</a> 
-    
-            <div class="linesRule"></div>
-    
-            <a class="workLink" href="./sayHello.html">say hello</a> 
+        <div class="linesRule"></div>
+
+        <a class="workLink" href="./plunk.html">Plunk®</a>
+
+        <div class="linesRule"></div>
+
+        <a class="workLink" href="habbot.html">Habbot</a>
+
+        <div class="linesRule"></div>
+
+        <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/">Pollin</a>
+
+        <div class="linesRule"></div>
+
+        <a class="workLink" href="./acotil.images.html">ACOTIL</a>
+
+        <div class="linesRule"></div>
+
+
+        <a class="workLink" href="./sketchbook.html">sketchbook</a>
+
+        <div class="linesRule"></div>
+
+        <a class="workLink" href="./motion.html">motion</a>
+
+        <div class="linesRule"></div>
+
+        <a class="workLink" href="./sayHello.html">say hello</a>
+    </div>
+
+
+    <div id="mobileMenuButton">
+        <div id="menuButtonAnim"></div>
+    </div>
+
+    <div id="mobileMenuScreen">
+        <div id="mobileLinks">
+
+            <a class="workLink" href="./work.html">work</a>
+
+
+
+            <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
+
+
+
+            <a class="workLink" href="./plunk.html">Plunk®</a>
+
+
+
+            <a class="workLink" href="habbot.html">Habbot</a>
+
+
+
+            <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/">Pollin</a>
+
+
+
+            <a class="workLink" href="./acotil.images.html">ACOTIL</a>
+
+
+
+
+            <a class="workLink" href="./sketchbook.html">sketchbook</a>
+
+
+
+            <a class="workLink" href="./motion.html">motion</a>
+
+
+
+            <a class="workLink" href="./sayHello.html">say hello</a>
         </div>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+        <script src="js/shopa.studio.js"></script>
 
-   <div id="mobileMenuButton">
-    <div id="menuButtonAnim"></div>
-   </div>
-
-   <div id="mobileMenuScreen">
-    <div id="mobileLinks">
-
-        <a class="workLink" href="./work.html">work</a> 
-
-            
-
-            <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a> 
-
-            
-
-            <a class="workLink" href="./plunk.html">Plunk®</a> 
-    
-            
-            
-            <a class="workLink" href="habbot.html">Habbot</a> 
-    
-            
-    
-            <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/">Pollin</a> 
-    
-            
-            
-            <a class="workLink" href="./acotil.images.html">ACOTIL</a> 
-    
-            
-    
-    
-            <a class="workLink" href="./sketchbook.html">sketchbook</a> 
-    
-            
-            
-            <a class="workLink" href="./motion.html">motion</a> 
-    
-            
-    
-            <a class="workLink" href="./sayHello.html">say hello</a> 
     </div>
-   </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-    <script src="js/shopa.studio.js"></script>
-    
-    </div>
-    
+
 
 
 </body>

@@ -1,46 +1,54 @@
 @import url(satoshi.css);
 
-
-
 html {
-    background: linear-gradient(132deg, #EBF1F5 1.23%, #E2EBF1 86.21%);
+    background: linear-gradient(0deg, #E2EBF1 0%, #FFF 125.78%);
     cursor: url("studio.cursor.png"), auto;
-    align-items: center;
-    align-content: center;
-    flex-direction: column;
     height: 100%;
     display: flex;
-    flex: auto;
-    
-    min-height: 100vh;
-    min-width: 100vw;
     margin: 0;
 
+    min-height: 100vh;
+
 }
-
-
-
-
 
 body {
     height: 100%;
     max-height: 100vh;
-    max-width: 100vw;
+    width: 100vw;
+    margin: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     
-   
 }
 
+#helloContent{
+    display: flex;
+    margin: 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    text-align: left;
+    height: 100vh;
+    
+}
 
+#content{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    
+    flex-grow: 1;
+    width: 100vw;
+    background: linear-gradient(0deg, #E2EBF1 0%, #FFF 125.78%);
+ 
+}
 
 #mouse-circle {
-
     z-index: 2;
-
-    
     position: absolute;
     width: 32px;
     height: 32px;
@@ -48,12 +56,8 @@ body {
     background: rgba(10, 61, 98, 0.14);
     border-radius: 50%;
     pointer-events: none;
-
-    transition: width 0.2s; /* Transition effect when sliding down (and up) */
-    transition: height 0.2s; /* Transition effect when sliding down (and up) */
+    transition: width 0.2s, height 0.2s;
 }
-
-
 
 #extraneousLinks {
     z-index: 1;
@@ -65,122 +69,317 @@ body {
     align-items: center;
     gap: 24px;
     position: fixed;
-    /* Make it stick/fixed */
     bottom: 4vh;
-    
     border-radius: 12px;
     background: #FFF;
     box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
     text-decoration: none;
     font-family: 'Satoshi-Medium';
-    padding: 24px;
-    flex-direction: row;
     transition: top 0.3s;
-
-}
-
-#content{
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-    justify-content: center;
-    align-items: center;
-    margin: 24px;
-    flex-grow: 1;
-    width: 100vw;
-  
 }
 
 
 
 #headerBox {
-    
     z-index: 2;
-    width: 100vw;
+    width: 100%;
     position: fixed;
     top: 0;
     transition: top 0.3s;
-
 }
 
-
-/* LOGO THINGS */
-
-
 .logoBox {
-    
     display: flex;
     flex-direction: row;
     align-items: center;
-
     width: 72px;
     min-width: 60px;
     max-width: 100px;
     background-color: #0A3D62;
     border-radius: 16px;
-    padding-top: 12px;
-    padding-bottom: 10px;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 12px 16px;
     margin: 24px;
-
     box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
-
-
-
 }
 
-
-.logoBox:hover{
+.logoBox:hover {
     cursor: url('studio.cursorHover.png'), pointer;
-
 }
 
-
-#aboutMe{
-    z-index: 1;
+#aboutPlusWorkContainer {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: left;
+    align-items: left;
+    height: 100vh;
+    overflow: hidden;
     
+}
+
+#aboutMe {
     
-    justify-content: center;
-    align-items: center;
+    display: flex;
     flex-direction: column;
-    gap: 0px;
+    justify-content: center;
+    align-items: left;
+    width: 60%;
+    height: 100vh;
+    overflow: auto;
+    margin: 12vh 0px 40px 120px;
+    
+
 }
 
-#aboutMe a{
+
+.workContainer {
+    
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    overflow-y: auto;
+    gap: 24px;
+    padding-right: 140px;
+    padding-left: 140px;
+}
+
+#aboutMe a {
     text-decoration: none;
-    color: black;
+    
 }
 
+#aboutMe h1 {
+    font-family: 'Satoshi-Bold';
+    font-size: 40px;
+    color: #0E3B5C;
+    font-weight: 400;
+    letter-spacing: -1.6px;
+    margin: 0;
+}
 
-
-
-
-
-#aboutMe h4{
+#aboutMe h4 {
     font-family: 'Satoshi-Regular';
     font-size: 16px;
     color: #335D7C;
-    
     font-weight: 400;
     line-height: 200%;
+    margin: 0;
 }
 
-#aboutMe a{
+#aboutMe a {
     font-family: 'Satoshi-Regular';
     font-size: 16px;
     color: #335D7C;
-    height: 0px;
+    text-decoration: underline;
+}
+
+
+#plunkSection {
+    display: flex;
+    margin-top: 24vh;
+
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: center;
+
+    background-color: white;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+
+#allWorkSection {
+    display: flex;
+    margin-bottom: 24vh;
+    flex-direction: column;
+
+    background-color: white;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+
+
+#habbotSection {
+    
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    background-color: #40576A;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
 }
 
 
 
-#selfPortrait{
-    width: 40vw;
+
+.projectLogo{
+    margin-bottom: 24px;
+    display: flex;
+
 }
 
+#centeredImage{
+    width: stretch;
+    display: flex;
+    flex-direction: row;
+  
+    justify-content: center;
+}
+
+
+
+.threeOneSpan {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    align-items: left;
+    
+}
+
+#spotifySection {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #20272D;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+
+#spotifySection h4, #habbotSection h4 {
+    color: white;
+}
+
+#pollinSection {
+    
+    width: 43%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #CDDFFC;
+    padding: 24px;
+    border-radius: 18px;
+    
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+
+
+    
+    
+#pollinSection h4{
+    margin-top: 12px;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: -0.8px;
+}
+
+
+
+
+
+.projectSection h4{
+        color: #003960;
+
+    font-family: 'Satoshi-Medium';
+    font-size: 22px;
+    margin: 0;
+    text-align: left;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 200%; 
+    letter-spacing: -0.8px;
+}
+
+
+.projectTagContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    gap: 8px;
+    
+
+}
+
+.tagChip {
+
+    padding: 5px 10px;
+    background-color: #FFFFFF;
+    border-radius: 24px;
+    border: 1px solid #003960;
+
+    font-family: 'Satoshi-Medium';
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.tagChipLight {
+
+    padding: 5px 10px;
+    border-radius: 24px;
+    border: 1px solid white;
+    color: white;
+    font-family: 'Satoshi-Medium';
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.buttonRack{
+    
+    margin-top: 2vh;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+
+}
+
+.previewButtonDark {
+    padding: 8px 32px 8px 32px;
+    display: flex;
+    /* flex-grow: 3; */
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #003960;
+    color: white;
+    border-radius: 24px;
+    font-family: 'Satoshi-Medium';
+    font-weight: 500;
+    font-size: 16px;
+    
+    gap: 8px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+
+.previewButtonLight {
+    /* flex-grow: 3; */
+    padding: 8px 32px 8px 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: #003960;
+    border-radius: 24px;
+    font-family: 'Satoshi-Medium';
+    font-weight: 500;
+    font-size: 16px;
+    
+    gap: 8px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+}
+
+.previewButtonDark  h5 {
+    margin: 0;
+}
+
+.previewButtonLight  h5 {
+    margin: 0;
+}
 
 .linesRule {
     width: 1px;
@@ -188,16 +387,14 @@ body {
     background: #D9D9D9;
 }
 
-a{
+#extraneousLinks a {
     color: #0A3D62;
     text-decoration: none;
 }
 
 #extraneousLinks a:hover {
     font-family: 'Satoshi-Medium';
-    /* cursor: url('studio.cursorHover.png'), pointer; */
     cursor: none;
-    
 }
 
 #extraneousLinks a:visited {
@@ -207,76 +404,151 @@ a{
 
 button:hover {
     cursor: url('studio.cursorHover.png'), pointer;
+}
+
+#mobileMenuButton {
+    display: none;
+}
+
+@media (max-width: 1000px) {
+
+    
+
+
+body {
+    height: fit-content;
+    
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+   
     
 }
 
-
-
-#mobileMenuButton {
-    display: none; /* Hide the mobileMenuButton by default */
+#content{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: flex-start;
+    align-items: center;
+    
+    flex-grow: 1;
+    width: 100vw;
+ 
 }
 
-/* Media query to show the mobileMenuButton when the device width is less than 1488 pixels */
-@media (max-width: 1000px) {
+
+.sayHelloText{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+}
+
+#helloContent{
+    display: flex;
+    margin: 0px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    text-align: left;
+    height: 100vh;
+    width: 100vw;
+    
+}
+
+    #aboutPlusWorkContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        margin-top: 12vh;
+        gap: 80px;
+        width: 90%;
+        height: 100%;
+        overflow: visible;
+
+    }
+    
+    #aboutMe {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: left;
+        width: 90vw;
+        height: 100%;
+        margin-top: 120vh;
+        padding: 0;
+        margin: 120px 0 0 0;
+    }
+    
+    .workContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: left;
+        width: 100%;
+        height: fit-content;
+        gap: 12px;
+        padding: 0px;
+        margin: 0px;
+
+    }
+
+    .buttonRack{
+        flex-wrap: wrap;
+    }
+
+    .threeOneSpan{
+        flex-direction: column;
+    }
+
+    #pollinSection{
+        width: auto;
+    }
+
+    #plunkSection{
+        margin: 0;
+    }
 
 
-    #extraneousLinks{
+    #extraneousLinks {
         display: none;
     }
 
-    #aboutMe{
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        align-items: center;
-        justify-content: center;
-        width: 90vw;
-        
-        
+
+    #aboutMe h4 {
+        font-size: 14px;
     }
 
-    #aboutMe h4{
-        font-family: 'Satoshi-Regular';
+    #aboutMe a {
         font-size: 14px;
-        color: #335D7C;
-        
-        align-items: center;
-        justify-content: center;
-    }
-
-    #aboutMe a{
-        font-family: 'Satoshi-Regular';
-        font-size: 14px;
-        color: #335D7C;
-        
     }
 
     #mobileMenuButton {
-       
         display: flex;
         z-index: 2;
         margin: 24px;
-
         gap: 24px;
         position: fixed;
-        /* Make it stick/fixed */
         bottom: 4vh;
         flex-direction: column;
-        
         transition: top 0.3s;
-    
-    
         width: 48px;
         height: 48px;
         padding: 8px;
         justify-content: center;
         align-items: center;
-        gap: 8px;
-        flex-shrink: 0;
-    
         border-radius: 100%;
         background: #FFF;
-    
         box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
     }
 }
@@ -290,28 +562,18 @@ button:hover {
     transform: translate(-50%, -50%);
     justify-content: center;
     align-items: center;
-    
-    
-    /* Make it stick/fixed */
+    position: fixed;
     bottom: 4vh;
-    flex-direction: column;
-    
     transition: top 0.3s;
-
     width: 48px;
     height: 48px;
     padding: 8px;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-
     border-radius: 100%;
     background: white;
-
     box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
 }
 
-#mobileLinks{
+#mobileLinks {
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -321,16 +583,14 @@ button:hover {
     font-family: 'Satoshi-Medium';
 }
 
-#mobileLinks a{
+#mobileLinks a {
     color: #0A3D62;
     font-size: 12px;
     text-align: center;
     text-decoration: none;
-    font-family: 'Satoshi-Medium';
 }
 
 #menuButtonAnim{
     z-index: 0;
     height: 22px;
 }
-
