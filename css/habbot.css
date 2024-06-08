@@ -180,7 +180,7 @@ img[src$="arrow_right.svg"] {
 
 h4{
     font-size: clamp(12px, 18px, 18px );
-    padding-bottom: px;
+    font-weight: 400;
     
 }
 
@@ -398,6 +398,7 @@ a:visited{
 h5{
     font-family: "Satoshi-Regular";
     font-size: 14px;
+    font-weight: 400;
 }
 
 
