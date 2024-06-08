@@ -143,6 +143,20 @@ body {
     padding-left: 140px;
 }
 
+#nameAndIcon{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 24px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+#nameAndIcon img{
+    width: 64px;
+}
+
 #aboutMe a {
     text-decoration: none;
     
@@ -347,8 +361,8 @@ body {
     background-color: #003960;
     color: white;
     border-radius: 24px;
-    font-family: 'Satoshi-Medium';
-    font-weight: 500;
+    font-family: 'Satoshi-Regular';
+    font-weight: 400;
     font-size: 16px;
     
     gap: 8px;
@@ -365,8 +379,8 @@ body {
     background-color: white;
     color: #003960;
     border-radius: 24px;
-    font-family: 'Satoshi-Medium';
-    font-weight: 500;
+    
+    
     font-size: 16px;
     
     gap: 8px;
@@ -374,11 +388,17 @@ body {
 }
 
 .previewButtonDark  h5 {
+    font-family: 'Satoshi-Medium';
     margin: 0;
+    font-style: normal;
+    font-weight: 500;
 }
 
 .previewButtonLight  h5 {
+    font-family: 'Satoshi-Medium';
     margin: 0;
+    font-style: normal;
+    font-weight: 500;
 }
 
 .linesRule {
@@ -501,6 +521,18 @@ body {
         padding: 0px;
         margin: 0px;
 
+    }
+
+    .workContainer h4{
+        margin-top: 12px;
+        font-size: 16px;
+    }
+
+    #pollinSection h4{
+        margin-top: 12px;
+        font-size: 16px;
+        line-height: 150%;
+        letter-spacing: -0.8px;
     }
 
     .buttonRack{
