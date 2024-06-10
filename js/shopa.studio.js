@@ -264,19 +264,19 @@ function openAcotilTab() {
 }
 
 function etGoPlunk() {
-  window.location.href = "plunkProject.html";
+  window.location.href = "/plunkProject.html";
 }
 
 function etGoPollinDoc() {
-  window.location.href = "pollinDoc.html";
+  window.location.href = "/pollinDoc.html";
 }
 
 function etGoSpotify() {
-  window.location.href = "spotifyFullscreen.html";
+  window.location.href = "/spotifyFullscreen.html";
 }
 
 function etGoHabbotDoc() {
-  window.location.href = "habbot.html";
+  window.location.href = "/habbot.html";
 }
 
 function etGoHabbotBeta() {
@@ -284,5 +284,5 @@ function etGoHabbotBeta() {
 }
 
 function etGoWork() {
-  window.location.href = "work.html";
+  window.location.href = "/work.html";
 }
