@@ -1,245 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="css/work.css">
-    <link rel="stylesheet" href="css/satoshi.css">
+    <link rel="stylesheet" href="css/work.css" />
+    <link rel="stylesheet" href="css/satoshi.css" />
 
     <title>shopa.work</title>
-    
 
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="manifest" href="assets/site.webmanifest">
-    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon-16x16.png"
+    />
+    <link rel="manifest" href="assets/site.webmanifest" />
+    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
 
-
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  </head>
 
-    
-
-</head>
-
-<body>
-
+  <body>
     <!-- MOUSE FOLLOW CIRCLE -->
     <div id="mouse-circle"></div>
 
     <!-- HEADER + LOGO CONTAINER -->
     <div id="headerBox">
-        <!--LOGO-->
-        <div id="logoBox">
-
-            <div class="logoBox" onClick="etGoHome()"></div>
-
-        </div>
-
+      <!--LOGO-->
+      <div id="logoBox">
+        <div class="logoBox" onClick="etGoHome()"></div>
+      </div>
     </div>
-
 
     <div id="content">
-
- 
-                <div class="workBoxItem" id="plunkBox">
-                    <div class="logoTitleBox">
-                        <img src="assets/logo_Plunk.svg" height="42px" alt="">
-                        <h2>Plunk®</h2>
-                    </div>
-                    <h3>Where I currently work. – Product Designer.</h3>
-                    <div class="linksBox">
-                        <a class="linkOut" href="./plunk.html"> Design System <img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        <a class="linkOut" href="./plunk.html#storyContentFrame">Data as a story<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        
-                        <a class="linkOut" href="./motion.html"> Motion + Video <img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        
-                    </div>
-                
-                </div>
-
-                <div class="linesRock"></div>
-
-                <div class="workBoxItem" id="spotifyBox">
-                    <div class="logoTitleBox">
-                        <img src="assets/logo_SpotifyDreams.svg" height="48px" alt="">
-                        <h2>Spotify dreams</h2>
-                    </div>
-                    <h3>Dreaming up ideas for a dream job.</h3>
-
-                    <div class="linksBox" >
-                        <a class="linkOut" href="./spotifyFullscreen.html">A new fullscreen<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        <a class="linkOut" href="./spotifyRecordShelf.html">A record shelf <img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        <!-- <a class="linkOut" href="./spotifyFullscreen.html">Musing on Spotify wrapped <img src="icons/arrow_right.svg" alt="" height="12px"></a> -->
-                        <a class="linkOut" href="./spotifyDreamRambling.html">A rambling on dream work<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                      
-                    </div>
-                </div>
-
-                <div class="linesRock"></div>
-
-                <div class="workBoxItem" id="habbotBox">
-                    <div class="logoTitleBox">
-                        <img src="assets/logo_habbot.svg" height=52px" alt="">
-                        <h2>Habbot</h2>
-                    </div>
-                    <h3>A simple + visual habbot tracking tool I built in swift. – Beta is live now.</h3>
-                    
-                    <div class="linksBox">
-                        
-                        <a class="linkOut" href="./habbot.html">Drawings<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        <a class="linkOut" href="./habbot.html">The why?<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        <a class="linkOut" href="https://testflight.apple.com/join/pagCNvNc">Give it a sit<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        
-                    </div>
-
-                </div>
-
-                <div class="linesRock"></div>
-
-                <div class="workBoxItem" id="fiftyChairsBox">
-                    <div class="logoTitleBox">
-                        <img src="assets/chair.png" height="42px" alt="">
-                        <h2>Fifty–Chairs</h2>
-                    </div>
-                    <h3>An ongoing project to create drawings, renders, and models of 50 famous chairs.</h3>
-                    
-                    <div class="linksBox">
-                        <a class="linkOut" href="./fiftyChairs.html">The project<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        <a class="linkOut" href="./fiftyChairs.html">Scale Models<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        <a class="linkOut" href="./fiftyChairs.html">Drawings<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        <a class="linkOut" href="./fiftyChairs.html">Renders<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        
-                    </div>
-    
-                </div>
-
-                
-
-                
-
-               
-
-                <div class="linesRock"></div>
-
-                <div class="workBoxItem" id="pollinBox">
-                    <div class="logoTitleBox">
-                        <img src="assets/logo_pollin.svg" height="42px" alt="">
-                        <h2>Pollin</h2>
-                    </div>
-                    <h3>An ephemeral social polling application. Teaching myself react development. It's (kind of) live.</h3>
-                    <div class="linksBox">
-                        <a class="linkOut" href="./pollinText.html">A designer developing<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                        <a class="linkOut" href="https://pollin-client-5gdey.kinsta.app/">The (broken) result<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                    </div>
-                    
-                </div>
-
-                <div class="linesRock"></div>
-
-                <div class="workBoxItem" id="dashChallengeBox">
-                    <h2>Dash x Accrue challenge</h2>
-                    <h3>The results of a challenge between Dash careers and Accrue Financial.</h3>
-                    <div class="linksBox" >
-                        <a class="linkOut" href="assets/dashxaccrue.pdf">Output<img src="icons/arrow_right.svg" alt="" height="12px"></a>
-                    </div>
-                    
-                    
-                </div>
-
-                
-         
-           </div> 
-            
-
-
-        
-        
-        <div id="extraneousLinks">
-
-            <a class="workLink" href="./index.html">about</a> 
-
-            <div class="linesRule"></div>
-
-            <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a> 
-
-            <div class="linesRule"></div>
-
-            <a class="workLink" href="./plunk.html">Plunk®</a> 
-    
-            <div class="linesRule"></div>
-            
-            
-            <a class="workLink" href="habbot.html">Habbot</a> 
-            
-            <div class="linesRule"></div>
-            
-            <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/">Pollin</a> 
-            
-            <div class="linesRule"></div>
-            <a class="workLink" href="./acotil.images.html">ACOTIL</a> 
-    
-            <div class="linesRule"></div>
-    
-            <a class="workLink" href="./sketchbook.html">sketchbook</a> 
-    
-            <div class="linesRule"></div>
-            
-            <a class="workLink" href="./motion.html">motion</a> 
-    
-            <div class="linesRule"></div>
-    
-            <a class="workLink" href="./sayHello.html">say hello</a> 
+      <div class="workBoxItem" id="plunkBox">
+        <div class="logoTitleBox">
+          <img src="assets/logo_Plunk.svg" height="42px" alt="" />
+          <h2>Plunk®</h2>
         </div>
+        <h3>Where I currently work. – Product Designer.</h3>
+        <div class="linksBox">
+          <a class="linkOut" href="./plunkProject.html"
+            >Product<img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+          <a class="linkOut" href="./plunk.html">
+            Design System <img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
 
+          <a class="linkOut" href="./motion.html">
+            Motion + Video
+            <img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+        </div>
+      </div>
 
-   <div id="mobileMenuButton">
-    <div id="menuButtonAnim"></div>
-   </div>
+      <div class="linesRock"></div>
 
-   <div id="mobileMenuScreen">
-    <div id="mobileLinks">
+      <div class="workBoxItem" id="spotifyBox">
+        <div class="logoTitleBox">
+          <img src="assets/logo_SpotifyDreams.svg" height="48px" alt="" />
+          <h2>Spotify dreams</h2>
+        </div>
+        <h3>Dreaming up ideas for a dream job.</h3>
 
-        <a class="workLink" href="./index.html">about</a> 
+        <div class="linksBox">
+          <a class="linkOut" href="./spotifyFullscreen.html"
+            >A new fullscreen<img
+              src="icons/arrow_right.svg"
+              alt=""
+              height="12px"
+          /></a>
+          <a class="linkOut" href="./spotifyRecordShelf.html"
+            >A record shelf
+            <img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+          <!-- <a class="linkOut" href="./spotifyFullscreen.html">Musing on Spotify wrapped <img src="icons/arrow_right.svg" alt="" height="12px"></a> -->
+          <a class="linkOut" href="./spotifyDreamRambling.html"
+            >A rambling on dream work<img
+              src="icons/arrow_right.svg"
+              alt=""
+              height="12px"
+          /></a>
+        </div>
+      </div>
 
-        <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a> 
+      <div class="linesRock"></div>
 
-        <a class="workLink" href="./plunk.html">Plunk®</a> 
-        
-        <a class="workLink" href="habbot.html">Habbot</a> 
-    
-        <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/">Pollin</a> 
-    
-        <a class="workLink" href="./acotil.images.html">ACOTIL</a> 
+      <div class="workBoxItem" id="habbotBox">
+        <div class="logoTitleBox">
+          <img src="assets/logo_habbot.svg" height=52px" alt="">
+          <h2>Habbot</h2>
+        </div>
+        <h3>
+          A simple + visual habbot tracking tool I built in swift. – Beta is
+          live now.
+        </h3>
 
-        <a class="workLink" href="./sketchbook.html">sketchbook</a> 
-        
-        <a class="workLink" href="./motion.html">motion</a> 
+        <div class="linksBox">
+          <a class="linkOut" href="./habbot.html"
+            >Drawings<img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+          <a class="linkOut" href="./habbot.html"
+            >The why?<img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+          <a class="linkOut" href="https://testflight.apple.com/join/pagCNvNc"
+            >Give it a sit<img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+        </div>
+      </div>
 
-        <a class="workLink" href="./sayHello.html">say hello</a> 
+      <div class="linesRock"></div>
 
-        <img src="assets/shopa.head.svg" alt="" height="40px" >
+      <div class="workBoxItem" id="fiftyChairsBox">
+        <div class="logoTitleBox">
+          <img src="assets/chair.png" height="42px" alt="" />
+          <h2>Fifty–Chairs</h2>
+        </div>
+        <h3>
+          An ongoing project to create drawings, renders, and models of 50
+          famous chairs.
+        </h3>
+
+        <div class="linksBox">
+          <a class="linkOut" href="./fiftyChairs.html"
+            >The project<img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+          <a class="linkOut" href="./fiftyChairs.html"
+            >Scale Models<img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+          <a class="linkOut" href="./fiftyChairs.html"
+            >Drawings<img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+          <a class="linkOut" href="./fiftyChairs.html"
+            >Renders<img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+        </div>
+      </div>
+
+      <div class="linesRock"></div>
+
+      <div class="workBoxItem" id="pollinBox">
+        <div class="logoTitleBox">
+          <img src="assets/logo_pollin.svg" height="42px" alt="" />
+          <h2>Pollin</h2>
+        </div>
+        <h3>
+          An ephemeral social polling application. Teaching myself react
+          development. It's (kind of) live.
+        </h3>
+        <div class="linksBox">
+          <a class="linkOut" href="./pollinText.html"
+            >A designer developing<img
+              src="icons/arrow_right.svg"
+              alt=""
+              height="12px"
+          /></a>
+          <a class="linkOut" href="https://pollin-client-5gdey.kinsta.app/"
+            >The (broken) result<img
+              src="icons/arrow_right.svg"
+              alt=""
+              height="12px"
+          /></a>
+        </div>
+      </div>
+
+      <div class="linesRock"></div>
+
+      <div class="workBoxItem" id="dashChallengeBox">
+        <h2>Dash x Accrue challenge</h2>
+        <h3>
+          The results of a challenge between Dash careers and Accrue Financial.
+        </h3>
+        <div class="linksBox">
+          <a class="linkOut" href="assets/dashxaccrue.pdf"
+            >Output<img src="icons/arrow_right.svg" alt="" height="12px"
+          /></a>
+        </div>
+      </div>
     </div>
-   </div>
-    
+
+    <div id="extraneousLinks">
+      <a class="workLink" href="./index.html">about</a>
+
+      <div class="linesRule"></div>
+
+      <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
+
+      <div class="linesRule"></div>
+
+      <a class="workLink" href="./plunkProject.html">Plunk®</a>
+
+      <div class="linesRule"></div>
+
+      <a class="workLink" href="habbot.html">Habbot</a>
+
+      <div class="linesRule"></div>
+
+      <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/"
+        >Pollin</a
+      >
+
+      <div class="linesRule"></div>
+      <a class="workLink" href="./acotil.images.html">ACOTIL</a>
+
+      <div class="linesRule"></div>
+
+      <a class="workLink" href="./sketchbook.html">sketchbook</a>
+
+      <div class="linesRule"></div>
+
+      <a class="workLink" href="./motion.html">motion</a>
+
+      <div class="linesRule"></div>
+
+      <a class="workLink" href="./sayHello.html">say hello</a>
+    </div>
+
+    <div id="mobileMenuButton">
+      <div id="menuButtonAnim"></div>
+    </div>
+
+    <div id="mobileMenuScreen">
+      <div id="mobileLinks">
+        <a class="workLink" href="./index.html">about</a>
+
+        <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
+
+        <a class="workLink" href="./plunkProject.html">Plunk®</a>
+
+        <a class="workLink" href="habbot.html">Habbot</a>
+
+        <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/"
+          >Pollin</a
+        >
+
+        <a class="workLink" href="./acotil.images.html">ACOTIL</a>
+
+        <a class="workLink" href="./sketchbook.html">sketchbook</a>
+
+        <a class="workLink" href="./motion.html">motion</a>
+
+        <a class="workLink" href="./sayHello.html">say hello</a>
+
+        <img src="assets/shopa.head.svg" alt="" height="40px" />
+      </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="js/workScripts.js"></script>
-    
-    
-    
-
-
-</body>
-
-
+  </body>
 </html>

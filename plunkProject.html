@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/plunkProject.css" />
+    <link rel="stylesheet" href="css/satoshi.css" />
+
+    <title>shopa.plunk</title>
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/favicon-16x16.png"
+    />
+    <link rel="manifest" href="assets/site.webmanifest" />
+    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <!-- MOUSE FOLLOW CIRCLE -->
+    <div id="mouse-circle"></div>
+
+    <!-- HEADER + LOGO CONTAINER -->
+    <div class="headerBox">
+      <!--LOGO-->
+      <div id="logoBox">
+        <div class="logoBox" onClick="etGoHome()"></div>
+      </div>
+    </div>
+
+    <div class="content" id="plunkContent">
+      <div class="heroPanel" id="plunk">
+        <div class="projectInfo">
+          <h1>Plunk®</h1>
+          <div class="linesRule"></div>
+          <h5>About</h5>
+          <h4>
+            Plunk is a suite of tools and products that help <br />
+            homeowners understand their home as a financial asset.
+          </h4>
+          <a id="betaLink" href=""
+            >Plunk Pro is live <img src="icons/arrow_right.svg" alt=""
+          /></a>
+          <div class="linesRule"></div>
+          <h5>Deliverables</h5>
+          <h4>Product design</h4>
+          <h4>Website design</h4>
+          <h4>Design system</h4>
+          <h4>Motion system</h4>
+          <h4>Copywriting</h4>
+          <div class="linesRule"></div>
+          <h5>2020 – 2023</h5>
+        </div>
+        <div class="projectHeroImage">
+          <img src="assets/projectAssets/plunkHeroImage.png" alt="" />
+        </div>
+      </div>
+
+      <div class="panelSection" id="plunkProSection">
+        <div class="projectGallery" id="plunkProGallery">
+          <img
+            id="galleryImage01"
+            src="assets/projectAssets/plunkPro01.png"
+            alt=""
+          />
+        </div>
+        <div class="subSectionText" id="plunkProText">
+          <div id="titleAndHome">
+            <img src="icons/homes1.svg" alt="" width="100px" />
+            <h1>Plunk Pro™</h1>
+            <h2>responsive website, dashboard, user experience</h2>
+          </div>
+
+          <h4>
+            Plunk Pro™ was created to become a home for Plunk's past, present
+            and future offerings. <br />
+            <br />
+            It's goal was to allow audiences to understand unique product
+            offerings, create a free account, and explore what Plunk had to
+            offer.
+          </h4>
+        </div>
+      </div>
+      <div class="panelSection" id="mobileSection">
+        <div class="projectGallery" id="mobileGallery">
+          <div class="gifAndTwoImg">
+            <img
+              id="mobileAnim"
+              src="assets/projectAssets/plunkProMobileGif01.gif"
+              alt=""
+            />
+          </div>
+
+          <img
+            id="gallerySpan"
+            src="assets/projectAssets/plunkProMobile02.png"
+            alt=""
+          />
+        </div>
+        <div class="subSectionText" id="mobileTextSection">
+          <div id="titleAndHome">
+            <img src="icons/home2.svg" alt="" width="100px" />
+            <h1>Plunk Pro™ Mobile</h1>
+            <h2>Mobile application (iOS + Android)</h2>
+          </div>
+
+          <h4>
+            Plunk Pro™ mobile is a companion app for Plunk Pro. <br />
+            <br />
+            It allowed audiences to view key information on the go, receive
+            updates and notifications about saved homes, as well as view at a
+            glance data through the use of homescreen widgets.
+          </h4>
+        </div>
+      </div>
+
+      <div class="panelSection" id="motionSection">
+        <div class="projectGallery" id="motionGallery">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/hwCA_yP868w?si=8ZfwqC8Dx8kNUgD1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+          <video
+            src="assets/projectAssets/PlunkValueAnim.mp4"
+            autoplay
+            muted
+            loop
+          ></video>
+          <video
+            src="assets/projectAssets/RemodelValue.mov"
+            autoplay
+            muted
+            loop
+          ></video>
+        </div>
+        <div class="subSectionText" id="motionTextSection">
+          <div id="titleAndHome">
+            <img src="icons/home3.svg" alt="" width="100px" />
+            <h1>Motion</h1>
+            <h2>Video, animation, and explainability</h2>
+          </div>
+
+          <h4>
+            Plunk's goal of providing homeowners with the most accurate and
+            useful information required a use of animations that visually
+            explained to the audience a product or feature's purpose and
+            offering.
+          </h4>
+        </div>
+      </div>
+
+      <div class="footerPanelSection">
+        <img
+          src="assets/shopa.head.svg"
+          alt=""
+          height="48px"
+          onclick="etGoHome()"
+        />
+
+        <div class="projectLink">
+          <a href="/index.html">home</a>
+          <a href="/pollinProject.html">next project</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="js/plunkScripts.js"></script>
+  </body>
+</html>

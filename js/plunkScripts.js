@@ -49,7 +49,7 @@ $(document).ready(function () {
 
     // GSAP ANIMATIONS
     // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
-    $("#extraneousLinks a").hover(
+    $("a").hover(
       function () {
         // Get the position and width of the hovered link
         let linkPos = $(this).offset();
@@ -68,7 +68,7 @@ $(document).ready(function () {
         $(this).css("text-decoration", "underline");
 
         // Add a black border to the mouse circle
-        mouseCircle.style.border = "0.5px solid #0A3D62";
+        mouseCircle.style.border = "0.5px solid #001428";
       },
       function () {
         // Update the mouse circle position without considering link height
@@ -76,7 +76,7 @@ $(document).ready(function () {
 
         // Apply hover out animations
         gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
-        $(this).css("color", "#0A3D62");
+        $(this).css("color", "#FFF5F5");
         $(this).css("text-decoration", "none");
 
         // Remove the black border on un-hover
@@ -107,7 +107,7 @@ $(document).ready(function () {
       }
     }
 
-    $("#extraneousLinks a").hover(
+    $("a").hover(
       function () {
         gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
         $(this).css("color", "blue");
@@ -153,20 +153,6 @@ $(document).ready(function () {
     animationMenu.setDirection(-directionMenu);
     animationMenu.play();
   });
-
-  // /* When the user scrolls down, hide the logoBar. When the user scrolls up, show the navbar */
-  // var prevScrollpos = window.pageYOffset;
-  // window.onscroll = function () {
-  //   var currentScrollPos = window.pageYOffset;
-  //   if (prevScrollpos > currentScrollPos) {
-  //     document.getElementById("headerBox").style.top = "0";
-  //     document.getElementById("extraneousLinks").style.bottom = "1.6vh";
-  //   } else {
-  //     document.getElementById("headerBox").style.top = "-100px";
-  //     document.getElementById("extraneousLinks").style.bottom = "-140px";
-  //   }
-  //   prevScrollpos = currentScrollPos;
-  // };
 
   //MOBILE MENU ANIM AND LOGIC
   let mobileMenuExpanded = false; // Track the menu state

@@ -264,7 +264,7 @@ function openAcotilTab() {
 }
 
 function etGoPlunk() {
-  window.location.href = "plunk.html";
+  window.location.href = "plunkProject.html";
 }
 
 function etGoPollinDoc() {
