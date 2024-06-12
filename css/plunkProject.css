@@ -253,7 +253,7 @@ h1 {
 
 h2 {
   color: #002644;
-  font-family: 'Satoshi-Regular';
+  font-family: "Satoshi-Regular";
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -364,10 +364,14 @@ a:visited {
   }
 
   h4 {
-    margin-top: 24px;
+    margin-top: 0px;
     font-size: 16px;
     letter-spacing: -0.4px;
     line-height: 150%;
+  }
+
+  h5{
+    margin-top: 0px;
   }
 
   #titleAndHome img {

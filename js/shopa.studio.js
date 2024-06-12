@@ -275,8 +275,8 @@ function etGoSpotify() {
   window.location.href = "/spotifyFullscreen.html";
 }
 
-function etGoHabbotDoc() {
-  window.location.href = "/habbot.html";
+function etGoHabbot() {
+  window.location.href = "/habbotProject.html";
 }
 
 function etGoHabbotBeta() {
