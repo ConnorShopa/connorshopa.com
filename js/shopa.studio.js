@@ -70,6 +70,76 @@ $(document).ready(function () {
       }
     );
 
+    $(" .previewButtonDark a").hover(
+      function () {
+        // Get the position and width of the hovered link
+        let linkPos = $(this).offset();
+        let linkWidth = $(this).innerWidth() * 0.8;
+
+        // Set revisedMousePosX and revisedMousePosY to the link's position
+        revisedCirclePosX = linkPos.left + 20;
+        revisedCirclePosY = linkPos.top;
+
+        // Update the mouse circle position without considering link height
+        updateMouseCirclePosition(true, linkWidth); // Pass true to indicate hover
+
+        // Apply hover animations
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+        $(this).css("color", "white");
+        $(this).css("text-decoration", "underline");
+
+        // Add a black border to the mouse circle
+        mouseCircle.style.border = "0.5px solid white";
+      },
+      function () {
+        // Update the mouse circle position without considering link height
+        updateMouseCirclePosition(false); // Pass false to indicate un-hover
+
+        // Apply hover out animations
+        gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
+        $(this).css("color", "white");
+        $(this).css("text-decoration", "none");
+
+        // Remove the black border on un-hover
+        mouseCircle.style.border = "none";
+      }
+    );
+
+    $(" .previewButtonLight a").hover(
+      function () {
+        // Get the position and width of the hovered link
+        let linkPos = $(this).offset();
+        let linkWidth = $(this).innerWidth() * 0.8;
+
+        // Set revisedMousePosX and revisedMousePosY to the link's position
+        revisedCirclePosX = linkPos.left + 20;
+        revisedCirclePosY = linkPos.top;
+
+        // Update the mouse circle position without considering link height
+        updateMouseCirclePosition(true, linkWidth); // Pass true to indicate hover
+
+        // Apply hover animations
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+        $(this).css("color", "#003960");
+        $(this).css("text-decoration", "underline");
+
+        // Add a black border to the mouse circle
+        mouseCircle.style.border = "0.5px solid white";
+      },
+      function () {
+        // Update the mouse circle position without considering link height
+        updateMouseCirclePosition(false); // Pass false to indicate un-hover
+
+        // Apply hover out animations
+        gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
+        $(this).css("color", "#003960");
+        $(this).css("text-decoration", "none");
+
+        // Remove the black border on un-hover
+        mouseCircle.style.border = "none";
+      }
+    );
+
     function updateMouseCirclePosition(isHover, linkWidth) {
       console.log(isHover);
       console.log(revisedCirclePosX);

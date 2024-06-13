@@ -141,6 +141,7 @@ body {
     gap: 24px;
     padding-right: 140px;
     padding-left: 140px;
+    max-width: 40vw;
 }
 
 #nameAndIcon{
@@ -244,13 +245,7 @@ body {
 
 
 
-.threeOneSpan {
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
-    align-items: left;
-    
-}
+
 
 #spotifySection {
     display: flex;
@@ -269,7 +264,7 @@ body {
 
 #pollinSection {
     
-    width: 43%;
+    
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -285,9 +280,9 @@ body {
     
 #pollinSection h4{
     margin-top: 12px;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 150%;
-    letter-spacing: -0.8px;
+    letter-spacing: -0.4px;
 }
 
 
@@ -295,16 +290,17 @@ body {
 
 
 .projectSection h4{
-        color: #003960;
+    color: #003960;
 
     font-family: 'Satoshi-Medium';
-    font-size: 22px;
+    font-size: 16px;
     margin: 0;
     text-align: left;
     font-style: normal;
     font-weight: 500;
     line-height: 200%; 
-    letter-spacing: -0.8px;
+    letter-spacing: -0.4px;
+    margin-top: 8px;
 }
 
 
@@ -312,7 +308,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin-top: 24px;
+    margin-top: 12px;
     margin-bottom: 24px;
     gap: 8px;
     
@@ -321,57 +317,64 @@ body {
 
 .tagChip {
 
-    padding: 5px 10px;
+    
     
     border-radius: 24px;
     border: 1px solid black;
 
     font-family: 'Satoshi-Medium';
     font-weight: 400;
-    font-size: 12px;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    padding: 2px 8px;
 }
 
 .tagChipLight {
 
-    padding: 5px 10px;
+    
     border-radius: 24px;
     border: 1px solid white;
     color: white;
     font-family: 'Satoshi-Medium';
     font-weight: 400;
-    font-size: 12px;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    padding: 2px 8px;
 }
 
 .buttonRack{
-    
+
+    flex-direction: column;
     margin-top: 2vh;
     display: flex;
-    flex-direction: row;
+    width: 100%;
     gap: 12px;
+    align-items: center;
+    justify-content: center;
+    
 
 }
 
 .previewButtonDark {
-    padding: 8px 32px 8px 32px;
+    padding: 12px 32px 12px 32px;
     display: flex;
-    /* flex-grow: 3; */
+    flex-grow: 3;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     background-color: #003960;
     color: white;
     border-radius: 24px;
-    font-family: 'Satoshi-Regular';
-    font-weight: 400;
-    font-size: 16px;
     
+    font-size: 22px;
+    width: 80%;
     gap: 8px;
     box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
 }
 
 .previewButtonLight {
-    /* flex-grow: 3; */
-    padding: 8px 32px 8px 32px;
+    flex-grow: 3;
+    padding: 12px 32px 12px 32px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -380,8 +383,8 @@ body {
     color: #003960;
     border-radius: 24px;
     
-    
-    font-size: 16px;
+    width: 80%;
+    font-size: 22px;
     
     gap: 8px;
     box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
@@ -421,6 +424,35 @@ body {
     text-decoration: none;
     color: #0A3D62;
 }
+
+.previewButtonDark a {
+    font-family: 'Satoshi-Medium';
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    text-decoration: none;
+}
+
+.previewButtonDark a:visited{
+    color: white;
+
+}
+
+
+.previewButtonLight a {
+    font-family: 'Satoshi-Medium';
+    font-size: 18px;
+    font-weight: 500;
+    color: #20272D;
+    text-decoration: none;
+}
+
+.previewButtonLight a:visited{
+    color: #20272D;
+
+}
+
+
 
 button:hover {
     cursor: url('studio.cursorHover.png'), pointer;
@@ -515,12 +547,20 @@ body {
         flex-direction: column;
         justify-content: flex-start;
         align-items: left;
-        width: 100%;
+        width: 80vw;
         height: fit-content;
-        gap: 12px;
+        gap: 24px;
         padding: 0px;
         margin: 0px;
+        min-width: 92vw;
 
+    }
+
+
+    .previewButtonDark a{
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
     }
 
     .workContainer h4{
@@ -536,7 +576,9 @@ body {
     }
 
     .buttonRack{
+        display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
     }
 
     .threeOneSpan{
