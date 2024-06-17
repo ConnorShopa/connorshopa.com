@@ -35,6 +35,19 @@ $(document).ready(function () {
 
     // GSAP ANIMATIONS
     // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
+    $(".projectSection").hover(
+      function () {
+        // gsap.to(this, { duration: 0.32, backgroundColor: "#041426" });
+        gsap.to(this, { duration: 0.32, scale: 0.98 });
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+      },
+      function () {
+        gsap.to(this, { duration: 0.32, scale: 1 });
+        // gsap.to(this, { duration: 0.32, backgroundColor: "#041426" });
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
+      }
+    );
+
     $("a").hover(
       function () {
         // Get the position and width of the hovered link
@@ -337,8 +350,8 @@ function etGoPlunk() {
   window.location.href = "/plunkProject.html";
 }
 
-function etGoPollinDoc() {
-  window.location.href = "/pollinDoc.html";
+function etGoPollin() {
+  window.location.href = "/pollinProject.html";
 }
 
 function etGoSpotify() {

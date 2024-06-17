@@ -53,33 +53,37 @@
 
     <div id="content">
         <div id="aboutPlusWorkContainer">
-            <div id="aboutMe">
+            <div id="aboutMeContainer">
+                <div id="aboutMeText">
 
 
-                <h4>Howdy! My name's</h4>
-                <div id="nameAndIcon">
-                    <img src="assets/shopa.head.svg" alt="" width="100px">
-                    <h1>Connor Shopa</h1>
+                    <h4>Howdy! My name's</h4>
+                    <div id="nameAndIcon">
+                        <img src="assets/shopa.head.svg" alt="" width="100px">
+                        <h1>Connor Shopa</h1>
+                    </div>
+
+                    <h4> I'm a digital product designer based in Canada, who finds joy in using creativity to craft
+                        tools
+                        that help humans.
+                        <br> Right now I'm in Montreal helping build <a href="/plunkProject.html">Plunk®</a>
+
+                        <br> Before that, I was studying design in Toronto, at OCAD.
+
+                        <br> I'm working through my <a href="./fiftyChairs.html">fifty–chairs</a> project.
+
+                        <br> I'm always around to <a href="./sayHello.html"> chat</a> design, music and homemade jam.
+
+                        <!-- <br> Some of my <a href="./work.html">work</a> is below.</h4> -->
                 </div>
-
-                <h4> I'm a digital product designer based in Canada, who finds joy in using creativity to craft
-                    tools
-                    that help humans.
-                    <br> Right now I'm in Montreal helping build <a href="/plunkProject.html">Plunk®</a>
-
-                    <br> Before that, I was studying design in Toronto, at OCAD.
-
-                    <br> I'm working through my <a href="./fiftyChairs.html">fifty–chairs</a> project.
-
-                    <br> I'm always around to <a href="./sayHello.html"> chat</a> design, music and homemade jam.
-
-                    <!-- <br> Some of my <a href="./work.html">work</a> is below.</h4> -->
             </div>
 
+
+
             <div class="workContainer">
-                <div class="projectSection" id="plunkSection">
+                <div class="projectSection" id="plunkSection" onclick="etGoPlunk()">
                     <img src="assets/plunkLogo.svg" alt="" height="40px">
-                    <h4>Design system, product launches, + motion design</h4>
+                    <h4>Design system, product launches + motion design</h4>
                     <div class="projectTagContainer" id="plunkTagContainer">
                         <div class="tagChip">
                             PRODUCT DESIGN
@@ -103,21 +107,22 @@
                             HIGH-FIDELITY PROTOTYPING
                         </div>
                     </div>
-                    <div class="previewLinkOff">
+                    <div class="previewImage">
                         <img src="assets/projectAssets/plunkPreview.png" alt="dataAsAStory" width="100%">
-                        <div class="buttonRack">
-
-                            <div class="previewButtonDark" onClick="etGoPlunk()">
-                                <a href="./plunkProject.html">View Project</a>
-                                <img src="icons/arrow_right_white.svg" alt="" height="16px">
-                            </div>
 
 
+                    </div>
+                    <div class="buttonRack">
+
+                        <div class="previewButtonDark" onClick="etGoPlunk()">
+                            <a href="./plunkProject.html">View Project</a>
+                            <img src="icons/arrow_right_white.svg" alt="" height="16px">
                         </div>
+
 
                     </div>
                 </div>
-                <div class="projectSection" id="habbotSection">
+                <div class="projectSection" id="habbotSection" onclick="etGoHabbot()">
                     <div class="projectLogo">
                         <img id="habbotLogo" src="assets/habbotLogoHZ.svg" alt="" height="30px">
                     </div>
@@ -142,31 +147,29 @@
                         </div>
 
                     </div>
-                    <div class="previewLinkOff">
-                        <div id="centeredImage">
-                            <img src="assets/projectAssets/habbotHeroImage.png" alt="" width="50%">
+                    <div class="previewImage">
+
+                        <img src="assets/projectAssets/habbotHeroImage.png" alt="" width="50%">
+
+
+
+                    </div>
+                    <div class="buttonRack">
+
+                        <div class="previewButtonLight" onClick="etGoHabbot()">
+                            <a href="./habbotProject.html">View Project</a>
+                            <img src="icons/arrow_right.svg" alt="" height="16px">
                         </div>
-                        <div class="buttonRack">
-
-                            <div class="previewButtonLight" onClick="etGoHabbot()">
-                                <a href="./habbotProject.html">View Project</a>
-                                <img src="icons/arrow_right.svg" alt="" height="16px">
-                            </div>
-
-                            <div class="previewButtonLight" onClick="etGoHabbotBeta()">
-                                <a href="./habbotProject.html">Try the beta</a>
-                                <img src="icons/arrow_right.svg" alt="" height="16px">
-                            </div>
 
 
-                        </div>
+
 
                     </div>
                 </div>
 
 
 
-                <div class="projectSection" id="pollinSection">
+                <div class="projectSection" id="pollinSection" onclick="etGoPollin()">
                     <img src="assets/pollinLogo.svg" alt="" height="60px">
                     <h4>An ephemeral social polling application. Built to teach me react</h4>
                     <div class="projectTagContainer" id="pollinTagContainer">
@@ -182,15 +185,17 @@
                     </div>
 
 
-                    <div class="previewLinkOff">
-                        <img src="assets/workSectionAssets/pollinPreview.png" width="100%">
-                        <div class="buttonRack">
+                    <div class="previewImage">
+                        <img src="assets/projectAssets/pollin_previewImage.png" width="100%">
 
-                            <div class="previewButtonLight" onClick="etGoPollinDoc()">
-                                <a href="./pollinProject.html">View Project</a>
-                                <img src="icons/arrow_right.svg" alt="" height="16px">
-                            </div>
 
+                    </div>
+
+                    <div class="buttonRack">
+
+                        <div class="previewButtonLight" onClick="etGoPollin()">
+                            <a href="./pollinProject.html">View Project</a>
+                            <img src="icons/arrow_right.svg" alt="" height="16px">
                         </div>
 
                     </div>
@@ -221,15 +226,17 @@
                     </div>
 
 
-                    <div class="previewLinkOff">
+                    <div class="previewImage">
                         <img src="assets/workSectionAssets/spotifyDreamsPreview.png" alt="dataAsAStory" width="100%">
-                        <div class="buttonRack">
 
-                            <div class="previewButtonLight" onClick="etGoSpotify()">
-                                <h5>View Case Study</h5>
-                                <img src="icons/arrow_right.svg" alt="" height="16px">
-                            </div>
 
+                    </div>
+
+                    <div class="buttonRack">
+
+                        <div class="previewButtonLight" onClick="etGoSpotify()">
+                            <a href="./spotifyFullscreen.html">View case study</a>
+                            <img src="icons/arrow_right.svg" alt="" height="16px">
                         </div>
 
                     </div>
@@ -241,25 +248,23 @@
 
 
                 <div class="projectSection" id="allWorkSection">
-                    <div class="projectLogo">
-
-                    </div>
-
-                    <h4>View all selected works</h4>
-
-                    <div class="previewLinkOff">
-
-                        <div class="buttonRack">
 
 
 
-                            <div class="previewButtonDark" onClick="etGoWork()">
-                                <h5>See more work</h5>
-                                <img src="icons/arrow_right_white.svg" alt="" height="16px">
-                            </div>
+
+
+
+                    <div class="buttonRack">
+
+
+
+                        <div class="previewButtonDark" onClick="etGoWork()">
+                            <a href="">View all selected work</a>
+                            <img src="icons/arrow_right_white.svg" alt="" height="16px">
                         </div>
-
                     </div>
+
+
                 </div>
             </div>
 
