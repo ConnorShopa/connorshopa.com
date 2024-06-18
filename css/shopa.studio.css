@@ -1,22 +1,20 @@
 @import url(satoshi.css);
 
 html {
-    background: linear-gradient(0deg, #e2ebf1 0%, #fff 125.78%);
+  background: linear-gradient(0deg, #e2ebf1 0%, #fff 125.78%);
   cursor: url("studio.cursor.png"), auto;
   height: 100%;
   display: flex;
   margin: 0;
-    max-width: 100vw;
+  max-width: 100vw;
   min-height: 100vh;
 }
 
-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 
 #helloContent {
   display: flex;
@@ -29,16 +27,15 @@ body{
   height: 100vh;
 }
 
-#sayHelloContainer{
-    display: flex;
-    flex-direction: column;
-    min-width: 100vw;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-
+#sayHelloContainer {
+  display: flex;
+  flex-direction: column;
+  min-width: 100vw;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 #mouse-circle {
@@ -152,11 +149,13 @@ body{
   width: 64px;
 }
 
-#aboutMeTextText a, #sayHelloText a {
+#aboutMeTextText a,
+#sayHelloText a {
   text-decoration: none;
 }
 
-#aboutMeText h1, #sayHelloText h1 {
+#aboutMeText h1,
+#sayHelloText h1 {
   font-family: "Satoshi-Bold";
   font-size: 40px;
   color: #0e3b5c;
@@ -165,7 +164,8 @@ body{
   margin: 0;
 }
 
-#aboutMeText h4, #sayHelloText h4 {
+#aboutMeText h4,
+#sayHelloText h4 {
   font-family: "Satoshi-Regular";
   font-size: 16px;
   color: #335d7c;
@@ -174,7 +174,8 @@ body{
   margin: 0;
 }
 
-#aboutMeText a, #sayHelloText a {
+#aboutMeText a,
+#sayHelloText a {
   font-family: "Satoshi-Regular";
   font-size: 16px;
   color: #335d7c;
@@ -370,31 +371,24 @@ button:hover {
 }
 
 @media (max-width: 1000px) {
+  html {
+    width: 100vw;
+    min-height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    justify-content: center;
+    align-items: flex-start;
+  }
 
-    html{
-       
-        width: 100vw;
-        min-height: 100vh;
-        margin: 0px;
-        padding: 0px;
-        justify-content: center;
-        align-items: flex-start;
-        
-    }
+  body {
+    display: flex;
 
-    body{
-        display: flex;
-
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(0deg, #e2ebf1 0%, #fff 125.78%);
-    }
-
-    
-
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(0deg, #e2ebf1 0%, #fff 125.78%);
+  }
 
   #aboutPlusWorkContainer {
-    
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
@@ -404,10 +398,7 @@ button:hover {
     margin: 0px;
     padding: 0px;
     height: 100%;
-    
   }
-
-
 
   #aboutMeContainer {
     padding: 24vh 0px 0px 0px;
@@ -415,28 +406,27 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     margin: 0px;
-    
   }
 
-  #aboutMeText{
+  #aboutMeText {
     width: 80%;
     margin: 0px;
     padding: 0px;
   }
 
-  #sayHelloContainer{
+  #sayHelloContainer {
     width: 100vw;
     justify-content: center;
     align-items: center;
-    
   }
-  #sayHelloText{
+
+  #sayHelloText {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     width: 100%;
     margin: 0px;
     padding: 0px;
@@ -458,14 +448,13 @@ button:hover {
     padding: 0px;
   }
 
-  #nameAndIcon img{
+  #nameAndIcon img {
     width: 12vw;
   }
 
-  #nameAndIcon h1{
+  #nameAndIcon h1 {
     font-size: 32px;
   }
-  
 
   .projectSection {
     min-width: 80%;
