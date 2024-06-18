@@ -335,7 +335,7 @@ function etGoHome() {
 }
 
 function etGoPollin() {
-  window.location.href = "https://pollin-client-5gdey.kinsta.app/";
+  window.location.href = "./pollinProject.html";
 }
 
 function etGoAcotil() {

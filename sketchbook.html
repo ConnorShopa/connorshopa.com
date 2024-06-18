@@ -1,276 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/shopa.sketchbook.css" />
-    <link rel="stylesheet" href="css/satoshi.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>shopa.sketchbook</title>
+  <link rel="stylesheet" href="css/shopa.sketchbook.css" />
+  <link rel="stylesheet" href="css/satoshi.css" />
 
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="assets/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="assets/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="assets/favicon-16x16.png"
-    />
-    <link rel="manifest" href="assets/site.webmanifest" />
-    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
+  <title>shopa.sketchbook</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  </head>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="manifest" href="assets/site.webmanifest" />
+  <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5" />
+  <meta name="msapplication-TileColor" content="#da532c" />
+  <meta name="theme-color" content="#ffffff" />
 
-  <body>
-    <!-- MOUSE FOLLOW CIRCLE -->
-    <div id="mouse-circle"></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
 
-    <!-- HEADER + LOGO CONTAINER -->
-    <div id="headerBox">
-      <!--LOGO-->
-      <div id="logoBox">
-        <div class="logoBox" onClick="etGoHome()"></div>
+<body>
+  <!-- MOUSE FOLLOW CIRCLE -->
+  <div id="mouse-circle"></div>
+
+  <!-- HEADER + LOGO CONTAINER -->
+  <div id="headerBox">
+    <!--LOGO-->
+    <div id="logoBox">
+      <div class="logoBox" onClick="etGoHome()"></div>
+    </div>
+  </div>
+
+  <div id="content">
+    <div id="sketchbookSection">
+      <div class="wideImage">
+        <img src="illustrations/thereGoesTheNeighbourhood.png" alt="theres something about these blues" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">there goes the
+          nieghbourhood</a>
+      </div>
+
+      <div class="imageAndText">
+        <img src="assets/covers/finger_guns.png" alt="theres something about these blues" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">finger_guns</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/theres something about these blues.png" alt="theres something about these blues" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">there's something about
+          these blues</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/0Oo°..png" alt="0Oo°" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">0Oo°</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/11.png" alt="11" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">11</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/a love letter to public libraries.png" alt="a love letter to public libraries" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">a love letter to public
+          libraries</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/a porch in montreal.png" alt="a porch in montreal" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">a porch in montreal</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/back third.png" alt="back third" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">back third</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/BIGLOVE.png" alt="BIGLOVE" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">BIGLOVE</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/habbot.png" alt="habbot" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">habbot</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/it is.png" alt="it is" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">it is</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/kemosabé.png" alt="kemosabé" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">kemosabé</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/laying on the floor.png" alt="laying on the floor" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">laying on the floor</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/lonely speck.png" alt="lonely speck" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">lonely speck</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/okie.png" alt="okie" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">okie</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/placesToBe.png" alt="places to be" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">places to be...</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/spiralling in control.png" alt="spiralling in control" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">spiralling in control</a>
+      </div>
+      <div class="imageAndText">
+        <img src="assets/covers/sundries.png" alt="sundries" />
+        <a href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87">sundries</a>
       </div>
     </div>
+    <div id="extraneousLinks">
+      <a class="workLink" href="./work.html">work</a>
 
-    <div id="content">
-      <div id="sketchbookSection">
-        <div class="wideImage">
-          <img
-            src="illustrations/thereGoesTheNeighbourhood.png"
-            alt="theres something about these blues"
-          />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >there goes the nieghbourhood</a
-          >
-        </div>
+      <div class="linesRule"></div>
 
-        <div class="imageAndText">
-          <img
-            src="assets/covers/finger_guns.png"
-            alt="theres something about these blues"
-          />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >finger_guns</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img
-            src="assets/covers/theres something about these blues.png"
-            alt="theres something about these blues"
-          />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >there's something about these blues</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/0Oo°..png" alt="0Oo°" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >0Oo°</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/11.png" alt="11" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >11</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img
-            src="assets/covers/a love letter to public libraries.png"
-            alt="a love letter to public libraries"
-          />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >a love letter to public libraries</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img
-            src="assets/covers/a porch in montreal.png"
-            alt="a porch in montreal"
-          />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >a porch in montreal</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/back third.png" alt="back third" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >back third</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/BIGLOVE.png" alt="BIGLOVE" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >BIGLOVE</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/habbot.png" alt="habbot" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >habbot</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/it is.png" alt="it is" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >it is</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/kemosabé.png" alt="kemosabé" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >kemosabé</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img
-            src="assets/covers/laying on the floor.png"
-            alt="laying on the floor"
-          />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >laying on the floor</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/lonely speck.png" alt="lonely speck" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >lonely speck</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/okie.png" alt="okie" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >okie</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/placesToBe.png" alt="places to be" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >places to be...</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img
-            src="assets/covers/spiralling in control.png"
-            alt="spiralling in control"
-          />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >spiralling in control</a
-          >
-        </div>
-        <div class="imageAndText">
-          <img src="assets/covers/sundries.png" alt="sundries" />
-          <a
-            href="https://open.spotify.com/playlist/2q6Fud8dP766oM8sQr3r5B?si=2723a01feed44a87"
-            >sundries</a
-          >
-        </div>
-      </div>
-      <div id="extraneousLinks">
-        <a class="workLink" href="./work.html">work</a>
+      <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
 
-        <div class="linesRule"></div>
+      <div class="linesRule"></div>
 
-        <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
+      <a class="workLink" href="./plunkProject.html">Plunk®</a>
 
-        <div class="linesRule"></div>
+      <div class="linesRule"></div>
 
-        <a class="workLink" href="./plunkProject.html">Plunk®</a>
+      <a class="workLink" href="habbotProject.html">Habbot</a>
 
-        <div class="linesRule"></div>
+      <div class="linesRule"></div>
 
-        <a class="workLink" href="habbotProject.html">Habbot</a>
+      <a class="workLink" href="./pollinProject.html">Poll.in</a>
 
-        <div class="linesRule"></div>
+      <div class="linesRule"></div>
 
-        <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/"
-          >Pollin</a
-        >
+      <a class="workLink" href="./acotil.images.html">ACOTIL</a>
 
-        <div class="linesRule"></div>
+      <div class="linesRule"></div>
 
-        <a class="workLink" href="./acotil.images.html">ACOTIL</a>
+      <a class="workLink" href="./index.html">about</a>
 
-        <div class="linesRule"></div>
+      <div class="linesRule"></div>
 
-        <a class="workLink" href="./index.html">about</a>
+      <a class="workLink" href="./motion.html">motion</a>
 
-        <div class="linesRule"></div>
+      <div class="linesRule"></div>
 
-        <a class="workLink" href="./motion.html">motion</a>
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./sayHello.html">say hello</a>
-      </div>
+      <a class="workLink" href="./sayHello.html">say hello</a>
     </div>
+  </div>
 
-    <div id="mobileMenuButton">
-      <div id="menuButtonAnim"></div>
+  <div id="mobileMenuButton">
+    <div id="menuButtonAnim"></div>
+  </div>
+
+  <div id="mobileMenuScreen">
+    <div id="mobileLinks">
+      <a class="workLink" href="./work.html">work</a>
+
+      <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
+
+      <a class="workLink" href="./plunkProject.html">Plunk®</a>
+
+      <a class="workLink" href="./habbotProject.html">Habbot</a>
+
+      <a class="workLink" href="./pollinProject.html">Poll.in</a>
+
+      <a class="workLink" href="./acotil.images.html">ACOTIL</a>
+
+      <a class="workLink" href="./index.html">about</a>
+
+      <a class="workLink" href="./motion.html">motion</a>
+
+      <a class="workLink" href="./sayHello.html">say hello</a>
+
+      <img src="assets/shopa.head.svg" alt="" height="40px" />
     </div>
+  </div>
 
-    <div id="mobileMenuScreen">
-      <div id="mobileLinks">
-        <a class="workLink" href="./work.html">work</a>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="js/sketchbookScripts.js"></script>
+</body>
 
-        <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
-
-        <a class="workLink" href="./plunkProject.html">Plunk®</a>
-
-        <a class="workLink" href="./habbotProject.html">Habbot</a>
-
-        <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/"
-          >Pollin</a
-        >
-
-        <a class="workLink" href="./acotil.images.html">ACOTIL</a>
-
-        <a class="workLink" href="./index.html">about</a>
-
-        <a class="workLink" href="./motion.html">motion</a>
-
-        <a class="workLink" href="./sayHello.html">say hello</a>
-
-        <img src="assets/shopa.head.svg" alt="" height="40px" />
-      </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-    <script src="js/sketchbookScripts.js"></script>
-  </body>
 </html>

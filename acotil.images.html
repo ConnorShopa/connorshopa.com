@@ -1,452 +1,414 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/shopa.acotil.css" />
-    <link rel="stylesheet" href="css/satoshi.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/shopa.acotil.css" />
+  <link rel="stylesheet" href="css/satoshi.css" />
 
-    <title>shopa.acotil</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="assets/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="assets/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="assets/favicon-16x16.png"
-    />
-    <link rel="manifest" href="assets/site.webmanifest" />
-    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5" />
-    <meta name="msapplication-TileColor" content="#da532c" />
-    <meta name="theme-color" content="#ffffff" />
-  </head>
+  <title>shopa.acotil</title>
 
-  <body>
-    <!-- MOUSE FOLLOW CIRCLE -->
-    <div id="mouse-circle"></div>
-    <!-- HEADER + LOGO CONTAINER -->
-    <div id="headerBox">
-      <!--LOGO-->
-      <div id="logoBox">
-        <div class="logoBox" onClick="etGoHome()"></div>
-      </div>
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="manifest" href="assets/site.webmanifest" />
+  <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5" />
+  <meta name="msapplication-TileColor" content="#da532c" />
+  <meta name="theme-color" content="#ffffff" />
+</head>
+
+<body>
+  <!-- MOUSE FOLLOW CIRCLE -->
+  <div id="mouse-circle"></div>
+  <!-- HEADER + LOGO CONTAINER -->
+  <div id="headerBox">
+    <!--LOGO-->
+    <div id="logoBox">
+      <div class="logoBox" onClick="etGoHome()"></div>
     </div>
-    <div id="title"><h4>A Collection Of Things I Like</h4></div>
+  </div>
+  <div id="title">
+    <h4>A Collection Of Things I Like</h4>
+  </div>
 
-    <div id="tabBox">
-      <h3 class="tabText" id="selectedTabTitle">images</h3>
-      <h3 class="tabText" id="deselectedTabTitle" onClick="etGoTextTab()">
-        text
-      </h3>
-    </div>
+  <div id="tabBox">
+    <h3 class="tabText" id="selectedTabTitle">images</h3>
+    <h3 class="tabText" id="deselectedTabTitle" onClick="etGoTextTab()">
+      text
+    </h3>
+  </div>
 
-    <div id="entriesBox">
-      <div class="entry" id="14">
-        <div class="image">
-          <img src="acotilImages/14.jpg" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>Chaurli</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Unknown</h4>
-          </div>
-
-          <div class="Link">
-            <a href="https://en.wikipedia.org/wiki/Sea_turtle">Sea Turtles</a>
-          </div>
-        </div>
+  <div id="entriesBox">
+    <div class="entry" id="14">
+      <div class="image">
+        <img src="acotilImages/14.jpg" alt="" />
       </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="13">
-        <div class="image">
-          <img src="acotilImages/13.webp" alt="" />
+      <div class="Description">
+        <div class="Title">
+          <h3>Chaurli</h3>
         </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>We All Know Too Much About Each Other</h3>
-          </div>
 
-          <div class="Credit">
-            <h4>Michelle Goldberg</h4>
-          </div>
-
-          <div class="Link">
-            <a
-              href="https://www.nytimes.com/2021/11/01/opinion/facebook-social-media-problems.html"
-              >NYT</a
-            >
-          </div>
+        <div class="Credit">
+          <h4>Unknown</h4>
         </div>
-      </div>
 
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="12">
-        <div class="image">
-          <img src="acotilImages/12.webp" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>Terra Form</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>unknown</h4>
-          </div>
-
-          <div class="Link">
-            <a href=".."></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="11">
-        <div class="image">
-          <img src="acotilImages/11.jpg" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2023_0011. Oops</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>internet user mmmcake</h4>
-          </div>
-
-          <div class="Link">
-            <a href="https://old.reddit.com/user/mmmcake"
-              >https://old.reddit.com/user/mmmcake</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="10">
-        <div class="image">
-          <img src="acotilImages/10.png" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0010. A good quote</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Rain Noe</h4>
-          </div>
-
-          <div class="Link">
-            <a href="https://codex.core77.com/users/Rain-Noe"
-              >https://codex.core77.com/users/Rain-Noe</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="09">
-        <div class="image">
-          <img src="acotilImages/09.png" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0009. Hierarchy</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Nike (Designer unknown)</h4>
-          </div>
-
-          <div class="Link">
-            <a href="https://soles4souls.org/">https://soles4souls.org/</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="08">
-        <div class="image">
-          <img src="acotilImages/08.png" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0008. Data -> Information -> Knowledge -> Insight</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Unknown</h4>
-          </div>
-
-          <div class="Link">
-            <a href=""></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="07">
-        <div class="image">
-          <img src="acotilImages/07.jpg" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0007. Bullet Train Design</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Kenji Ekuan</h4>
-          </div>
-
-          <div class="Link">
-            <a href="http://www2.artcenter.edu/dot/kenji_ekuan_legacy.php"
-              >http://www2.artcenter.edu/dot/kenji_ekuan_legacy.php</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="06">
-        <div class="image">
-          <iframe
-            src="https://open.spotify.com/embed/album/5sY6UIQ32GqwMLAfSNEaXb"
-            allowtransparency="true"
-            allow="encrypted-media"
-            width="300"
-            height="380"
-            frameborder="0"
-          ></iframe>
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0006. Circles</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Mac Miller</h4>
-          </div>
-
-          <div class="Link">
-            <a href="https://pittsburghfoundation.org/macmiller "
-              >https://pittsburghfoundation.org/macmiller
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="05">
-        <div class="image">
-          <img src="acotilImages/05.jpg" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0005. Atelier</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>D. Rams / P. Hartwein, 1980</h4>
-          </div>
-
-          <div class="Link">
-            <a href="https://www.dasprogramm.co.uk/shop/braun/view/446"
-              >https://www.dasprogramm.co.uk/shop/braun/view/446</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="04">
-        <div class="image">
-          <img src="acotilImages/04.jpg" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0004. Sunday Visitors</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Norman Rockewell</h4>
-          </div>
-
-          <div class="Link">
-            <a
-              href="https://www.saturdayeveningpost.com/2020/02/post-artists-george-hughes-norman-rockwells-anti-muse/"
-              >https://www.saturdayeveningpost.com/2020/02/post-artists-george-hughes-norman-rockwells-anti-muse/</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="03">
-        <div class="image">
-          <img src="acotilImages/03.webp" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0003. Bank of Georgia Headquarters</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Architectural Group & Partners</h4>
-          </div>
-
-          <div class="Link">
-            <a href="https://openscholarship.wustl.edu/bcs/133/"
-              >https://openscholarship.wustl.edu/bcs/133/</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="02">
-        <div class="image">
-          <img src="acotilImages/02.jpg" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0002. Tortoise & Turtle Shells</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Parveen Kaswan</h4>
-          </div>
-
-          <div class="Link">
-            <a
-              href="https://mobile.twitter.com/ParveenKaswan/status/1391031204678234113/photo/1"
-              >https://mobile.twitter.com/ParveenKaswan</a
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="seperatorLine"></div>
-
-      <div class="entry" id="01">
-        <div class="image">
-          <img src="acotilImages/01.webp" alt="" />
-        </div>
-        <div class="Description">
-          <div class="Title">
-            <h3>2021_0001. Tongue tea set</h3>
-          </div>
-
-          <div class="Credit">
-            <h4>Bethan Laura Wood | Rosenthal</h4>
-          </div>
-
-          <div class="Link">
-            <a href="https://www.scp.co.uk/products/tongue-tea-sets"
-              >https://www.scp.co.uk/products/tongue-tea-sets</a
-            >
-          </div>
+        <div class="Link">
+          <a href="https://en.wikipedia.org/wiki/Sea_turtle">Sea Turtles</a>
         </div>
       </div>
     </div>
-    <div id="extraneousLinks">
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="13">
+      <div class="image">
+        <img src="acotilImages/13.webp" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>We All Know Too Much About Each Other</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Michelle Goldberg</h4>
+        </div>
+
+        <div class="Link">
+          <a href="https://www.nytimes.com/2021/11/01/opinion/facebook-social-media-problems.html">NYT</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="12">
+      <div class="image">
+        <img src="acotilImages/12.webp" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>Terra Form</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>unknown</h4>
+        </div>
+
+        <div class="Link">
+          <a href=".."></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="11">
+      <div class="image">
+        <img src="acotilImages/11.jpg" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2023_0011. Oops</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>internet user mmmcake</h4>
+        </div>
+
+        <div class="Link">
+          <a href="https://old.reddit.com/user/mmmcake">https://old.reddit.com/user/mmmcake</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="10">
+      <div class="image">
+        <img src="acotilImages/10.png" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0010. A good quote</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Rain Noe</h4>
+        </div>
+
+        <div class="Link">
+          <a href="https://codex.core77.com/users/Rain-Noe">https://codex.core77.com/users/Rain-Noe</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="09">
+      <div class="image">
+        <img src="acotilImages/09.png" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0009. Hierarchy</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Nike (Designer unknown)</h4>
+        </div>
+
+        <div class="Link">
+          <a href="https://soles4souls.org/">https://soles4souls.org/</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="08">
+      <div class="image">
+        <img src="acotilImages/08.png" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0008. Data -> Information -> Knowledge -> Insight</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Unknown</h4>
+        </div>
+
+        <div class="Link">
+          <a href=""></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="07">
+      <div class="image">
+        <img src="acotilImages/07.jpg" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0007. Bullet Train Design</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Kenji Ekuan</h4>
+        </div>
+
+        <div class="Link">
+          <a
+            href="http://www2.artcenter.edu/dot/kenji_ekuan_legacy.php">http://www2.artcenter.edu/dot/kenji_ekuan_legacy.php</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="06">
+      <div class="image">
+        <iframe src="https://open.spotify.com/embed/album/5sY6UIQ32GqwMLAfSNEaXb" allowtransparency="true"
+          allow="encrypted-media" width="300" height="380" frameborder="0"></iframe>
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0006. Circles</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Mac Miller</h4>
+        </div>
+
+        <div class="Link">
+          <a href="https://pittsburghfoundation.org/macmiller ">https://pittsburghfoundation.org/macmiller
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="05">
+      <div class="image">
+        <img src="acotilImages/05.jpg" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0005. Atelier</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>D. Rams / P. Hartwein, 1980</h4>
+        </div>
+
+        <div class="Link">
+          <a
+            href="https://www.dasprogramm.co.uk/shop/braun/view/446">https://www.dasprogramm.co.uk/shop/braun/view/446</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="04">
+      <div class="image">
+        <img src="acotilImages/04.jpg" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0004. Sunday Visitors</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Norman Rockewell</h4>
+        </div>
+
+        <div class="Link">
+          <a
+            href="https://www.saturdayeveningpost.com/2020/02/post-artists-george-hughes-norman-rockwells-anti-muse/">https://www.saturdayeveningpost.com/2020/02/post-artists-george-hughes-norman-rockwells-anti-muse/</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="03">
+      <div class="image">
+        <img src="acotilImages/03.webp" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0003. Bank of Georgia Headquarters</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Architectural Group & Partners</h4>
+        </div>
+
+        <div class="Link">
+          <a href="https://openscholarship.wustl.edu/bcs/133/">https://openscholarship.wustl.edu/bcs/133/</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="02">
+      <div class="image">
+        <img src="acotilImages/02.jpg" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0002. Tortoise & Turtle Shells</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Parveen Kaswan</h4>
+        </div>
+
+        <div class="Link">
+          <a
+            href="https://mobile.twitter.com/ParveenKaswan/status/1391031204678234113/photo/1">https://mobile.twitter.com/ParveenKaswan</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="seperatorLine"></div>
+
+    <div class="entry" id="01">
+      <div class="image">
+        <img src="acotilImages/01.webp" alt="" />
+      </div>
+      <div class="Description">
+        <div class="Title">
+          <h3>2021_0001. Tongue tea set</h3>
+        </div>
+
+        <div class="Credit">
+          <h4>Bethan Laura Wood | Rosenthal</h4>
+        </div>
+
+        <div class="Link">
+          <a href="https://www.scp.co.uk/products/tongue-tea-sets">https://www.scp.co.uk/products/tongue-tea-sets</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="extraneousLinks">
+    <a class="workLink" href="./work.html">work</a>
+
+    <div class="linesRule"></div>
+
+    <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
+
+    <div class="linesRule"></div>
+
+    <a class="workLink" href="./plunkProject.html">Plunk®</a>
+
+    <div class="linesRule"></div>
+
+    <a class="workLink" href="habbotProject.html">Habbot</a>
+
+    <div class="linesRule"></div>
+
+    <a class="workLink" href="./pollinProject.html">Poll.in</a>
+
+    <div class="linesRule"></div>
+
+    <a class="workLink" href="./index.html">about</a>
+
+    <div class="linesRule"></div>
+
+    <a class="workLink" href="./sketchbook.html">sketchbook</a>
+
+    <div class="linesRule"></div>
+
+    <a class="workLink" href="./motion.html">motion</a>
+
+    <div class="linesRule"></div>
+
+    <a class="workLink" href="./sayHello.html">say hello</a>
+  </div>
+
+  <div id="mobileMenuButton">
+    <div id="menuButtonAnim"></div>
+  </div>
+
+  <div id="mobileMenuScreen">
+    <div id="mobileLinks">
       <a class="workLink" href="./work.html">work</a>
-
-      <div class="linesRule"></div>
 
       <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
 
-      <div class="linesRule"></div>
-
       <a class="workLink" href="./plunkProject.html">Plunk®</a>
 
-      <div class="linesRule"></div>
+      <a class="workLink" href="./habbotProject.html">Habbot</a>
 
-      <a class="workLink" href="habbotProject.html">Habbot</a>
-
-      <div class="linesRule"></div>
-
-      <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/"
-        >Pollin</a
-      >
-
-      <div class="linesRule"></div>
+      <a class="workLink" href="./pollinProject.html">Poll.in</a>
 
       <a class="workLink" href="./index.html">about</a>
 
-      <div class="linesRule"></div>
-
       <a class="workLink" href="./sketchbook.html">sketchbook</a>
-
-      <div class="linesRule"></div>
 
       <a class="workLink" href="./motion.html">motion</a>
 
-      <div class="linesRule"></div>
-
       <a class="workLink" href="./sayHello.html">say hello</a>
+
+      <img src="assets/shopa.head.svg" alt="" height="40px" />
     </div>
+  </div>
 
-    <div id="mobileMenuButton">
-      <div id="menuButtonAnim"></div>
-    </div>
+  <script src="js/acotilScripts.js"></script>
+</body>
 
-    <div id="mobileMenuScreen">
-      <div id="mobileLinks">
-        <a class="workLink" href="./work.html">work</a>
-
-        <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
-
-        <a class="workLink" href="./plunkProject.html">Plunk®</a>
-
-        <a class="workLink" href="./habbotProject.html">Habbot</a>
-
-        <a class="workLink" href="https://pollin-client-5gdey.kinsta.app/"
-          >Pollin</a
-        >
-
-        <a class="workLink" href="./index.html">about</a>
-
-        <a class="workLink" href="./sketchbook.html">sketchbook</a>
-
-        <a class="workLink" href="./motion.html">motion</a>
-
-        <a class="workLink" href="./sayHello.html">say hello</a>
-
-        <img src="assets/shopa.head.svg" alt="" height="40px" />
-      </div>
-    </div>
-
-    <script src="js/acotilScripts.js"></script>
-  </body>
 </html>
