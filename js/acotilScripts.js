@@ -159,7 +159,7 @@ $(document).ready(function () {
     window.location.href = "./";
   }
 
-  $("#logoBox").hover(
+  $(".logoBox").hover(
     function () {
       gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
     },

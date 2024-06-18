@@ -215,7 +215,7 @@ $(document).ready(function () {
     }
   );
 
-  $("#logoBox").hover(
+  $(".logoBox").hover(
     function () {
       gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
     },
