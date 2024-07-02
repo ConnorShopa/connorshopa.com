@@ -78,13 +78,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80vw;
-  max-width: 80vw;
+  max-width: 1200px;
 }
 
 .heroPanel {
   padding: 12px;
-  width: 80vw;
+  width: 100%;
   background-color: white;
   border-radius: 24px;
   display: flex;

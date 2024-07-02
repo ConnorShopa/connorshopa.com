@@ -107,13 +107,16 @@ body {
 }
 
 #aboutMeContainer {
-  padding: 0px 48px 48px 48px;
-  width: 100%;
+  padding: 0px;
+  flex-grow: 1;
+  min-width: 50vw;
   display: flex;
   justify-content: center;
   align-items: center;
   
+
 }
+
 
 .workContainer {
   display: flex;
@@ -194,7 +197,7 @@ body {
   color: #003960;
 
   font-family: "Satoshi-Medium";
-  font-size: 16px;
+  font-size: 12px;
   
   text-align: left;
   font-style: normal;
@@ -424,6 +427,7 @@ button:hover {
     align-items: center;
 
     margin: 0px;
+    
   }
 
   #aboutMeText {
@@ -450,7 +454,7 @@ button:hover {
 
   #workSectionTitle{
     font-size: 11px;
-    margin:;
+    margin: 0;
 
   }
 
@@ -471,7 +475,7 @@ button:hover {
   }
 
   #nameAndIcon img {
-    width: 12vw;
+    width: 8vw;
   }
 
   #nameAndIcon h1 {
