@@ -1,21 +1,11 @@
-// GO BACK TO SHOPA.STUDIO FUCNTION CALLED ON CLICK
-function etGoHome() {
-  window.location.href = "./";
-}
-
-function etGoTextTab() {
-  window.location.href = "acotil.text.html";
-}
-
-function etGoImagesTab() {
-  window.location.href = "acotil.images.html";
-}
-
-function etGoHabbotTestflight() {
-  window.location.href = "https://testflight.apple.com/join/pagCNvNc";
-}
-
 $(document).ready(function () {
+  if (!("ontouchstart" in window || navigator.maxTouchPoints)) {
+    console.log("This is not a touch device");
+  } else {
+    // Hide the mouse-circle if it's a touch device
+    $("#mouse-circle").hide();
+  }
+
   // Loop logo on hover
   let iconMenu = document.querySelector(".logoBox");
   let animateLogo = bodymovin.loadAnimation({
@@ -358,3 +348,20 @@ $(document).ready(function () {
     });
   });
 });
+
+// GO BACK TO SHOPA.STUDIO FUCNTION CALLED ON CLICK
+function etGoHome() {
+  window.location.href = "./";
+}
+
+function etGoTextTab() {
+  window.location.href = "acotil.text.html";
+}
+
+function etGoImagesTab() {
+  window.location.href = "acotil.images.html";
+}
+
+function etGoHabbotTestflight() {
+  window.location.href = "https://testflight.apple.com/join/pagCNvNc";
+}

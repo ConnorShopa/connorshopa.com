@@ -1,19 +1,3 @@
-function etGoHome() {
-  window.location.href = "./";
-}
-
-function etGoTextTab() {
-  window.location.href = "acotil.text.html";
-}
-
-function etGoImagesTab() {
-  window.location.href = "acotil.images.html";
-}
-
-function etGoHabbotTestflight() {
-  window.location.href = "https://testflight.apple.com/join/pagCNvNc";
-}
-
 $(document).ready(function () {
   if (!("ontouchstart" in window || navigator.maxTouchPoints)) {
     // CIRCLE FOLLOWS CURSOR FUNCTION//
@@ -226,3 +210,19 @@ $(document).ready(function () {
     mobileMenuExpanded = !mobileMenuExpanded;
   });
 });
+
+function etGoHome() {
+  window.location.href = "./";
+}
+
+function etGoTextTab() {
+  window.location.href = "acotil.text.html";
+}
+
+function etGoImagesTab() {
+  window.location.href = "acotil.images.html";
+}
+
+function etGoHabbotTestflight() {
+  window.location.href = "https://testflight.apple.com/join/pagCNvNc";
+}
