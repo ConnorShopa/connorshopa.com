@@ -104,6 +104,19 @@ $(document).ready(function () {
       }
     );
 
+    $(".heroPanel a").hover(
+      function () {
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+        $(this).css("color", "white");
+        $(this).css("text-decoration", "underline");
+      },
+      function () {
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
+        $(this).css("color", "#408c68");
+        $(this).css("text-decoration", "none");
+      }
+    );
+
     $(".logoBox").hover(
       function () {
         gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
