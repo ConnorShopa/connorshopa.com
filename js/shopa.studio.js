@@ -358,6 +358,10 @@ function etGoSpotify() {
   window.location.href = "/spotifyFullscreen.html";
 }
 
+function etGoSpotifyDreams() {
+  window.location.href = "/spotifyProject.html";
+}
+
 function etGoHabbot() {
   window.location.href = "/habbotProject.html";
 }

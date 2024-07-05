@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="css/spotifyProject.css" />
+  <link rel="stylesheet" href="css/satoshi.css" />
+
+  <title>shopa.spotify</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+  <link rel="manifest" href="assets/site.webmanifest" />
+  <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5" />
+  <meta name="msapplication-TileColor" content="#da532c" />
+  <meta name="theme-color" content="#ffffff" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+</head>
+
+<body>
+  <!-- MOUSE FOLLOW CIRCLE -->
+  <div id="mouse-circle"></div>
+
+  <!-- HEADER + LOGO CONTAINER -->
+  <div class="headerBox">
+    <!--LOGO-->
+    <div id="logoBox">
+      <div class="logoBox" onClick="etGoHome()"></div>
+    </div>
+  </div>
+
+  <div class="content" id="habbotContent">
+    <div class="heroPanel" id="heroPanel">
+      <div class="projectInfo">
+        <h1>Spotify Dreams</h1>
+        <div class="linesRule"></div>
+        <h5>About</h5>
+        <h4>
+          Product ideation and high fidelity prototyping for Spotify <br />
+        </h4>
+        <a id="betaLink" href="https://www.figma.com/community/file/1332007412800881713/sketches-spotify-shopa">view
+          figma project file <img src="icons/arrow_right.svg" alt="" /></a>
+        <div class="linesRule"></div>
+        <h5>Deliverables</h5>
+        <h4>High-fidelity prototype</h4>
+        <h4>Product design</h4>
+        <h4>Product ideation</h4>
+        <div class="linesRule"></div>
+        <h5>2023 – 2024</h5>
+      </div>
+      <div class="projectHeroImage">
+        <img src="assets/projectAssets/spotifyDreams_Icon.svg" alt="" height=160px">
+      </div>
+    </div>
+
+    <div class="panelSection" id="recordShelfSection">
+
+      <div class="subSectionText" id="recordShelfTextSection">
+        <div id="titleAndIcon">
+          <img src="assets/projectAssets/spotifyDream_recordShelfIcon.svg" alt="" width="60px" />
+          <h1>Record shelf</h1>
+
+        </div>
+
+        <h4>
+          Over the last year, I've become fascinated with vinyl-records. Both the aspect of collecting physical objects
+          that hold the power music has, and the fun of exploring and sifting through crates when I
+          visit record-stores.
+          <br> <br>
+          This fascination led to the idea of bringing these same experiences to Spotify. I aimed
+          to create a digital manifestation of the record-crate, for two purposes:
+          <br> <br>
+          – Organizing collections in a physical way
+          <br> <br>
+          – Add joy to the discovery of new content through thumbing through never-before seen things
+        </h4>
+        <a id="betaLink" href="./spotifyRecordShelf.html">more about the record shelf <img src="icons/arrow_right.svg"
+            alt="" /></a>
+      </div>
+      <div class="projectGallery" id="recordShelfGallery">
+        <img id="recordShelfSkeleton" src="assets/projectAssets/spotifyDreams_recordShelfSkeleton.png" alt="" />
+      </div>
+
+
+    </div>
+
+    <div class="panelSection" id="animItemSection">
+
+
+
+      <div class="animItemOffsetSpan">
+
+
+        <div class="animItem" id="animItem01">
+          <img src="assets//projectAssets/spotifyDreams_useCaseGif01.gif" alt="" />
+
+        </div>
+        <div class="animItem" id="animItem02">
+          <img src="assets//projectAssets/spotifyDreams_useCaseGif02.gif" alt="" />
+
+        </div>
+
+      </div>
+
+
+
+
+
+    </div>
+
+    <div class="panelSection" id="useCaseSection">
+
+      <div class="centeredTitle">
+        <h1>Use cases</h1>
+      </div>
+
+      <div class="gallerySpan">
+        <div class="galleryItem">
+          <img class="mobileAnim" src="assets/projectAssets/spotifyDreams_useCase01.png" alt="" />
+          <h3>Internal Library</h3>
+          <h2>A more physical view of a listeners library</h2>
+        </div>
+
+        <div class="galleryItem">
+          <img class="mobileAnim" src="assets/projectAssets/spotifyDreams_useCase02.png" alt="" />
+          <h3>Curated Collections</h3>
+          <h2>Explore collections from Spotify, users & brands</h2>
+        </div>
+
+      </div>
+
+      <div class="gallerySpan">
+
+
+        <div class="galleryItem">
+          <img class="mobileAnim" src="assets/projectAssets/spotifyDreams_useCase03.png" alt="" />
+          <h3>Artist Discography</h3>
+          <h2>Thumb through old & new favourite artist discographies and learn more about them and their music</h2>
+        </div>
+        <div class="galleryItem">
+          <img class="mobileAnim" src="assets/projectAssets/spotifyDreams_useCase04.png" alt="" />
+          <h3>Social Exploration</h3>
+          <h2>Explore what friends are listening to, discover what you have in common, find new artists and content to
+            enjoy</h2>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+
+
+
+    <div class="footerPanel">
+      <img src="assets/shopa.head.svg" alt="" height="48px" onclick="etGoHome()" />
+
+      <div class="projectLink">
+        <a href="/index.html">home</a>
+        <a href="/work.html">all work</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="js/spotifyProjectScripts.js"></script>
+</body>
+
+</html>
