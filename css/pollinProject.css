@@ -104,11 +104,11 @@ body {
   
 }
 
-.footerPanelSection {
+.footerPanel {
   padding: 24px;
 
   align-self: center;
-  width: 100%;
+  width: 70%;
 
   border-radius: 24px;
   display: flex;
