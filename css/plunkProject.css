@@ -78,7 +78,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 80vw;
   max-width: 1200px;
+  
 }
 
 .heroPanel {
@@ -105,16 +107,14 @@ body {
 .footerPanel {
   padding: 24px;
 
-  align-self: center;
-  min-width: 95%;
-
+  
   border-radius: 24px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20vh;
-
+  width: 70%;
   border: 1px solid #001428;
 }
 
@@ -227,20 +227,21 @@ body {
   gap: 24px;
   justify-content: center;
   align-items: flex-start;
-  max-width: 50%;
+  width: 100%;
 
 }
 
 
-#mobileAnim {
-  flex: 1 0 0;
-  align-self: stretch;
-}
 
-.projectGallery video,
+
+
 .projectGallery iframe {
   width: 100%;
-  border-radius: 18px;
+  border-radius: 12px;
+}
+
+.motionGif{
+  width: 50%;
 }
 
 #motionGallery {
@@ -408,7 +409,20 @@ a:visited {
     font-size: 36px;
   }
 
+  .doubleGifContainer{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
 
+  #motionGallery video {
+    width: 80vw;
+}
+
+  #titleAndHome{
+    padding-bottom: 12px;
+  }
 
   h4 {
     margin-top: 0px;
