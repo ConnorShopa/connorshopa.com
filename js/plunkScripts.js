@@ -1,5 +1,7 @@
 $(document).ready(function () {
   if (!("ontouchstart" in window || navigator.maxTouchPoints)) {
+    console.log("This is not a touch device");
+
     // CIRCLE FOLLOWS CURSOR FUNCTION//
     let mousePosX = 0,
       mousePosY = 0,
@@ -7,7 +9,7 @@ $(document).ready(function () {
 
     document.onmousemove = (e) => {
       mousePosX = e.clientX + 2;
-      mousePosY = e.clientY + 8;
+      mousePosY = e.clientY + 4;
     };
 
     let delay = 6,
@@ -32,6 +34,32 @@ $(document).ready(function () {
     startMouseFollow();
 
     // GSAP ANIMATIONS
+
+    $(".workItem").hover(
+      function () {
+        gsap.to($(this).find(".workItemImage"), {
+          duration: 0.3,
+          boxShadow:
+            "0px 2px 2px 0px rgba(129, 129, 129, 0.14), 0px 3px 1px 0px rgba(129, 129, 129, 0.12), 0px 1px 5px 0px rgba(129, 129, 129, 0.20)",
+        });
+        gsap.to(".workItem", {
+          duration: 0.8,
+          width: "140px",
+          ease: "power2.out",
+        }); // Shrink all work items
+        gsap.to(this, { duration: 0.8, width: "180px", ease: "power2.out" }); // Expand hovered work item
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+      },
+      function () {
+        gsap.to($(this).find(".workItemImage"), {
+          duration: 0.3,
+          boxShadow: "none",
+        });
+
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
+      }
+    );
+
     // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
     $("a").hover(
       function () {
@@ -52,7 +80,7 @@ $(document).ready(function () {
         $(this).css("text-decoration", "underline");
 
         // Add a black border to the mouse circle
-        mouseCircle.style.border = "0.5px solid #001428";
+        mouseCircle.style.border = "0.5px solid #03131F";
       },
       function () {
         // Update the mouse circle position without considering link height
@@ -60,7 +88,7 @@ $(document).ready(function () {
 
         // Apply hover out animations
         gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
-        $(this).css("color", "#FFF5F5");
+        $(this).css("color", "#03131F");
         $(this).css("text-decoration", "none");
 
         // Remove the black border on un-hover
@@ -90,92 +118,56 @@ $(document).ready(function () {
         mouseCircle.style.borderRadius = "50%";
       }
     }
-
-    $("a").hover(
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
-        $(this).css("color", "blue");
-        $(this).css("text-decoration", "underline");
-      },
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-        $(this).css("color", "#0A3D62");
-        $(this).css("text-decoration", "none");
-      }
-    );
-
-    $(".heroPanel a").hover(
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
-        $(this).css("color", "white");
-        $(this).css("text-decoration", "underline");
-      },
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-        $(this).css("color", "#408c68");
-        $(this).css("text-decoration", "none");
-      }
-    );
-
-    $(".panelSection a").hover(
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
-        $(this).css("color", "#003960");
-        $(this).css("text-decoration", "underline");
-      },
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-        $(this).css("color", "#408c68");
-        $(this).css("text-decoration", "none");
-      }
-    );
-
-    $(".footerPanel a").hover(
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
-        $(this).css("color", "#003960");
-        $(this).css("text-decoration", "underline");
-      },
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-        $(this).css("color", "#408c68");
-        $(this).css("text-decoration", "none");
-      }
-    );
-
-    $(".logoBox").hover(
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
-      },
-      function () {
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-      }
-    );
+    // Rest of the code for non-touch devices
   } else {
     // Hide the mouse-circle if it's a touch device
     $("#mouse-circle").hide();
   }
 
   // Loop logo on hover
-  let iconMenu = document.querySelector(".logoBox");
+  let logoAnim = document.querySelector(".logoAnim");
   let animationMenu = bodymovin.loadAnimation({
-    container: iconMenu,
+    container: logoAnim,
     renderer: "svg",
     loop: false,
     autoplay: false,
     path: "resources/lottiefiles/shopaAnimLight.json",
   });
 
+  let logoBox = document.querySelector(".logoBox");
+
   var directionMenu = 1;
-  iconMenu.addEventListener("mouseenter", (e) => {
+  logoBox.addEventListener("mouseenter", (e) => {
     animationMenu.setDirection(directionMenu);
     animationMenu.play();
   });
 
-  iconMenu.addEventListener("mouseleave", (e) => {
+  logoBox.addEventListener("mouseleave", (e) => {
     animationMenu.setDirection(-directionMenu);
     animationMenu.play();
   });
+
+  $(" a").hover(
+    function () {
+      gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+      $(this).css("color", "blue");
+      $(this).css("text-decoration", "underline");
+    },
+    function () {
+      gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
+      $(this).css("color", "#408c68");
+      $(this).css("text-decoration", "none");
+    }
+  );
+
+  $(".logoAnim").hover(
+    function () {
+      gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
+    },
+    function () {
+      gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
+    }
+  );
 
   //MOBILE MENU ANIM AND LOGIC
   let mobileMenuExpanded = false; // Track the menu state
@@ -189,25 +181,18 @@ $(document).ready(function () {
     path: "animations/menuButtonAnim.json",
   });
 
-  // Select the liveButton element
-  var liveButton = $("#liveButton");
-
-  // Create a GSAP timeline for the pulsating animation
-  var pulseTimeline = gsap.timeline({ repeat: -1, yoyo: true });
-
-  // Add a pulsating animation to the timeline
-  pulseTimeline.to(liveButton, {
-    scale: 0.2,
-    duration: 0.5,
-    ease: "power1.inOut",
-  });
-
-  $("#mobileMenuButton").click(function () {
+  $(".mobileMenuButton").click(function () {
     if (!mobileMenuExpanded) {
       menuButtonAnim.setDirection(1);
       menuButtonAnim.play();
+
+      gsap.to(".logoBox", {
+        duration: 0.1,
+        position: "fixed",
+      });
+
       // Expand the menu
-      gsap.to("#mobileMenuScreen", {
+      gsap.to(".mobileMenuScreen", {
         duration: 0.62,
 
         display: "flex",
@@ -216,32 +201,34 @@ $(document).ready(function () {
         height: "300vh",
         borderRadius: "100%",
       });
-      gsap.to("#mobileMenuButton", {
-        background: "#EBF1F5",
+      gsap.to(".mobileMenuButton", {
+        position: "fixed",
+        right: "24px",
       });
-      gsap.to("#mobileLinks", {
+      gsap.to(".mobileLinks", {
         duration: 0.3,
         ease: "elastic.out(2, 1.6)",
-        gap: "24px",
+        gap: "48px",
         display: "flex",
       });
     } else {
       menuButtonAnim.setDirection(-1);
       menuButtonAnim.play();
-      gsap.to("#mobileMenuScreen", {
+      gsap.to(".mobileMenuScreen", {
         duration: 0.32,
         width: "1px",
         height: "1px",
         borderRadius: "100%",
         display: "none",
       });
-      gsap.to("#mobileLinks", {
+      gsap.to(".mobileLinks", {
         duration: 0.24,
         ease: "elastic.in(0.5, 0.5)",
         gap: "-24px",
         display: "none",
       });
-      gsap.to("#mobileMenuButton", {
+
+      gsap.to(".mobileMenuButton", {
         background: "white",
       });
     }
@@ -250,18 +237,54 @@ $(document).ready(function () {
   });
 });
 
+// Refresh page on logo click
+
+function etRefresh() {
+  window.location.reload();
+}
+
+//JUMP FUNCTIONS
+
 function etGoHome() {
-  window.location.href = "./";
+  window.location.href = "./index.html";
 }
 
-function etGoTextTab() {
-  window.location.href = "acotil.text.html";
+function etGoPollin() {
+  window.location.href = "./pollinProject.html";
 }
 
-function etGoImagesTab() {
-  window.location.href = "acotil.images.html";
+function etGoAcotil() {
+  window.location.href = "shopa.acotil.images.html";
 }
 
-function etGoHabbotTestflight() {
+function openAcotilTab() {
+  window.open("https://acollectionofthingsilike.com", "_blank");
+}
+
+function etGoPlunk() {
+  window.location.href = "/plunk.html";
+}
+
+function etGoPollin() {
+  window.location.href = "/pollinProject.html";
+}
+
+function etGoSpotify() {
+  window.location.href = "/spotifyFullscreen.html";
+}
+
+function etGoSpotifyDreams() {
+  window.location.href = "/spotifyProject.html";
+}
+
+function etGoHabbot() {
+  window.location.href = "./habbot.html";
+}
+
+function etGoHabbotBeta() {
   window.location.href = "https://testflight.apple.com/join/pagCNvNc";
+}
+
+function etGoWork() {
+  window.location.href = "/work.html";
 }

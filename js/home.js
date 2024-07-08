@@ -255,17 +255,17 @@ function openAcotilTab() {
 }
 
 function etGoPlunk() {
-  window.location.href = "/work_plunk.html";
+  window.location.href = "/plunk.html";
 }
 
 function etGoPollin() {
-  window.location.href = "./work_pollin.html";
+  window.location.href = "./pollin.html";
 }
 
 function etGoSpotify() {
-  window.location.href = "./work_spotifyDreams.html";
+  window.location.href = "./spotifyDreams.html";
 }
 
 function etGoHabbot() {
-  window.location.href = "./work_habbot.html";
+  window.location.href = "./habbot.html";
 }

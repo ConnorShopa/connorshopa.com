@@ -2,113 +2,173 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/habbot.css" />
+    <link rel="stylesheet" href="css/satoshi.css" />
 
-    <link rel="stylesheet" href="css/habbot.css">
-    <link rel="stylesheet" href="css/satoshi.css">
-
-    <title>shopa.habbot</title>
-    
-
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="manifest" href="assets/site.webmanifest">
-    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-
-
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-    
-
+    <title>connorshopa : work : habbot</title>
 </head>
 
 <body>
-
     <!-- MOUSE FOLLOW CIRCLE -->
     <div id="mouse-circle"></div>
 
     <!-- HEADER + LOGO CONTAINER -->
     <div class="headerBox">
         <!--LOGO-->
-        <div id="logoBox">
+        <div class="logoBox" onClick="etGoHome()">
+            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="24px">
+            <div class="logoAnim"></div>
+        </div>
 
-            <div class="logoBox" onClick="etGoHome()"></div>
+        <div class="navLinksContainer">
+
+            <a class="navLink" href="./index.html">home</a>
+
+            <div class="linesRock"></div>
+
+            <h5 class="currentNavLink">work</h5>
+
+            <div class="linesRock"></div>
+
+
+
+            <a class="navLink" href="./acotil.images.html">acotil</a>
+
+            <div class="linesRock"></div>
+
+            <a class="navLink" href="./sketchbook.html">sketchbook</a>
+
+            <div class="linesRock"></div>
+
+            <a class="navLink" href="./motion.html">motion</a>
+
+        </div>
+
+        <div class="mobileMenuButton">
+            <div id="menuButtonAnim"></div>
+        </div>
+
+        <div class="mobileMenuScreen">
+            <div class="mobileLinks">
+
+
+
+
+                <a class="workLink" href="./index.html">home</a>
+
+                <h5 class="currentNavLink">work</h5>
+
+                <a class="workLink" href="./acotil.images.html">acotil</a>
+
+                <a class="workLink" href="./sketchbook.html">sketchbook</a>
+
+                <a class="workLink" href="./motion.html">motion</a>
+
+
+            </div>
+
+
 
         </div>
 
     </div>
 
+    <div class="content">
+        <div class="heroBox" id="heroPanel">
+            <div class="projectInfo">
+                <h1>habbot</h1>
+                <div class="linesRule"></div>
+                <h5>About</h5>
+                <h4>
+                    A simple and visual habit tracking tool. <br />
+                    Sketched, designed and built in a remote cabin in Wyoming
+                </h4>
 
-    <div id="habbotSiteBody">
-        <div id="heroLogo"><img src="./assets/habbotLogo.svg" alt="" height="24px"></div>
-        <div id="habbotHeroText">
-            <h1>I needed a tool, so I built habbot</h1>
+                <div class="linesRule"></div>
+                <h5>Deliverables</h5>
+                <h4>Beta iOS application</h4>
+                <h4>Product design</h4>
+                <h4>Branding</h4>
+                <div class="linesRule"></div>
+                <h5>2023 – current</h5>
+            </div>
+            <div class="heroImageBox">
+                <img src="assets/projectAssets/habbotHeroImage.png" alt="" />
+            </div>
         </div>
-        <a id="heroButton" href = "https://testflight.apple.com/join/pagCNvNc"><h4>download the beta</h4 > <img src="icons/arrow_right.svg" alt="" height="16px"></a>
-        <div id="heroImage">
-            <img src="assets/habbotHeroScreen.png" alt="">
-        </div>
-        <h2>a simple + visual habit tracking tool</h2>
-        
 
+        <div class="panelBox" id="walkthruSection">
+            <div class="galleryBox" id="walkthruGallery">
+                <img id="mobileAnim" src="assets/projectAssets/habbotGif01.gif" alt="" />
+            </div>
+
+            <div class="panelText" id="mobileTextSection">
+                <div class="titleAndHome">
+                    <img src="icons/habbotIcon01.png" alt="" width="80px" />
+                    <h1>habbot</h1>
+                    <h2>mobile application</h2>
+                </div>
+
+                <h4>
+                    Aiming to be visually pleasing, and useful, habbot is a tool that
+                    helps it's audience keep tabs on habits.
+                </h4>
+            </div>
+        </div>
+
+        <div class="spanBox" id="brandPanel">
+            <div class="gallerySpan" id="brandingImages">
+                <img class="brandImg" id="noRadiusImg" src="assets/projectAssets/habbotBrand0.png" alt="">
+                <img class="brandImg" src="assets/projectAssets/habbotBrand01.png" alt="" />
+                <img class="brandImg" id="noRadiusImg" src="assets/projectAssets/habbotBrand02.png" alt="" />
+                <img class="brandImg" id="noRadiusImg" src="assets/projectAssets/habbotBrand03.png" alt="" />
+            </div>
+        </div>
+
+        <div class="panelBox" id="settingsSection">
+            <div class="galleryBox" id="mobileGallery">
+                <img src="assets/projectAssets/habbot01.png" alt="" />
+            </div>
+            <div class="panelText" id="mobileTextSection">
+                <div id="titleAndHome">
+                    <img src="icons/habbotIcon02.svg" alt="" width="100px" />
+                    <h1>search + settings</h1>
+                    <h2>Habbots are customizable and searchable.</h2>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="spanBox" id="marketingPanel">
+            <div class="gallerySpan" id="marketingImages">
+                <img class="brandImg" id="" src="assets/projectAssets/habbotMarketing.png" alt="">
+            </div>
+        </div>
+
+
+        <div class="footerBox">
+            <img src="assets/shopa.head.svg" alt="" height="48px" onclick="etGoHome()" />
+
+            <div class="footerLinkBox">
+                <a href="/index.html">home</a>
+                <a href="./pollin.html">next project</a>
+            </div>
+        </div>
     </div>
-    
-    <div id="moreInfoButton"> <h4>learn more</h4><img src="icons/arrow_down.svg" alt="" height="16px"> </div>
-    <div id="linesRule"> </div>
-        
-        
-    <div id="explanationContentBox">
-        <h3>a habbot is a pair of dots</h3>
-            <div id="fig01">
-                <div id="circle01"></div>
-                <div id="circle01"></div>
-         </div>
-        <h3>time spent on a habbot is represented by
-                distance between the dots</h3>
-        <div id="fig02">
-            <div id="circle02"></div>
-            <div id="circle03"></div>
-        </div>
-        <div id="timeBtnRack">
-            <div class="timeButton" id="timeButton01" ><h4 id="timeText01">5 mins</h4></div>
-            <div class="timeButton" id="timeButton02" ><h4 id="timeText02">30 mins</h4></div>
-            <div class="timeButton" id="timeButton03" ><h4 id="timeText03">2 hrs</h4></div>
-        </div>
-        <h3>simple + visual</h3>
-        <div id="phoneScreenRack">
-            <img src="assets/habbotScreen01.svg" alt="">
-            <img src="assets/habbotScreen02.svg" alt="">
-            <img src="assets/habbotScreen03.svg" alt="">
-            <img src="assets/habbotScreen04.svg" alt="">
-        </div>
-        
-    </div>
 
-    
-    <a id="heroButton" href = "https://testflight.apple.com/join/pagCNvNc"><h4>download the beta</h4 > <img src="icons/arrow_right.svg" alt="" height="16px"></a>
 
- 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="js/habbotScripts.js"></script>
-    
-
 </body>
-<footer>
-    <h5>shopa.studio</h5>
-    <h5>|</h5>
-    <h5>built in a remote cabin in Jackson, Wyoming</h5>
-    <h5>|</h5>
-    <img src="assets/peaceHand.png" alt="" height="18px">+<img src="assets/hearEmoji.png" alt="" height="18px">
-</footer>
 
 </html>

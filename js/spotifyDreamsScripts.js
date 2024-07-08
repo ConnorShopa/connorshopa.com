@@ -88,7 +88,7 @@ $(document).ready(function () {
 
         // Apply hover out animations
         gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
-        $(this).css("color", "#03131F");
+        $(this).css("color", "#4668B1;");
         $(this).css("text-decoration", "none");
 
         // Remove the black border on un-hover
@@ -155,7 +155,7 @@ $(document).ready(function () {
     },
     function () {
       gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-      $(this).css("color", "#408c68");
+      $(this).css("color", "#001428");
       $(this).css("text-decoration", "none");
     }
   );
@@ -262,7 +262,7 @@ function openAcotilTab() {
 }
 
 function etGoPlunk() {
-  window.location.href = "/work_Plunk.html";
+  window.location.href = "/plunk.html";
 }
 
 function etGoPollin() {
@@ -278,7 +278,7 @@ function etGoSpotifyDreams() {
 }
 
 function etGoHabbot() {
-  window.location.href = "./work_habbot.html";
+  window.location.href = "./habbot.html";
 }
 
 function etGoHabbotBeta() {
