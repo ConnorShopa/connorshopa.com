@@ -181,12 +181,18 @@ $(document).ready(function () {
     path: "animations/menuButtonAnim.json",
   });
 
-  $("#mobileMenuButton").click(function () {
+  $(".mobileMenuButton").click(function () {
     if (!mobileMenuExpanded) {
       menuButtonAnim.setDirection(1);
       menuButtonAnim.play();
+
+      gsap.to(".logoBox", {
+        duration: 0.1,
+        position: "fixed",
+      });
+
       // Expand the menu
-      gsap.to("#mobileMenuScreen", {
+      gsap.to(".mobileMenuScreen", {
         duration: 0.62,
 
         display: "flex",
@@ -195,32 +201,35 @@ $(document).ready(function () {
         height: "300vh",
         borderRadius: "100%",
       });
-      gsap.to("#mobileMenuButton", {
-        background: "#EBF1F5",
+      gsap.to(".mobileMenuButton", {
+        background: "#84d1ac",
+        position: "fixed",
+        right: "24px",
       });
-      gsap.to("#mobileLinks", {
+      gsap.to(".mobileLinks", {
         duration: 0.3,
         ease: "elastic.out(2, 1.6)",
-        gap: "24px",
+        gap: "48px",
         display: "flex",
       });
     } else {
       menuButtonAnim.setDirection(-1);
       menuButtonAnim.play();
-      gsap.to("#mobileMenuScreen", {
+      gsap.to(".mobileMenuScreen", {
         duration: 0.32,
         width: "1px",
         height: "1px",
         borderRadius: "100%",
         display: "none",
       });
-      gsap.to("#mobileLinks", {
+      gsap.to(".mobileLinks", {
         duration: 0.24,
         ease: "elastic.in(0.5, 0.5)",
         gap: "-24px",
         display: "none",
       });
-      gsap.to("#mobileMenuButton", {
+
+      gsap.to(".mobileMenuButton", {
         background: "white",
       });
     }
