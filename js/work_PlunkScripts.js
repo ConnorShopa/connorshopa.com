@@ -202,7 +202,6 @@ $(document).ready(function () {
         borderRadius: "100%",
       });
       gsap.to(".mobileMenuButton", {
-        background: "#84d1ac",
         position: "fixed",
         right: "24px",
       });
@@ -279,7 +278,7 @@ function etGoSpotifyDreams() {
 }
 
 function etGoHabbot() {
-  window.location.href = "/habbotProject.html";
+  window.location.href = "./work_habbot.html";
 }
 
 function etGoHabbotBeta() {

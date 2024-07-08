@@ -205,7 +205,6 @@ body {
 
 .projectGallery {
   display: flex;
-  flex-grow: 3;
   gap: 12px;
   flex-direction: column;
   align-items: center;
@@ -232,7 +231,7 @@ body {
 .linesRule {
   height: 1px;
   width: 33%;
-  background-color: #051324;
+  background-color: inherit;
   margin: 24px 0px 24px 0px;
 }
 
