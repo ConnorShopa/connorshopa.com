@@ -88,7 +88,7 @@ $(document).ready(function () {
 
         // Apply hover out animations
         gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
-        $(this).css("color", "#03131F");
+        $(this).css("color", "#4668B1;");
         $(this).css("text-decoration", "none");
 
         // Remove the black border on un-hover
@@ -131,7 +131,7 @@ $(document).ready(function () {
     renderer: "svg",
     loop: false,
     autoplay: false,
-    path: "resources/lottiefiles/shopaAnimDark.json",
+    path: "resources/lottiefiles/shopaAnimLight.json",
   });
 
   let logoBox = document.querySelector(".logoBox");
@@ -147,7 +147,7 @@ $(document).ready(function () {
     animationMenu.play();
   });
 
-  $("#extraneousLinks a").hover(
+  $(" a").hover(
     function () {
       gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
       $(this).css("color", "blue");
@@ -155,7 +155,7 @@ $(document).ready(function () {
     },
     function () {
       gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-      $(this).css("color", "#0A3D62");
+      $(this).css("color", "#001428");
       $(this).css("text-decoration", "none");
     }
   );
@@ -202,7 +202,6 @@ $(document).ready(function () {
         borderRadius: "100%",
       });
       gsap.to(".mobileMenuButton", {
-        background: "#84d1ac",
         position: "fixed",
         right: "24px",
       });
@@ -246,6 +245,14 @@ function etRefresh() {
 
 //JUMP FUNCTIONS
 
+function etGoHome() {
+  window.location.href = "./home.html";
+}
+
+function etGoPollin() {
+  window.location.href = "./pollinProject.html";
+}
+
 function etGoAcotil() {
   window.location.href = "shopa.acotil.images.html";
 }
@@ -255,17 +262,29 @@ function openAcotilTab() {
 }
 
 function etGoPlunk() {
-  window.location.href = "/work_plunk.html";
+  window.location.href = "/work_Plunk.html";
 }
 
 function etGoPollin() {
-  window.location.href = "./work_pollin.html";
+  window.location.href = "/pollinProject.html";
 }
 
 function etGoSpotify() {
-  window.location.href = "./work_spotifyDreams.html";
+  window.location.href = "/spotifyFullscreen.html";
+}
+
+function etGoSpotifyDreams() {
+  window.location.href = "/spotifyProject.html";
 }
 
 function etGoHabbot() {
   window.location.href = "./work_habbot.html";
+}
+
+function etGoHabbotBeta() {
+  window.location.href = "https://testflight.apple.com/join/pagCNvNc";
+}
+
+function etGoWork() {
+  window.location.href = "/work.html";
 }

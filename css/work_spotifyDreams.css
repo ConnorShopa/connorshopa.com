@@ -3,9 +3,9 @@
 html {
   display: flex;
 
-  background-color: #051324;
+  background-color: #e3fb9b;
 
-  cursor: url("cursor_habbot.png"), pointer;
+  cursor: url("cursor_spotify.png"), pointer;
   justify-content: center;
   align-items: center;
   margin: 24px;
@@ -34,7 +34,7 @@ body {
   width: 32px;
   height: 32px;
   margin: -13px 0 0 -13px;
-  background: rgba(250, 152, 58, 0.2);
+  background: rgba(145, 175, 239, 0.50);
   border-radius: 50%;
   pointer-events: none;
   transition: width 0.2s, height 0.2s;
@@ -57,7 +57,8 @@ body {
   justify-content: center;
   width: fit-content;
   padding: 20px 24px 18px 24px;
-  background-color: #4668B1;
+  background-color: #54B05C;
+  border: 1px solid #f6f6f6;
   
   border-radius: 18px;
   box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
@@ -78,8 +79,8 @@ body {
   justify-content: center;
   align-items: center;
   gap: 24px;
-  background-color: #fffaf6;
-  border: 1px solid #4668B1;
+  background-color: #f6f6f6;
+  border: 1px solid #54B05C;
   border-radius: 18px;
   box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
   font-family: "Satoshi-Medium";
@@ -106,23 +107,23 @@ body {
     align-items: center;
     height: fit-content;
   
-    /* padding: 18px; */
-    gap: 16px;
+    gap: 12px;
     
     max-width: 1200px;
     
   }
 
   .heroBox {
-    padding: 24px;
     
-    background-color: #fffaf6;
+    width: 100%;
+    
     border-radius: 16px 16px 4px 4px;
     display: flex;
     flex-direction: row;
-    color: #051324;
+    color: #03131f;
     justify-content: space-between;
-    gap: 72px;
+    
+    background-color: #f6f6f6;
     box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
     
     
@@ -133,10 +134,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #408c68;
-   border-radius: 4px 16px 16px 4px;
-    width: 50%;
-    margin: 0px;
+    width: 80%;
+    
+    border-radius: 4px 12px 12px 4px;
+    
+    margin: 24px;
     
     
   }
@@ -152,22 +154,25 @@ body {
     flex-direction: column;
     height: 150%;
     max-width: 60%;
-    color: #051324;
-    
+    color: #001428;
+    padding: 48px;
+    width: 50%;
   
   }
 
   .panelBox {
+    padding: 12px;
     display: flex;
     flex-direction: row;
-    background-color: #fffaf6;
+    background-color: #f6f6f6;
     border-radius: 16px;
-    width: 100%;
     border-radius: 4px 4px 4px 4px;
+    gap: 12px;
+    color: #001428;
     box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
   }
 
-  #marketingPanel{
+  #endsSection{
     border-radius: 4px 4px 16px 16px;
   }
 
@@ -177,34 +182,81 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 48px;
     
     
   }
+
 
 
   .galleryBox img{
-    width: 40%;
+    width: 50%;
+    border-radius: 12px;
   }
 
-  .spanBox{
+  #animItemSection{
     display: flex;
-    background-color: #fffaf6;
-    width: 100%;
-    border-radius: 4px 4px 4px 4px;
-    ox-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    flex-direction: row;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+   
+  }
+
+  
+  .animItemOffsetSpan {
     
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 48px;
+    display: flex;
+    flex-direction: row;
+    gap: 72px;
+    margin-bottom: 48px;
+  }
+  
+  .animItem img {
+    max-width: 240px;
+  }
+  
+  #animItem01 {
+    margin-top: 120px;
   }
 
-  .gallerySpan {
-    width: 100%;
-    padding: 24px;
+  #useCaseSection{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    border-radius: 4px 4px 12px 12px;
+    padding-top: 48px;
+    padding-bottom: 36px;
   }
 
-  .gallerySpan img{
-    width: 100%;
-    background-color: white;
+  #useCaseSection img{
+    width: 60%;
   }
+
+  .doubleItemSpan{
+    display: flex;
+    flex-direction: row;
+
+  }
+
+  .galleryItem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+  }
+
+  .galleryItem h2{
+    max-width: 60%;
+    text-align: center;
+  }
+
 
   .panelText {
     z-index: 1;
@@ -213,12 +265,10 @@ body {
     
     padding: 72px 24px 72px 24px;
     flex-grow: 3;
-    border-radius: 4px 18px 18px 4px;
-  
-    min-width: 40%;
-    max-width: 40%;
+    
+    width: 40%;
 
-    gap: 72px;
+    
     
   }
 
@@ -226,57 +276,16 @@ body {
 
 
   .panelText h4 {
-    color: #051324;
+    color: #001428;
     font-family: "Satoshi-Regular";
     font-weight: 400;
     letter-spacing: -0.4px;
     font-size: 18px;
     margin: 0px;
-  }
-
-  .subSectionText h1 {
-    color: #051324;
-  }
-  
-
-  #motionGallery video {
-    width: 100%;
-  }
-
-  
-  
-  .doubleGifContainer{
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
-    justify-content: center;
-    align-items: flex-start;
-    width: 100%;
-  
-  }
-
-  .doubleGifContainer video{
-    
-    max-width: 30%;
-  
-  }
-
-  .panelBox_center{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-    text-align: center;
-    color: #002644;
-
     
   }
 
-  .panelBox_center img{
-    margin-top: 72px;
-    width: 60%;
-  }
+  
 
   .footerBox {
     display: flex;
@@ -286,7 +295,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20vh;
-    border: 1px solid #fffaf6;
+    border: 1px solid #001428;
     width: 100%;
     max-width: 1600px;
   }
@@ -309,7 +318,7 @@ body {
 
   .linesRule{
     height: 1px;
-    background-color: #03131f;
+    background-color: #1353B4;
     margin-top: 24px;
     margin-bottom: 24px;
     width: 100%;
@@ -342,6 +351,17 @@ h1 {
     line-height: 125%;
     letter-spacing: -0.4px;
   }
+
+  h3 {
+    font-family: "Satoshi-Medium";
+    font-weight: 400;
+    letter-spacing: -1.6px;
+    font-size: 32px;
+    color: #001428;
+    margin: 0px;
+    margin-top: 32px;
+    text-align: center;
+  }
   
   h5 {
     color: #809caf;
@@ -354,7 +374,7 @@ h1 {
   }
   
   .heroBox h4 {
-    color: color: #051324;
+    color: #051324;
     font-family: "Satoshi-Regular";
     font-weight: 400;
     letter-spacing: -0.4px;
@@ -362,21 +382,11 @@ h1 {
     margin: 0px;
   }
   
-  
-  a {
-    color: #91afef;
-    font-family: "Satoshi-Regular";
-    font-weight: 400;
-    letter-spacing: -0px;
-    font-size: 18px;
-    margin: 0px;
-    text-decoration: none;
+  .titleAndIcon{
+    margin-bottom: 48px;
+    
   }
-  
-  a:visited {
-    text-decoration: none;
-    color: #91afef;
-  }
+
 
 /* LINK THINGS */
 
@@ -385,7 +395,7 @@ h1 {
   padding: 8px 16px;
   border: 1px solid gray;
   font-family: "Satoshi-Bold";
-  color: #03131f;
+  color: #001428;
   font-size: 16px;
 }
 
@@ -393,7 +403,7 @@ h1 {
 
 a {
   z-index: 300;
-  color: #4668B1;
+  color: #001428;
   font-family: "Satoshi-Medium";
   font-weight: 500;
     width: fit-content;
@@ -405,7 +415,7 @@ a {
 
 a:visited {
   text-decoration: none;
-  color: #4668B1;
+  color: #001428;
 }
 
 .logoBox:hover,
@@ -474,11 +484,14 @@ a:hover {
   .heroBox {
     box-decoration-break: flex;
     flex-direction: column-reverse;
-    padding: 12px;
+ 
     
     color: white;
     gap: 36px;
-    
+    padding: 0px;
+    margin: 0px;
+    justify-content: center;
+    align-items: center;
     
     
   }
@@ -490,25 +503,23 @@ a:hover {
     align-items: center;
     
     width: 100%;
-    border-radius: 12px 12px 2px 2px;
+    
     padding: 0px;
     margin: 0px;
 
   }
   
   .heroImageBox img {
-    width: 60%;
-    padding: 24px;
+    width: 20%;
+    padding: 0px;
     margin: 0px;
   }
 
   .projectInfo {
     margin: 0px;
     padding: 0px;
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    max-width: 100%;
+    min-width: 80%;
+    margin-bottom: 24px;
     
   
   }
@@ -517,48 +528,72 @@ a:hover {
     display: flex;
     flex-direction: column;
     color: #002644;
-    gap: 36px;
+    gap: 24px;
+    padding: 0px;
+    margin: 0px;
+    justify-content: center;
+    align-items: center;
+    
+
 
   }
 
   
 
   .titleAndHome img{
-    width: 60px;
+    width: 40px;
   }
 
   .panelText {
+    margin-top: 24px;
+    margin-bottom: 24px;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    padding: 0px;
     max-width: 100%;
+    padding: 0px;
+    border-radius: 4px 4px 4px 4px;
     gap: 12px;
-    margin: 24px;
+
+    width: 80%;
     
   }
+
+  .animItemOffsetSpan {
+    gap: 12px;
+  }
+
+  .animItemOffsetSpan img{
+    max-width: 120px;
+  }
+
+
+  .panelText h4{
+  }
+
   .galleryBox {
     display: flex;
     width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 24px;
+    
     padding: 0px;
     
   }
-
+  
   
 
   /* TEXT THINGS */
 
   .panelBox h1 {
+    
     font-size: 28px;
     letter-spacing: -0.8px;
     max-width: 100%;
   }
   .panelText h4 {
-    font-size: 14px;
+    font-size: 18px;
     line-height: 150%;
   }
 
@@ -568,8 +603,24 @@ a:hover {
 
   a {
     font-size: 16px;
-    color: #4668B1;
+    color: #001428;
     
+  }
+
+  h3{
+    font-size: 18px;
+    letter-spacing: -0.8px;
+  }
+
+  .galleryItem h2 {
+    font-size: 12px;
+    
+    letter-spacing: 0px;
+    min-width: 80%;
+  }
+
+  .galleryItem img {
+    width: %;
   }
 
 
@@ -626,7 +677,7 @@ a:hover {
   }
 
   .mobileLinks a {
-    color: #4668B1;
+    color: #001428;
     font-size: 18px;
     text-align: center;
     text-decoration: none;
