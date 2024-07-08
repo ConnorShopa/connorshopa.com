@@ -246,7 +246,7 @@ function etRefresh() {
 //JUMP FUNCTIONS
 
 function etGoHome() {
-  window.location.href = "./home.html";
+  window.location.href = "./index.html";
 }
 
 function etGoPollin() {
