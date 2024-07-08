@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/satoshi.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <title>Connor Shopa : home</title>
+</head>
+
+<body>
+    <!-- MOUSE FOLLOW CIRCLE -->
+    <div id="mouse-circle"></div>
+
+    <!-- HEADER + LOGO CONTAINER -->
+    <div class="headerBox">
+        <!--LOGO-->
+        <div class="logoBox" onClick="etRefresh()">
+            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="24px">
+            <div class="logoAnim"></div>
+        </div>
+
+        <div class="navLinksContainer">
+            <h5 class="currentNavLink">home</h5>
+
+            <div class="linesRock"></div>
+
+            <a class="navLink" href="./acotil.images.html">work</a>
+
+            <div class="linesRock"></div>
+
+            <a class="navLink" href="./acotil.images.html">acotil</a>
+
+            <div class="linesRock"></div>
+
+            <a class="navLink" href="./sketchbook.html">sketchbook</a>
+
+            <div class="linesRock"></div>
+
+            <a class="navLink" href="./motion.html">motion</a>
+
+        </div>
+    </div>
+
+    <div class="content">
+
+
+
+        <div class="aboutHelloSpan">
+            <div class="aboutBox">
+                <div class="aboutContent">
+
+                    <div class="boxTitle">
+                        <h2>HOWDY</h2>
+                        <h3>My name is</h3>
+                    </div>
+
+
+
+                    <h1>Connor Shopa</h1>
+                    <br>
+                    <h4>I'm a digital product designer based in Canada. I find joy in using creativity to help build
+                        human
+                        experiences and products.
+                        <br> <br>
+                        Right now I’m in Montreal, helping build <a
+                            href="https://www.figma.com/@connorshopa">Bartar.io</a>
+                        and making homemade jam.
+
+                        <br>
+                    </h4>
+                </div>
+            </div>
+            <div class="sayHelloBox">
+                <div class="sayHelloContent">
+
+                    <div class="boxTitle">
+                        <h2>SAY HELLO</h2>
+                        <h3>Around most days and most times to chat design, music, and big ideas</h3>
+
+                    </div>
+
+                    <h4>Call me: 343.209.5337</h4>
+
+                    <h4>Email me: connorshopa@gmail.com</h4>
+                    <br> <br>
+                    <div class="socialBox">
+                        <div class="socialLink">
+                            <a href="https://www.figma.com/@connorshopa">Figma</a> <img
+                                src="assets/homeAssets/icon_socialLink.svg" alt="" height="10px">
+                        </div>
+
+                        <div class="socialLink">
+                            <a href="https://www.behance.net/connorshopa">Behance</a> <img
+                                src="assets/homeAssets/icon_socialLink.svg" alt="" height="10px">
+                        </div>
+
+                        <div class="socialLink">
+                            <a href="https://dribbble.com/connorshopa">Dribbble</a> <img
+                                src="assets/homeAssets/icon_socialLink.svg" alt="" height="10px">
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="workBox">
+            <div class="workContent">
+                <div class="boxTitle">
+                    <h2>WORK</h2>
+                    <h3>Selected projects, case studies + musings</h3>
+                </div>
+
+                <div class="workItemSpan">
+                    <div class="workItem" id="work_plunk">
+                        <div class="workItemImage" id="image_plunk">
+                            <img src="assets/homeAssets/plunk_heroImage.png" alt="">
+                        </div>
+                        <a href="">Plunk®</a>
+
+                    </div>
+
+                    <div class="workItem" id="work_habbot">
+                        <div class="workItemImage" id="image_habbot">
+                            <img src="assets/homeAssets/habbot_heroImage.png" alt="">
+                        </div>
+                        <a href="">Habbot</a>
+
+
+                    </div>
+
+                    <div class="workItem" id="work_pollin">
+                        <div class="workItemImage" id="image_pollin">
+                            <img src="assets/homeAssets/pollin_heroImage.png" alt="">
+                        </div>
+                        <a href="">Poll.in</a>
+                    </div>
+
+
+
+                    <div class="workItem" id="work_spotifyDreams">
+                        <div class="workItemImage" id="image_spotifyDreams">
+                            <img src="assets/homeAssets/spotifyDreams_heroImage.png" alt="">
+                        </div>
+                        <a href="">Spotify dreams</a>
+                    </div>
+
+                    <div class="workItem" id="work_bartar">
+                        <div class="workItemImage" id="image_bartar">
+                            <img src="assets/homeAssets/habbot_heroImage.png" alt="">
+                        </div>
+                        <a href="">Bartar.io</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="historyBox">
+
+            <div class="historyContent">
+                <div class="boxTitle">
+                    <h2>PROFESSIONAL HISTORY</h2>
+
+                </div>
+
+                <div class="jobItemSpan">
+                    <div class="jobItem">
+
+                        <h1>Bartar.io</h1>
+                        <h3>
+                            Co-Founder & Design Lead
+                            <br>
+                            01/2024 – Now
+                        </h3>
+                    </div>
+
+                    <div class="jobItem">
+
+                        <h1>A.I startup (N.D.A)</h1>
+                        <h3>
+                            Designer
+                            <br>
+                            01/2024 – Current
+                        </h3>
+                    </div>
+
+                    <div class="jobItem">
+                        <img src="assets/homeAssets/shopa.studio_logo.png" alt="" height="24px">
+                        <h1>shopa.studio</h1>
+                        <h3>
+                            Founder
+                            <br>
+                            2023 – now
+                        </h3>
+                    </div>
+
+                    <div class="jobItem">
+                        <img src="assets/homeAssets/plunk_logo.png" alt="" height="22px">
+                        <h1>Plunk®</h1>
+                        <h3>
+                            Product Designer
+                            <br>
+                            05/2020 – 12/2023
+                        </h3>
+                    </div>
+
+                    <div class="jobItem">
+                        <img src="assets/homeAssets/albedo_logo.png" alt="" height="22px">
+                        <h1>Albedo Informatics</h1>
+                        <h3>
+                            AR/VR Designer
+                            <br>
+                            02/2020 – 05/2020
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="js/home.js"></script>
+</body>
+
+</html>
