@@ -131,7 +131,7 @@ $(document).ready(function () {
     renderer: "svg",
     loop: false,
     autoplay: false,
-    path: "resources/lottiefiles/shopaAnimDark.json",
+    path: "resources/lottiefiles/shopaAnimLight.json",
   });
 
   let logoBox = document.querySelector(".logoBox");
@@ -147,7 +147,7 @@ $(document).ready(function () {
     animationMenu.play();
   });
 
-  $("#extraneousLinks a").hover(
+  $(" a").hover(
     function () {
       gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
       $(this).css("color", "blue");
@@ -155,7 +155,7 @@ $(document).ready(function () {
     },
     function () {
       gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });
-      $(this).css("color", "#0A3D62");
+      $(this).css("color", "#408c68");
       $(this).css("text-decoration", "none");
     }
   );
@@ -245,6 +245,10 @@ function etRefresh() {
 }
 
 //JUMP FUNCTIONS
+
+function etGoHome() {
+  window.location.href = "./home.html";
+}
 
 function etGoPollin() {
   window.location.href = "./pollinProject.html";
