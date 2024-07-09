@@ -247,7 +247,7 @@ function etRefresh() {
 //JUMP FUNCTIONS
 
 function etGoAcotil() {
-  window.location.href = "shopa.acotil.images.html";
+  window.location.href = "shopa.acotil.html";
 }
 
 function openAcotilTab() {

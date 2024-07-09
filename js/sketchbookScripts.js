@@ -8,7 +8,7 @@ function etGoTextTab() {
 }
 
 function etGoImagesTab() {
-  window.location.href = "acotil.images.html";
+  window.location.href = "acotil.html";
 }
 
 $(document).ready(function () {
