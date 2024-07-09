@@ -413,6 +413,10 @@ a {
   text-decoration: none;
 }
 
+#betaLink{
+  z-index: 1;
+}
+
 a:visited {
   text-decoration: none;
   color: #001428;
