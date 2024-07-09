@@ -1,0 +1,520 @@
+@import url(satoshi.css);
+
+html {
+  display: flex;
+
+  background-color: #DAE4FA;
+
+  cursor: url("cursor_sketchbook.png"), pointer;
+  justify-content: center;
+  align-items: center;
+  margin: 24px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 1200px;
+  
+  align-self: stretch;
+  
+}
+
+.mobileMenuButton {
+  display: none;
+}
+
+.mobileMenuScreen {
+  display: none;
+}
+
+.content {
+  
+    margin-top: 80px;
+    
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1 0 0;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+
+#mouse-circle {
+  z-index: 2;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  margin: -13px 0 0 -13px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: width 0.2s, height 0.2s;
+}
+
+.headerBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  transition: top 0.3s;
+  
+}
+
+.linesRock {
+  opacity: 50%;
+  background-color: white;
+  width: 1px;
+  height: 16px;
+}
+
+.logoBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 20px 24px 18px 24px;
+  background-color: #03131f;
+  
+  border-radius: 18px;
+  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+  max-width: 120px;
+  gap: 12px;
+}
+
+.logoAnim {
+  height: 24px;
+  margin: 0;
+}
+
+.navLinksContainer {
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  background-color: #03131f;
+  
+  border-radius: 18px;
+  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+  font-family: "Satoshi-Medium";
+}
+
+
+.sketchbookBox{
+    
+    display: flex;
+    align-self: stretch;
+    
+    flex-direction: column;
+    gap: 8px;
+    align-self: stretch;
+    min-height: 80vh;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.titleBox{
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+
+
+.topSpan {
+    gap: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    /* align-self: stretch; */
+    transition: gap 0.3s;
+
+  
+}
+.middleSpan {
+    gap: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    /* align-self: stretch; */
+    transition: gap 0.3s;
+  
+  
+}
+
+.bottomSpan {
+    gap: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    /* align-self: stretch; */
+    transition: gap 0.3s;
+  
+  
+}
+
+.squareItem {
+
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    width: 120px;
+    height: 120px;
+  
+}
+
+
+.squareItem img {
+    border-radius: 4px;
+    width: 100%;
+}
+
+
+
+.wideItem {
+
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    width: 300px;
+    height: 160px;
+    
+    
+  
+}
+
+.wideItem img {
+    width: 90%;
+    
+}
+
+
+.tallItem {
+
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    width: 180px;
+    height: 260px;
+    
+    
+  
+}
+
+.tallItem img {
+    
+    height: 100%;
+    
+    border-radius: 4px;
+    
+}
+
+
+.boxTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+
+
+.footerBox {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    border-radius: 24px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20vh;
+    border: 1px solid #03131f;
+    background-color: #03131f;
+    width: 100%;
+    max-width: 1600px;
+  }
+
+  .footerBox img{
+   
+    margin: 24px;
+
+  }
+
+  .footerLinkBox{
+    display: flex;
+    gap: 24px;
+    margin: 24px;
+    z-index: 1;
+    color: #03131f;
+
+  }
+
+/* FONT THINGS */
+
+h1 {
+  color: #03131f;
+  font-family: "Satoshi-Medium";
+  font-weight: 500;
+
+  font-size: 40px;
+  width: 100%;
+  margin: 0px;
+  letter-spacing: -2.8px;
+}
+
+
+h2 {
+  font-family: "Satoshi-Bold";
+  font-weight: 500;
+
+  font-size: 12px;
+  margin: 0px;
+  letter-spacing: 1.2px;
+}
+
+h3 {
+  color: #5d6870;
+  font-family: "Satoshi-Regular";
+  font-weight: 500;
+
+  font-size: 16px;
+  margin: 0px;
+}
+
+h4 {
+  color: #03131f;
+  font-family: "Satoshi-Regular";
+  font-weight: 400;
+
+  font-size: 16px;
+  margin: 0px;
+  letter-spacing: -0px;
+}
+
+/* LINK THINGS */
+
+.currentNavLink {
+  border-radius: 18px;
+  padding: 8px 16px;
+  border: 1px solid gray;
+  font-family: "Satoshi-Bold";
+  color: white;
+  font-size: 16px;
+}
+
+h5 {
+  z-index: 3;
+  color: #03131f;
+  font-family: "Satoshi-Medium";
+  font-weight: 500;
+
+  font-size: 18px;
+  margin: 0px;
+  letter-spacing: -0px;
+  text-decoration: underline;
+}
+
+
+a {
+  z-index: 300;
+  color: white;
+  font-family: "Satoshi-Medium";
+  font-weight: 500;
+
+  font-size: 16px;
+  margin: 0px;
+  letter-spacing: -0px;
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+.logoBox:hover,
+a:hover {
+  cursor: url("cursor_linkHover.png"), pointer;
+}
+
+.item a {
+  z-index: 3;
+  font-size: 18px;
+  font-family: "Satoshi-Medium";
+  font-weight: 500;
+  letter-spacing: -0.8px;
+  margin: 0px;
+  color: inherit;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  html {
+    display: flex;
+
+
+    cursor: url("cursor_home.png"), pointer;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 24px;
+    
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0px;
+    padding: 0px;
+    
+  }
+
+  .logoBox {
+    padding: 8px 12px;
+    border-radius: 12px;
+    gap: 8px;
+    z-index: 3;
+    position: fixed;
+    
+  }
+
+  .logoAnim {
+    max-height: 16px;
+  }
+
+  .content {
+    border-radius: 18px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: fit-content;
+
+    
+    gap: 8px;
+    flex: 1 0 0;
+    max-width: 100%;
+  }
+
+  .headerBox{
+    min-height: fit-content;
+    
+    min-height: 42px;
+  }
+
+  .navLinksContainer {
+    display: none;
+  }
+
+
+
+
+  /* TEXT THINGS */
+
+  h1 {
+    font-size: 42px;
+    letter-spacing: -0.8px;
+    max-width: 100%;
+  }
+  h4 {
+    font-size: 16px;
+    line-height: 150%;
+  }
+
+  h2 {
+    font-size: 12px;
+  }
+
+  a {
+    font-size: 16px;
+    
+  }
+
+ 
+
+
+  .mobileMenuButton {
+    display: flex;
+    z-index: 3;
+    flex-direction: column;
+    transition: top 0.3s;
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 18px;
+    background-color: white;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    position: fixed;
+    right: 24px;
+    
+  }
+
+  .mobileMenuScreen {
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 4vh;
+    transition: top 0.3s;
+    /* width: 48px;
+        height: 48px; */
+    padding: 8px;
+    border-radius: 100%;
+    background: #03131f;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    height: 100vh;
+    
+  }
+
+  .mobileLinks {
+    color: white;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    
+    font-family: "Satoshi-Medium";
+  }
+
+  .mobileLinks a {
+    color: inherit;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .menuButtonAnim {
+   
+    height: 22px;
+  }
+
+}
