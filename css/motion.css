@@ -1,0 +1,491 @@
+@import url(satoshi.css);
+
+html {
+  display: flex;
+background-color: #E5E5E5;
+  cursor: url("cursor_motion.png"), pointer;
+  justify-content: center;
+  align-items: center;
+  margin: 24px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.mobileMenuButton {
+  display: none;
+}
+
+.mobileMenuScreen {
+  display: none;
+}
+
+
+#mouse-circle {
+  z-index: 2;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  margin: -13px 0 0 -13px;
+  background: rgba(0, 0, 0, 0.20);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: width 0.2s, height 0.2s;
+}
+
+.headerBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: top 0.3s;
+}
+
+
+
+.logoBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 20px 24px 18px 24px;
+  background-color: white;
+  border-radius: 18px;
+  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+  max-width: 120px;
+  gap: 12px;
+}
+
+.logoAnim {
+  height: 24px;
+  margin: 0;
+}
+
+.navLinksContainer {
+  z-index: 1;
+  display: flex;
+  width: fit-content;
+  padding: 12px 20px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 24px;
+  background-color: white;
+  border-radius: 18px;
+  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+  font-family: "Satoshi-Medium";
+}
+
+.currentNavLink {
+    border-radius: 18px;
+    padding: 8px 16px;
+    border: 1px solid gray;
+    font-family: "Satoshi-Bold";
+    color: #002644;
+    font-size: 16px;
+    text-decoration: underline;
+  }
+
+
+
+.content {
+    border-radius: 24px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    
+    max-width: 1200px;
+    align-self: stretch;
+    padding: 24px;
+    gap: 16px;
+    
+  }
+
+
+.fullSpanBox{
+  display: flex;
+  align-self: stretch;
+
+}
+
+.fullSpanBox iframe {
+  width: 100%;
+  min-height: 600px;
+  border-radius: 8px;
+}
+
+.oneTwoBox {
+
+display: flex;
+flex-direction: row;
+gap: 16px;
+
+align-self: stretch;
+
+}
+
+
+.leftColumn{
+    
+    flex: 1;
+    
+}
+.rightColumn{
+    flex: 2;
+}
+
+
+.linesRule{
+  width: 100%;
+  height: 1px;
+  background-color: black;
+  border-radius: 24px;
+
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.linesAreCool{
+  min-width: 1px;
+  height: 100%;
+  background-color: black;
+  border-radius: 24px;
+
+  
+}
+
+
+.leftItem video, .leftItem img {
+  
+  width: 100%;
+  border-radius: 8px;
+  
+  
+
+}
+
+.rightItem video, .rightItem img {
+  width: 100%;
+  border-radius: 8px;
+  
+  
+  
+
+}
+
+.description{
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  gap: 12px;
+  
+  
+  
+}
+
+
+  .footerBox {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    border-radius: 24px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20vh;
+    
+  border: 1px solid black;
+    width: 100%;
+    max-width: 1600px;
+  }
+
+  .footerBox img{
+   
+    margin: 24px;
+
+  }
+
+  .footerLinkBox{
+    display: flex;
+    gap: 24px;
+    margin: 24px;
+    z-index: 1;
+
+  }
+  
+  
+
+  .linesRock {
+    opacity: 50%;
+    background-color: #03131f;
+    width: 1px;
+    height: 16px;
+  }
+
+
+/* FONT THINGS */
+h1 {
+    font-family: "Satoshi-Medium";
+    font-weight: 400;
+    letter-spacing: -1.6px;
+    font-size: 48px;
+    color: inherit;
+    margin: 0px;
+    color: white;
+  }
+  
+  h2 {
+    color: inherit;
+    font-family: "Satoshi-Regular";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0px;
+    letter-spacing: -0.4px;
+    color: #c8d6e5;
+  }
+  
+  h5 {
+    color: black;
+    font-family: "Satoshi-Regular";
+    font-weight: 400;
+    letter-spacing: -0.4px;
+    font-size: 16px;
+    margin: 0px;
+    margin-bottom: 4px;
+  }
+
+  
+  
+
+  .description h3{
+    color: inherit;
+    font-family: "Satoshi-Regular";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    margin: 0px;
+    letter-spacing: -0.4px;
+    color: white;
+    max-width: 80%;
+  }
+
+  .description h4{
+    color: inherit;
+    font-family: "Satoshi-Regular";
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    margin: 0px;
+    letter-spacing: -0.4px;
+    color: white;
+    max-width: 80%;
+  }
+  .description a{
+    color: inherit;
+    font-family: "Satoshi-Regular";
+    font-size: 14px;
+    
+    font-weight: 400;
+    margin: 0px;
+    letter-spacing: 0px;
+    color: #c8d6e5;
+   
+    width: 100%;
+    z-index: 1;
+  }
+
+
+/* LINK THINGS */
+
+.currentNavLink {
+  border-radius: 18px;
+  padding: 8px 16px;
+  border: 1px solid gray;
+  font-family: "Satoshi-Bold";
+  color: black;
+  font-size: 16px;
+}
+
+
+
+a {
+  z-index: 300;
+  color: black;
+  font-family: "Satoshi-Medium";
+  font-weight: 500;
+    width: fit-content;
+  font-size: 16px;
+  margin: 0px;
+  letter-spacing: -0px;
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
+}
+
+.logoBox:hover,
+a:hover {
+  cursor: url("cursor_linkHover.png"), pointer;
+}
+ 
+
+@media (max-width: 900px) {
+  html {
+    display: flex;
+
+    cursor: url("cursor_home.png"), pointer;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 24px;
+    
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0px;
+    padding: 0px;
+    
+  }
+
+  .logoBox {
+    padding: 8px 12px;
+    border-radius: 12px;
+    gap: 8px;
+    z-index: 3;
+    position: fixed;
+    
+  }
+
+  .logoAnim {
+    max-height: 16px;
+  }
+
+  .headerBox{
+    min-height: fit-content;
+    
+    min-height: 42px;
+  }
+
+  .navLinksContainer {
+    display: none;
+  }
+
+  .content {
+    border-radius: 12px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: fit-content;
+
+    
+    gap: px;
+    flex: 1 0 0;
+    
+  }
+
+  .fullSpanBox iframe{
+    height: 33vh;
+    max-height: 50vh;
+    min-height: 0px;
+  
+
+  }
+
+  .oneTwoBox{
+    flex-direction: column;
+  }
+
+  
+
+  /* TEXT THINGS */
+
+
+  h2 {
+    font-size: 18px;
+  }
+
+  a {
+    font-size: 16px;
+    
+    
+  }
+
+
+
+
+  .mobileMenuButton {
+    display: flex;
+    z-index: 3;
+    flex-direction: column;
+    transition: top 0.3s;
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 18px;
+    border: 1px solid #03131f;
+    background-color: white;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    position: fixed;
+    right: 24px;
+    
+  }
+
+  .mobileMenuScreen {
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 4vh;
+    transition: top 0.3s;
+ 
+    padding: 8px;
+    border-radius: 100%;
+    background: white;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    height: 100vh;
+    
+  }
+
+  .mobileLinks {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    
+    font-family: "Satoshi-Medium";
+  }
+
+  .mobileLinks a {
+    color: black;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .menuButtonAnim {
+   
+    height: 22px;
+  }
+
+  
+}
