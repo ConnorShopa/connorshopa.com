@@ -246,6 +246,10 @@ function etRefresh() {
 
 //JUMP FUNCTIONS
 
+function etGoDesignSystem() {
+  window.location.href = "./designSystem.html";
+}
+
 function etGoAcotil() {
   window.location.href = "shopa.acotil.html";
 }
