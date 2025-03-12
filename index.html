@@ -2,374 +2,326 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/satoshi.css" />
+    <link rel="stylesheet" href="css/hostgrotesk.css">
 
-    <link rel="stylesheet" href="css/shopa.studio.css">
-    <link rel="stylesheet" href="css/satoshi.css">
-
-    <title>Connor Shopa</title>
-
-
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="manifest" href="assets/site.webmanifest">
-    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-
-
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-
-
+    <title>Connor Shopa : home</title>
 </head>
 
 <body>
-
     <!-- MOUSE FOLLOW CIRCLE -->
     <div id="mouse-circle"></div>
 
     <!-- HEADER + LOGO CONTAINER -->
-    <div id="headerBox">
+    <div class="headerBox">
         <!--LOGO-->
-        <div id="logoBox">
+        <div class="logoBox" onClick="etRefresh()">
+            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="20px">
+            <div class="logoAnim"></div>
+        </div>
 
-            <div class="logoBox" onClick="refreshPage()"></div>
+        <div class="navLinksContainer">
+            <h5 class="currentNavLink">HOME</h5>
+
+            <a class="navLink" href="./plunk.html">WORK</a>
+
+            <a class="navLink" href="./acotil.html">ACOTIL</a>
+
+            <a class="navLink" href="./sketchbook.html">SKETCHBOOK</a>
+
+            <a class="navLink" href="./motion.html">MOTION</a>
+
+        </div>
+
+        <div class="mobileMenuButton">
+            <div id="menuButtonAnim"></div>
+        </div>
+
+        <div class="mobileMenuScreen">
+            <div class="mobileLinks">
+
+
+                <h5 class="currentNavLink">HOME</h5>
+
+                <a class="workLink" href="./plunk.html">WORK</a>
+
+                <a class="workLink" href="./acotil.html">ACOTIL</a>
+
+                <a class="workLink" href="./sketchbook.html">SKETCHBOOK</a>
+
+                <a class="workLink" href="./motion.html">MOTION</a>
+
+
+            </div>
+
+
 
         </div>
 
     </div>
 
+    <div class="content">
 
 
 
-    <div id="content">
-        <div id="aboutPlusWorkContainer">
-            <div id="aboutMeContainer">
-                <div id="aboutMeText">
+        <div class="aboutHelloSpan">
+            <div class="aboutBox">
+                <div class="aboutContent">
 
-
-                    <h4>Howdy! My name's</h4>
-                    <div id="nameAndIcon">
-                        <img src="assets/shopa.head.svg" alt="" width="100px">
-                        <h1>Connor Shopa</h1>
+                    <div class="boxTitle">
+                        <h3>HOWDY</h3>
+                        <h2>My name is</h2>
                     </div>
+                    <h1>Connor Shopa</h1>
+                    <br>
+                    <h4>I'm a product designer based in Canada. I find joy in using creativity to help build
+                        human
+                        experiences and products.
+                        <br> <br>
+                        Right now I’m in Montreal, helping build <a href="https://cert0.com/">Cert0</a>, <a
+                            href="https://altQ.ai/">AltQ</a>
+                        and making homemade jam.
 
-                    <h4> I'm a digital product designer based in Canada, who finds joy in
                         <br>
-                        using creativity to craft tools that help humans.
-                        <br> Right now I'm in Montreal, helping build <a href="/plunkProject.html">Plunk®</a>
+                    </h4>
+                </div>
+            </div>
+            <div class="sayHelloBox">
+                <div class="sayHelloContent">
 
-                        <br> Before that, I was studying design in Toronto, at OCAD.
+                    <div class="boxTitle">
+                        <h3>SAY HELLO</h3>
+                        <h2>Always up for chats about design, music, and big ideas</h2>
 
-                        <br> I'm working through my <a href="./fiftyChairs.html">fifty–chairs</a> project.
+                    </div>
 
-                        <br> I'm always around to <a href="./sayHello.html"> chat</a> design, music and homemade jam.
+                    <h4>Call me: 343.209.5337</h4>
+                    <h4>Email me: connorshopa@gmail.com</h4>
+                    <br> <br>
+                    <div class="socialBox">
+                        <div class="socialLink">
+                            <a href="https://www.figma.com/@connorshopa">Figma</a> <img
+                                src="assets/homeAssets/icon_socialLink.svg" alt="" height="10px">
+                        </div>
 
-                        <!-- <br> Some of my <a href="./work.html">work</a> is below.</h4> -->
+                        <div class="socialLink">
+                            <a href="https://www.behance.net/connorshopa">Behance</a> <img
+                                src="assets/homeAssets/icon_socialLink.svg" alt="" height="10px">
+                        </div>
+
+                        <div class="socialLink">
+                            <a href="https://dribbble.com/connorshopa">Dribbble</a> <img
+                                src="assets/homeAssets/icon_socialLink.svg" alt="" height="10px">
+                        </div>
+
+
+
+
+
+
+                    </div>
+
+
+
                 </div>
             </div>
 
 
 
-            <div class="workContainer">
 
-                <div id="workSectionTitle">
-                    <h2>Selected works, case studies, and musings :</h2>
+        </div>
+
+        <div class="workBox">
+            <div class="workContent">
+                <div class="boxTitle">
+                    <h3>PRODUCTS</h3>
+                    <h2>People who interact with my work include 25k monthly app users, 50+ million API calls, and seed
+                        stage
+                        design and engineering teams </h2>
                 </div>
 
-                <div class="projectSection" id="plunkSection" onclick="etGoPlunk()">
-                    <img src="assets/plunkLogo.svg" alt="" height="40px">
-                    <h4>Design system, product launches + motion design</h4>
-                    <div class="projectTagContainer" id="plunkTagContainer">
-                        <div class="tagChip">
-                            PRODUCT DESIGN
-                        </div>
-                        <div class="tagChip">
-                            VISUAL DESIGN
-                        </div>
-                        <div class="tagChip">
-                            MOBILE + WEB
-                        </div>
-                        <div class="tagChip">
-                            USER RESEARCH
-                        </div>
-                        <div class="tagChip">
-                            DESIGN THINKING
-                        </div>
-                        <div class="tagChip">
-                            SHIPPED PRODUCTS
-                        </div>
-                        <div class="tagChip">
-                            HIGH-FIDELITY PROTOTYPING
-                        </div>
-                    </div>
-                    <div class="previewImage">
-                        <img src="assets/projectAssets/plunkPreview.png" alt="dataAsAStory" width="100%">
+                <div class="workItemSpan">
 
+                    <div class="workItem" id="AltQ">
+                        <div class="workItemImage" id="image_altQ">
+                            <img src="assets/homeAssets/altQ_heroImage.png" alt="">
+                        </div>
+                        <a href="./index.html">AltQ</a>
 
                     </div>
-                    <div class="buttonRack">
 
-                        <div class="previewButtonDark" onClick="etGoPlunk()">
-                            <a href="./plunkProject.html">View Project</a>
-                            <img src="icons/arrow_right_white.svg" alt="" height="16px">
+                    <div class="workItem" id="Nanni_AI" onclick="etGoNanni()">
+                        <div class="workItemImage" id="image_nanni">
+                            <img src="assets/homeAssets/nanni_projectImage.svg" alt="" height="48px">
                         </div>
-
-
-                    </div>
-                </div>
-
-                <div class="projectSection" id="habbotSection" onclick="etGoHabbot()">
-                    <div class="projectLogo">
-                        <img id="habbotLogo" src="assets/habbotLogoHZ.svg" alt="" height="60px">
-                    </div>
-
-                    <h4>Mobile Application Design + Beta Launch</h4>
-                    <div class="projectTagContainer" id="habbotTagContainer">
-                        <div class="tagChipLight">
-                            PRODUCT DESIGN
-                        </div>
-                        <div class="tagChipLight">
-                            VISUAL DESIGN
-                        </div>
-                        <div class="tagChipLight">
-                            iOS DEVELOPMENT
-                        </div>
-                        <div class="tagChipLight">
-                            MARKETING
-                        </div>
-
-                        <div class="tagChipLight">
-                            SHIPPED PRODUCTS
-                        </div>
-
-                    </div>
-                    <div class="previewImage">
-
-                        <img src="assets/projectAssets/habbotHeroImage.png" alt="" width="50%">
-
-
-
-                    </div>
-                    <div class="buttonRack">
-
-                        <div class="previewButtonLight" onClick="etGoHabbot()">
-                            <a href="./habbotProject.html">View Project</a>
-                            <img src="icons/arrow_right.svg" alt="" height="16px">
-                        </div>
-
-
-
-
-                    </div>
-                </div>
-
-
-                <div class="projectSection" id="pollinSection" onclick="etGoPollin()">
-                    <img src="assets/pollinLogo.svg" alt="" height="80px">
-                    <h4>An ephemeral social polling application. Built to teach me react</h4>
-                    <div class="projectTagContainer" id="pollinTagContainer">
-                        <div class="tagChip">
-                            PRODUCT IDEATION
-                        </div>
-                        <div class="tagChip">
-                            PRODUCT BUILD
-                        </div>
-
-
+                        <a href="./nanni.html">Nanni</a>
 
                     </div>
 
 
-                    <div class="previewImage">
-                        <img src="assets/projectAssets/pollin_previewImage.png" width="100%">
+                    <div class="workItem" id="designSystem" onclick="etGoSeeds()">
+                        <div class="workItemImage" id="image_designSystem">
+                            <img src="assets/homeAssets/seeds_projectImage.svg" alt="" height="42px">
+                        </div>
+                        <a href="./seeds.html">Seeds </a>
+                        <h4>: design system</h4>
+
+                    </div>
+
+                    <div class="workItem" id="plunk" onclick="etGoPlunk()">
+                        <div class="workItemImage" id="image_plunk">
+                            <img src="assets/homeAssets/plunk_projectImage.svg" alt="" height="32px">
+                        </div>
+                        <a href="./plunk.html">Plunk®</a>
+
+                    </div>
+
+                    <div class="workItem" id="habbot" onclick="etGoHabbot()">
+                        <div class="workItemImage" id="image_habbot">
+                            <img src="assets/homeAssets/habbot_projectImage.svg" alt="" height="24px">
+                        </div>
+                        <a href="./habbot.html">Habbot</a>
 
 
                     </div>
 
-                    <div class="buttonRack">
-
-                        <div class="previewButtonLight" onClick="etGoPollin()">
-                            <a href="./pollinProject.html">View Project</a>
-                            <img src="icons/arrow_right.svg" alt="" height="16px">
+                    <div class="workItem" id="spotifyDreams" onclick="etGoSpotify()">
+                        <div class="workItemImage" id="image_spotifyDreams">
+                            <img src="assets/homeAssets/spotifyDreams_projectImage.svg" alt="" height="60px">
                         </div>
-
+                        <a href="./spotifyDreams.html">Spotify dreams</a>
                     </div>
 
 
-                </div>
-
-                <div class="projectSection" id="spotifySection" onclick="etGoSpotifyDreams()">
-                    <img src="assets/spotifyDreams.svg" alt="" height="60px">
-                    <h4> Product ideation + High-fidelity prototyping </h4>
-                    <div class="projectTagContainer" id="spotifyTagContainer">
-                        <div class="tagChipLight">
-                            PRODUCT IDEATION
-                        </div>
-                        <div class="tagChipLight">
-                            PRODUCT PROPOSAL
-                        </div>
-                        <div class="tagChipLight">
-                            PROTOTYPING
-                        </div>
-                        <div class="tagChipLight">
-                            CASE STUDY
-                        </div>
-                        <div class="tagChipLight">
-                            INTERACTION DESIGN
-                        </div>
-
-                    </div>
 
 
-                    <div class="previewImage">
-                        <img src="assets/projectAssets/spotifyDreams_heroImage.png" alt="" width="100%">
-
-
-                    </div>
-
-                    <div class="buttonRack">
-
-                        <div class="previewButtonLight" onClick="etGoSpotifyDreams()">
-                            <a href="./spotifyProject.html">View case study</a>
-                            <img src="icons/arrow_right.svg" alt="" height="16px">
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="projectSection" id="allWorkSection" onclick="etGoWork()">
-
-
-
-
-
-
-                    <div class="buttonRack">
-
-
-
-                        <div class="previewButtonDark" onClick="etGoWork()">
-                            <a href="./work.html">View all work</a>
-                            <img src="icons/arrow_right_white.svg" alt="" height="16px">
-                        </div>
-                    </div>
 
 
                 </div>
             </div>
 
         </div>
-    </div>
 
+        <!-- <div class="workBox">
+            <div class="workContent">
+                <div class="boxTitle">
+                    <h3>PROJECTS</h3>
+                    <h2>Selected side-projects, case studies + musings</h2>
+                </div>
 
-    <div id="extraneousLinks">
-
-        <a class="workLink" href="./work.html">work</a>
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./plunkProject.html">Plunk®</a>
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="habbotProject.html">Habbot</a>
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./pollinProject.html">Poll.in</a>
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./acotil.images.html">ACOTIL</a>
-
-        <div class="linesRule"></div>
-
-
-        <a class="workLink" href="./sketchbook.html">sketchbook</a>
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./motion.html">motion</a>
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./sayHello.html">say hello</a>
-    </div>
-
-
-    <div id="mobileMenuButton">
-        <div id="menuButtonAnim"></div>
-    </div>
-
-    <div id="mobileMenuScreen">
-        <div id="mobileLinks">
+                <div class="workItemSpan">
 
 
 
 
-            <a class="workLink" href="./work.html">work</a>
-
-
-
-            <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
-
-
-
-            <a class="workLink" href="./plunkProject.html">Plunk®</a>
-
-
-
-            <a class="workLink" href="habbotProject.html">Habbot</a>
-
-
-
-            <a class="workLink" href="./pollinProject.html">Poll.in</a>
-
-
-
-            <a class="workLink" href="./acotil.images.html">ACOTIL</a>
+                    <div class="workItem" id="pollin" onclick="etGoPollin()">
+                        <div class="workItemImage" id="image_pollin">
+                            <img src="assets/homeAssets/pollin_heroImage.png" alt="">
+                        </div>
+                        <a href="./pollin.html">Poll.in</a>
+                    </div>
 
 
 
 
-            <a class="workLink" href="./sketchbook.html">sketchbook</a>
+
+                    <div class="workItem" id="work_overhand">
+                        <div class="workItemImage" id="image_overhand">
+                            <img src="assets/homeAssets/overhand_heroImage.png" alt="">
+                        </div>
+                        <a href="">OverHand.io</a>
+                    </div>
+                </div>
+            </div>
+
+        </div> -->
+
+        <div class="historyBox">
+
+            <div class="historyContent">
+                <div class="boxTitle">
+                    <h3>PROFESSIONAL HISTORY</h3>
+
+                </div>
+
+                <div class="jobItemSpan">
+
+                    <div class="jobItem">
+
+                        <img src="assets/homeAssets/altQ_Logo.svg" alt="" height="16px">
+                        <h1>AltQ</h1>
+                        <h2>
+                            Product & Design Lead
+                            <br>
+                            01/2024 – Current
+                        </h2>
+                    </div>
+
+                    <div class="jobItem">
+
+                        <img src="assets/homeAssets/ubenwa_logo.svg" alt="" height="16px">
+                        <h1>Ubenwa Health</h1>
+                        <h2>
+                            Product Designer
+                            <br>
+                            3 month contract
+                        </h2>
+                    </div>
+                    <div class="jobItem">
+
+
+                        <img src="assets/homeAssets/overhand_logo.svg" alt="" height="16px">
+                        <h1>OverHand.io</h1>
+                        <h2>
+
+                            Co-Founder & Design Lead
+                            <br>
+                            stealth
+                        </h2>
+                    </div>
+
+
+                    <div class="jobItem">
+                        <img src="assets/homeAssets/plunk_logo.png" alt="" height="16px">
+                        <h1>Plunk®</h1>
+                        <h2>
+                            Product Designer
+                            <br>
+                            05/2020 – 12/2023
+                        </h2>
+                    </div>
+
+                    <div class="jobItem">
+                        <img src="assets/homeAssets/albedo_logo.png" alt="" height="16px">
+                        <h1>Albedo Informatics</h1>
+                        <h2>
+                            AR/VR Designer
+                            <br>
+                            02/2020 – 05/2020
+                        </h2>
+                    </div>
+                </div>
 
 
 
-            <a class="workLink" href="./motion.html">motion</a>
-
-
-
-            <a class="workLink" href="./sayHello.html">say hello</a>
-
-            <img src="assets/shopa.head.svg" alt="" height="40px">
+            </div>
         </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-        <script src="js/shopa.studio.js"></script>
-
     </div>
 
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="js/home.js"></script>
 </body>
-
 
 </html>

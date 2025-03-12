@@ -1,444 +1,547 @@
 @import url(satoshi.css);
-
-
+@import url(hostgrotesk.css);
 
 html {
-    background-color: #E2EBF1;
-    cursor: url("cursorMonk.png"), auto;
-    align-items: center;
-    align-content: center;
-    flex-direction: column;
-    display: flex;
-    flex: auto;
-    background: linear-gradient(180deg, #051324 30%, #D9EAFF 160%);
-    min-height: 100%;
-    min-width: 100%;
+  display: flex;
 
+  background-color: #FFFAF6;
+
+  cursor: url("cursor_home.png"), pointer;
+  justify-content: center;
+  align-items: center;
+  margin: 24px;
 }
-
-
-
-
 
 body {
- 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(1vh, 0vh, 2vh);
-    margin: 0;
-    
-   
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  max-width: 1200px;
 }
 
-.headerBox {
-    
- 
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    transition: top 0.3s;
-
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
 }
 
-
-/* LOGO THINGS */
-
-
-.logoBox {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    width: 72px;
-    min-width: 60px;
-    max-width: 100px;
-    background-color: #91AFEF;
-    border-radius: 16px;
-    padding-top: 12px;
-    padding-bottom: 10px;
-    padding-left: 16px;
-    padding-right: 16px;
-    margin: 24px;
-
-    box-shadow: 0px 7.2px 8px rgba(7, 66, 47, 0.1);
-
-
-
+.mobileMenuButton {
+  display: none;
 }
 
-
-.logoBox:hover{
-    cursor: url('studio.cursorHover.png'), pointer;
-
-}
-
-img[src$="arrow_right.svg"] {
-    filter: brightness(0) invert(1);
+.mobileMenuScreen {
+  display: none;
 }
 
 
 #mouse-circle {
-
-    z-index: 2;
-
-    
-    position: absolute;
-    width: 32px;
-    height: 32px;
-    margin: -13px 0 0 -13px;
-    background: rgba(250, 152, 58, 0.20);
-    border-radius: 50%;
-    pointer-events: none;
-
-    transition: width 0.2s; /* Transition effect when sliding down (and up) */
-    transition: height 0.2s; /* Transition effect when sliding down (and up) */
+  z-index: 2;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  margin: -13px 0 0 -13px;
+  background: rgba(5, 29, 47, 0.10);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: width 0.2s, height 0.2s;
 }
 
-#extraneousLinks {
-    z-index: 1;
+.headerBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 100%;
+  transition: top 0.3s;
+}
+
+
+.logoBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 14px 24px 12px 24px;
+  border-radius: 18px;
+  background-color: white;
+  
+  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+  max-width: 120px;
+  gap: 12px;
+  
+  height: 24px;
+
+  border: 1px solid #03131f;
+}
+
+.logoAnim {
+  height: 16px;
+  margin: 0;
+}
+
+.navLinksContainer {
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  background-color: white;
+
+  border-radius: 18px;
+  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+
+  padding: 14px 36px 12px 36px;
+  border-radius: 18px;
+
+  height: 24px;
+
+  border: 1px solid #03131f;
+
+}
+
+.currentNavLink {
+  font-family: "Host Grotesk";
+  color: #03131f;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  text-decoration: underline;
+}
+
+
+
+
+
+  .heroBox{
+    margin-top: 140px;
     display: flex;
-    flex-wrap: wrap;
-    padding: 24px;
-    margin: 24px;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    position: fixed;
-    /* Make it stick/fixed */
-    bottom: 4vh;
-    
-    border-radius: 12px;
-    background: #FFF;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
-    text-decoration: none;
-    font-family: 'Satoshi-Medium';
-    padding: 24px;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+
+  }
+
+  .productDetails{
+    width: 100%;
+    display: flex;
     flex-direction: row;
-    transition: top 0.3s;
+    justify-content: space-between;
 
-}
+  }
 
-#habbotSiteBody{
-    padding-top: 12vh;
+  
+
+  .imageBox{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    
-    background-image: url("../assets/habbotBG.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 90%;
-    
-}
+    align-self: stretch;
+    max-width: 1600px;
+  }
 
-#habbotHeroText{
+  .imageBox img {
+    width: 100%;
+    
+  }
+
+
+  #fullGif img {
+    max-height: 780px;
+  }
+
+
+
+  .buttonRack{
+    margin-top: 72px;
+    margin-bottom: 72px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+
+  .button{
+    background-color: white;
+    border: 1px solid #03131f;
+    padding: 12px 48px;
+    border-radius: 24px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    
+
+  }
+
+  .textSection{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .imageTextSection{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 72px;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+
+
+
+
+  .rightText{
+    align-self: flex-end;
+    text-align: right;
+    width: 60%;
+  }
+
+  .leftText{
+    align-self: flex-start;
+    width: 60%;
+  }
+
+  #leftText{
+    width: 80%;
+  }
+
+  .centerText{
+    text-align: center;
+    width: 100%;
+  }
+
+ .linesRule{
+  width: 100%;
+  height: 1px;
+  background-color: #002644;
+
+ }
+
+  
+
+  h1{
+    font-family: "Host Grotesk";
+    font-size: 120px;
+    font-weight: 300;
+    color: #03131f;
     margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    padding-left: 24px;
-    padding-right: 24px;
+    letter-spacing: -3.2px;
+    line-height: 150%;
+    margin-bottom: 72px;
+  }
+
+  h2{
+    font-family: "Host Grotesk";
+    font-weight: 300;
+    font-size: 48px;
+    color: #03131f;
+    margin: 0;
+    letter-spacing: -1.6px;
+  }
+
+  h3{
+    font-family: "Host Grotesk";
+    font-size: 26px;
+    font-weight: 300;
+    margin: 0;
+
+    color: #2D3A44;
+  
     
-    
-}
+  }
 
-#heroButton{
-    display: flex;
-    padding: 0px 24px 2px 24px;
-    justify-content: center;
-    height: clamp(48px, 60px, 32px);
-    margin: clamp(12px, 0px, 0px);
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    border-radius: 48px;
-    background: #FA983A;
-    border: 1px solid #FA983A;
-    
-
-    color: #FFFAF6;
-
-    font-family: 'Satoshi-Regular';
-    
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 0px;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
-
-    
-}
-
-
-
-#heroButton img{
-    padding-top: 3px;
-}
-
-h4{
-    font-size: clamp(12px, 18px, 18px );
+  h4{ 
+    font-family: "Host Grotesk";
+    font-size: 22px;
     font-weight: 400;
+    margin: 0;
+
+    color: #002644;
+  
+
+
+  }
+
+
+  h5{
+    font-family: "Host Grotesk";
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0;
+
+    color: #2D3A44;
+  
     
-}
+  }
+  
+  a {
+    z-index: 3;
+    color: #03131f;
+    font-family: "Host Grotesk";
+    font-weight: 400;
+  
+    font-size: 18px;
+    margin: 0px;
+    letter-spacing: -0.4px;
+    line-height: 110%;
+    text-decoration: none;
+  }
+  
+  .navLinksContainer a{
+    font-size: 14px;
+    font-weight: 300;
+  }
 
-#heroImage{
-    display: flex;
-    justify-content: center;
-}
-
-#heroImage img{
-    width: 40vw;
-}
-
-
-
-
-#heroButton:hover{
-    cursor: url('studio.cursorHover.png'), pointer;
-
-}
-
-h1{
-    color: #FFFAF6;
-
+  .buttonText{
+    font-family: "Host Grotesk";
+    font-weight: 400;
+    color: #03131f;
     text-align: center;
-    font-family: 'Satoshi-Medium';
-    font-size: clamp(4vw, 24px, 6vw);
-    font-style: medium;
-    font-weight: 700;
-    line-height: 100%;
-    letter-spacing: clamp(-2.2px, -2.2px, -1.6px);
-}
 
+  }
 
-h2{
-    color: #FFFAF6;
+  
+  
+  a:visited {
+    text-decoration: none;
+    color: #03131f;
+  }
+  
+  .logoBox:hover,
+  a:hover {
+    cursor: url("cursor_linkHover.png"), pointer;
+  }
+  
 
-    text-align: center;
-    font-family: 'Satoshi-Regular';
-    font-size: clamp(18px, 20px, 28px);
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.8px;
-    margin-bottom: 4vh;
-}
-
-
-
-
-#moreInfoButton{
+  .footerBox {
     display: flex;
-    padding: 0px 24px 2px 24px;
-    justify-content: center;
-    height: clamp(48px, 60px, 32px);
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    border-radius: 48px;
-    background: white;
+    margin-bottom: 20vh;
+    width: 100%;
+    align-self: stretch;
+    background-color: white;
+    border-radius: 18px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+ 
+    border-radius: 18px;
 
-    
+    border: 1px solid #03131f;
+    margin-top: 72px;
+   
+  }
 
-    color: #FA983A;
+  .footerBox img{
+   
+    margin: 24px;
 
-    font-family: 'Satoshi-Regular';
-    
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 0px;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
+  }
 
-    
-}
+  .footerLinkBox{
+    display: flex;
+    gap: 24px;
+    margin: 24px;
+    z-index: 1;
 
-#moreInfoButton img{
-    fill: #FA983A;
-    padding-top: 3px;
-    rotate: 90;
-}
+  }
+  
 
-#explanationContentBox{
+
+
+
  
 
-    margin-bottom: 4vh;
+@media (max-width: 900px) {
+  html {
     display: flex;
+
+    cursor: url("cursor_home.png"), pointer;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 8px;
+    margin-top: 24px;
+    
+    
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0px;
+    padding: 0px;
+    
+  }
+
+
+
+  .logoBox {
+    padding: 8px 12px;
+    border-radius: 18px;
+    gap: 8px;
+    z-index: 3;
+    position: fixed;
+    
+  }
+
+  .logoAnim {
+    max-height: 16px;
+  }
+
+  .headerBox{
+    min-height: fit-content;
+    width: 100%;
+  
+    min-height: 42px;
+  }
+
+  .navLinksContainer {
+    display: none;
+  }
+
+  .content {
+    border-radius: 18px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: fit-content;
+
+    
+    gap: 24px;
+    flex: 1 0 0;
+    
+  }
+
+
+  .imageTextSection{
+    flex-direction: column-reverse;
+  }
+
+
+
+  .heroBox{
+    gap: 4px;
+  }
+
+  .textSection{
+    padding: 24px;
+  }
+
+  
+
+  
+
+  h1{
+    font-size: 80px;
+    line-height: 100%;
+    margin-bottom: 0px;
+  }
+
+  h2{
+    font-size: 18px;
+    letter-spacing: -0.8px;
+  }
+
+  h3{
+    font-size: 14px;
+  }
+
+  h4{
+    font-size: 12px;
+  }
+  h5{
+    font-size: 14px;
+  }
+
+  a{
+    font-size: 14px;
+  }
+  .productDetails{
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    
+  }
+
+  
+  .imageBox img {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+  }
+
+ 
+  .mobileMenuButton {
+    display: flex;
+    z-index: 3;
+    flex-direction: column;
+    transition: top 0.3s;
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 18px;
+    border: 1px solid #03131f;
+    background-color: white;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    position: fixed;
+    right: 18px;
+    
+  }
+
+  .mobileMenuScreen {
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 4vh;
+    transition: top 0.3s;
+ 
+    padding: 8px;
+    border-radius: 100%;
+    background: white;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    height: 100vh;
+    
+  }
+
+  .mobileLinks {
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 4vh;
-}
-
-h3{
-    color: white;
-
-    text-align: center;
-    font-family: 'Satoshi-Regular';
-    font-size: clamp(18px, 20px, 28px);
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.8px;
-
-    width: 90vw;
+    position: relative;
     
-}
+    font-family: "Satoshi-Medium";
+  }
 
-
-#fig01{
-    z-index: 1;
-    display: flex;
-    flex-direction: row;
-    gap: 48px;
-}
-
-#fig02{
-    z-index: 1;
-    display: flex;
-    flex-direction: row;
-    gap: 2px;
-}
-
-#circle01, #circle02, #circle03{
-    z-index: 1;
-    width: 42px;
-    height: 42px;
-    flex-shrink: 0;
-    border-radius: 64px;
-    background: #91AFEF;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
-}
-#timeBtnRack{
-    margin-top: 2vh;
-    display: flex;
-    flex-direction: row;
-
-}
-#timeButton01{
-    display: flex;
-    padding: 0px 24px 2px 24px;
-    justify-content: center;
-    height: clamp(48px, 60px, 32px);
-    margin: clamp(12px, 0px, 0px);
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    border-radius: 48px;
-    background: #FA983A;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.10);
-    border: 1px solid white;
-}
-
-a {
-    text-decoration: none;
-}
-
-a:visited{
-    text-decoration: none;
-}
-
-
-#timeButton02, #timeButton03{
-    display: flex;
-    padding: 0px 24px 2px 24px;
-    justify-content: center;
-    height: clamp(48px, 60px, 32px);
-    margin: clamp(12px, 0px, 0px);
-    align-items: center;
-    gap: 8px;
-    flex-shrink: 0;
-    border-radius: 48px;
-    background: white;
-}
-
-#timeButton01 h4{
-    color: white;
-    font-family: 'Satoshi-Regular';
-    font-size: 16px;
-    
-    
-    
-}
-
-#timeButton02 h4, #timeButton03 h4{
-    color: #FA983A;
-    font-family: 'Satoshi-Regular';
-    font-size: 16px;
-    
-}
-
-#linesRule {
-    opacity: 0.5;
-    margin-top: 2vh;
-    width: 60vw;
-    height: 2px;
-    background: #D9D9D9;
-}
-
-#phoneScreenRack{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-width: 80vw;
-    gap: 48px;
-    justify-content: center;
-    align-items: center;
-
-}
-
-#phoneScreenRack img{
-
-    width: 12vw;
-    
-}
-h5{
-    font-family: "Satoshi-Regular";
+  .mobileLinks a {
+   
     font-size: 14px;
-    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .menuButtonAnim {
+   
+    height: 22px;
+  }
+
+  
 }
-
-
-footer{
-    color: white;
-    background-color: #91AFEF;
-    height: 4vh;
-    width: 100vw;
-    gap: 12px;
-    margin-top: 4vh;
-    padding-right: 24px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: end;
-
-}
-
-@media (max-width: 1000px) {
-
-    #heroImage img{
-        width: 80vw;
-    }
-
-    #phoneScreenRack img{
-        width: 30vw;
-    }
-    h5{
-        font-size: 10px;
-    }
-
-    footer img{
-        height: 12px;
-    }
-
-    footer{
-        gap: 6px;
-    }
-
-}
-
-
-

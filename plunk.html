@@ -2,305 +2,280 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="css/plunkPage.css">
+    <link rel="stylesheet" href="css/plunk.css" />
+    <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
-    <title>shopa.plunk</title>
-
-
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-    <link rel="manifest" href="assets/site.webmanifest">
-    <link rel="mask-icon" href="assets/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-
-
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
-
-
+    <title>connorshopa : work : plunk</title>
 </head>
 
 <body>
-
     <!-- MOUSE FOLLOW CIRCLE -->
     <div id="mouse-circle"></div>
 
     <!-- HEADER + LOGO CONTAINER -->
-    <div id="headerBox">
+    <div class="headerBox">
         <!--LOGO-->
-        <div id="logoBox">
-
-            <div class="logoBox" onClick="etGoHome()"></div>
+        <div class="logoBox" onClick="etGoHome()">
+            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="20px">
 
         </div>
 
-    </div>
+        <div class="navLinksContainer">
+            <a class="navLink" href="./index.html"> HOME</a>
 
+            <h5 class="currentNavLink">WORK</h5>
 
+            <a class="navLink" href="./acotil.html">ACOTIL</a>
 
-    <div id="content">
+            <a class="navLink" href="./sketchbook.html">SKETCHBOOK</a>
 
+            <a class="navLink" href="./motion.html">MOTION</a>
 
-        <div id="banner">
-            <a id="liveProjectBanner" href="https://www.plunkpro.com">
-                <div id="liveButton"> </div>
-                <h4>Plunk is a live product</h4> <img src="icons/arrow_right.svg" alt="" height="12px">
-            </a>
         </div>
-        <div id="plunkContent">
 
-            <div id="leftContentFrame">
-                <a href="./plunk.html#systemContentFrame">
-                    <h3 id="dataStoryText" class="underline">Design + Style systems</h3>
-                </a>
+        <div class="mobileMenuButton">
+            <div id="menuButtonAnim"></div>
+        </div>
 
-                <h4>a living design system</h4>
-                <h4>design system</h4>
-                <h4>design system</h4>
-                <a href="./plunk.html#storyContentFrame">
-                    <h3 id="dataStoryText" class="underline">Data as a story</h3>
-                </a>
-                <h4>past present + future</h4>
-                <h4>the full book</h4>
+        <div class="mobileMenuScreen">
+            <div class="mobileLinks">
 
-                <h3>Motion + Video </h3>
+
+                <a class="navLink" href="./index.html">HOME</a>
+
+                <h5 class="currentNavLink">WORK</h5>
+
+
+
+                <a class="workLink" href="./acotil.html">ACOTIL</a>
+
+                <a class="workLink" href="./sketchbook.html">SKETCHBOOK</a>
+
+
+
+                <a class="workLink" href="./motion.html">MOTION</a>
+
+
             </div>
 
-            <div id="rightContentFrame">
-                <div id="systemContentFrame">
-
-                    <iframe id="protoFrame" style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="800"
-                        src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FDLc0wJPpMHptTtPXfU7iTH%2FDesign-System-%253A-Plunk%3Fpage-id%3D0%253A1%26node-id%3D1-30017%26viewport%3D-13270%252C543%252C0.25%26t%3Dfue1WhOx7TQ09qpw-1%26scaling%3Dscale-down%26starting-point-node-id%3D1%253A30017"
-                        allowfullscreen></iframe>
 
 
-                    <div id="titleText">
-                        <h1>Design + Style System</h1>
-                    </div>
-                    <h3>Every story, requires the fundamentals of language.</h3>
+        </div>
 
-                    <div id="designSystemBox">
-                        <h3>enter: the style system</h3>
-
-                        <div class="styleSection">
-                            <div class="styleScreen">
-                                <img src="assets/styleScreen.png" alt="">
-                                <h4>Typography was seperated by each use case of the lettering. Body text was given room
-                                    to breathe, while headings were made bold and slightly squished with the purpose of
-                                    acting as seperation in the product.
-                            </div>
-                            <div class="styleScreen">
-                                <h4>Colors were labeled, and made into elements. This ensured accurate usage of the same
-                                    palette spanning the entire suite of products. Gradients and tones were added for
-                                    more flexibility across the use cases. </h4>
-                                <img src="assets/styleScreen02.png" alt="">
-                            </div>
-                        </div>
-                        <div id="systemFlowImage">
-                            <h4>With the style and tone of the product set into a nomenclature, sketches and ideation
-                                began. Issues of creating small elements from scratch quickly became apparent, on top of
-                                a growing seperation of product fundamentals. </h4>
-
-                        </div>
-                        <div id="linesRule"></div>
-
-                        <div id="designSystemBox">
-                            <h3>enter: the design system</h3>
-                            <div id="systemFlowImage">
-                                <img src="assets/systemFlow.svg" alt="">
-                                <h4>Following the atomic design methodology allowed for a more comprehensive break down
-                                    of the many parts that make up both Plunk's identity, and product language.</h4>
-
-                            </div>
-                            <div id="atomicDesignSection">
-                                <div class="atomicScreen">
-                                    <h4>The fundamental parts of a design system. Atoms represent the smallest
-                                        components that are added together to create something more.</h4>
-                                    <img src="assets/atoms.png" width="20%">
-                                </div>
-                                <div class="atomicScreen">
-                                    <img src="assets/molecules.png" width="40%">
-                                    <h4>Moleclues are atoms put together. Working as singluar components that produce
-                                        parts of a product, but not the whole.</h4>
-                                </div>
-                                <div class="atomicScreen">
-                                    <h4>Organisms are the largest combination of singluar elements. They allow for parts
-                                        of pages to be constructed.</h4>
-                                    <img src="assets/organisms.png" width="40%">
-                                </div>
-                                <div class="atomicScreen">
-                                    <img src="assets/pages.png" width="40%">
-                                    <h4>Pages see organisms living together. Taking all singular elements and building
-                                        interfaces and usable products.</h4>
-                                </div>
-                            </div>
-                            <div id="linesRule"></div>
-                            <h3>the living being</h3>
-                            <div id="fullSystemSpan">
-
-                                <img src="assets/designSystem.png" alt="">
-                                <video src="assets/componentUsageVideo.mov" width="80%" autoplay="true" muted="true"
-                                    loop="true"></video>
-                                <h4>Using Figma's component system, and including interaction flows, allowed for fast
-                                    ideation that remained in the target product language.</h4>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <div id="storyContentFrame">
-
-
-
-
-                    <img id="dataTitle" src="./assets/dataMask.svg" alt="" width="420px">
-
-                    <h4>When I joined Plunk I was employee number 8, and to this day I'm still one of only two designers
-                        on the team. It's my role to intake a variety of data, and tell a meaningful and useful story
-                        with it.</h4>
-                    <h3 id="centeredText">Every good story, deals with the past, the present, and the future.</h3>
-                    <div id="linesRule"></div>
-                    <div id="pastPresentFuture">
-                        <h3>chapter 01: The Past</h3>
-                        <div id="pastBox">
-
-                            <h4>Data has a strange relationship with the past. Historical information is key to current
-                                and future information, however the problem with historical information is that becuase
-                                it's already happened, there's a lot of it.</h4>
-                            <div id="pastContentBox">
-                                <video id="marketInsightsVideo" src="assets/marketInsights.mov" width="70%"
-                                    autoplay="true" loop="true" muted="true"></video>
-                                <video id="iosWidgetVideo" src="assets/iosWidgetStackVideo.mov" width="20%"
-                                    autoplay="true" loop="true" muted="true"></video>
-                                <img id="widgetMosaic" src="assets/widgetMosaic.png" width="90%"></img>
-                            </div>
-                        </div>
-
-                        <div id="linesRule"></div>
-
-                        <h3>chapter 02: The Present</h3>
-                        <div id="presentBox">
-                            <h4>Plunk's mission is to provide "Real estate data in real-time". Needless to say, current
-                                and live data is the most important part of this story. </h4>
-                            <div id="presentContentBox">
-                                <img src="assets/shareMosaic.png" width="40%" alt="">
-                                <video id="homeTickerVideo" src="assets/homeTicker.mov" width="36%" autoplay="true"
-                                    loop="true" muted="true"></video>
-                                <video id="refinedValueVideo" src="assets/refinedValue.mov" width="80%" autoplay="true"
-                                    loop="true" muted="true"></video>
-
-                            </div>
-
-                        </div>
-                        <div id="linesRule"></div>
-                        <h3>chapter 03: The Future</h3>
-                        <div id="futureBox">
-                            <h4>The future holds potential, but the potential is unknown. It's imperative that any data
-                                and insights stemming from the future are explained and easily understood. </h4>
-                            <div id="futureContentBox">
-                                <video id="plunkValueFrame" src="assets/RemodelValueAnim.mp4" autoplay muted loop
-                                    width="40%"></video>
-                                <video id="plunkValueFrame" src="assets/PlunkValueAnim.mp4" autoplay muted loop
-                                    width="40%"></video>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-
-                </div>
-
-
-
-                <!-- <div id="extraneousLinks">
-
-        <a class="workLink" href="./work.html">work</a> 
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./index.html">about</a> 
-
-        <div class="linesRule"></div>
-        
-        <a class="workLink" href="./habbot.html">Habbot</a> 
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./pollinProject.html">Poll.in</a> 
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./acotil.images.html">ACOTIL</a> 
-
-        <div class="linesRule"></div>
-
-        <a class="workLink" href="./sketchbook.html">sketchbook</a> 
-
-        <div class="linesRule"></div>
-        
-        <a class="workLink" href="./motion.html">motion</a> 
-
-        <div class="linesRule"></div>
-
-        
-
-        <a class="workLink" href="./sayHello.html">say hello</a> 
     </div>
 
 
-   <div id="mobileMenuButton">
-    <div id="menuButtonAnim"></div>
-   </div>
 
-   <div id="mobileMenuScreen">
-    <div id="mobileLinks">
+    <div class="content">
 
-        <a class="workLink" href="./work.html">work</a>
-        
-        <a class="workLink" href="./fiftyChairs.html">fifty–chairs</a>
 
-        <a class="workLink" href="./index.html">about</a> 
+        <div class="heroBox" id="nanni">
 
-        <a class="workLink" href="./habbot.html">Habbot</a> 
+            <div class="textSection">
 
-        <a class="workLink" href="./pollinProject.html">Poll.in</a> 
+                <h1>Plunk® <br> & PlunkPro™</h1>
 
-        <a class="workLink" href="./acotil.images.html">ACOTIL</a> 
+                <div class="linkWrap">
+                    <h5>*All work shown was in collaboration with the outstanding</h5>
+                    <a href="https://www.aldredge.io/"> Vaughn Aldredge</a>
+                </div>
 
-        <a class="workLink" href="./sketchbook.html">sketchbook</a> 
+            </div>
 
-        <a class="workLink" href="./motion.html">motion</a>
 
-        <a class="workLink" href="./sayHello.html">say hello</a> 
+            <div class="productDetails">
+                <div class="textSection">
+                    <h5>Audience</h5>
+                    <h4>Homeowners + Modern Real Estate agents</h4>
+                </div>
+                <div class="textSection">
+                    <h5>Team</h5>
+                    <h4>Startup : seed</h4>
+                </div>
+
+
+            </div>
+
+            <div class="imageBox">
+                <img src="assets/projectAssets/plunkAssets/plunk_image_01.png" alt="" />
+            </div>
+
+            <div class="textSection">
+                <h5>About</h5>
+                <h2>
+                    Plunk aimed to revolutionize real estate data access.
+
+                    <br> <br>
+                    - As one of two designers, I was responsible for designing product, interfaces, and
+                    motion to help Plunk meet it's goal.
+
+                </h2>
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+        <div class="tripleGifSection">
+
+
+            <div class="animationBox">
+                <div class="animContainer">
+                    <img src="assets/projectAssets/plunkAssets/remodelValueCard.svg" alt="Background Image" width="80%">
+                    <div class="valueDriversAnim"> </div>
+                </div>
+
+                <img class="homeIll" src="assets/projectAssets/plunkAssets/home00.svg" alt="" height="120px">
+            </div>
+            <div class="animationBox">
+                <div class="animContainer">
+                    <img src="assets/projectAssets/plunkAssets/homeValueCard.svg" alt="Background Image" width="80%">
+                    <div class="homeValueAnim"> </div>
+                </div>
+
+                <img class="homeIll" src="assets/projectAssets/plunkAssets/home01.svg" alt="" height="120px">
+            </div>
+            <div class="animationBox">
+                <div class="animContainer">
+                    <img src="assets/projectAssets/plunkAssets/plunkValueCard.svg" alt="Background Image" width="80%">
+                    <div class="plunkValueAnim"> </div>
+                </div>
+
+                <img class="homeIll" src="assets/projectAssets/plunkAssets/home03.svg" alt="" height="120px">
+            </div>
+        </div>
     </div>
-   </div> -->
-
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-                <script src="js/plunkScripts.js"></script>
 
 
+    <div class="imageTextSection">
+
+        <div class="textSection">
+
+            <h5>Deliverables</h5>
+            <h2>High fidelity prototyping of new products & interfaces – Product handoff to the engineering team –Motion
+                & Visual design for data visualisation – Video and static site building for marketing
+                design – Responsive web design from mobile to desktop</h2>
+
+        </div>
+    </div>
+
+    <div class="imageBox">
+        <img src="assets/projectAssets/plunkAssets/plunk_image_02.png" alt="">
+    </div>
+    <h3 class="rightText">While cutting edge, Plunk's AI powered insights all were designed to follow the brand mantra:
+        <br><br> Empowering,
+        Trustworthy, Approachable, & Fun.
+    </h3>
 
 
 
+
+
+
+
+
+    <div class="imageTextSection">
+        <img src="assets/projectAssets/plunkAssets/plunk_gif_02.gif" alt="">
+
+        <div class="textSection">
+
+            <br><br>
+            <h4>Plunk's cost calculator </h4>
+            <h5>prototype built in figma</h5>
+
+            <br><br>
+
+            <h3>
+
+
+
+                Each new product or feature was designed with the purpose of removing the barrier of entry to quality
+                real estate data.
+                <br><br>
+                The cost caluclator is an example of letting our audience customize data based on their unique homes.
+
+            </h3>
+        </div>
+
+
+    </div>
+
+
+    <div class="imageBox">
+        <img src="assets/projectAssets/plunkAssets/plunk_image_03.png" alt="">
+    </div>
+    <h4 class="centerText">Home Condition</h4>
+
+    <h3 class="centerText">Home Condition allows homeowners or real estate agents to instantly understand how the home's
+        condition impacted a home's value through machine vision.
+    </h3>
+
+
+
+
+
+    <div class="imageBox">
+        <img src="assets/projectAssets/plunkAssets/plunk_image_04.png" alt="">
+    </div>
+
+
+
+    <div class="textSection">
+
+        <h5 class="rightText">Desktop, tablet, mobile, homescreen widgets</h5>
+        <h3 class="rightText">PlunkPro is the responsive home for everything Plunk offered and planned to offer
+            our audience.
+        </h3>
+
+    </div>
+
+    <div class="linesRule"></div>
+
+
+    <h1>Marketing, Motion & Brand</h1>
+
+    <iframe class="iFrame" src="https://www.youtube.com/embed/hwCA_yP868w?si=NBZ1iEbyyaPBFyq6"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="imageBox">
+        <img src="assets/projectAssets/plunkAssets/plunk_image_05.png" alt="">
+    </div>
+    <div class="oneTwoStack">
+        <video class="twoStack" src="assets/projectAssets/plunkAssets/ThingsChangeVideo.mp4" controls></video>
+        <video class="oneStack" src="assets/projectAssets/plunkAssets/appStoreVideo.mp4" controls></video>
+    </div>
+
+
+
+    <div class=" footerBox">
+        <img src="assets/homeAssets/icon_shopa.svg" alt="" height="24px" onclick="etGoHome()" />
+
+        <div class="footerLinkBox">
+            <a href="./index.html">home</a>
+
+            <a href="./habbot.html">next project</a>
+        </div>
+    </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="js/home.js"></script>
 </body>
-
 
 </html>

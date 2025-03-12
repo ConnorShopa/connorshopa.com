@@ -61,7 +61,7 @@ $(document).ready(function () {
     );
 
     // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
-    $("a").hover(
+    $("a, .buttonText").hover(
       function () {
         // Get the position and width of the hovered link
         let linkPos = $(this).offset();
@@ -75,12 +75,14 @@ $(document).ready(function () {
         updateMouseCirclePosition(true, linkWidth); // Pass true to indicate hover
 
         // Apply hover animations
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
-        $(this).css("color", "blue");
+        gsap.to("#mouse-circle", { duration: 0.32, scale: 1.6 });
+        $(this).css("color", "#3C77BC");
         $(this).css("text-decoration", "underline");
 
         // Add a black border to the mouse circle
-        mouseCircle.style.border = "0.5px solid #03131F";
+        mouseCircle.style.border = "0.1px solid #3C77BC";
+        mouseCircle.style.background = "none";
+        mouseCircle.style.borderRadius = "100px";
       },
       function () {
         // Update the mouse circle position without considering link height
@@ -93,6 +95,7 @@ $(document).ready(function () {
 
         // Remove the black border on un-hover
         mouseCircle.style.border = "none";
+        mouseCircle.style.background = "rgba(5, 29, 47, 0.10)";
       }
     );
 
@@ -202,9 +205,8 @@ $(document).ready(function () {
         borderRadius: "100%",
       });
       gsap.to(".mobileMenuButton", {
-        background: "#84d1ac",
         position: "fixed",
-        right: "24px",
+        right: "18px",
       });
       gsap.to(".mobileLinks", {
         duration: 0.3,
@@ -238,6 +240,44 @@ $(document).ready(function () {
   });
 });
 
+// Plunk animations
+
+// Select the containers for the animations after the DOM is fully loaded
+// Plunk Lottie Animation
+let plunkAnim01 = document.querySelector(".valueDriversAnim");
+if (plunkAnim01) {
+  let animationMenu02 = bodymovin.loadAnimation({
+    container: plunkAnim01,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "assets/projectAssets/plunkAssets/valueDrivers_lottie.json", // Correct path
+  });
+}
+
+// Home Lottie Animation
+let plunkAnim02 = document.querySelector(".homeValueAnim");
+if (plunkAnim02) {
+  let animationMenu03 = bodymovin.loadAnimation({
+    container: plunkAnim02,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "assets/projectAssets/plunkAssets/homeValue_lottie.json", // Correct path
+  });
+}
+
+let plunkAnim03 = document.querySelector(".plunkValueAnim");
+if (plunkAnim02) {
+  let animationMenu03 = bodymovin.loadAnimation({
+    container: plunkAnim03,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "assets/projectAssets/plunkAssets/plunkValue_lottie.json", // Correct path
+  });
+}
+
 // Refresh page on logo click
 
 function etRefresh() {
@@ -246,12 +286,20 @@ function etRefresh() {
 
 //JUMP FUNCTIONS
 
-function etGoPollin() {
-  window.location.href = "./pollinProject.html";
+function etGoSeeds() {
+  window.location.href = "./seeds.html";
+}
+
+function etGoHome() {
+  window.location.href = "./index.html";
+}
+
+function etGoAltQ() {
+  window.location.href = "./altQ.html";
 }
 
 function etGoAcotil() {
-  window.location.href = "shopa.acotil.images.html";
+  window.location.href = "shopa.acotil.html";
 }
 
 function openAcotilTab() {
@@ -259,29 +307,21 @@ function openAcotilTab() {
 }
 
 function etGoPlunk() {
-  window.location.href = "/work_Plunk.html";
+  window.location.href = "/plunk.html";
 }
 
 function etGoPollin() {
-  window.location.href = "/pollinProject.html";
+  window.location.href = "./pollin.html";
 }
 
 function etGoSpotify() {
-  window.location.href = "/spotifyFullscreen.html";
-}
-
-function etGoSpotifyDreams() {
-  window.location.href = "/spotifyProject.html";
+  window.location.href = "./spotifyDreams.html";
 }
 
 function etGoHabbot() {
-  window.location.href = "/habbotProject.html";
+  window.location.href = "./habbot.html";
 }
 
-function etGoHabbotBeta() {
-  window.location.href = "https://testflight.apple.com/join/pagCNvNc";
-}
-
-function etGoWork() {
-  window.location.href = "/work.html";
+function etGoNanni() {
+  window.location.href = "./nanni.html";
 }

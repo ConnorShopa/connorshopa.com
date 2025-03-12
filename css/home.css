@@ -1,9 +1,10 @@
 @import url(satoshi.css);
+@import url(hostgrotesk.css);
 
 html {
   display: flex;
 
-  background-color: white;
+  background-color: #FAFAFA;
 
   cursor: url("cursor_home.png"), pointer;
   justify-content: center;
@@ -14,9 +15,9 @@ html {
 body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 48px;
   width: 100%;
-  max-width: 1600px;
+  max-width: 1200px;
 }
 
 .mobileMenuButton {
@@ -29,16 +30,16 @@ body {
 
 .content {
   border-radius: 24px;
-  background: #84d1ac;
+  background: #03131f;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   height: fit-content;
 
-  padding: 18px;
-  gap: 12px;
+  padding: 2px;
+  gap: 2px;
   flex: 1 0 0;
-  max-width: 1600px;
+  max-width: 1200px;
 }
 
 #mouse-circle {
@@ -47,7 +48,7 @@ body {
   width: 32px;
   height: 32px;
   margin: -13px 0 0 -13px;
-  background: rgba(123, 181, 154, 0.5);
+  background: rgba(5, 29, 47, 0.10);
   border-radius: 50%;
   pointer-events: none;
   transition: width 0.2s, height 0.2s;
@@ -74,17 +75,21 @@ body {
   align-items: center;
   justify-content: center;
   width: fit-content;
-  padding: 20px 24px 18px 24px;
-  background-color: white;
-  border: 1px solid #84d1ac;
+  padding: 14px 24px 12px 24px;
   border-radius: 18px;
+  background-color: white;
+  
   box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
   max-width: 120px;
   gap: 12px;
+  
+  height: 24px;
+
+  border: 1px solid #03131f;
 }
 
 .logoAnim {
-  height: 24px;
+  height: 16px;
   margin: 0;
 }
 
@@ -92,21 +97,28 @@ body {
   z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  padding: 12px 20px;
+  
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 36px;
   background-color: white;
-  border: 1px solid #84d1ac;
+
   border-radius: 18px;
   box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
-  font-family: "Satoshi-Medium";
+
+  padding: 14px 36px 12px 36px;
+  border-radius: 18px;
+
+  height: 24px;
+
+  border: 1px solid #03131f;
+
 }
 
 .aboutHelloSpan {
   display: flex;
   flex-direction: row;
-  gap: 12px;
+  gap: 2px;
   justify-content: center;
   align-items: flex-start;
 
@@ -119,7 +131,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 48px;
-  border-radius: 18px 4px 4px 4px;
+  border-radius: 22px 4px 4px 4px;
   box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
   align-self: stretch;
   width: 100%;
@@ -131,7 +143,7 @@ body {
   flex-direction: column;
   align-self: stretch;
   padding: 48px;
-  border-radius: 4px 18px 4px 4px;
+  border-radius: 4px 22px 4px 4px;
   box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
   margin: 0px;
   width: 100%;
@@ -165,27 +177,25 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 12px;
+  gap: 4px;
   align-self: stretch;
   max-width: 100%;
+ 
 }
 
 .workItem {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 140px;
   gap: 12px;
-  /* flex: 1 0 0; */
-  width: 160px;
 }
 
-.workItem :hover {
-  cursor: url("cursor_linkHover.png"), pointer;
-}
+
 
 .workItemImage {
   display: flex;
-  padding: 48px 24px;
+  padding: 24px 24px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -196,6 +206,10 @@ body {
   width: 80px;
 }
 
+.workItem :hover {
+  cursor: url("cursor_linkHover.png"), pointer;
+}
+
 #image_plunk {
   background-color: #003960;
 }
@@ -204,16 +218,28 @@ body {
   background: #c5dcfe;
 }
 
+#image_designSystem{
+  background-color: #3BAA78;
+}
+
 #image_habbot {
-  background-color: #fffaf6;
+  background-color: #FA983A;
 }
 
 #image_spotifyDreams {
-  background-color: #e4fb9b;
+  background-color: #65D36E;
 }
 
 #image_overhand {
   background: #05c46b;
+}
+
+#image_nanni{
+  background: #0A4791;
+}
+
+#image_altQ{
+  background: #F2F2F4;
 }
 
 .historyBox {
@@ -223,7 +249,7 @@ body {
   align-self: stretch;
   padding: 48px;
   padding-right: 0px;
-  border-radius: 4px 4px 18px 18px;
+  border-radius: 4px 4px 22px 22px;
   box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
   margin: 0px;
 }
@@ -264,74 +290,52 @@ body {
 
 h1 {
   color: #03131f;
-  font-family: "Satoshi-Medium";
-  font-weight: 500;
+  font-family: "Host Grotesk";
+  font-weight: 400;
 
   font-size: 50px;
   width: 100%;
   margin: 0px;
-  letter-spacing: -3.6px;
+  letter-spacing: -2.6px;
 }
 
-.workItem h3 {
-  color: inherit;
-}
-
-.jobItem h1 {
-  font-size: 18px;
-  letter-spacing: -0.4px;
-  margin: 0px;
+.jobItem h1{
+  font-size: 32px;
+  letter-spacing: -1.6px;
 }
 
 h2 {
-  font-family: "Satoshi-Bold";
-  font-weight: 500;
-
-  font-size: 12px;
+  font-family: "Host Grotesk";
+  font-weight: 200;
+  color: #2D3A44;
+  font-size: 16px;
   margin: 0px;
-  letter-spacing: 1.2px;
+  letter-spacing: -0.4px;
+  
 }
 
 h3 {
-  color: #5d6870;
-  font-family: "Satoshi-Regular";
-  font-weight: 500;
+  color: #03131f;
+  font-family: "Host Grotesk";
+  font-weight: 600;
+  letter-spacing: 1.2px;
 
   font-size: 16px;
   margin: 0px;
 }
+
 
 h4 {
-  color: #03131f;
-  font-family: "Satoshi-Regular";
-  font-weight: 400;
-
-  font-size: 16px;
-  margin: 0px;
-  letter-spacing: -0px;
-}
-
-/* LINK THINGS */
-
-.currentNavLink {
-  border-radius: 18px;
-  padding: 8px 16px;
-  border: 1px solid gray;
-  font-family: "Satoshi-Bold";
-  color: #03131f;
-  font-size: 16px;
-}
-
-h5 {
   z-index: 3;
   color: #03131f;
-  font-family: "Satoshi-Medium";
-  font-weight: 500;
+  font-family: "Host Grotesk";
+  font-weight: 300;
 
   font-size: 18px;
   margin: 0px;
-  letter-spacing: -0px;
-  text-decoration: underline;
+  letter-spacing: -0.4px;
+  line-height: 150%;
+  
 }
 
 .socialBox {
@@ -344,16 +348,31 @@ h5 {
   z-index: 3;
 }
 
-a {
-  z-index: 300;
+.currentNavLink {
+  font-family: "Host Grotesk";
   color: #03131f;
-  font-family: "Satoshi-Medium";
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  text-decoration: underline;
+}
 
-  font-size: 16px;
+a {
+  z-index: 3;
+  color: #03131f;
+  font-family: "Host Grotesk";
+  font-weight: 400;
+
+  font-size: 18px;
   margin: 0px;
-  letter-spacing: -0px;
+  letter-spacing: -0.4px;
+  line-height: 110%;
   text-decoration: none;
+}
+
+.navLinksContainer a{
+  font-size: 14px;
+  font-weight: 300;
 }
 
 a:visited {
@@ -366,34 +385,28 @@ a:hover {
   cursor: url("cursor_linkHover.png"), pointer;
 }
 
-.workItem a {
-  z-index: 3;
-  font-size: 18px;
-  font-family: "Satoshi-Medium";
-  font-weight: 500;
-  letter-spacing: -0.8px;
-  margin: 0px;
-  color: inherit;
-  text-align: center;
-}
+
+
 
 @media (max-width: 900px) {
   html {
     display: flex;
 
-    background-color: white;
+    background-color: #FAFAFA;
 
     cursor: url("cursor_home.png"), pointer;
     justify-content: center;
     align-items: flex-start;
-    margin: 24px;
+    margin: 8px;
+    margin-top: 24px;
+    
     
   }
 
   body {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 24px;
     margin: 0px;
     padding: 0px;
     
@@ -414,7 +427,7 @@ a:hover {
 
   .content {
     border-radius: 18px;
-    background: #84d1ac;
+    background: #03131f;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -428,7 +441,8 @@ a:hover {
 
   .headerBox{
     min-height: fit-content;
-    
+    width: 100%;
+  
     min-height: 42px;
   }
 
@@ -476,6 +490,7 @@ a:hover {
     margin: 24px;
   }
 
+
   .workItemSpan {
     justify-content: center;
     flex-wrap: wrap;
@@ -511,22 +526,30 @@ a:hover {
   /* TEXT THINGS */
 
   h1 {
-    font-size: 42px;
+    font-size: 36px;
     letter-spacing: -0.8px;
     max-width: 100%;
   }
   h4 {
-    font-size: 16px;
-    line-height: 150%;
+    z-index: 1;
+    font-size: 14px;
+    line-height: 125%;
+    max-width: 100%;
   }
 
   h2 {
     font-size: 12px;
+    max-width: 80%;
+  }
+
+  
+
+  h5{
+    font-size: 14px;
   }
 
   a {
-    font-size: 16px;
-    
+    font-size: 14px;
   }
 
   .socialLink {
@@ -549,11 +572,11 @@ a:hover {
     justify-content: center;
     align-items: center;
     border-radius: 18px;
-    border: 1px solid #84d1ac;
+    border: 1px solid #03131f;
     background-color: white;
     box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
     position: fixed;
-    right: 24px;
+    right: 18px;
     
   }
 
@@ -591,7 +614,7 @@ a:hover {
 
   .mobileLinks a {
     color: #03131f;
-    font-size: 18px;
+    font-size: 14px;
     text-align: center;
     text-decoration: none;
   }
@@ -604,5 +627,18 @@ a:hover {
   .workItem a {
     z-index: 1;
   
+  }
+
+  .jobItemSpan{
+    width: 100%;
+  }
+
+  .jobItem{
+    padding: 0px;
+    min-width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
   }
 }

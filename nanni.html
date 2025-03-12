@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/nanni.css" />
+    <link rel="stylesheet" href="css/hostgrotesk.css" />
+    <link rel="stylesheet" href="css/satoshi.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <title>connorshopa : work : nanni</title>
+</head>
+
+<body>
+    <!-- MOUSE FOLLOW CIRCLE -->
+    <div id="mouse-circle"></div>
+
+    <!-- HEADER + LOGO CONTAINER -->
+    <div class="headerBox">
+        <!--LOGO-->
+        <div class="logoBox" onClick="etGoHome()">
+            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="20px">
+
+        </div>
+
+        <div class="navLinksContainer">
+            <a class="navLink" href="./index.html"> HOME</a>
+
+            <h5 class="currentNavLink">WORK</h5>
+
+            <a class="navLink" href="./acotil.html">ACOTIL</a>
+
+            <a class="navLink" href="./sketchbook.html">SKETCHBOOK</a>
+
+            <a class="navLink" href="./motion.html">MOTION</a>
+
+        </div>
+
+        <div class="mobileMenuButton">
+            <div id="menuButtonAnim"></div>
+        </div>
+
+        <div class="mobileMenuScreen">
+            <div class="mobileLinks">
+
+
+                <a class="navLink" href="./index.html">HOME</a>
+
+                <h5 class="currentNavLink">WORK</h5>
+
+
+
+                <a class="workLink" href="./acotil.html">ACOTIL</a>
+
+                <a class="workLink" href="./sketchbook.html">SKETCHBOOK</a>
+
+
+
+                <a class="workLink" href="./motion.html">MOTION</a>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="content">
+
+
+        <div class="heroBox" id="nanni">
+
+            <div class="textSection">
+                <h1>Nanni</h1>
+
+            </div>
+
+
+            <div class="productDetails">
+                <div class="textSection">
+                    <h5>Audience</h5>
+                    <h4>Over 25k monthly caregivers</h4>
+                </div>
+                <div class="textSection">
+                    <h5>Team</h5>
+                    <h4>Startup : pre-seed stage</h4>
+                </div>
+
+
+            </div>
+
+            <div class="imageBox">
+                <img src="assets/projectAssets/nanniAssets/nanni_image_01.png" alt="" />
+            </div>
+
+            <div class="textSection">
+                <h5>About</h5>
+                <h2>
+                    Nanni is a mobile app that predicts why a newborn is crying, using a
+                    hyper-accurate algorithm, while also offering caregivers the abilty to create & follow a
+                    healthy sleep schedule.
+
+                    <br> <br>
+
+                    – I worked with Ubenwa to redesign the application with a focus on product clarity &
+                    brand maturity.
+
+
+                </h2>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="imageTextSection">
+            <div class="imageBox">
+                <img src="assets/projectAssets/nanniAssets/nanni_image_03.png" alt="" />
+            </div>
+            <div class="textSection">
+
+                <h5>Goals</h5>
+                <h2>A. Organization</h2>
+                <h3>
+                    With the launch of new key features, and a growing base of users, the application had become
+                    cluttered and difficult to navigate.
+
+                    <br> <br>
+
+                    I would focus on organizing existing elements into a clearly defined hierarchy, while leaving
+                    room
+                    for new features coming down the road.
+                </h3>
+
+                <h2>B. Maturity</h2>
+                <h3>
+                    Nanni is backed by scientific research, and uses pediatric science to provide tools for
+                    caregivers.
+                    We wanted to make sure the application relfected this.
+                </h3>
+                <h2>C. Maintain the fun</h2>
+                <h3>
+                    While a redesign was inevitable, there was no need to remove the "fun" from the product. A
+                    balance
+                    needed to be struck between keeping the product fun for caregivers, while also clearly defining
+                    itself as a useful and usable tool.
+                </h3>
+            </div>
+        </div>
+
+        <div class="textSection">
+            <div class="imageBox">
+                <img src="assets/projectAssets/nanniAssets/nanni_image_08.png">
+            </div>
+        </div>
+
+        <div class="linesRule"></div>
+
+        <h2>The Redesign</h2>
+        <div class="imageBox">
+            <img src="assets/projectAssets/nanniAssets/nanni_image_02.png" alt="" />
+        </div>
+
+        <h5 class="rightText">The navigation menu went through several iterations, with intention to minimize
+            actions, and prioritize recording a newborns cry.</h5>
+
+
+        <div class="imageTextSection">
+
+            <div class="textSection">
+
+                <h5 id="leftText">– Feedback was moved to more pertinent locations across the experience, garnering more
+                    direct
+                    feedback
+                    from caregivers.
+                    <br> <br>
+                    –Logs were renamed as Journal, found to be more of a human representation of the feature.
+                    <br> <br>
+                    – Translation became a floating action button, allowing caregivers to have instant access across the
+                    application, and never miss a cry or journal entry.
+                    <br> <br>
+                    – The navigation menu itself became a floating bar, that got out of the way when the user was
+                    interacting with content across the experience.
+
+                </h5>
+
+            </div>
+            <div class="imageBox">
+                <img src="assets/projectAssets/nanniAssets/nanniGif_01.gif">
+            </div>
+        </div>
+
+        <div class="textSection">
+            <h5>Other feature changes</h5>
+            <h2>
+                Logs went through a transformation and became Journal, a home for all recorded cries.
+
+                <br> <br>
+
+                Split into two tabs, Journal matured into a space where caregivers could glean insights, and view their
+                history.
+
+
+            </h2>
+        </div>
+
+
+
+        <div class="imageBox">
+            <img src="assets/projectAssets/nanniAssets/nanni_image_04.png" alt=""">
+        </div>
+
+       
+        <div class=" textSection">
+            <h2>Journal : Insights</h2>
+            <h5 class=" leftText">Caregiver's recorded cries generate insights, allowing them to further understand
+                causes, trends and averages across their newborns data.</h5>
+        </div>
+
+        <div class=" imageBox">
+            <img src="assets/projectAssets/nanniAssets/nanni_image_06.png" alt="">
+        </div>
+        <div class=" textSection">
+            <h2 class="rightText">Journal : History</h2>
+            <h5 class=" rightText">A filterable history of all recorded cries or events. Visible by other caregivers for
+                posterity and support.</h5>
+        </div>
+        <div class=" imageBox">
+            <img src="assets/projectAssets/nanniAssets/nanni_image_07.png" alt=""">
+        </div>
+        <div class=" imageBox">
+            <img src="assets/projectAssets/nanniAssets/nanni_image_09.png" alt=""">
+        </div>
+
+        <div class=" linesRule">
+        </div>
+
+
+
+        <h1 class="textSection">Results</h1>
+        <div class=" productDetails">
+
+            <div class="textSection">
+                <h2>12 million</h2>
+                <h5>Downloads</h5>
+            </div>
+            <div class="textSection">
+                <h2>4.7/5</h2>
+                <h5>Stars rating</h5>
+            </div>
+            <div class="textSection">
+                <h2>#62</h2>
+                <h5>Health app worldwide</h5>
+            </div>
+
+        </div>
+
+
+
+
+
+
+        <div class=" footerBox">
+            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="24px" onclick="etGoHome()" />
+
+            <div class="footerLinkBox">
+                <a href="./index.html">home</a>
+
+                <a href="./seeds.html">next project</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="js/home.js"></script>
+</body>
+
+</html>

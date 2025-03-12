@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/spotifyDreams.css" />
+    <link rel="stylesheet" href="css/hostgrotesk.css" />
+    <link rel="stylesheet" href="css/satoshi.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <title>connorshopa : work : spotify : record shelf</title>
+</head>
+
+<body>
+    <!-- MOUSE FOLLOW CIRCLE -->
+    <div id="mouse-circle"></div>
+
+    <!-- HEADER + LOGO CONTAINER -->
+    <div class="headerBox">
+        <!--LOGO-->
+        <div class="logoBox" onClick="etGoHome()">
+            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="20px">
+
+        </div>
+
+        <div class="navLinksContainer">
+            <a class="navLink" href="./index.html"> HOME</a>
+
+            <h5 class="currentNavLink">WORK</h5>
+
+            <a class="navLink" href="./acotil.html">ACOTIL</a>
+
+            <a class="navLink" href="./sketchbook.html">SKETCHBOOK</a>
+
+            <a class="navLink" href="./motion.html">MOTION</a>
+
+        </div>
+
+        <div class="mobileMenuButton">
+            <div id="menuButtonAnim"></div>
+        </div>
+
+        <div class="mobileMenuScreen">
+            <div class="mobileLinks">
+
+
+                <a class="navLink" href="./index.html">HOME</a>
+
+                <h5 class="currentNavLink">WORK</h5>
+
+
+
+                <a class="workLink" href="./acotil.html">ACOTIL</a>
+
+                <a class="workLink" href="./sketchbook.html">SKETCHBOOK</a>
+
+
+
+                <a class="workLink" href="./motion.html">MOTION</a>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="content">
+
+
+        <div class="heroBox" id="nanni">
+
+            <div class="textSection">
+                <h1>Spotify Dreams</h1>
+
+            </div>
+
+
+            <div class="productDetails">
+                <div class="textSection">
+
+                    <h4>Fixing problems I have with Spotify</h4>
+                </div>
+
+
+
+            </div>
+
+            <div class="imageBox">
+                <img src="assets/projectAssets/spotifyAssets/spotify_img01.png" alt="" />
+            </div>
+
+            <div class="textSection">
+
+                <h3>
+                    I spent 112,000 minutes with spotify during 2024. 5.1 hours a day. For all it's wonder, spending
+                    that much time with a product, you notice some problems.
+                </h3>
+                <br><br>
+
+                <h3>
+                    – Oxymoronically, I also collect vinyl records, and it was this hobby that made me set out to design
+                    a solution that would solve two problems.
+                </h3>
+                <br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+                </h2>
+                <br> <br>
+                <div class="linesRule"></div>
+                <br> <br>
+                <br> <br>
+                <h2>
+                    Problem 1: Organization and exploration of Spotify content is unweildy, as well as lacking in
+                    wonder.
+                </h2>
+
+            </div>
+            <br><br>
+
+            <div class="imageTextSection">
+                <img class="roundedBox" src="assets/projectAssets/spotifyAssets/spotify_gif01.gif" alt="">
+                <div class="textSection">
+                    <h2 class="centerText">Making digital more physical</h2>
+                    <h3 class="centerText">I started with a skeleton ideation of how I would represent thumbing through
+                        physical records.</h3>
+
+
+                </div>
+
+            </div>
+            <br><br>
+
+        </div>
+
+        <div class="textSection">
+            <h2 class="centerText">Making the view scalable</h2>
+            <h3 class="centerText">Spotify hosts a variety of different content <br> as well as a variety of methods to
+                organize this content.</h3>
+
+
+        </div>
+        <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img02.png" alt="">
+
+        </div>
+
+        <h3 class="centerText">I created a set of components and layouts that would adapt to this variety.</h3>
+
+
+        <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img03.png" alt="">
+        </div>
+
+        <h5 class="centerText">
+            the final idea
+        </h5>
+        <div class="iconTextBox">
+
+            <img src="assets/projectAssets/spotifyAssets/spotify_icon_recordShelf.svg" alt="" height="32px">
+            <h1>Record Shelf</h1>
+        </div>
+
+        <div class="gifBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_gif02.gif" alt="" width="300px">
+
+        </div>
+
+
+        <div class="textSection">
+
+            <h2>Discovered use cases</h2>
+            <h3>Through my exploration, I found new ways to display content I hadn't thought about before</h3>
+        </div>
+        <div class="imageTextSection">
+            <div class="textSection">
+                <h2 class="centerText">Friend Activity</h2>
+                <h5 class="centerText">Record shelf allows for a dynamic and social view <br> of the content
+                    friends are listening to.</h5>
+                <br><br>
+                <h5 class="centerText">Understand similarities in taste, <br> explore tags your friends
+                    are into</h5>
+            </div>
+
+            <div class="imageBox">
+                <img src="assets/projectAssets/spotifyAssets/spotify_gif03.gif" alt="">
+            </div>
+
+        </div>
+
+        <div class="imageTextSection">
+            <div class="imageBox">
+                <img src="assets/projectAssets/spotifyAssets/spotify_gif04.gif" alt="">
+            </div>
+            <div class="textSection">
+                <h2 class="centerText">Curated Collections</h2>
+
+
+                <h5 class="centerText">Thumb through grammy nominees, podcast collections, <br> top charts or other
+                    curated
+                    digital crates</h5>
+                <br><br>
+                <h5 class="centerText">See what's top of mind for the world</h5>
+            </div>
+
+
+
+        </div>
+        <div class="imageTextSection">
+
+            <div class="textSection">
+                <h2 class="centerText">A Visual Library</h2>
+
+                <h5 class="centerText">Display your perfectly created playlists, find deep cuts from your favorites,
+                    <br> get suggestions based on your unique taste
+                </h5>
+                <br><br>
+                <h5 class="centerText">Your library, in a new light</h5>
+            </div>
+
+            <div class="imageBox">
+                <img src="assets/projectAssets/spotifyAssets/spotify_gif05.gif" alt="">
+            </div>
+
+        </div>
+
+
+        <div class="linesRule"></div>
+
+        <div class="textSection">
+
+            <h2>
+                Problem 2: Spotify's fullscreen design is behind the times.
+            </h2>
+
+            <h3>When Spotify went through a redesign in 2022, the fullscreen view was left behind: </h3>
+        </div>
+
+
+        <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img_05.png" alt="">
+        </div>
+        <h5 class="centerText">While receiving new icons, fonts and ui elements, <br> I believe there is a lot to be
+            desired in terms of functionality and new features
+        </h5>
+
+
+
+        <div class="textSection">
+
+            <h3 class="centerText">I often see Spotify open on a television at parties, dinners or gatherings,
+                fullscreen should be:</h3>
+        </div>
+
+
+        <div class="textSection">
+
+            <h2 class="centerText">1. Beautiful</h2>
+            <h5 class="centerText">The fullscreen view should be a center piece that reflects what's being played
+            </h5>
+        </div>
+        <div class="textSection">
+
+            <h2 class="centerText">2. Useful</h2>
+            <h5 class="centerText">The fullscreen view shouldn't limit functionality
+            </h5>
+        </div>
+
+        <div class="textSection">
+
+            <h2 class="centerText">3. Understandable </h2>
+            <h5 class="centerText">The fullscreen view shouldn't feel cluttered or overvearing
+            </h5>
+        </div>
+
+
+        <div class="imageTextSection">
+            <div class="textSection">
+
+                <h2>Sketching</h2>
+                <h5>Staying in ine with Spotify's brand and identity I explored different ways to make the fullscreen
+                    view
+                    more in line with my goals</h5>
+            </div>
+            <div class="imageBox">
+                <img src="assets/projectAssets/spotifyAssets/spotify_gif06.gif" alt="">
+            </div>
+        </div>
+
+
+        <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img06.png" alt="">
+        </div>
+        <div class="textSection">
+            <h5>Neutral View</h5>
+            <h2>I landed on a view that would blend into the background of a gathering, added key functionality, and
+                interesting information about the content being played</h2>
+        </div>
+
+        <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img07.png" alt="">
+        </div>
+
+        <div class="textSection">
+            <h5>Modular View</h5>
+            <h2>Borrowing from the main desktop applications use of modular cards that take up the left or right hand
+                side of the screen, all necessary functinality is a click away, or a click to hide</h2>
+        </div>
+
+        <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img08.png" alt="">
+        </div>
+
+        <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img09.png" alt="">
+        </div>
+
+        <div class="textSection">
+
+            <h2 class="centerText">When there's nothing being played</h2>
+            <h5 class="centerText">To maintain functionality, teh fullscreen view allows for listeners to <br> quickly
+                browse
+                their library, friend activity, or recommendations</h5>
+        </div>
+
+
+        <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img10.png" alt="">
+        </div>
+
+
+        <div class="iconTextBox">
+
+            <img src="assets/projectAssets/spotifyAssets/spotify_icon_fullScreen.svg" alt="" height="32px">
+            <h1>In Context</h1>
+        </div>
+
+        <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_gif07.gif" alt="">
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class=" footerBox">
+            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="24px" onclick="etGoHome()" />
+
+            <div class="footerLinkBox">
+                <a href="./index.html">home</a>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+    <script src="js/home.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,499 @@
+@import url(satoshi.css);
+@import url(hostgrotesk.css);
+
+html {
+  display: flex;
+
+  background-color: #FAFAFA;
+
+  cursor: url("cursor_home.png"), pointer;
+  justify-content: center;
+  align-items: center;
+  margin: 24px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+.mobileMenuButton {
+  display: none;
+}
+
+.mobileMenuScreen {
+  display: none;
+}
+
+
+#mouse-circle {
+  z-index: 2;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  margin: -13px 0 0 -13px;
+  background: rgba(5, 29, 47, 0.10);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: width 0.2s, height 0.2s;
+}
+
+.headerBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 100%;
+  transition: top 0.3s;
+}
+
+
+.logoBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 14px 24px 12px 24px;
+  border-radius: 18px;
+  background-color: white;
+  
+  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+  max-width: 120px;
+  gap: 12px;
+  
+  height: 24px;
+
+  border: 1px solid #03131f;
+}
+
+.logoAnim {
+  height: 16px;
+  margin: 0;
+}
+
+.navLinksContainer {
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+  background-color: white;
+
+  border-radius: 18px;
+  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+
+  padding: 14px 36px 12px 36px;
+  border-radius: 18px;
+
+  height: 24px;
+
+  border: 1px solid #03131f;
+
+}
+
+.currentNavLink {
+  font-family: "Host Grotesk";
+  color: #03131f;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+  text-decoration: underline;
+}
+
+
+
+
+
+  .heroBox{
+    margin-top: 140px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 12px;
+
+  }
+
+  .productDetails{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+  }
+
+  
+
+  .imageBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    max-width: 1600px;
+  }
+
+  .imageBox img {
+    width: 100%;
+  }
+
+  .textSection{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .imageTextSection{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 72px;
+
+  }
+
+  .rightText{
+    align-self: flex-end;
+    text-align: right;
+    width: 60%;
+  }
+
+  .leftText{
+    align-self: flex-start;
+    width: 60%;
+  }
+
+
+  
+
+ .linesRule{
+  width: 100%;
+  height: 1px;
+  background-color: #002644;
+
+ }
+
+  
+
+  h1{
+    font-family: "Host Grotesk";
+    font-size: 120px;
+    font-weight: 300;
+    color: #03131f;
+    margin: 0;
+    letter-spacing: -3.2px;
+    line-height: 150%;
+   
+  }
+
+  
+
+  h2{
+    font-family: "Host Grotesk";
+    font-weight: 300;
+    font-size: 48px;
+    color: #03131f;
+    margin: 0;
+    letter-spacing: -1.6px;
+  }
+
+  h3{
+    font-family: "Host Grotesk";
+    font-size: 26px;
+    font-weight: 300;
+    margin: 0;
+
+    color: #2D3A44;
+  
+    
+  }
+
+  h4{ 
+    font-family: "Host Grotesk";
+    font-size: 22px;
+    font-weight: 400;
+    margin: 0;
+
+    color: #002644;
+  
+
+
+  }
+
+
+  h5{
+    font-family: "Host Grotesk";
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0;
+
+    color: #2D3A44;
+  
+    
+  }
+  
+  a {
+    z-index: 3;
+    color: #03131f;
+    font-family: "Host Grotesk";
+    font-weight: 400;
+  
+    font-size: 18px;
+    margin: 0px;
+    letter-spacing: -0.4px;
+    line-height: 110%;
+    text-decoration: none;
+  }
+  
+  .navLinksContainer a{
+    font-size: 14px;
+    font-weight: 300;
+  }
+  
+  a:visited {
+    text-decoration: none;
+    color: #03131f;
+  }
+  
+  .logoBox:hover,
+  a:hover {
+    cursor: url("cursor_linkHover.png"), pointer;
+  }
+  
+
+  .footerBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20vh;
+    width: 100%;
+    align-self: stretch;
+    background-color: white;
+    border-radius: 18px;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+ 
+    border-radius: 18px;
+
+    border: 1px solid #03131f;
+    margin-top: 72px;
+   
+  }
+
+  .footerBox img{
+   
+    margin: 24px;
+
+  }
+
+  .footerLinkBox{
+    display: flex;
+    gap: 24px;
+    margin: 24px;
+    z-index: 1;
+
+  }
+  
+
+
+
+
+ 
+
+@media (max-width: 900px) {
+  html {
+    display: flex;
+
+    background-color: #FAFAFA;
+
+    cursor: url("cursor_home.png"), pointer;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 8px;
+    margin-top: 24px;
+    
+    
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0px;
+    padding: 0px;
+    
+  }
+
+
+
+  .logoBox {
+    padding: 8px 12px;
+    border-radius: 18px;
+    gap: 8px;
+    z-index: 3;
+    position: fixed;
+    
+  }
+
+  .logoAnim {
+    max-height: 16px;
+  }
+
+  .headerBox{
+    min-height: fit-content;
+    width: 100%;
+  
+    min-height: 42px;
+  }
+
+  .navLinksContainer {
+    display: none;
+  }
+
+  .content {
+    border-radius: 18px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: fit-content;
+
+    
+    gap: 24px;
+    flex: 1 0 0;
+    
+  }
+
+
+  .imageTextSection{
+    flex-direction: column-reverse;
+  }
+
+
+
+  .heroBox{
+    gap: 4px;
+  }
+
+  .textSection{
+    padding: 24px;
+  }
+
+  
+
+  h1{
+    font-size: 80px;
+    line-height: 100%;
+    margin-bottom: 0px;
+  }
+
+  h2{
+    font-size: 18px;
+    letter-spacing: -0.8px;
+  }
+
+  h3{
+    font-size: 14px;
+  }
+
+  h4{
+    font-size: 12px;
+  }
+  h5{
+    font-size: 14px;
+  }
+
+  a{
+    font-size: 14px;
+  }
+  .productDetails{
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    
+  }
+
+  
+  .imageBox img {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+  }
+
+ 
+  .mobileMenuButton {
+    display: flex;
+    z-index: 3;
+    flex-direction: column;
+    transition: top 0.3s;
+    width: 24px;
+    height: 24px;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 18px;
+    border: 1px solid #03131f;
+    background-color: white;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    position: fixed;
+    right: 18px;
+    
+  }
+
+  .mobileMenuScreen {
+    z-index: 2;
+    display: none;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 4vh;
+    transition: top 0.3s;
+ 
+    padding: 8px;
+    border-radius: 100%;
+    background: white;
+    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+    height: 100vh;
+    
+  }
+
+  .mobileLinks {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    
+    font-family: "Satoshi-Medium";
+  }
+
+  .mobileLinks a {
+   
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .menuButtonAnim {
+   
+    height: 22px;
+  }
+
+  
+}
