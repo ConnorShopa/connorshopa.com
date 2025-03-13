@@ -4,9 +4,9 @@
 html {
   display: flex;
 
-  background-color: #BDD7FF;
+  background-color: #DAEAFD;
 
-  cursor: url("resources/lottiefiles/cursor_home.png"), pointer;
+  cursor: url("cursor_home.png"), pointer;
   justify-content: center;
   align-items: center;
   margin: 24px;
@@ -147,33 +147,20 @@ body {
 }
 
 
-.columnSpan{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 24px;
-    width: 100%;
+.microContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-
-.leftColumn{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    gap: 24px;
+.microBox{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.rightColumn{
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    gap: 24px;
-}
-
-.sketchBox img{
-    width: 100%;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
-}
 
   
 
@@ -306,9 +293,9 @@ body {
   html {
     display: flex;
 
-    background-color: #BDD7FF;
+    
 
-    cursor: url("resources/lottiefiles/cursor_home.png"), pointer;
+    
     justify-content: center;
     align-items: flex-start;
     margin: 8px;
@@ -404,8 +391,14 @@ body {
     font-size: 14px;
   }
   
-
-
+  .microBox img{
+    width: 100%;
+  }
+  .linesRule{
+    width: 60%;
+    justify-self: center;
+    align-self: center;
+  }
  
   .mobileMenuButton {
     display: flex;

@@ -6,7 +6,7 @@ html {
 
   background-color: #FAFAFA;
 
-  cursor: url("resources/cursor_home.png"), pointer;
+  cursor: url("cursor_home.png"), pointer;
   justify-content: center;
   align-items: center;
   margin: 24px;
@@ -207,7 +207,7 @@ body {
 }
 
 .workItem :hover {
-  cursor: url("resources/lottiefiles/cursors/cursor_linkHover.png"), pointer;
+  cursor: url("cursor_linkHover.png"), pointer;
 }
 
 #image_plunk {
@@ -394,7 +394,7 @@ a:hover {
 
     background-color: #FAFAFA;
 
-    cursor: url("cursor_home.png"), pointer;
+  
     justify-content: center;
     align-items: flex-start;
     margin: 8px;

@@ -150,7 +150,7 @@ $(document).ready(function () {
     animationMenu.play();
   });
 
-  $("#extraneousLinks a").hover(
+  $("#extraneousLinks a, .logoBox").hover(
     function () {
       gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
       $(this).css("color", "blue");
