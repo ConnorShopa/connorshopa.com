@@ -23,7 +23,7 @@ body {
 .content{
   display: flex;
   flex-direction: column;
-  gap: 72px;
+  gap: 140px;
 }
 
 .mobileMenuButton {
@@ -152,12 +152,50 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 24px;
 }
 
 .microBox{
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+.twoOneSpan{
+  display: flex;
+  flex-direction: column;
+  
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  max-width: 100%;
+}
+
+.twoSpan{
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+.twoSpan img{
+  
+  width: 100%;
+  
+}
+
+
+.oneSpan img{
+  max-width: 100%;
+}
+
+video{
   width: 100%;
 }
 

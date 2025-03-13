@@ -278,6 +278,19 @@ if (plunkAnim02) {
   });
 }
 
+// Micro Animations
+
+let extractAnimation = document.querySelector("#extractAnim");
+if (extractAnimation) {
+  let extractAnimationMenu = bodymovin.loadAnimation({
+    container: extractAnimation,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "assets/micros/automationScan.json",
+  });
+}
+
 // Refresh page on logo click
 
 function etRefresh() {
