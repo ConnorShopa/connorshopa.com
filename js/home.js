@@ -291,6 +291,17 @@ if (extractAnimation) {
   });
 }
 
+let emotionAnimation = document.querySelector("#emotionAnim");
+if (emotionAnimation) {
+  let extractAnimationMenu = bodymovin.loadAnimation({
+    container: emotionAnimation,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "assets/micros/emotionalStates.json",
+  });
+}
+
 // Refresh page on logo click
 
 function etRefresh() {
