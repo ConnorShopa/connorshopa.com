@@ -134,7 +134,7 @@ $(document).ready(function () {
     renderer: "svg",
     loop: false,
     autoplay: false,
-    path: "resources/lottiefiles/shopaAnimDark.json",
+    path: "animations/shopaAnimation.json",
   });
 
   let logoBox = document.querySelector(".logoBox");
