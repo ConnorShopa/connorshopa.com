@@ -319,7 +319,7 @@ function etGoHome() {
 }
 
 function etGoAltQ() {
-  window.location.href = "./altQ.html";
+  window.location.href = "./altq.html";
 }
 
 function etGoAcotil() {
