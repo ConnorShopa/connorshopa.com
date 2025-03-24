@@ -254,6 +254,7 @@ body {
 
   .centerText{
     text-align: center;
+    align-self: center;
   }
 
  .linesRule{
