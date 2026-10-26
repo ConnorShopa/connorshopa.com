@@ -242,6 +242,11 @@ body {
   background: #F2F2F4;
 }
 
+#image_happlycations {
+  background: #CFE6FA; /* light blue */
+  min-height: 24px;
+}
+
 .historyBox {
   background-color: white;
   display: flex;

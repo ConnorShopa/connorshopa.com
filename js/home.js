@@ -349,3 +349,7 @@ function etGoHabbot() {
 function etGoNanni() {
   window.location.href = "./nanni.html";
 }
+
+function etGoHapplycations() {
+  window.location.href = "./happlycations.html";
+}
