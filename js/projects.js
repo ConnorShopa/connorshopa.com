@@ -216,7 +216,7 @@
           '<div class="coverWrap"><span class="trioPill">About</span><p class="coverText">Throughout a roadtrip from Seattle to Mexico to New York I would keep track of my meditation with two dots drawn in my journal.</p><p class="coverText">The distance between the dots represented the length of the meditation, with quick notes before and after each meditation.</p><p class="coverText">While living in a remote Wyoming cabin, I digitized this process into an iOS application.</p></div>' +
           phone(A + "habbotAssets/app_screen04.png", "coverShot")),
         pg("cover",
-          '<div class="coverWrap"><span class="trioPill">List</span><p class="coverLead">Habbots are customizable + searchable</p></div>' +
+          '<div class="coverWrap"><span class="trioPill">List</span><p class="coverLead">Keep track of your time visually</p></div>' +
           phone(A + "habbotAssets/app_screen01.png", "coverShot")),
         pg("cover",
           '<div class="coverWrap"><span class="trioPill">Compile</span><p class="coverLead">Simple + Visual components</p><p class="coverText">Habbot uses abstract and visual elements to keep as much parity with my journaling as possible</p></div>' +
