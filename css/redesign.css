@@ -1465,3 +1465,9 @@ nav.stack { position: relative; }
 /* the page itself never scrolls */
 html, body { height: 100%; overflow: hidden !important; overscroll-behavior: none; }
 body { position: relative; }
+
+/* panel content: no inner scroller or width cap, just centred text */
+.panelText .pgText { overflow: visible; max-width: none; width: 100%; max-height: none; padding: 0; align-items: center; }
+.panelText .contactLinks { flex-wrap: nowrap; white-space: nowrap; }
+.panelText .contactLinks li { padding: 0.4em 0; flex: none; }
+.panelText .contactLinks li:not(.no-slash)::after { content: "\00B7"; margin: 0 clamp(10px, 1.8vw, 32px); color: rgba(47, 39, 37, 0.12); }
