@@ -5,7 +5,6 @@
   if (typeof gsap === "undefined") return;
 
   var nav = document.querySelector(".hero > nav");
-  var intro = document.querySelector(".hero > header");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var t = function (s) { return reduce ? 0 : s; };
 
@@ -32,6 +31,25 @@
     return targetMid - currentMid;
   }
 
+  // the gallery items currently on screen
+  function items() { return document.querySelectorAll("#projectList li:not(.is-hidden)"); }
+
+  // Same pop out / pop in as the filter pills: items pop away, the gallery jumps to its new size
+  // and place while they are invisible, then they pop back in.
+  var popTl = null;
+  function popGallery(applyLayout) {
+    if (popTl) popTl.kill();
+    var list = items();
+    gsap.killTweensOf(list);
+    popTl = gsap.timeline();
+    popTl.to(list, { scale: 0, opacity: 0, duration: t(0.18), ease: "back.in(1.2)", stagger: t(0.02), transformOrigin: "50% 50%" });
+    popTl.add(function () {
+      applyLayout();
+      gsap.set(items(), { scale: 0, opacity: 0 });
+    });
+    popTl.to(items, { scale: 1, opacity: 1, duration: t(0.3), ease: "back.out(1.2)", stagger: t(0.03) });
+  }
+
   function show(trigger, view) {
     if (open) return;
     open = { view: view, trigger: trigger };
@@ -43,16 +61,16 @@
     gsap.set(view, { xPercent: -50, yPercent: -50 });
 
     var drop = galleryDrop(view);
-    if (intro) intro.setAttribute("inert", "");
 
-    gsap.killTweensOf([view, nav, intro]);
+    gsap.killTweensOf(view);
     gsap.fromTo(
       view,
       { autoAlpha: 0, scale: 0.12, x: from.x, y: from.y },
       { autoAlpha: 1, scale: 1, x: 0, y: 0, duration: t(0.6), ease: "power3.out" }
     );
-    gsap.to(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%", duration: t(0.6), ease: "power3.out" });
-    if (intro) gsap.to(intro, { autoAlpha: 0, duration: t(0.3), ease: "power2.out" });
+    popGallery(function () {
+      gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
+    });
 
     var close = view.querySelector(".viewClose");
     if (close) gsap.delayedCall(t(0.3), function () { close.focus({ preventScroll: true }); });
@@ -65,7 +83,7 @@
     open = null;
 
     var to = offsetFrom(trigger); // the link's current (minimised) spot
-    gsap.killTweensOf([view, nav, intro]);
+    gsap.killTweensOf(view);
     gsap.to(view, {
       autoAlpha: 0,
       scale: 0.12,
@@ -78,11 +96,9 @@
         document.documentElement.style.overflow = "";
       },
     });
-    gsap.to(nav, { scale: 1, y: 0, duration: t(0.5), ease: "power3.out", onComplete: function () { gsap.set(nav, { clearProps: "transform" }); } });
-    if (intro) {
-      intro.removeAttribute("inert");
-      gsap.to(intro, { autoAlpha: 1, duration: t(0.4), delay: t(0.1), ease: "power2.out" });
-    }
+    popGallery(function () {
+      gsap.set(nav, { clearProps: "transform" });
+    });
     trigger.focus({ preventScroll: true });
   }
 
