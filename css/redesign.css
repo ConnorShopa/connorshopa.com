@@ -96,6 +96,13 @@ body {
   letter-spacing: -0.01em;
 }
 
+.history .company a {
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-decoration: none;
+}
+
 .history .role,
 .history .dates {
   font-weight: 300;
