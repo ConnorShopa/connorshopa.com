@@ -805,7 +805,8 @@ html.view-open #mouse-circle {
 
 .viewNav.prev { left: 24px; }
 .viewNav.next { right: 24px; }
-.viewNav:disabled { opacity: 0.25; pointer-events: none; }
+.viewNav { transition: opacity 0.2s ease; }
+.viewNav:disabled { opacity: 0; pointer-events: none; } /* no chevron where there is no page to go to */
 
 .viewDots {
   position: absolute;
