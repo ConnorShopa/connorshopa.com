@@ -54,7 +54,9 @@
     document.documentElement.style.overflow = "hidden";
     gsap.set(view, { xPercent: -50, yPercent: -50 });
 
-    var cardBottom = view.getBoundingClientRect().bottom; // measured while the card is centred at full size
+    // the card's bottom edge once it has zoomed to full size. Worked out from its layout size, not its
+    // current rect: after the first close the card is left shrunk to a dot, which gave a tiny, wrong number
+    var cardBottom = window.innerHeight / 2 + view.offsetHeight / 2;
     var currentLi = trigger.closest("li");
 
     gsap.killTweensOf(view);
