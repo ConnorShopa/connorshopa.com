@@ -80,6 +80,18 @@ body {
   border-top: 1px solid var(--blue);
 }
 
+.history .logo {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  margin-bottom: 8px;
+}
+
+.history .logo img {
+  display: block;
+  max-width: 100%;
+}
+
 .history .company {
   font-weight: 400;
 }
