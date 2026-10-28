@@ -1445,3 +1445,11 @@ html.view-open .filters { position: relative; z-index: 20; }
 /* Spotify dreams: Spotify's own typeface is Circular (proprietary), so this uses Circular if it is installed and Figtree, a close lookalike, otherwise */
 .spot { font-family: "Circular Std", "Circular", "CircularSp", "Figtree", "Host Grotesk", sans-serif; font-weight: 700; letter-spacing: -0.01em; }
 .dreams { font-size: 0.62em; font-weight: 300; vertical-align: 0.12em; }
+
+/* About view: the history list, compact */
+.aboutJobs { gap: 10px; margin-top: 8px; align-items: center; }
+.aboutJobs li { flex-direction: row; gap: 14px; align-items: baseline; }
+.aboutJobs .company { font-size: 16px; }
+.aboutJobs .role, .aboutJobs .dates { font-size: 14px; color: var(--ink-soft); }
+/* Contact view: the links keep their one-line, big-link look */
+.view .inline.big.reach { justify-content: center; }
