@@ -183,6 +183,20 @@ a:focus-visible {
 .withCaption .label { grid-area: 1 / 2; }
 .withCaption .caption { grid-area: 2 / 2; margin-top: -0.7em; }
 
+/* hovered links grow (js/mouse.js animates --grow), pushing the items around them away */
+#projectList a {
+  font-size: calc(1em * var(--grow, 1));
+}
+
+#projectList .bubble {
+  height: calc(48px * var(--grow, 1));
+}
+
+#projectList .logo {
+  height: calc(40px * var(--grow, 1));
+  max-width: calc(96px * var(--grow, 1));
+}
+
 /* the centre list keeps the unfiltered list's height; the live list sits in the middle of it */
 .stack {
   display: grid;
