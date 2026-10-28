@@ -346,6 +346,8 @@
     // ---------------------------------------------------------------- Overhand (no content yet)
     overhand: {
       title: "Overhand",
+      logo: H + "overhand_logo.svg",
+      logoOnly: true,
       pages: [],
     },
 
