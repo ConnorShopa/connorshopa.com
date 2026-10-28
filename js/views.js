@@ -124,8 +124,8 @@
     html += "</div>";
     if (proj.download) { html += '<button type="button" class="lockBtn viewDownload">Download the app</button>'; }
     if (many) {
-      html += '<button type="button" class="viewNav prev" aria-label="Previous page" disabled' + (locked ? " hidden" : "") + ">" + CHEVRON("prev") + "</button>";
-      html += '<button type="button" class="viewNav next" aria-label="Next page"' + (locked ? " hidden" : "") + ">" + CHEVRON("next") + "</button>";
+      if (!proj.noNav) html += '<button type="button" class="viewNav prev" aria-label="Previous page" disabled' + (locked ? " hidden" : "") + ">" + CHEVRON("prev") + "</button>";
+      if (!proj.noNav) html += '<button type="button" class="viewNav next" aria-label="Next page"' + (locked ? " hidden" : "") + ">" + CHEVRON("next") + "</button>";
       html += '<div class="viewDots"' + (locked ? " hidden" : "") + ">";
       (locked ? [] : proj.pages).forEach(function (_, i) {
         html += '<button type="button" class="viewDot" data-page="' + i + '" aria-label="Page ' + (i + 1) + " of " + proj.pages.length + '"' + (i === 0 ? ' aria-current="true"' : "") + "></button>";

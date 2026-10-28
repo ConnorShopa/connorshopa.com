@@ -198,8 +198,8 @@
     habbot: {
       title: "Habbot",
       logoOnly: true,
+      noNav: true, // no side chevrons (the pages will be moved through another way)
       bgImage: A + "habbotAssets/grass.jpg", // behind the first page only: sharp on the right...
-      bgImageBlur: A + "habbotAssets/grass_blur.jpg", // ...blurred on the left
       accent: "#FA983A", // the orange of its underline: dots, eyebrow markers, the active page dot
       bg: "#FFFAF6",     // the paper from the app: the card's background (its link in index.html carries the same colour in data-bubble)
       // a fresh start (the previous 7 pages are saved in archive/habbot-view.js): a cover in the manner of the
