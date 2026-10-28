@@ -39,12 +39,12 @@
     var current = items();
     gsap.killTweensOf(current);
     popTl = gsap.timeline();
-    popTl.to(current, { scale: 0, opacity: 0, duration: t(0.18), ease: "back.in(1.2)", stagger: t(0.02), transformOrigin: "50% 50%" });
+    popTl.to(current, { scale: 0, opacity: 0, duration: t(0.12), ease: "back.in(1.2)", stagger: t(0.012), transformOrigin: "50% 50%" });
     popTl.add(function () {
       applyLayout();
       var next = items();
       gsap.set(next, { scale: 0, opacity: 0 });
-      popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.3), ease: "back.out(1.2)", stagger: t(0.03) });
+      popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "back.out(1.2)", stagger: t(0.018) });
     });
   }
 
@@ -79,8 +79,8 @@
     view._page = n;
 
     if (animate && old !== next && !reduce) {
-      gsap.fromTo(next, { autoAlpha: 0, x: 48 * dir }, { autoAlpha: 1, x: 0, duration: 0.4, ease: "power3.out" });
-      gsap.to(old, { autoAlpha: 0, x: -48 * dir, duration: 0.2, ease: "power2.in", onComplete: function () { old.classList.remove("is-on"); gsap.set(old, { clearProps: "opacity,visibility,transform" }); } });
+      gsap.fromTo(next, { autoAlpha: 0, x: 48 * dir }, { autoAlpha: 1, x: 0, duration: 0.28, ease: "power3.out" });
+      gsap.to(old, { autoAlpha: 0, x: -48 * dir, duration: 0.14, ease: "power2.in", onComplete: function () { old.classList.remove("is-on"); gsap.set(old, { clearProps: "opacity,visibility,transform" }); } });
     } else if (old !== next) {
       old.classList.remove("is-on");
     }
@@ -128,7 +128,7 @@
     gsap.fromTo(
       view,
       { autoAlpha: 0, scale: 0.12, x: 0, y: open.offY }, // zooms out of the dead centre of the screen
-      { autoAlpha: 1, scale: 1, x: 0, y: 0, duration: t(0.6), ease: "power3.out" }
+      { autoAlpha: 1, scale: 1, x: 0, y: 0, duration: t(0.36), ease: "power4.out" }
     );
     popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
@@ -147,7 +147,7 @@
     });
 
     var close = view.querySelector(".viewClose");
-    if (close) gsap.delayedCall(t(0.3), function () { close.focus({ preventScroll: true }); });
+    if (close) gsap.delayedCall(t(0.2), function () { close.focus({ preventScroll: true }); });
   }
 
   // opening another project from the gallery row while one is open: the old card shrinks away (the
@@ -161,7 +161,7 @@
       scale: 0.12,
       x: 0,
       y: current.offY,
-      duration: t(0.3),
+      duration: t(0.2),
       ease: "power3.in",
       onComplete: function () { old.hidden = true; stopMedia(old); },
     });
@@ -180,7 +180,7 @@
       scale: 0.12,
       x: 0,
       y: offY, // ...and back into the dead centre
-      duration: t(0.4),
+      duration: t(0.24),
       ease: "power3.in",
       onComplete: function () {
         view.hidden = true;
