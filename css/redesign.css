@@ -1255,7 +1255,7 @@ html.view-open .contactBlock {
 /* a dark fade over the photo, strongest on the left (where the text sits) and gone by the right, for legibility */
 .view.hasBgImage::after {
   content: "";
-  background: linear-gradient(to right, rgba(0, 14, 6, 0.72) 0%, rgba(0, 14, 6, 0.5) 30%, rgba(0, 14, 6, 0.18) 60%, rgba(0, 14, 6, 0) 85%);
+  background: linear-gradient(to right, rgba(0, 14, 6, 0.6) 0%, rgba(0, 14, 6, 0.42) 40%, rgba(0, 14, 6, 0.18) 72%, rgba(0, 14, 6, 0) 98%);
   -webkit-mask-image: none;
   mask-image: none;
 }
