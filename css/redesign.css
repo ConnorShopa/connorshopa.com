@@ -1515,8 +1515,6 @@ body { position: relative; }
 /* About: the "Professional history" label matches the Contact labels */
 .panelText:has(.aboutJobs) .eyebrow { font-size: 12px; letter-spacing: 0.08em; font-weight: 500; text-transform: uppercase; }
 
-/* the TouchTunes link in the About sentence is underlined */
-.panelText .lead a { text-decoration: underline; text-underline-offset: 0.12em; text-decoration-thickness: 1px; }
 
 /* Sketchbook / Micro + Motion: just the pictures, in a masonry grid that scrolls inside the card */
 .pg.gallery { grid-template-columns: minmax(0, 1fr); align-items: stretch; }
@@ -1553,9 +1551,7 @@ a:has(.spot) .bubble { margin-right: 10px; }
 /* Poll.in's logo is a small wordmark */
 .logo.pollin { height: 32px; width: auto; max-width: none; }
 
-/* links that leave the site get the ↗ arrow (LinkedIn has it in its text) */
-.panelText .lead a[target="_blank"]::after { content: "\2197"; content: "\2197" / ""; display: inline-block; margin-left: 0.15em; font-size: 0.7em; vertical-align: 0.3em; text-decoration: none; }
 
 
 /* the TouchTunes pin beside the name in the About sentence */
-.ttPin { display: inline-block; height: 1.05em; width: auto; vertical-align: -0.12em; margin-right: 0.05em; }
+.ttPin { display: inline-block; height: 0.8em; width: auto; vertical-align: -0.04em; margin-right: 0.12em; }
