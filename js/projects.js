@@ -222,7 +222,7 @@
           '<div class="coverWrap"><span class="trioPill">List</span><p class="coverLead">Keep track of your habbots visually</p></div>' +
           phone(A + "habbotAssets/app_screen01.png", "coverShot")),
         pg("cover",
-          '<div class="coverWrap"><span class="trioPill">Compile</span><p class="coverLead">Simple + Visual components</p><p class="coverText">Habbot uses abstract and visual elements to keep as much parity with my journaling as possible</p></div>' +
+          '<div class="coverWrap"><span class="trioPill">Compile</span><p class="coverLead">See your progress stack up</p><p class="coverLead">Find which habbots are most frequent</p></div>' +
           phone(A + "habbotAssets/app_screen03.png", "coverShot")),
         pg("media",
           media(pfig(A + "habbotAssets/app_screen01.png") + pfig(A + "habbotAssets/app_screen02.png") + pfig(A + "habbotAssets/app_screen03.png"))),
