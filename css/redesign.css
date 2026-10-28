@@ -197,13 +197,6 @@ a:focus-visible {
   margin-top: 40px;
 }
 
-.inline.reach li {
-  display: block; /* one per line (beats the generic .inline li further down) */
-}
-
-.inline.reach li::after {
-  content: none;
-}
 
 /* big statement under the name + tagline; the "3" is set larger than the words around it */
 .stat {
