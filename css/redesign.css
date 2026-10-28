@@ -125,7 +125,7 @@ a:focus-visible {
 /* big statement under the name + tagline; the "3" is set larger than the words around it */
 .stat {
   margin: 32px 0 20px;
-  font-size: 40px;
+  font-size: 26px;
   font-weight: 300;
   line-height: 1.15;
   letter-spacing: -0.02em;
@@ -133,9 +133,9 @@ a:focus-visible {
 }
 
 .stat .num {
-  font-size: 2.2em;
+  font-size: 2.6em;
   line-height: 0.8;
-  font-weight: 300;
+  font-weight: 600;
   vertical-align: -0.06em;
 }
 
@@ -354,7 +354,7 @@ a:focus-visible {
 
 @media (max-width: 500px) {
   .stat {
-    font-size: 26px;
+    font-size: 20px;
   }
 
   .inline.big {
