@@ -105,14 +105,35 @@
   }
 
   // Growing is real layout (font size + logo size follow the --grow variable in redesign.css),
-  // so neighbours are pushed away. While it animates, the box re-measures the link every frame.
+  // so neighbours are pushed away. To guarantee the hovered link itself never moves, we remember
+  // where its centre was before it grew and, every frame, translate it back onto that spot.
+  function pageCenter(link) {
+    var r = link.getBoundingClientRect();
+    return { x: r.left + r.width / 2 + window.scrollX, y: r.top + r.height / 2 + window.scrollY };
+  }
+
+  function holdInPlace(link) {
+    if (!link._anchor) return;
+    var c = pageCenter(link);
+    var x = gsap.getProperty(link, "x");
+    var y = gsap.getProperty(link, "y");
+    // c includes the current translate, so (c - translate) is where layout alone would put it
+    gsap.set(link, { x: link._anchor.x - (c.x - x), y: link._anchor.y - (c.y - y) });
+  }
+
+  function tick(link) {
+    holdInPlace(link);
+    if (currentLink === link) reposition();
+  }
+
   function grow(link) {
+    if (!link._anchor) link._anchor = pageCenter(link);
     gsap.to(link, {
       "--grow": GROW,
       duration: t(0.45),
       ease: "power3.out",
       overwrite: "auto",
-      onUpdate: function () { if (currentLink === link) reposition(); },
+      onUpdate: function () { tick(link); },
     });
   }
 
@@ -122,7 +143,11 @@
       duration: t(0.4),
       ease: "power3.out",
       overwrite: "auto",
-      onUpdate: function () { if (currentLink === link) reposition(); },
+      onUpdate: function () { tick(link); },
+      onComplete: function () {
+        gsap.set(link, { x: 0, y: 0 });
+        link._anchor = null;
+      },
     });
   }
 
