@@ -1216,3 +1216,13 @@ html.view-open .contactBlock {
     9px 14px 18px -2px rgba(0, 10, 4, 0.45),
     18px 26px 34px -8px rgba(0, 10, 4, 0.35);
 }
+
+/* the cover's left-hand content is a centred column, centred in its half of the card */
+.pg.cover .coverWrap {
+  align-items: center;
+  align-self: center;
+  justify-self: center;
+  text-align: center;
+}
+
+.pg.cover .coverHead { align-items: center; }
