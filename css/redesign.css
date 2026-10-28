@@ -148,10 +148,18 @@ a:focus-visible {
 .introTop {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px 48px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0 1.7em;
   width: 100%;
+}
+
+/* the same slash that runs through the rest of the site, between the about-me column and the contact column */
+.sep {
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: rgba(47, 39, 37, 0.12);
 }
 
 .who {
