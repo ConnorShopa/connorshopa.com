@@ -9,7 +9,8 @@
   };
 
   // ---- password-protected projects ----
-  var lockPage = function (proj) { return
+  var lockPage = function (proj) {
+    return (
     '<div class="pg one is-on"><div class="pgText lockBox">' +
     '<p class="body soft">Under NDA</p>' +
     '<form class="lockForm"><input class="lockInput" type="password" placeholder="Password" autocomplete="current-password" aria-label="Password">' +
@@ -17,7 +18,9 @@
     '<p class="lockMsg" role="alert"></p>' +
     '<p class="lockAsk"><a href="mailto:connorshopa@gmail.com">Email</a> or <a href="sms:+13432095337">text</a> me for the password</p>' +
     (proj.appLink ? '<a class="lockApp" href="' + proj.appLink + '" target="_blank" rel="noopener">Download the app &#8599;</a>' : "") +
-    '</div></div>'; };
+    '</div></div>'
+    );
+  };
 
   var unb64 = function (s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); };
 
