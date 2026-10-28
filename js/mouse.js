@@ -19,8 +19,8 @@
   var clamp = function (v, min, max) { return Math.max(min, Math.min(max, v)); };
 
   // ---- tuning ----
-  var PAD_X = 16;        // box padding around the link text
-  var PAD_Y = 6;
+  var PAD_X = 22;        // box padding around the link text
+  var PAD_Y = 10;
   var MAGNET = 0.5;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
   var MAX_PULL_X = 32;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 16;
@@ -32,7 +32,7 @@
   var DOT_SIZE = 32;
   // Corner radius follows the box's shape: a tall, squarish box is fully round (radius = half its height),
   // and as the box gets wider relative to its height the corners tighten, down to ROUND_WIDE of that.
-  var ROUND_WIDE = 0.45; // how round the widest boxes are (1 = full pill, lower = squarer)
+  var ROUND_WIDE = 0.75; // how round the widest boxes are (1 = full pill, lower = squarer)
   var WIDE_AT = 6;       // width / height at which a box counts as "widest"
   var DOT_FILL = "rgba(0, 0, 0, 0.10)";
   var DOT_BORDER = "rgba(0, 0, 0, 0)";
