@@ -1,15 +1,10 @@
 @import url(hostgrotesk.css);
 
 :root {
-  /* palette sampled from the reference image */
-  --bg: #EDEFF1;
-  --blue: #ADCDDA;
-  --red: #DD8881;
-  --orange: #EDB47D;
-  --yellow: #F5DC9C;
-  --purple: #AEA5C4;
-  --pink: #ECD7E6;
-  --ink: #030000;
+  /* black and white for layout. Palette to bring back later (from the reference image):
+     blue #ADCDDA, red #DD8881, orange #EDB47D, yellow #F5DC9C, purple #AEA5C4, pink #ECD7E6 */
+  --bg: #FFFFFF;
+  --ink: #000000;
 
   /* distance of the name from the top and left edges */
   --edge: 48px;
@@ -69,7 +64,7 @@ body {
   font-weight: 400;
   font-size: 16pt;
   line-height: 1.2;
-  color: rgba(3, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .history {
@@ -151,8 +146,9 @@ body {
   color: var(--ink) !important;
   text-decoration: none !important;
   border-radius: 2px;
-  box-shadow: 0 8px 14px rgba(3, 0, 0, 0.12);
-  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 30%);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
+  background-color: var(--bg);
+  border: 1px solid var(--ink);
 }
 
 .note:focus-visible {
@@ -160,12 +156,7 @@ body {
   outline-offset: 4px;
 }
 
-.note.blue { background-color: var(--blue); }
-.note.yellow { background-color: var(--yellow); }
-.note.orange { background-color: var(--orange); }
-.note.red { background-color: var(--red); }
-.note.purple { background-color: var(--purple); }
-.note.pink { background-color: var(--pink); }
+/* per-note colours (classes blue, yellow, orange, red, purple, pink) come back with the palette */
 
 .noteTitle {
   font-size: 20px;
@@ -208,7 +199,7 @@ body {
   width: 32px;
   height: 32px;
   margin: -13px 0 0 -13px;
-  background: rgba(5, 29, 47, 0.10);
+  background: rgba(0, 0, 0, 0.10);
   border-radius: 50%;
   pointer-events: none;
   transition: width 0.2s, height 0.2s;

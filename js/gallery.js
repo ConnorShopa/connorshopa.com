@@ -49,7 +49,7 @@
         scale: 1.1,
         y: -8,
         rotation: -rot(slot),
-        boxShadow: "0 18px 28px rgba(3, 0, 0, 0.2)",
+        boxShadow: "0 18px 28px rgba(0, 0, 0, 0.2)",
         ease: "power2.out",
       });
       gsap.to("#mouse-circle", { duration: 0.32, scale: 2 });
@@ -62,7 +62,7 @@
         scale: 1,
         y: 0,
         rotation: 0,
-        boxShadow: "0 8px 14px rgba(3, 0, 0, 0.12)",
+        boxShadow: "0 8px 14px rgba(0, 0, 0, 0.12)",
         ease: "power2.out",
       });
       gsap.to("#mouse-circle", { duration: 0.32, scale: 1 });

@@ -52,11 +52,11 @@ $(document).ready(function () {
 
         // Apply hover animations
         gsap.to("#mouse-circle", { duration: 0.32, scale: 1.6 });
-        $(this).css("color", "#3C77BC");
+        $(this).css("color", "#000000");
         $(this).css("text-decoration", "underline");
 
         // Add a black border to the mouse circle
-        mouseCircle.style.border = "0.1px solid #3C77BC";
+        mouseCircle.style.border = "0.1px solid #000000";
         mouseCircle.style.background = "none";
         mouseCircle.style.borderRadius = "100px";
       },
@@ -66,12 +66,12 @@ $(document).ready(function () {
 
         // Apply hover out animations
         gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
-        $(this).css("color", "#03131F");
+        $(this).css("color", "#000000");
         $(this).css("text-decoration", "none");
 
         // Remove the black border on un-hover
         mouseCircle.style.border = "none";
-        mouseCircle.style.background = "rgba(5, 29, 47, 0.10)";
+        mouseCircle.style.background = "rgba(0, 0, 0, 0.10)";
       }
     );
 
