@@ -132,9 +132,6 @@ a:focus-visible {
   font-size: 20px;
   line-height: 2.4;                 /* the two lines sit further apart */
   color: rgba(0, 0, 0, 0.5);        /* lighter than the rest of the page */
-  width: calc(100vw - 48px - 15px); /* breaks out of the reading width: spans the screen (page padding + scrollbar gutter) */
-  text-align: justify;
-  text-align-last: justify;         /* each of the two lines is spread edge to edge */
 }
 
 /* big statement under the name + tagline; the "3" is set larger than the words around it */
