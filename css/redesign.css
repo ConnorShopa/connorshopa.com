@@ -1055,40 +1055,89 @@ html.view-open .contactBlock {
 
 .stickyDots { display: block; color: var(--accent, var(--ink)); }
 
-/* an iPhone frame around a screenshot: dark bezel, rounded screen, dynamic island */
+/* an iPhone frame around a screenshot: brushed titanium rim, thin black bezel, glass, dynamic island, side buttons */
 .phone {
   position: relative;
   box-sizing: border-box;
   height: 100%;
   max-width: 100%;
   aspect-ratio: 0.475;
-  padding: 9px;
-  background: #151516;
-  border-radius: 50px;
-  box-shadow: inset 0 0 0 1.5px #3a3a3d, 0 18px 40px -16px rgba(47, 39, 37, 0.35), 0 4px 10px rgba(47, 39, 37, 0.1);
+  padding: 11px;
+  border-radius: 56px;
+  background: linear-gradient(145deg, #eceae5 0%, #a19f99 18%, #dad8d3 40%, #8d8b86 68%, #d3d1cc 88%, #a7a59f 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+    inset 0 0 2px 1px rgba(0, 0, 0, 0.25),
+    0 30px 50px -22px rgba(47, 39, 37, 0.45),
+    0 6px 14px rgba(47, 39, 37, 0.14);
+}
+
+/* the black bezel between the titanium rim and the glass */
+.phone::before {
+  content: "";
+  position: absolute;
+  inset: 3.5px;
+  border-radius: 53px;
+  background: #050506;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .pgMedia .phone img,
 .phone img {
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
   max-width: none;
   max-height: none;
   object-fit: cover;
-  border-radius: 41px;
+  border-radius: 45px;
   box-shadow: none;
+}
+
+/* a faint reflection across the glass */
+.phoneGlare {
+  position: absolute;
+  inset: 11px;
+  border-radius: 45px;
+  background: linear-gradient(118deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 22%, rgba(255, 255, 255, 0) 38%);
+  pointer-events: none;
 }
 
 .phoneIsland {
   position: absolute;
-  top: 19px;
+  top: 22px;
   left: 50%;
   translate: -50% 0;
-  width: 31%;
-  height: 3.4%;
+  width: 29%;
+  height: 3.3%;
   background: #000;
   border-radius: 999px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* action + volume buttons on the left, power on the right */
+.phoneBtn {
+  position: absolute;
+  width: 3px;
+  background: linear-gradient(to right, #8e8c87, #d9d7d2 60%, #a3a19b);
+}
+
+.phoneBtn.l {
+  left: -2.5px;
+  top: 13%;
+  height: 22%;
+  border-radius: 2px 0 0 2px;
+  -webkit-mask: linear-gradient(to bottom, #000 0 22%, transparent 22% 38%, #000 38% 69%, transparent 69% 77%, #000 77% 100%);
+  mask: linear-gradient(to bottom, #000 0 22%, transparent 22% 38%, #000 38% 69%, transparent 69% 77%, #000 77% 100%);
+}
+
+.phoneBtn.r {
+  right: -2.5px;
+  top: 21%;
+  height: 8%;
+  border-radius: 0 2px 2px 0;
+  background: linear-gradient(to left, #8e8c87, #d9d7d2 60%, #a3a19b);
 }
 
 .coverWrap {

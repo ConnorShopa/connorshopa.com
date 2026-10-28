@@ -19,7 +19,7 @@
   }
   // a screenshot inside an iPhone frame
   function phone(src, cls) {
-    return '<div class="phone' + (cls ? " " + cls : "") + '"><img src="' + src + '" alt="" loading="lazy" decoding="async"><i class="phoneIsland"></i></div>';
+    return '<div class="phone' + (cls ? " " + cls : "") + '"><img src="' + src + '" alt="" loading="lazy" decoding="async"><i class="phoneGlare"></i><i class="phoneIsland"></i><i class="phoneBtn l"></i><i class="phoneBtn r"></i></div>';
   }
   function pfig(src) { return "<figure>" + phone(src) + "</figure>"; }
   function fact(label, value) { return '<div class="fact"><p class="eyebrow">' + label + '</p><p class="sub">' + value + "</p></div>"; }
