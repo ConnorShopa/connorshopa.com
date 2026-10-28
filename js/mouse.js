@@ -30,7 +30,10 @@
   var MORPH_TIME = 0.4;  // how long the dot takes to become a box (and back)
 
   var DOT_SIZE = 32;
-  var RADIUS_PCT = 0.14; // corner radius as a share of the box's width, so every link feels the same (capped at a full pill)
+  // Corner radius follows the box's shape: a tall, squarish box is fully round (radius = half its height),
+  // and as the box gets wider relative to its height the corners tighten, down to ROUND_WIDE of that.
+  var ROUND_WIDE = 0.45; // how round the widest boxes are (1 = full pill, lower = squarer)
+  var WIDE_AT = 6;       // width / height at which a box counts as "widest"
   var DOT_FILL = "rgba(0, 0, 0, 0.10)";
   var DOT_BORDER = "rgba(0, 0, 0, 0)";
   var BOX_FILL = "#F4F4F4";
@@ -65,7 +68,8 @@
   function morphToBox() {
     var w = base.width + PAD_X * 2;
     var h = base.height + PAD_Y * 2;
-    var radius = Math.min(w * RADIUS_PCT, h / 2);
+    var shape = Math.min(1, Math.max(0, (w / h - 1) / (WIDE_AT - 1))); // 0 = squarish, 1 = very wide
+    var radius = (h / 2) * (1 - shape * (1 - ROUND_WIDE));
     // icon-only buttons (the view's close button and page chevrons) get a true circle around the icon instead of a pill
     if (currentLink && (currentLink.classList.contains("viewClose") || currentLink.classList.contains("viewNav"))) {
       w = h = Math.max(base.width, base.height) + 8;
