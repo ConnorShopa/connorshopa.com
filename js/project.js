@@ -456,6 +456,28 @@
     if (cue && open) step(1);
   });
 
+
+  // ?debug=1 on the page address shows a small readout (bottom left) of what moves when you scroll: send a screenshot of it
+  if (/[?&]debug=1/.test(location.search)) {
+    var hud = document.createElement("pre");
+    hud.style.cssText = "position:fixed;left:8px;bottom:8px;z-index:99999;margin:0;padding:8px 10px;font:11px/1.4 monospace;background:rgba(0,0,0,.8);color:#9f9;border-radius:6px;pointer-events:none;white-space:pre";
+    document.body.appendChild(hud);
+    var chip = document.querySelector(".filters");
+    var tick = function () {
+      var vv = window.visualViewport;
+      var v = open && open.view ? open.view.getBoundingClientRect() : null;
+      hud.textContent =
+        "open: " + !!open + "  lockY: " + lockY + "\n" +
+        "scrollY: " + window.pageYOffset + "  html.scrollTop: " + document.documentElement.scrollTop + "  body.scrollTop: " + document.body.scrollTop + "\n" +
+        "visualViewport top/left: " + (vv ? vv.offsetTop.toFixed(1) + " / " + vv.offsetLeft.toFixed(1) + "  scale " + vv.scale : "n/a") + "\n" +
+        "body position/top: " + getComputedStyle(document.body).position + " / " + getComputedStyle(document.body).top + "\n" +
+        "chips top: " + (chip ? chip.getBoundingClientRect().top.toFixed(1) : "-") + "\n" +
+        "card top: " + (v ? v.top.toFixed(1) : "-") + "  page: " + (open ? open.view._page : "-");
+      requestAnimationFrame(tick);
+    };
+    tick();
+  }
+
   document.querySelectorAll(".viewNav.prev").forEach(function (b) { b.addEventListener("click", function () { step(-1); }); });
   document.querySelectorAll(".viewNav.next").forEach(function (b) { b.addEventListener("click", function () { step(1); }); });
   // dots are added after load for locked projects, so they are handled by delegation
