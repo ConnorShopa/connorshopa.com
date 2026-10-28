@@ -1551,4 +1551,4 @@ body { position: relative; }
 a:has(.spot) .bubble { margin-right: 10px; }
 
 /* Poll.in's logo is a small wordmark */
-.logo.pollin { height: 22px; width: auto; max-width: none; }
+.logo.pollin { height: 32px; width: auto; max-width: none; }
