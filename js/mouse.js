@@ -249,7 +249,7 @@
       snapTo(from);
       ctl = gsap.to(dot, {
         x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: to.shadow || CARD_SHADOW,
-        duration: t(dur), ease: "power4.out", onComplete: done,
+        duration: t(dur), ease: "back.out(1.3)", onComplete: done, // a subtle overshoot, then it settles
       });
     },
     // the card is showing on top of the (now identical) grey box: the dot turns back into the pointer dot, unseen
@@ -269,7 +269,7 @@
       snapTo(from);
       ctl = gsap.to(dot, {
         x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: BOX_SHADOW,
-        duration: t(dur), ease: "power3.inOut",
+        duration: t(dur), ease: "none", // linear on the way back
         onComplete: function () { unlock(); if (done) done(); },
       });
     },

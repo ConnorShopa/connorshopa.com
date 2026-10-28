@@ -195,7 +195,20 @@
       if (!open || open.view !== view) return;
       gsap.set(view, { autoAlpha: 1 });
       if (window.bubble) window.bubble.handoff();
-      gsap.to(view.children, { opacity: 1, duration: t(0.15), clearProps: "opacity" });
+      var head = view.querySelector(".viewHead");
+      var rest = Array.prototype.filter.call(view.children, function (el) { return el !== head; });
+      gsap.to(rest, { opacity: 1, duration: t(0.15), clearProps: "opacity" });
+      if (head) {
+        // the project's logo flies out of the middle of the card to its place in the corner
+        gsap.set(head, { clearProps: "transform,opacity" });
+        var hr = head.getBoundingClientRect();
+        var cr2 = view.getBoundingClientRect();
+        gsap.fromTo(
+          head,
+          { x: cr2.left + cr2.width / 2 - (hr.left + hr.width / 2), y: cr2.top + cr2.height / 2 - (hr.top + hr.height / 2), scale: 1.6, opacity: 0, transformOrigin: "50% 50%" },
+          { x: 0, y: 0, scale: 1, opacity: 1, duration: t(0.45), ease: "power3.out", clearProps: "transform,opacity" }
+        );
+      }
     };
     if (window.bubble) window.bubble.grow(to, b, 0.38, reveal); else reveal();
     popGallery(function () {
