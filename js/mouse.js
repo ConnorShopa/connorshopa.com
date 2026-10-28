@@ -34,10 +34,10 @@
   // and as the box gets wider relative to its height the corners tighten, down to ROUND_WIDE of that.
   var ROUND_WIDE = 0.75; // how round the widest boxes are (1 = full pill, lower = squarer)
   var WIDE_AT = 6;       // width / height at which a box counts as "widest"
-  var DOT_FILL = "rgba(0, 0, 0, 0.10)";
-  var DOT_BORDER = "rgba(0, 0, 0, 0)";
+  var DOT_FILL = "rgba(47, 39, 37, 0.10)";
+  var DOT_BORDER = "rgba(47, 39, 37, 0)";
   var BOX_FILL = "#F4F4F4";
-  var BOX_BORDER = "rgba(0, 0, 0, 0.45)";
+  var BOX_BORDER = "rgba(47, 39, 37, 0.45)";
 
   var mouse = { x: 0, y: 0 };
   var seenMouse = false;

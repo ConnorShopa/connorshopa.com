@@ -4,8 +4,8 @@
   /* black and white for layout. Palette to bring back later (from the reference image):
      blue #ADCDDA, red #DD8881, orange #EDB47D, yellow #F5DC9C, purple #AEA5C4, pink #ECD7E6 */
   --bg: #FFFFFF;
-  --ink: #000000;
-  --ink-soft: rgba(0, 0, 0, 0.6);
+  --ink: #2F2725;
+  --ink-soft: rgba(47, 39, 37, 0.6);
 }
 
 * {
@@ -131,11 +131,11 @@ a:focus-visible {
   margin: 0;
   font-size: 20px;
   line-height: 2.4;                 /* the two lines sit further apart */
-  color: rgba(0, 0, 0, 0.5);        /* lighter than the rest of the page */
+  color: rgba(47, 39, 37, 0.5);        /* lighter than the rest of the page */
   white-space: nowrap;              /* each of the two lines stays on one line */
 }
 
-/* links inside the about-me line stay full black against the lighter text */
+/* links inside the about-me line stay full ink against the lighter text */
 .tagline a {
   color: var(--ink);
 }
@@ -178,7 +178,7 @@ a:focus-visible {
   content: "/";
   content: "/" / "";
   margin: 0 1.1em; /* air between the items on a row */
-  color: rgba(0, 0, 0, 0.12); /* 12% black */
+  color: rgba(47, 39, 37, 0.12); /* 12% black */
   text-shadow: none; /* the list's text shadow doesn't apply to the slashes */
 }
 
@@ -286,7 +286,7 @@ a:focus-visible {
   display: block;
   height: 22px;
   width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
+  filter: drop-shadow(0 2px 4px rgba(47, 39, 37, 0.22));
 }
 
 .logo.wide {
@@ -299,7 +299,7 @@ a:focus-visible {
 
 .logo {
   display: block;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
+  filter: drop-shadow(0 2px 4px rgba(47, 39, 37, 0.22));
   width: auto;
   height: 45px;
   max-width: 112px;
@@ -314,7 +314,7 @@ a:focus-visible {
 
 /* subtle drop shadow on the centre list's text */
 #projectList {
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+  text-shadow: 0 2px 5px rgba(47, 39, 37, 0.18);
 }
 
 /* Seeds: a smaller logo on the left; the title with "design system" underneath it forms a column
@@ -380,7 +380,7 @@ a:focus-visible {
   position: relative;
   color: var(--bg);
   background: var(--ink);
-  box-shadow: 0 6px 14px -4px rgba(0, 0, 0, 0.28), 0 2px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 14px -4px rgba(47, 39, 37, 0.28), 0 2px 4px rgba(47, 39, 37, 0.12);
 }
 
 /* 1px stroke on the active chip: 80% white at the top fading to 0% at the bottom */
@@ -465,8 +465,8 @@ a:focus-visible {
   z-index: 0;
   width: 32px;
   height: 32px;
-  background: rgba(0, 0, 0, 0.10);
-  border: 1px solid rgba(0, 0, 0, 0);
+  background: rgba(47, 39, 37, 0.10);
+  border: 1px solid rgba(47, 39, 37, 0);
   border-radius: 16px;
   pointer-events: none;
   will-change: transform, width, height;
@@ -496,7 +496,7 @@ a:focus-visible {
   box-sizing: border-box;
   border-radius: 64px;
   background: #FFFFFF;
-  box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.14), 0 4px 14px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 24px 60px -24px rgba(47, 39, 37, 0.14), 0 4px 14px rgba(47, 39, 37, 0.05);
 }
 
 .view[hidden] {
@@ -743,7 +743,7 @@ html.view-open #mouse-circle {
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(47, 39, 37, 0.2);
   cursor: pointer;
 }
 
