@@ -312,14 +312,14 @@ a:focus-visible {
   box-shadow: 0 6px 14px -4px rgba(0, 0, 0, 0.28), 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
-/* 1px stroke on the active chip: 12% white at the top fading to 0% at the bottom */
+/* 1px stroke on the active chip: 60% white at the top fading to 0% at the bottom */
 .pill[aria-pressed="true"]::before {
   content: "";
   position: absolute;
   inset: 0;
   padding: 1px;
   border-radius: inherit;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
