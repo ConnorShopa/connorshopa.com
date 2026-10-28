@@ -1340,7 +1340,7 @@ html.view-open .contactBlock {
 .pg.cover .aboutBtn:hover { background: #051324; color: #FFFAF6; } /* Midnight, the app's black */
 
 /* the phone sits nearer the right edge */
-.pg.cover .coverShot { left: 110px; }
+.pg.cover .coverShot { left: 80px; }
 
 /* vertical views clip their pages to the card as they scroll past */
 .view.vertical { overflow: hidden; }
@@ -1402,7 +1402,7 @@ html.view-open .contactBlock {
 .view.vertical .viewBody { clip-path: inset(-108px -72px -56px -72px round 48px); }
 
 /* a larger phone: it is taller than the content area (which is inset more than the card's grass frame), centred on the card */
-.pg.cover .coverShot { height: calc(100% + 100px); }
+.pg.cover .coverShot { height: calc(100% + 50px); }
 
 /* each page sets its phone down at a slightly different angle */
 .view.hasBgImage.onFirst .pg:nth-child(1) .coverShot { transform: rotate(1.5deg); }
