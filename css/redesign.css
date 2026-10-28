@@ -162,7 +162,7 @@ a:focus-visible {
 .inline li::after {
   content: "/";
   content: "/" / "";
-  margin: 0 1.1em;
+  margin: 0 1.7em; /* more air between the items on a row */
   color: rgba(0, 0, 0, 0.12); /* 12% black */
   text-shadow: none; /* the list's text shadow doesn't apply to the slashes */
 }
@@ -180,7 +180,7 @@ a:focus-visible {
 
 .inline.big {
   font-size: 40px;
-  line-height: 2.1;
+  line-height: 2.7; /* more air between the rows of the centre list */
   letter-spacing: -0.02em;
 }
 
@@ -306,8 +306,24 @@ a:focus-visible {
 }
 
 .pill[aria-pressed="true"] {
+  position: relative;
   color: var(--bg);
   background: var(--ink);
+  box-shadow: 0 6px 14px -4px rgba(0, 0, 0, 0.28), 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* 1px stroke on the active chip: 12% white at the top fading to 0% at the bottom */
+.pill[aria-pressed="true"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
 }
 
 .pill:focus-visible {
