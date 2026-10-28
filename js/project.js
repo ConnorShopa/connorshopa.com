@@ -14,6 +14,7 @@
   var GAP = 28;    // space between the card and the minimised gallery
   var CARD_RATIO = 3 / 2; // the expanded card's width : height
   var INTRO_GAP = 16;  // the gap left above the filter chips once the about-me lines are gone
+  var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
   var BOTTOM_ROOM = 160; // space kept under the card for the gallery row
 
@@ -237,6 +238,12 @@
     view.hidden = false;
     document.documentElement.style.overflow = "hidden";
     document.documentElement.classList.add("view-open");
+    // pin the page where it is: a fixed body can't be scrolled by anything (wheel, touch, keys, drags, momentum)
+    if (lockY === null) {
+      lockY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var bs = document.body.style;
+      bs.position = "fixed"; bs.top = -lockY + "px"; bs.left = "0"; bs.right = "0"; bs.width = "100%";
+    }
     gsap.set(view, { xPercent: -50, yPercent: -50 });
 
     // The card starts just under the intro (name, tagline, stat, chips) and runs down the screen,
@@ -375,6 +382,12 @@
     var finish = function () {
       view.hidden = true;
       document.documentElement.style.overflow = "";
+      if (lockY !== null) { // let the page scroll again, exactly where it was
+        var y = lockY; lockY = null;
+        var bs = document.body.style;
+        bs.position = ""; bs.top = ""; bs.left = ""; bs.right = ""; bs.width = "";
+        window.scrollTo(0, y);
+      }
       document.documentElement.classList.remove("view-open");
       stopMedia(view);
       gsap.set(view.children, { clearProps: "opacity" });
