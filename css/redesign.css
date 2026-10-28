@@ -986,8 +986,9 @@ html.view-open #mouse-circle {
   content: none;
 }
 
-.inline.big li {
-  padding-inline: 5em;
+/* the space between items on a row (the id rule above sets the items' own padding, so the room is a gap instead) */
+.inline.big {
+  column-gap: clamp(40px, 8vw, 140px);
 }
 
 #projectList li.row-break,
