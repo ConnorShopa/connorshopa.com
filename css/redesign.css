@@ -877,6 +877,38 @@ html.view-open #mouse-circle {
   cursor: url("cursor_linkHover.png"), pointer;
 }
 
+.lockForm.has-error {
+  animation: lockShake 0.32s ease;
+}
+
+.lockForm.has-error .lockInput {
+  border-color: #C9524A;
+  background: rgba(201, 82, 74, 0.08);
+}
+
+@keyframes lockShake {
+  20% { transform: translateX(-7px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(2px); }
+}
+
+.lockForm.has-error ~ .lockMsg {
+  color: #C9524A;
+}
+
+.lockAsk {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.lockAsk a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .lockMsg {
   min-height: 1.4em;
   margin: 0;

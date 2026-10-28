@@ -14,7 +14,9 @@
     '<p class="body soft">This work is password protected.</p>' +
     '<form class="lockForm"><input class="lockInput" type="password" placeholder="Password" autocomplete="current-password" aria-label="Password">' +
     '<button type="submit" class="lockBtn">Unlock</button></form>' +
-    '<p class="lockMsg" role="alert"></p></div></div>';
+    '<p class="lockMsg" role="alert"></p>' +
+    '<p class="lockAsk">Need the password? <a href="mailto:connorshopa@gmail.com">Email me</a> or <a href="tel:+13432095337">call 343.209.5337</a>.</p>' +
+    '</div></div>';
 
   var unb64 = function (s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); };
 
@@ -48,10 +50,12 @@
     var form = sec.querySelector(".lockForm");
     var input = sec.querySelector(".lockInput");
     var msg = sec.querySelector(".lockMsg");
+    input.addEventListener("input", function () { form.classList.remove("has-error"); msg.textContent = ""; });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!input.value) return;
       msg.textContent = "";
+      form.classList.remove("has-error");
       decryptBundle(slug, input.value).then(function (pages) {
         var body = sec.querySelector(".viewBody");
         body.innerHTML = pages.map(function (page, i) {
@@ -73,6 +77,9 @@
         sec._page = 0;
       }).catch(function (err) {
         msg.textContent = err && err.message === "missing" ? "Nothing has been added here yet." : "That password didn\u2019t work.";
+        form.classList.remove("has-error");
+        void form.offsetWidth; // restart the shake if it was already showing
+        form.classList.add("has-error");
         input.select();
       });
     });
