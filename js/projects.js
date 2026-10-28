@@ -197,6 +197,7 @@
     habbot: {
       title: "Habbot",
       logo: H + "habbot_projectImage.svg",
+      icon: H + "habbot_icon.svg",
       logoOnly: true,
       pages: [
         pg("two",

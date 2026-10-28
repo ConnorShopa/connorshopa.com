@@ -22,7 +22,9 @@
     sec.hidden = true;
 
     var html = '<div class="viewHead' + (proj.wordmark ? " stacked" : "") + '">';
-    if (proj.logo) html += '<img class="viewLogo" src="' + proj.logo + '" alt="">';
+    // an icon on top of the logo (Habbot) goes in a small column
+    if (proj.icon) html += '<span class="viewStack"><img class="viewIcon" src="' + proj.icon + '" alt=""><img class="viewLogo" src="' + proj.logo + '" alt=""></span>';
+    else if (proj.logo) html += '<img class="viewLogo" src="' + proj.logo + '" alt="">';
     // a wordmark replaces the written title (which stays for screen readers) and sits under the icon
     if (proj.wordmark) html += '<img class="viewWordmark" src="' + proj.wordmark + '" alt="">';
     html += '<h2 id="' + id + '-title" class="viewTitle' + (proj.logoOnly || proj.wordmark ? " sr-only" : "") + '"></h2></div>';

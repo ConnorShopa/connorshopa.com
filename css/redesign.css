@@ -232,6 +232,16 @@ a:focus-visible {
 
 .stackLogo .bubble { margin-right: 0; height: auto; }
 
+/* Habbot: its small orange icon sits above the wordmark */
+.markIcon {
+  display: block;
+  height: 20px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
+}
+
+.stackLogo.small .logo { height: 32px; }
+
 .stackLogo .logo {
   height: 48px;
   max-width: none;
@@ -487,6 +497,21 @@ a:focus-visible {
 .viewWordmark {
   display: block;
   height: 16px;
+  width: auto;
+}
+
+.viewStack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.viewStack .viewLogo { height: 28px; }
+
+.viewIcon {
+  display: block;
+  height: 12px;
   width: auto;
 }
 
