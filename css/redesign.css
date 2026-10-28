@@ -11,8 +11,8 @@
   --pink: #ECD7E6;
   --ink: #030000;
 
-  /* distance of the name from the top and left edges (shrinks on narrow screens) */
-  --edge: min(480px, 40vw);
+  /* distance of the name from the top and left edges */
+  --edge: 48px;
 }
 
 * {
