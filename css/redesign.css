@@ -1504,3 +1504,6 @@ body { position: relative; }
 /* Contact: dead centre of the screen, with more air between the three */
 .panelText:has(.contactCol2) { position: fixed; inset: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); width: max-content; }
 .contactCol2 { gap: 44px; }
+
+/* About: dead centre of the screen too (the history stays a left-aligned block inside it) */
+.panelText:has(.aboutJobs) { position: fixed; inset: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); width: max-content; max-width: 92vw; }
