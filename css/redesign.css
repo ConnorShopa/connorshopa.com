@@ -1438,3 +1438,6 @@ html.view-open .filters { position: relative; z-index: 20; }
 
 /* each tagline line is its own block (so they can move one at a time) */
 .tagline .tl { display: block; }
+
+/* Micro + Motion: blue and bold */
+.hop, .hopLetter { color: #2563EB; font-weight: 600; }
