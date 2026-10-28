@@ -1,13 +1,13 @@
-// "Micro + Motion": the + hops the way the dot in the old shopa logo does (animations/shopaAnimation.json),
+// "Micro + Motion": the whole string hops the way the dot in the old shopa logo does (animations/shopaAnimation.json),
 // rebuilt with GSAP. Hover plays it forward, leaving plays it back, like the Lottie did.
 (function () {
   var link = document.querySelector('#projectList a[data-view="micro"]');
-  var plus = link && link.querySelector(".plus");
+  var plus = link && link.querySelector(".hop");
   if (!plus || !window.gsap) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
   var F = function (frames) { return frames / 60; }; // the Lottie runs at 60 fps
-  var HOP = 20;                                       // px the + rises at the top of the hop
+  var HOP = 24;                                       // px the text rises at the top of the hop
 
   gsap.set(plus, { transformOrigin: "50% 100%" });
 

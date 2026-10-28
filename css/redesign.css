@@ -994,7 +994,7 @@ html.view-open #mouse-circle {
   padding: 0;
 }
 
-/* the + in Micro + Motion hops (js/micro.js) */
-.plus {
+/* Micro + Motion hops as a whole (js/micro.js) */
+.hop {
   display: inline-block;
 }
