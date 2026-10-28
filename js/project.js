@@ -52,6 +52,7 @@
 
     view.hidden = false;
     document.documentElement.style.overflow = "hidden";
+    document.documentElement.classList.add("view-open");
     gsap.set(view, { xPercent: -50, yPercent: -50 });
 
     // the card's bottom edge once it has zoomed to full size. Worked out from its layout size, not its
@@ -102,6 +103,7 @@
       onComplete: function () {
         view.hidden = true;
         document.documentElement.style.overflow = "";
+        document.documentElement.classList.remove("view-open");
       },
     });
     popGallery(function () {

@@ -152,7 +152,7 @@
     hideCall = gsap.delayedCall(0.06, hideBox);
   }
 
-  document.querySelectorAll("a").forEach(function (link) {
+  document.querySelectorAll("a, .viewClose").forEach(function (link) {
     link.addEventListener("mouseenter", function () { showFor(link); });
     link.addEventListener("mouseleave", function () { unshrink(link); leave(); });
     link.addEventListener("focus", function () { showFor(link); });
