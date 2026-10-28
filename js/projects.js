@@ -365,6 +365,13 @@
     },
 
     // ---------------------------------------------------------------- Overhand (no content yet)
+    pollin: {
+      title: "Poll.in",
+      logo: H + "pollin_logo.svg",
+      logoOnly: true,
+      pages: [],
+    },
+
     overhand: {
       title: "Overhand",
       logo: H + "overhand_logo.svg",
