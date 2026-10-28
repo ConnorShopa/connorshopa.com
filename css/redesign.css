@@ -1226,3 +1226,6 @@ html.view-open .contactBlock {
 }
 
 .pg.cover .coverHead { align-items: center; }
+
+/* the Download button has no cursor bubble (js/mouse.js skips .dlBtn): it turns the project's orange on hover */
+.dlBtn:hover { background: var(--accent, var(--ink)); }

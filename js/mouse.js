@@ -50,7 +50,7 @@
   var hideCall = null;
   var locked = false;    // true while the project card is using the dot (see window.bubble below)
   var ctl = null;        // the tween that is growing / shrinking the dot
-  var SEL = "a, .viewClose, .viewNav, .pill, .lockBtn";
+  var SEL = "a, .viewClose, .viewNav, .pill, .lockBtn:not(.dlBtn)";
 
   // The dot is centred on its x / y; quickTo makes it trail whatever target we give it.
   gsap.set(dot, { xPercent: -50, yPercent: -50, autoAlpha: 0 });
