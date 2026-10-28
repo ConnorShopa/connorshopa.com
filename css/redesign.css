@@ -131,7 +131,7 @@ a:focus-visible {
   margin: 0;
   font-size: 20px;
   line-height: 2.4;                 /* the two lines sit further apart */
-  color: rgba(47, 39, 37, 0.5);        /* lighter than the rest of the page */
+  color: rgba(47, 39, 37, 0.7);        /* a softer shade of the ink */
   white-space: nowrap;              /* each of the two lines stays on one line */
 }
 
