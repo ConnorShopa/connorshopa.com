@@ -389,15 +389,26 @@ a:focus-visible {
   display: none;
 }
 
+/* the project's logo + name, top left of the card (the same lockup as its gallery link) */
+.viewHead {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .viewLogo {
   display: block;
-  margin-bottom: 8px;
+  width: 40px;
+  height: 40px;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
 
 .viewTitle {
   margin: 0;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: 300;
   letter-spacing: -0.02em;
 }
