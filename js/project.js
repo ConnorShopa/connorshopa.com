@@ -71,11 +71,23 @@
         });
         // ...and get sucked back to their own spot
         var others = Array.prototype.filter.call(next, function (el) { return el !== focusEl; });
-        popIn = gsap.to(others, { x: 0, y: 0, scale: 1, opacity: 1, duration: t(0.3), ease: "power2.out" });
+        // like gravity: the nearer a link is to the bubble the harder it is pulled, so it lands first;
+        // the further away, the later and the slower it falls into place
+        var tweens = [];
+        others.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          var len = Math.hypot(r.left + r.width / 2 - origin.x - gsap.getProperty(el, "x"), r.top + r.height / 2 - origin.y - gsap.getProperty(el, "y"));
+          var far = Math.min(len / 700, 1);
+          var delay = t(0.28 * far);
+          tweens.push(gsap.to(el, { scale: 1, opacity: 1, duration: t(0.2), delay: delay, ease: "power2.out" }));
+          tweens.push(gsap.to(el, { x: 0, y: 0, duration: t(0.28 + 0.22 * far), delay: delay, ease: "power2.in" }));
+        });
+        popIn = gsap.timeline();
+        tweens.forEach(function (tw) { popIn.add(tw, 0); });
         // the link that was open grows no sideways: it scales down from the centre of the bubble, in its own spot
         if (focusEl) {
-          gsap.set(focusEl, { x: 0, y: 0, scale: 1.8, opacity: 0, transformOrigin: "50% 50%" });
-          gsap.to(focusEl, { scale: 1, opacity: 1, duration: t(0.3), delay: t(0.08), ease: "power3.out" });
+          gsap.set(focusEl, { x: 0, y: 0, scale: 3, opacity: 0, transformOrigin: "50% 50%" });
+          gsap.to(focusEl, { scale: 1, opacity: 1, duration: t(0.3), delay: t(0.05), ease: "power3.out" });
         }
       } else {
         gsap.set(next, { scale: 0, opacity: 0 });
@@ -258,10 +270,10 @@
     // contents fade, then the card is swapped for the identical grey box, which shrinks into the bubble
     gsap.to(view.children, {
       opacity: 0,
-      duration: t(0.07),
+      duration: t(0.05),
       onComplete: function () {
         gsap.set(view, { autoAlpha: 0 });
-        if (window.bubble) window.bubble.shrink(fromCard, b, 0.28, finish); else finish();
+        if (window.bubble) window.bubble.shrink(fromCard, b, 0.2, finish); else finish();
       },
     });
     popGallery(function () {
