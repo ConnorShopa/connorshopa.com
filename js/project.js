@@ -37,17 +37,20 @@
   // Same pop out / pop in as the filter pills: items pop away, the gallery jumps to its new size
   // and place while they are invisible, then they pop back in.
   var popTl = null;
+  var popIn = null;
   function popGallery(applyLayout) {
     if (popTl) popTl.kill();
+    if (popIn) popIn.kill();
     var list = items();
     gsap.killTweensOf(list);
     popTl = gsap.timeline();
     popTl.to(list, { scale: 0, opacity: 0, duration: t(0.18), ease: "back.in(1.2)", stagger: t(0.02), transformOrigin: "50% 50%" });
     popTl.add(function () {
       applyLayout();
-      gsap.set(items(), { scale: 0, opacity: 0 });
+      var next = items();
+      gsap.set(next, { scale: 0, opacity: 0 });
+      popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.3), ease: "back.out(1.2)", stagger: t(0.03) });
     });
-    popTl.to(items, { scale: 1, opacity: 1, duration: t(0.3), ease: "back.out(1.2)", stagger: t(0.03) });
   }
 
   function show(trigger, view) {
