@@ -19,8 +19,8 @@
   var clamp = function (v, min, max) { return Math.max(min, Math.min(max, v)); };
 
   // ---- tuning ----
-  var PAD_X = 12;        // box padding around the link text
-  var PAD_Y = 4;
+  var PAD_X = 16;        // box padding around the link text
+  var PAD_Y = 8;
   var MAGNET = 0.5;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
   var MAX_PULL_X = 32;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 16;

@@ -159,6 +159,12 @@ a:focus-visible {
   display: inline-block; /* so items can move with transforms when the list is filtered */
 }
 
+/* The air between the rows lives on the items, not in the links' line height: a link is only as tall
+   as what you see (text + logo), so the hover bubble hugs it instead of being a tall, empty box. */
+#projectList li {
+  padding: 0.75em 0;
+}
+
 .inline li::after {
   content: "/";
   content: "/" / "";
@@ -180,7 +186,7 @@ a:focus-visible {
 
 .inline.big {
   font-size: 40px;
-  line-height: 2.7; /* more air between the rows of the centre list */
+  line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
