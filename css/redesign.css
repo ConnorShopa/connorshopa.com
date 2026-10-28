@@ -3,7 +3,8 @@
 :root {
   /* black and white for layout. Palette to bring back later (from the reference image):
      blue #ADCDDA, red #DD8881, orange #EDB47D, yellow #F5DC9C, purple #AEA5C4, pink #ECD7E6 */
-  --bg: #FFFFFF;
+  --page: #F2F2F2;  /* neutral grey ground so the white tiles read without outlines */
+  --bg: #FFFFFF;    /* tiles */
   --ink: #000000;
 
   --unit: 64px;   /* one grid cell */
@@ -26,8 +27,11 @@ body {
 }
 
 body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
   padding: 48px 24px;
-  background-color: var(--bg);
+  background-color: var(--page);
   color: var(--ink);
   font-family: "Host Grotesk", sans-serif;
 }
@@ -40,7 +44,7 @@ body {
   grid-auto-flow: dense;
   gap: var(--gap);
   justify-content: center;
-  max-width: 1200px;
+  width: min(100%, 840px);
   margin: 0 auto;
 }
 
@@ -70,9 +74,8 @@ body {
   padding: 12px;
   overflow: hidden;
   background-color: var(--bg);
-  border: 1px solid var(--ink);
   border-radius: 2px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 26px -10px rgba(0, 0, 0, 0.22), 0 2px 6px rgba(0, 0, 0, 0.06);
   font-size: 14px;
   line-height: 1.4;
   font-weight: 300;
@@ -82,12 +85,13 @@ a.tile:hover,
 a.tile:focus-visible {
   transform: scale(1.06);
   z-index: 3;
-  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 26px 36px -12px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
+/* keyboard focus: a soft ring instead of a hard outline */
 a.tile:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.5), 0 26px 36px -12px rgba(0, 0, 0, 0.28);
 }
 
 .company,
