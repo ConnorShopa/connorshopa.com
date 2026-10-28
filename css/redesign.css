@@ -120,6 +120,88 @@ body {
   }
 }
 
+.gallery {
+  margin-top: 64px;
+}
+
+.notes {
+  --note: 148px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--note));
+  gap: 20px;
+}
+
+.slot {
+  position: relative;
+  top: var(--dy, 0);
+  transform: rotate(calc(var(--rot, 0) * 1deg));
+}
+
+.note {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: var(--note);
+  aspect-ratio: 1;
+  padding: 16px;
+  font-family: "Host Grotesk", sans-serif;
+  color: var(--ink) !important;
+  text-decoration: none !important;
+  border-radius: 2px;
+  box-shadow: 0 8px 14px rgba(3, 0, 0, 0.12);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0) 30%);
+}
+
+.note:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.note.blue { background-color: var(--blue); }
+.note.yellow { background-color: var(--yellow); }
+.note.orange { background-color: var(--orange); }
+.note.red { background-color: var(--red); }
+.note.purple { background-color: var(--purple); }
+.note.pink { background-color: var(--pink); }
+
+.noteTitle {
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.noteCaption {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/* wide screens: the notes become a centre piece in the middle of the page */
+@media (min-width: 1280px) {
+  .gallery {
+    position: fixed;
+    inset: 0;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .notes {
+    --note: clamp(120px, 10.5vw, 168px);
+    grid-template-columns: repeat(3, var(--note));
+    gap: 16px;
+  }
+
+  .note {
+    pointer-events: auto;
+  }
+}
+
 #mouse-circle {
   z-index: 2;
   position: absolute;
