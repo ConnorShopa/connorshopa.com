@@ -1560,4 +1560,5 @@ a:has(.spot) .bubble { margin-right: 10px; }
 .sheepText { font-family: "Crimson Pro", Georgia, serif; font-weight: 600; background: linear-gradient(135deg, #16234D 0%, #3351B3 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
 a:has(.sheepText) .bubble { margin-right: 10px; }
 
-.logo.sheep { height: 38px; width: auto; max-width: none; }
+.logo.sheep { height: 22px; width: auto; max-width: none; }
+.sheepText { font-size: 1.15em; line-height: 1; }
