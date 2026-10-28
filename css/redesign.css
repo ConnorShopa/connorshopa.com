@@ -132,7 +132,6 @@ a:focus-visible {
   font-size: 20px;
   line-height: 2.4;                 /* the two lines sit further apart */
   color: rgba(47, 39, 37, 0.7);        /* a softer shade of the ink */
-  white-space: nowrap;              /* each of the two lines stays on one line */
 }
 
 /* links inside the about-me line stay full ink against the lighter text */
