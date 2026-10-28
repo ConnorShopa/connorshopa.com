@@ -1552,3 +1552,7 @@ a:has(.spot) .bubble { margin-right: 10px; }
 
 /* Poll.in's logo is a small wordmark */
 .logo.pollin { height: 32px; width: auto; max-width: none; }
+
+/* links that leave the site get the ↗ arrow (LinkedIn has it in its text) */
+#projectList a[target="_blank"]::after { content: "\2197"; content: "\2197" / ""; display: inline-block; margin-left: 0.2em; font-size: 0.5em; vertical-align: 1.1em; opacity: 0.6; }
+.panelText .lead a[target="_blank"]::after { content: "\2197"; content: "\2197" / ""; display: inline-block; margin-left: 0.15em; font-size: 0.7em; vertical-align: 0.3em; text-decoration: none; }
