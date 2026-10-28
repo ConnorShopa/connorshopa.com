@@ -1,6 +1,6 @@
 // Filter pills for the centre list.
-// Leaving items fade and drop, then the remaining items glide together to close the gap.
-// Items coming back fade in once the list has opened a space for them.
+// Leaving items pop out (shrink to nothing), then the remaining items glide together to close the gap.
+// Items coming back pop in once the list has opened a space for them.
 (function () {
   if (typeof gsap === "undefined") return;
 
@@ -14,13 +14,19 @@
   var t = function (seconds) { return reduce ? 0 : seconds; };
 
   // ---- tuning ----
-  var DROP_DISTANCE = 28;   // px a leaving item falls while it fades
-  var DROP_TIME = 0.3;
-  var DROP_STAGGER = 0.03;
-  var CONVERGE_TIME = 0.6;  // how long the rest of the list takes to close the gap
-  var ENTER_TIME = 0.45;
+  var POP_OUT_TIME = 0.28;
+  var POP_OUT_STAGGER = 0.03;
+  var POP_OUT_EASE = "back.in(1.7)";   // pulls back a touch before vanishing
+  var CONVERGE_TIME = 0.7;             // how long the rest of the list takes to close the gap
+  var CONVERGE_EASE = "power2.inOut";
+  var POP_IN_TIME = 0.5;
+  var POP_IN_EASE = "back.out(1.7)";   // overshoots a touch, then settles
+  var POP_IN_DELAY = 0.2;              // waits for the list to open a space
 
   var current = "all";
+
+  // items scale from their own centre
+  gsap.set(items, { transformOrigin: "50% 50%" });
 
   function matches(li, filter) {
     if (filter === "all") return true;
@@ -69,9 +75,9 @@
 
     var tl = gsap.timeline();
 
-    // 1. leaving items fade and drop where they are
+    // 1. leaving items pop out where they are
     if (leaving.length) {
-      tl.to(leaving, { opacity: 0, y: DROP_DISTANCE, duration: t(DROP_TIME), ease: "power2.in", stagger: t(DROP_STAGGER) });
+      tl.to(leaving, { scale: 0, opacity: 0, duration: t(POP_OUT_TIME), ease: POP_OUT_EASE, stagger: t(POP_OUT_STAGGER) });
     }
 
     // 2. remove them, let the list reflow, and glide the rest into the new layout
@@ -93,12 +99,12 @@
         var dx = from.left - to.left;
         var dy = from.top - to.top;
         if (dx || dy) {
-          gsap.fromTo(li, { x: dx, y: dy }, { x: 0, y: 0, duration: t(CONVERGE_TIME), ease: "power3.inOut" });
+          gsap.fromTo(li, { x: dx, y: dy }, { x: 0, y: 0, duration: t(CONVERGE_TIME), ease: CONVERGE_EASE });
         }
       });
 
       entering.forEach(function (li) {
-        gsap.fromTo(li, { opacity: 0, y: DROP_DISTANCE }, { opacity: 1, y: 0, duration: t(ENTER_TIME), ease: "power2.out", delay: t(0.15) });
+        gsap.fromTo(li, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: t(POP_IN_TIME), ease: POP_IN_EASE, delay: t(POP_IN_DELAY) });
       });
     });
   }
