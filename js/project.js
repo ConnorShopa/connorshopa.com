@@ -12,7 +12,7 @@
 
   var MINI = 0.4;  // how small the gallery gets while a view is open
   var GAP = 28;    // space between the card and the minimised gallery
-  var BOTTOM_ROOM = 100; // space kept under the card for the gallery row
+  var BOTTOM_ROOM = 160; // space kept under the card for the gallery row
 
   var open = null; // { view, trigger }
 

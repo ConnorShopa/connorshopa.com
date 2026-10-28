@@ -371,10 +371,10 @@ a:focus-visible {
   margin: 0;
   /* centred by GSAP (xPercent / yPercent -50 in js/project.js) so it can also animate x / y / scale */
   /* width is fixed here; the height is set in js/project.js so the card clears the whole intro */
-  width: min(94vw, 1400px);
+  width: min(86vw, 1100px);
   height: 440px;
   box-sizing: border-box;
-  padding: 48px 32px;
+  padding: 72px 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -393,8 +393,8 @@ a:focus-visible {
 /* the project's logo + name, top left of the card (the same lockup as its gallery link) */
 .viewHead {
   position: absolute;
-  top: 24px;
-  left: 32px;
+  top: 48px;
+  left: 56px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -421,8 +421,8 @@ a:focus-visible {
 
 .viewClose {
   position: absolute;
-  top: 20px;
-  right: 24px;
+  top: 44px;
+  right: 52px;
   width: 40px;
   height: 40px;
   padding: 0;
