@@ -39,7 +39,7 @@
   gsap.set(items, { transformOrigin: "50% 50%" });
 
   function matches(li, filter) {
-    if (filter === "all") return (li.getAttribute("data-category") || "") !== "contact"; // contact items only show under Contact
+    if (filter === "all") return true;
     return (li.getAttribute("data-category") || "").split(" ").indexOf(filter) !== -1;
   }
 
@@ -71,13 +71,10 @@
     layoutRows(list, items);
   }
 
-  function filter_isContact() { return current === "contact"; }
-
   function updateStatus() {
     if (!status) return;
     var n = items.filter(function (li) { return !isHidden(li); }).length;
-    var total = items.filter(function (li) { return li.getAttribute("data-category") !== "contact"; }).length;
-    status.textContent = filter_isContact() ? "Contact" : "Showing " + n + " of " + total;
+    status.textContent = "Showing " + n + " of " + items.length;
   }
 
   function setPressed(filter) {
