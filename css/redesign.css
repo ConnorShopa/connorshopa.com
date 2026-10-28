@@ -114,7 +114,7 @@ a:focus-visible {
 .inline li::after {
   content: "/";
   content: "/" / "";
-  margin: 0 0.6em;
+  margin: 0 1.1em;
   color: var(--ink-soft);
 }
 
@@ -130,8 +130,8 @@ a:focus-visible {
 }
 
 .inline.big {
-  font-size: 36px;
-  line-height: 1.7;
+  font-size: 28px;
+  line-height: 2.2;
   letter-spacing: -0.02em;
 }
 
@@ -144,8 +144,8 @@ a:focus-visible {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  margin-right: 10px;
+  height: 48px;
+  margin-right: 12px;
   vertical-align: middle;
 }
 
@@ -153,9 +153,8 @@ a:focus-visible {
   display: block;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
   width: auto;
-  height: auto;
-  max-width: 56px;
-  max-height: 24px;
+  height: 40px;
+  max-width: 96px;
 }
 
 .caption {
@@ -312,6 +311,6 @@ a:focus-visible {
 
 @media (max-width: 500px) {
   .inline.big {
-    font-size: 28px;
+    font-size: 22px;
   }
 }
