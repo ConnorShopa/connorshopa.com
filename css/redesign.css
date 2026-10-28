@@ -112,8 +112,9 @@ a:focus-visible {
   content: none;
 }
 
+/* !important so it beats the inline-block set on list items */
 .is-hidden {
-  display: none;
+  display: none !important;
 }
 
 .inline.big {
