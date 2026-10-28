@@ -994,7 +994,11 @@ html.view-open #mouse-circle {
   padding: 0;
 }
 
-/* Micro + Motion hops as a whole (js/micro.js) */
+/* Micro + Motion: each letter hops in turn (js/micro.js) */
 .hop {
+  display: inline-block;
+}
+
+.hopLetter {
   display: inline-block;
 }
