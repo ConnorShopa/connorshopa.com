@@ -183,9 +183,29 @@
     });
   }
 
+  // A view whose first page is a "scene" (Habbot: .coverReveal): before moving to the next page, scrolling or tapping the
+  // chevron moves the logo and CTA up (the column is centred, so the text growing below pushes them), brings the text
+  // in from below and updates the phone to another screen. Going back reverses it.
+  function sceneTo(view, k, animate) {
+    var wrap = view.querySelector(".coverReveal");
+    if (!wrap) return;
+    var txt = wrap.querySelector(".coverText"), alt = view.querySelector(".phoneAlt");
+    view._step = k;
+    gsap.killTweensOf([wrap, txt, alt]);
+    var on = k === 1, d = animate && !reduce ? 0.8 : 0;
+    gsap.to(wrap, { height: on ? "auto" : 0, marginTop: on ? 0 : -22, duration: d, ease: "power3.inOut" });
+    gsap.to(txt, { opacity: on ? 1 : 0, y: on ? 0 : 40, duration: d, ease: "power3.out", delay: on ? d * 0.15 : 0 });
+    if (alt) gsap.to(alt, { opacity: on ? 1 : 0, duration: d, ease: "power2.inOut" });
+  }
+
   function step(delta) {
     if (!open) return;
     var view = open.view;
+    if (view.querySelector(".coverReveal") && (view._page || 0) === 0) {
+      var k = view._step || 0;
+      if (delta > 0 && k === 0) { sceneTo(view, 1, true); return; }
+      if (delta < 0 && k === 1) { sceneTo(view, 0, true); return; }
+    }
     var n = (view._page || 0) + delta;
     if (n < 0 || n >= pagesOf(view).length) return;
     setPage(view, n, true, delta);
@@ -196,6 +216,7 @@
     open = { view: view, trigger: trigger };
     setPage(view, 0, false);
     view.classList.remove("imgIn"); // the background image fades in after the bubble hands over (see reveal)
+    sceneTo(view, 0, false);
 
     view.hidden = false;
     document.documentElement.style.overflow = "hidden";

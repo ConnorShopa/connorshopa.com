@@ -18,8 +18,8 @@
       (caption ? "<figcaption>" + caption + "</figcaption>" : "") + "</figure>";
   }
   // a screenshot inside an iPhone frame
-  function phone(src, cls) {
-    return '<div class="phone' + (cls ? " " + cls : "") + '"><img src="' + src + '" alt="" loading="lazy" decoding="async"><i class="phoneGlare"></i><i class="phoneIsland"></i><i class="phoneBtn l"></i><i class="phoneBtn r"></i></div>';
+  function phone(src, cls, extra) {
+    return '<div class="phone' + (cls ? " " + cls : "") + '"><img src="' + src + '" alt="" loading="lazy" decoding="async">' + (extra || "") + '<i class="phoneGlare"></i><i class="phoneIsland"></i><i class="phoneBtn l"></i><i class="phoneBtn r"></i></div>';
   }
   function pfig(src) { return "<figure>" + phone(src) + "</figure>"; }
   function fact(label, value) { return '<div class="fact"><p class="eyebrow">' + label + '</p><p class="sub">' + value + "</p></div>"; }
@@ -209,8 +209,9 @@
           '<div class="coverWrap"><div class="coverHead"><img class="coverMark" src="' + H + 'habbot_projectImage.svg" alt="Habbot">' +
           '<span class="stickyDots" data-d="16" data-fit></span></div>' +
           '<button type="button" class="lockBtn dlBtn">Download the app</button>' +
+          '<div class="coverReveal"><p class="coverText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div>' +
           '<button type="button" class="scrollCue" aria-label="Next page"><svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9.5l8 8 8-8"/></svg></button></div>' +
-          phone(A + "habbotAssets/app_screen01.png", "coverShot")),
+          phone(A + "habbotAssets/app_screen01.png", "coverShot", '<img class="phoneAlt" src="' + A + 'habbotAssets/app_screen02.png" alt="" decoding="async">')),
         pg("media",
           media(pfig(A + "habbotAssets/app_screen01.png") + pfig(A + "habbotAssets/app_screen02.png") + pfig(A + "habbotAssets/app_screen03.png"))),
         pg("media",

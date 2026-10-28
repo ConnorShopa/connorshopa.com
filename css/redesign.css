@@ -1276,3 +1276,17 @@ html.view-open .contactBlock {
 }
 
 @media (prefers-reduced-motion: reduce) { .scrollCue { animation: none; } }
+
+/* the cover scene's second step: the text waits collapsed below the CTA (js/project.js sceneTo grows it) */
+.coverReveal { height: 0; margin-top: -22px; overflow: hidden; }
+
+.pg .coverText { opacity: 0; transform: translateY(40px); }
+
+/* a second screenshot over the phone's first, faded in with the second step */
+.phone .phoneAlt {
+  position: absolute;
+  inset: 8px;
+  width: auto;
+  height: auto;
+  opacity: 0;
+}
