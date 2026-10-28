@@ -84,16 +84,6 @@ a:focus-visible {
   line-height: 1.4;
 }
 
-.logoBox {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logoAnim {
-  height: 16px;
-}
-
 .tagline {
   margin: 0;
 }
