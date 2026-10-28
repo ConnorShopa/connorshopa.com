@@ -40,23 +40,30 @@ body {
 
 .page {
   position: relative;
-  z-index: 1; /* above the hover box, so link text stays on top of it */
+  z-index: 1; /* above the cursor dot, so link text stays on top of it */
   width: min(100%, 1280px); /* wide enough for the centre list; the other sections are narrowed below */
-  /* three rows: intro | centre list | history + contact. The two outer rows are equal (1fr), so the
-     centre list sits exactly in the middle of the screen */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+}
+
+/* The first screen: intro at the top, gallery in the exact middle of the device screen.
+   Only the intro and the gallery are in here, so history and contact don't affect the centring.
+   The two outer rows are equal (1fr) and the hero is exactly one screen tall (minus the body padding). */
+.hero {
+  width: 100%;
   display: grid;
   grid-template-rows: 1fr auto 1fr;
   justify-items: center;
-  row-gap: 56px;
   min-height: calc(100vh - 96px);
 }
 
-.page > header {
-  align-self: start; /* name, tagline and filters stay at the top; only the list is centred */
+.hero > header {
+  align-self: start; /* name, tagline and filters stay at the top */
 }
 
-.page > .below {
-  align-self: start;
+.below {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,13 +71,13 @@ body {
 }
 
 /* the intro, history and contact stay a comfortable reading width; only the centre list runs wide */
-.page > header,
-.page > .below {
+.hero > header,
+.below {
   width: 100%;
   max-width: 720px;
 }
 
-.page > nav {
+.hero > nav {
   width: 100%;
 }
 
