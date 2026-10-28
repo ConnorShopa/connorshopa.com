@@ -3,7 +3,7 @@
 //  - Hovering (or tabbing to) a link morphs the dot into a soft rounded box around that link.
 //    The box is "magnetised": it sits on the link but leans toward the cursor.
 //  - Moving to another link glides it across; leaving a link shrinks it back to a dot.
-//  - The hovered link grows, and the items around it are pushed out of its way.
+//  - The hovered link shrinks a touch.
 (function () {
   if (typeof gsap === "undefined") return;
 
@@ -24,7 +24,8 @@
   var MAGNET = 0.3;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
   var MAX_PULL_X = 16;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 8;
-  var GROW = 1.25;       // hovered links in the centre list grow to this multiple of their size
+  var LINK_SCALE = 0.9;  // hovered links shrink to this fraction of their size...
+  var MIN_PX = 14;       // ...but never below this font size
   var FOLLOW_TIME = 0.4; // how smoothly the dot / box trails its target
   var MORPH_TIME = 0.4;  // how long the dot takes to become a box (and back)
 
@@ -104,51 +105,27 @@
     return rects[0] || link.getBoundingClientRect();
   }
 
-  // Growing is real layout (font size + logo size follow the --grow variable in redesign.css),
-  // so neighbours are pushed away. To guarantee the hovered link itself never moves, we remember
-  // where its centre was before it grew and, every frame, translate it back onto that spot.
-  function pageCenter(link) {
-    var r = link.getBoundingClientRect();
-    return { x: r.left + r.width / 2 + window.scrollX, y: r.top + r.height / 2 + window.scrollY };
+  // The scale a hovered link shrinks to, keeping its text at or above MIN_PX.
+  function shrinkScale(link) {
+    var fontSize = parseFloat(getComputedStyle(link).fontSize) || MIN_PX;
+    return Math.min(1, Math.max(LINK_SCALE, MIN_PX / fontSize));
   }
 
-  function holdInPlace(link) {
-    if (!link._anchor) return;
-    var c = pageCenter(link);
-    var x = gsap.getProperty(link, "x");
-    var y = gsap.getProperty(link, "y");
-    // c includes the current translate, so (c - translate) is where layout alone would put it
-    gsap.set(link, { x: link._anchor.x - (c.x - x), y: link._anchor.y - (c.y - y) });
+  function shrink(link) {
+    gsap.to(link, { scale: shrinkScale(link), duration: t(0.4), ease: "power3.out", overwrite: "auto" });
   }
 
-  function tick(link) {
-    holdInPlace(link);
-    if (currentLink === link) reposition();
+  function unshrink(link) {
+    gsap.to(link, { scale: 1, duration: t(0.35), ease: "power3.out", overwrite: "auto" });
   }
 
-  function grow(link) {
-    if (!link._anchor) link._anchor = pageCenter(link);
-    gsap.to(link, {
-      "--grow": GROW,
-      duration: t(0.45),
-      ease: "power3.out",
-      overwrite: "auto",
-      onUpdate: function () { tick(link); },
-    });
-  }
-
-  function ungrow(link) {
-    gsap.to(link, {
-      "--grow": 1,
-      duration: t(0.4),
-      ease: "power3.out",
-      overwrite: "auto",
-      onUpdate: function () { tick(link); },
-      onComplete: function () {
-        gsap.set(link, { x: 0, y: 0 });
-        link._anchor = null;
-      },
-    });
+  // A link's rect measured while it is shrunk, converted back to its full size
+  function fullSizeRect(link, r) {
+    var s = gsap.getProperty(link, "scale") || 1;
+    if (s === 1) return r;
+    var w = r.width / s;
+    var h = r.height / s;
+    return { left: r.left - (w - r.width) / 2, top: r.top - (h - r.height) / 2, width: w, height: h };
   }
 
   function showFor(link) {
@@ -156,7 +133,7 @@
     currentLink = link;
     var r = linkRect(link);
     base = { left: r.left, top: r.top, width: r.width, height: r.height };
-    grow(link);
+    shrink(link);
     boxShown = true;
     morphToBox();
   }
@@ -177,9 +154,9 @@
 
   document.querySelectorAll("a").forEach(function (link) {
     link.addEventListener("mouseenter", function () { showFor(link); });
-    link.addEventListener("mouseleave", function () { ungrow(link); leave(); });
+    link.addEventListener("mouseleave", function () { unshrink(link); leave(); });
     link.addEventListener("focus", function () { showFor(link); });
-    link.addEventListener("blur", function () { ungrow(link); leave(); });
+    link.addEventListener("blur", function () { unshrink(link); leave(); });
   });
 
   window.addEventListener("mousemove", function (e) {
@@ -196,7 +173,7 @@
   // keep the box on its link if the page scrolls or resizes while it is open
   function reposition() {
     if (!currentLink || !boxShown) return;
-    var r = linkRect(currentLink);
+    var r = fullSizeRect(currentLink, linkRect(currentLink));
     base = { left: r.left, top: r.top, width: r.width, height: r.height };
     followTarget();
   }
