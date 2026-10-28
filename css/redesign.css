@@ -185,11 +185,11 @@ a:focus-visible {
   margin-top: 40px;
 }
 
-.reach li {
-  display: block;
+.inline.reach li {
+  display: block; /* one per line (beats the generic .inline li further down) */
 }
 
-.reach li::after {
+.inline.reach li::after {
   content: none;
 }
 
