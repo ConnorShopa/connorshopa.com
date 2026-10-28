@@ -1148,7 +1148,7 @@ html.view-open .contactBlock {
   max-width: 560px;
 }
 
-.coverHead { display: flex; flex-direction: column; gap: 16px; width: fit-content; }
+.coverHead { display: flex; flex-direction: column; gap: 6px; width: fit-content; }
 
 .coverMark { height: 72px; width: auto; display: block; }
 
