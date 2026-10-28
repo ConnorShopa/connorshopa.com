@@ -20,7 +20,7 @@
 
   // ---- tuning ----
   var PAD_X = 16;        // box padding around the link text
-  var PAD_Y = 8;
+  var PAD_Y = 6;
   var MAGNET = 0.5;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
   var MAX_PULL_X = 32;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 16;
@@ -30,7 +30,7 @@
   var MORPH_TIME = 0.4;  // how long the dot takes to become a box (and back)
 
   var DOT_SIZE = 32;
-  var BOX_RADIUS = 40;
+  var BOX_RADIUS = 28;
   var DOT_FILL = "rgba(0, 0, 0, 0.10)";
   var DOT_BORDER = "rgba(0, 0, 0, 0)";
   var BOX_FILL = "#F4F4F4";
