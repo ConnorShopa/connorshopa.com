@@ -64,6 +64,10 @@
       { autoAlpha: 1, scale: 1, x: 0, y: 0, duration: t(0.6), ease: "power3.out" }
     );
     popGallery(function () {
+      // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
+      // still be shrunk or have a stale item hidden, which would throw the measurements below off
+      gsap.set(nav, { clearProps: "transform" });
+      list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
       // the open project isn't repeated in the gallery, and the rest run in a single row
       if (currentLi) currentLi.classList.add("is-current");
       list.classList.add("compact");
