@@ -108,14 +108,18 @@ a:focus-visible {
 }
 
 .inline li {
-  display: inline-flex; /* so items can move with transforms when the list is filtered */
-  align-items: flex-end; /* the slash lines up with the text row, under the logos */
+  display: inline-block; /* so items can move with transforms when the list is filtered */
+}
+
+/* the centre list: each item is a column (logo on top, title below) with the slash beside the title row */
+#projectList li {
+  display: inline-flex;
+  align-items: flex-end;
   vertical-align: bottom;
   padding: 14px 0;
 }
 
-/* in the centre list each link is a column: logo on top, title below */
-.inline a {
+#projectList a {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
