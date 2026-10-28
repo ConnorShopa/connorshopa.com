@@ -1246,3 +1246,6 @@ html.view-open .contactBlock {
    cover's two halves so they are centred in the card itself */
 .pg.cover .coverShot,
 .pg.cover .coverWrap { position: relative; top: -26px; }
+
+/* the left column moves in toward the middle of the card, mirroring the phone */
+.pg.cover .coverWrap { left: 70px; }
