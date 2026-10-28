@@ -198,6 +198,10 @@ a:focus-visible {
 }
 
 /* logo-only item (Habbot): no text, so no gap after the logo */
+.logo.wide {
+  max-width: 140px; /* wide wordmark logos (Plunk) */
+}
+
 .bubble.solo {
   margin-right: 0;
 }

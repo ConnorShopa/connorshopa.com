@@ -131,7 +131,8 @@
     // ---------------------------------------------------------------- Plunk
     plunk: {
       title: "Plunk®",
-      logo: H + "plunk_projectImage.svg",
+      logo: H + "plunk_logo_horizontal.svg",
+      logoOnly: true,
       pages: [
         pg("two",
           text(
