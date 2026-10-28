@@ -206,11 +206,16 @@ a:focus-visible {
   gap: 8px;
 }
 
-.stackLogo .bubble { margin-right: 0; }
+.stackLogo .bubble { margin-right: 0; height: auto; }
+
+.stackLogo .logo {
+  height: 72px;
+  max-width: none;
+}
 
 .wordmark {
   display: block;
-  height: 24px;
+  height: 16px;
   width: auto;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
@@ -436,11 +441,11 @@ a:focus-visible {
   top: 36px;
 }
 
-.viewHead.stacked .viewLogo { height: 32px; }
+.viewHead.stacked .viewLogo { height: 44px; }
 
 .viewWordmark {
   display: block;
-  height: 14px;
+  height: 10px;
   width: auto;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
