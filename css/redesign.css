@@ -448,14 +448,14 @@ html.view-open #mouse-circle {
   display: none !important;
 }
 
-/* 1px stroke around the card: dark blue (60% at the top) fading to 0% at the bottom (a gradient border via a masked pseudo-element) */
+/* 2px stroke around the card: dark blue (12% at the top) fading to 0% at the bottom (a gradient border via a masked pseudo-element) */
 .view::before {
   content: "";
   position: absolute;
   inset: 0;
-  padding: 1px;
+  padding: 2px;
   border-radius: inherit;
-  background: linear-gradient(to bottom, rgba(32, 69, 111, 0.6), rgba(32, 69, 111, 0)); /* #20456F: a dark blue from the card's own hue (#DCEBFA) */
+  background: linear-gradient(to bottom, rgba(32, 69, 111, 0.12), rgba(32, 69, 111, 0)); /* #20456F: a dark blue from the card's own hue (#DCEBFA) */
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
