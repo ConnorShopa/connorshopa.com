@@ -204,8 +204,8 @@
       // illustration-book reference (a square of green, the name set big beneath it), then the app screens
       pages: [
         pg("cover",
-          '<div class="coverWrap"><img class="coverMark" src="' + H + 'habbot_projectImage.svg" alt="Habbot">' +
-          '<span class="stickyDots" data-d="26" data-s="120"></span>' +
+          '<div class="coverWrap"><div class="coverHead"><img class="coverMark" src="' + H + 'habbot_projectImage.svg" alt="Habbot">' +
+          '<span class="stickyDots" data-d="26" data-fit></span></div>' +
           '<p class="coverText">Throughout a roadtrip from Seattle to Mexico to New York I would keep track of my meditation with two dots drawn in my journal.</p>' +
           '<p class="coverText">The distance between the dots represented the length of the meditation, with quick notes before and after each meditation.</p>' +
           '<p class="coverText">While living in a remote Wyoming cabin, I digitized this process into an iOS application.</p>' +

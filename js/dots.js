@@ -52,9 +52,14 @@
 
   function build(el) {
     var D = parseFloat(el.getAttribute("data-d")) || 26, S = parseFloat(el.getAttribute("data-s")) || 120, r = D / 2;
+    // data-fit: stretch to the width of the element's container (the wordmark above it) instead of data-s
+    var fit = el.hasAttribute("data-fit");
+    function size() {
+      if (fit && el.offsetWidth > 2 * D) S = el.offsetWidth - 2 * D;
+      svg.setAttribute("width", 2 * D + S); svg.setAttribute("height", D);
+      svg.setAttribute("viewBox", "0 0 " + (2 * D + S) + " " + D);
+    }
     var svg = document.createElementNS(NS, "svg");
-    svg.setAttribute("width", 2 * D + S); svg.setAttribute("height", D);
-    svg.setAttribute("viewBox", "0 0 " + (2 * D + S) + " " + D);
     svg.setAttribute("aria-hidden", "true");
     svg.style.overflow = "visible"; svg.style.display = "block";
     var path = document.createElementNS(NS, "path");
@@ -68,10 +73,11 @@
     function draw() { g.setAttribute("transform", "translate(" + f(-st.s / 2) + " 0)"); a.setAttribute("cx", r); b.setAttribute("cx", r + st.s + D); path.setAttribute("d", neck(r, st.s)); }
     function play() {
       if (tween) tween.kill();
+      size();
       st.s = -D; draw();
       tween = gsap.to(st, { s: S, duration: 1.1, delay: 0.25, ease: pull(), onUpdate: draw });
     }
-    draw();
+    size(); draw();
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) play(); else { if (tween) tween.kill(); st.s = -D; draw(); } }); }).observe(el);
     } else play();
