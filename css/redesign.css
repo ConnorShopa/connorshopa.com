@@ -1316,3 +1316,12 @@ html.view-open .contactBlock {
   border-radius: 34px;
   opacity: 0;
 }
+
+.pg .coverTag {
+  margin: 10px 0 0;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  text-align: center;
+}
