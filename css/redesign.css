@@ -163,7 +163,7 @@ a:focus-visible {
   content: "/";
   content: "/" / "";
   margin: 0 1.1em;
-  color: var(--ink-soft);
+  color: rgba(0, 0, 0, 0.12); /* 12% black */
 }
 
 /* no slash after the last visible item (filter.js marks it) */
