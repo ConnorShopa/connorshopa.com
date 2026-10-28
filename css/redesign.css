@@ -509,6 +509,15 @@ a:focus-visible {
   gap: 8px;
 }
 
+/* the social links stack in a column, no slashes */
+.contact li {
+  display: block;
+}
+
+.contact li::after {
+  content: none;
+}
+
 /* the cursor dot: trails the pointer, and morphs into a soft box around hovered links (see js/mouse.js).
    It sits under the page (z-index 0 vs .page's 1) so link text always stays on top of it. */
 #mouse-circle {
