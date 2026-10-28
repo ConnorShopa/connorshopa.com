@@ -146,7 +146,7 @@ a:focus-visible {
 
 .introTop {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* the contact column stays beside the about-me text; the text wraps instead */
   justify-content: flex-start;
   align-items: center;
   gap: 0 1.7em;
@@ -162,6 +162,7 @@ a:focus-visible {
 }
 
 .who {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -174,6 +175,7 @@ a:focus-visible {
 }
 
 .reach {
+  flex: none;
   font-size: 16px;
   line-height: 1.6;
   text-align: left;
@@ -808,4 +810,10 @@ html.view-open #mouse-circle {
   .pg.two,
   .pg.flip { grid-template-columns: minmax(0, 1fr); }
   .pg.flip .pgText { order: -1; }
+}
+
+/* very narrow screens: the contact column goes under the about-me text */
+@media (max-width: 640px) {
+  .introTop { flex-wrap: wrap; }
+  .sep { display: none; }
 }
