@@ -211,10 +211,13 @@
           '<div class="coverActions"><button type="button" class="lockBtn dlBtn">Download the app</button><button type="button" class="lockBtn dlBtn aboutBtn" aria-label="More">More<svg width="18" height="18" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9.5l8 8 8-8"/></svg></button></div>' +
           '</div>' +
           phone(A + "habbotAssets/app_screen01.png", "coverShot")),
-        // the page the "More" button scrolls down to: the same grass behind it, text on the left, another screen of the app
-        pg("cover",
-          '<div class="coverWrap"><p class="coverText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div>' +
-          phone(A + "habbotAssets/app_screen02.png", "coverShot")),
+        // the page the "More" button scrolls down to: three phones on the grass, each titled by a pill
+        pg("trio",
+          '<div class="trioRow">' +
+          '<div class="trioItem"><span class="trioPill">About</span>' + phone(A + "habbotAssets/app_screen04.png") + '</div>' +
+          '<div class="trioItem"><span class="trioPill">List</span>' + phone(A + "habbotAssets/app_screen01.png") + '</div>' +
+          '<div class="trioItem"><span class="trioPill">Compile</span>' + phone(A + "habbotAssets/app_screen02.png") + '</div>' +
+          '</div>'),
         pg("media",
           media(pfig(A + "habbotAssets/app_screen01.png") + pfig(A + "habbotAssets/app_screen02.png") + pfig(A + "habbotAssets/app_screen03.png"))),
         pg("media",
