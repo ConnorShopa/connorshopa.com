@@ -981,14 +981,12 @@ html.view-open #mouse-circle {
   white-space: nowrap;
 }
 
-/* no slashes between the gallery items; the air they took becomes side padding */
-.inline.big li::after {
-  content: none;
-}
-
-/* the space between items on a row (the id rule above sets the items' own padding, so the room is a gap instead) */
-.inline.big {
-  column-gap: clamp(32px, 6vw, 110px);
+/* an interpunct between the gallery items (not after the last one on a row; filter.js marks those no-slash) */
+.inline.big li:not(.no-slash):not(:last-child)::after {
+  content: "\00B7";
+  content: "\00B7" / "";
+  margin: 0 clamp(16px, 3vw, 55px);
+  color: rgba(47, 39, 37, 0.3);
 }
 
 #projectList li.row-break,
