@@ -1432,3 +1432,6 @@ html.view-open body { overscroll-behavior: none; }
 /* no elastic "rubber-band" overscroll on the page at any time (it would drag the whole window, fixed card included) */
 html, body { overscroll-behavior: none; }
 html.view-open { touch-action: none; }
+
+/* while a project is open the chips stay above the growing bubble (it overshoots a little as it lands) */
+html.view-open .filters { position: relative; z-index: 20; }
