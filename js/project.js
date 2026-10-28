@@ -160,6 +160,7 @@
     startMedia(next);
     view._page = n;
     view.classList.toggle("onFirst", n === 0); // a project's first page can carry a background image (proj.bgImage)
+    view.classList.toggle("imgIn", n === 0);   // ...which has its own switch so it can fade in slowly when the card opens
 
     if (animate && old !== next && !reduce) {
       gsap.fromTo(next, { autoAlpha: 0, x: 48 * dir }, { autoAlpha: 1, x: 0, duration: 0.28, ease: "power3.out" });
@@ -190,6 +191,7 @@
     if (open) return;
     open = { view: view, trigger: trigger };
     setPage(view, 0, false);
+    view.classList.remove("imgIn"); // the background image fades in after the bubble hands over (see reveal)
 
     view.hidden = false;
     document.documentElement.style.overflow = "hidden";
@@ -219,7 +221,10 @@
       if (!open || open.view !== view) return;
       gsap.set(view, { autoAlpha: 1 });
       if (window.bubble) window.bubble.handoff();
-      gsap.to(view.children, { opacity: 1, duration: t(0.15), clearProps: "opacity" });
+      var soft = view.classList.contains("hasBgImage");
+      gsap.to(view.children, { opacity: 1, duration: t(soft ? 0.55 : 0.15), ease: soft ? "power1.out" : "none", clearProps: "opacity" });
+      // the image layers fade in from the peach (a frame later, so the CSS transition has something to run from)
+      requestAnimationFrame(function () { requestAnimationFrame(function () { if (open && open.view === view && view._page === 0) view.classList.add("imgIn"); }); });
     };
     if (window.bubble) window.bubble.grow(to, b, 0.38, reveal); else reveal();
     popGallery(function () {

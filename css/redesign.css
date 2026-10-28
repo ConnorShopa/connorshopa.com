@@ -1195,8 +1195,8 @@ html.view-open .contactBlock {
   mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0.55) 35%, rgba(0,0,0,0.25) 55%, transparent 78%);
 }
 
-.view.hasBgImage.onFirst::before,
-.view.hasBgImage.onFirst::after { opacity: 1; }
+.view.hasBgImage.imgIn::before,
+.view.hasBgImage.imgIn::after { opacity: 1; transition-duration: 0.6s; }
 
 /* light type on the photo; the phone gets a deep drop shadow */
 .view.hasBgImage.onFirst .coverWrap { color: #fff; }
