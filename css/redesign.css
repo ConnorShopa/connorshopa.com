@@ -1064,10 +1064,10 @@ html.view-open .contactBlock {
   aspect-ratio: 0.475;
   padding: 11px;
   border-radius: 42px;
-  background: linear-gradient(145deg, #eceae5 0%, #a19f99 18%, #dad8d3 40%, #8d8b86 68%, #d3d1cc 88%, #a7a59f 100%);
+  background: linear-gradient(145deg, #3a3c41 0%, #1b1c1f 20%, #34363a 42%, #15161a 68%, #2f3135 88%, #1c1d20 100%); /* midnight black */
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
-    inset 0 0 2px 1px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 2px 1px rgba(0, 0, 0, 0.4),
     0 30px 50px -22px rgba(47, 39, 37, 0.45),
     0 6px 14px rgba(47, 39, 37, 0.14);
 }
@@ -1120,7 +1120,7 @@ html.view-open .contactBlock {
 .phoneBtn {
   position: absolute;
   width: 3px;
-  background: linear-gradient(to right, #8e8c87, #d9d7d2 60%, #a3a19b);
+  background: linear-gradient(to right, #1a1b1e, #3b3d42 60%, #26282b);
 }
 
 .phoneBtn.l {
@@ -1137,7 +1137,7 @@ html.view-open .contactBlock {
   top: 21%;
   height: 8%;
   border-radius: 0 2px 2px 0;
-  background: linear-gradient(to left, #8e8c87, #d9d7d2 60%, #a3a19b);
+  background: linear-gradient(to left, #1a1b1e, #3b3d42 60%, #26282b);
 }
 
 .coverWrap {
@@ -1209,8 +1209,8 @@ html.view-open .contactBlock {
      (light from the upper left), with a tight dark ring where the glass meets the grass */
   transform: rotate(1.5deg);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
-    inset 0 0 2px 1px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16),
+    inset 0 0 2px 1px rgba(0, 0, 0, 0.4),
     0 0 5px 1px rgba(0, 10, 4, 0.75),
     3px 5px 7px rgba(0, 10, 4, 0.6),
     9px 14px 18px -2px rgba(0, 10, 4, 0.45),
