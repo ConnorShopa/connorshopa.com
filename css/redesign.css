@@ -144,7 +144,8 @@ a:focus-visible {
 }
 
 .contactBlock {
-  width: 100%; /* same left edge as Professional History */
+  width: max-content; /* as wide as the row needs, centred on the page */
+  max-width: none;
 }
 
 .contactCol {
@@ -189,8 +190,8 @@ a:focus-visible {
 
 .inline.small.reach {
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px 56px; /* three labelled columns */
+  flex-wrap: nowrap; /* always one row */
+  gap: 0 48px; /* three labelled columns */
   font-size: 20px; /* same as the about-me text (beats .inline.small's 14px, which is defined later) */
   line-height: 1.6;
   text-align: left;
@@ -973,4 +974,9 @@ html.view-open #mouse-circle {
 
 .inline.reach li::after {
   content: none;
+}
+
+.inline.reach li {
+  flex: none;
+  white-space: nowrap;
 }
