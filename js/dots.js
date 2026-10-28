@@ -8,6 +8,7 @@
     if (!ease && window.CustomEase) { try { ease = CustomEase.create("habbotPull", "M0,0 C0.45,0 0.2,1 1,1"); } catch (e) {} }
     return ease || "power2.inOut";
   }
+  var THIN = 0.55; // how thick the stretched strand is relative to the app's (1 = same as the app)
   function f(n) { return n.toFixed(2); }
 
   // the goo between the dots, filling in from their centres (the circles cover its ends)
@@ -29,7 +30,7 @@
       return pathOf(cy, p1x, p2x, midX, attachY, mid, kx, ky, c, c);
     }
     // a strand: fat just after the circles part, thinning with length, never under 20% of the radius
-    var strand = r * Math.max(0.2, 0.32 / (1 + gap / (r * 10)) + 0.12 * Math.exp(-gap / (r * 0.6)));
+    var strand = THIN * r * Math.max(0.2, 0.32 / (1 + gap / (r * 10)) + 0.12 * Math.exp(-gap / (r * 0.6)));
     attachY = Math.min(r * 0.88, strand + r * 0.75);
     theta = Math.asin(attachY / r);
     p1x = c1x + r * Math.cos(theta); p2x = c2x - r * Math.cos(theta);
