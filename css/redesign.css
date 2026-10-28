@@ -993,3 +993,8 @@ html.view-open #mouse-circle {
 .inline.big li.row-break {
   padding: 0;
 }
+
+/* the + in Micro + Motion hops (js/micro.js) */
+.plus {
+  display: inline-block;
+}
