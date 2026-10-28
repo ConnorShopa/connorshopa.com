@@ -1172,3 +1172,26 @@ html.view-open .contactBlock {
 
 .view.hasDownload .viewDots { bottom: 82px; }
 .view.hasDownload .viewBody { bottom: 120px; }
+
+/* a project's first page can sit on a background image (Habbot: grass); it fades away on the other pages */
+.view.hasBgImage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--view-img) center / cover no-repeat;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.view.hasBgImage.onFirst::before { opacity: 1; }
+
+/* light type + controls on the dark photo */
+.view.hasBgImage.onFirst { color: #fff; }
+.view.hasBgImage.onFirst .viewClose,
+.view.hasBgImage.onFirst .viewNav:not(:disabled) { color: var(--ink); }
+.view.hasBgImage.onFirst .coverMark { filter: brightness(0) invert(1); }
+.view.hasBgImage.onFirst .viewDot { background: rgba(255, 255, 255, 0.4); }
+.view.hasBgImage.onFirst .viewDot[aria-current="true"] { background: var(--accent, #fff); }
+.view.hasBgImage.onFirst .viewClose { color: #fff; }

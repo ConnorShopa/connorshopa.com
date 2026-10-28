@@ -159,6 +159,7 @@
     next.classList.add("is-on");
     startMedia(next);
     view._page = n;
+    view.classList.toggle("onFirst", n === 0); // a project's first page can carry a background image (proj.bgImage)
 
     if (animate && old !== next && !reduce) {
       gsap.fromTo(next, { autoAlpha: 0, x: 48 * dir }, { autoAlpha: 1, x: 0, duration: 0.28, ease: "power3.out" });

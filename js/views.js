@@ -137,6 +137,7 @@
     sec.querySelector(".viewTitle").textContent = proj.title;
     if (proj.accent) sec.style.setProperty("--accent", proj.accent);
     if (proj.bg) sec.style.setProperty("--view-bg", proj.bg);
+    if (proj.bgImage) { sec.style.setProperty("--view-img", 'url("' + proj.bgImage + '")'); sec.classList.add("hasBgImage"); }
     document.body.appendChild(sec);
     if (locked) wireLock(slug, sec);
   });
