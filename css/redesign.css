@@ -63,19 +63,20 @@ body {
   list-style: none;
   margin: 72px 0 0;
   padding: 0;
-  max-width: 880px;
-  border-bottom: 1px solid var(--blue);
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   font-family: "Host Grotesk", sans-serif;
   font-size: 16px;
   line-height: 1.4;
 }
 
 .history li {
-  display: grid;
-  grid-template-columns: 140px 1.4fr 1.2fr auto;
-  align-items: center;
-  column-gap: 24px;
-  padding: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 12px;
   border-top: 1px solid var(--blue);
 }
 
@@ -83,6 +84,7 @@ body {
   display: flex;
   align-items: center;
   height: 24px;
+  margin-bottom: 8px;
 }
 
 .history .logo img {
@@ -102,25 +104,10 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-.history .dates {
-  text-align: right;
-  white-space: nowrap;
-}
-
 @media (max-width: 700px) {
   .history {
     margin-top: 48px;
-  }
-
-  .history li {
-    grid-template-columns: 1fr auto;
-    row-gap: 4px;
-    align-items: baseline;
-  }
-
-  .history .logo,
-  .history .company {
-    grid-column: 1 / -1;
+    max-width: none;
   }
 }
 
