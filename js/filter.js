@@ -1,6 +1,6 @@
 // Filter pills for the centre list.
-// Leaving items pop out (shrink to nothing), then the remaining items glide together to close the gap.
-// Items coming back pop in once the list has opened a space for them.
+// On every filter change all items pop out, the list updates while nothing is showing,
+// then every item that belongs pops back in. Nothing slides around.
 (function () {
   if (typeof gsap === "undefined") return;
 
@@ -14,14 +14,12 @@
   var t = function (seconds) { return reduce ? 0 : seconds; };
 
   // ---- tuning ----
-  var POP_OUT_TIME = 0.28;
-  var POP_OUT_STAGGER = 0.03;
-  var POP_OUT_EASE = "back.in(1.7)";   // pulls back a touch before vanishing
-  var CONVERGE_TIME = 0.7;             // how long the rest of the list takes to close the gap
-  var CONVERGE_EASE = "power2.inOut";
-  var POP_IN_TIME = 0.5;
-  var POP_IN_EASE = "back.out(1.7)";   // overshoots a touch, then settles
-  var POP_IN_DELAY = 0.2;              // waits for the list to open a space
+  var POP_OUT_TIME = 0.18;
+  var POP_OUT_STAGGER = 0.02;
+  var POP_OUT_EASE = "back.in(1.2)";   // number = size of the bounce (1 = none, higher = bouncier)
+  var POP_IN_TIME = 0.3;
+  var POP_IN_STAGGER = 0.03;
+  var POP_IN_EASE = "back.out(1.2)";
 
   var current = "all";
 
@@ -62,51 +60,32 @@
     current = filter;
     setPressed(filter);
 
-    // finish anything still moving from a previous click
+    // settle anything still moving from a previous click
     gsap.killTweensOf(items);
     gsap.set(items, { clearProps: "transform,opacity" });
 
     var visible = items.filter(function (li) { return !isHidden(li); });
-    var leaving = visible.filter(function (li) { return !matches(li, filter); });
-    var staying = visible.filter(function (li) { return matches(li, filter); });
-    var entering = items.filter(function (li) { return isHidden(li) && matches(li, filter); });
+    var next = items.filter(function (li) { return matches(li, filter); });
 
-    if (!leaving.length && !entering.length) { updateStatus(); return; }
+    // same items before and after: nothing to animate
+    var same = visible.length === next.length && visible.every(function (li) { return next.indexOf(li) !== -1; });
+    if (same) { updateStatus(); return; }
 
     var tl = gsap.timeline();
 
-    // 1. leaving items pop out where they are
-    if (leaving.length) {
-      tl.to(leaving, { scale: 0, opacity: 0, duration: t(POP_OUT_TIME), ease: POP_OUT_EASE, stagger: t(POP_OUT_STAGGER) });
-    }
+    // 1. every visible item pops out
+    tl.to(visible, { scale: 0, opacity: 0, duration: t(POP_OUT_TIME), ease: POP_OUT_EASE, stagger: t(POP_OUT_STAGGER) });
 
-    // 2. remove them, let the list reflow, and glide the rest into the new layout
+    // 2. with nothing showing, swap which items are in the list
     tl.add(function () {
-      var before = new Map();
-      staying.forEach(function (li) { before.set(li, li.getBoundingClientRect()); });
-
-      leaving.forEach(function (li) {
-        li.classList.add("is-hidden");
-        gsap.set(li, { clearProps: "transform,opacity" });
-      });
-      entering.forEach(function (li) { li.classList.remove("is-hidden"); });
+      items.forEach(function (li) { li.classList.toggle("is-hidden", !matches(li, filter)); });
       updateSlashes();
       updateStatus();
-
-      staying.forEach(function (li) {
-        var from = before.get(li);
-        var to = li.getBoundingClientRect();
-        var dx = from.left - to.left;
-        var dy = from.top - to.top;
-        if (dx || dy) {
-          gsap.fromTo(li, { x: dx, y: dy }, { x: 0, y: 0, duration: t(CONVERGE_TIME), ease: CONVERGE_EASE });
-        }
-      });
-
-      entering.forEach(function (li) {
-        gsap.fromTo(li, { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: t(POP_IN_TIME), ease: POP_IN_EASE, delay: t(POP_IN_DELAY) });
-      });
+      gsap.set(next, { scale: 0, opacity: 0 });
     });
+
+    // 3. every item that belongs pops in
+    tl.to(next, { scale: 1, opacity: 1, duration: t(POP_IN_TIME), ease: POP_IN_EASE, stagger: t(POP_IN_STAGGER) });
   }
 
   pills.forEach(function (pill) {
