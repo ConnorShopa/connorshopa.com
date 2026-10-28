@@ -1074,8 +1074,10 @@ html.view-open .contactBlock {
 .viewDownload {
   position: absolute;
   bottom: 24px;
-  left: 50%;
-  translate: -50% 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto; /* centred without translate, which the cursor's hover transform would clobber */
+  width: fit-content;
   z-index: 3;
 }
 
