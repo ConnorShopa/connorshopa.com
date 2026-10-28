@@ -60,10 +60,12 @@
     var path = document.createElementNS(NS, "path");
     var a = document.createElementNS(NS, "circle"), b = document.createElementNS(NS, "circle");
     [a, b].forEach(function (c) { c.setAttribute("r", r); c.setAttribute("cy", r); });
-    [path, a, b].forEach(function (n) { n.setAttribute("fill", "currentColor"); svg.appendChild(n); });
+    var g = document.createElementNS(NS, "g"); // grows out from the middle of the span
+    [path, a, b].forEach(function (n) { n.setAttribute("fill", "currentColor"); g.appendChild(n); });
+    svg.appendChild(g);
     el.appendChild(svg);
     var st = { s: -D }, tween = null;
-    function draw() { a.setAttribute("cx", r); b.setAttribute("cx", r + st.s + D); path.setAttribute("d", neck(r, st.s)); }
+    function draw() { g.setAttribute("transform", "translate(" + f(-st.s / 2) + " 0)"); a.setAttribute("cx", r); b.setAttribute("cx", r + st.s + D); path.setAttribute("d", neck(r, st.s)); }
     function play() {
       if (tween) tween.kill();
       st.s = -D; draw();
