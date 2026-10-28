@@ -188,6 +188,9 @@ a:focus-visible {
 }
 
 .inline.small.reach {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 56px; /* three labelled columns */
   font-size: 20px; /* same as the about-me text (beats .inline.small's 14px, which is defined later) */
   line-height: 1.6;
   text-align: left;
@@ -957,4 +960,17 @@ html.view-open #mouse-circle {
 
 .lockBox .body a {
   color: var(--ink);
+}
+
+/* small label above each contact link, in the style of the section titles */
+.reachLabel {
+  display: block;
+  margin: 0 0 4px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: var(--ink-soft);
+}
+
+.inline.reach li::after {
+  content: none;
 }
