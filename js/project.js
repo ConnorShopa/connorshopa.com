@@ -12,7 +12,8 @@
 
   var MINI = 0.4;  // how small the gallery gets while a view is open
   var GAP = 28;    // space between the card and the minimised gallery
-  var INTRO_GAP = 16;  // the gap left between the (collapsed) intro and the filter chips
+  var CARD_RATIO = 3 / 2; // the expanded card's width : height
+  var INTRO_GAP = 16;  // the gap left above the filter chips once the about-me lines are gone
   var introState = null; // the intro's full size while a project is open (restored on close)
   var BOTTOM_ROOM = 160; // space kept under the card for the gallery row
 
@@ -240,23 +241,25 @@
 
     // The card starts just under the intro (name, tagline, stat, chips) and runs down the screen,
     // leaving room at the bottom for the gallery row, which gets pushed down beneath it.
-    // The "about me" part of the intro (name + tagline) collapses away while a project is open, so the card gets
-    // that room too: the card's top is worked out for the collapsed intro, and the intro animates to it.
+    // The "about me" part of the intro (name + tagline) is pushed away from the card like the gallery links, and the
+    // filter chips rise into the room it leaves, so the card gets that room too: the card's top is worked out for
+    // the risen chips.
     var introTop = intro && intro.querySelector(".introTop");
     var introFilters = intro && intro.querySelector(".filters");
     var collapseBy = 0;
-    if (introTop && introFilters) {
-      if (!introState) { // first open: remember the full size so closing can restore it
-        introState = { h: introTop.offsetHeight, mt: parseFloat(getComputedStyle(introFilters).marginTop) || 0 };
-        collapseBy = introState.h + introState.mt - INTRO_GAP;
-      }
-      gsap.killTweensOf([introTop, introFilters]);
-      gsap.set(introTop, { overflow: "hidden" });
-      gsap.to(introTop, { height: 0, opacity: 0, duration: t(0.55), ease: "power3.inOut" });
-      gsap.to(introFilters, { marginTop: INTRO_GAP, duration: t(0.55), ease: "power3.inOut" });
+    var freshIntro = false;
+    if (introTop && introFilters && !introState) { // first open: remember how far the chips rise so closing can undo it
+      var mt = parseFloat(getComputedStyle(introFilters).marginTop) || 0;
+      introState = { rise: Math.max(0, introTop.offsetHeight + mt - INTRO_GAP) };
+      collapseBy = introState.rise;
+      freshIntro = true;
     }
     var top = intro ? intro.getBoundingClientRect().bottom - collapseBy + 24 : 80;
-    var height = Math.max(300, window.innerHeight - top - BOTTOM_ROOM);
+    // the card keeps a familiar shape (3:2): it takes the room available, but never gets taller than that shape
+    // allows, and when the room is short it gets narrower instead of squatter
+    var fullW = Math.min(window.innerWidth * 0.86, 1100);
+    var height = Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
+    view.style.width = Math.min(fullW, height * CARD_RATIO) + "px";
     view.style.height = height + "px";
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height; // measured from layout, not the rect: the card is left shrunk after a close
@@ -265,6 +268,22 @@
     var b = bubbleOf(trigger);
     open.bubble = b;
     var currentLi = trigger.closest("li");
+
+    if (freshIntro) {
+      var aboutEls = introEls();
+      gsap.killTweensOf(aboutEls);
+      gsap.to(aboutEls, {
+        x: function (i, el) { return push(el, { x: b.cx, y: b.cy }).x; },
+        y: function (i, el) { return push(el, { x: b.cx, y: b.cy }).y; },
+        scale: 0.55,
+        opacity: 0,
+        duration: t(0.3),
+        ease: "power2.out",
+        transformOrigin: "50% 50%",
+      });
+      gsap.killTweensOf(introFilters);
+      gsap.to(introFilters, { y: -introState.rise, duration: t(0.5), ease: "power3.inOut" });
+    }
 
     gsap.killTweensOf(view);
     gsap.killTweensOf(view.children);
@@ -316,21 +335,36 @@
     });
   }
 
-  function restoreIntro() {
-    var introTop = intro && intro.querySelector(".introTop");
+  // the about-me lines (name, tagline)
+  function introEls() { return intro ? intro.querySelectorAll(".introTop .name, .introTop .tagline") : []; }
+
+  // the reverse of the push: they start shoved away, small and faint, and are drawn back to their places, the
+  // nearer ones first, like the gallery links
+  function restoreIntro(origin) {
     var introFilters = intro && intro.querySelector(".filters");
-    if (!introState || !introTop || !introFilters) return;
-    var st = introState;
+    if (!introState || !introFilters) return;
     introState = null;
-    gsap.killTweensOf([introTop, introFilters]);
-    gsap.to(introTop, { height: st.h, opacity: 1, duration: t(0.5), ease: "power3.inOut", onComplete: function () { gsap.set(introTop, { clearProps: "height,opacity,overflow" }); } });
-    gsap.to(introFilters, { marginTop: st.mt, duration: t(0.5), ease: "power3.inOut", onComplete: function () { gsap.set(introFilters, { clearProps: "marginTop" }); } });
+    var els = introEls();
+    gsap.killTweensOf(els);
+    gsap.killTweensOf(introFilters);
+    gsap.set(els, { clearProps: "x,y,scale,opacity" }); // measure from their own places
+    els.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var len = Math.hypot(r.left + r.width / 2 - origin.x, r.top + r.height / 2 - origin.y);
+      var far = Math.min(len / 700, 1);
+      var from = push(el, origin, true);
+      var delay = t(0.14 * far);
+      gsap.set(el, { x: from.x, y: from.y, scale: 0.8, opacity: 0, transformOrigin: "50% 50%" });
+      gsap.to(el, { scale: 1, opacity: 1, duration: t(0.16), delay: delay, ease: "power2.out" });
+      gsap.to(el, { x: 0, y: 0, duration: t(0.22 + 0.14 * far), delay: delay, ease: "power2.inOut", onComplete: function () { gsap.set(el, { clearProps: "x,y,scale,opacity,transformOrigin" }); } });
+    });
+    gsap.to(introFilters, { y: 0, duration: t(0.4), ease: "power2.inOut", onComplete: function () { gsap.set(introFilters, { clearProps: "y" }); } });
   }
 
   function hide() {
     if (!open) return;
     var view = open.view;
-    restoreIntro();
+    restoreIntro({ x: open.bubble.cx, y: open.bubble.cy });
     var trigger = open.trigger;
     var b = open.bubble;
     open = null;
