@@ -159,13 +159,21 @@
     next.classList.add("is-on");
     startMedia(next);
     view._page = n;
-    view.classList.toggle("onFirst", n === 0); // a project's first page can carry a background image (proj.bgImage)
-    view.classList.toggle("imgIn", n === 0);   // ...which has its own switch so it can fade in slowly when the card opens
+    // a project's first page can carry a background image (proj.bgImage); in a vertical view it stays behind every page
+    // (the pages scroll over it)
+    var keepImg = view.classList.contains("vertical");
+    view.classList.toggle("onFirst", keepImg || n === 0);
+    view.classList.toggle("imgIn", keepImg || n === 0); // ...its own switch, so it can fade in slowly when the card opens
 
     if (animate && old !== next && !reduce) {
       var ax = view.classList.contains("vertical") ? "y" : "x"; // vertical views slide up and down
       var inFrom = { autoAlpha: 0 }, inTo = { autoAlpha: 1, duration: 0.28, ease: "power3.out" }, outTo = { autoAlpha: 0, duration: 0.14, ease: "power2.in", onComplete: null };
       inFrom[ax] = 48 * dir; inTo[ax] = 0; outTo[ax] = -48 * dir;
+      if (ax === "y") { // a real scroll: the whole page travels the card's height, the next one rising in behind it (the card clips them)
+        var H = view.getBoundingClientRect().height;
+        inFrom[ax] = dir * H * 0.9; inFrom.autoAlpha = 1; inTo.duration = 0.85; inTo.ease = "power3.inOut";
+        outTo[ax] = -dir * H * 0.9; outTo.autoAlpha = 1; outTo.duration = 0.85; outTo.ease = "power3.inOut";
+      }
       gsap.fromTo(next, inFrom, inTo);
       outTo.onComplete = function () { old.classList.remove("is-on"); gsap.set(old, { clearProps: "opacity,visibility,transform" }); };
       gsap.to(old, outTo);
@@ -249,7 +257,7 @@
       var soft = view.classList.contains("hasBgImage");
       gsap.to(view.children, { opacity: 1, duration: t(soft ? 0.55 : 0.15), ease: soft ? "power1.out" : "none", clearProps: "opacity" });
       // the image layers fade in from the peach (a frame later, so the CSS transition has something to run from)
-      requestAnimationFrame(function () { requestAnimationFrame(function () { if (open && open.view === view && view._page === 0) view.classList.add("imgIn"); }); });
+      requestAnimationFrame(function () { requestAnimationFrame(function () { if (open && open.view === view && (view._page === 0 || view.classList.contains("vertical"))) view.classList.add("imgIn"); }); });
     };
     if (window.bubble) window.bubble.grow(to, b, 0.38, reveal); else reveal();
     popGallery(function () {
