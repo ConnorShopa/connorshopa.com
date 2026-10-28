@@ -53,6 +53,10 @@
         ease: "power2.out",
         transformOrigin: "50% 50%",
       });
+    } else if (pullIn) {
+      // closing: the row under the card is out of the way at once, so the links can start falling back while
+      // the bubble is still shrinking instead of after it
+      popTl.to(current, { scale: 0, opacity: 0, duration: t(0.04), ease: "power1.in", transformOrigin: "50% 50%" });
     } else {
       popTl.to(current, { scale: 0, opacity: 0, duration: t(0.12), ease: "back.in(1.2)", stagger: t(0.012), transformOrigin: "50% 50%" });
     }
