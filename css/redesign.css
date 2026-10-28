@@ -210,13 +210,13 @@ a:focus-visible {
 .stackLogo .bubble { margin-right: 0; height: auto; }
 
 .stackLogo .logo {
-  height: 72px;
+  height: 48px;
   max-width: none;
 }
 
 .wordmark {
   display: block;
-  height: 16px;
+  height: 28px;
   width: auto;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
