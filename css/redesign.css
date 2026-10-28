@@ -370,9 +370,9 @@ a:focus-visible {
   left: 50%;
   margin: 0;
   /* centred by GSAP (xPercent / yPercent -50 in js/project.js) so it can also animate x / y / scale */
-  /* big, but it leaves 160px above (the name, tagline, stat and chips stay visible) and the same below (the gallery row) */
+  /* width is fixed here; the height is set in js/project.js so the card clears the whole intro */
   width: min(94vw, 1400px);
-  height: max(360px, calc(100vh - 320px));
+  height: 440px;
   box-sizing: border-box;
   padding: 48px 32px;
   display: flex;

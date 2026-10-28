@@ -6,6 +6,7 @@
 
   var nav = document.querySelector(".hero > nav");
   var list = document.getElementById("projectList");
+  var intro = document.querySelector(".hero > header");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var t = function (s) { return reduce ? 0 : s; };
 
@@ -54,6 +55,14 @@
     document.documentElement.style.overflow = "hidden";
     document.documentElement.classList.add("view-open");
     gsap.set(view, { xPercent: -50, yPercent: -50 });
+
+    // Size the card to the space between the intro (name, tagline, stat, chips) and the bottom of the
+    // screen, equal above and below so it stays dead centre. The intro is never covered; on a window
+    // too short for that, the card keeps a minimum height and overlaps it.
+    if (intro) {
+      var room = window.innerHeight - 2 * (intro.getBoundingClientRect().bottom + 24);
+      view.style.height = Math.max(300, room) + "px";
+    }
 
     // the card's bottom edge once it has zoomed to full size. Worked out from its layout size, not its
     // current rect: after the first close the card is left shrunk to a dot, which gave a tiny, wrong number
