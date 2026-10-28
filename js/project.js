@@ -1,5 +1,5 @@
 // In-page project views. Clicking a gallery link marked data-view="name" opens #view-name:
-// a card centred on the screen (where the gallery was) that zooms out of the link you tapped,
+// a card centred on the screen (where the gallery was) that zooms out of the middle of the screen,
 // while the gallery shrinks and slides underneath it. The visitor never leaves the homepage.
 (function () {
   if (typeof gsap === "undefined") return;
@@ -13,15 +13,6 @@
   var GAP = 28;    // space between the card and the minimised gallery
 
   var open = null; // { view, trigger }
-
-  // vector from the middle of the screen to the middle of the tapped link
-  function offsetFrom(trigger) {
-    var r = trigger.getBoundingClientRect();
-    return {
-      x: r.left + r.width / 2 - window.innerWidth / 2,
-      y: r.top + r.height / 2 - window.innerHeight / 2,
-    };
-  }
 
   // the gallery items currently on screen
   function items() { return document.querySelectorAll("#projectList li:not(.is-hidden):not(.is-current)"); }
@@ -59,8 +50,6 @@
     if (open) return;
     open = { view: view, trigger: trigger };
 
-    var from = offsetFrom(trigger); // measured before the gallery moves
-
     view.hidden = false;
     document.documentElement.style.overflow = "hidden";
     gsap.set(view, { xPercent: -50, yPercent: -50 });
@@ -71,7 +60,7 @@
     gsap.killTweensOf(view);
     gsap.fromTo(
       view,
-      { autoAlpha: 0, scale: 0.12, x: from.x, y: from.y },
+      { autoAlpha: 0, scale: 0.12, x: 0, y: 0 }, // zooms out of the dead centre of the screen
       { autoAlpha: 1, scale: 1, x: 0, y: 0, duration: t(0.6), ease: "power3.out" }
     );
     popGallery(function () {
@@ -96,13 +85,12 @@
     var trigger = open.trigger;
     open = null;
 
-    var to = offsetFrom(trigger); // the link's current (minimised) spot
     gsap.killTweensOf(view);
     gsap.to(view, {
       autoAlpha: 0,
       scale: 0.12,
-      x: to.x,
-      y: to.y,
+      x: 0,
+      y: 0, // ...and back into the dead centre
       duration: t(0.4),
       ease: "power3.in",
       onComplete: function () {
