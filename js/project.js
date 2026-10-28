@@ -49,7 +49,7 @@
         y: function (i, el) { return push(el, origin).y; },
         scale: 0.55,
         opacity: 0,
-        duration: t(0.45),
+        duration: t(0.3),
         ease: "power2.out",
         transformOrigin: "50% 50%",
       });
@@ -70,7 +70,7 @@
           transformOrigin: "50% 50%",
         });
         // ...and get sucked back to their own spot
-        popIn = gsap.to(next, { x: 0, y: 0, scale: 1, opacity: 1, duration: t(0.45), ease: "power2.out" });
+        popIn = gsap.to(next, { x: 0, y: 0, scale: 1, opacity: 1, duration: t(0.3), ease: "power2.out" });
       } else {
         gsap.set(next, { scale: 0, opacity: 0 });
         popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "back.out(1.2)", stagger: t(0.018) });
@@ -195,9 +195,9 @@
       if (!open || open.view !== view) return;
       gsap.set(view, { autoAlpha: 1 });
       if (window.bubble) window.bubble.handoff();
-      gsap.to(view.children, { opacity: 1, duration: t(0.25), clearProps: "opacity" });
+      gsap.to(view.children, { opacity: 1, duration: t(0.15), clearProps: "opacity" });
     };
-    if (window.bubble) window.bubble.grow(to, b, 0.55, reveal); else reveal();
+    if (window.bubble) window.bubble.grow(to, b, 0.38, reveal); else reveal();
     popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
       // still be shrunk or have a stale item hidden, which would throw the measurements below off
@@ -252,10 +252,10 @@
     // contents fade, then the card is swapped for the identical grey box, which shrinks into the bubble
     gsap.to(view.children, {
       opacity: 0,
-      duration: t(0.1),
+      duration: t(0.07),
       onComplete: function () {
         gsap.set(view, { autoAlpha: 0 });
-        if (window.bubble) window.bubble.shrink(fromCard, b, 0.38, finish); else finish();
+        if (window.bubble) window.bubble.shrink(fromCard, b, 0.28, finish); else finish();
       },
     });
     popGallery(function () {

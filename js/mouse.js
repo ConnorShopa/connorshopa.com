@@ -217,11 +217,13 @@
   // close it shrinks back into the bubble. Geometry objects are { cx, cy, w, h, r, shadow } in viewport px.
   var CARD_SHADOW = "0px 24px 60px -24px rgba(47, 39, 37, 0.14), 0px 4px 14px 0px rgba(47, 39, 37, 0.05)";
 
-  function lock() {
+  // z: 10 puts the bubble over the page's links (growing: they vanish behind it); 0 keeps it under them (shrinking:
+  // the links come back on top of it). The project card sits at 11.
+  function lock(z) {
     locked = true;
     if (hideCall) { hideCall.kill(); hideCall = null; }
     if (ctl) { ctl.kill(); ctl = null; }
-    gsap.set(dot, { zIndex: 0, mixBlendMode: "normal" }); // under the page, like the hover bubble
+    gsap.set(dot, { zIndex: z, mixBlendMode: "normal" });
   }
 
   function snapTo(g) {
@@ -243,7 +245,7 @@
     CARD_SHADOW: CARD_SHADOW,
     // the bubble grows from `from` (where it is) to `to` (the card)
     grow: function (to, from, dur, done) {
-      lock();
+      lock(10);
       snapTo(from);
       ctl = gsap.to(dot, {
         x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: to.shadow || CARD_SHADOW,
@@ -263,7 +265,7 @@
     },
     // the card's grey box shrinks from `from` (the card) back into the bubble `to`
     shrink: function (from, to, dur, done) {
-      lock();
+      lock(0);
       snapTo(from);
       ctl = gsap.to(dot, {
         x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: BOX_SHADOW,
