@@ -63,9 +63,18 @@ body {
   color: var(--ink);
 }
 
+.historyTitle {
+  margin: 72px 0 20px;
+  font-family: "Host Grotesk", sans-serif;
+  font-weight: 400;
+  font-size: 16pt;
+  line-height: 1.2;
+  color: rgba(3, 0, 0, 0.6);
+}
+
 .history {
   list-style: none;
-  margin: 72px 0 0;
+  margin: 0;
   padding: 0;
   max-width: 360px;
   display: flex;
@@ -80,18 +89,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2px;
-}
-
-.history .logo {
-  display: flex;
-  align-items: center;
-  height: 18px;
-  margin-bottom: 6px;
-}
-
-.history .logo img {
-  display: block;
-  max-width: 100%;
 }
 
 .history .company {
@@ -114,8 +111,11 @@ body {
 }
 
 @media (max-width: 700px) {
-  .history {
+  .historyTitle {
     margin-top: 48px;
+  }
+
+  .history {
     max-width: none;
   }
 }
