@@ -27,6 +27,7 @@ body {
   box-sizing: border-box;
   min-height: 100vh;
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* a too-wide child can't stretch the page sideways */
   place-items: center;
   padding: 48px 24px;
   background-color: var(--bg);
@@ -54,6 +55,7 @@ body {
 .hero {
   width: 100%;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: 1fr auto 1fr;
   justify-items: center;
   min-height: calc(100vh - 96px);
@@ -79,6 +81,7 @@ body {
 
 .hero > nav {
   width: 100%;
+  min-width: 0;
 }
 
 a {
@@ -445,6 +448,12 @@ a:focus-visible {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: flex-end;
+}
+
+/* each item keeps its full width (title + slash on one line) instead of being squeezed by the row */
+#projectList.compact li {
+  flex: none;
+  white-space: nowrap;
 }
 
 .is-current {
