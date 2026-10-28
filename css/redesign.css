@@ -157,12 +157,17 @@ a:focus-visible {
   color: var(--ink-soft);
 }
 
-/* a link with its caption underneath (Seeds): the slash stays beside the title line */
+/* a link with its caption underneath (Seeds): the column's baseline is the title's, so the title
+   lines up with the other items and the caption hangs below it without pushing anything */
 .withCaption {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  vertical-align: top;
+  vertical-align: baseline;
+}
+
+.withCaption .caption {
+  margin-top: -0.6em;
 }
 
 /* the centre list keeps the unfiltered list's height; the live list sits in the middle of it */
