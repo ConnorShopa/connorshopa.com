@@ -112,13 +112,13 @@ a:focus-visible {
 .inline li:not(:last-child)::after {
   content: "/";
   content: "/" / "";
-  margin: 0 0.35em;
+  margin: 0 0.6em;
   color: var(--ink-soft);
 }
 
 .inline.big {
   font-size: 36px;
-  line-height: 1.3;
+  line-height: 1.7;
   letter-spacing: -0.02em;
 }
 
