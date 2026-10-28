@@ -62,7 +62,7 @@
       // the bubble is still shrinking instead of after it
       popTl.to(current, { scale: 0, opacity: 0, duration: t(0.015), ease: "none", transformOrigin: "50% 50%" });
     } else {
-      popTl.to(current, { scale: 0, opacity: 0, duration: t(0.12), ease: "back.in(1.2)", stagger: t(0.012), transformOrigin: "50% 50%" });
+      popTl.to(current, { scale: 0, opacity: 0, duration: t(0.12), ease: "power2.in", stagger: t(0.012), transformOrigin: "50% 50%" });
     }
     popTl.add(function () {
       applyLayout();
@@ -99,7 +99,7 @@
         }
       } else {
         gsap.set(next, { scale: 0, opacity: 0 });
-        popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "back.out(1.2)", stagger: t(0.018) });
+        popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "power2.out", stagger: t(0.018) });
       }
     });
   }

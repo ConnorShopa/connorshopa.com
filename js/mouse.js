@@ -249,7 +249,7 @@
       snapTo(from);
       ctl = gsap.to(dot, {
         x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: to.shadow || CARD_SHADOW, borderColor: DOT_BORDER, backgroundColor: to.fill || BOX_FILL,
-        duration: t(dur), ease: "back.out(1.3)", onComplete: done, // a subtle overshoot, then it settles
+        duration: t(dur), ease: "power3.out", onComplete: done, // no overshoot
       });
     },
     // the card is showing on top of the (now identical) grey box: the dot turns back into the pointer dot, unseen
