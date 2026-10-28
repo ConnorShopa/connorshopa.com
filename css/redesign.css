@@ -139,23 +139,19 @@ a:focus-visible {
   font-size: 14px;
 }
 
-/* project logos sit in a white bubble just before the link text; the bubble carries the shadow */
+/* project logos sit just before the link text (no bubble); the logo and the text share a subtle drop shadow */
 .bubble {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 44px;
   height: 40px;
-  padding: 0 14px;
   margin-right: 10px;
   vertical-align: middle;
-  border-radius: 999px;
-  background: var(--bg);
-  box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.35), 0 3px 8px rgba(0, 0, 0, 0.18);
 }
 
 .logo {
   display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
   width: auto;
   height: auto;
   max-width: 56px;
@@ -167,6 +163,11 @@ a:focus-visible {
   letter-spacing: normal;
   line-height: 1.2;
   color: var(--ink-soft);
+}
+
+/* subtle drop shadow on the centre list's text */
+#projectList {
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
 }
 
 /* a link with a caption under its title (Seeds): bubble on the left, title and caption stacked
