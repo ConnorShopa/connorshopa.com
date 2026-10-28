@@ -1,16 +1,16 @@
-// Cursor circle + link hover box, both driven by GSAP.
-//  - The circle follows the cursor with a smooth lag.
-//  - Hovering (or tabbing to) a link grows a hollow, rounded box from the link's
-//    centre, snapped to the link's bounds. It is "magnetised": it stays on the
-//    link but leans toward the cursor, so it still follows the mouse a little.
-//    Moving to another link glides the box over. The hovered link shrinks a touch.
+// The cursor dot is the hover effect.
+//  - It trails the cursor with a smooth lag.
+//  - Hovering (or tabbing to) a link morphs the dot into a soft rounded box around that link.
+//    The box is "magnetised": it sits on the link but leans toward the cursor.
+//  - Moving to another link glides it across; leaving a link shrinks it back to a dot.
+//  - The hovered link shrinks a touch.
 (function () {
   if (typeof gsap === "undefined") return;
 
-  var circle = document.getElementById("mouse-circle");
+  var dot = document.getElementById("mouse-circle");
   var isTouch = "ontouchstart" in window || navigator.maxTouchPoints;
-  if (isTouch) {
-    if (circle) circle.style.display = "none";
+  if (isTouch || !dot) {
+    if (dot) dot.style.display = "none";
     return;
   }
 
@@ -19,37 +19,80 @@
   var clamp = function (v, min, max) { return Math.max(min, Math.min(max, v)); };
 
   // ---- tuning ----
-  var PAD_X = 12;       // box padding around the link text
+  var PAD_X = 12;        // box padding around the link text
   var PAD_Y = 4;
-  var MAGNET = 0.3;     // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
-  var MAX_PULL_X = 16;  // the most the box can drift away from the link, in px
+  var MAGNET = 0.3;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
+  var MAX_PULL_X = 16;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 8;
-  var LINK_SCALE = 0.9; // hovered links shrink to this fraction of their size...
-  var MIN_PX = 14;      // ...but never below this font size
+  var LINK_SCALE = 0.9;  // hovered links shrink to this fraction of their size...
+  var MIN_PX = 14;       // ...but never below this font size
+  var FOLLOW_TIME = 0.4; // how smoothly the dot / box trails its target
+  var MORPH_TIME = 0.4;  // how long the dot takes to become a box (and back)
+
+  var DOT_SIZE = 32;
+  var BOX_RADIUS = 24;
+  var DOT_FILL = "rgba(0, 0, 0, 0.10)";
+  var DOT_BORDER = "rgba(0, 0, 0, 0)";
+  var BOX_FILL = "#F4F4F4";
+  var BOX_BORDER = "rgba(0, 0, 0, 0.45)";
 
   var mouse = { x: 0, y: 0 };
   var seenMouse = false;
-
-  // ---- cursor circle (fixed positioning, so no scroll maths) ----
-  var moveX, moveY;
-  if (circle) {
-    gsap.set(circle, { xPercent: -50, yPercent: -50, autoAlpha: 0 });
-    moveX = gsap.quickTo(circle, "x", { duration: t(0.45), ease: "power3.out" });
-    moveY = gsap.quickTo(circle, "y", { duration: t(0.45), ease: "power3.out" });
-  }
-
-  // ---- link hover box ----
-  var box = document.createElement("div");
-  box.id = "hover-box";
-  box.setAttribute("aria-hidden", "true");
-  document.body.appendChild(box);
-  gsap.set(box, { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" });
-
   var boxShown = false;
   var currentLink = null;
-  var base = null;      // the link's rect while the box is open
+  var base = null;       // the link's rect while the dot is a box
   var hideCall = null;
 
+  // The dot is centred on its x / y; quickTo makes it trail whatever target we give it.
+  gsap.set(dot, { xPercent: -50, yPercent: -50, autoAlpha: 0 });
+  var moveX = gsap.quickTo(dot, "x", { duration: t(FOLLOW_TIME), ease: "power3.out" });
+  var moveY = gsap.quickTo(dot, "y", { duration: t(FOLLOW_TIME), ease: "power3.out" });
+
+  // Where the dot's centre should be: on the cursor, or magnetised onto the link.
+  function followTarget() {
+    var x = mouse.x;
+    var y = mouse.y;
+    if (boxShown && base) {
+      var cx = base.left + base.width / 2;
+      var cy = base.top + base.height / 2;
+      x = cx + clamp((mouse.x - cx) * MAGNET, -MAX_PULL_X, MAX_PULL_X);
+      y = cy + clamp((mouse.y - cy) * MAGNET, -MAX_PULL_Y, MAX_PULL_Y);
+    }
+    moveX(x);
+    moveY(y);
+  }
+
+  function morphToBox() {
+    var w = base.width + PAD_X * 2;
+    var h = base.height + PAD_Y * 2;
+    gsap.to(dot, {
+      width: w,
+      height: h,
+      borderRadius: Math.min(BOX_RADIUS, h / 2),
+      backgroundColor: BOX_FILL,
+      borderColor: BOX_BORDER,
+      duration: t(MORPH_TIME),
+      ease: "power3.out",
+      overwrite: "auto",
+    });
+    followTarget();
+  }
+
+  function morphToDot() {
+    gsap.to(dot, {
+      width: DOT_SIZE,
+      height: DOT_SIZE,
+      borderRadius: DOT_SIZE / 2,
+      backgroundColor: DOT_FILL,
+      borderColor: DOT_BORDER,
+      duration: t(MORPH_TIME * 0.9),
+      ease: "power3.out",
+      overwrite: "auto",
+    });
+    followTarget();
+  }
+
+  // ---- link helpers ----
   // For a link that wraps across lines, use the line the pointer is on.
   function linkRect(link) {
     var rects = link.getClientRects();
@@ -85,38 +128,14 @@
     return { left: r.left - (w - r.width) / 2, top: r.top - (h - r.height) / 2, width: w, height: h };
   }
 
-  // Where the box should sit: on the link, leaning toward the cursor.
-  function target() {
-    var cx = base.left + base.width / 2;
-    var cy = base.top + base.height / 2;
-    var pullX = clamp((mouse.x - cx) * MAGNET, -MAX_PULL_X, MAX_PULL_X);
-    var pullY = clamp((mouse.y - cy) * MAGNET, -MAX_PULL_Y, MAX_PULL_Y);
-    return {
-      x: base.left - PAD_X + pullX,
-      y: base.top - PAD_Y + pullY,
-      width: base.width + PAD_X * 2,
-      height: base.height + PAD_Y * 2,
-    };
-  }
-
   function showFor(link) {
     if (hideCall) { hideCall.kill(); hideCall = null; }
     currentLink = link;
     var r = linkRect(link);
     base = { left: r.left, top: r.top, width: r.width, height: r.height };
     shrink(link);
-
-    if (!boxShown) {
-      // first link: appear in place and grow out from the centre
-      gsap.killTweensOf(box);
-      gsap.set(box, target());
-      gsap.fromTo(box, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: t(0.4), ease: "power3.out" });
-      if (circle) gsap.to(circle, { autoAlpha: 0, scale: 0.4, duration: t(0.2), overwrite: "auto" });
-      boxShown = true;
-    } else {
-      // already open: glide to the new link
-      gsap.to(box, Object.assign({ duration: t(0.35), ease: "power3.out", overwrite: "auto" }, target()));
-    }
+    boxShown = true;
+    morphToBox();
   }
 
   function hideBox() {
@@ -124,12 +143,11 @@
     currentLink = null;
     base = null;
     boxShown = false;
-    gsap.to(box, { autoAlpha: 0, scale: 0.85, duration: t(0.22), ease: "power2.in", overwrite: "auto" });
-    if (circle && seenMouse) gsap.to(circle, { autoAlpha: 1, scale: 1, duration: t(0.25), overwrite: "auto" });
+    morphToDot();
   }
 
   function leave() {
-    // short grace period so moving between links glides instead of closing
+    // short grace period so moving between links glides instead of turning back into a dot
     if (hideCall) hideCall.kill();
     hideCall = gsap.delayedCall(0.06, hideBox);
   }
@@ -144,22 +162,12 @@
   window.addEventListener("mousemove", function (e) {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
-
-    if (circle) {
-      if (!seenMouse) {
-        gsap.set(circle, { x: mouse.x, y: mouse.y });
-        if (!boxShown) gsap.to(circle, { autoAlpha: 1, duration: t(0.2) });
-      }
-      moveX(mouse.x);
-      moveY(mouse.y);
+    if (!seenMouse) {
+      seenMouse = true;
+      gsap.set(dot, { x: mouse.x, y: mouse.y });
+      gsap.to(dot, { autoAlpha: 1, duration: t(0.2) });
     }
-    seenMouse = true;
-
-    // magnet: ease the box toward the cursor, staying anchored to its link
-    if (boxShown && base) {
-      var p = target();
-      gsap.to(box, { x: p.x, y: p.y, duration: t(0.35), ease: "power3.out", overwrite: "auto" });
-    }
+    followTarget();
   });
 
   // keep the box on its link if the page scrolls or resizes while it is open
@@ -167,7 +175,7 @@
     if (!currentLink || !boxShown) return;
     var r = fullSizeRect(currentLink, linkRect(currentLink));
     base = { left: r.left, top: r.top, width: r.width, height: r.height };
-    gsap.set(box, target());
+    followTarget();
   }
   window.addEventListener("scroll", reposition, { passive: true });
   window.addEventListener("resize", reposition);

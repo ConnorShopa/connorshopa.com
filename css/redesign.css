@@ -266,30 +266,19 @@ a:focus-visible {
   gap: 8px;
 }
 
+/* the cursor dot: trails the pointer, and morphs into a soft box around hovered links (see js/mouse.js).
+   It sits under the page (z-index 0 vs .page's 1) so link text always stays on top of it. */
 #mouse-circle {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 0;
   width: 32px;
   height: 32px;
   background: rgba(0, 0, 0, 0.10);
-  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 16px;
   pointer-events: none;
-  will-change: transform;
-}
-
-/* softly rounded box with a very light grey fill around a hovered link; GSAP sets its position and size */
-#hover-box {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  border: 1px solid rgba(0, 0, 0, 0.45);
-  border-radius: 24px;
-  background: #F4F4F4;
-  pointer-events: none;
-  visibility: hidden;
   will-change: transform, width, height;
 }
 
