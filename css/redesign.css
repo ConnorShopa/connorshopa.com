@@ -1403,3 +1403,9 @@ html.view-open .contactBlock {
 
 /* a larger phone: it is taller than the content area (which is inset more than the card's grass frame), centred on the card */
 .pg.cover .coverShot { height: calc(100% + 100px); }
+
+/* each page sets its phone down at a slightly different angle */
+.view.hasBgImage.onFirst .pg:nth-child(1) .coverShot { transform: rotate(1.5deg); }
+.view.hasBgImage.onFirst .pg:nth-child(2) .coverShot { transform: rotate(-1.8deg); }
+.view.hasBgImage.onFirst .pg:nth-child(3) .coverShot { transform: rotate(2.2deg); }
+.view.hasBgImage.onFirst .pg:nth-child(4) .coverShot { transform: rotate(-1deg); }
