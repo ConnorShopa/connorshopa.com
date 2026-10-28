@@ -37,7 +37,7 @@
   // origin (optional, viewport px): the spot the card grows from. The other links are pushed away from it
   // as if the growing card shoved them aside, instead of just shrinking in place.
   // pullIn: on close the links start out where the push would have left them and are drawn back to their places
-  function popGallery(applyLayout, origin, pullIn) {
+  function popGallery(applyLayout, origin, pullIn, focusEl) {
     if (popTl) popTl.kill();
     if (popIn) popIn.kill();
     var current = items();
@@ -70,7 +70,13 @@
           transformOrigin: "50% 50%",
         });
         // ...and get sucked back to their own spot
-        popIn = gsap.to(next, { x: 0, y: 0, scale: 1, opacity: 1, duration: t(0.3), ease: "power2.out" });
+        var others = Array.prototype.filter.call(next, function (el) { return el !== focusEl; });
+        popIn = gsap.to(others, { x: 0, y: 0, scale: 1, opacity: 1, duration: t(0.3), ease: "power2.out" });
+        // the link that was open grows no sideways: it scales down from the centre of the bubble, in its own spot
+        if (focusEl) {
+          gsap.set(focusEl, { x: 0, y: 0, scale: 1.8, opacity: 0, transformOrigin: "50% 50%" });
+          gsap.to(focusEl, { scale: 1, opacity: 1, duration: t(0.3), delay: t(0.08), ease: "power3.out" });
+        }
       } else {
         gsap.set(next, { scale: 0, opacity: 0 });
         popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "back.out(1.2)", stagger: t(0.018) });
@@ -195,20 +201,7 @@
       if (!open || open.view !== view) return;
       gsap.set(view, { autoAlpha: 1 });
       if (window.bubble) window.bubble.handoff();
-      var head = view.querySelector(".viewHead");
-      var rest = Array.prototype.filter.call(view.children, function (el) { return el !== head; });
-      gsap.to(rest, { opacity: 1, duration: t(0.15), clearProps: "opacity" });
-      if (head) {
-        // the project's logo flies out of the middle of the card to its place in the corner
-        gsap.set(head, { clearProps: "transform,opacity" });
-        var hr = head.getBoundingClientRect();
-        var cr2 = view.getBoundingClientRect();
-        gsap.fromTo(
-          head,
-          { x: cr2.left + cr2.width / 2 - (hr.left + hr.width / 2), y: cr2.top + cr2.height / 2 - (hr.top + hr.height / 2), scale: 1.6, opacity: 0, transformOrigin: "50% 50%" },
-          { x: 0, y: 0, scale: 1, opacity: 1, duration: t(0.45), ease: "power3.out", clearProps: "transform,opacity" }
-        );
-      }
+      gsap.to(view.children, { opacity: 1, duration: t(0.15), clearProps: "opacity" });
     };
     if (window.bubble) window.bubble.grow(to, b, 0.38, reveal); else reveal();
     popGallery(function () {
@@ -276,7 +269,7 @@
       list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
       fixSlashes();
       gsap.set(nav, { clearProps: "transform" });
-    }, { x: b.cx, y: b.cy }, true);
+    }, { x: b.cx, y: b.cy }, true, trigger.closest("li"));
     trigger.focus({ preventScroll: true });
   }
 
