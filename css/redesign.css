@@ -1500,3 +1500,7 @@ body { position: relative; }
 
 /* Contact: each label and link centred within the column */
 .contactCol2, .contactCol2 li, .contactCol2 a.withLabel { align-items: center; text-align: center; }
+
+/* Contact: dead centre of the screen, with more air between the three */
+.panelText:has(.contactCol2) { position: fixed; inset: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); width: max-content; }
+.contactCol2 { gap: 44px; }
