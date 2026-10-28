@@ -12,6 +12,8 @@
 
   var MINI = 0.4;  // how small the gallery gets while a view is open
   var GAP = 28;    // space between the card and the minimised gallery
+  var INTRO_GAP = 16;  // the gap left between the (collapsed) intro and the filter chips
+  var introState = null; // the intro's full size while a project is open (restored on close)
   var BOTTOM_ROOM = 160; // space kept under the card for the gallery row
 
   var open = null; // { view, trigger }
@@ -238,7 +240,22 @@
 
     // The card starts just under the intro (name, tagline, stat, chips) and runs down the screen,
     // leaving room at the bottom for the gallery row, which gets pushed down beneath it.
-    var top = intro ? intro.getBoundingClientRect().bottom + 24 : 80;
+    // The "about me" part of the intro (name + tagline) collapses away while a project is open, so the card gets
+    // that room too: the card's top is worked out for the collapsed intro, and the intro animates to it.
+    var introTop = intro && intro.querySelector(".introTop");
+    var introFilters = intro && intro.querySelector(".filters");
+    var collapseBy = 0;
+    if (introTop && introFilters) {
+      if (!introState) { // first open: remember the full size so closing can restore it
+        introState = { h: introTop.offsetHeight, mt: parseFloat(getComputedStyle(introFilters).marginTop) || 0 };
+        collapseBy = introState.h + introState.mt - INTRO_GAP;
+      }
+      gsap.killTweensOf([introTop, introFilters]);
+      gsap.set(introTop, { overflow: "hidden" });
+      gsap.to(introTop, { height: 0, opacity: 0, duration: t(0.55), ease: "power3.inOut" });
+      gsap.to(introFilters, { marginTop: INTRO_GAP, duration: t(0.55), ease: "power3.inOut" });
+    }
+    var top = intro ? intro.getBoundingClientRect().bottom - collapseBy + 24 : 80;
     var height = Math.max(300, window.innerHeight - top - BOTTOM_ROOM);
     view.style.height = height + "px";
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
@@ -299,9 +316,21 @@
     });
   }
 
+  function restoreIntro() {
+    var introTop = intro && intro.querySelector(".introTop");
+    var introFilters = intro && intro.querySelector(".filters");
+    if (!introState || !introTop || !introFilters) return;
+    var st = introState;
+    introState = null;
+    gsap.killTweensOf([introTop, introFilters]);
+    gsap.to(introTop, { height: st.h, opacity: 1, duration: t(0.5), ease: "power3.inOut", onComplete: function () { gsap.set(introTop, { clearProps: "height,opacity,overflow" }); } });
+    gsap.to(introFilters, { marginTop: st.mt, duration: t(0.5), ease: "power3.inOut", onComplete: function () { gsap.set(introFilters, { clearProps: "marginTop" }); } });
+  }
+
   function hide() {
     if (!open) return;
     var view = open.view;
+    restoreIntro();
     var trigger = open.trigger;
     var b = open.bubble;
     open = null;
