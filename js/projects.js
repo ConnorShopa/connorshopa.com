@@ -196,41 +196,7 @@
       icon: H + "habbot_icon.svg",
       logoOnly: true,
       accent: "#FA983A", // the orange of its underline: dots, eyebrow markers, the active page dot
-      pages: [
-        pg("two",
-          text(
-            '<div class="facts">' + fact("Built in", "a Remote Cabin in Wyoming") + fact("Built using", "Paper &amp; Pen + Figma + SwiftUI") + "</div>"
-          ) + media(fig(A + "habbotAssets/habbot_img01.png"))),
-        pg("two",
-          text(
-            p("eyebrow", "Introduction") +
-            p("body", "Throughout a roadtrip from Seattle to Mexico to New York I would keep track of my meditation with two dots drawn in my journal.") +
-            p("body", "The distance between the dots represented the length of the meditation, with quick notes before and after each meditation.") +
-            p("body", "While living in a remote Wyoming cabin, I digitized this process into an iOS application.")
-          ) + media(fig(A + "habbotAssets/habbot_gif02.gif"))),
-        pg("flip",
-          media(fig(A + "habbotAssets/habbot_img02.png")) +
-          text(p("lead", "How to habbot"))),
-        pg("two",
-          text(
-            p("lead", "Simple + Visual components") +
-            p("body", "Habbot uses abstract and visual elements to keep as much parity with my journaling as possible")
-          ) + media(fig(A + "habbotAssets/habbot_img05.png"))),
-        pg("flip",
-          media(fig(A + "habbotAssets/habbot_gif01.gif")) +
-          text(p("lead", "Maintaining a physical feeling through weighty animations"))),
-        pg("two",
-          text(p("lead", "Habbots are customizable + searchable")) +
-          media(fig(A + "habbotAssets/habbot_img04.png"))),
-        pg("flip",
-          media(fig(A + "habbotAssets/habbot_img03.png")) +
-          text(
-            p("lead", "Colours + Identity") +
-            p("body", "Off-white and off-black were used as the main colours, maintaining the feel of writing with ink on paper.") +
-            p("body", "Orange is used sparingly as a highlighter would be used in a journal, denoting important things.") +
-            p("body", "The habbots themselves were contrained to three colours, intending to make each habbot feel purposeful.")
-          )),
-      ],
+      pages: [], // cleared to start fresh; the previous 7 pages are saved in archive/habbot-view.js
     },
 
     // ---------------------------------------------------------------- Spotify dreams
