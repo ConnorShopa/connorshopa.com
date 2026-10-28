@@ -1647,3 +1647,27 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .panelText .aboutJobs li { flex-direction: column; justify-content: center; gap: 2px; }
   .panelText .aboutJobs span { display: block; text-align: center; }
 }
+
+/* ---- project views on phones: as wide and tall as there is room, content stacked in one column ---- */
+@media (max-width: 700px) {
+  .view { border-radius: 28px; }
+  .viewHead { top: 18px; left: 18px; }
+  .viewLogo { height: 28px; max-width: 110px; }
+  .viewHead.stacked .viewLogo { height: 30px; }
+  .viewWordmark { height: 13px; }
+  .viewClose { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 26px; }
+  .viewBody { inset: 68px 16px 52px; clip-path: none; }
+  .viewNav.prev { left: 4px; }
+  .viewNav.next { right: 4px; }
+
+  .pg { gap: 16px; overflow-y: auto; overflow-x: hidden; align-items: start; grid-template-rows: none; grid-auto-rows: min-content; align-content: start; -webkit-overflow-scrolling: touch; }
+  .pg.two, .pg.flip, .pg.one, .pg.media { grid-template-columns: minmax(0, 1fr); }
+  .pg.one { align-content: center; }
+  .view.vertical .pg { overflow: visible; }
+  .pgText { max-width: none; overflow: visible; max-height: none; gap: 12px; }
+  .pg.one .pgText { max-width: none; }
+  .pgMedia { height: auto; flex-direction: column; gap: 12px; }
+  .pgMedia figure { flex: none; width: 100%; height: auto; }
+  .pgMedia img, .pgMedia video { width: 100%; height: auto; max-height: none; border-radius: 18px; }
+  .viewDots { bottom: 16px; }
+}

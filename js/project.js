@@ -267,6 +267,7 @@
     }
     if (introState) collapseBy = introState.rise; // the header's own box never shrinks (the lines and chips are only moved)
     var top = intro ? intro.getBoundingClientRect().bottom - collapseBy + 24 : 80;
+    if (window.innerWidth <= 700) top = Math.max(12, top - 12); // phones: right under the tabs, never off the top
     // the card keeps a familiar shape (3:2): it takes the room available, but never gets taller than that shape
     // allows, and when the room is short it gets narrower instead of squatter
     var narrow = window.innerWidth <= 700; // phones: the card is nearly full width and as tall as the room allows (no 3:2)
@@ -465,7 +466,7 @@
   var wheelLock = 0;
   // while a view is open nothing outside it may scroll: wheel, touch and the scrolling keys are all stopped (except
   // inside a text block that genuinely needs to scroll)
-  function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText, .pgGallery"); }
+  function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText, .pgGallery, .pg"); }
   function onWheel(e) {
     if (!open) return;
     if (!insideScroller(e)) e.preventDefault(); // stops page scrolling and the elastic bounce
@@ -480,6 +481,21 @@
   // in the capture phase, on both the document and the window, so nothing can get in ahead of it
   document.addEventListener("wheel", onWheel, { passive: false, capture: true });
   window.addEventListener("wheel", onWheel, { passive: false, capture: true });
+  // touch screens: swipe sideways to go between pages (up / down in the vertical Habbot view)
+  var swipe = null;
+  document.addEventListener("touchstart", function (e) {
+    if (!open || !e.touches[0] || !e.target.closest(".view")) { swipe = null; return; }
+    swipe = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  }, { passive: true });
+  document.addEventListener("touchend", function (e) {
+    if (!swipe || !open || !e.changedTouches[0]) return;
+    var dx = e.changedTouches[0].clientX - swipe.x, dy = e.changedTouches[0].clientY - swipe.y;
+    swipe = null;
+    var vertical = open.view.classList.contains("vertical");
+    var d = vertical ? dy : dx, o = vertical ? dx : dy;
+    if (Math.abs(d) > 60 && Math.abs(d) > Math.abs(o) * 1.5) step(d < 0 ? 1 : -1);
+  }, { passive: true });
+
   window.addEventListener("touchmove", function (e) { if (open && !insideScroller(e)) e.preventDefault(); }, { passive: false });
   document.addEventListener("keydown", function (e) {
     if (!open || /^(input|textarea|select)$/i.test(e.target.tagName)) return;
