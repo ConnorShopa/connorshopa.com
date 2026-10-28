@@ -1269,8 +1269,9 @@ html.view-open .contactBlock {
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--ink); /* dark arrow on the lighter fill */
+  box-shadow: 0 8px 18px -4px rgba(0, 10, 4, 0.4), 0 2px 5px rgba(0, 10, 4, 0.25);
   display: grid;
   place-items: center;
   cursor: url("cursor_linkHover.png"), pointer;
