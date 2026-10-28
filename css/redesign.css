@@ -434,19 +434,18 @@ a:focus-visible {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
 
-/* head with a wordmark: icon on top, wordmark underneath */
+/* head with a wordmark (Nanni): icon and wordmark in one row, centred on each other */
 .viewHead.stacked {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  top: 36px;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 
-.viewHead.stacked .viewLogo { height: 44px; }
+.viewHead.stacked .viewLogo { height: 40px; }
 
 .viewWordmark {
   display: block;
-  height: 10px;
+  height: 16px;
   width: auto;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
