@@ -1563,3 +1563,4 @@ a:has(.sheepText) .bubble { margin-right: 10px; }
 .logo.sheep { height: 22px; width: auto; max-width: none; }
 .sheepText { font-size: 1.15em; line-height: 1; }
 a:has(.sheepText) .bubble { margin-right: 4px; }
+a:has(.sheepText) .bubble { margin-right: 4px; }
