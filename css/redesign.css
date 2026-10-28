@@ -1497,3 +1497,6 @@ body { position: relative; }
 .panelText .aboutJobs li { align-items: baseline; text-align: left; gap: 18px; }
 .panelText .aboutJobs .company { font-size: 22px; }
 .panelText .aboutJobs .role, .panelText .aboutJobs .dates { font-size: 18px; }
+
+/* Contact: each label and link centred within the column */
+.contactCol2, .contactCol2 li, .contactCol2 a.withLabel { align-items: center; text-align: center; }
