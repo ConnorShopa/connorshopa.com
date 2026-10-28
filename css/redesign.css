@@ -1185,6 +1185,9 @@ html.view-open .contactBlock {
   left: 56%;
   border-radius: 0 56px 56px 0; /* the right corners are concentric with the card's 64px corners */
   background: var(--view-img) center / cover no-repeat;
+  /* the photo fades into the peach on its left side */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 45%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
