@@ -1541,3 +1541,6 @@ body { position: relative; }
 .earlyInput:focus { box-shadow: 0 0 0 3px rgba(27, 36, 48, 0.18); }
 .earlyBtn.lockBtn { font: inherit; font-size: 16px; font-weight: 600; padding: 12px 22px; color: #FFDD55; background: #1B2430; border: 1px solid #1B2430; border-radius: 999px; cursor: pointer; }
 .earlyBtn.lockBtn:disabled { opacity: 1; }
+
+/* AltQ's logo is a small wordmark */
+.logo.altq { height: 18px; width: auto; max-width: none; }
