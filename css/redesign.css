@@ -1173,16 +1173,17 @@ html.view-open .contactBlock {
 .view.hasDownload .viewDots { bottom: 82px; }
 .view.hasDownload .viewBody { bottom: 120px; }
 
-/* a project's first page can sit on an image panel (Habbot: blurred grass) down the left side of the card,
-   inset 8px from the card's edge (a peach border), rounded on the right; it fades away on the other pages */
+/* a project's first page can sit on an image panel (Habbot: blurred grass) down the right side of the card, inset 8px
+   from the card's top, right and bottom edges (a peach border): rounded on the right, a straight edge on the left.
+   It fades away on the other pages. */
 .view.hasBgImage::before {
   content: "";
   position: absolute;
   top: 8px;
+  right: 8px;
   bottom: 8px;
-  left: 8px;
-  width: calc(52% - 8px);
-  border-radius: 56px 56px 56px 56px / 56px 56px 56px 56px; /* concentric with the card's 64px corners */
+  left: 56%;
+  border-radius: 0 56px 56px 0; /* the right corners are concentric with the card's 64px corners */
   background: var(--view-img) center / cover no-repeat;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1191,13 +1192,16 @@ html.view-open .contactBlock {
 
 .view.hasBgImage.onFirst::before { opacity: 1; }
 
-/* light type on the image; the phone sits on the peach beside it with a deeper drop shadow */
-.view.hasBgImage.onFirst .coverWrap { color: #fff; }
-.view.hasBgImage.onFirst .coverMark { filter: brightness(0) invert(1); }
+/* the phone sits on the panel with a deep drop shadow; the close button goes white on the photo */
+.view.hasBgImage.onFirst .viewClose { color: #fff; }
 .view.hasBgImage.onFirst .coverShot {
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.55),
     inset 0 0 2px 1px rgba(0, 0, 0, 0.25),
-    0 44px 70px -22px rgba(47, 39, 37, 0.5),
-    0 10px 22px rgba(47, 39, 37, 0.2);
+    0 44px 70px -22px rgba(0, 0, 0, 0.6),
+    0 10px 22px rgba(0, 0, 0, 0.3);
 }
+
+/* with the panel on the right, the cover's text column stays clear of it */
+.view.hasBgImage .pg.cover { grid-template-columns: minmax(0, 1fr) 36%; gap: 0; }
+.view.hasBgImage .coverWrap { max-width: 470px; }
