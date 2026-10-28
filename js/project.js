@@ -344,7 +344,7 @@
     step(e.deltaY > 0 ? 1 : -1);
   }, { passive: true });
   document.addEventListener("click", function (e) {
-    var cue = e.target.closest && e.target.closest(".scrollCue");
+    var cue = e.target.closest && e.target.closest(".aboutBtn");
     if (cue && open) step(1);
   });
 
