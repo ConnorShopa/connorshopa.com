@@ -1180,9 +1180,9 @@ html.view-open .contactBlock {
 .view.hasBgImage::after {
   content: "";
   position: absolute;
-  inset: 8px; /* a peach border around the photo */
+  inset: 16px; /* a peach border around the photo */
   z-index: -1; /* behind the card's content (the .view is its own stacking context) */
-  border-radius: 56px; /* concentric with the card's 64px corners */
+  border-radius: 48px; /* concentric with the card's 64px corners */
   background: var(--view-img) center / cover no-repeat;
   opacity: 0;
   transition: opacity 0.3s ease;
