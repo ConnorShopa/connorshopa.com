@@ -11,11 +11,11 @@
   // ---- password-protected projects ----
   var LOCK_PAGE =
     '<div class="pg one is-on"><div class="pgText lockBox">' +
-    '<p class="body soft">This work is password protected.</p>' +
+    '<p class="body soft">Under NDA</p>' +
     '<form class="lockForm"><input class="lockInput" type="password" placeholder="Password" autocomplete="current-password" aria-label="Password">' +
     '<button type="submit" class="lockBtn">Unlock</button></form>' +
     '<p class="lockMsg" role="alert"></p>' +
-    '<p class="lockAsk">Need the password? <a href="mailto:connorshopa@gmail.com">Email me</a> or <a href="tel:+13432095337">call 343.209.5337</a>.</p>' +
+    '<p class="lockAsk"><a href="mailto:connorshopa@gmail.com">Email</a> or <a href="sms:+13432095337">text</a> me for the password</p>' +
     '</div></div>';
 
   var unb64 = function (s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); };
