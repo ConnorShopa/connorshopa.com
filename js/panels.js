@@ -82,3 +82,6 @@
     a.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, view: window, ctrlKey: !mac, metaKey: mac }));
   });
 })();
+
+// Overhand's "Get early access" form is a placeholder for now: it doesn't send anywhere
+document.addEventListener("submit", function (e) { if (e.target.closest && e.target.closest(".earlyForm")) e.preventDefault(); });
