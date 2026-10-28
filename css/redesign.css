@@ -1241,3 +1241,8 @@ html.view-open .contactBlock {
 .pg.cover { grid-template-columns: minmax(0, 1fr) 62%; gap: 0; }
 
 .dlBtn { font-size: 17px; padding: 14px 30px; }
+
+/* the card's content area sits 26px below the card's centre (more room is left above for the header); lift the
+   cover's two halves so they are centred in the card itself */
+.pg.cover .coverShot,
+.pg.cover .coverWrap { position: relative; top: -26px; }
