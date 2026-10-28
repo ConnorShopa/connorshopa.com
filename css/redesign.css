@@ -1257,22 +1257,42 @@ html.view-open .contactBlock {
 /* the grass photo is mirrored (it reads better that way round) */
 .view.hasBgImage::before { transform: scaleX(-1); }
 
-/* the down chevron under the first page's button: bobs gently, scrolls to the next page */
+/* the down chevron: a round button on the bottom edge of the card, under the left column (outside the column, so
+   the logo + CTA stay centred); 12% white with the same light stroke as the filter chips */
 .scrollCue {
-  margin-top: 6px;
-  padding: 6px;
+  position: absolute;
+  left: calc(19% + 70px);
+  bottom: -50px;
+  margin-left: -22px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   border: 0;
-  background: none;
-  color: inherit;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
   display: grid;
   place-items: center;
   cursor: url("cursor_linkHover.png"), pointer;
   animation: cueBob 1.8s ease-in-out infinite;
 }
 
+.scrollCue::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
 @keyframes cueBob {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
+  50% { transform: translateY(5px); }
 }
 
 @media (prefers-reduced-motion: reduce) { .scrollCue { animation: none; } }
