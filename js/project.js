@@ -221,6 +221,13 @@
       setPage(view, n, true, n > (view._page || 0) ? 1 : -1);
     });
   });
+  // a click anywhere outside the card closes it (links and chips keep doing their own thing; the click that
+  // opened the card is a link click, so it is ignored here too)
+  document.addEventListener("click", function (e) {
+    if (!open) return;
+    if (e.target.closest(".view, a, .pill")) return;
+    hide();
+  });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") hide();
     else if (e.key === "ArrowRight") step(1);
