@@ -18,6 +18,7 @@
 //   function stat(value, label) { return '<div class="stat"><p class="big">' + value + '</p><p class="eyebrow">' + label + "</p></div>"; }
 //   function p(cls, html) { return '<p class="' + cls + '">' + html + "</p>"; }
 
+var ARCHIVED = {
     habbot: {
       title: "Habbot",
       logo: H + "habbot_projectImage.svg",
@@ -60,3 +61,4 @@
           )),
       ],
     },
+};
