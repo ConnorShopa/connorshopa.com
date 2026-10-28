@@ -1488,3 +1488,12 @@ body { position: relative; }
 /* Contact: the column is centred on the page; labels stay left-aligned with their links inside it */
 .panelText:has(.contactCol2), .panelText:has(.contactCol2) .pgText { align-items: center; }
 .contactCol2 { width: fit-content; }
+
+/* About: larger type throughout; the history is left-aligned (as a block, centred on the page) */
+.panelText:has(.aboutJobs) .lead { font-size: 34px; max-width: 760px; }
+.panelText:has(.aboutJobs) .body { font-size: 26px; }
+.panelText:has(.aboutJobs) .eyebrow { font-size: 15px; margin-top: 18px; }
+.panelText .aboutJobs { width: fit-content; align-items: flex-start; text-align: left; gap: 14px; }
+.panelText .aboutJobs li { align-items: baseline; text-align: left; gap: 18px; }
+.panelText .aboutJobs .company { font-size: 22px; }
+.panelText .aboutJobs .role, .panelText .aboutJobs .dates { font-size: 18px; }
