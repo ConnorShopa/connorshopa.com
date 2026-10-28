@@ -34,6 +34,7 @@
       if (current !== name || !name) return;
       panel.innerHTML = window.PANELS[name].pages[0].html;
       panel.hidden = false;
+      if (window.bindHover) window.bindHover(panel);
       gsap.fromTo(panel.children, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: t(0.3), ease: "back.out(1.2)", stagger: t(0.05) });
     };
     var showLinks = function () {

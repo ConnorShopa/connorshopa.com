@@ -44,9 +44,9 @@
       logoOnly: true,
       pages: [pg("one", text(
         '<ul class="contactCol2">' +
-        '<li><span class="tinyLabel">EMAIL ME</span><a href="mailto:connorshopa@gmail.com">connorshopa@gmail.com</a></li>' +
-        '<li><span class="tinyLabel">CALL ME</span><a href="tel:+13432095337">343.209.5337</a></li>' +
-        '<li><span class="tinyLabel">LINKEDIN</span><a href="https://www.linkedin.com/in/connorshopa/" target="_blank" rel="noopener">LinkedIn</a></li>' +
+        '<li><a class="withLabel" href="mailto:connorshopa@gmail.com"><span class="tinyLabel">EMAIL ME</span>connorshopa@gmail.com</a></li>' +
+        '<li><a class="withLabel" href="tel:+13432095337"><span class="tinyLabel">CALL ME</span>343.209.5337</a></li>' +
+        '<li><a class="withLabel" href="https://www.linkedin.com/in/connorshopa/" target="_blank" rel="noopener"><span class="tinyLabel">LINKEDIN</span>LinkedIn &nearr;</a></li>' +
         '</ul>'
       ))]
     }

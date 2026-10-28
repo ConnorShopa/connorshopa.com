@@ -1477,3 +1477,10 @@ body { position: relative; }
 .contactCol2 li { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .contactCol2 .tinyLabel { font-size: 12px; letter-spacing: 0.08em; font-weight: 500; color: var(--ink-soft); }
 .contactCol2 a { font-size: 32px; line-height: 1.2; letter-spacing: -0.02em; }
+
+/* Contact: the whole column sits left, labels left-aligned over their links (the label is inside the link, so the hover bubble wraps both) */
+.panelText:has(.contactCol2) { align-items: flex-start; text-align: left; }
+.panelText:has(.contactCol2) .pgText { align-items: flex-start; }
+.contactCol2 { align-items: flex-start; }
+.contactCol2 li { align-items: flex-start; }
+.contactCol2 a.withLabel { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; font-size: 32px; line-height: 1.2; letter-spacing: -0.02em; }

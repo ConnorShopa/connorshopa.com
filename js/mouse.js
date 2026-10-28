@@ -181,14 +181,19 @@
     hideCall = gsap.delayedCall(0.06, hideBox);
   }
 
-  document.querySelectorAll(SEL).forEach(function (link) {
+  // also called for links added later (the About / Contact text)
+  window.bindHover = function (root) { (root || document).querySelectorAll(SEL).forEach(bind); };
+  function bind(link) {
+    if (link.__hoverBound) return;
+    link.__hoverBound = true;
     link.addEventListener("mouseenter", function () { showFor(link); });
     link.addEventListener("mouseleave", function () { unshrink(link); leave(); });
     // only react to keyboard focus: the view moves focus to its close button (and back) in code, which
     // would otherwise yank the dot onto it before the pointer is anywhere near
     link.addEventListener("focus", function () { if (link.matches(":focus-visible")) showFor(link); });
     link.addEventListener("blur", function () { unshrink(link); leave(); });
-  });
+  }
+  window.bindHover();
 
   window.addEventListener("mousemove", function (e) {
     mouse.x = e.clientX;
