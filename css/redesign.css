@@ -157,18 +157,19 @@ a:focus-visible {
   color: var(--ink-soft);
 }
 
-/* a link with its caption underneath (Seeds): the column's baseline is the title's, so the title
-   lines up with the other items and the caption hangs below it without pushing anything */
+/* a link with a caption under its title (Seeds): bubble on the left, title and caption stacked
+   in a column on the right, so the caption starts exactly where the title does */
 .withCaption {
-  display: inline-flex;
-  flex-direction: column;
+  display: inline-grid;
+  grid-template-columns: auto auto;
   align-items: center;
-  vertical-align: baseline;
+  justify-items: start;
+  text-align: left;
 }
 
-.withCaption .caption {
-  margin-top: -0.6em;
-}
+.withCaption .bubble { grid-area: 1 / 1; }
+.withCaption .label { grid-area: 1 / 2; }
+.withCaption .caption { grid-area: 2 / 2; margin-top: -0.7em; }
 
 /* the centre list keeps the unfiltered list's height; the live list sits in the middle of it */
 .stack {
