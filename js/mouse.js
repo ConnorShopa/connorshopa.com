@@ -161,7 +161,9 @@
   document.querySelectorAll("a, .viewClose").forEach(function (link) {
     link.addEventListener("mouseenter", function () { showFor(link); });
     link.addEventListener("mouseleave", function () { unshrink(link); leave(); });
-    link.addEventListener("focus", function () { showFor(link); });
+    // only react to keyboard focus: the view moves focus to its close button (and back) in code, which
+    // would otherwise yank the dot onto it before the pointer is anywhere near
+    link.addEventListener("focus", function () { if (link.matches(":focus-visible")) showFor(link); });
     link.addEventListener("blur", function () { unshrink(link); leave(); });
   });
 
