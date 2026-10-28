@@ -48,6 +48,9 @@
   var currentLink = null;
   var base = null;       // the link's rect while the dot is a box
   var hideCall = null;
+  var locked = false;    // true while the project card is using the dot (see window.bubble below)
+  var ctl = null;        // the tween that is growing / shrinking the dot
+  var SEL = "a, .viewClose, .viewNav, .pill, .lockBtn";
 
   // The dot is centred on its x / y; quickTo makes it trail whatever target we give it.
   gsap.set(dot, { xPercent: -50, yPercent: -50, autoAlpha: 0 });
@@ -56,6 +59,7 @@
 
   // Where the dot's centre should be: on the cursor, or magnetised onto the link.
   function followTarget() {
+    if (locked) return;
     var x = mouse.x;
     var y = mouse.y;
     if (boxShown && base) {
@@ -69,6 +73,7 @@
   }
 
   function morphToBox() {
+    if (locked) return;
     var w = base.width + PAD_X * 2;
     var h = base.height + PAD_Y * 2;
     var shape = Math.min(1, Math.max(0, (w / h - 1) / (WIDE_AT - 1))); // 0 = squarish, 1 = very wide
@@ -99,6 +104,7 @@
   }
 
   function morphToDot() {
+    if (locked) return;
     gsap.to(dot, {
       width: DOT_SIZE,
       height: DOT_SIZE,
@@ -150,6 +156,7 @@
   }
 
   function showFor(link) {
+    if (locked) return;
     if (hideCall) { hideCall.kill(); hideCall = null; }
     currentLink = link;
     var r = linkRect(link);
@@ -160,6 +167,7 @@
   }
 
   function hideBox() {
+    if (locked) return;
     hideCall = null;
     currentLink = null;
     base = null;
@@ -173,7 +181,7 @@
     hideCall = gsap.delayedCall(0.06, hideBox);
   }
 
-  document.querySelectorAll("a, .viewClose, .viewNav, .pill, .lockBtn").forEach(function (link) {
+  document.querySelectorAll(SEL).forEach(function (link) {
     link.addEventListener("mouseenter", function () { showFor(link); });
     link.addEventListener("mouseleave", function () { unshrink(link); leave(); });
     // only react to keyboard focus: the view moves focus to its close button (and back) in code, which
@@ -195,6 +203,7 @@
 
   // keep the box on its link if the page scrolls or resizes while it is open
   function reposition() {
+    if (locked) return;
     if (!currentLink || !boxShown) return;
     var r = fullSizeRect(currentLink, linkRect(currentLink));
     base = { left: r.left, top: r.top, width: r.width, height: r.height };
@@ -202,4 +211,65 @@
   }
   window.addEventListener("scroll", reposition, { passive: true });
   window.addEventListener("resize", reposition);
+
+  // ---- the bubble IS the project card while a project opens or closes ----
+  // The card's grey box is this same dot: it grows from the hover bubble to the card's size and shape, and on
+  // close it shrinks back into the bubble. Geometry objects are { cx, cy, w, h, r, shadow } in viewport px.
+  var CARD_SHADOW = "0px 24px 60px -24px rgba(47, 39, 37, 0.14), 0px 4px 14px 0px rgba(47, 39, 37, 0.05)";
+
+  function lock() {
+    locked = true;
+    if (hideCall) { hideCall.kill(); hideCall = null; }
+    if (ctl) { ctl.kill(); ctl = null; }
+    gsap.set(dot, { zIndex: 0, mixBlendMode: "normal" }); // under the page, like the hover bubble
+  }
+
+  function snapTo(g) {
+    gsap.set(dot, {
+      x: g.cx, y: g.cy, width: g.w, height: g.h, borderRadius: g.r,
+      boxShadow: g.shadow || BOX_SHADOW, backgroundColor: BOX_FILL, borderColor: BOX_BORDER, autoAlpha: 1,
+    });
+  }
+
+  function unlock() {
+    locked = false;
+    gsap.set(dot, { clearProps: "zIndex,mixBlendMode" });
+    var el = seenMouse ? document.elementFromPoint(mouse.x, mouse.y) : null;
+    var link = el && el.closest ? el.closest(SEL) : null;
+    if (link) showFor(link); else hideBox();
+  }
+
+  window.bubble = {
+    CARD_SHADOW: CARD_SHADOW,
+    // the bubble grows from `from` (where it is) to `to` (the card)
+    grow: function (to, from, dur, done) {
+      lock();
+      snapTo(from);
+      ctl = gsap.to(dot, {
+        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: to.shadow || CARD_SHADOW,
+        duration: t(dur), ease: "power4.out", onComplete: done,
+      });
+    },
+    // the card is showing on top of the (now identical) grey box: the dot turns back into the pointer dot, unseen
+    handoff: function () {
+      gsap.set(dot, {
+        x: mouse.x, y: mouse.y, width: DOT_SIZE, height: DOT_SIZE, borderRadius: DOT_SIZE / 2,
+        boxShadow: DOT_SHADOW, backgroundColor: DOT_FILL, borderColor: DOT_BORDER, opacity: 0,
+      });
+      locked = false;
+      gsap.set(dot, { clearProps: "zIndex,mixBlendMode" });
+      boxShown = false; currentLink = null; base = null;
+      gsap.to(dot, { opacity: 1, duration: t(0.2), delay: t(0.15) });
+    },
+    // the card's grey box shrinks from `from` (the card) back into the bubble `to`
+    shrink: function (from, to, dur, done) {
+      lock();
+      snapTo(from);
+      ctl = gsap.to(dot, {
+        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: BOX_SHADOW,
+        duration: t(dur), ease: "power3.inOut",
+        onComplete: function () { unlock(); if (done) done(); },
+      });
+    },
+  };
 })();

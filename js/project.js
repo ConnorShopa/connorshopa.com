@@ -179,29 +179,25 @@
     view.style.height = height + "px";
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height; // measured from layout, not the rect: the card is left shrunk after a close
-    // the card is the hover bubble growing to its full size (and shrinking back into it on close)
+    // the card IS the hover bubble: the bubble (js/mouse.js) grows to the card's size and shape, then the card
+    // takes over and its contents fade in
     var b = bubbleOf(trigger);
     open.bubble = b;
-    open.offX = b.cx - window.innerWidth / 2;
-    open.offY = b.cy - (top + height / 2);
     var currentLi = trigger.closest("li");
-    var W = view.offsetWidth;
 
     gsap.killTweensOf(view);
     gsap.killTweensOf(view.children);
-    gsap.fromTo(
-      view,
-      { autoAlpha: 1, scale: 1, width: b.w, height: b.h, borderRadius: b.r, x: open.offX, y: open.offY, overflow: "hidden" },
-      { width: W, height: height, borderRadius: 64, x: 0, y: 0, duration: t(0.55), ease: "power4.out", clearProps: "width,borderRadius,overflow" }
-    );
-    // what's inside fades in once the bubble has grown
-    gsap.fromTo(view.children, { opacity: 0 }, { opacity: 1, duration: t(0.25), delay: t(0.3), clearProps: "opacity" });
-    // the real cursor bubble hides while the card takes its place, then comes back
-    if (dotEl) {
-      gsap.killTweensOf(dotEl, "opacity");
-      gsap.set(dotEl, { opacity: 0 });
-      gsap.to(dotEl, { opacity: 1, duration: t(0.2), delay: t(0.45) });
-    }
+    gsap.set(view, { autoAlpha: 0, scale: 1, x: 0, y: 0, xPercent: -50, yPercent: -50 });
+    gsap.set(view.children, { opacity: 0 });
+    var cr = view.getBoundingClientRect();
+    var to = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: 64 };
+    var reveal = function () {
+      if (!open || open.view !== view) return;
+      gsap.set(view, { autoAlpha: 1 });
+      if (window.bubble) window.bubble.handoff();
+      gsap.to(view.children, { opacity: 1, duration: t(0.25), clearProps: "opacity" });
+    };
+    if (window.bubble) window.bubble.grow(to, b, 0.55, reveal); else reveal();
     popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
       // still be shrunk or have a stale item hidden, which would throw the measurements below off
@@ -216,7 +212,7 @@
       var rowH = list.getBoundingClientRect().height;
       var drop = cardBottom + GAP + (rowH * MINI) / 2 - (n.top + n.height / 2);
       gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
-    }, from);
+    }, { x: b.cx, y: b.cy });
 
     var close = view.querySelector(".viewClose");
     if (close) gsap.delayedCall(t(0.2), function () { close.focus({ preventScroll: true }); });
@@ -224,28 +220,15 @@
 
   // opening another project from the gallery row while one is open: the old card shrinks away (the
   // gallery isn't touched; show() below re-lays it out for the new project)
-  function switchFrom(current, toLink) {
+  function switchFrom(current) {
     var old = current.view;
     open = null;
-    var b = toLink ? bubbleOf(toLink) : current.bubble;
-    var oc = centreOf(old);
     gsap.killTweensOf(old);
-    gsap.set(old, { overflow: "hidden" });
-    gsap.to(old.children, { opacity: 0, duration: t(0.1) });
     gsap.to(old, {
-      width: b.w,
-      height: b.h,
-      borderRadius: b.r,
-      x: b.cx - oc.x,
-      y: b.cy - oc.y,
-      duration: t(0.3),
-      ease: "power3.inOut",
-      onComplete: function () {
-        old.hidden = true;
-        stopMedia(old);
-        gsap.set(old.children, { clearProps: "opacity" });
-        gsap.set(old, { clearProps: "width,borderRadius,overflow,x,y" });
-      },
+      autoAlpha: 0,
+      duration: t(0.15),
+      ease: "power2.in",
+      onComplete: function () { old.hidden = true; stopMedia(old); gsap.set(old.children, { clearProps: "opacity" }); },
     });
   }
 
@@ -254,28 +237,25 @@
     var view = open.view;
     var trigger = open.trigger;
     var b = open.bubble;
-    var offX = open.offX;
-    var offY = open.offY;
     open = null;
 
     gsap.killTweensOf(view);
-    gsap.set(view, { overflow: "hidden" });
-    gsap.to(view.children, { opacity: 0, duration: t(0.1) });
-    gsap.to(view, {
-      width: b.w,
-      height: b.h,
-      borderRadius: b.r,
-      x: offX,
-      y: offY, // ...back into the bubble it grew from
-      duration: t(0.38),
-      ease: "power3.inOut",
+    var cr = view.getBoundingClientRect();
+    var fromCard = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: 64, shadow: window.bubble && window.bubble.CARD_SHADOW };
+    var finish = function () {
+      view.hidden = true;
+      document.documentElement.style.overflow = "";
+      document.documentElement.classList.remove("view-open");
+      stopMedia(view);
+      gsap.set(view.children, { clearProps: "opacity" });
+    };
+    // contents fade, then the card is swapped for the identical grey box, which shrinks into the bubble
+    gsap.to(view.children, {
+      opacity: 0,
+      duration: t(0.1),
       onComplete: function () {
-        view.hidden = true;
-        document.documentElement.style.overflow = "";
-        document.documentElement.classList.remove("view-open");
-        stopMedia(view);
-        gsap.set(view.children, { clearProps: "opacity" });
-        gsap.set(view, { clearProps: "width,borderRadius,overflow,x,y" });
+        gsap.set(view, { autoAlpha: 0 });
+        if (window.bubble) window.bubble.shrink(fromCard, b, 0.38, finish); else finish();
       },
     });
     popGallery(function () {
@@ -294,7 +274,7 @@
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let modified clicks behave normally
       e.preventDefault();
       if (open && open.view === view) return; // already open
-      if (open) switchFrom(open, link);             // another project is open: swap it out, then open this one
+      if (open) switchFrom(open);             // another project is open: swap it out, then open this one
       show(link, view);
     });
   });
