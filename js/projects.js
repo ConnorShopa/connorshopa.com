@@ -27,13 +27,8 @@
       title: "TouchTunes",
       logo: H + "touchtunes_icon.svg",
       wordmark: H + "touchtunes_wordmark.svg",
-      pages: [
-        pg("one",
-          text(
-            p("body soft", "Product Designer &middot; 04/2025 &ndash; current") +
-            '<p class="body"><a href="https://touchtunes.com/" rel="noopener" target="_blank">touchtunes.com &#8599;</a></p>'
-          )),
-      ],
+      locked: true, // the pages live encrypted in js/locked/touchtunes.json (see tools/lock.mjs)
+      pages: [],
     },
 
     // ---------------------------------------------------------------- Nanni

@@ -214,12 +214,13 @@
   document.querySelectorAll(".viewClose").forEach(function (b) { b.addEventListener("click", hide); });
   document.querySelectorAll(".viewNav.prev").forEach(function (b) { b.addEventListener("click", function () { step(-1); }); });
   document.querySelectorAll(".viewNav.next").forEach(function (b) { b.addEventListener("click", function () { step(1); }); });
-  document.querySelectorAll(".viewDot").forEach(function (d) {
-    d.addEventListener("click", function () {
-      var view = d.closest(".view");
-      var n = parseInt(d.getAttribute("data-page"), 10);
-      setPage(view, n, true, n > (view._page || 0) ? 1 : -1);
-    });
+  // dots are added after load for locked projects, so they are handled by delegation
+  document.addEventListener("click", function (e) {
+    var d = e.target.closest && e.target.closest(".viewDot");
+    if (!d) return;
+    var view = d.closest(".view");
+    var n = parseInt(d.getAttribute("data-page"), 10);
+    setPage(view, n, true, n > (view._page || 0) ? 1 : -1);
   });
   // a click anywhere outside the card closes it (links and chips keep doing their own thing; the click that
   // opened the card is a link click, so it is ignored here too)

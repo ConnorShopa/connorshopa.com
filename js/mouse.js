@@ -168,7 +168,7 @@
     hideCall = gsap.delayedCall(0.06, hideBox);
   }
 
-  document.querySelectorAll("a, .viewClose, .viewNav, .pill").forEach(function (link) {
+  document.querySelectorAll("a, .viewClose, .viewNav, .pill, .lockBtn").forEach(function (link) {
     link.addEventListener("mouseenter", function () { showFor(link); });
     link.addEventListener("mouseleave", function () { unshrink(link); leave(); });
     // only react to keyboard focus: the view moves focus to its close button (and back) in code, which

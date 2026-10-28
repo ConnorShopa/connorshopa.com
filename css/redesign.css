@@ -831,3 +831,55 @@ html.view-open #mouse-circle {
   .introTop { flex-wrap: wrap; }
   .sep { display: none; }
 }
+
+/* ---- password-protected view ---- */
+.viewNav[hidden],
+.viewDots[hidden] {
+  display: none !important;
+}
+
+.lockBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.lockForm {
+  display: flex;
+  gap: 8px;
+}
+
+.lockInput {
+  font: inherit;
+  font-size: 16px;
+  padding: 10px 18px;
+  color: var(--ink);
+  background: rgba(47, 39, 37, 0.06);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  outline: none;
+}
+
+.lockInput:focus {
+  border-color: rgba(47, 39, 37, 0.3);
+}
+
+.lockBtn {
+  font: inherit;
+  font-size: 14px;
+  padding: 10px 20px;
+  color: #fff;
+  background: var(--ink);
+  border: 0;
+  border-radius: 999px;
+  cursor: url("cursor_linkHover.png"), pointer;
+}
+
+.lockMsg {
+  min-height: 1.4em;
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
