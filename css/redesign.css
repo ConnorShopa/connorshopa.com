@@ -444,3 +444,21 @@ html.view-open #mouse-circle {
   z-index: 12;
   mix-blend-mode: multiply;
 }
+
+/* while a project view is open the gallery runs in one row beneath it (the open project is left out) */
+#projectList.compact {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+/* each item keeps its full width (title + slash on one line) instead of being squeezed by the row */
+#projectList.compact li {
+  flex: none;
+  white-space: nowrap;
+}
+
+.is-current {
+  display: none !important;
+}

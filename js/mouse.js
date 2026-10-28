@@ -65,10 +65,16 @@
   function morphToBox() {
     var w = base.width + PAD_X * 2;
     var h = base.height + PAD_Y * 2;
+    var radius = Math.min(BOX_RADIUS, h / 2);
+    // icon-only buttons (the view's close button) get a true circle around the icon instead of a pill
+    if (currentLink && currentLink.classList.contains("viewClose")) {
+      w = h = Math.max(base.width, base.height) + 8;
+      radius = w / 2;
+    }
     gsap.to(dot, {
       width: w,
       height: h,
-      borderRadius: Math.min(BOX_RADIUS, h / 2),
+      borderRadius: radius,
       backgroundColor: BOX_FILL,
       borderColor: BOX_BORDER,
       duration: t(MORPH_TIME),
