@@ -792,16 +792,19 @@ html.view-open #mouse-circle {
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 0;
-  background: none;
+  border: 1px solid rgba(47, 39, 37, 0.08);
+  border-radius: 50%;
+  background: #fff; /* floating buttons inside the card's left and right edges */
+  box-shadow: 0 6px 14px -4px rgba(47, 39, 37, 0.22), 0 2px 4px rgba(47, 39, 37, 0.1);
   color: var(--ink);
   display: grid;
   place-items: center;
   cursor: pointer;
+  z-index: 3;
 }
 
-.viewNav.prev { left: -64px; }
-.viewNav.next { right: -64px; }
+.viewNav.prev { left: 24px; }
+.viewNav.next { right: 24px; }
 .viewNav:disabled { opacity: 0.25; pointer-events: none; }
 
 .viewDots {
