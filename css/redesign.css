@@ -139,6 +139,10 @@ a:focus-visible {
   color: var(--ink);
 }
 
+.tagline .num {
+  font-weight: 600;
+}
+
 .contactCol {
   flex: none;
 }
