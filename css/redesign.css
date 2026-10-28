@@ -1415,6 +1415,7 @@ html.view-open .contactBlock {
 .view.hasBgImage.onFirst .pg:nth-child(2) .coverShot { transform: rotate(-1.8deg); }
 .view.hasBgImage.onFirst .pg:nth-child(3) .coverShot { transform: rotate(2.2deg); }
 .view.hasBgImage.onFirst .pg:nth-child(4) .coverShot { transform: rotate(-1deg); }
+.view.hasBgImage.onFirst .pg:nth-child(5) .coverShot { transform: rotate(1.4deg); }
 
 .pg .coverLead {
   margin: 0;
