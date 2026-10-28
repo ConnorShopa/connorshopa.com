@@ -438,3 +438,15 @@ a:focus-visible {
 .viewClose:focus-visible {
   background: rgba(0, 0, 0, 0.12);
 }
+
+/* while a project view is open the gallery runs in one row beneath it (the open project is left out) */
+#projectList.compact {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.is-current {
+  display: none !important;
+}

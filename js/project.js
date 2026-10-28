@@ -5,6 +5,7 @@
   if (typeof gsap === "undefined") return;
 
   var nav = document.querySelector(".hero > nav");
+  var list = document.getElementById("projectList");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var t = function (s) { return reduce ? 0 : s; };
 
@@ -22,17 +23,18 @@
     };
   }
 
-  // how far the gallery must move down so its (shrunken) middle sits just under the card
-  function galleryDrop(view) {
-    var card = view.getBoundingClientRect(); // measured while visible and centred
-    var n = nav.getBoundingClientRect();
-    var currentMid = n.top + n.height / 2;
-    var targetMid = card.bottom + GAP + (n.height * MINI) / 2;
-    return targetMid - currentMid;
-  }
-
   // the gallery items currently on screen
-  function items() { return document.querySelectorAll("#projectList li:not(.is-hidden)"); }
+  function items() { return document.querySelectorAll("#projectList li:not(.is-hidden):not(.is-current)"); }
+
+  // no slash after the last item that is actually showing
+  function fixSlashes() {
+    var last = null;
+    list.querySelectorAll("li").forEach(function (li) {
+      li.classList.remove("no-slash");
+      if (!li.classList.contains("is-hidden") && !li.classList.contains("is-current")) last = li;
+    });
+    if (last) last.classList.add("no-slash");
+  }
 
   // Same pop out / pop in as the filter pills: items pop away, the gallery jumps to its new size
   // and place while they are invisible, then they pop back in.
@@ -41,10 +43,10 @@
   function popGallery(applyLayout) {
     if (popTl) popTl.kill();
     if (popIn) popIn.kill();
-    var list = items();
-    gsap.killTweensOf(list);
+    var current = items();
+    gsap.killTweensOf(current);
     popTl = gsap.timeline();
-    popTl.to(list, { scale: 0, opacity: 0, duration: t(0.18), ease: "back.in(1.2)", stagger: t(0.02), transformOrigin: "50% 50%" });
+    popTl.to(current, { scale: 0, opacity: 0, duration: t(0.18), ease: "back.in(1.2)", stagger: t(0.02), transformOrigin: "50% 50%" });
     popTl.add(function () {
       applyLayout();
       var next = items();
@@ -63,7 +65,8 @@
     document.documentElement.style.overflow = "hidden";
     gsap.set(view, { xPercent: -50, yPercent: -50 });
 
-    var drop = galleryDrop(view);
+    var cardBottom = view.getBoundingClientRect().bottom; // measured while the card is centred at full size
+    var currentLi = trigger.closest("li");
 
     gsap.killTweensOf(view);
     gsap.fromTo(
@@ -72,6 +75,14 @@
       { autoAlpha: 1, scale: 1, x: 0, y: 0, duration: t(0.6), ease: "power3.out" }
     );
     popGallery(function () {
+      // the open project isn't repeated in the gallery, and the rest run in a single row
+      if (currentLi) currentLi.classList.add("is-current");
+      list.classList.add("compact");
+      fixSlashes();
+      // slide the (shrunken) row so it sits just under the card
+      var n = nav.getBoundingClientRect();
+      var rowH = list.getBoundingClientRect().height;
+      var drop = cardBottom + GAP + (rowH * MINI) / 2 - (n.top + n.height / 2);
       gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
     });
 
@@ -100,6 +111,9 @@
       },
     });
     popGallery(function () {
+      list.classList.remove("compact");
+      list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
+      fixSlashes();
       gsap.set(nav, { clearProps: "transform" });
     });
     trigger.focus({ preventScroll: true });
