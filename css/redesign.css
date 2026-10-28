@@ -1544,3 +1544,8 @@ body { position: relative; }
 
 /* AltQ's logo is a small wordmark */
 .logo.altq { height: 18px; width: auto; max-width: none; }
+
+/* Thoughtify: the icon and the word are both Spotify green */
+.spotIcon { display: block; width: 26px; height: 28px; background: #1DB954; -webkit-mask: url("../assets/homeAssets/spotifyDreams_projectImage.svg") center / contain no-repeat; mask: url("../assets/homeAssets/spotifyDreams_projectImage.svg") center / contain no-repeat; }
+.spot { color: #1DB954; }
+a:has(.spot) .bubble { margin-right: 10px; }
