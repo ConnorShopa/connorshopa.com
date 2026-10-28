@@ -1349,10 +1349,12 @@ html.view-open .contactBlock {
   pointer-events: none;
 }
 
-/* dark type and the original wordmark on the peach */
-.view.hasBgImage.onFirst .coverWrap { color: var(--ink); }
-.view.hasBgImage.onFirst .coverMark { filter: none; }
-.pg.cover .scrollCue { background: rgba(47, 39, 37, 0.07); color: var(--ink); box-shadow: none; }
+/* white wordmark, tagline, chevron and button on the translucent panel */
+.view.hasBgImage.onFirst .coverWrap { color: #fff; }
+.view.hasBgImage.onFirst .coverMark { filter: brightness(0) invert(1); }
+.pg.cover .scrollCue { background: rgba(255, 255, 255, 0.16); color: #fff; box-shadow: none; }
+.pg.cover .dlBtn { background: #fff; color: var(--ink); }
+.pg.cover .dlBtn:hover { background: var(--accent, #fff); }
 
 /* the phone sits nearer the right edge */
 .pg.cover .coverShot { left: 110px; }
