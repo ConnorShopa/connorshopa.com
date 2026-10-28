@@ -34,19 +34,50 @@
   // and place while they are invisible, then they pop back in.
   var popTl = null;
   var popIn = null;
-  function popGallery(applyLayout) {
+  // origin (optional, viewport px): the spot the card grows from. The other links are pushed away from it
+  // as if the growing card shoved them aside, instead of just shrinking in place.
+  function popGallery(applyLayout, origin) {
     if (popTl) popTl.kill();
     if (popIn) popIn.kill();
     var current = items();
     gsap.killTweensOf(current);
     popTl = gsap.timeline();
-    popTl.to(current, { scale: 0, opacity: 0, duration: t(0.12), ease: "back.in(1.2)", stagger: t(0.012), transformOrigin: "50% 50%" });
+    if (origin) {
+      popTl.to(current, {
+        x: function (i, el) { return push(el, origin).x; },
+        y: function (i, el) { return push(el, origin).y; },
+        scale: 0.55,
+        opacity: 0,
+        duration: t(0.3),
+        ease: "power3.out",
+        transformOrigin: "50% 50%",
+      });
+    } else {
+      popTl.to(current, { scale: 0, opacity: 0, duration: t(0.12), ease: "back.in(1.2)", stagger: t(0.012), transformOrigin: "50% 50%" });
+    }
     popTl.add(function () {
       applyLayout();
       var next = items();
+      gsap.set(list.querySelectorAll("li"), { clearProps: "x,y" });
       gsap.set(next, { scale: 0, opacity: 0 });
       popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "back.out(1.2)", stagger: t(0.018) });
     });
+  }
+
+  // how far, and which way, a link is shoved: straight away from the origin, the closer the harder
+  function push(el, origin) {
+    var r = el.getBoundingClientRect();
+    var dx = r.left + r.width / 2 - origin.x;
+    var dy = r.top + r.height / 2 - origin.y;
+    var len = Math.hypot(dx, dy) || 1;
+    var dist = 90 + 220 * (1 - Math.min(len / 700, 1));
+    return { x: (dx / len) * dist, y: (dy / len) * dist };
+  }
+
+  // centre of a link on screen
+  function centreOf(el) {
+    var r = el.getBoundingClientRect();
+    return { x: r.left + r.width / 2, y: r.top + r.height / 2 };
   }
 
   // ---- pages inside a view ----------------------------------------------------------------
@@ -121,14 +152,16 @@
     view.style.height = height + "px";
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height; // measured from layout, not the rect: the card is left shrunk after a close
-    // zoom out of / back into the dead centre of the screen, wherever the card ends up
-    open.offY = window.innerHeight / 2 - (top + height / 2);
+    // the card grows out of (and shrinks back into) the link that was clicked
+    var from = centreOf(trigger);
+    open.offX = from.x - window.innerWidth / 2;
+    open.offY = from.y - (top + height / 2);
     var currentLi = trigger.closest("li");
 
     gsap.killTweensOf(view);
     gsap.fromTo(
       view,
-      { autoAlpha: 0, scale: 0.12, x: 0, y: open.offY }, // zooms out of the dead centre of the screen
+      { autoAlpha: 0, scale: 0.08, x: open.offX, y: open.offY }, // starts where the link is
       { autoAlpha: 1, scale: 1, x: 0, y: 0, duration: t(0.36), ease: "power4.out" }
     );
     popGallery(function () {
@@ -145,7 +178,7 @@
       var rowH = list.getBoundingClientRect().height;
       var drop = cardBottom + GAP + (rowH * MINI) / 2 - (n.top + n.height / 2);
       gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
-    });
+    }, from);
 
     var close = view.querySelector(".viewClose");
     if (close) gsap.delayedCall(t(0.2), function () { close.focus({ preventScroll: true }); });
@@ -153,15 +186,17 @@
 
   // opening another project from the gallery row while one is open: the old card shrinks away (the
   // gallery isn't touched; show() below re-lays it out for the new project)
-  function switchFrom(current) {
+  function switchFrom(current, toLink) {
     var old = current.view;
     open = null;
     gsap.killTweensOf(old);
+    var oc = centreOf(old);
+    var tc = toLink ? centreOf(toLink) : { x: oc.x, y: oc.y + current.offY };
     gsap.to(old, {
       autoAlpha: 0,
-      scale: 0.12,
-      x: 0,
-      y: current.offY,
+      scale: 0.08,
+      x: tc.x - oc.x,
+      y: tc.y - oc.y,
       duration: t(0.2),
       ease: "power3.in",
       onComplete: function () { old.hidden = true; stopMedia(old); },
@@ -172,15 +207,16 @@
     if (!open) return;
     var view = open.view;
     var trigger = open.trigger;
+    var offX = open.offX;
     var offY = open.offY;
     open = null;
 
     gsap.killTweensOf(view);
     gsap.to(view, {
       autoAlpha: 0,
-      scale: 0.12,
-      x: 0,
-      y: offY, // ...and back into the dead centre
+      scale: 0.08,
+      x: offX,
+      y: offY, // ...and back into the link it grew from
       duration: t(0.24),
       ease: "power3.in",
       onComplete: function () {
@@ -206,7 +242,7 @@
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let modified clicks behave normally
       e.preventDefault();
       if (open && open.view === view) return; // already open
-      if (open) switchFrom(open);             // another project is open: swap it out, then open this one
+      if (open) switchFrom(open, link);             // another project is open: swap it out, then open this one
       show(link, view);
     });
   });
