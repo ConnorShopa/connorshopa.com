@@ -1252,7 +1252,13 @@ html.view-open .contactBlock {
 .pg.cover .coverWrap { left: 70px; }
 
 /* the grass is one sharp photo (no blurred layer) */
-.view.hasBgImage::after { content: none; }
+/* a dark fade over the photo, strongest on the left (where the text sits) and gone by the right, for legibility */
+.view.hasBgImage::after {
+  content: "";
+  background: linear-gradient(to right, rgba(0, 14, 6, 0.72) 0%, rgba(0, 14, 6, 0.5) 30%, rgba(0, 14, 6, 0.18) 60%, rgba(0, 14, 6, 0) 85%);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
 
 /* the grass photo is mirrored (it reads better that way round) */
 .view.hasBgImage::before { transform: scaleX(-1); background-position: 50% calc(var(--gy, 0) * 1%); } /* --gy: how far down the field we are (js/project.js) */
