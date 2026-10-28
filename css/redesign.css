@@ -1566,7 +1566,6 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
 a:has(.sheepText) .bubble { margin-right: 4px; }
 
 /* ======== phones and small screens ======== */
-.deck { display: none; }
 @media (hover: none) {
   .dlBtn:hover { transform: none; }
   .dlBtn:hover::before { opacity: 0; }
@@ -1594,13 +1593,9 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .tagline { font-size: 15px; line-height: 1.6; padding: 0 8px; }
   .pill { font-size: 13px; padding: 7px 14px; }
 
-  /* the list becomes a deck of cards */
-  #projectList, nav.stack > .ghost { display: none !important; }
-  nav.stack { height: 300px; }
-  .deck { display: block; list-style: none; margin: 0; padding: 0; position: relative; width: min(78vw, 300px); height: 190px; margin: 56px auto 0; touch-action: none; }
-  .deck .card { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #F4F4F4; border: 1px solid rgba(47, 39, 37, 0.1); border-radius: 28px; box-shadow: 0 10px 24px -10px rgba(47, 39, 37, 0.25), 0 2px 6px rgba(47, 39, 37, 0.06); user-select: none; -webkit-user-select: none; }
-  .deck .card a { display: inline-flex; align-items: center; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; -webkit-tap-highlight-color: transparent; }
-  .deck .card a .bubble { height: auto; }
+  /* the page scrolls on phones: the wrapped list can run past the bottom of the screen */
+  html, body { height: auto; overflow: auto !important; overflow-x: hidden !important; overscroll-behavior: auto; }
+  html.view-open, html.view-open body { overflow: hidden !important; }
 
   /* About / Contact text */
   .panelText .lead, .panelText:has(.aboutJobs) .lead { font-size: 22px; }

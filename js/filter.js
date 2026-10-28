@@ -26,13 +26,15 @@
 
   // at most three items per row: a zero-height break after every third visible item, and no interpunct at the
   // end of a row; each row then centres on its own
+  var perRow = function () { return window.innerWidth <= 700 ? 2 : 3; }; // two to a row on phones
   function layoutRows(listEl, lis) {
+    var per = perRow();
     listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
     var shown = lis.filter(function (li) {
       return !li.classList.contains("is-hidden") && !li.classList.contains("is-current");
     });
     shown.forEach(function (li, i) {
-      var rowEnd = i % 3 === 2;
+      var rowEnd = i % per === per - 1;
       li.classList.toggle("no-slash", rowEnd || i === shown.length - 1);
       if (rowEnd && i < shown.length - 1) {
         var br = document.createElement("li");
@@ -46,6 +48,15 @@
   layoutRows(ghost, Array.prototype.slice.call(ghost.children));
   items.forEach(function (li) { li.classList.remove("no-slash"); });
   layoutRows(list, items);
+  // re-flow the rows when the screen crosses the phone breakpoint
+  var lastPer = perRow();
+  window.addEventListener("resize", function () {
+    if (perRow() === lastPer) return;
+    lastPer = perRow();
+    layoutRows(ghost, Array.prototype.slice.call(ghost.children).filter(function (li) { return !li.classList.contains("row-break"); }));
+    items.forEach(function (li) { if (!li.classList.contains("row-break")) li.classList.remove("no-slash"); });
+    layoutRows(list, items.filter(function (li) { return !li.classList.contains("row-break"); }));
+  });
 
   // ---- on load: the links pop in one after another, from the top left to the bottom right ----
   var links = items.filter(function (li) { return !li.classList.contains("row-break"); });
