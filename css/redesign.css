@@ -1390,6 +1390,6 @@ html.view-open .contactBlock {
 }
 
 /* each phone is set down at its own slight angle, with a small shift up or down, so the row feels casual */
-.trioItem:nth-child(1) .phone { transform: rotate(-6deg) translateY(6px); }
-.trioItem:nth-child(2) .phone { transform: rotate(3deg) translateY(-8px); }
-.trioItem:nth-child(3) .phone { transform: rotate(-3.5deg) translateY(10px); }
+.trioItem:nth-child(1) .phone { transform: rotate(-2.5deg) translateY(4px); }
+.trioItem:nth-child(2) .phone { transform: rotate(1.5deg) translateY(-6px); }
+.trioItem:nth-child(3) .phone { transform: rotate(-1.5deg) translateY(6px); }
