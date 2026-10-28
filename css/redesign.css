@@ -1206,16 +1206,12 @@ html.view-open .contactBlock {
 .view.hasBgImage.onFirst .viewDot { background: rgba(255, 255, 255, 0.4); }
 .view.hasBgImage.onFirst .viewDot[aria-current="true"] { background: var(--accent, #fff); }
 .view.hasBgImage.onFirst .coverShot {
-  /* laid down on the lawn, seen from above: set at a slight angle, shadows falling short and to the lower right
-     (light from the upper left), with a tight dark ring where the glass meets the grass */
+  /* no cast shadow: the phone rests in the grass rather than floating over it (only a hairline of darkness at the edge) */
   transform: rotate(1.5deg);
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.38),
     inset 0 0 1px 2px rgba(255, 255, 255, 0.07),
-    0 0 5px 1px rgba(0, 10, 4, 0.75),
-    3px 5px 7px rgba(0, 10, 4, 0.6),
-    9px 14px 18px -2px rgba(0, 10, 4, 0.45),
-    18px 26px 34px -8px rgba(0, 10, 4, 0.35);
+    0 0 2px rgba(0, 10, 4, 0.6);
 }
 
 /* the cover's left-hand content is a centred column, centred in its half of the card */
