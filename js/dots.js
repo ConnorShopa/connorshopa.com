@@ -70,7 +70,7 @@
     svg.appendChild(g);
     el.appendChild(svg);
     var st = { s: -D }, tween = null;
-    function draw() { g.setAttribute("transform", "translate(" + f(-st.s / 2) + " 0)"); a.setAttribute("cx", r); b.setAttribute("cx", r + st.s + D); path.setAttribute("d", neck(r, st.s)); }
+    function draw() { g.setAttribute("transform", "translate(" + f((S - st.s) / 2) + " 0)"); a.setAttribute("cx", r); b.setAttribute("cx", r + st.s + D); path.setAttribute("d", neck(r, st.s)); }
     function play() {
       if (tween) tween.kill();
       size();
