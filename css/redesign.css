@@ -867,14 +867,43 @@ html.view-open #mouse-circle {
 }
 
 .lockBtn {
+  position: relative;
   font: inherit;
   font-size: 14px;
   padding: 10px 20px;
-  color: #fff;
+  color: var(--bg);
   background: var(--ink);
-  border: 0;
+  border: 1px solid transparent; /* same box as the filter chips, so the stroke below lines up */
   border-radius: 999px;
+  box-shadow: 0 6px 14px -4px rgba(47, 39, 37, 0.28), 0 2px 4px rgba(47, 39, 37, 0.12);
   cursor: url("cursor_linkHover.png"), pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* the same 1px stroke as the active filter chip: 80% white at the top fading to 0% at the bottom */
+.lockBtn::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+/* disabled until something has been typed: flat, pale, no shadow or stroke */
+.lockBtn:disabled {
+  color: rgba(47, 39, 37, 0.35);
+  background: rgba(47, 39, 37, 0.08);
+  box-shadow: none;
+  cursor: default;
+}
+
+.lockBtn:disabled::before {
+  content: none;
 }
 
 .lockForm.has-error {

@@ -13,7 +13,7 @@
     '<div class="pg one is-on"><div class="pgText lockBox">' +
     '<p class="body soft">Under NDA</p>' +
     '<form class="lockForm"><input class="lockInput" type="password" placeholder="Password" autocomplete="current-password" aria-label="Password">' +
-    '<button type="submit" class="lockBtn">Unlock</button></form>' +
+    '<button type="submit" class="lockBtn" disabled>Unlock</button></form>' +
     '<p class="lockMsg" role="alert"></p>' +
     '<p class="lockAsk"><a href="mailto:connorshopa@gmail.com">Email</a> or <a href="sms:+13432095337">text</a> me for the password</p>' +
     '</div></div>';
@@ -50,7 +50,13 @@
     var form = sec.querySelector(".lockForm");
     var input = sec.querySelector(".lockInput");
     var msg = sec.querySelector(".lockMsg");
-    input.addEventListener("input", function () { form.classList.remove("has-error"); msg.textContent = ""; });
+    var btn = sec.querySelector(".lockBtn");
+    // Unlock stays disabled until at least one character has been typed
+    input.addEventListener("input", function () {
+      form.classList.remove("has-error");
+      msg.textContent = "";
+      btn.disabled = !input.value;
+    });
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!input.value) return;
