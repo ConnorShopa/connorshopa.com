@@ -66,25 +66,23 @@ body {
   max-width: 360px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 28px;
   font-family: "Host Grotesk", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.4;
 }
 
 .history li {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-top: 12px;
-  border-top: 1px solid var(--blue);
+  gap: 2px;
 }
 
 .history .logo {
   display: flex;
   align-items: center;
-  height: 24px;
-  margin-bottom: 8px;
+  height: 18px;
+  margin-bottom: 6px;
 }
 
 .history .logo img {
@@ -93,9 +91,9 @@ body {
 }
 
 .history .company {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 400;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .history .role,
