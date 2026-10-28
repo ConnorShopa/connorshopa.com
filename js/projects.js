@@ -196,6 +196,7 @@
       icon: H + "habbot_icon.svg",
       logoOnly: true,
       accent: "#FA983A", // the orange of its underline: dots, eyebrow markers, the active page dot
+      bg: "#FFFAF6",     // the paper from the app: the card's background (its link in index.html carries the same colour in data-bubble)
       pages: [], // cleared to start fresh; the previous 7 pages are saved in archive/habbot-view.js
     },
 

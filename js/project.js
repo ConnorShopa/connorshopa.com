@@ -119,6 +119,7 @@
     var b = useDot
       ? { w: d.width, h: d.height, cx: d.left + d.width / 2, cy: d.top + d.height / 2 }
       : { w: r.width + 44, h: r.height + 20, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+    b.fill = link.getAttribute("data-bubble") || null; // a project's own bubble / card colour
     b.r = useDot ? parseFloat(getComputedStyle(dotEl).borderTopLeftRadius) || b.h / 2 : b.h / 2;
     return b;
   }
@@ -212,7 +213,7 @@
     gsap.set(view, { autoAlpha: 0, scale: 1, x: 0, y: 0, xPercent: -50, yPercent: -50 });
     gsap.set(view.children, { opacity: 0 });
     var cr = view.getBoundingClientRect();
-    var to = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: 64 };
+    var to = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: 64, fill: b.fill };
     var reveal = function () {
       if (!open || open.view !== view) return;
       gsap.set(view, { autoAlpha: 1 });
@@ -263,7 +264,7 @@
 
     gsap.killTweensOf(view);
     var cr = view.getBoundingClientRect();
-    var fromCard = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: 64, shadow: window.bubble && window.bubble.CARD_SHADOW };
+    var fromCard = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: 64, fill: b.fill, shadow: window.bubble && window.bubble.CARD_SHADOW };
     var finish = function () {
       view.hidden = true;
       document.documentElement.style.overflow = "";

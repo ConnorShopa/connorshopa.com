@@ -93,7 +93,7 @@
       width: w,
       height: h,
       borderRadius: radius,
-      backgroundColor: BOX_FILL,
+      backgroundColor: (currentLink && currentLink.getAttribute("data-bubble")) || BOX_FILL,
       borderColor: BOX_BORDER,
       boxShadow: BOX_SHADOW,
       duration: t(MORPH_TIME),
@@ -229,7 +229,7 @@
   function snapTo(g) {
     gsap.set(dot, {
       x: g.cx, y: g.cy, width: g.w, height: g.h, borderRadius: g.r,
-      boxShadow: g.shadow || BOX_SHADOW, backgroundColor: BOX_FILL, borderColor: g.shadow ? DOT_BORDER : BOX_BORDER, autoAlpha: 1,
+      boxShadow: g.shadow || BOX_SHADOW, backgroundColor: g.fill || BOX_FILL, borderColor: g.shadow ? DOT_BORDER : BOX_BORDER, autoAlpha: 1,
     });
   }
 
@@ -248,7 +248,7 @@
       lock(10);
       snapTo(from);
       ctl = gsap.to(dot, {
-        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: to.shadow || CARD_SHADOW, borderColor: DOT_BORDER,
+        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: to.shadow || CARD_SHADOW, borderColor: DOT_BORDER, backgroundColor: to.fill || BOX_FILL,
         duration: t(dur), ease: "back.out(1.3)", onComplete: done, // a subtle overshoot, then it settles
       });
     },
@@ -268,7 +268,7 @@
       lock(0);
       snapTo(from);
       ctl = gsap.to(dot, {
-        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: BOX_SHADOW, borderColor: BOX_BORDER,
+        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: BOX_SHADOW, borderColor: BOX_BORDER, backgroundColor: to.fill || BOX_FILL,
         duration: t(dur), ease: "none", // linear on the way back
         onComplete: function () { unlock(); if (done) done(); },
       });
