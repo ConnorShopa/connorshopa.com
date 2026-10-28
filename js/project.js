@@ -269,14 +269,17 @@
     var top = intro ? intro.getBoundingClientRect().bottom - collapseBy + 24 : 80;
     // the card keeps a familiar shape (3:2): it takes the room available, but never gets taller than that shape
     // allows, and when the room is short it gets narrower instead of squatter
-    var fullW = Math.min(window.innerWidth * 0.86, 1100);
-    var height = Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
-    view.style.width = Math.min(fullW, height * CARD_RATIO) + "px";
+    var narrow = window.innerWidth <= 700; // phones: the card is nearly full width and as tall as the room allows (no 3:2)
+    var fullW = narrow ? window.innerWidth - 24 : Math.min(window.innerWidth * 0.86, 1100);
+    var height = narrow
+      ? Math.max(300, window.innerHeight - top - 24)
+      : Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
+    view.style.width = (narrow ? fullW : Math.min(fullW, height * CARD_RATIO)) + "px";
     view.style.height = height + "px";
     // and it sits dead centre in the window, as long as that leaves it clear of the chips above and the gallery row
     // under it (otherwise it sits as close to the middle as those allow)
     var minTop = top;
-    var maxTop = Math.max(minTop, window.innerHeight - BOTTOM_ROOM - height);
+    var maxTop = Math.max(minTop, window.innerHeight - (narrow ? 12 : BOTTOM_ROOM) - height);
     top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height; // measured from layout, not the rect: the card is left shrunk after a close
@@ -427,7 +430,7 @@
     trigger.focus({ preventScroll: true });
   }
 
-  document.querySelectorAll("[data-view]").forEach(function (link) {
+  function bindViewLink(link) {
     var view = document.getElementById("view-" + link.getAttribute("data-view"));
     if (!view) return;
     link.addEventListener("click", function (e) {
@@ -437,7 +440,10 @@
       if (open) switchFrom(open);             // another project is open: swap it out, then open this one
       show(link, view);
     });
-  });
+  }
+  // also called for links added later (the mobile card deck)
+  window.bindProjectLinks = function (root) { (root || document).querySelectorAll("[data-view]").forEach(function (l) { if (!l.__viewBound) { l.__viewBound = true; bindViewLink(l); } }); };
+  window.bindProjectLinks();
 
   // Work is the gallery itself: it is the lit chip whenever nothing is open, and clicking it closes whatever is
   var workChip = document.querySelector("[data-work]");

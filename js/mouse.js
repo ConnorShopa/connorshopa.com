@@ -8,7 +8,7 @@
   if (typeof gsap === "undefined") return;
 
   var dot = document.getElementById("mouse-circle");
-  var isTouch = "ontouchstart" in window || navigator.maxTouchPoints;
+  var isTouch = window.matchMedia("(hover: none), (pointer: coarse)").matches;
   if (isTouch || !dot) {
     if (dot) dot.style.display = "none";
     return;

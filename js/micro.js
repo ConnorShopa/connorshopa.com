@@ -6,6 +6,7 @@
   var hop = link && link.querySelector(".hop");
   if (!hop || !window.gsap) return;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(hover: none)").matches) return; // no hover on touch screens
 
   // one span per letter (spaces stay plain text); screen readers get the whole phrase once
   var text = hop.textContent;

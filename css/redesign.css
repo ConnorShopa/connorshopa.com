@@ -1564,3 +1564,68 @@ a:has(.sheepText) .bubble { margin-right: 10px; }
 .sheepText { font-size: 1.15em; line-height: 1; }
 a:has(.sheepText) .bubble { margin-right: 4px; }
 a:has(.sheepText) .bubble { margin-right: 4px; }
+
+/* ======== phones and small screens ======== */
+.deck { display: none; }
+@media (hover: none) {
+  .dlBtn:hover { transform: none; }
+  .dlBtn:hover::before { opacity: 0; }
+  .pg.cover .dlBtn:hover { background: var(--accent, #FA983A); color: #FFFAF6; }
+  .pg.cover .aboutBtn:hover { background: #fff; color: var(--ink); }
+  a:hover { cursor: auto; }
+}
+#mouse-circle { }
+@media (hover: none), (pointer: coarse) { #mouse-circle { display: none !important; } }
+
+@media (max-width: 900px) {
+  .name { font-size: 22px; }
+  .tagline { font-size: 17px; line-height: 2; }
+  .inline.big { font-size: 26px; }
+  .pg .lead { font-size: 32px; }
+  .panelText:has(.aboutJobs) .lead { font-size: 28px; }
+  .panelText:has(.aboutJobs) .body { font-size: 22px; }
+}
+
+@media (max-width: 700px) {
+  body { padding: 28px 16px; font-size: 13px; }
+  .page { gap: 32px; }
+  .hero { min-height: calc(100vh - 56px); min-height: calc(100dvh - 56px); }
+  .name { font-size: 20px; }
+  .tagline { font-size: 15px; line-height: 1.6; padding: 0 8px; }
+  .pill { font-size: 13px; padding: 7px 14px; }
+
+  /* the list becomes a deck of cards */
+  #projectList, nav.stack > .ghost { display: none !important; }
+  nav.stack { height: 300px; }
+  .deck { display: block; list-style: none; margin: 0; padding: 0; position: relative; width: min(78vw, 300px); height: 190px; margin: 56px auto 0; touch-action: none; }
+  .deck .card { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #F4F4F4; border: 1px solid rgba(47, 39, 37, 0.1); border-radius: 28px; box-shadow: 0 10px 24px -10px rgba(47, 39, 37, 0.25), 0 2px 6px rgba(47, 39, 37, 0.06); user-select: none; -webkit-user-select: none; }
+  .deck .card a { display: inline-flex; align-items: center; font-size: 24px; line-height: 1.2; letter-spacing: -0.02em; -webkit-tap-highlight-color: transparent; }
+  .deck .card a .bubble { height: auto; }
+
+  /* About / Contact text */
+  .panelText .lead, .panelText:has(.aboutJobs) .lead { font-size: 22px; }
+  .panelText .body, .panelText:has(.aboutJobs) .body { font-size: 17px; }
+  .panelText .aboutJobs .company { font-size: 17px; }
+  .panelText .aboutJobs .role, .panelText .aboutJobs .dates { font-size: 14px; }
+  .panelText .aboutJobs li { flex-direction: column; gap: 2px; }
+  .contactCol2 { gap: 28px; }
+  .contactCol2 a.withLabel { font-size: 22px; }
+
+  /* project views */
+  .viewBody { inset: 84px 18px 28px; }
+  .pg .lead { font-size: 24px; }
+  .pg .body, .pg .sub { font-size: 15px; }
+  .pg .big { font-size: 36px; }
+  .pg .eyebrow { font-size: 11px; }
+  .pg.cover { grid-template-columns: minmax(0, 1fr); }
+  .pg.cover .coverWrap { width: auto; left: 0; top: 0; }
+  .pg.cover .coverShot { display: none; }
+  .pgGallery { column-count: 2; column-gap: 10px; }
+  .pgGallery img { margin-bottom: 10px; border-radius: 10px; }
+
+  /* Overhand */
+  .ohTrade { gap: 12px; }
+  .ohChip { font-size: 13px; padding: 6px 12px; }
+  .earlyForm { flex-direction: column; width: 100%; }
+  .earlyInput { width: 100%; box-sizing: border-box; }
+}
