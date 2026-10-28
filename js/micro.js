@@ -29,6 +29,7 @@
   gsap.set(letters, { transformOrigin: "50% 100%" });
 
   var tl = gsap.timeline({ paused: true, defaults: { ease: "none" } });
+  tl.timeScale(1.8); // faster overall than the Lottie's own 1.15s (applies to the stagger too, and to playing back)
 
   letters.forEach(function (el, i) {
     var t0 = i * STAGGER;
