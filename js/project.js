@@ -216,8 +216,11 @@
       if (delta > 0 && k === 0) { sceneTo(view, 1, true); return; }
       if (delta < 0 && k === 1) { sceneTo(view, 0, true); return; }
     }
+    var count = pagesOf(view).length;
     var n = (view._page || 0) + delta;
-    if (n < 0 || n >= pagesOf(view).length) return;
+    if (view.classList.contains("vertical")) n = (n + count) % count; // vertical views loop: past the last page is the first
+    else if (n < 0 || n >= count) return;
+    if (count < 2) return;
     setPage(view, n, true, delta);
   }
 

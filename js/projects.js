@@ -224,10 +224,6 @@
         pg("cover",
           '<div class="coverWrap"><span class="trioPill">Compile</span><p class="coverLead">See your progress stack up</p><p class="coverLead">Find which habbots are most frequent</p></div>' +
           phone(A + "habbotAssets/app_screen03.png", "coverShot")),
-        pg("media",
-          media(pfig(A + "habbotAssets/app_screen01.png") + pfig(A + "habbotAssets/app_screen02.png") + pfig(A + "habbotAssets/app_screen03.png"))),
-        pg("media",
-          media(pfig(A + "habbotAssets/app_screen04.png") + pfig(A + "habbotAssets/app_screen05.png") + pfig(A + "habbotAssets/app_screen06.png"))),
       ],
     },
 
