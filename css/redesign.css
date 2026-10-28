@@ -135,6 +135,11 @@ a:focus-visible {
   white-space: nowrap;              /* each of the two lines stays on one line */
 }
 
+/* links inside the about-me line stay full black against the lighter text */
+.tagline a {
+  color: var(--ink);
+}
+
 /* big statement under the name + tagline; the "3" is set larger than the words around it */
 .stat {
   margin: 32px 0 20px;
