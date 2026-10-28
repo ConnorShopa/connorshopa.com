@@ -48,6 +48,8 @@ body {
 }
 
 a {
+  display: inline-block; /* lets the hover shrink transform apply without reflowing the text */
+  white-space: nowrap;
   color: inherit;
   font: inherit;
   letter-spacing: inherit;
@@ -185,15 +187,15 @@ a:focus-visible {
   will-change: transform;
 }
 
-/* hollow, softly rounded box around a hovered link; GSAP sets its position and size */
+/* softly rounded box with a very light grey fill around a hovered link; GSAP sets its position and size */
 #hover-box {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 0;
   border: 1px solid rgba(0, 0, 0, 0.45);
-  border-radius: 14px;
-  background: transparent;
+  border-radius: 24px;
+  background: #F4F4F4;
   pointer-events: none;
   visibility: hidden;
   will-change: transform, width, height;
