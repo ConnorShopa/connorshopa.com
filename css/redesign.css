@@ -381,7 +381,7 @@ a:focus-visible {
   justify-content: center;
   gap: 12px;
   text-align: center;
-  border-radius: 40px;
+  border-radius: 32px;
   background: #DCEBFA; /* light blue */
   box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.25), 0 6px 20px rgba(0, 0, 0, 0.08);
 }
