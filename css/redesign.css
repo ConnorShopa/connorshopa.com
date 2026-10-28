@@ -164,6 +164,7 @@ a:focus-visible {
   content: "/" / "";
   margin: 0 1.1em;
   color: rgba(0, 0, 0, 0.12); /* 12% black */
+  text-shadow: none; /* the list's text shadow doesn't apply to the slashes */
 }
 
 /* no slash after the last visible item (filter.js marks it) */
