@@ -1173,12 +1173,16 @@ html.view-open .contactBlock {
 .view.hasDownload .viewDots { bottom: 82px; }
 .view.hasDownload .viewBody { bottom: 120px; }
 
-/* a project's first page can sit on a background image (Habbot: grass); it fades away on the other pages */
+/* a project's first page can sit on an image panel (Habbot: blurred grass) down the left side of the card,
+   inset 8px from the card's edge (a peach border), rounded on the right; it fades away on the other pages */
 .view.hasBgImage::before {
   content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
+  top: 8px;
+  bottom: 8px;
+  left: 8px;
+  width: calc(52% - 8px);
+  border-radius: 56px 56px 56px 56px / 56px 56px 56px 56px; /* concentric with the card's 64px corners */
   background: var(--view-img) center / cover no-repeat;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1187,11 +1191,13 @@ html.view-open .contactBlock {
 
 .view.hasBgImage.onFirst::before { opacity: 1; }
 
-/* light type + controls on the dark photo */
-.view.hasBgImage.onFirst { color: #fff; }
-.view.hasBgImage.onFirst .viewClose,
-.view.hasBgImage.onFirst .viewNav:not(:disabled) { color: var(--ink); }
+/* light type on the image; the phone sits on the peach beside it with a deeper drop shadow */
+.view.hasBgImage.onFirst .coverWrap { color: #fff; }
 .view.hasBgImage.onFirst .coverMark { filter: brightness(0) invert(1); }
-.view.hasBgImage.onFirst .viewDot { background: rgba(255, 255, 255, 0.4); }
-.view.hasBgImage.onFirst .viewDot[aria-current="true"] { background: var(--accent, #fff); }
-.view.hasBgImage.onFirst .viewClose { color: #fff; }
+.view.hasBgImage.onFirst .coverShot {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+    inset 0 0 2px 1px rgba(0, 0, 0, 0.25),
+    0 44px 70px -22px rgba(47, 39, 37, 0.5),
+    0 10px 22px rgba(47, 39, 37, 0.2);
+}
