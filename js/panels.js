@@ -55,7 +55,16 @@
 
   chips.forEach(function (c) {
     c.addEventListener("click", function () {
-      go(c.hasAttribute("data-work") ? null : c.getAttribute("data-panel"));
+      var target = c.hasAttribute("data-work") ? null : c.getAttribute("data-panel");
+      var openView = document.documentElement.classList.contains("view-open") && document.querySelector(".view:not([hidden]) .viewClose");
+      if (!openView || !target) { go(target); return; }
+      // a project is open: close it first, then move to the new tab once it has finished closing
+      openView.click();
+      var tries = 0;
+      (function wait() {
+        if (!document.documentElement.classList.contains("view-open") || ++tries > 150) go(target);
+        else requestAnimationFrame(wait);
+      })();
     });
   });
 })();
