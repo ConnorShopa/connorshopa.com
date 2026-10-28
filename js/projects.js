@@ -219,7 +219,7 @@
           '<div class="coverWrap"><span class="trioPill">Creating a habbot</span><p class="coverLead">Set a time goal, or not</p><p class="coverLead">Organize your habbots with tags</p></div>' +
           phone(A + "habbotAssets/app_screen05.png", "coverShot")),
         pg("cover",
-          '<div class="coverWrap"><span class="trioPill">List</span><p class="coverLead">Keep track of your time visually</p></div>' +
+          '<div class="coverWrap"><span class="trioPill">List</span><p class="coverLead">Keep track of your habbots visually</p></div>' +
           phone(A + "habbotAssets/app_screen01.png", "coverShot")),
         pg("cover",
           '<div class="coverWrap"><span class="trioPill">Compile</span><p class="coverLead">Simple + Visual components</p><p class="coverText">Habbot uses abstract and visual elements to keep as much parity with my journaling as possible</p></div>' +
