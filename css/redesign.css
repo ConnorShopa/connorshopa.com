@@ -129,6 +129,7 @@ a:focus-visible {
 
 .tagline {
   margin: 0;
+  font-size: 20px;
 }
 
 /* big statement under the name + tagline; the "3" is set larger than the words around it */
