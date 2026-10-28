@@ -48,9 +48,65 @@
     });
   }
 
+  // ---- pages inside a view ----------------------------------------------------------------
+  function pagesOf(view) { return view.querySelectorAll(".pg"); }
+
+  // stop anything playing on a page that is being left (video, embedded player)
+  function stopMedia(scope) {
+    scope.querySelectorAll("video").forEach(function (v) { v.pause(); });
+    scope.querySelectorAll("iframe").forEach(function (f) { f.removeAttribute("src"); });
+  }
+
+  // embedded players only load once their page is shown
+  function startMedia(scope) {
+    scope.querySelectorAll("iframe[data-src]").forEach(function (f) { f.setAttribute("src", f.getAttribute("data-src")); });
+  }
+
+  // go to page n (dir: 1 = forward, -1 = back) with a short slide + fade; animate=false just swaps
+  function setPage(view, n, animate, dir) {
+    var pages = pagesOf(view);
+    if (!pages.length) return;
+    n = Math.max(0, Math.min(pages.length - 1, n));
+    var from = view._page || 0;
+    var old = pages[from];
+    var next = pages[n];
+    gsap.killTweensOf(pages);
+    pages.forEach(function (p) { if (p !== next && p !== old) p.classList.remove("is-on"); gsap.set(p, { clearProps: "opacity,transform" }); });
+
+    if (old !== next) stopMedia(old);
+    next.classList.add("is-on");
+    startMedia(next);
+    view._page = n;
+
+    if (animate && old !== next && !reduce) {
+      gsap.fromTo(next, { autoAlpha: 0, x: 48 * dir }, { autoAlpha: 1, x: 0, duration: 0.4, ease: "power3.out" });
+      gsap.to(old, { autoAlpha: 0, x: -48 * dir, duration: 0.2, ease: "power2.in", onComplete: function () { old.classList.remove("is-on"); gsap.set(old, { clearProps: "opacity,visibility,transform" }); } });
+    } else if (old !== next) {
+      old.classList.remove("is-on");
+    }
+
+    // chevrons and dots
+    var prev = view.querySelector(".viewNav.prev");
+    var nextBtn = view.querySelector(".viewNav.next");
+    if (prev) prev.disabled = n === 0;
+    if (nextBtn) nextBtn.disabled = n === pages.length - 1;
+    view.querySelectorAll(".viewDot").forEach(function (d, i) {
+      if (i === n) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current");
+    });
+  }
+
+  function step(delta) {
+    if (!open) return;
+    var view = open.view;
+    var n = (view._page || 0) + delta;
+    if (n < 0 || n >= pagesOf(view).length) return;
+    setPage(view, n, true, delta);
+  }
+
   function show(trigger, view) {
     if (open) return;
     open = { view: view, trigger: trigger };
+    setPage(view, 0, false);
 
     view.hidden = false;
     document.documentElement.style.overflow = "hidden";
@@ -94,6 +150,23 @@
     if (close) gsap.delayedCall(t(0.3), function () { close.focus({ preventScroll: true }); });
   }
 
+  // opening another project from the gallery row while one is open: the old card shrinks away (the
+  // gallery isn't touched; show() below re-lays it out for the new project)
+  function switchFrom(current) {
+    var old = current.view;
+    open = null;
+    gsap.killTweensOf(old);
+    gsap.to(old, {
+      autoAlpha: 0,
+      scale: 0.12,
+      x: 0,
+      y: current.offY,
+      duration: t(0.3),
+      ease: "power3.in",
+      onComplete: function () { old.hidden = true; stopMedia(old); },
+    });
+  }
+
   function hide() {
     if (!open) return;
     var view = open.view;
@@ -113,6 +186,7 @@
         view.hidden = true;
         document.documentElement.style.overflow = "";
         document.documentElement.classList.remove("view-open");
+        stopMedia(view);
       },
     });
     popGallery(function () {
@@ -131,10 +205,24 @@
       if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return; // let modified clicks behave normally
       e.preventDefault();
       if (open && open.view === view) return; // already open
+      if (open) switchFrom(open);             // another project is open: swap it out, then open this one
       show(link, view);
     });
   });
 
   document.querySelectorAll(".viewClose").forEach(function (b) { b.addEventListener("click", hide); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
+  document.querySelectorAll(".viewNav.prev").forEach(function (b) { b.addEventListener("click", function () { step(-1); }); });
+  document.querySelectorAll(".viewNav.next").forEach(function (b) { b.addEventListener("click", function () { step(1); }); });
+  document.querySelectorAll(".viewDot").forEach(function (d) {
+    d.addEventListener("click", function () {
+      var view = d.closest(".view");
+      var n = parseInt(d.getAttribute("data-page"), 10);
+      setPage(view, n, true, n > (view._page || 0) ? 1 : -1);
+    });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") hide();
+    else if (e.key === "ArrowRight") step(1);
+    else if (e.key === "ArrowLeft") step(-1);
+  });
 })();

@@ -374,13 +374,6 @@ a:focus-visible {
   width: min(86vw, 1100px);
   height: 440px;
   box-sizing: border-box;
-  padding: 72px 64px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  text-align: center;
   border-radius: 64px;
   background: #DCEBFA; /* light blue */
   box-shadow: 0 24px 60px -24px rgba(0, 0, 0, 0.14), 0 4px 14px rgba(0, 0, 0, 0.05);
@@ -402,8 +395,9 @@ a:focus-visible {
 
 .viewLogo {
   display: block;
-  width: 40px;
-  height: 40px;
+  width: auto;
+  height: 36px;
+  max-width: 140px;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
 
@@ -412,11 +406,6 @@ a:focus-visible {
   font-size: 28px;
   font-weight: 300;
   letter-spacing: -0.02em;
-}
-
-.viewMeta {
-  margin: 0;
-  color: var(--ink-soft);
 }
 
 .viewClose {
@@ -471,4 +460,154 @@ html.view-open #mouse-circle {
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   pointer-events: none;
+}
+
+/* ---- pages inside a view: paginated, never scrolling the card ---- */
+.viewBody {
+  position: absolute;
+  inset: 108px 72px 64px;
+  text-align: left;
+}
+
+.pg {
+  display: none;
+  position: absolute;
+  inset: 0;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.pg.is-on { display: grid; }
+.pg.two { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
+.pg.flip { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.pg.one,
+.pg.media { grid-template-columns: minmax(0, 1fr); }
+.pg.one { justify-items: center; text-align: center; }
+
+.pgText {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+  max-height: 100%;
+  overflow: auto; /* only if a window is too short for the copy */
+}
+
+.pg.one .pgText { align-items: center; max-width: 720px; }
+
+.pgMedia {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+}
+
+.pgMedia figure {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.pgMedia img,
+.pgMedia video {
+  flex: 0 1 auto;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+.pgMedia figcaption {
+  flex: none;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.pgMedia iframe {
+  width: 100%;
+  max-height: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 12px;
+}
+
+/* type inside pages */
+.pg p { margin: 0; }
+.pg .eyebrow { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); font-weight: 400; }
+.pg .lead { font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; }
+.pg .sub { font-size: 18px; line-height: 1.3; font-weight: 400; letter-spacing: -0.01em; }
+.pg .body { font-size: 15px; line-height: 1.55; }
+.pg .soft { color: var(--ink-soft); }
+.pg .big { font-size: 56px; line-height: 1; letter-spacing: -0.03em; font-weight: 300; }
+.pg .quote { font-size: 15px; line-height: 1.5; padding-left: 14px; border-left: 2px solid rgba(32, 69, 111, 0.35); }
+.pg .facts,
+.pg .stats { display: flex; flex-wrap: wrap; gap: 14px 40px; }
+.pg .stats { gap: 24px 64px; justify-content: center; }
+.pg .fact,
+.pg .stat { display: flex; flex-direction: column; gap: 4px; }
+.pg.one .stat { align-items: center; max-width: 240px; }
+.pg .list { margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.55; }
+.pg a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* chevrons either side of the card, and the page dots */
+.viewNav {
+  position: absolute;
+  top: calc(50% - 22px);
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.viewNav.prev { left: -64px; }
+.viewNav.next { right: -64px; }
+.viewNav:disabled { opacity: 0.25; pointer-events: none; }
+
+.viewDots {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  gap: 8px;
+}
+
+.viewDot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.viewDot[aria-current="true"] { background: var(--ink); }
+
+/* narrow screens: no room outside the card, so the chevrons sit inside its edges */
+@media (max-width: 960px) {
+  .viewNav.prev { left: 8px; }
+  .viewNav.next { right: 8px; }
+  .viewBody { inset: 100px 56px 56px; }
+  .pg.two,
+  .pg.flip { grid-template-columns: minmax(0, 1fr); }
+  .pg.flip .pgText { order: -1; }
 }

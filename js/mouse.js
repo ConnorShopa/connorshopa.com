@@ -66,8 +66,8 @@
     var w = base.width + PAD_X * 2;
     var h = base.height + PAD_Y * 2;
     var radius = Math.min(BOX_RADIUS, h / 2);
-    // icon-only buttons (the view's close button) get a true circle around the icon instead of a pill
-    if (currentLink && currentLink.classList.contains("viewClose")) {
+    // icon-only buttons (the view's close button and page chevrons) get a true circle around the icon instead of a pill
+    if (currentLink && (currentLink.classList.contains("viewClose") || currentLink.classList.contains("viewNav"))) {
       w = h = Math.max(base.width, base.height) + 8;
       radius = w / 2;
     }
@@ -158,7 +158,7 @@
     hideCall = gsap.delayedCall(0.06, hideBox);
   }
 
-  document.querySelectorAll("a, .viewClose, .pill").forEach(function (link) {
+  document.querySelectorAll("a, .viewClose, .viewNav, .pill").forEach(function (link) {
     link.addEventListener("mouseenter", function () { showFor(link); });
     link.addEventListener("mouseleave", function () { unshrink(link); leave(); });
     // only react to keyboard focus: the view moves focus to its close button (and back) in code, which
