@@ -288,12 +288,15 @@
     if (freshIntro) {
       var aboutEls = introEls();
       gsap.killTweensOf(aboutEls);
+      // straight up (never sideways, so the lines stay centred wherever the bubble came from), the line nearest the
+      // bubble first and the others following
       gsap.to(aboutEls, {
-        x: function (i, el) { return push(el, { x: b.cx, y: b.cy }).x; },
+        x: 0,
         y: function (i, el) { return push(el, { x: b.cx, y: b.cy }).y; },
-        scale: 0.55,
+        scale: 0.7,
         opacity: 0,
         duration: t(0.3),
+        delay: function (i) { return t(0.05 * (aboutEls.length - 1 - i)); },
         ease: "power2.out",
         transformOrigin: "50% 50%",
       });
@@ -355,7 +358,7 @@
   }
 
   // the about-me text (the tagline; the name stays put)
-  function introEls() { return intro ? intro.querySelectorAll(".introTop .tagline") : []; }
+  function introEls() { return intro ? intro.querySelectorAll(".introTop .tagline .tl") : []; }
 
   // the reverse of the push: they start shoved away, small and faint, and are drawn back to their places, the
   // nearer ones first, like the gallery links
@@ -373,7 +376,7 @@
       var far = Math.min(len / 700, 1);
       var from = push(el, origin, true);
       var delay = t(0.14 * far);
-      gsap.set(el, { x: from.x, y: from.y, scale: 0.8, opacity: 0, transformOrigin: "50% 50%" });
+      gsap.set(el, { x: 0, y: from.y, scale: 0.8, opacity: 0, transformOrigin: "50% 50%" });
       gsap.to(el, { scale: 1, opacity: 1, duration: t(0.16), delay: delay, ease: "power2.out" });
       gsap.to(el, { x: 0, y: 0, duration: t(0.22 + 0.14 * far), delay: delay, ease: "power2.inOut", onComplete: function () { gsap.set(el, { clearProps: "x,y,scale,opacity,transformOrigin" }); } });
     });
