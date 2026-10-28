@@ -1,0 +1,75 @@
+@import url(hostgrotesk.css);
+
+:root {
+  /* palette sampled from the reference image */
+  --bg: #FCF5EB;
+  --blue: #ADCDDA;
+  --red: #DD8881;
+  --orange: #EDB47D;
+  --yellow: #F5DC9C;
+  --purple: #AEA5C4;
+  --pink: #ECD7E6;
+  --ink: #030000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  cursor: url("cursor_home.png"), pointer;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+.heroName {
+  margin: 0;
+  font-family: "Host Grotesk", sans-serif;
+  font-weight: 400;
+  font-size: calc((100vw - 48px) / 6.15);
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--blue);
+}
+
+@media (max-width: 700px) {
+  .heroName {
+    font-size: calc((100vw - 48px) / 3.3);
+    white-space: normal;
+  }
+
+  .heroName span {
+    display: block;
+  }
+}
+
+#mouse-circle {
+  z-index: 2;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  margin: -13px 0 0 -13px;
+  background: rgba(5, 29, 47, 0.10);
+  border-radius: 50%;
+  pointer-events: none;
+  transition: width 0.2s, height 0.2s;
+}
+
+a:hover {
+  cursor: url("cursor_linkHover.png"), pointer;
+}
