@@ -995,7 +995,7 @@ html.view-open #mouse-circle {
   content: "\00B7";
   content: "\00B7" / "";
   margin: 0 clamp(10px, 1.8vw, 32px);
-  color: rgba(47, 39, 37, 0.12); /* the same soft grey the slashes had */
+  color: rgba(47, 39, 37, 0.4); /* the same soft grey the slashes had */
 }
 
 #projectList li.row-break,
@@ -1470,7 +1470,7 @@ body { position: relative; }
 .panelText .pgText { overflow: visible; max-width: none; width: 100%; max-height: none; padding: 0; align-items: center; }
 .panelText .contactLinks { flex-wrap: nowrap; white-space: nowrap; }
 .panelText .contactLinks li { padding: 0.4em 0; flex: none; }
-.panelText .contactLinks li:not(.no-slash)::after { content: "\00B7"; margin: 0 clamp(10px, 1.8vw, 32px); color: rgba(47, 39, 37, 0.12); }
+.panelText .contactLinks li:not(.no-slash)::after { content: "\00B7"; margin: 0 clamp(10px, 1.8vw, 32px); color: rgba(47, 39, 37, 0.4); }
 
 /* Contact panel: a centred column, a small label over each link */
 .contactCol2 { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; }
