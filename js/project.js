@@ -268,6 +268,11 @@
     var height = Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
     view.style.width = Math.min(fullW, height * CARD_RATIO) + "px";
     view.style.height = height + "px";
+    // and it sits dead centre in the window, as long as that leaves it clear of the chips above and the gallery row
+    // under it (otherwise it sits as close to the middle as those allow)
+    var minTop = top;
+    var maxTop = Math.max(minTop, window.innerHeight - BOTTOM_ROOM - height);
+    top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height; // measured from layout, not the rect: the card is left shrunk after a close
     // the card IS the hover bubble: the bubble (js/mouse.js) grows to the card's size and shape, then the card
