@@ -1236,3 +1236,8 @@ html.view-open .contactBlock {
 .dlBtn::before { opacity: 0; transition: opacity 0.25s ease; }
 .dlBtn:hover { background: var(--accent, var(--ink)); transform: scale(1.06); }
 .dlBtn:hover::before { opacity: 1; }
+
+/* the phone sits nearer the middle of the card: its column is wider and starts further left */
+.pg.cover { grid-template-columns: minmax(0, 1fr) 62%; gap: 0; }
+
+.dlBtn { font-size: 17px; padding: 14px 30px; }
