@@ -232,12 +232,15 @@ a:focus-visible {
 
 .stackLogo .bubble { margin-right: 0; height: auto; }
 
-/* Habbot: its small orange icon sits above the wordmark */
+/* Habbot: the orange bar sits under the wordmark like an underline, exactly as wide as the wordmark.
+   width 0 + min-width 100% makes it follow the wordmark's width instead of stretching the item. */
 .markIcon {
   display: block;
-  height: 20px;
-  width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
+  width: 0;
+  min-width: 100%;
+  height: auto;
+  aspect-ratio: 541 / 66;
+  margin-top: -2px;
 }
 
 .stackLogo.small .logo { height: 32px; }
@@ -507,12 +510,14 @@ a:focus-visible {
   gap: 6px;
 }
 
-.viewStack .viewLogo { height: 28px; }
+.viewStack .viewLogo { height: 32px; }
 
 .viewIcon {
   display: block;
-  height: 12px;
-  width: auto;
+  width: 0;
+  min-width: 100%;
+  height: auto;
+  aspect-ratio: 541 / 66;
 }
 
 .viewTitle {
