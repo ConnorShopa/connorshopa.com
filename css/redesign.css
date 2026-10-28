@@ -108,7 +108,17 @@ a:focus-visible {
 }
 
 .inline li {
-  display: inline-block; /* so items can move with transforms when the list is filtered */
+  display: inline-flex; /* so items can move with transforms when the list is filtered */
+  align-items: flex-end; /* the slash lines up with the text row, under the logos */
+  vertical-align: bottom;
+  padding: 14px 0;
+}
+
+/* in the centre list each link is a column: logo on top, title below */
+.inline a {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .inline li::after {
@@ -130,8 +140,8 @@ a:focus-visible {
 }
 
 .inline.big {
-  font-size: 28px;
-  line-height: 2.2;
+  font-size: 20px;
+  line-height: 1.3;
   letter-spacing: -0.02em;
 }
 
@@ -141,24 +151,22 @@ a:focus-visible {
 
 /* project logos sit just before the link text (no bubble); the logo and the text share a subtle drop shadow */
 .bubble {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  margin-right: 12px;
-  vertical-align: middle;
+  margin-bottom: 10px;
 }
 
 .logo {
   display: block;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
   width: auto;
-  height: 40px;
-  max-width: 96px;
+  height: 56px;
+  max-width: 120px;
 }
 
 .caption {
-  font-size: 14px;
+  font-size: 12px;
   letter-spacing: normal;
   line-height: 1.2;
   color: var(--ink-soft);
@@ -169,19 +177,10 @@ a:focus-visible {
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
 }
 
-/* a link with a caption under its title (Seeds): bubble on the left, title and caption stacked
-   in a column on the right, so the caption starts exactly where the title does */
-.withCaption {
-  display: inline-grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-  justify-items: start;
-  text-align: left;
+/* Seeds: the caption simply sits under the title, centred in the same column */
+.withCaption .caption {
+  margin-top: 2px;
 }
-
-.withCaption .bubble { grid-area: 1 / 1; }
-.withCaption .label { grid-area: 1 / 2; }
-.withCaption .caption { grid-area: 2 / 2; margin-top: -0.7em; }
 
 /* the centre list keeps the unfiltered list's height; the live list sits in the middle of it */
 .stack {
@@ -311,6 +310,6 @@ a:focus-visible {
 
 @media (max-width: 500px) {
   .inline.big {
-    font-size: 22px;
+    font-size: 17px;
   }
 }
