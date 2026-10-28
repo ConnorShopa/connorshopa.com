@@ -43,10 +43,10 @@
       title: "Contact",
       logoOnly: true,
       pages: [pg("one", text(
-        '<ul class="inline big contactLinks">' +
-        '<li><a href="mailto:connorshopa@gmail.com">connorshopa@gmail.com</a></li>' +
-        '<li><a href="tel:+13432095337">343.209.5337</a></li>' +
-        '<li class="no-slash"><a href="https://www.linkedin.com/in/connorshopa/" target="_blank" rel="noopener">LinkedIn</a></li>' +
+        '<ul class="contactCol2">' +
+        '<li><span class="tinyLabel">EMAIL ME</span><a href="mailto:connorshopa@gmail.com">connorshopa@gmail.com</a></li>' +
+        '<li><span class="tinyLabel">CALL ME</span><a href="tel:+13432095337">343.209.5337</a></li>' +
+        '<li><span class="tinyLabel">LINKEDIN</span><a href="https://www.linkedin.com/in/connorshopa/" target="_blank" rel="noopener">LinkedIn</a></li>' +
         '</ul>'
       ))]
     }

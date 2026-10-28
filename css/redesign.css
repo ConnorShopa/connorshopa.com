@@ -1471,3 +1471,9 @@ body { position: relative; }
 .panelText .contactLinks { flex-wrap: nowrap; white-space: nowrap; }
 .panelText .contactLinks li { padding: 0.4em 0; flex: none; }
 .panelText .contactLinks li:not(.no-slash)::after { content: "\00B7"; margin: 0 clamp(10px, 1.8vw, 32px); color: rgba(47, 39, 37, 0.12); }
+
+/* Contact panel: a centred column, a small label over each link */
+.contactCol2 { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+.contactCol2 li { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.contactCol2 .tinyLabel { font-size: 12px; letter-spacing: 0.08em; font-weight: 500; color: var(--ink-soft); }
+.contactCol2 a { font-size: 32px; line-height: 1.2; letter-spacing: -0.02em; }
