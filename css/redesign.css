@@ -132,6 +132,7 @@ a:focus-visible {
   font-size: 20px;
   line-height: 2.4;                 /* the two lines sit further apart */
   color: rgba(0, 0, 0, 0.5);        /* lighter than the rest of the page */
+  white-space: nowrap;              /* each of the two lines stays on one line */
 }
 
 /* big statement under the name + tagline; the "3" is set larger than the words around it */
