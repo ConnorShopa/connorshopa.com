@@ -38,6 +38,9 @@
   var DOT_BORDER = "rgba(47, 39, 37, 0)";
   var BOX_FILL = "#F4F4F4";
   var BOX_BORDER = "rgba(47, 39, 37, 0)"; // no stroke: the bubble is the same soft grey as the project card it grows into
+  // the bubble's drop shadow: the project card's shadow, scaled down to the bubble's size
+  var BOX_SHADOW = "0px 8px 20px -8px rgba(47, 39, 37, 0.14), 0px 2px 6px 0px rgba(47, 39, 37, 0.05)";
+  var DOT_SHADOW = "0px 0px 0px 0px rgba(47, 39, 37, 0), 0px 0px 0px 0px rgba(47, 39, 37, 0)";
 
   var mouse = { x: 0, y: 0 };
   var seenMouse = false;
@@ -87,6 +90,7 @@
       borderRadius: radius,
       backgroundColor: BOX_FILL,
       borderColor: BOX_BORDER,
+      boxShadow: BOX_SHADOW,
       duration: t(MORPH_TIME),
       ease: "power3.out",
       overwrite: "auto",
@@ -101,6 +105,7 @@
       borderRadius: DOT_SIZE / 2,
       backgroundColor: DOT_FILL,
       borderColor: DOT_BORDER,
+      boxShadow: DOT_SHADOW,
       duration: t(MORPH_TIME * 0.9),
       ease: "power3.out",
       overwrite: "auto",
