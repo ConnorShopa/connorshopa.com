@@ -272,18 +272,21 @@ a:focus-visible {
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
 }
 
-/* a link with a caption beside its title (Seeds): logo, title and caption in one row; the caption sits on the title's baseline */
+/* Seeds: a smaller logo on the left; the title with "design system" underneath it forms a column
+   that is vertically centred on the logo */
 .withCaption {
   display: inline-grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
   align-items: center;
   justify-items: start;
   text-align: left;
 }
 
-.withCaption .bubble { grid-area: 1 / 1; }
-.withCaption .label { grid-area: 1 / 2; align-self: baseline; }
-.withCaption .caption { grid-area: 1 / 3; margin-left: 0.5em; align-self: baseline; } /* same line as the title, sitting on its baseline */
+.withCaption .bubble { grid-area: 1 / 1 / 3 / 2; height: auto; }
+.withCaption .logo { height: 32px; max-width: none; }
+.withCaption .label { grid-area: 1 / 2; align-self: end; }
+.withCaption .caption { grid-area: 2 / 2; align-self: start; margin-top: -0.3em; }
 
 /* the centre list keeps the unfiltered list's height; the live list sits in the middle of it */
 .stack {
