@@ -17,6 +17,11 @@
     return "<figure><img src=\"" + src + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">" +
       (caption ? "<figcaption>" + caption + "</figcaption>" : "") + "</figure>";
   }
+  // a screenshot inside an iPhone frame
+  function phone(src, cls) {
+    return '<div class="phone' + (cls ? " " + cls : "") + '"><img src="' + src + '" alt="" loading="lazy" decoding="async"><i class="phoneIsland"></i></div>';
+  }
+  function pfig(src) { return "<figure>" + phone(src) + "</figure>"; }
   function fact(label, value) { return '<div class="fact"><p class="eyebrow">' + label + '</p><p class="sub">' + value + "</p></div>"; }
   function stat(value, label) { return '<div class="stat"><p class="big">' + value + '</p><p class="eyebrow">' + label + "</p></div>"; }
   function p(cls, html) { return '<p class="' + cls + '">' + html + "</p>"; }
@@ -203,12 +208,13 @@
           '<p class="coverText">Throughout a roadtrip from Seattle to Mexico to New York I would keep track of my meditation with two dots drawn in my journal.</p>' +
           '<p class="coverText">The distance between the dots represented the length of the meditation, with quick notes before and after each meditation.</p>' +
           '<p class="coverText">While living in a remote Wyoming cabin, I digitized this process into an iOS application.</p>' +
+          '<span class="stickyDots" data-d="26" data-s="120"></span>' +
           '<button type="button" class="lockBtn">Download the app</button></div>' +
-          '<img class="coverShot" src="' + A + 'habbotAssets/app_screen01.png" alt="">'),
+          phone(A + "habbotAssets/app_screen01.png", "coverShot")),
         pg("media",
-          media(fig(A + "habbotAssets/app_screen01.png") + fig(A + "habbotAssets/app_screen02.png") + fig(A + "habbotAssets/app_screen03.png"))),
+          media(pfig(A + "habbotAssets/app_screen01.png") + pfig(A + "habbotAssets/app_screen02.png") + pfig(A + "habbotAssets/app_screen03.png"))),
         pg("media",
-          media(fig(A + "habbotAssets/app_screen04.png") + fig(A + "habbotAssets/app_screen05.png") + fig(A + "habbotAssets/app_screen06.png"))),
+          media(pfig(A + "habbotAssets/app_screen04.png") + pfig(A + "habbotAssets/app_screen05.png") + pfig(A + "habbotAssets/app_screen06.png"))),
       ],
     },
 
