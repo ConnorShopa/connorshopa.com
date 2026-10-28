@@ -203,7 +203,8 @@
           '<p class="coverText">Throughout a roadtrip from Seattle to Mexico to New York I would keep track of my meditation with two dots drawn in my journal.</p>' +
           '<p class="coverText">The distance between the dots represented the length of the meditation, with quick notes before and after each meditation.</p>' +
           '<p class="coverText">While living in a remote Wyoming cabin, I digitized this process into an iOS application.</p>' +
-          '<button type="button" class="lockBtn">Download the app</button></div>'),
+          '<button type="button" class="lockBtn">Download the app</button></div>' +
+          '<img class="coverShot" src="' + A + 'habbotAssets/app_screen01.png" alt="">'),
         pg("media",
           media(fig(A + "habbotAssets/app_screen01.png") + fig(A + "habbotAssets/app_screen02.png") + fig(A + "habbotAssets/app_screen03.png"))),
         pg("media",

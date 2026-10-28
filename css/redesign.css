@@ -1041,9 +1041,20 @@ html.view-open .contactBlock {
 
 /* ---- cover page (Habbot): wordmark top left, a short text, then the download button ---- */
 .pg.cover {
-  grid-template-columns: minmax(0, 1fr);
-  align-content: start;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
   justify-items: start;
+}
+
+.coverShot {
+  justify-self: center;
+  align-self: center;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 28px;
+  box-shadow: 0 18px 40px -16px rgba(47, 39, 37, 0.3), 0 4px 10px rgba(47, 39, 37, 0.08);
 }
 
 .coverWrap {
