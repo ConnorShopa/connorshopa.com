@@ -17,7 +17,7 @@
     '<button type="submit" class="lockBtn" disabled>Unlock</button></form>' +
     '<p class="lockMsg" role="alert"></p>' +
     '<p class="lockAsk"><a href="mailto:connorshopa@gmail.com">Email</a> or <a href="sms:+13432095337">text</a> me for the password</p>' +
-    (proj.appLink ? '<a class="lockApp" href="' + proj.appLink + '" target="_blank" rel="noopener">Download the app &#8599;</a>' : "") +
+    (proj.appLinks ? '<p class="lockApp">Download the app: <a href="' + proj.appLinks.apple + '" target="_blank" rel="noopener">Apple</a> &middot; <a href="' + proj.appLinks.android + '" target="_blank" rel="noopener">Android</a></p>' : "") +
     '</div></div>'
     );
   };
