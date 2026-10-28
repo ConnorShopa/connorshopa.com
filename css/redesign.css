@@ -126,15 +126,27 @@ a:focus-visible {
   font-size: 14px;
 }
 
-/* project logos sit just before the link text, with a very strong drop shadow */
-.logo {
-  width: 56px;
-  height: 28px;
+/* project logos sit in a white bubble just before the link text; the bubble carries the shadow */
+.bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 40px;
+  padding: 0 14px;
   margin-right: 10px;
   vertical-align: middle;
-  object-fit: contain;
-  object-position: right center;
-  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.6)) drop-shadow(0 3px 4px rgba(0, 0, 0, 0.45));
+  border-radius: 999px;
+  background: var(--bg);
+  box-shadow: 0 10px 20px -4px rgba(0, 0, 0, 0.35), 0 3px 8px rgba(0, 0, 0, 0.18);
+}
+
+.logo {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 56px;
+  max-height: 24px;
 }
 
 .caption {
