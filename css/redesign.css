@@ -1527,3 +1527,6 @@ body { position: relative; }
 
 /* AltQ sits in the list but links nowhere */
 .noLink { cursor: default; }
+
+/* the invisible row breaks never get an interpunct (they were showing one between the rows) */
+.inline.big li.row-break::after { content: none !important; }
