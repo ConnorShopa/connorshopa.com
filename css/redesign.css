@@ -1633,3 +1633,17 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
     width: auto; max-width: none; box-sizing: border-box; padding: 8px 12px 40px;
   }
 }
+
+/* small screens: tabs closer to the tagline, more air between the tabs and what is under them; Contact is centred
+   in the middle of the device again; every line of the history is centred */
+@media (max-width: 700px), (max-height: 760px) {
+  .introTop + .filters { margin-top: 14px; }
+  .hero > nav { margin-top: 36px; }
+  .panelText:has(.contactCol2) {
+    position: fixed; inset: auto; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: max-content; max-width: 92vw; padding: 0;
+  }
+  .panelText .aboutJobs, .panelText .aboutJobs li { align-items: center; text-align: center; }
+  .panelText .aboutJobs li { flex-direction: column; justify-content: center; gap: 2px; }
+  .panelText .aboutJobs span { display: block; text-align: center; }
+}
