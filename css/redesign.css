@@ -40,11 +40,23 @@ body {
 .page {
   position: relative;
   z-index: 1; /* above the hover box, so link text stays on top of it */
-  width: min(100%, 720px);
+  width: min(100%, 1120px); /* wide enough for the centre list; the other sections are narrowed below */
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 56px;
+}
+
+/* the intro, history and contact stay a comfortable reading width; only the centre list runs wide */
+.page > header,
+.page > section,
+.page > footer {
+  width: 100%;
+  max-width: 720px;
+}
+
+.page > nav {
+  width: 100%;
 }
 
 a {
