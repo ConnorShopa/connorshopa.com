@@ -78,9 +78,9 @@
           var r = el.getBoundingClientRect();
           var len = Math.hypot(r.left + r.width / 2 - origin.x - gsap.getProperty(el, "x"), r.top + r.height / 2 - origin.y - gsap.getProperty(el, "y"));
           var far = Math.min(len / 700, 1);
-          var delay = t(0.28 * far);
-          tweens.push(gsap.to(el, { scale: 1, opacity: 1, duration: t(0.2), delay: delay, ease: "power2.out" }));
-          tweens.push(gsap.to(el, { x: 0, y: 0, duration: t(0.28 + 0.22 * far), delay: delay, ease: "power2.in" }));
+          var delay = t(0.14 * far);
+          tweens.push(gsap.to(el, { scale: 1, opacity: 1, duration: t(0.16), delay: delay, ease: "power2.out" }));
+          tweens.push(gsap.to(el, { x: 0, y: 0, duration: t(0.22 + 0.14 * far), delay: delay, ease: "power2.inOut" }));
         });
         popIn = gsap.timeline();
         tweens.forEach(function (tw) { popIn.add(tw, 0); });
