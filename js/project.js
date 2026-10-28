@@ -301,7 +301,7 @@
     // the chips settle the same distance above the card as the gallery row sits under it (GAP)
     if (introFilters && introState) {
       gsap.killTweensOf(introFilters);
-      gsap.to(introFilters, { y: top - GAP - introState.fBottom, duration: t(0.5), ease: "power3.inOut" });
+      gsap.to(introFilters, { y: top - GAP - introState.fBottom, duration: t(0.22), ease: "power3.out" }); // quick, so they are in place before the bubble reaches them
     }
 
     gsap.killTweensOf(view);
