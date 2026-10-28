@@ -30,7 +30,7 @@
   var MORPH_TIME = 0.4;  // how long the dot takes to become a box (and back)
 
   var DOT_SIZE = 32;
-  var BOX_RADIUS = 24;
+  var BOX_RADIUS = 40;
   var DOT_FILL = "rgba(0, 0, 0, 0.10)";
   var DOT_BORDER = "rgba(0, 0, 0, 0)";
   var BOX_FILL = "#F4F4F4";
