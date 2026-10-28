@@ -1332,12 +1332,12 @@ html.view-open .contactBlock {
 
 .coverActions { display: flex; gap: 12px; align-items: center; justify-content: center; }
 
-.pg.cover .dlBtn { background: #fff; color: var(--ink); font-weight: 600; }
-.pg.cover .dlBtn:hover { background: var(--accent, #fff); color: #FFFAF6; }
+.pg.cover .dlBtn { background: var(--accent, #FA983A); color: #FFFAF6; font-weight: 600; }
+.pg.cover .dlBtn:hover { background: #fff; color: var(--ink); }
 
 /* "About": a glass pill beside the download button; it brings in the text and the second phone screen */
-.pg.cover .aboutBtn { background: rgba(255, 255, 255, 0.45); color: #fff; display: inline-flex; align-items: center; gap: 6px; padding-right: 24px; }
-.pg.cover .aboutBtn:hover { background: rgba(255, 255, 255, 0.65); color: #FFFAF6; }
+.pg.cover .aboutBtn { background: #fff; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; padding-right: 24px; }
+.pg.cover .aboutBtn:hover { background: var(--accent, #FA983A); color: #FFFAF6; }
 
 /* the phone sits nearer the right edge */
 .pg.cover .coverShot { left: 110px; }
