@@ -139,6 +139,7 @@
     if (proj.bg) sec.style.setProperty("--view-bg", proj.bg);
     // url() inside a custom property resolves against the stylesheet, so it gets the full address
     if (proj.bgImage) { sec.style.setProperty("--view-img", 'url("' + new URL(proj.bgImage, document.baseURI).href + '")'); sec.classList.add("hasBgImage"); }
+    if (proj.bgImageBlur) sec.style.setProperty("--view-img-blur", 'url("' + new URL(proj.bgImageBlur, document.baseURI).href + '")');
     document.body.appendChild(sec);
     if (locked) wireLock(slug, sec);
   });

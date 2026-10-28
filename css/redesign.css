@@ -1173,30 +1173,36 @@ html.view-open .contactBlock {
 .view.hasDownload .viewDots { bottom: 82px; }
 .view.hasDownload .viewBody { bottom: 120px; }
 
-/* a project's first page can sit on an image panel (Habbot: blurred grass) down the right side of the card, inset 8px
-   from the card's top, right and bottom edges (a peach border): rounded on the right, a straight edge on the left.
-   It fades away on the other pages. */
-.view.hasBgImage::before {
+/* a project's first page can sit on a full-card image (Habbot: grass), blurred on the left and fading into crisp on the
+   right: a sharp layer (::before) under a blurred copy (::after) that is masked away from left to right.
+   Both fade out on the other pages. */
+.view.hasBgImage::before,
+.view.hasBgImage::after {
   content: "";
   position: absolute;
-  top: 8px;
-  right: 8px;
-  bottom: 8px;
-  left: 56%;
-  border-radius: 0 56px 56px 0; /* the right corners are concentric with the card's 64px corners */
+  inset: 0;
+  border-radius: inherit;
   background: var(--view-img) center / cover no-repeat;
-  /* the photo fades into the peach on its left side */
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 8%, #000 22%);
-  mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 8%, #000 22%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
 }
 
-.view.hasBgImage.onFirst::before { opacity: 1; }
+.view.hasBgImage::after {
+  background-image: var(--view-img-blur);
+  -webkit-mask-image: linear-gradient(to right, #000 0%, #000 25%, transparent 75%);
+  mask-image: linear-gradient(to right, #000 0%, #000 25%, transparent 75%);
+}
 
-/* the phone sits on the panel with a deep drop shadow; the close button goes white on the photo */
+.view.hasBgImage.onFirst::before,
+.view.hasBgImage.onFirst::after { opacity: 1; }
+
+/* light type on the photo; the phone gets a deep drop shadow */
+.view.hasBgImage.onFirst .coverWrap { color: #fff; }
+.view.hasBgImage.onFirst .coverMark { filter: brightness(0) invert(1); }
 .view.hasBgImage.onFirst .viewClose { color: #fff; }
+.view.hasBgImage.onFirst .viewDot { background: rgba(255, 255, 255, 0.4); }
+.view.hasBgImage.onFirst .viewDot[aria-current="true"] { background: var(--accent, #fff); }
 .view.hasBgImage.onFirst .coverShot {
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.55),
@@ -1204,7 +1210,3 @@ html.view-open .contactBlock {
     0 44px 70px -22px rgba(0, 0, 0, 0.6),
     0 10px 22px rgba(0, 0, 0, 0.3);
 }
-
-/* with the panel on the right, the cover's text column stays clear of it */
-.view.hasBgImage .pg.cover { grid-template-columns: minmax(0, 1fr) 36%; gap: 0; }
-.view.hasBgImage .coverWrap { max-width: 470px; }
