@@ -985,7 +985,7 @@ html.view-open #mouse-circle {
 .inline.big li:not(.no-slash):not(:last-child)::after {
   content: "\00B7";
   content: "\00B7" / "";
-  margin: 0 clamp(16px, 3vw, 55px);
+  margin: 0 clamp(10px, 1.8vw, 32px);
   color: rgba(47, 39, 37, 0.12); /* the same soft grey the slashes had */
 }
 
