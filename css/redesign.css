@@ -1260,10 +1260,8 @@ html.view-open .contactBlock {
 /* the down chevron: a round button on the bottom edge of the card, under the left column (outside the column, so
    the logo + CTA stay centred); 12% white with the same light stroke as the filter chips */
 .scrollCue {
-  position: absolute;
-  left: calc(19% + 70px);
-  bottom: -26px;
-  margin-left: -22px;
+  position: relative;
+  margin-top: 4px;
   width: 44px;
   height: 44px;
   padding: 0;
@@ -1326,3 +1324,19 @@ html.view-open .contactBlock {
   text-align: center;
 }
 
+
+/* the logo, CTA and chevron sit together on a frosted panel floating over the grass (12% white, background blurred) */
+.pg.cover .coverWrap {
+  width: 360px;
+  box-sizing: border-box;
+  padding: 40px 36px 26px;
+  border-radius: 40px;
+  background: rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 18px 40px -16px rgba(0, 10, 4, 0.45);
+}
+
+/* the phone sits nearer the right edge */
+.pg.cover .coverShot { left: 110px; }
