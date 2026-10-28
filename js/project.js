@@ -255,7 +255,8 @@
     var introFilters = intro && intro.querySelector(".filters");
     var collapseBy = 0;
     var freshIntro = false;
-    if (introTop && introFilters && !introState) { // first open: remember how far the chips rise so closing can undo it
+    if (false && introTop && introFilters && !introState) { // the header no longer moves when a project opens
+      // first open: remember how far the chips rise so closing can undo it
       var mt = parseFloat(getComputedStyle(introFilters).marginTop) || 0;
       // only the tagline goes (the name stays): the chips rise by its height plus the gap under the name
       var tg = introTop.querySelector(".tagline");
@@ -443,7 +444,7 @@
   var chips = document.querySelectorAll(".filters .pill");
   function syncChips(name) {
     chips.forEach(function (c) {
-      var on = name ? c.getAttribute("data-view") === name : c.hasAttribute("data-work");
+      var on = name ? c.getAttribute("data-panel") === name : c.hasAttribute("data-work");
       c.setAttribute("aria-pressed", on ? "true" : "false");
     });
   }

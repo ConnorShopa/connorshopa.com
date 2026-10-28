@@ -26,7 +26,7 @@
   function stat(value, label) { return '<div class="stat"><p class="big">' + value + '</p><p class="eyebrow">' + label + "</p></div>"; }
   function p(cls, html) { return '<p class="' + cls + '">' + html + "</p>"; }
 
-  window.PROJECTS = {
+  window.PANELS = {
     // ---------------------------------------------------------------- About
     about: {
       title: "About",
@@ -49,7 +49,10 @@
         '<li class="no-slash"><a href="https://www.linkedin.com/in/connorshopa/" target="_blank" rel="noopener">LinkedIn</a></li>' +
         '</ul>'
       ))]
-    },
+    }
+  };
+
+  window.PROJECTS = {
     // ---------------------------------------------------------------- TouchTunes
     touchtunes: {
       title: "TouchTunes",

@@ -1453,3 +1453,11 @@ html.view-open .filters { position: relative; z-index: 20; }
 .aboutJobs .role, .aboutJobs .dates { font-size: 14px; color: var(--ink-soft); }
 /* Contact view: the links keep their one-line, big-link look */
 .view .inline.big.reach { justify-content: center; }
+
+/* About / Contact text sits where the gallery is, centred, with no box around it */
+nav.stack { position: relative; }
+.panelText { position: absolute; inset: 0 0 auto 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+.panelText[hidden] { display: none; }
+.panelText .lead { font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0; max-width: 640px; }
+.panelText .body { font-size: 18px; font-weight: 300; margin: 0; }
+.panelText .eyebrow { font-size: 14px; margin: 10px 0 0; color: var(--ink-soft); }
