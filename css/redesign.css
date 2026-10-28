@@ -1461,3 +1461,7 @@ nav.stack { position: relative; }
 .panelText .lead { font-size: 26px; font-weight: 500; line-height: 1.2; margin: 0; max-width: 640px; }
 .panelText .body { font-size: 18px; font-weight: 300; margin: 0; }
 .panelText .eyebrow { font-size: 14px; margin: 10px 0 0; color: var(--ink-soft); }
+
+/* the page itself never scrolls */
+html, body { height: 100%; overflow: hidden !important; overscroll-behavior: none; }
+body { position: relative; }
