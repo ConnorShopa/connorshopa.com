@@ -1556,6 +1556,8 @@ a:has(.spot) .bubble { margin-right: 10px; }
 /* the TouchTunes pin beside the name in the About sentence */
 .ttPin { display: inline-block; height: 0.8em; width: auto; vertical-align: -0.04em; margin-right: 0.12em; }
 
-/* "Sheep" takes the orange gradient of the star in its icon */
-.sheepText { font-weight: 600; background: linear-gradient(135deg, #E8641F 0%, #BB3500 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
+/* "Sheep": Crimson Pro, with the blue gradient of the logo */
+.sheepText { font-family: "Crimson Pro", Georgia, serif; font-weight: 600; background: linear-gradient(135deg, #16234D 0%, #3351B3 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
 a:has(.sheepText) .bubble { margin-right: 10px; }
+
+.logo.sheep { height: 38px; width: auto; max-width: none; }
