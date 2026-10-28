@@ -1325,18 +1325,34 @@ html.view-open .contactBlock {
 }
 
 
-/* the logo, CTA and chevron sit together on a frosted panel floating over the grass (12% white, background blurred) */
+/* the logo, CTA and chevron sit together on a peach panel (the app's paper) floating over the grass, with the same
+   light stroke as the buttons: bright at the top fading to nothing at the bottom */
 .pg.cover .coverWrap {
   width: 410px;
   box-sizing: border-box;
   padding: 60px 60px 44px;
   border-radius: 40px;
-  background: rgba(255, 255, 255, 0.12);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 18px 40px -16px rgba(0, 10, 4, 0.45);
+  background: #FFFAF6;
+  box-shadow: 0 18px 40px -16px rgba(0, 10, 4, 0.5), 0 3px 8px rgba(0, 10, 4, 0.2);
 }
+
+.pg.cover .coverWrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+/* dark type and the original wordmark on the peach */
+.view.hasBgImage.onFirst .coverWrap { color: var(--ink); }
+.view.hasBgImage.onFirst .coverMark { filter: none; }
+.pg.cover .scrollCue { background: rgba(47, 39, 37, 0.07); color: var(--ink); box-shadow: none; }
 
 /* the phone sits nearer the right edge */
 .pg.cover .coverShot { left: 110px; }
