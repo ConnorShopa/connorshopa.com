@@ -1560,3 +1560,4 @@ a:has(.spot) .bubble { margin-right: 10px; }
 /* the arrow is centred on the logo it belongs to */
 #projectList a[target="_blank"] { display: inline-flex; align-items: center; }
 #projectList a[target="_blank"]::after { vertical-align: baseline; margin-left: 0.3em; font-size: 0.55em; }
+#projectList a[target="_blank"]::after { font-size: 0.85em; line-height: 1; margin-left: 0.2em; opacity: 0.75; }
