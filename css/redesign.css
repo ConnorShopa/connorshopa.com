@@ -672,7 +672,7 @@ html.view-open #mouse-circle {
 /* ---- pages inside a view: paginated, never scrolling the card ---- */
 .viewBody {
   position: absolute;
-  inset: 108px 72px 64px;
+  inset: 124px 88px 72px;
   text-align: left;
 }
 
@@ -681,13 +681,13 @@ html.view-open #mouse-circle {
   position: absolute;
   inset: 0;
   grid-template-rows: minmax(0, 1fr);
-  gap: 48px;
+  gap: 72px;
   align-items: center;
 }
 
 .pg.is-on { display: grid; }
-.pg.two { grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); }
-.pg.flip { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.pg.two { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr); }
+.pg.flip { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.85fr); }
 .pg.one,
 .pg.media { grid-template-columns: minmax(0, 1fr); }
 .pg.one { justify-items: center; text-align: center; }
@@ -695,7 +695,8 @@ html.view-open #mouse-circle {
 .pgText {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 20px;
+  max-width: 460px;
   min-height: 0;
   max-height: 100%;
   overflow: auto; /* only if a window is too short for the copy */
@@ -744,7 +745,8 @@ html.view-open #mouse-circle {
   max-height: 100%;
   min-height: 0;
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 28px;
+  box-shadow: 0 22px 44px -22px rgba(47, 39, 37, 0.28), 0 2px 8px rgba(47, 39, 37, 0.06);
 }
 
 .pgMedia figcaption {
@@ -764,10 +766,12 @@ html.view-open #mouse-circle {
 
 /* type inside pages */
 .pg p { margin: 0; }
-.pg .eyebrow { font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); font-weight: 400; }
-.pg .lead { font-size: 28px; line-height: 1.15; letter-spacing: -0.02em; }
+.pg .eyebrow { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
+/* a small dot in the project's accent colour (--accent, set per project in js/projects.js) leads each eyebrow */
+.pg .eyebrow::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 8px; border-radius: 50%; background: var(--accent, var(--ink)); vertical-align: 0.08em; }
+.pg .lead { font-size: 40px; line-height: 1.08; letter-spacing: -0.03em; font-weight: 500; }
 .pg .sub { font-size: 18px; line-height: 1.3; font-weight: 400; letter-spacing: -0.01em; }
-.pg .body { font-size: 15px; line-height: 1.55; }
+.pg .body { font-size: 18px; line-height: 1.5; font-weight: 300; color: rgba(47, 39, 37, 0.82); }
 .pg .soft { color: var(--ink-soft); }
 .pg .big { font-size: 56px; line-height: 1; letter-spacing: -0.03em; font-weight: 300; }
 .pg .quote { font-size: 15px; line-height: 1.5; padding-left: 14px; border-left: 2px solid rgba(32, 69, 111, 0.35); }
@@ -776,6 +780,7 @@ html.view-open #mouse-circle {
 .pg .stats { gap: 24px 64px; justify-content: center; }
 .pg .fact,
 .pg .stat { display: flex; flex-direction: column; gap: 4px; }
+.pg .fact { flex: 1 1 200px; padding-top: 14px; border-top: 1px solid rgba(47, 39, 37, 0.12); }
 .pg.one .stat { align-items: center; max-width: 240px; }
 .pg .list { margin: 0; padding-left: 18px; font-size: 15px; line-height: 1.55; }
 .pg a { text-decoration: underline; text-underline-offset: 3px; }
@@ -818,7 +823,7 @@ html.view-open #mouse-circle {
   cursor: pointer;
 }
 
-.viewDot[aria-current="true"] { background: var(--ink); }
+.viewDot[aria-current="true"] { background: var(--accent, var(--ink)); }
 
 /* narrow screens: no room outside the card, so the chevrons sit inside its edges */
 @media (max-width: 960px) {

@@ -133,6 +133,7 @@
     }
     sec.innerHTML = html;
     sec.querySelector(".viewTitle").textContent = proj.title;
+    if (proj.accent) sec.style.setProperty("--accent", proj.accent);
     document.body.appendChild(sec);
     if (locked) wireLock(slug, sec);
   });

@@ -195,6 +195,7 @@
       logo: H + "habbot_projectImage.svg",
       icon: H + "habbot_icon.svg",
       logoOnly: true,
+      accent: "#FA983A", // the orange of its underline: dots, eyebrow markers, the active page dot
       pages: [
         pg("two",
           text(
