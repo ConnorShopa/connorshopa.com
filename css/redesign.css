@@ -980,3 +980,17 @@ html.view-open #mouse-circle {
   flex: none;
   white-space: nowrap;
 }
+
+/* no slashes between the gallery items; the air they took becomes side padding */
+.inline.big li::after {
+  content: none;
+}
+
+.inline.big li {
+  padding-inline: 1.4em;
+}
+
+#projectList li.row-break,
+.inline.big li.row-break {
+  padding: 0;
+}
