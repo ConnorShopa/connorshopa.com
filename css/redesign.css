@@ -1507,3 +1507,7 @@ body { position: relative; }
 
 /* About: dead centre of the screen too (the history stays a left-aligned block inside it) */
 .panelText:has(.aboutJobs) { position: fixed; inset: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); width: max-content; max-width: 92vw; }
+
+/* About: the history is centre-aligned too */
+.panelText .aboutJobs { align-items: center; text-align: center; }
+.panelText .aboutJobs li { justify-content: center; text-align: center; }
