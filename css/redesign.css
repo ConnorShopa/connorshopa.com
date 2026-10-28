@@ -126,6 +126,17 @@ a:focus-visible {
   font-size: 14px;
 }
 
+/* project logos sit just before the link text, with a very strong drop shadow */
+.logo {
+  width: 56px;
+  height: 28px;
+  margin-right: 10px;
+  vertical-align: middle;
+  object-fit: contain;
+  object-position: right center;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.6)) drop-shadow(0 3px 4px rgba(0, 0, 0, 0.45));
+}
+
 .caption {
   font-size: 14px;
   letter-spacing: normal;
