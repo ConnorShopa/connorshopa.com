@@ -17,13 +17,13 @@
   var open = null; // { view, trigger }
 
   // the gallery items currently on screen
-  function items() { return document.querySelectorAll("#projectList li:not(.is-hidden):not(.is-current)"); }
+  function items() { return document.querySelectorAll("#projectList li:not(.is-hidden):not(.is-current):not(.row-break)"); }
 
   // no slash after the last item that is actually showing
   function fixSlashes() {
     if (!list.classList.contains("compact") && window.layoutGalleryRows) { window.layoutGalleryRows(); return; }
     var last = null;
-    list.querySelectorAll("li").forEach(function (li) {
+    list.querySelectorAll("li:not(.row-break)").forEach(function (li) {
       li.classList.remove("no-slash");
       if (!li.classList.contains("is-hidden") && !li.classList.contains("is-current")) last = li;
     });

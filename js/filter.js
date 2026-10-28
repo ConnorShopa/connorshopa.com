@@ -45,25 +45,30 @@
 
   function isHidden(li) { return li.classList.contains("is-hidden"); }
 
-  // at most three items per row: place the visible items on a six-track grid (each spans two tracks),
-  // centre a short last row, and drop the slash at the end of every row
-  function layoutRows(lis) {
+  // at most three items per row: a zero-height break after every third visible item, and no slash at the
+  // end of a row; each row then centres on its own
+  function layoutRows(listEl, lis) {
+    listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
     var shown = lis.filter(function (li) {
       return !li.classList.contains("is-hidden") && !li.classList.contains("is-current");
     });
     shown.forEach(function (li, i) {
-      var row = Math.floor(i / 3);
-      var inRow = Math.min(3, shown.length - row * 3);
-      var start = 1 + 2 * (i % 3) + (3 - inRow);
-      li.style.gridColumn = start + " / span 2";
-      li.classList.toggle("no-slash", i % 3 === 2 || i === shown.length - 1);
+      var rowEnd = i % 3 === 2;
+      li.classList.toggle("no-slash", rowEnd || i === shown.length - 1);
+      if (rowEnd && i < shown.length - 1) {
+        var br = document.createElement("li");
+        br.className = "row-break";
+        br.setAttribute("aria-hidden", "true");
+        listEl.insertBefore(br, li.nextSibling);
+      }
     });
   }
-  window.layoutGalleryRows = function () { layoutRows(items); };
+  window.layoutGalleryRows = function () { layoutRows(list, items); };
+  layoutRows(ghost, Array.prototype.slice.call(ghost.children));
 
   function updateSlashes() {
     items.forEach(function (li) { li.classList.remove("no-slash"); });
-    layoutRows(items);
+    layoutRows(list, items);
   }
 
   function updateStatus() {

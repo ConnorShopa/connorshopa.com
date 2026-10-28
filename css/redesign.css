@@ -164,6 +164,9 @@ a:focus-visible {
 #projectList li {
   padding: 0.75em 0;
 }
+#projectList li.row-break {
+  padding: 0;
+}
 
 .inline li::after {
   content: "/";
@@ -190,17 +193,27 @@ a:focus-visible {
   letter-spacing: -0.02em;
 }
 
-/* at most three items per row: six tracks, every item spans two; filter.js / project.js place the items
-   so a short last row sits in the middle */
+/* at most three items per row: each row is its own centred line (filter.js puts a break after every third item) */
 .inline.big {
-  display: grid;
-  grid-template-columns: repeat(6, auto);
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  justify-items: center;
+  align-items: center;
 }
 
-.inline.big li {
-  grid-column: span 2;
+.inline li.row-break {
+  flex: 0 0 100%;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.inline li.row-break::after {
+  content: none;
+}
+
+#projectList.compact .row-break {
+  display: none;
 }
 
 .inline.small {
