@@ -494,6 +494,17 @@ html.view-open #mouse-circle {
   overflow: auto; /* only if a window is too short for the copy */
 }
 
+/* no scroll bars anywhere in a view (the copy can still scroll if a window is very short) */
+.view,
+.view * {
+  scrollbar-width: none;
+}
+
+.view::-webkit-scrollbar,
+.view *::-webkit-scrollbar {
+  display: none;
+}
+
 .pg.one .pgText { align-items: center; max-width: 720px; }
 
 .pgMedia {
