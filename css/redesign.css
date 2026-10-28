@@ -142,10 +142,7 @@ a:focus-visible {
 }
 
 .stat .num {
-  font-size: 2.6em;
-  line-height: 0.8;
   font-weight: 600;
-  vertical-align: -0.06em;
 }
 
 /* inline lists: items run on like a centred paragraph and wrap, with "/" between them */
