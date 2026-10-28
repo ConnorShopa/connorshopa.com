@@ -38,7 +38,7 @@
     // ---------------------------------------------------------------- Nanni
     nanni: {
       title: "Nanni",
-      logo: H + "nanni_projectImage.svg",
+      logo: H + "nanni_app_icon.svg",
       pages: [
         pg("two",
           text(
