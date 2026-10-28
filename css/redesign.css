@@ -185,7 +185,7 @@ a:focus-visible {
 }
 
 .inline.big {
-  font-size: 40px;
+  font-size: 32px;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
@@ -216,11 +216,11 @@ a:focus-visible {
 .rowLogo .bubble { margin-right: 0; height: auto; }
 
 .rowLogo .logo {
-  height: 48px;
+  height: 38px;
   max-width: none;
 }
 
-.rowLogo .wordmark { height: 22px; }
+.rowLogo .wordmark { height: 18px; }
 
 /* a link with the app icon on top and a wordmark underneath (Nanni) */
 .stackLogo {
@@ -243,22 +243,22 @@ a:focus-visible {
   margin-top: -2px;
 }
 
-.stackLogo.small .logo { height: 32px; }
+.stackLogo.small .logo { height: 26px; }
 
 .stackLogo .logo {
-  height: 48px;
+  height: 38px;
   max-width: none;
 }
 
 .wordmark {
   display: block;
-  height: 28px;
+  height: 22px;
   width: auto;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
 
 .logo.wide {
-  max-width: 140px; /* wide wordmark logos (Plunk) */
+  max-width: 112px; /* wide wordmark logos (Plunk) */
 }
 
 .bubble.solo {
@@ -269,8 +269,8 @@ a:focus-visible {
   display: block;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
   width: auto;
-  height: 56px;
-  max-width: 140px;
+  height: 45px;
+  max-width: 112px;
 }
 
 .caption {
@@ -297,7 +297,7 @@ a:focus-visible {
 }
 
 .withCaption .bubble { grid-area: 1 / 1 / 3 / 2; height: auto; }
-.withCaption .logo { height: 32px; max-width: none; }
+.withCaption .logo { height: 26px; max-width: none; }
 .withCaption .label { grid-area: 1 / 2; align-self: end; }
 .withCaption .caption { grid-area: 2 / 2; align-self: start; margin-top: -0.3em; }
 
