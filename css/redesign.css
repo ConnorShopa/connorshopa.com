@@ -1235,7 +1235,7 @@ html.view-open .contactBlock {
 
 /* the light stroke around it only appears on hover, along with a small scale up */
 .dlBtn::before { opacity: 0; transition: opacity 0.25s ease; }
-.dlBtn:hover { background: var(--accent, var(--ink)); transform: scale(1.06); }
+.dlBtn:hover { background: var(--accent, var(--ink)); transform: scale(0.95); }
 .dlBtn:hover::before { opacity: 1; }
 
 /* the phone sits nearer the middle of the card: its column is wider and starts further left */
@@ -1337,7 +1337,7 @@ html.view-open .contactBlock {
 
 /* "About": a glass pill beside the download button; it brings in the text and the second phone screen */
 .pg.cover .aboutBtn { background: #fff; color: var(--ink); display: inline-flex; align-items: center; gap: 6px; padding-right: 24px; }
-.pg.cover .aboutBtn:hover { background: var(--accent, #FA983A); color: #FFFAF6; }
+.pg.cover .aboutBtn:hover { background: #051324; color: #FFFAF6; } /* Midnight, the app's black */
 
 /* the phone sits nearer the right edge */
 .pg.cover .coverShot { left: 110px; }
