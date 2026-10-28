@@ -197,7 +197,16 @@
       logoOnly: true,
       accent: "#FA983A", // the orange of its underline: dots, eyebrow markers, the active page dot
       bg: "#FFFAF6",     // the paper from the app: the card's background (its link in index.html carries the same colour in data-bubble)
-      pages: [], // cleared to start fresh; the previous 7 pages are saved in archive/habbot-view.js
+      // a fresh start (the previous 7 pages are saved in archive/habbot-view.js): a cover in the manner of the
+      // illustration-book reference (a square of green, the name set big beneath it), then the app screens
+      pages: [
+        pg("cover",
+          '<div class="coverWrap"><div class="coverSquare" style="background:#3E8C69"></div><p class="coverTitle">HABBOT</p></div>'),
+        pg("media",
+          media(fig(A + "habbotAssets/app_screen01.png") + fig(A + "habbotAssets/app_screen02.png") + fig(A + "habbotAssets/app_screen03.png"))),
+        pg("media",
+          media(fig(A + "habbotAssets/app_screen04.png") + fig(A + "habbotAssets/app_screen05.png") + fig(A + "habbotAssets/app_screen06.png"))),
+      ],
     },
 
     // ---------------------------------------------------------------- Spotify dreams
