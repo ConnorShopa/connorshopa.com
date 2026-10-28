@@ -1524,3 +1524,6 @@ body { position: relative; }
 .pgGallery::-webkit-scrollbar { display: none; }
 .pgGallery img { display: block; width: 100%; height: auto; margin: 0 0 16px; border-radius: 12px; break-inside: avoid; }
 @media (max-width: 700px) { .pgGallery { column-count: 2; } }
+
+/* AltQ sits in the list but links nowhere */
+.noLink { cursor: default; }
