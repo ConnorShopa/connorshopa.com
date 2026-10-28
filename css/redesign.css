@@ -370,9 +370,9 @@ a:focus-visible {
   left: 50%;
   margin: 0;
   /* centred by GSAP (xPercent / yPercent -50 in js/project.js) so it can also animate x / y / scale */
-  /* most of the screen: the 200px left over (100px above and below) leaves room for the gallery row underneath */
+  /* big, but it leaves 160px above (the name, tagline, stat and chips stay visible) and the same below (the gallery row) */
   width: min(94vw, 1400px);
-  height: max(360px, calc(100vh - 200px));
+  height: max(360px, calc(100vh - 320px));
   box-sizing: border-box;
   padding: 48px 32px;
   display: flex;
