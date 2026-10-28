@@ -52,7 +52,7 @@ body {
 }
 
 .page > header {
-  align-self: end;
+  align-self: start; /* name, tagline and filters stay at the top; only the list is centred */
 }
 
 .page > .below {
