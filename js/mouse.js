@@ -37,7 +37,7 @@
   var DOT_FILL = "rgba(47, 39, 37, 0.10)";
   var DOT_BORDER = "rgba(47, 39, 37, 0)";
   var BOX_FILL = "#F4F4F4";
-  var BOX_BORDER = "rgba(47, 39, 37, 0.45)";
+  var BOX_BORDER = "rgba(47, 39, 37, 0)"; // no stroke: the bubble is the same soft grey as the project card it grows into
 
   var mouse = { x: 0, y: 0 };
   var seenMouse = false;

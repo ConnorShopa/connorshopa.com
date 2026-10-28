@@ -566,7 +566,7 @@ a:focus-visible {
   height: 440px;
   box-sizing: border-box;
   border-radius: 64px;
-  background: #FFFFFF;
+  background: #F4F4F4; /* the same soft grey as the hover bubble, which grows into this card */
   box-shadow: 0 24px 60px -24px rgba(47, 39, 37, 0.14), 0 4px 14px rgba(47, 39, 37, 0.05);
 }
 

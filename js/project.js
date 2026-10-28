@@ -36,20 +36,21 @@
   var popIn = null;
   // origin (optional, viewport px): the spot the card grows from. The other links are pushed away from it
   // as if the growing card shoved them aside, instead of just shrinking in place.
-  function popGallery(applyLayout, origin) {
+  // pullIn: on close the links start out where the push would have left them and are drawn back to their places
+  function popGallery(applyLayout, origin, pullIn) {
     if (popTl) popTl.kill();
     if (popIn) popIn.kill();
     var current = items();
     gsap.killTweensOf(current);
     popTl = gsap.timeline();
-    if (origin) {
+    if (origin && !pullIn) {
       popTl.to(current, {
         x: function (i, el) { return push(el, origin).x; },
         y: function (i, el) { return push(el, origin).y; },
         scale: 0.55,
         opacity: 0,
-        duration: t(0.3),
-        ease: "power3.out",
+        duration: t(0.45),
+        ease: "power2.out",
         transformOrigin: "50% 50%",
       });
     } else {
@@ -59,8 +60,21 @@
       applyLayout();
       var next = items();
       gsap.set(list.querySelectorAll("li"), { clearProps: "x,y" });
-      gsap.set(next, { scale: 0, opacity: 0 });
-      popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "back.out(1.2)", stagger: t(0.018) });
+      if (origin && pullIn) {
+        // the reverse of the push: start displaced away from the origin, small and faint...
+        gsap.set(next, {
+          x: function (i, el) { return push(el, origin).x; },
+          y: function (i, el) { return push(el, origin).y; },
+          scale: 0.55,
+          opacity: 0,
+          transformOrigin: "50% 50%",
+        });
+        // ...and get sucked back to their own spot
+        popIn = gsap.to(next, { x: 0, y: 0, scale: 1, opacity: 1, duration: t(0.45), ease: "power2.out" });
+      } else {
+        gsap.set(next, { scale: 0, opacity: 0 });
+        popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "back.out(1.2)", stagger: t(0.018) });
+      }
     });
   }
 
@@ -70,8 +84,21 @@
     var dx = r.left + r.width / 2 - origin.x;
     var dy = r.top + r.height / 2 - origin.y;
     var len = Math.hypot(dx, dy) || 1;
-    var dist = 90 + 220 * (1 - Math.min(len / 700, 1));
+    var dist = 36 + 90 * (1 - Math.min(len / 700, 1));
     return { x: (dx / len) * dist, y: (dy / len) * dist };
+  }
+
+  // the hover bubble around a link, as a box on screen: the card starts as this and grows from it
+  var dotEl = document.getElementById("mouse-circle");
+  function bubbleOf(link) {
+    var d = dotEl && dotEl.getBoundingClientRect();
+    var r = link.getBoundingClientRect();
+    var useDot = d && d.width > 40 && Math.abs(d.left + d.width / 2 - (r.left + r.width / 2)) < r.width && Math.abs(d.top + d.height / 2 - (r.top + r.height / 2)) < r.height;
+    var b = useDot
+      ? { w: d.width, h: d.height, cx: d.left + d.width / 2, cy: d.top + d.height / 2 }
+      : { w: r.width + 44, h: r.height + 20, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+    b.r = useDot ? parseFloat(getComputedStyle(dotEl).borderTopLeftRadius) || b.h / 2 : b.h / 2;
+    return b;
   }
 
   // centre of a link on screen
@@ -152,18 +179,29 @@
     view.style.height = height + "px";
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height; // measured from layout, not the rect: the card is left shrunk after a close
-    // the card grows out of (and shrinks back into) the link that was clicked
-    var from = centreOf(trigger);
-    open.offX = from.x - window.innerWidth / 2;
-    open.offY = from.y - (top + height / 2);
+    // the card is the hover bubble growing to its full size (and shrinking back into it on close)
+    var b = bubbleOf(trigger);
+    open.bubble = b;
+    open.offX = b.cx - window.innerWidth / 2;
+    open.offY = b.cy - (top + height / 2);
     var currentLi = trigger.closest("li");
+    var W = view.offsetWidth;
 
     gsap.killTweensOf(view);
+    gsap.killTweensOf(view.children);
     gsap.fromTo(
       view,
-      { autoAlpha: 0, scale: 0.08, x: open.offX, y: open.offY }, // starts where the link is
-      { autoAlpha: 1, scale: 1, x: 0, y: 0, duration: t(0.36), ease: "power4.out" }
+      { autoAlpha: 1, scale: 1, width: b.w, height: b.h, borderRadius: b.r, x: open.offX, y: open.offY, overflow: "hidden" },
+      { width: W, height: height, borderRadius: 64, x: 0, y: 0, duration: t(0.55), ease: "power4.out", clearProps: "width,borderRadius,overflow" }
     );
+    // what's inside fades in once the bubble has grown
+    gsap.fromTo(view.children, { opacity: 0 }, { opacity: 1, duration: t(0.25), delay: t(0.3), clearProps: "opacity" });
+    // the real cursor bubble hides while the card takes its place, then comes back
+    if (dotEl) {
+      gsap.killTweensOf(dotEl, "opacity");
+      gsap.set(dotEl, { opacity: 0 });
+      gsap.to(dotEl, { opacity: 1, duration: t(0.2), delay: t(0.45) });
+    }
     popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
       // still be shrunk or have a stale item hidden, which would throw the measurements below off
@@ -189,17 +227,25 @@
   function switchFrom(current, toLink) {
     var old = current.view;
     open = null;
-    gsap.killTweensOf(old);
+    var b = toLink ? bubbleOf(toLink) : current.bubble;
     var oc = centreOf(old);
-    var tc = toLink ? centreOf(toLink) : { x: oc.x, y: oc.y + current.offY };
+    gsap.killTweensOf(old);
+    gsap.set(old, { overflow: "hidden" });
+    gsap.to(old.children, { opacity: 0, duration: t(0.1) });
     gsap.to(old, {
-      autoAlpha: 0,
-      scale: 0.08,
-      x: tc.x - oc.x,
-      y: tc.y - oc.y,
-      duration: t(0.2),
-      ease: "power3.in",
-      onComplete: function () { old.hidden = true; stopMedia(old); },
+      width: b.w,
+      height: b.h,
+      borderRadius: b.r,
+      x: b.cx - oc.x,
+      y: b.cy - oc.y,
+      duration: t(0.3),
+      ease: "power3.inOut",
+      onComplete: function () {
+        old.hidden = true;
+        stopMedia(old);
+        gsap.set(old.children, { clearProps: "opacity" });
+        gsap.set(old, { clearProps: "width,borderRadius,overflow,x,y" });
+      },
     });
   }
 
@@ -207,23 +253,29 @@
     if (!open) return;
     var view = open.view;
     var trigger = open.trigger;
+    var b = open.bubble;
     var offX = open.offX;
     var offY = open.offY;
     open = null;
 
     gsap.killTweensOf(view);
+    gsap.set(view, { overflow: "hidden" });
+    gsap.to(view.children, { opacity: 0, duration: t(0.1) });
     gsap.to(view, {
-      autoAlpha: 0,
-      scale: 0.08,
+      width: b.w,
+      height: b.h,
+      borderRadius: b.r,
       x: offX,
-      y: offY, // ...and back into the link it grew from
-      duration: t(0.24),
-      ease: "power3.in",
+      y: offY, // ...back into the bubble it grew from
+      duration: t(0.38),
+      ease: "power3.inOut",
       onComplete: function () {
         view.hidden = true;
         document.documentElement.style.overflow = "";
         document.documentElement.classList.remove("view-open");
         stopMedia(view);
+        gsap.set(view.children, { clearProps: "opacity" });
+        gsap.set(view, { clearProps: "width,borderRadius,overflow,x,y" });
       },
     });
     popGallery(function () {
@@ -231,7 +283,7 @@
       list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
       fixSlashes();
       gsap.set(nav, { clearProps: "transform" });
-    });
+    }, { x: b.cx, y: b.cy }, true);
     trigger.focus({ preventScroll: true });
   }
 
