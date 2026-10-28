@@ -1023,7 +1023,7 @@ html.view-open #mouse-circle {
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 20px;
+  bottom: 44px;
   margin: 0 auto;
   z-index: 2;
   transition: opacity 0.2s ease;
