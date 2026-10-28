@@ -142,7 +142,7 @@ a:focus-visible {
 
 /* big statement under the name + tagline; the "3" is set larger than the words around it */
 .stat {
-  margin: 32px 0 20px;
+  margin: 28px 0 0;
   font-size: 26px;
   font-weight: 300;
   line-height: 1.15;
