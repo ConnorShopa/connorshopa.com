@@ -412,13 +412,27 @@
   document.querySelectorAll(".viewClose").forEach(function (b) { b.addEventListener("click", hide); });
   // vertical views (Habbot): scroll or click the chevron under the first page's button to move between pages
   var wheelLock = 0;
+  // while a view is open nothing outside it may scroll: wheel, touch and the scrolling keys are all stopped (except
+  // inside a text block that genuinely needs to scroll)
+  function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText"); }
   window.addEventListener("wheel", function (e) {
-    if (!open || !open.view.classList.contains("vertical")) return;
+    if (!open) return;
+    if (!insideScroller(e)) e.preventDefault();
+    if (!open.view.classList.contains("vertical")) return;
     var now = Date.now();
     if (Math.abs(e.deltaY) < 12 || now - wheelLock < 750) return; // one page per scroll gesture
     wheelLock = now;
     step(e.deltaY > 0 ? 1 : -1);
-  }, { passive: true });
+  }, { passive: false });
+  window.addEventListener("touchmove", function (e) { if (open && !insideScroller(e)) e.preventDefault(); }, { passive: false });
+  document.addEventListener("keydown", function (e) {
+    if (!open || /^(input|textarea|select)$/i.test(e.target.tagName)) return;
+    var down = e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ";
+    var up = e.key === "ArrowUp" || e.key === "PageUp";
+    if (!down && !up && e.key !== "Home" && e.key !== "End") return;
+    e.preventDefault(); // no page scrolling behind the view
+    if (open.view.classList.contains("vertical")) step(down ? 1 : up ? -1 : 0);
+  });
   document.addEventListener("click", function (e) {
     var cue = e.target.closest && e.target.closest(".aboutBtn");
     if (cue && open) step(1);

@@ -1424,3 +1424,7 @@ html.view-open .contactBlock {
   letter-spacing: -0.01em;
   line-height: 1.2;
 }
+
+/* rock solid while a project is open: the page behind can't scroll or bounce */
+html.view-open { overflow: hidden !important; overscroll-behavior: none; }
+html.view-open body { overscroll-behavior: none; }
