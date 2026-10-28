@@ -257,10 +257,10 @@
     var freshIntro = false;
     if (introTop && introFilters && !introState) { // first open: remember how far the chips rise so closing can undo it
       var mt = parseFloat(getComputedStyle(introFilters).marginTop) || 0;
-      introState = { rise: Math.max(0, introTop.offsetHeight + mt - INTRO_GAP) };
-      collapseBy = introState.rise;
+      introState = { rise: Math.max(0, introTop.offsetHeight + mt - INTRO_GAP), fBottom: introFilters.getBoundingClientRect().bottom };
       freshIntro = true;
     }
+    if (introState) collapseBy = introState.rise; // the header's own box never shrinks (the lines and chips are only moved)
     var top = intro ? intro.getBoundingClientRect().bottom - collapseBy + 24 : 80;
     // the card keeps a familiar shape (3:2): it takes the room available, but never gets taller than that shape
     // allows, and when the room is short it gets narrower instead of squatter
@@ -293,8 +293,11 @@
         ease: "power2.out",
         transformOrigin: "50% 50%",
       });
+    }
+    // the chips settle the same distance above the card as the gallery row sits under it (GAP)
+    if (introFilters && introState) {
       gsap.killTweensOf(introFilters);
-      gsap.to(introFilters, { y: -introState.rise, duration: t(0.5), ease: "power3.inOut" });
+      gsap.to(introFilters, { y: top - GAP - introState.fBottom, duration: t(0.5), ease: "power3.inOut" });
     }
 
     gsap.killTweensOf(view);
