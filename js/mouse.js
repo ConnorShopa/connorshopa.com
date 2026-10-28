@@ -1,102 +1,112 @@
-$(document).ready(function () {
-  if (!("ontouchstart" in window || navigator.maxTouchPoints)) {
-    console.log("This is not a touch device");
+// Cursor circle + link hover box, both driven by GSAP.
+//  - The circle follows the cursor with a smooth lag.
+//  - Hovering (or tabbing to) a link grows a soft box from the link's centre,
+//    snapped to the link's bounds. Moving to another link glides the box over.
+(function () {
+  if (typeof gsap === "undefined") return;
 
-    // CIRCLE FOLLOWS CURSOR FUNCTION//
-    let mousePosX = 0,
-      mousePosY = 0,
-      mouseCircle = document.getElementById("mouse-circle");
-
-    document.onmousemove = (e) => {
-      mousePosX = e.clientX + 2;
-      mousePosY = e.clientY + 4;
-    };
-
-    let delay = 6,
-      revisedMousePosX = 0,
-      revisedMousePosY = 0;
-
-    function startMouseFollow() {
-      requestAnimationFrame(startMouseFollow);
-
-      // Include scroll offset
-      let scrollOffsetY =
-        window.pageYOffset || document.documentElement.scrollTop;
-
-      revisedMousePosX += (mousePosX - revisedMousePosX) / delay;
-      revisedMousePosY += (mousePosY - revisedMousePosY) / delay;
-
-      mouseCircle.style.top = revisedMousePosY + scrollOffsetY + "px";
-      mouseCircle.style.left = revisedMousePosX + "px";
-    }
-
-    // ON LOAD FUNC CALLS
-    startMouseFollow();
-
-    // GSAP ANIMATIONS
-
-
-    // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
-    $("a, .buttonText").hover(
-      function () {
-        // Get the position and width of the hovered link
-        let linkPos = $(this).offset();
-        let linkWidth = $(this).innerWidth() * 0.8;
-
-        // Set revisedMousePosX and revisedMousePosY to the link's position
-        revisedCirclePosX = linkPos.left + 20;
-        revisedCirclePosY = linkPos.top;
-
-        // Update the mouse circle position without considering link height
-        updateMouseCirclePosition(true, linkWidth); // Pass true to indicate hover
-
-        // Apply hover animations
-        gsap.to("#mouse-circle", { duration: 0.32, scale: 1.6 });
-        $(this).css("color", "#000000");
-        $(this).css("text-decoration", "underline");
-
-        // Add a black border to the mouse circle
-        mouseCircle.style.border = "0.1px solid #000000";
-        mouseCircle.style.background = "none";
-        mouseCircle.style.borderRadius = "100px";
-      },
-      function () {
-        // Update the mouse circle position without considering link height
-        updateMouseCirclePosition(false); // Pass false to indicate un-hover
-
-        // Apply hover out animations
-        gsap.to("#mouse-circle", { duration: 0.1, scale: 1 });
-        $(this).css("color", "#000000");
-        $(this).css("text-decoration", "none");
-
-        // Remove the black border on un-hover
-        mouseCircle.style.border = "none";
-        mouseCircle.style.background = "rgba(0, 0, 0, 0.10)";
-      }
-    );
-
-    function updateMouseCirclePosition(isHover, linkWidth) {
-      // Update the position of the mouse circle
-      mouseCircle.style.top = revisedCirclePosY - 40; // Adjusted for better vertical alignment
-      mouseCircle.style.left = revisedCirclePosX - linkWidth / 2; // Center the rectangle over the link
-
-      // Set the width of the rectangle to the link's text width
-      mouseCircle.style.width = isHover ? linkWidth + "px" : "";
-
-      // Check if you should transition to a rectangle
-      if (isHover) {
-        // Adjust the height of the rectangle
-        mouseCircle.style.height = "20px"; // Set the desired height
-        mouseCircle.style.borderRadius = "10px"; // Set the desired border radius
-      } else {
-        // Reset to circle
-        mouseCircle.style.height = ""; // Reset the height
-        mouseCircle.style.borderRadius = "50%";
-      }
-    }
-    // Rest of the code for non-touch devices
-  } else {
-    // Hide the mouse-circle if it's a touch device
-    $("#mouse-circle").hide();
+  var circle = document.getElementById("mouse-circle");
+  var isTouch = "ontouchstart" in window || navigator.maxTouchPoints;
+  if (isTouch) {
+    if (circle) circle.style.display = "none";
+    return;
   }
-});
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var t = function (seconds) { return reduce ? 0 : seconds; };
+
+  var PAD_X = 12;
+  var PAD_Y = 4;
+
+  // ---- cursor circle (fixed positioning, so no scroll maths) ----
+  var moveX, moveY, seenMouse = false;
+  if (circle) {
+    gsap.set(circle, { xPercent: -50, yPercent: -50, autoAlpha: 0 });
+    moveX = gsap.quickTo(circle, "x", { duration: t(0.45), ease: "power3.out" });
+    moveY = gsap.quickTo(circle, "y", { duration: t(0.45), ease: "power3.out" });
+  }
+
+  window.addEventListener("mousemove", function (e) {
+    if (!circle) return;
+    if (!seenMouse) {
+      seenMouse = true;
+      gsap.set(circle, { x: e.clientX, y: e.clientY });
+      if (!boxShown) gsap.to(circle, { autoAlpha: 1, duration: t(0.2) });
+    }
+    moveX(e.clientX);
+    moveY(e.clientY);
+  });
+
+  // ---- link hover box ----
+  var box = document.createElement("div");
+  box.id = "hover-box";
+  box.setAttribute("aria-hidden", "true");
+  document.body.appendChild(box);
+  gsap.set(box, { autoAlpha: 0, scale: 0, transformOrigin: "50% 50%" });
+
+  var boxShown = false;
+  var currentLink = null;
+  var hideCall = null;
+
+  // For a link that wraps across lines, use the line the pointer is on.
+  function linkRect(link, e) {
+    var rects = link.getClientRects();
+    if (e && typeof e.clientX === "number" && rects.length > 1) {
+      for (var i = 0; i < rects.length; i++) {
+        var r = rects[i];
+        if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) return r;
+      }
+    }
+    return rects[0] || link.getBoundingClientRect();
+  }
+
+  function boxProps(r) {
+    return { x: r.left - PAD_X, y: r.top - PAD_Y, width: r.width + PAD_X * 2, height: r.height + PAD_Y * 2 };
+  }
+
+  function showFor(link, e) {
+    if (hideCall) { hideCall.kill(); hideCall = null; }
+    currentLink = link;
+    var props = boxProps(linkRect(link, e));
+
+    if (!boxShown) {
+      // first link: appear in place and grow out from the centre
+      gsap.killTweensOf(box);
+      gsap.set(box, props);
+      gsap.fromTo(box, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: t(0.4), ease: "power3.out" });
+      if (circle) gsap.to(circle, { autoAlpha: 0, scale: 0.4, duration: t(0.2), overwrite: "auto" });
+      boxShown = true;
+    } else {
+      // already open: glide to the new link
+      gsap.to(box, Object.assign({ duration: t(0.35), ease: "power3.out", overwrite: "auto" }, props));
+    }
+  }
+
+  function hideBox() {
+    hideCall = null;
+    currentLink = null;
+    boxShown = false;
+    gsap.to(box, { autoAlpha: 0, scale: 0.85, duration: t(0.22), ease: "power2.in", overwrite: "auto" });
+    if (circle && seenMouse) gsap.to(circle, { autoAlpha: 1, scale: 1, duration: t(0.25), overwrite: "auto" });
+  }
+
+  function leave() {
+    // short grace period so moving between links glides instead of closing
+    if (hideCall) hideCall.kill();
+    hideCall = gsap.delayedCall(0.06, hideBox);
+  }
+
+  document.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("mouseenter", function (e) { showFor(link, e); });
+    link.addEventListener("mouseleave", leave);
+    link.addEventListener("focus", function () { showFor(link, null); });
+    link.addEventListener("blur", leave);
+  });
+
+  // keep the box on its link if the page scrolls or resizes while it is open
+  function reposition() {
+    if (currentLink && boxShown) gsap.set(box, boxProps(linkRect(currentLink, null)));
+  }
+  window.addEventListener("scroll", reposition, { passive: true });
+  window.addEventListener("resize", reposition);
+})();

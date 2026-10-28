@@ -38,6 +38,8 @@ body {
 }
 
 .page {
+  position: relative;
+  z-index: 1; /* above the hover box, so link text stays on top of it */
   width: min(100%, 720px);
   display: flex;
   flex-direction: column;
@@ -171,15 +173,30 @@ a:focus-visible {
 }
 
 #mouse-circle {
-  z-index: 4;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
   width: 32px;
   height: 32px;
-  margin: -13px 0 0 -13px;
   background: rgba(0, 0, 0, 0.10);
   border-radius: 50%;
   pointer-events: none;
-  transition: width 0.2s, height 0.2s;
+  will-change: transform;
+}
+
+/* soft box that grows around a hovered link; GSAP sets its position and size */
+#hover-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: 12px;
+  background: var(--bg);
+  box-shadow: 0 14px 28px -10px rgba(0, 0, 0, 0.28), 0 2px 8px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  visibility: hidden;
+  will-change: transform, width, height;
 }
 
 @media (max-width: 500px) {
