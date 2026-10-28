@@ -1039,7 +1039,7 @@ html.view-open .contactBlock {
 /* ---- cover page (Habbot): a square of colour with the name set big beneath it ---- */
 .pg.cover {
   grid-template-columns: minmax(0, 1fr);
-  justify-items: center;
+  justify-items: start;
 }
 
 .coverWrap {
@@ -1069,3 +1069,15 @@ html.view-open .contactBlock {
   letter-spacing: -0.03em;
   white-space: nowrap;
 }
+
+/* sticky "Download the app" button centred at the bottom of the card; the page dots sit above it */
+.viewDownload {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 3;
+}
+
+.view.hasDownload .viewDots { bottom: 82px; }
+.view.hasDownload .viewBody { bottom: 120px; }

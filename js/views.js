@@ -122,6 +122,7 @@
       html += '<div class="pg ' + page.layout + (i === 0 ? " is-on" : "") + '">' + page.html + "</div>";
     });
     html += "</div>";
+    if (proj.download) { html += '<button type="button" class="lockBtn viewDownload">Download the app</button>'; }
     if (many) {
       html += '<button type="button" class="viewNav prev" aria-label="Previous page" disabled' + (locked ? " hidden" : "") + ">" + CHEVRON("prev") + "</button>";
       html += '<button type="button" class="viewNav next" aria-label="Next page"' + (locked ? " hidden" : "") + ">" + CHEVRON("next") + "</button>";
@@ -132,6 +133,7 @@
       html += "</div>";
     }
     sec.innerHTML = html;
+    if (proj.download) sec.classList.add("hasDownload");
     sec.querySelector(".viewTitle").textContent = proj.title;
     if (proj.accent) sec.style.setProperty("--accent", proj.accent);
     if (proj.bg) sec.style.setProperty("--view-bg", proj.bg);
