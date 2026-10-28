@@ -198,6 +198,23 @@ a:focus-visible {
 }
 
 /* logo-only item (Habbot): no text, so no gap after the logo */
+/* a link with the app icon on top and a wordmark underneath (Nanni) */
+.stackLogo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stackLogo .bubble { margin-right: 0; }
+
+.wordmark {
+  display: block;
+  height: 24px;
+  width: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
+}
+
 .logo.wide {
   max-width: 140px; /* wide wordmark logos (Plunk) */
 }
@@ -408,6 +425,23 @@ a:focus-visible {
   width: auto;
   height: 36px;
   max-width: 140px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
+}
+
+/* head with a wordmark: icon on top, wordmark underneath */
+.viewHead.stacked {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  top: 36px;
+}
+
+.viewHead.stacked .viewLogo { height: 32px; }
+
+.viewWordmark {
+  display: block;
+  height: 14px;
+  width: auto;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
 

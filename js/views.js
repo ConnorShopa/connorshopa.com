@@ -21,9 +21,11 @@
     sec.setAttribute("aria-labelledby", id + "-title");
     sec.hidden = true;
 
-    var html = '<div class="viewHead">';
+    var html = '<div class="viewHead' + (proj.wordmark ? " stacked" : "") + '">';
     if (proj.logo) html += '<img class="viewLogo" src="' + proj.logo + '" alt="">';
-    html += '<h2 id="' + id + '-title" class="viewTitle' + (proj.logoOnly ? " sr-only" : "") + '"></h2></div>';
+    // a wordmark replaces the written title (which stays for screen readers) and sits under the icon
+    if (proj.wordmark) html += '<img class="viewWordmark" src="' + proj.wordmark + '" alt="">';
+    html += '<h2 id="' + id + '-title" class="viewTitle' + (proj.logoOnly || proj.wordmark ? " sr-only" : "") + '"></h2></div>';
     html += '<button type="button" class="viewClose" aria-label="Close">&times;</button>';
     html += '<div class="viewBody">';
     proj.pages.forEach(function (page, i) {

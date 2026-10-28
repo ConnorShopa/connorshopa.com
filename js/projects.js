@@ -39,6 +39,7 @@
     nanni: {
       title: "Nanni",
       logo: H + "nanni_app_icon.svg",
+      wordmark: H + "nanni_wordmark.svg",
       pages: [
         pg("two",
           text(
