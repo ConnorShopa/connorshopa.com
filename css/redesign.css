@@ -205,6 +205,23 @@ a:focus-visible {
 }
 
 /* logo-only item (Habbot): no text, so no gap after the logo */
+/* a link with the app icon and a wordmark in one horizontal row (TouchTunes) */
+.rowLogo {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+}
+
+.rowLogo .bubble { margin-right: 0; height: auto; }
+
+.rowLogo .logo {
+  height: 48px;
+  max-width: none;
+}
+
+.rowLogo .wordmark { height: 22px; }
+
 /* a link with the app icon on top and a wordmark underneath (Nanni) */
 .stackLogo {
   display: inline-flex;

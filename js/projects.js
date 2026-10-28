@@ -25,7 +25,8 @@
     // ---------------------------------------------------------------- TouchTunes
     touchtunes: {
       title: "TouchTunes",
-      logo: H + "touchtunes_icon.png",
+      logo: H + "touchtunes_icon.svg",
+      wordmark: H + "touchtunes_wordmark.svg",
       pages: [
         pg("one",
           text(
