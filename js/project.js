@@ -459,7 +459,7 @@
   var wheelLock = 0;
   // while a view is open nothing outside it may scroll: wheel, touch and the scrolling keys are all stopped (except
   // inside a text block that genuinely needs to scroll)
-  function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText"); }
+  function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText, .pgGallery"); }
   function onWheel(e) {
     if (!open) return;
     if (!insideScroller(e)) e.preventDefault(); // stops page scrolling and the elastic bounce

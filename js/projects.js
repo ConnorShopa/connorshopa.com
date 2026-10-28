@@ -376,13 +376,7 @@
     sketchbook: {
       title: "Sketchbook",
       pages: [
-        pg("two",
-          text(p("lead", "A collection of sketches, ideas and other musings")) +
-          media(fig("assets/sketches/sketch01.png"), fig("assets/sketches/sketch04.png"))),
-        pg("media", media(fig("assets/sketches/sketch03.png"), fig("assets/sketches/sketch02.png"), fig("assets/sketches/sketch12.png"))),
-        pg("media", media(fig("assets/sketches/sketch05.png"), fig("assets/sketches/sketch07.png"), fig("assets/sketches/sketch06.png"))),
-        pg("media", media(fig("assets/sketches/sketch08.png"), fig("assets/sketches/sketch09.png"), fig("assets/sketches/sketch10.png"))),
-        pg("media", media(fig("assets/sketches/sketch11.png"), fig("assets/sketches/sketch14.png"), fig("assets/sketches/sketch13.png"))),
+        pg("gallery", '<div class="pgGallery">' + ["assets/sketches/sketch01.png", "assets/sketches/sketch04.png", "assets/sketches/sketch03.png", "assets/sketches/sketch02.png", "assets/sketches/sketch12.png", "assets/sketches/sketch05.png", "assets/sketches/sketch07.png", "assets/sketches/sketch06.png", "assets/sketches/sketch08.png", "assets/sketches/sketch09.png", "assets/sketches/sketch10.png", "assets/sketches/sketch11.png", "assets/sketches/sketch14.png", "assets/sketches/sketch13.png"].map(function (src) { return "<img src=\"" + src + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
       ],
     },
 
@@ -390,11 +384,7 @@
     micro: {
       title: "Micro + Motion",
       pages: [
-        pg("two",
-          text(p("lead", "Micro Interactions + Motion Design")) +
-          media(fig("assets/micros/heroAnim01.gif"), fig("assets/micros/heroAnim02.gif"), fig("assets/micros/heroAnim03.gif", "Hero animation set for AltQ"))),
-        pg("media", media(fig("assets/micros/micro_gif01.gif", "Lead generation interaction for Realty Candy + Plunk"))),
-        pg("media", media(fig("assets/micros/micro_gif02.gif", "Wizard flow intearction handoff to Plunk developers"))),
+        pg("gallery", '<div class="pgGallery">' + ["assets/micros/heroAnim01.gif", "assets/micros/heroAnim02.gif", "assets/micros/heroAnim03.gif", "assets/micros/micro_gif01.gif", "assets/micros/micro_gif02.gif"].map(function (src) { return "<img src=\"" + src + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
       ],
     },
   };
