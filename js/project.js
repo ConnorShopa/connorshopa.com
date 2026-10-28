@@ -163,8 +163,12 @@
     view.classList.toggle("imgIn", n === 0);   // ...which has its own switch so it can fade in slowly when the card opens
 
     if (animate && old !== next && !reduce) {
-      gsap.fromTo(next, { autoAlpha: 0, x: 48 * dir }, { autoAlpha: 1, x: 0, duration: 0.28, ease: "power3.out" });
-      gsap.to(old, { autoAlpha: 0, x: -48 * dir, duration: 0.14, ease: "power2.in", onComplete: function () { old.classList.remove("is-on"); gsap.set(old, { clearProps: "opacity,visibility,transform" }); } });
+      var ax = view.classList.contains("vertical") ? "y" : "x"; // vertical views slide up and down
+      var inFrom = { autoAlpha: 0 }, inTo = { autoAlpha: 1, duration: 0.28, ease: "power3.out" }, outTo = { autoAlpha: 0, duration: 0.14, ease: "power2.in", onComplete: null };
+      inFrom[ax] = 48 * dir; inTo[ax] = 0; outTo[ax] = -48 * dir;
+      gsap.fromTo(next, inFrom, inTo);
+      outTo.onComplete = function () { old.classList.remove("is-on"); gsap.set(old, { clearProps: "opacity,visibility,transform" }); };
+      gsap.to(old, outTo);
     } else if (old !== next) {
       old.classList.remove("is-on");
     }
@@ -309,6 +313,20 @@
   });
 
   document.querySelectorAll(".viewClose").forEach(function (b) { b.addEventListener("click", hide); });
+  // vertical views (Habbot): scroll or click the chevron under the first page's button to move between pages
+  var wheelLock = 0;
+  window.addEventListener("wheel", function (e) {
+    if (!open || !open.view.classList.contains("vertical")) return;
+    var now = Date.now();
+    if (Math.abs(e.deltaY) < 12 || now - wheelLock < 750) return; // one page per scroll gesture
+    wheelLock = now;
+    step(e.deltaY > 0 ? 1 : -1);
+  }, { passive: true });
+  document.addEventListener("click", function (e) {
+    var cue = e.target.closest && e.target.closest(".scrollCue");
+    if (cue && open) step(1);
+  });
+
   document.querySelectorAll(".viewNav.prev").forEach(function (b) { b.addEventListener("click", function () { step(-1); }); });
   document.querySelectorAll(".viewNav.next").forEach(function (b) { b.addEventListener("click", function () { step(1); }); });
   // dots are added after load for locked projects, so they are handled by delegation

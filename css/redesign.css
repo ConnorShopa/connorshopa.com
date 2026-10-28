@@ -1253,3 +1253,26 @@ html.view-open .contactBlock {
 
 /* the grass is one sharp photo (no blurred layer) */
 .view.hasBgImage::after { content: none; }
+
+/* the grass photo is mirrored (it reads better that way round) */
+.view.hasBgImage::before { transform: scaleX(-1); }
+
+/* the down chevron under the first page's button: bobs gently, scrolls to the next page */
+.scrollCue {
+  margin-top: 6px;
+  padding: 6px;
+  border: 0;
+  background: none;
+  color: inherit;
+  display: grid;
+  place-items: center;
+  cursor: url("cursor_linkHover.png"), pointer;
+  animation: cueBob 1.8s ease-in-out infinite;
+}
+
+@keyframes cueBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) { .scrollCue { animation: none; } }
