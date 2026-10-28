@@ -69,3 +69,16 @@
     });
   });
 })();
+
+// AltQ opens in a background tab: the page keeps focus. Browsers decide this themselves, so it is done the way a
+// Cmd/Ctrl-click does it (which they treat as "open in the background").
+(function () {
+  var a = document.querySelector('a[href="https://altq.ai"]');
+  if (!a) return;
+  a.addEventListener("click", function (e) {
+    if (e.isTrusted === false || e.ctrlKey || e.metaKey) return;
+    e.preventDefault();
+    var mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+    a.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, view: window, ctrlKey: !mac, metaKey: mac }));
+  });
+})();
