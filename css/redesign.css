@@ -1337,7 +1337,7 @@ html.view-open .contactBlock {
 .pg.cover .dlBtn:hover { background: var(--accent, #fff); color: #FFFAF6; }
 
 /* "About": a glass pill beside the download button; it brings in the text and the second phone screen */
-.pg.cover .aboutBtn { background: rgba(255, 255, 255, 0.16); color: #fff; box-shadow: none; }
+.pg.cover .aboutBtn { background: rgba(255, 255, 255, 0.16); color: #fff; box-shadow: none; display: inline-flex; align-items: center; gap: 6px; padding-right: 24px; }
 .pg.cover .aboutBtn:hover { background: rgba(255, 255, 255, 0.3); color: #FFFAF6; }
 
 /* the phone sits nearer the right edge */
