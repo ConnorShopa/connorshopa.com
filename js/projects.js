@@ -27,6 +27,7 @@
       title: "TouchTunes",
       logo: H + "touchtunes_icon.svg",
       wordmark: H + "touchtunes_wordmark.svg",
+      appLink: "https://apps.apple.com/us/app/id378351144",
       locked: true, // the pages live encrypted in js/locked/touchtunes.json (see tools/lock.mjs)
       pages: [],
     },

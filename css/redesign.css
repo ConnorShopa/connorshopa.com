@@ -944,3 +944,9 @@ html.view-open #mouse-circle {
   font-size: 14px;
   color: var(--ink-soft);
 }
+
+.lockApp {
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--ink);
+}

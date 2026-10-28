@@ -9,14 +9,15 @@
   };
 
   // ---- password-protected projects ----
-  var LOCK_PAGE =
+  var lockPage = function (proj) { return
     '<div class="pg one is-on"><div class="pgText lockBox">' +
     '<p class="body soft">Under NDA</p>' +
     '<form class="lockForm"><input class="lockInput" type="password" placeholder="Password" autocomplete="current-password" aria-label="Password">' +
     '<button type="submit" class="lockBtn" disabled>Unlock</button></form>' +
     '<p class="lockMsg" role="alert"></p>' +
     '<p class="lockAsk"><a href="mailto:connorshopa@gmail.com">Email</a> or <a href="sms:+13432095337">text</a> me for the password</p>' +
-    '</div></div>';
+    (proj.appLink ? '<a class="lockApp" href="' + proj.appLink + '" target="_blank" rel="noopener">Download the app &#8599;</a>' : "") +
+    '</div></div>'; };
 
   var unb64 = function (s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); };
 
@@ -114,7 +115,7 @@
     html += '<h2 id="' + id + '-title" class="viewTitle' + (proj.logoOnly || proj.wordmark ? " sr-only" : "") + '"></h2></div>';
     html += '<button type="button" class="viewClose" aria-label="Close">&times;</button>';
     html += '<div class="viewBody">';
-    if (locked) html += LOCK_PAGE;
+    if (locked) html += lockPage(proj);
     else proj.pages.forEach(function (page, i) {
       html += '<div class="pg ' + page.layout + (i === 0 ? " is-on" : "") + '">' + page.html + "</div>";
     });
