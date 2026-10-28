@@ -1514,3 +1514,6 @@ body { position: relative; }
 
 /* About: the "Professional history" label matches the Contact labels */
 .panelText:has(.aboutJobs) .eyebrow { font-size: 12px; letter-spacing: 0.08em; font-weight: 500; text-transform: uppercase; }
+
+/* the TouchTunes link in the About sentence is underlined */
+.panelText .lead a { text-decoration: underline; text-underline-offset: 0.12em; text-decoration-thickness: 1px; }
