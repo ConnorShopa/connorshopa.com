@@ -139,6 +139,18 @@ a:focus-visible {
   color: var(--ink);
 }
 
+.contactCol {
+  flex: none;
+}
+
+.reachTitle {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink-soft);
+}
+
 /* name + about-me on the left, contact info in a column on the right */
 .hero > header {
   max-width: 1100px;
@@ -175,7 +187,6 @@ a:focus-visible {
 }
 
 .reach {
-  flex: none;
   font-size: 20px; /* same as the about-me text */
   line-height: 1.6;
   text-align: left;
