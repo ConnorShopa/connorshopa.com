@@ -1624,3 +1624,12 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .earlyForm { flex-direction: column; width: 100%; }
   .earlyInput { width: 100%; box-sizing: border-box; }
 }
+
+/* narrow or short windows: About / Contact sit in the page right under the tabs (centring them on the screen
+   made tall content run up under the header) */
+@media (max-width: 700px), (max-height: 760px) {
+  .panelText:has(.contactCol2), .panelText:has(.aboutJobs) {
+    position: absolute; inset: 0 0 auto 0; top: 0; left: 0; transform: none;
+    width: auto; max-width: none; box-sizing: border-box; padding: 8px 12px 40px;
+  }
+}
