@@ -428,15 +428,20 @@
   // while a view is open nothing outside it may scroll: wheel, touch and the scrolling keys are all stopped (except
   // inside a text block that genuinely needs to scroll)
   function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText"); }
-  window.addEventListener("wheel", function (e) {
+  function onWheel(e) {
     if (!open) return;
-    if (!insideScroller(e)) e.preventDefault();
+    if (!insideScroller(e)) e.preventDefault(); // stops page scrolling and the elastic bounce
+    if (e.__habbotSeen) return; // registered on two targets below; act once per event
+    e.__habbotSeen = true;
     if (!open.view.classList.contains("vertical")) return;
     var now = Date.now();
     if (Math.abs(e.deltaY) < 12 || now - wheelLock < 750) return; // one page per scroll gesture
     wheelLock = now;
     step(e.deltaY > 0 ? 1 : -1);
-  }, { passive: false });
+  }
+  // in the capture phase, on both the document and the window, so nothing can get in ahead of it
+  document.addEventListener("wheel", onWheel, { passive: false, capture: true });
+  window.addEventListener("wheel", onWheel, { passive: false, capture: true });
   window.addEventListener("touchmove", function (e) { if (open && !insideScroller(e)) e.preventDefault(); }, { passive: false });
   document.addEventListener("keydown", function (e) {
     if (!open || /^(input|textarea|select)$/i.test(e.target.tagName)) return;

@@ -1428,3 +1428,7 @@ html.view-open .contactBlock {
 /* rock solid while a project is open: the page behind can't scroll or bounce */
 html.view-open { overflow: hidden !important; overscroll-behavior: none; }
 html.view-open body { overscroll-behavior: none; }
+
+/* no elastic "rubber-band" overscroll on the page at any time (it would drag the whole window, fixed card included) */
+html, body { overscroll-behavior: none; }
+html.view-open { touch-action: none; }
