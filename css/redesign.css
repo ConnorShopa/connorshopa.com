@@ -122,6 +122,23 @@ a:focus-visible {
   margin: 0;
 }
 
+/* big statement under the name + tagline; the "3" is set larger than the words around it */
+.stat {
+  margin: 32px 0 20px;
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.stat .num {
+  font-size: 2.2em;
+  line-height: 0.8;
+  font-weight: 300;
+  vertical-align: -0.06em;
+}
+
 /* inline lists: items run on like a centred paragraph and wrap, with "/" between them */
 .inline {
   list-style: none;
@@ -336,6 +353,10 @@ a:focus-visible {
 }
 
 @media (max-width: 500px) {
+  .stat {
+    font-size: 26px;
+  }
+
   .inline.big {
     font-size: 30px;
   }
