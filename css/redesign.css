@@ -145,7 +145,7 @@ a:focus-visible {
 
 .contactCol {
   flex: none;
-  text-align: left;
+  text-align: left; /* title and links share one left edge; the block itself sits centred */
 }
 
 .reachTitle {
@@ -163,8 +163,8 @@ a:focus-visible {
 
 .introTop {
   display: flex;
-  flex-wrap: nowrap; /* the contact column stays beside the about-me text; the text wraps instead */
-  justify-content: flex-start;
+  flex-wrap: nowrap;
+  justify-content: center;
   align-items: center;
   gap: 0 1.7em;
   width: 100%;
@@ -182,13 +182,13 @@ a:focus-visible {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 6px;
-  text-align: left;
+  text-align: center;
 }
 
 .who .name {
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .inline.small.reach {
