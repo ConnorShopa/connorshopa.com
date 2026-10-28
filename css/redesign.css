@@ -1008,3 +1008,25 @@ html.view-open #mouse-circle {
   justify-content: center;
   text-align: center;
 }
+
+/* the contact footer stays on screen, centred along the bottom edge (no scrolling to find it) */
+.contactBlock {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  margin: 0 auto;
+  z-index: 2;
+  transition: opacity 0.2s ease;
+}
+
+/* leave room under the page content so the footer never covers the history list */
+.below {
+  padding-bottom: 120px;
+}
+
+/* tucked away while a project view is open */
+html.view-open .contactBlock {
+  opacity: 0;
+  pointer-events: none;
+}
