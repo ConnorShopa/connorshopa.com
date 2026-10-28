@@ -316,7 +316,7 @@ a:focus-visible {
 .pill[aria-pressed="true"]::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -1px; /* out to the chip's very edge (over its transparent 1px border) */
   padding: 1px;
   border-radius: inherit;
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0));
