@@ -384,6 +384,7 @@
   }
 
   function hide() {
+    if (typeof syncChips === "function") syncChips(null);
     if (!open) return;
     var view = open.view;
     restoreIntro({ x: open.bubble.cx, y: open.bubble.cy });
@@ -425,7 +426,7 @@
     trigger.focus({ preventScroll: true });
   }
 
-  document.querySelectorAll("a[data-view]").forEach(function (link) {
+  document.querySelectorAll("[data-view]").forEach(function (link) {
     var view = document.getElementById("view-" + link.getAttribute("data-view"));
     if (!view) return;
     link.addEventListener("click", function (e) {
@@ -436,6 +437,21 @@
       show(link, view);
     });
   });
+
+  // Work is the gallery itself: it is the lit chip whenever nothing is open, and clicking it closes whatever is
+  var workChip = document.querySelector("[data-work]");
+  var chips = document.querySelectorAll(".filters .pill");
+  function syncChips(name) {
+    chips.forEach(function (c) {
+      var on = name ? c.getAttribute("data-view") === name : c.hasAttribute("data-work");
+      c.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+  document.querySelectorAll("[data-view]").forEach(function (l) {
+    l.addEventListener("click", function () { syncChips(l.classList.contains("pill") ? l.getAttribute("data-view") : null); });
+  });
+  document.addEventListener("click", function (e) { if (e.target.closest(".viewClose, .view .viewBack")) syncChips(null); }, true);
+  if (workChip) workChip.addEventListener("click", function () { if (open) hide(); syncChips(null); });
 
   document.querySelectorAll(".viewClose").forEach(function (b) { b.addEventListener("click", hide); });
   // vertical views (Habbot): scroll or click the chevron under the first page's button to move between pages

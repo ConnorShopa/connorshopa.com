@@ -27,6 +27,26 @@
   function p(cls, html) { return '<p class="' + cls + '">' + html + "</p>"; }
 
   window.PROJECTS = {
+    // ---------------------------------------------------------------- About
+    about: {
+      title: "About",
+      logoOnly: true,
+      pages: [pg("one", text(
+        p("lead", "I&rsquo;m a product designer helping good folk make good things.") +
+        p("body", "Currently building social music experiences at TouchTunes and making homemade jam.") +
+        p("body", "Over 3 million people interact with my work each month.")
+      ))]
+    },
+    // ---------------------------------------------------------------- Contact
+    contact: {
+      title: "Contact",
+      logoOnly: true,
+      pages: [pg("one", text(
+        p("lead", '<a href="mailto:connorshopa@gmail.com">connorshopa@gmail.com</a>') +
+        p("lead", '<a href="tel:+13432095337">343.209.5337</a>') +
+        p("lead", '<a href="https://www.linkedin.com/in/connorshopa/" target="_blank" rel="noopener">LinkedIn</a>')
+      ))]
+    },
     // ---------------------------------------------------------------- TouchTunes
     touchtunes: {
       title: "TouchTunes",
