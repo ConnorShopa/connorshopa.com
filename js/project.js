@@ -162,6 +162,8 @@
     // a project's first page can carry a background image (proj.bgImage); in a vertical view it stays behind every page
     // (the pages scroll over it)
     var keepImg = view.classList.contains("vertical");
+    // moving down the pages also moves down the "field": the grass behind scrolls slower than the pages (a parallax)
+    if (keepImg) gsap.to(view, { "--gy": Math.min(100, n * 34), duration: animate && !reduce ? 0.85 : 0, ease: "power3.inOut", overwrite: "auto" });
     view.classList.toggle("onFirst", keepImg || n === 0);
     view.classList.toggle("imgIn", keepImg || n === 0); // ...its own switch, so it can fade in slowly when the card opens
 
