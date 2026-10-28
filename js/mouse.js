@@ -37,7 +37,7 @@ $(document).ready(function () {
 
 
     // SNAPPING MOUSE CIRCLE TO LINK ELEMENTS
-    $("a:not(.tile), .buttonText").hover(
+    $("a, .buttonText").hover(
       function () {
         // Get the position and width of the hovered link
         let linkPos = $(this).offset();
