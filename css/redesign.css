@@ -1002,3 +1002,18 @@ html.view-open #mouse-circle {
 .hopLetter {
   display: inline-block;
 }
+
+/* contact items in the gallery (Contact tab): a small label above each link */
+.withLabel {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.tinyLabel {
+  font-size: 12px;
+  line-height: 1.2;
+  letter-spacing: 0;
+  color: var(--ink-soft);
+}
