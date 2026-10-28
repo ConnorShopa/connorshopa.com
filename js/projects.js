@@ -200,7 +200,9 @@
       pages: [
         pg("cover",
           '<div class="coverWrap"><img class="coverMark" src="' + H + 'habbot_projectImage.svg" alt="Habbot">' +
-          '<p class="coverText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>' +
+          '<p class="coverText">Throughout a roadtrip from Seattle to Mexico to New York I would keep track of my meditation with two dots drawn in my journal.</p>' +
+          '<p class="coverText">The distance between the dots represented the length of the meditation, with quick notes before and after each meditation.</p>' +
+          '<p class="coverText">While living in a remote Wyoming cabin, I digitized this process into an iOS application.</p>' +
           '<button type="button" class="lockBtn">Download the app</button></div>'),
         pg("media",
           media(fig(A + "habbotAssets/app_screen01.png") + fig(A + "habbotAssets/app_screen02.png") + fig(A + "habbotAssets/app_screen03.png"))),

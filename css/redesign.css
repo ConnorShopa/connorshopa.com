@@ -1050,11 +1050,11 @@ html.view-open .contactBlock {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 28px;
-  max-width: 520px;
+  gap: 22px;
+  max-width: 560px;
 }
 
-.coverMark { height: 56px; width: auto; display: block; }
+.coverMark { height: 104px; width: auto; display: block; }
 
 .pg .coverText {
   margin: 0;
