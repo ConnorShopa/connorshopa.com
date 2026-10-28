@@ -140,6 +140,10 @@ a:focus-visible {
   color: var(--ink);
 }
 
+.reach {
+  margin-top: 14px;
+}
+
 /* big statement under the name + tagline; the "3" is set larger than the words around it */
 .stat {
   margin: 28px 0 0;
