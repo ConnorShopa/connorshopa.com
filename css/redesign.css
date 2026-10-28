@@ -1336,7 +1336,7 @@ html.view-open .contactBlock {
 .pg.cover .dlBtn:hover { background: var(--accent, #fff); color: #FFFAF6; }
 
 /* "About": a glass pill beside the download button; it brings in the text and the second phone screen */
-.pg.cover .aboutBtn { background: rgba(255, 255, 255, 0.45); color: #fff; box-shadow: none; display: inline-flex; align-items: center; gap: 6px; padding-right: 24px; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+.pg.cover .aboutBtn { background: rgba(255, 255, 255, 0.45); color: #fff; display: inline-flex; align-items: center; gap: 6px; padding-right: 24px; }
 .pg.cover .aboutBtn:hover { background: rgba(255, 255, 255, 0.65); color: #FFFAF6; }
 
 /* the phone sits nearer the right edge */
@@ -1393,3 +1393,6 @@ html.view-open .contactBlock {
 .trioItem:nth-child(1) .phone { transform: rotate(-2.5deg) translateY(4px); }
 .trioItem:nth-child(2) .phone { transform: rotate(1.5deg) translateY(-6px); }
 .trioItem:nth-child(3) .phone { transform: rotate(-1.5deg) translateY(6px); }
+
+/* drop shadows on the two buttons */
+.pg.cover .dlBtn { box-shadow: 0 10px 20px -6px rgba(0, 10, 4, 0.5), 0 2px 6px rgba(0, 10, 4, 0.3); }
