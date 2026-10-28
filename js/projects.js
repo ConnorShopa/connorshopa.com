@@ -193,14 +193,15 @@
     habbot: {
       title: "Habbot",
       logoOnly: true,
-      download: true, // shows the sticky "Download the app" button (not linked yet)
       accent: "#FA983A", // the orange of its underline: dots, eyebrow markers, the active page dot
       bg: "#FFFAF6",     // the paper from the app: the card's background (its link in index.html carries the same colour in data-bubble)
       // a fresh start (the previous 7 pages are saved in archive/habbot-view.js): a cover in the manner of the
       // illustration-book reference (a square of green, the name set big beneath it), then the app screens
       pages: [
         pg("cover",
-          '<div class="coverWrap"><div class="coverSquare" style="background:#3E8C69"></div><p class="coverTitle">HABBOT</p></div>'),
+          '<div class="coverWrap"><img class="coverMark" src="' + H + 'habbot_projectImage.svg" alt="Habbot">' +
+          '<p class="coverText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>' +
+          '<button type="button" class="lockBtn">Download the app</button></div>'),
         pg("media",
           media(fig(A + "habbotAssets/app_screen01.png") + fig(A + "habbotAssets/app_screen02.png") + fig(A + "habbotAssets/app_screen03.png"))),
         pg("media",

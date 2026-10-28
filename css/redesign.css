@@ -1039,9 +1039,10 @@ html.view-open .contactBlock {
   pointer-events: none;
 }
 
-/* ---- cover page (Habbot): a square of colour with the name set big beneath it ---- */
+/* ---- cover page (Habbot): wordmark top left, a short text, then the download button ---- */
 .pg.cover {
   grid-template-columns: minmax(0, 1fr);
+  align-content: start;
   justify-items: start;
 }
 
@@ -1049,28 +1050,17 @@ html.view-open .contactBlock {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 14px;
-  height: 100%;
-  width: fit-content;
+  gap: 28px;
+  max-width: 520px;
 }
 
-.coverSquare {
-  flex: 1 1 0;
-  min-height: 0;
-  aspect-ratio: 1 / 1;
-  border-radius: 6px;
-}
+.coverMark { height: 56px; width: auto; display: block; }
 
-/* width 0 + min-width 100% keeps the title exactly as wide as the square instead of stretching it */
-.pg .coverTitle {
-  width: 0;
-  min-width: 100%;
+.pg .coverText {
   margin: 0;
-  font-size: clamp(44px, 8.5vh, 84px);
-  font-weight: 600;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.6;
 }
 
 /* sticky "Download the app" button centred at the bottom of the card; the page dots sit above it */
