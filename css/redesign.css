@@ -453,7 +453,6 @@ a:focus-visible {
   width: auto;
   height: 36px;
   max-width: 140px;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
 
 /* head with a wordmark (Nanni): icon and wordmark in one row, centred on each other */
@@ -469,7 +468,6 @@ a:focus-visible {
   display: block;
   height: 16px;
   width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
 }
 
 .viewTitle {
