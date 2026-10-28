@@ -17,6 +17,12 @@ html {
 }
 
 html,
+html {
+  /* keep the scroll bar's space reserved: opening a view locks scrolling, and without this the page
+     would jump sideways by the width of the bar every time one opens or closes */
+  scrollbar-gutter: stable;
+}
+
 body {
   margin: 0;
   padding: 0;
