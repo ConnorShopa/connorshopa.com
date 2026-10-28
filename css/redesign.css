@@ -191,8 +191,8 @@ a:focus-visible {
   justify-content: flex-start;
 }
 
-.inline.reach {
-  font-size: 20px; /* same as the about-me text (beats .inline.small's 14px) */
+.inline.small.reach {
+  font-size: 20px; /* same as the about-me text (beats .inline.small's 14px, which is defined later) */
   line-height: 1.6;
   text-align: left;
 }
