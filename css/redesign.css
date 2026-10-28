@@ -1400,3 +1400,6 @@ html.view-open .contactBlock {
 /* the pages scroll under the edge of the grass frame: the body is clipped to the photo's rounded rectangle (16px in
    from the card; the body itself is inset 124px / 88px / 72px / 88px, so the clip reaches out past it) */
 .view.vertical .viewBody { clip-path: inset(-108px -72px -56px -72px round 48px); }
+
+/* a larger phone: it is taller than the content area (which is inset more than the card's grass frame), centred on the card */
+.pg.cover .coverShot { height: calc(100% + 100px); }
