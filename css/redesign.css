@@ -145,6 +145,7 @@ a:focus-visible {
 
 .contactCol {
   flex: none;
+  text-align: left;
 }
 
 .reachTitle {
