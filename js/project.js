@@ -21,6 +21,7 @@
 
   // no slash after the last item that is actually showing
   function fixSlashes() {
+    if (!list.classList.contains("compact") && window.layoutGalleryRows) { window.layoutGalleryRows(); return; }
     var last = null;
     list.querySelectorAll("li").forEach(function (li) {
       li.classList.remove("no-slash");

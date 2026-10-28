@@ -168,7 +168,7 @@ a:focus-visible {
 .inline li::after {
   content: "/";
   content: "/" / "";
-  margin: 0 1.7em; /* more air between the items on a row */
+  margin: 0 1.1em; /* air between the items on a row */
   color: rgba(0, 0, 0, 0.12); /* 12% black */
   text-shadow: none; /* the list's text shadow doesn't apply to the slashes */
 }
@@ -188,6 +188,19 @@ a:focus-visible {
   font-size: 32px;
   line-height: 1.2;
   letter-spacing: -0.02em;
+}
+
+/* at most three items per row: six tracks, every item spans two; filter.js / project.js place the items
+   so a short last row sits in the middle */
+.inline.big {
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  justify-content: center;
+  justify-items: center;
+}
+
+.inline.big li {
+  grid-column: span 2;
 }
 
 .inline.small {

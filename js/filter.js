@@ -45,14 +45,25 @@
 
   function isHidden(li) { return li.classList.contains("is-hidden"); }
 
-  // the last visible item shouldn't have a trailing slash
-  function updateSlashes() {
-    var last = null;
-    items.forEach(function (li) {
-      li.classList.remove("no-slash");
-      if (!isHidden(li)) last = li;
+  // at most three items per row: place the visible items on a six-track grid (each spans two tracks),
+  // centre a short last row, and drop the slash at the end of every row
+  function layoutRows(lis) {
+    var shown = lis.filter(function (li) {
+      return !li.classList.contains("is-hidden") && !li.classList.contains("is-current");
     });
-    if (last) last.classList.add("no-slash");
+    shown.forEach(function (li, i) {
+      var row = Math.floor(i / 3);
+      var inRow = Math.min(3, shown.length - row * 3);
+      var start = 1 + 2 * (i % 3) + (3 - inRow);
+      li.style.gridColumn = start + " / span 2";
+      li.classList.toggle("no-slash", i % 3 === 2 || i === shown.length - 1);
+    });
+  }
+  window.layoutGalleryRows = function () { layoutRows(items); };
+
+  function updateSlashes() {
+    items.forEach(function (li) { li.classList.remove("no-slash"); });
+    layoutRows(items);
   }
 
   function updateStatus() {
