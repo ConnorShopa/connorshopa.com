@@ -111,20 +111,6 @@ a:focus-visible {
   display: inline-block; /* so items can move with transforms when the list is filtered */
 }
 
-/* the centre list: each item is a column (logo on top, title below) with the slash beside the title row */
-#projectList li {
-  display: inline-flex;
-  align-items: flex-end;
-  vertical-align: bottom;
-  padding: 14px 0;
-}
-
-#projectList a {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .inline li::after {
   content: "/";
   content: "/" / "";
@@ -144,8 +130,8 @@ a:focus-visible {
 }
 
 .inline.big {
-  font-size: 20px;
-  line-height: 1.3;
+  font-size: 28px;
+  line-height: 2.2;
   letter-spacing: -0.02em;
 }
 
@@ -155,22 +141,24 @@ a:focus-visible {
 
 /* project logos sit just before the link text (no bubble); the logo and the text share a subtle drop shadow */
 .bubble {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  height: 48px;
+  margin-right: 12px;
+  vertical-align: middle;
 }
 
 .logo {
   display: block;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.22));
   width: auto;
-  height: 56px;
-  max-width: 120px;
+  height: 40px;
+  max-width: 96px;
 }
 
 .caption {
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: normal;
   line-height: 1.2;
   color: var(--ink-soft);
@@ -181,10 +169,19 @@ a:focus-visible {
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
 }
 
-/* Seeds: the caption simply sits under the title, centred in the same column */
-.withCaption .caption {
-  margin-top: 2px;
+/* a link with a caption under its title (Seeds): bubble on the left, title and caption stacked
+   in a column on the right, so the caption starts exactly where the title does */
+.withCaption {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-items: start;
+  text-align: left;
 }
+
+.withCaption .bubble { grid-area: 1 / 1; }
+.withCaption .label { grid-area: 1 / 2; }
+.withCaption .caption { grid-area: 2 / 2; margin-top: -0.7em; }
 
 /* the centre list keeps the unfiltered list's height; the live list sits in the middle of it */
 .stack {
@@ -314,6 +311,6 @@ a:focus-visible {
 
 @media (max-width: 500px) {
   .inline.big {
-    font-size: 17px;
+    font-size: 22px;
   }
 }
