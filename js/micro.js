@@ -24,8 +24,7 @@
 
   var F = function (frames) { return frames / 60; }; // the Lottie runs at 60 fps
   var HOP = 7;          // px a letter rises at the top of its hop
-  var WAVE = 0.5;       // seconds from the first letter starting to the last one starting
-  var wave = gsap.parseEase("power2.out"); // gaps between letters start wide and shrink, so the wave builds momentum
+  var STAGGER = 0.035;  // seconds between one letter and the next
 
   gsap.set(letters, { transformOrigin: "50% 100%" });
 
@@ -33,7 +32,7 @@
   tl.timeScale(1.8); // faster overall than the Lottie's own 1.15s (applies to the stagger too, and to playing back)
 
   letters.forEach(function (el, i) {
-    var t0 = WAVE * wave(letters.length > 1 ? i / (letters.length - 1) : 0);
+    var t0 = i * STAGGER;
     // squash and stretch (frames from the Lottie: 0 / 6 / 12 / 24 / 37 / 56 / 61 / 69)
     tl.to(el, { scaleX: 1.02, scaleY: 0.98, duration: F(6) }, t0)
       .to(el, { scaleX: 0.98, scaleY: 1.02, duration: F(6) }, t0 + F(6))
