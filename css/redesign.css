@@ -954,3 +954,7 @@ html.view-open #mouse-circle {
 .lockApp a {
   color: var(--ink);
 }
+
+.lockBox .body a {
+  color: var(--ink);
+}

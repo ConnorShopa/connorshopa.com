@@ -12,11 +12,10 @@
   var lockPage = function (proj) {
     return (
     '<div class="pg one is-on"><div class="pgText lockBox">' +
-    '<p class="body soft">Under NDA</p>' +
+    '<p class="body soft">Under NDA. <a href="mailto:connorshopa@gmail.com">Email</a> or <a href="sms:+13432095337">text</a> me for the password</p>' +
     '<form class="lockForm"><input class="lockInput" type="password" placeholder="Password" autocomplete="current-password" aria-label="Password">' +
     '<button type="submit" class="lockBtn" disabled>Unlock</button></form>' +
     '<p class="lockMsg" role="alert"></p>' +
-    '<p class="lockAsk"><a href="mailto:connorshopa@gmail.com">Email</a> or <a href="sms:+13432095337">text</a> me for the password</p>' +
     (proj.appLinks ? '<p class="lockApp">Download the app: <a href="' + proj.appLinks.apple + '" target="_blank" rel="noopener">Apple</a> &middot; <a href="' + proj.appLinks.android + '" target="_blank" rel="noopener">Android</a></p>' : "") +
     '</div></div>'
     );
