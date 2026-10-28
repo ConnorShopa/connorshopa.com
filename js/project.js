@@ -56,7 +56,7 @@
     } else if (pullIn) {
       // closing: the row under the card is out of the way at once, so the links can start falling back while
       // the bubble is still shrinking instead of after it
-      popTl.to(current, { scale: 0, opacity: 0, duration: t(0.04), ease: "power1.in", transformOrigin: "50% 50%" });
+      popTl.to(current, { scale: 0, opacity: 0, duration: t(0.015), ease: "none", transformOrigin: "50% 50%" });
     } else {
       popTl.to(current, { scale: 0, opacity: 0, duration: t(0.12), ease: "back.in(1.2)", stagger: t(0.012), transformOrigin: "50% 50%" });
     }
@@ -67,9 +67,9 @@
       if (origin && pullIn) {
         // the reverse of the push: start displaced away from the origin, small and faint...
         gsap.set(next, {
-          x: function (i, el) { return push(el, origin).x; },
-          y: function (i, el) { return push(el, origin).y; },
-          scale: 0.55,
+          x: function (i, el) { return push(el, origin, true).x; },
+          y: function (i, el) { return push(el, origin, true).y; },
+          scale: 0.8,
           opacity: 0,
           transformOrigin: "50% 50%",
         });
@@ -101,12 +101,12 @@
   }
 
   // how far, and which way, a link is shoved: straight away from the origin, the closer the harder
-  function push(el, origin) {
+  function push(el, origin, soft) {
     var r = el.getBoundingClientRect();
     var dx = r.left + r.width / 2 - origin.x;
     var dy = r.top + r.height / 2 - origin.y;
     var len = Math.hypot(dx, dy) || 1;
-    var dist = 36 + 90 * (1 - Math.min(len / 700, 1));
+    var dist = soft ? 16 + 40 * (1 - Math.min(len / 700, 1)) : 36 + 90 * (1 - Math.min(len / 700, 1));
     return { x: (dx / len) * dist, y: (dy / len) * dist };
   }
 
