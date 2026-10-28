@@ -333,6 +333,14 @@
       ],
     },
 
+    // ---------------------------------------------------------------- Rubin (no content yet)
+    rubin: {
+      title: "Rubin",
+      logo: H + "rubin_logo.svg",
+      logoOnly: true,
+      pages: [],
+    },
+
     // ---------------------------------------------------------------- Happlycations (an empty skeleton on the old site)
     happlycations: {
       title: "Happlycations",
