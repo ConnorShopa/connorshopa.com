@@ -156,6 +156,24 @@ a:focus-visible {
   color: var(--ink-soft);
 }
 
+/* the centre list keeps the unfiltered list's height; the live list sits in the middle of it */
+.stack {
+  display: grid;
+}
+
+.stack > ul {
+  grid-area: 1 / 1;
+}
+
+.stack > #projectList {
+  align-self: center;
+}
+
+.stack > .ghost {
+  visibility: hidden;
+  pointer-events: none;
+}
+
 /* filter pills */
 .filters {
   display: flex;

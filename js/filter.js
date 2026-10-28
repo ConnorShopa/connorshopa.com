@@ -10,6 +10,18 @@
   if (!list || !pills.length) return;
 
   var items = Array.prototype.slice.call(list.children);
+
+  // Reserve the full list's space: an invisible copy of the unfiltered list sits in the same
+  // spot, so the block keeps its height (at any screen width) and nothing around it shifts.
+  var nav = list.parentElement;
+  var ghost = list.cloneNode(true);
+  ghost.removeAttribute("id");
+  ghost.classList.add("ghost");
+  ghost.setAttribute("aria-hidden", "true");
+  ghost.setAttribute("inert", "");
+  ghost.querySelectorAll("a").forEach(function (a) { a.setAttribute("tabindex", "-1"); });
+  nav.insertBefore(ghost, list);
+  nav.classList.add("stack");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var t = function (seconds) { return reduce ? 0 : seconds; };
 
