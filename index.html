@@ -29,18 +29,25 @@
                 <span>Connor Shopa</span>
             </h1>
             <p class="tagline">Building social music experiences at TouchTunes and making homemade jam</p>
+            <div class="filters" role="group" aria-label="Filter the list">
+                <button type="button" class="pill" data-filter="all" aria-pressed="true">All</button>
+                <button type="button" class="pill" data-filter="work" aria-pressed="false">Work</button>
+                <button type="button" class="pill" data-filter="art" aria-pressed="false">Art</button>
+                <button type="button" class="pill" data-filter="projects" aria-pressed="false">Projects</button>
+            </div>
         </header>
 
         <nav aria-label="Projects and pages">
-            <ul class="inline big">
-                <li><a href="./nanni.html"><span class="bubble"><img class="logo" src="assets/homeAssets/nanni_projectImage.svg" alt=""></span>Nanni</a></li>
-                <li><a href="./seeds.html"><span class="bubble"><img class="logo" src="assets/homeAssets/seeds_projectImage.svg" alt=""></span>Seeds</a> <span class="caption">design system</span></li>
-                <li><a href="./plunk.html"><span class="bubble"><img class="logo" src="assets/homeAssets/plunk_projectImage.svg" alt=""></span>Plunk&reg;</a></li>
-                <li><a href="./habbot.html"><span class="bubble"><img class="logo" src="assets/homeAssets/habbot_projectImage.svg" alt=""></span>Habbot</a></li>
-                <li><a href="./spotifyDreams.html"><span class="bubble"><img class="logo" src="assets/homeAssets/spotifyDreams_projectImage.svg" alt=""></span>Spotify dreams</a></li>
-                <li><a href="./happlycations.html">Happlycations</a></li>
-                <li><a href="./sketchbook.html">Sketchbook</a></li>
-                <li><a href="./micro.html">Micro + Motion</a></li>
+            <p class="sr-only" id="filterStatus" role="status"></p>
+            <ul class="inline big" id="projectList">
+                <li data-category="work"><a href="./nanni.html"><span class="bubble"><img class="logo" src="assets/homeAssets/nanni_projectImage.svg" alt=""></span>Nanni</a></li>
+                <li data-category="work"><a href="./seeds.html"><span class="bubble"><img class="logo" src="assets/homeAssets/seeds_projectImage.svg" alt=""></span>Seeds</a> <span class="caption">design system</span></li>
+                <li data-category="work"><a href="./plunk.html"><span class="bubble"><img class="logo" src="assets/homeAssets/plunk_projectImage.svg" alt=""></span>Plunk&reg;</a></li>
+                <li data-category="projects"><a href="./habbot.html"><span class="bubble"><img class="logo" src="assets/homeAssets/habbot_projectImage.svg" alt=""></span>Habbot</a></li>
+                <li data-category="projects"><a href="./spotifyDreams.html"><span class="bubble"><img class="logo" src="assets/homeAssets/spotifyDreams_projectImage.svg" alt=""></span>Spotify dreams</a></li>
+                <li data-category="projects"><a href="./happlycations.html">Happlycations</a></li>
+                <li data-category="art"><a href="./sketchbook.html">Sketchbook</a></li>
+                <li data-category="art"><a href="./micro.html">Micro + Motion</a></li>
             </ul>
         </nav>
 
@@ -90,6 +97,7 @@
     </main>
 
     <script src="js/mouse.js"></script>
+    <script src="js/filter.js"></script>
 </body>
 
 </html>

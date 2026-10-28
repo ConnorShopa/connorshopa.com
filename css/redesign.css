@@ -96,14 +96,24 @@ a:focus-visible {
 }
 
 .inline li {
-  display: inline;
+  display: inline-block; /* so items can move with transforms when the list is filtered */
 }
 
-.inline li:not(:last-child)::after {
+.inline li::after {
   content: "/";
   content: "/" / "";
   margin: 0 0.6em;
   color: var(--ink-soft);
+}
+
+/* no slash after the last visible item (filter.js marks it) */
+.inline li:last-child::after,
+.inline li.no-slash::after {
+  content: none;
+}
+
+.is-hidden {
+  display: none;
 }
 
 .inline.big {
@@ -143,6 +153,56 @@ a:focus-visible {
   font-size: 14px;
   letter-spacing: normal;
   color: var(--ink-soft);
+}
+
+/* filter pills */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.pill {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 8px 16px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  cursor: url("cursor_linkHover.png"), pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.pill:hover {
+  border-color: rgba(0, 0, 0, 0.6);
+}
+
+.pill[aria-pressed="true"] {
+  color: var(--bg);
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.pill:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* professional history */
