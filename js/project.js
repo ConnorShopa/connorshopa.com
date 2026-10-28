@@ -12,6 +12,7 @@
 
   var MINI = 0.4;  // how small the gallery gets while a view is open
   var GAP = 28;    // space between the card and the minimised gallery
+  var BOTTOM_ROOM = 100; // space kept under the card for the gallery row
 
   var open = null; // { view, trigger }
 
@@ -56,23 +57,21 @@
     document.documentElement.classList.add("view-open");
     gsap.set(view, { xPercent: -50, yPercent: -50 });
 
-    // Size the card to the space between the intro (name, tagline, stat, chips) and the bottom of the
-    // screen, equal above and below so it stays dead centre. The intro is never covered; on a window
-    // too short for that, the card keeps a minimum height and overlaps it.
-    if (intro) {
-      var room = window.innerHeight - 2 * (intro.getBoundingClientRect().bottom + 24);
-      view.style.height = Math.max(300, room) + "px";
-    }
-
-    // the card's bottom edge once it has zoomed to full size. Worked out from its layout size, not its
-    // current rect: after the first close the card is left shrunk to a dot, which gave a tiny, wrong number
-    var cardBottom = window.innerHeight / 2 + view.offsetHeight / 2;
+    // The card starts just under the intro (name, tagline, stat, chips) and runs down the screen,
+    // leaving room at the bottom for the gallery row, which gets pushed down beneath it.
+    var top = intro ? intro.getBoundingClientRect().bottom + 24 : 80;
+    var height = Math.max(300, window.innerHeight - top - BOTTOM_ROOM);
+    view.style.height = height + "px";
+    view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
+    var cardBottom = top + height; // measured from layout, not the rect: the card is left shrunk after a close
+    // zoom out of / back into the dead centre of the screen, wherever the card ends up
+    open.offY = window.innerHeight / 2 - (top + height / 2);
     var currentLi = trigger.closest("li");
 
     gsap.killTweensOf(view);
     gsap.fromTo(
       view,
-      { autoAlpha: 0, scale: 0.12, x: 0, y: 0 }, // zooms out of the dead centre of the screen
+      { autoAlpha: 0, scale: 0.12, x: 0, y: open.offY }, // zooms out of the dead centre of the screen
       { autoAlpha: 1, scale: 1, x: 0, y: 0, duration: t(0.6), ease: "power3.out" }
     );
     popGallery(function () {
@@ -99,6 +98,7 @@
     if (!open) return;
     var view = open.view;
     var trigger = open.trigger;
+    var offY = open.offY;
     open = null;
 
     gsap.killTweensOf(view);
@@ -106,7 +106,7 @@
       autoAlpha: 0,
       scale: 0.12,
       x: 0,
-      y: 0, // ...and back into the dead centre
+      y: offY, // ...and back into the dead centre
       duration: t(0.4),
       ease: "power3.in",
       onComplete: function () {
