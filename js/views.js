@@ -115,7 +115,7 @@
     // a wordmark replaces the written title (which stays for screen readers) and sits under the icon
     if (proj.wordmark) html += '<img class="viewWordmark" src="' + proj.wordmark + '" alt="">';
     html += '<h2 id="' + id + '-title" class="viewTitle' + (proj.logoOnly || proj.wordmark ? " sr-only" : "") + '"></h2></div>';
-    html += '<button type="button" class="viewClose" aria-label="Close"' + (proj.bgImage ? ' data-bubble="#FFFFFF"' : "") + '>&times;</button>';
+    html += '<button type="button" class="viewClose" aria-label="Close"' + (proj.bgImage ? ' data-bubble="rgba(255,255,255,0.3)"' : "") + '>&times;</button>';
     html += '<div class="viewBody">';
     if (locked) html += lockPage(proj);
     else proj.pages.forEach(function (page, i) {

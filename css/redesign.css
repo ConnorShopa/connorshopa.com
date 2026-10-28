@@ -1326,5 +1326,3 @@ html.view-open .contactBlock {
   text-align: center;
 }
 
-/* on the photo the close button's hover bubble is white, so its X turns dark while it is hovered */
-.view.hasBgImage.onFirst .viewClose:hover { color: var(--ink); }
