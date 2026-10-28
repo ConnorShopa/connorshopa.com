@@ -266,20 +266,15 @@ a:focus-visible {
   padding: 8px 16px;
   color: var(--ink);
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  border: 1px solid transparent; /* no stroke; kept so the chips stay the same size */
   border-radius: 999px;
   cursor: url("cursor_linkHover.png"), pointer;
-  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-}
-
-.pill:hover {
-  border-color: rgba(0, 0, 0, 0.6);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .pill[aria-pressed="true"] {
   color: var(--bg);
   background: var(--ink);
-  border-color: var(--ink);
 }
 
 .pill:focus-visible {
