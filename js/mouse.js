@@ -37,7 +37,7 @@
   var DOT_FILL = "rgba(47, 39, 37, 0.10)";
   var DOT_BORDER = "rgba(47, 39, 37, 0)";
   var BOX_FILL = "#F4F4F4";
-  var BOX_BORDER = "rgba(47, 39, 37, 0)"; // no stroke: the bubble is the same soft grey as the project card it grows into
+  var BOX_BORDER = "rgba(47, 39, 37, 0.12)"; // a 1px stroke around the hover bubble
   // the bubble's drop shadow: the project card's shadow, scaled down to the bubble's size
   var BOX_SHADOW = "0px 8px 20px -8px rgba(47, 39, 37, 0.14), 0px 2px 6px 0px rgba(47, 39, 37, 0.05)";
   var DOT_SHADOW = "0px 0px 0px 0px rgba(47, 39, 37, 0), 0px 0px 0px 0px rgba(47, 39, 37, 0)";
@@ -229,7 +229,7 @@
   function snapTo(g) {
     gsap.set(dot, {
       x: g.cx, y: g.cy, width: g.w, height: g.h, borderRadius: g.r,
-      boxShadow: g.shadow || BOX_SHADOW, backgroundColor: BOX_FILL, borderColor: BOX_BORDER, autoAlpha: 1,
+      boxShadow: g.shadow || BOX_SHADOW, backgroundColor: BOX_FILL, borderColor: g.shadow ? DOT_BORDER : BOX_BORDER, autoAlpha: 1,
     });
   }
 
@@ -248,7 +248,7 @@
       lock(10);
       snapTo(from);
       ctl = gsap.to(dot, {
-        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: to.shadow || CARD_SHADOW,
+        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: to.shadow || CARD_SHADOW, borderColor: DOT_BORDER,
         duration: t(dur), ease: "back.out(1.3)", onComplete: done, // a subtle overshoot, then it settles
       });
     },
@@ -268,7 +268,7 @@
       lock(0);
       snapTo(from);
       ctl = gsap.to(dot, {
-        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: BOX_SHADOW,
+        x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: BOX_SHADOW, borderColor: BOX_BORDER,
         duration: t(dur), ease: "none", // linear on the way back
         onComplete: function () { unlock(); if (done) done(); },
       });
