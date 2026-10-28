@@ -257,7 +257,11 @@
     var freshIntro = false;
     if (introTop && introFilters && !introState) { // first open: remember how far the chips rise so closing can undo it
       var mt = parseFloat(getComputedStyle(introFilters).marginTop) || 0;
-      introState = { rise: Math.max(0, introTop.offsetHeight + mt - INTRO_GAP), fBottom: introFilters.getBoundingClientRect().bottom };
+      // only the tagline goes (the name stays): the chips rise by its height plus the gap under the name
+      var tg = introTop.querySelector(".tagline");
+      var tgGap = tg ? parseFloat(getComputedStyle(tg.parentNode).rowGap) || 0 : 0;
+      var lost = tg ? tg.offsetHeight + tgGap : introTop.offsetHeight;
+      introState = { rise: Math.max(0, lost + mt - INTRO_GAP), fBottom: introFilters.getBoundingClientRect().bottom };
       freshIntro = true;
     }
     if (introState) collapseBy = introState.rise; // the header's own box never shrinks (the lines and chips are only moved)
@@ -350,8 +354,8 @@
     });
   }
 
-  // the about-me lines (name, tagline)
-  function introEls() { return intro ? intro.querySelectorAll(".introTop .name, .introTop .tagline") : []; }
+  // the about-me text (the tagline; the name stays put)
+  function introEls() { return intro ? intro.querySelectorAll(".introTop .tagline") : []; }
 
   // the reverse of the push: they start shoved away, small and faint, and are drawn back to their places, the
   // nearer ones first, like the gallery links
