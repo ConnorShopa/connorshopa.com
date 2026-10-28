@@ -1396,3 +1396,7 @@ html.view-open .contactBlock {
 
 /* drop shadows on the two buttons */
 .pg.cover .dlBtn { box-shadow: 0 10px 20px -6px rgba(0, 10, 4, 0.5), 0 2px 6px rgba(0, 10, 4, 0.3); }
+
+/* the pages scroll under the edge of the grass frame: the body is clipped to the photo's rounded rectangle (16px in
+   from the card; the body itself is inset 124px / 88px / 72px / 88px, so the clip reaches out past it) */
+.view.vertical .viewBody { clip-path: inset(-108px -72px -56px -72px round 48px); }
