@@ -1844,9 +1844,3 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .viewSpot { display: inline-flex; align-items: center; gap: 8px; }
 .viewSpot .spotIcon { width: 24px; height: 26px; }
 .viewSpot .spot { font-size: 22px; line-height: 1; }
-
-/* the gallery links are grayscale until hovered (touch screens have no hover, so they stay in colour there) */
-@media (hover: hover) and (pointer: fine) {
-  #projectList li > a { filter: grayscale(1); transition: filter 0.3s ease; }
-  #projectList li > a:hover, #projectList li > a:focus-visible { filter: none; }
-}
