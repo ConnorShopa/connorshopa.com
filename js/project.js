@@ -283,6 +283,10 @@
     }
     if (introTop) gsap.to(introTop, { autoAlpha: 0, duration: t(0.25), ease: "power2.out" });
     gsap.to([document.documentElement, document.body], { backgroundColor: pageBg, duration: t(0.38), ease: "power2.out", overwrite: "auto" });
+    // the close icon is white or black, whichever reads on this project's colour
+    var cm = getComputedStyle(view).backgroundColor.match(/[\d.]+/g) || [255, 255, 255];
+    var lum = (0.299 * cm[0] + 0.587 * cm[1] + 0.114 * cm[2]) / 255;
+    view.style.setProperty("--closeInk", lum < 0.55 ? "#FFFFFF" : "#1A1A1A");
     view.style.setProperty("--tint", pageBg); // the floating logo and close button use the page's light colour
     // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
     var top = TABS_TOP + chipsH + 24;
