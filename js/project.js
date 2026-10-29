@@ -16,7 +16,7 @@
   var INTRO_GAP = 16;  // the gap left above the filter chips once the about-me lines are gone
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
-  var BOTTOM_ROOM = 160; // space kept under the card for the gallery row
+  var BOTTOM_ROOM = 104; // space kept under the card for the gallery row: 48px to the screen edge + the row + the gap above it
 
   var open = null; // { view, trigger }
 
@@ -271,7 +271,7 @@
     // the card keeps a familiar shape (3:2): it takes the room available, but never gets taller than that shape
     // allows, and when the room is short it gets narrower instead of squatter
     var narrow = window.innerWidth <= 700; // phones: the card is nearly full width and as tall as the room allows (no 3:2)
-    var fullW = narrow ? window.innerWidth - 24 : Math.min(window.innerWidth * 0.86, 1100);
+    var fullW = narrow ? window.innerWidth - 24 : Math.min(window.innerWidth * 0.92, 1400);
     var height = narrow
       ? Math.max(300, window.innerHeight - top - 24)
       : Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
@@ -340,7 +340,9 @@
       // slide the (shrunken) row so it sits just under the card
       var n = nav.getBoundingClientRect();
       var rowH = list.getBoundingClientRect().height;
-      var drop = cardBottom + GAP + (rowH * MINI) / 2 - (n.top + n.height / 2);
+      // the row sits 48px above the bottom edge of the screen (phones keep it just under the card)
+      var rowCentre = window.innerWidth > 700 ? window.innerHeight - 48 - (rowH * MINI) / 2 : cardBottom + GAP + (rowH * MINI) / 2;
+      var drop = rowCentre - (n.top + n.height / 2);
       gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
     }, { x: b.cx, y: b.cy });
 
