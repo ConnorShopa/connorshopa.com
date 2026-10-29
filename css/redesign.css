@@ -1772,3 +1772,19 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
 
 /* over the scrolling projects' close button the button draws its own bubble, so the cursor dot steps aside */
 html:has(.view.scrollView .viewClose:hover) #mouse-circle { opacity: 0 !important; }
+
+/* the project logo: no backdrop at rest; the page-coloured bubble (with the stroke) grows in behind it on hover, and a click scrolls back to the top */
+.view.scrollView .viewHead { background: none; box-shadow: none; cursor: pointer; }
+.view.scrollView .viewHead::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 999px; box-sizing: border-box;
+  background: var(--tint, #fff);
+  border: 1px solid rgba(47, 39, 37, 0.12);
+  box-shadow: 0px 8px 20px -8px rgba(47, 39, 37, 0.14), 0px 2px 6px 0px rgba(47, 39, 37, 0.05);
+  opacity: 0; transform: translate(var(--mx, 0px), var(--my, 0px)) scale(0.85);
+  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.view.scrollView .viewHead:hover::before, .view.scrollView .viewHead:focus-visible::before { opacity: 1; transform: translate(var(--mx, 0px), var(--my, 0px)) scale(1.04); }
+.view.dark.scrollView .viewLogo, .view.dark.scrollView .viewWordmark { filter: brightness(0) invert(1); transition: filter 0.2s ease; }
+.view.dark.scrollView .viewHead:hover .viewLogo, .view.dark.scrollView .viewHead:hover .viewWordmark,
+.view.dark.scrollView .viewHead:focus-visible .viewLogo, .view.dark.scrollView .viewHead:focus-visible .viewWordmark { filter: none; }
+html:has(.view.scrollView .viewHead:hover) #mouse-circle { opacity: 0 !important; }

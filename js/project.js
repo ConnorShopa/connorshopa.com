@@ -288,6 +288,23 @@
     var lum = (0.299 * cm[0] + 0.587 * cm[1] + 0.114 * cm[2]) / 255;
     view.style.setProperty("--closeInk", lum < 0.55 ? "#FFFFFF" : "#1A1A1A");
     view.style.setProperty("--tint", pageBg);
+    var headEl = view.querySelector(".viewHead");
+    if (headEl && view.classList.contains("scrollView") && !headEl.__magnet) {
+      // the logo: a hover bubble like the close button's, and a click takes the content back to the top
+      headEl.__magnet = true;
+      headEl.setAttribute("role", "button");
+      headEl.setAttribute("tabindex", "0");
+      headEl.setAttribute("aria-label", "Back to the top");
+      var toTop = function () { var vb = view.querySelector(".viewBody"); if (vb) vb.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); };
+      headEl.addEventListener("click", toTop);
+      headEl.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toTop(); } });
+      headEl.addEventListener("mousemove", function (e) {
+        var r = headEl.getBoundingClientRect();
+        headEl.style.setProperty("--mx", (e.clientX - (r.left + r.width / 2)) * 0.2 + "px");
+        headEl.style.setProperty("--my", (e.clientY - (r.top + r.height / 2)) * 0.3 + "px");
+      });
+      headEl.addEventListener("mouseleave", function () { headEl.style.setProperty("--mx", "0px"); headEl.style.setProperty("--my", "0px"); });
+    }
     var closeBtn = view.querySelector(".viewClose");
     if (closeBtn && view.classList.contains("scrollView") && !closeBtn.__magnet) {
       // its hover bubble is drawn on the button itself (in the page colour) and leans toward the cursor like the others
