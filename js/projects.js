@@ -66,6 +66,8 @@
     // ---------------------------------------------------------------- Nanni
     nanni: {
       title: "Nanni",
+      bg: "#0A4791", // the blue of its logo
+      dark: true,    // light text on the dark card
       logo: H + "nanni_app_icon.svg",
       wordmark: H + "nanni_wordmark.svg",
       pages: [
