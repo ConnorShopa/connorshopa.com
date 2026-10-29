@@ -268,12 +268,9 @@
     var narrow = window.innerWidth <= 700;
     // the project colour takes over the whole page
     // ...a lighter tint of it, so the card stands out against it
-    var lift = 0.55; // how far toward white
-    var pageBg = (function (c) {
-      var m = c.match(/[\d.]+/g);
-      if (!m || m.length < 3) return c;
-      return "rgb(" + [0, 1, 2].map(function (i) { var v = parseFloat(m[i]); return Math.round(v + (255 - v) * lift); }).join(",") + ")";
-    })(getComputedStyle(view).backgroundColor);
+    // the page behind takes the project's own colour; the card (and the hover bubble that grows into it) is the lighter tint
+    var pageBg = view.style.getPropertyValue("--page-bg") || "#E4E4E4";
+    var tintBg = getComputedStyle(view).backgroundColor;
     if (!introState && introFilters) { // first open: the tabs rise to the top of the screen, the name and tagline fade
       introState = { restTop: introFilters.getBoundingClientRect().top, bg: getComputedStyle(document.body).backgroundColor };
     }
@@ -288,7 +285,7 @@
     var cm = getComputedStyle(view).backgroundColor.match(/[\d.]+/g) || [255, 255, 255];
     var lum = (0.299 * cm[0] + 0.587 * cm[1] + 0.114 * cm[2]) / 255;
     view.style.setProperty("--closeInk", lum < 0.55 ? "#FFFFFF" : "#1A1A1A");
-    view.style.setProperty("--tint", pageBg);
+    view.style.setProperty("--tint", tintBg);
     var darkCard = lum < 0.55;
     // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
     var top = TABS_TOP + chipsH + 24;
@@ -299,8 +296,8 @@
     view.style.height = height + "px";
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height;
-    showProjNav(view, top, height, side, narrow, pageBg);
-    showChrome(view, top, side, pageBg, narrow, darkCard);
+    showProjNav(view, top, height, side, narrow, tintBg);
+    showChrome(view, top, side, tintBg, narrow, darkCard);
     // the card IS the hover bubble: the bubble (js/mouse.js) grows to the card's size and shape, then the card
     // takes over and its contents fade in
     var b = bubbleOf(trigger);
