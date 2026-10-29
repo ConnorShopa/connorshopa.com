@@ -1861,5 +1861,5 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   align-items: center;
   pointer-events: none;
 }
-.sharedStage .coverShot { position: relative; top: -26px; left: 110px; justify-self: center; align-self: center; height: min(calc(100% + 50px), 71.5vw); }
+.sharedStage .coverShot { grid-column: 2; position: relative; top: -26px; left: 110px; justify-self: center; align-self: center; height: min(calc(100% + 50px), 71.5vw); }
 @media (max-width: 700px) { .sharedStage { display: none; } }
