@@ -35,7 +35,9 @@
       panel.innerHTML = window.PANELS[name].pages[0].html;
       panel.hidden = false;
       if (window.bindHover) window.bindHover(panel);
-      gsap.fromTo(panel.children, { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: t(0.3), ease: "back.out(1.2)", stagger: t(0.05) });
+      // line by line from the top: a small rise and a fade, no bounce
+      var lines = panel.querySelectorAll(".pgText > p, .aboutJobs li, .contactCol2 li");
+      gsap.fromTo(lines, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: t(0.45), ease: "power2.out", stagger: t(0.09), clearProps: "transform,opacity" });
     };
     var showLinks = function () {
       if (current) return;
@@ -45,7 +47,7 @@
     };
     var hidePanel = function (done) {
       if (panel.hidden) { done(); return; }
-      gsap.to(panel.children, { scale: 0.8, opacity: 0, duration: t(0.2), ease: "power2.in", onComplete: function () { panel.hidden = true; done(); } });
+      gsap.to(panel.children, { opacity: 0, y: -6, duration: t(0.2), ease: "power2.in", onComplete: function () { panel.hidden = true; gsap.set(panel.children, { clearProps: "transform,opacity" }); done(); } });
     };
     if (!from) { // gallery -> panel
       gsap.to(links(), { scale: 0, opacity: 0, duration: t(0.2), ease: "power2.in", stagger: t(0.015), onComplete: function () { list.style.visibility = "hidden"; showPanel(); } });
