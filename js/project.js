@@ -267,11 +267,11 @@
     var introFilters = intro && intro.querySelector(".filters");
     var narrow = window.innerWidth <= 700;
     // the project colour takes over the whole page
-    // ...a shade darker than the card, so the card stands out against it
+    // ...a lighter tint of it, so the card stands out against it
     var pageBg = (function (c) {
       var m = c.match(/[\d.]+/g);
       if (!m || m.length < 3) return c;
-      return "rgb(" + [0, 1, 2].map(function (i) { return Math.round(parseFloat(m[i]) * 0.9); }).join(",") + ")";
+      return "rgb(" + [0, 1, 2].map(function (i) { var v = parseFloat(m[i]); return Math.round(v + (255 - v) * 0.55); }).join(",") + ")";
     })(getComputedStyle(view).backgroundColor);
     if (!introState && introFilters) { // first open: the tabs rise to the top of the screen, the name and tagline fade
       introState = { restTop: introFilters.getBoundingClientRect().top, bg: getComputedStyle(document.body).backgroundColor };
