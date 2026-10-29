@@ -55,19 +55,22 @@
           listEl.insertBefore(br, li.nextSibling);
         }
       });
-      return sizes.length;
+      return sizes;
     };
-    // ...and a row that is too wide for the screen would wrap by itself and strand its last item on a line of its own,
-    // so the row length drops until every row really fits on one line
+    // ...and the rows keep their length: if the widest row is wider than the screen, the whole list is scaled down
+    // a little so every row fits on one line (a row that wraps strands its last item on a line of its own)
     var per = perRow();
     var rows = apply(per);
-    if (per > 2 && shown.length) {
-      var wraps = function () {
-        var tops = {};
-        shown.forEach(function (li) { tops[li.offsetTop] = true; });
-        return Object.keys(tops).length > rows;
-      };
-      while (per > 2 && wraps()) rows = apply(--per);
+    listEl.style.zoom = "";
+    if (per > 1 && shown.length) {
+      var widest = 0, k = 0;
+      rows.forEach(function (n) { // the width of each intended row (a row that wrapped by itself still counts as one)
+        var w = 0;
+        for (var m = 0; m < n; m++, k++) w += shown[k].offsetWidth;
+        if (w > widest) widest = w;
+      });
+      var avail = listEl.clientWidth;
+      if (widest > avail && avail > 0) listEl.style.zoom = String(Math.max(0.5, (avail / widest) * 0.97));
     }
   }
   window.layoutGalleryRows = function () { layoutRows(list, items); };
