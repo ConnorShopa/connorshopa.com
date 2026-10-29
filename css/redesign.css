@@ -1713,3 +1713,7 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
 
 /* images in the project views sit plain on the card: no backdrop, no drop shadow */
 .pgMedia img, .pgMedia video, .pgGallery img { box-shadow: none; background: none; }
+
+/* the row under an open project: every logo and label is centred on the same line */
+#projectList.compact { align-items: center; }
+#projectList.compact li, #projectList.compact li > a { display: inline-flex; align-items: center; }
