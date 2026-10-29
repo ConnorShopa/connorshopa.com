@@ -124,6 +124,13 @@ document.addEventListener("submit", function (e) { if (e.target.closest && e.tar
     var to = { x: on.offsetLeft, y: on.offsetTop, width: on.offsetWidth, height: on.offsetHeight };
     if (!animate || first || reduce) { gsap.set(bg, to); first = false; gsap.set(bg, { autoAlpha: 1 }); }
     else { // no sliding: the highlight appears on the new tab with a small, soft pop
+      // the old tab's highlight pops out as the new one pops in
+      if (parseFloat(gsap.getProperty(bg, "opacity")) > 0.05) {
+        var ghost = bg.cloneNode(true);
+        group.insertBefore(ghost, bg);
+        gsap.set(ghost, { x: gsap.getProperty(bg, "x"), y: gsap.getProperty(bg, "y"), width: gsap.getProperty(bg, "width"), height: gsap.getProperty(bg, "height"), scale: gsap.getProperty(bg, "scale"), autoAlpha: gsap.getProperty(bg, "opacity"), transformOrigin: "50% 50%" });
+        gsap.to(ghost, { scale: 0.88, autoAlpha: 0, duration: 0.22, ease: "power2.in", onComplete: function () { ghost.remove(); } });
+      }
       gsap.killTweensOf(bg);
       gsap.set(bg, to);
       gsap.fromTo(bg, { scale: 0.88, autoAlpha: 0, transformOrigin: "50% 50%" }, { scale: 1, autoAlpha: 1, duration: 0.3, ease: "power2.out" });
