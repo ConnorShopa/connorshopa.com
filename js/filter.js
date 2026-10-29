@@ -29,7 +29,7 @@
   // phones report a wider window when something overflows, so the screen width counts too
   var perRow = function () {
     var w = Math.min(window.innerWidth, window.screen && screen.width ? screen.width : Infinity);
-    return w <= 700 ? 2 : w > 1100 ? 5 : 3; // two on phones (never fewer than two), three on tablets, five on wide screens
+    return w <= 700 ? 1 : w > 1100 ? 5 : 3; // one on phones, three on tablets, five on wide screens
   };
   function layoutRows(listEl, lis) {
     var per = perRow();
@@ -37,8 +37,14 @@
     var shown = lis.filter(function (li) {
       return !li.classList.contains("is-hidden") && !li.classList.contains("is-current");
     });
+    // row sizes: `per` each, but never a lonely last item on a wide screen (it borrows one from the row above)
+    var sizes = [], left = shown.length;
+    while (left > 0) { sizes.push(Math.min(per, left)); left -= per; }
+    if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
+    var ends = {}, run = 0;
+    sizes.forEach(function (n) { run += n; ends[run - 1] = true; });
     shown.forEach(function (li, i) {
-      var rowEnd = i % per === per - 1;
+      var rowEnd = !!ends[i];
       li.classList.toggle("no-slash", rowEnd || i === shown.length - 1);
       if (rowEnd && i < shown.length - 1) {
         var br = document.createElement("li");
