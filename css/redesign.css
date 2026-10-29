@@ -1256,7 +1256,7 @@ html.view-open .contactBlock {
 .pg.cover .coverWrap { position: relative; top: -26px; }
 
 /* the left column moves in toward the middle of the card, mirroring the phone */
-.pg.cover .coverWrap { left: 70px; }
+.pg.cover .coverWrap { left: 50px; }
 
 /* the grass is one sharp photo (no blurred layer) */
 /* a dark fade over the photo, strongest on the left (where the text sits) and gone by the right, for legibility */
@@ -1353,7 +1353,7 @@ html.view-open .contactBlock {
 .pg.cover .aboutBtn:hover { background: #051324; color: #FFFAF6; } /* Midnight, the app's black */
 
 /* the phone sits nearer the right edge */
-.pg.cover .coverShot { left: 80px; }
+.pg.cover .coverShot { left: 110px; }
 
 /* vertical views clip their pages to the card as they scroll past */
 .view.vertical { overflow: hidden; }
@@ -1415,7 +1415,8 @@ html.view-open .contactBlock {
 .view.vertical .viewBody { clip-path: inset(-108px -72px -56px -72px round 48px); }
 
 /* a larger phone: it is taller than the content area (which is inset more than the card's grass frame), centred on the card */
-.pg.cover .coverShot { height: calc(100% + 50px); }
+/* never wider than 34vw, so the phone stays clear of the wordmark and buttons beside it (width = 0.475 x height) */
+.pg.cover .coverShot { height: min(calc(100% + 50px), 71.5vw); }
 
 /* each page sets its phone down at a slightly different angle */
 .view.hasBgImage.onFirst .pg:nth-child(1) .coverShot { transform: rotate(1.5deg); }
