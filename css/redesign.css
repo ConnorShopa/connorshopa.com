@@ -1724,3 +1724,22 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
 .view.dark .pg .sub, .view.dark .pg .lead, .view.dark .pg .big, .view.dark .pg p { color: #FAFAFA; }
 .view.dark .viewWordmark, .view.dark .viewLogo { filter: brightness(0) invert(1); }
 .view.dark .pg .eyebrow { color: rgba(250, 250, 250, 0.7); }
+
+/* ---- scrolling projects: the card's own frame clips the content (no fade); the logo and close button float above it ---- */
+.view.scrollView { overflow: hidden; }
+.view.scrollView .viewBody {
+  inset: 0;
+  padding: 120px 88px 40px;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+.view.scrollView .viewHead,
+.view.scrollView .viewClose { z-index: 3; background: var(--tint, #fff); }
+.view.scrollView .viewHead { top: 28px; left: 32px; padding: 12px 20px; border-radius: 999px; }
+.view.scrollView .viewClose { top: 28px; right: 32px; width: 48px; height: 48px; border-radius: 50%; color: #2F2725; }
+.view.dark.scrollView .viewLogo, .view.dark.scrollView .viewWordmark { filter: none; }
+@media (max-width: 700px) {
+  .view.scrollView .viewBody { inset: 0; padding: 76px 16px 12px; }
+  .view.scrollView .viewHead { top: 12px; left: 12px; padding: 8px 14px; }
+  .view.scrollView .viewClose { top: 12px; right: 12px; width: 40px; height: 40px; }
+}

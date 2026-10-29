@@ -283,6 +283,7 @@
     }
     if (introTop) gsap.to(introTop, { autoAlpha: 0, duration: t(0.25), ease: "power2.out" });
     gsap.to([document.documentElement, document.body], { backgroundColor: pageBg, duration: t(0.38), ease: "power2.out", overwrite: "auto" });
+    view.style.setProperty("--tint", pageBg); // the floating logo and close button use the page's light colour
     // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
     var top = TABS_TOP + chipsH + 24;
     var side = narrow ? 12 : SIDE;
