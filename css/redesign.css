@@ -1844,3 +1844,8 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .viewSpot { display: inline-flex; align-items: center; gap: 8px; }
 .viewSpot .spotIcon { width: 24px; height: 26px; }
 .viewSpot .spot { font-size: 22px; line-height: 1; }
+
+/* every gallery item (logo, lockup or plain text) is centred on its row's midline, and so is its slash */
+#projectList li:not(.row-break) { display: inline-flex; align-items: center; }
+#projectList li > a:not(.withCaption):not(.rowLogo):not(.stackLogo) { display: inline-flex; align-items: center; justify-content: center; }
+#projectList li > a .bubble { vertical-align: middle; }
