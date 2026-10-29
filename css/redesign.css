@@ -1743,3 +1743,15 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .view.scrollView .viewHead { top: 12px; left: 12px; padding: 8px 14px; }
   .view.scrollView .viewClose { top: 12px; right: 12px; width: 40px; height: 40px; }
 }
+
+/* the floating logo and close button: a soft drop shadow, set further in from the edges */
+.view.scrollView .viewHead,
+.view.scrollView .viewClose { box-shadow: 0 8px 22px -8px rgba(47, 39, 37, 0.28), 0 2px 6px rgba(47, 39, 37, 0.1); }
+.view.scrollView .viewHead { top: 44px; left: 52px; }
+.view.scrollView .viewClose { top: 44px; right: 52px; }
+.view.scrollView .viewBody { padding-top: 140px; }
+@media (max-width: 700px) {
+  .view.scrollView .viewHead { top: 20px; left: 20px; }
+  .view.scrollView .viewClose { top: 20px; right: 20px; }
+  .view.scrollView .viewBody { padding-top: 92px; }
+}
