@@ -1710,3 +1710,6 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .view.scrollView .viewBody { inset: 68px 0 12px; padding: 0 16px; }
   .view.scrollView .pg { min-height: 0; }
 }
+
+/* images in the project views sit plain on the card: no backdrop, no drop shadow */
+.pgMedia img, .pgMedia video, .pgGallery img { box-shadow: none; background: none; }

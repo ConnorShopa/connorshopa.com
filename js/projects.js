@@ -139,6 +139,7 @@
     // ---------------------------------------------------------------- Seeds
     seeds: {
       title: "Seeds",
+      bg: "#3BAA78",
       logo: H + "seeds_projectImage.svg",
       pages: [
         pg("two",
@@ -256,6 +257,7 @@
     // ---------------------------------------------------------------- Spotify dreams
     spotify: {
       title: "Spotify dreams",
+      bg: "#65D36E",
       logo: H + "spotifyDreams_projectImage.svg",
       pages: [
         pg("two",
@@ -361,6 +363,7 @@
     // ---------------------------------------------------------------- Happlycations (an empty skeleton on the old site)
     happlycations: {
       title: "Happlycations",
+      bg: "#CFE6FA",
       pages: [],
     },
 
@@ -392,6 +395,7 @@
     // ---------------------------------------------------------------- Micro + Motion
     micro: {
       title: "Micro + Motion",
+      bg: "#DAEAFD",
       pages: [
         pg("gallery", '<div class="pgGallery">' + ["assets/micros/heroAnim01.gif", "assets/micros/heroAnim02.gif", "assets/micros/heroAnim03.gif", "assets/micros/micro_gif01.gif", "assets/micros/micro_gif02.gif"].map(function (src) { return "<img src=\"" + src + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
       ],
