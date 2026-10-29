@@ -1692,3 +1692,21 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .logo.sheep { height: 28px; }
   .spotIcon { width: 32px; height: 34px; }
 }
+
+/* ---- projects scroll vertically: every page sits under the one before, the card scrolls ---- */
+.view.scrollView .viewBody {
+  inset: 112px 0 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0 88px;
+  -webkit-overflow-scrolling: touch;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+}
+.view.scrollView .pg { display: grid; position: relative; inset: auto; min-height: 100%; box-sizing: border-box; padding: 28px 0; overflow: visible; }
+.view.scrollView .pg + .pg { margin-top: 24px; }
+.view.scrollView .viewNav, .view.scrollView .viewDots { display: none !important; }
+@media (max-width: 700px) {
+  .view.scrollView .viewBody { inset: 68px 0 12px; padding: 0 16px; }
+  .view.scrollView .pg { min-height: 0; }
+}

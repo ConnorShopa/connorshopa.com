@@ -135,6 +135,7 @@
     sec.innerHTML = html;
     if (proj.download) sec.classList.add("hasDownload");
     sec.querySelector(".viewTitle").textContent = proj.title;
+    if (!proj.noNav) sec.classList.add("scrollView"); // every project but Habbot: all the pages in one vertical scroll
     if (proj.noNav) sec.classList.add("vertical"); // pages move up and down (scroll or the chevron under the first page's button)
     if (proj.accent) sec.style.setProperty("--accent", proj.accent);
     if (proj.bg) sec.style.setProperty("--view-bg", proj.bg);

@@ -156,6 +156,11 @@
   function setPage(view, n, animate, dir) {
     var pages = pagesOf(view);
     if (!pages.length) return;
+    if (view.classList.contains("scrollView")) { // every page is on, one under the other: the card scrolls
+      view._page = 0;
+      pages.forEach(function (p) { p.classList.add("is-on"); startMedia(p); });
+      return;
+    }
     n = Math.max(0, Math.min(pages.length - 1, n));
     var from = view._page || 0;
     var old = pages[from];
@@ -218,6 +223,7 @@
 
   function step(delta) {
     if (!open) return;
+    if (open.view.classList.contains("scrollView")) return;
     var view = open.view;
     if (view.querySelector(".coverReveal") && (view._page || 0) === 0) {
       var k = view._step || 0;
@@ -236,6 +242,8 @@
     if (open) return;
     open = { view: view, trigger: trigger, link: link || trigger };
     setPage(view, 0, false);
+    var vbody = view.querySelector(".viewBody");
+    if (vbody) vbody.scrollTop = 0;
     view.classList.remove("imgIn"); // the background image fades in after the bubble hands over (see reveal)
     sceneTo(view, 0, false);
 
@@ -473,7 +481,7 @@
   var wheelLock = 0;
   // while a view is open nothing outside it may scroll: wheel, touch and the scrolling keys are all stopped (except
   // inside a text block that genuinely needs to scroll)
-  function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText, .pgGallery, .pg"); }
+  function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText, .pgGallery, .pg, .viewBody"); }
   function onWheel(e) {
     if (!open) return;
     if (!insideScroller(e)) e.preventDefault(); // stops page scrolling and the elastic bounce
