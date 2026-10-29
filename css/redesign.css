@@ -1671,3 +1671,9 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .pgMedia img, .pgMedia video { width: 100%; height: auto; max-height: none; border-radius: 18px; }
   .viewDots { bottom: 16px; }
 }
+
+/* the project card: a softer shadow, and the previous / next project chevrons outside it */
+.view { box-shadow: 0 16px 44px -26px rgba(47, 39, 37, 0.1), 0 2px 8px rgba(47, 39, 37, 0.03); }
+.projNav { position: fixed; z-index: 12; transform: translateY(-50%); width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; border: 0; background: none; color: var(--ink); cursor: pointer; }
+.projNav[hidden] { display: none; }
+@media (max-width: 700px) { .projNav { display: none !important; } }

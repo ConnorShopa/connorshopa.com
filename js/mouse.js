@@ -50,7 +50,7 @@
   var hideCall = null;
   var locked = false;    // true while the project card is using the dot (see window.bubble below)
   var ctl = null;        // the tween that is growing / shrinking the dot
-  var SEL = "a, .viewClose, .viewNav, .pill, .lockBtn:not(.dlBtn)";
+  var SEL = "a, .viewClose, .viewNav, .projNav, .pill, .lockBtn:not(.dlBtn)";
 
   // The dot is centred on its x / y; quickTo makes it trail whatever target we give it.
   gsap.set(dot, { xPercent: -50, yPercent: -50, autoAlpha: 0 });
@@ -79,7 +79,7 @@
     var shape = Math.min(1, Math.max(0, (w / h - 1) / (WIDE_AT - 1))); // 0 = squarish, 1 = very wide
     var radius = (h / 2) * (1 - shape * (1 - ROUND_WIDE));
     // icon-only buttons (the view's close button and page chevrons) get a true circle around the icon instead of a pill
-    if (currentLink && (currentLink.classList.contains("viewClose") || currentLink.classList.contains("viewNav"))) {
+    if (currentLink && (currentLink.classList.contains("viewClose") || currentLink.classList.contains("viewNav") || currentLink.classList.contains("projNav"))) {
       w = h = Math.max(base.width, base.height) + 8;
       radius = w / 2;
     }

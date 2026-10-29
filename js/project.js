@@ -18,7 +18,10 @@
   var introState = null; // the intro's full size while a project is open (restored on close)
   var BOTTOM_ROOM = 104; // space kept under the card for the gallery row: 48px to the screen edge + the row + the gap above it
 
-  var open = null; // { view, trigger }
+  var open = null; // { view, trigger, link }
+  var holdRow = false; // while a project is open the gallery row stays hidden (it pops back in on close)
+  var TABS_TOP = 48;   // the tabs sit this far from the top of the screen while a project is open
+  var SIDE = 88;       // room left and right of the card for the previous / next project chevrons
 
   // the gallery items currently on screen
   function items() { return document.querySelectorAll("#projectList li:not(.is-hidden):not(.is-current):not(.row-break)"); }
@@ -99,6 +102,7 @@
         }
       } else {
         gsap.set(next, { scale: 0, opacity: 0 });
+        if (holdRow) return; // a project is open: the row stays away
         popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "power2.out", stagger: t(0.018) });
       }
     });
@@ -228,9 +232,9 @@
     setPage(view, n, true, delta);
   }
 
-  function show(trigger, view) {
+  function show(trigger, view, link) {
     if (open) return;
-    open = { view: view, trigger: trigger };
+    open = { view: view, trigger: trigger, link: link || trigger };
     setPage(view, 0, false);
     view.classList.remove("imgIn"); // the background image fades in after the bubble hands over (see reveal)
     sceneTo(view, 0, false);
@@ -253,64 +257,34 @@
     // the risen chips.
     var introTop = intro && intro.querySelector(".introTop");
     var introFilters = intro && intro.querySelector(".filters");
-    var collapseBy = 0;
-    var freshIntro = false;
-    if (false && introTop && introFilters && !introState) { // the header no longer moves when a project opens
-      // first open: remember how far the chips rise so closing can undo it
-      var mt = parseFloat(getComputedStyle(introFilters).marginTop) || 0;
-      // only the tagline goes (the name stays): the chips rise by its height plus the gap under the name
-      var tg = introTop.querySelector(".tagline");
-      var tgGap = tg ? parseFloat(getComputedStyle(tg.parentNode).rowGap) || 0 : 0;
-      var lost = tg ? tg.offsetHeight + tgGap : introTop.offsetHeight;
-      introState = { rise: Math.max(0, lost + mt - INTRO_GAP), fBottom: introFilters.getBoundingClientRect().bottom };
-      freshIntro = true;
+    var narrow = window.innerWidth <= 700;
+    // the project colour takes over the whole page
+    var pageBg = getComputedStyle(view).backgroundColor;
+    if (!introState && introFilters) { // first open: the tabs rise to the top of the screen, the name and tagline fade
+      introState = { restTop: introFilters.getBoundingClientRect().top, bg: getComputedStyle(document.body).backgroundColor };
     }
-    if (introState) collapseBy = introState.rise; // the header's own box never shrinks (the lines and chips are only moved)
-    var top = intro ? intro.getBoundingClientRect().bottom - collapseBy + 24 : 80;
-    if (window.innerWidth <= 700) top = Math.max(12, top - 12); // phones: right under the tabs, never off the top
-    // the card keeps a familiar shape (3:2): it takes the room available, but never gets taller than that shape
-    // allows, and when the room is short it gets narrower instead of squatter
-    var narrow = window.innerWidth <= 700; // phones: the card is nearly full width and as tall as the room allows (no 3:2)
-    var fullW = narrow ? window.innerWidth - 24 : Math.min(window.innerWidth * 0.92, 1400);
-    var height = narrow
-      ? Math.max(300, window.innerHeight - top - 24)
-      : Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
-    view.style.width = (narrow ? fullW : Math.min(fullW, height * CARD_RATIO)) + "px";
+    var chipsH = introFilters ? introFilters.offsetHeight : 32;
+    if (introFilters && introState) {
+      gsap.killTweensOf(introFilters);
+      gsap.to(introFilters, { y: TABS_TOP - introState.restTop, duration: t(0.38), ease: "power3.out" });
+    }
+    if (introTop) gsap.to(introTop, { autoAlpha: 0, duration: t(0.25), ease: "power2.out" });
+    gsap.to([document.documentElement, document.body], { backgroundColor: pageBg, duration: t(0.38), ease: "power2.out", overwrite: "auto" });
+    // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
+    var top = TABS_TOP + chipsH + 24;
+    var side = narrow ? 12 : SIDE;
+    var bottomGap = narrow ? 12 : BOTTOM_ROOM; // desktop: the gallery row stays beneath the card, 48px above the bottom edge
+    var height = Math.max(300, window.innerHeight - top - bottomGap);
+    view.style.width = (window.innerWidth - side * 2) + "px";
     view.style.height = height + "px";
-    // and it sits dead centre in the window, as long as that leaves it clear of the chips above and the gallery row
-    // under it (otherwise it sits as close to the middle as those allow)
-    var minTop = top;
-    var maxTop = Math.max(minTop, window.innerHeight - (narrow ? 12 : BOTTOM_ROOM) - height);
-    top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
-    var cardBottom = top + height; // measured from layout, not the rect: the card is left shrunk after a close
+    var cardBottom = top + height;
+    showProjNav(view, top, height, side, narrow);
     // the card IS the hover bubble: the bubble (js/mouse.js) grows to the card's size and shape, then the card
     // takes over and its contents fade in
     var b = bubbleOf(trigger);
     open.bubble = b;
-    var currentLi = trigger.closest("li");
-
-    if (freshIntro) {
-      var aboutEls = introEls();
-      gsap.killTweensOf(aboutEls);
-      // straight up (never sideways, so the lines stay centred wherever the bubble came from), the line nearest the
-      // bubble first and the others following
-      gsap.to(aboutEls, {
-        x: 0,
-        y: function (i, el) { return push(el, { x: b.cx, y: b.cy }).y; },
-        scale: 0.7,
-        opacity: 0,
-        duration: t(0.3),
-        delay: function (i) { return t(0.05 * (aboutEls.length - 1 - i)); },
-        ease: "power2.out",
-        transformOrigin: "50% 50%",
-      });
-    }
-    // the chips settle the same distance above the card as the gallery row sits under it (GAP)
-    if (introFilters && introState) {
-      gsap.killTweensOf(introFilters);
-      gsap.to(introFilters, { y: top - GAP - introState.fBottom, duration: t(0.38), ease: "power3.out" }); // the same length as the bubble's growth, so they move in time with it
-    }
+    var currentLi = (open.link || trigger).closest("li");
 
     gsap.killTweensOf(view);
     gsap.killTweensOf(view.children);
@@ -358,44 +332,37 @@
     gsap.killTweensOf(old);
     gsap.to(old, {
       autoAlpha: 0,
-      duration: t(0.15),
+      scale: 0.9,
+      duration: t(0.22),
       ease: "power2.in",
-      onComplete: function () { old.hidden = true; stopMedia(old); gsap.set(old.children, { clearProps: "opacity" }); },
+      onComplete: function () { old.hidden = true; gsap.set(old, { scale: 1 }); stopMedia(old); gsap.set(old.children, { clearProps: "opacity" }); },
     });
   }
 
   // the about-me text (the tagline; the name stays put)
   function introEls() { return intro ? intro.querySelectorAll(".introTop .tagline .tl") : []; }
 
-  // the reverse of the push: they start shoved away, small and faint, and are drawn back to their places, the
-  // nearer ones first, like the gallery links
-  function restoreIntro(origin) {
+  // closing: the tabs drop back, the name and tagline return and the page goes back to its own colour
+  function restoreIntro() {
     var introFilters = intro && intro.querySelector(".filters");
-    if (!introState || !introFilters) return;
+    var introTop = intro && intro.querySelector(".introTop");
+    if (!introState) return;
+    var bg = introState.bg;
     introState = null;
-    var els = introEls();
-    gsap.killTweensOf(els);
-    gsap.killTweensOf(introFilters);
-    gsap.set(els, { clearProps: "x,y,scale,opacity" }); // measure from their own places
-    els.forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      var len = Math.hypot(r.left + r.width / 2 - origin.x, r.top + r.height / 2 - origin.y);
-      var far = Math.min(len / 700, 1);
-      var from = push(el, origin, true);
-      var delay = t(0.14 * far);
-      gsap.set(el, { x: 0, y: from.y, scale: 0.8, opacity: 0, transformOrigin: "50% 50%" });
-      gsap.to(el, { scale: 1, opacity: 1, duration: t(0.16), delay: delay, ease: "power2.out" });
-      gsap.to(el, { x: 0, y: 0, duration: t(0.22 + 0.14 * far), delay: delay, ease: "power2.inOut", onComplete: function () { gsap.set(el, { clearProps: "x,y,scale,opacity,transformOrigin" }); } });
-    });
-    gsap.to(introFilters, { y: 0, duration: t(0.4), ease: "power2.inOut", onComplete: function () { gsap.set(introFilters, { clearProps: "y" }); } });
+    if (introFilters) { gsap.killTweensOf(introFilters); gsap.to(introFilters, { y: 0, duration: t(0.4), ease: "power2.inOut", onComplete: function () { gsap.set(introFilters, { clearProps: "y" }); } }); }
+    if (introTop) { gsap.killTweensOf(introTop); gsap.to(introTop, { autoAlpha: 1, duration: t(0.3), delay: t(0.1), ease: "power2.out", onComplete: function () { gsap.set(introTop, { clearProps: "opacity,visibility" }); } }); }
+    gsap.to([document.documentElement, document.body], { backgroundColor: bg, duration: t(0.4), ease: "power2.inOut", overwrite: "auto", onComplete: function () { gsap.set([document.documentElement, document.body], { clearProps: "backgroundColor" }); } });
   }
 
   function hide() {
     if (typeof syncChips === "function") syncChips(null);
     if (!open) return;
     var view = open.view;
-    restoreIntro({ x: open.bubble.cx, y: open.bubble.cy });
+    holdRow = false;
+    hideProjNav();
+    restoreIntro();
     var trigger = open.trigger;
+    var open_link = open.link;
     var b = open.bubble;
     open = null;
 
@@ -429,8 +396,46 @@
       list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
       fixSlashes();
       gsap.set(nav, { clearProps: "transform" });
-    }, { x: b.cx, y: b.cy }, true, trigger.closest("li"));
+    }, { x: b.cx, y: b.cy }, true, (open_link || trigger).closest("li"));
     trigger.focus({ preventScroll: true });
+  }
+
+  // ---- previous / next project: chevrons outside the card, left and right ----
+  var projNav = ["prev", "next"].map(function (dir) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "projNav " + dir;
+    b.setAttribute("aria-label", dir === "prev" ? "Previous project" : "Next project");
+    b.innerHTML = '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="' + (dir === "prev" ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7") + '" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    b.hidden = true;
+    document.body.appendChild(b);
+    b.addEventListener("click", function () { goProject(dir === "prev" ? -1 : 1); });
+    return b;
+  });
+  function showProjNav(view, top, height, side, narrow) {
+    if (narrow) return;
+    projNav.forEach(function (b, i) {
+      b.hidden = false;
+      b.style.top = top + height / 2 + "px";
+      b.style[i === 0 ? "left" : "right"] = (side - 40) / 2 + "px";
+      gsap.fromTo(b, { autoAlpha: 0 }, { autoAlpha: 1, duration: t(0.3), delay: t(0.15), overwrite: "auto" });
+    });
+  }
+  function hideProjNav() {
+    projNav.forEach(function (b) { gsap.to(b, { autoAlpha: 0, duration: t(0.15), overwrite: "auto", onComplete: function () { b.hidden = true; } }); });
+  }
+  // the card collapses, the next (or previous) project's card grows out of the chevron
+  function goProject(delta) {
+    if (!open) return;
+    var links = Array.prototype.filter.call(document.querySelectorAll("#projectList [data-view]"), function (l) { return document.getElementById("view-" + l.getAttribute("data-view")); });
+    var i = links.findIndex(function (l) { return document.getElementById("view-" + l.getAttribute("data-view")) === open.view; });
+    var link = links[(i + delta + links.length) % links.length];
+    var view = document.getElementById("view-" + link.getAttribute("data-view"));
+    var btn = projNav[delta < 0 ? 0 : 1];
+    btn.setAttribute("data-bubble", link.getAttribute("data-bubble") || "");
+    if (!btn.getAttribute("data-bubble")) btn.removeAttribute("data-bubble");
+    switchFrom(open);
+    gsap.delayedCall(t(0.2), function () { show(btn, view, link); });
   }
 
   function bindViewLink(link) {

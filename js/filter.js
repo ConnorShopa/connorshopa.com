@@ -24,10 +24,13 @@
   // items scale from their own centre
   gsap.set(items, { transformOrigin: "50% 50%" });
 
-  // at most three items per row: a zero-height break after every third visible item, and no interpunct at the
+  // a few items per row (see perRow): a zero-height break after every third visible item, and no interpunct at the
   // end of a row; each row then centres on its own
   // phones report a wider window when something overflows, so the screen width counts too
-  var perRow = function () { return Math.min(window.innerWidth, window.screen && screen.width ? screen.width : Infinity) <= 700 ? 1 : 3; }; // one to a row on phones
+  var perRow = function () {
+    var w = Math.min(window.innerWidth, window.screen && screen.width ? screen.width : Infinity);
+    return w <= 700 ? 1 : w > 1100 ? 5 : 3; // one on phones, three on tablets, five on wide screens
+  };
   function layoutRows(listEl, lis) {
     var per = perRow();
     listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
