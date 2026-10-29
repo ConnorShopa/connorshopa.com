@@ -1870,3 +1870,4 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* Drawl: set in Nunito, like the Drawble app */
 .drawlText { font-family: "Nunito", "Host Grotesk", sans-serif; font-weight: 800; letter-spacing: -0.01em; }
+.drawlText { background: linear-gradient(100deg, #1FC8C0 0%, #F7D93A 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; text-shadow: none; }
