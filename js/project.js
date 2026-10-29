@@ -155,6 +155,46 @@
   }
 
   // go to page n (dir: 1 = forward, -1 = back) with a short slide + fade; animate=false just swaps
+  // Habbot: one phone stays put while the text scrolls past; each page only changes the recording playing on it.
+  // The first time the view is paged, every page's phone is lifted out into one shared stage over the pages.
+  var TILTS = [1.5, -1.8, 2.2, -1, 1.4]; // the phone is set down at a slightly different angle for each page
+  function ensureShared(view) {
+    if (view._shared !== undefined) return view._shared;
+    view._shared = null;
+    var vb = view.querySelector(".viewBody");
+    var pgs = Array.prototype.slice.call(pagesOf(view));
+    var clips = pgs.map(function (p) { var v = p.querySelector(".phone video"); return v ? v.getAttribute("src") : null; });
+    if (!vb || !clips[0] || !view.classList.contains("vertical")) return null;
+    var stage = document.createElement("div");
+    stage.className = "sharedStage";
+    var phone = pgs[0].querySelector(".phone");
+    pgs.forEach(function (p, i) { var ph = p.querySelector(".phone"); if (ph && ph !== phone) ph.remove(); });
+    stage.appendChild(phone);
+    vb.appendChild(stage);
+    gsap.set(phone, { rotation: TILTS[0] });
+    view._shared = { phone: phone, video: phone.querySelector("video"), clips: clips, cur: -1 };
+    return view._shared;
+  }
+  function syncShared(view, n) {
+    var sh = ensureShared(view);
+    if (!sh || !sh.clips[n]) return;
+    var v = sh.video;
+    var play = function () { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); };
+    if (sh.cur === n) { play(); return; }
+    var first = sh.cur === -1;
+    sh.cur = n;
+    gsap.to(sh.phone, { rotation: TILTS[n % TILTS.length], duration: first || reduce ? 0 : 0.85, ease: "power3.inOut", overwrite: "auto" });
+    if (first) { v.currentTime = 0; play(); return; }
+    // the old recording fades out, the next one starts from its beginning
+    gsap.killTweensOf(v);
+    gsap.to(v, { opacity: 0, duration: reduce ? 0 : 0.2, ease: "power1.in", onComplete: function () {
+      v.src = sh.clips[n];
+      v.load();
+      play();
+      gsap.to(v, { opacity: 1, duration: reduce ? 0 : 0.3, ease: "power1.out" });
+    } });
+  }
+
   function setPage(view, n, animate, dir) {
     var pages = pagesOf(view);
     if (!pages.length) return;
@@ -173,6 +213,7 @@
     if (old !== next) stopMedia(old);
     next.classList.add("is-on");
     startMedia(next);
+    syncShared(view, n);
     view._page = n;
     // a project's first page can carry a background image (proj.bgImage); in a vertical view it stays behind every page
     // (the pages scroll over it)

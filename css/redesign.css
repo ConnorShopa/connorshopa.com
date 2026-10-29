@@ -1850,3 +1850,16 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 #projectList li:not(.row-break) { display: inline-flex; align-items: center; }
 #projectList li > a:not(.withCaption):not(.rowLogo):not(.stackLogo) { display: inline-flex; align-items: center; justify-content: center; }
 #projectList li > a .bubble { vertical-align: middle; }
+
+/* Habbot's one shared phone: it sits over the pages in the same place each page's own phone used to */
+.sharedStage {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 62%;
+  grid-template-rows: minmax(0, 1fr);
+  align-items: center;
+  pointer-events: none;
+}
+.sharedStage .coverShot { position: relative; top: -26px; left: 110px; justify-self: center; align-self: center; height: min(calc(100% + 50px), 71.5vw); }
+@media (max-width: 700px) { .sharedStage { display: none; } }
