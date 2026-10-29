@@ -85,3 +85,23 @@
 
 // Overhand's "Get early access" form is a placeholder for now: it doesn't send anywhere
 document.addEventListener("submit", function (e) { if (e.target.closest && e.target.closest(".earlyForm")) e.preventDefault(); });
+
+// Scrolling the main view loops through the tabs: Work, About, Contact, and round again (a project being open
+// takes the wheel for itself; phones keep their normal page scroll)
+(function () {
+  var order = [null, "about", "contact"];
+  var busy = false;
+  window.addEventListener("wheel", function (e) {
+    if (document.documentElement.classList.contains("view-open")) return;
+    if (window.innerWidth <= 700 || Math.abs(e.deltaY) < 12 || busy) return;
+    if (e.target.closest && e.target.closest(".panelText a")) { /* still counts */ }
+    var chip = document.querySelector(".filters .pill[aria-pressed='true']");
+    var now = chip && chip.hasAttribute("data-panel") ? chip.getAttribute("data-panel") : null;
+    var i = order.indexOf(now);
+    var next = order[(i + (e.deltaY > 0 ? 1 : -1) + order.length) % order.length];
+    busy = true;
+    var target = next ? document.querySelector('.filters .pill[data-panel="' + next + '"]') : document.querySelector(".filters .pill[data-work]");
+    if (target) target.click();
+    setTimeout(function () { busy = false; }, 1100); // one step per flick: trackpad momentum keeps sending events
+  }, { passive: true });
+})();
