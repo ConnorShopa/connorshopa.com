@@ -1,3 +1,7 @@
+/* Nunito, the Drawble app's font (variable: every weight in one file) */
+@font-face { font-family: "Nunito"; src: url("../fonts/Nunito/Nunito-Variable.ttf") format("truetype"); font-weight: 200 1000; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nunito"; src: url("../fonts/Nunito/Nunito-VariableItalic.ttf") format("truetype"); font-weight: 200 1000; font-style: italic; font-display: swap; }
+
 @import url(hostgrotesk.css);
 
 :root {
@@ -1863,3 +1867,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 }
 .sharedStage .coverShot { grid-column: 2; position: relative; top: -26px; left: 110px; justify-self: center; align-self: center; height: min(calc(100% + 50px), 71.5vw); }
 @media (max-width: 700px) { .sharedStage { display: none; } }
+
+/* Drawl: set in Nunito, like the Drawble app */
+.drawlText { font-family: "Nunito", "Host Grotesk", sans-serif; font-weight: 800; letter-spacing: -0.01em; }
