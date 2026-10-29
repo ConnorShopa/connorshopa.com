@@ -32,41 +32,59 @@
     return w <= 700 ? 1 : w > 1100 ? 5 : 3; // one on phones, three on tablets, five on wide screens
   };
   function layoutRows(listEl, lis) {
-    var per = perRow();
     listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
     var shown = lis.filter(function (li) {
       return !li.classList.contains("is-hidden") && !li.classList.contains("is-current");
     });
-    // row sizes: `per` each, but never a lonely last item on a wide screen (it borrows one from the row above)
-    var sizes = [], left = shown.length;
-    while (left > 0) { sizes.push(Math.min(per, left)); left -= per; }
-    if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
-    var ends = {}, run = 0;
-    sizes.forEach(function (n) { run += n; ends[run - 1] = true; });
-    shown.forEach(function (li, i) {
-      var rowEnd = !!ends[i];
-      li.classList.toggle("no-slash", rowEnd || i === shown.length - 1);
-      if (rowEnd && i < shown.length - 1) {
-        var br = document.createElement("li");
-        br.className = "row-break";
-        br.setAttribute("aria-hidden", "true");
-        listEl.insertBefore(br, li.nextSibling);
-      }
-    });
+    // lay the rows out with `per` items each; a wide screen never leaves a lonely last item (it borrows one from the
+    // row above)
+    var apply = function (per) {
+      listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
+      var sizes = [], left = shown.length;
+      while (left > 0) { sizes.push(Math.min(per, left)); left -= per; }
+      if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
+      var ends = {}, run = 0;
+      sizes.forEach(function (n) { run += n; ends[run - 1] = true; });
+      shown.forEach(function (li, i) {
+        var rowEnd = !!ends[i];
+        li.classList.toggle("no-slash", rowEnd || i === shown.length - 1);
+        if (rowEnd && i < shown.length - 1) {
+          var br = document.createElement("li");
+          br.className = "row-break";
+          br.setAttribute("aria-hidden", "true");
+          listEl.insertBefore(br, li.nextSibling);
+        }
+      });
+      return sizes.length;
+    };
+    // ...and a row that is too wide for the screen would wrap by itself and strand its last item on a line of its own,
+    // so the row length drops until every row really fits on one line
+    var per = perRow();
+    var rows = apply(per);
+    if (per > 2 && shown.length) {
+      var wraps = function () {
+        var tops = {};
+        shown.forEach(function (li) { tops[li.offsetTop] = true; });
+        return Object.keys(tops).length > rows;
+      };
+      while (per > 2 && wraps()) rows = apply(--per);
+    }
   }
   window.layoutGalleryRows = function () { layoutRows(list, items); };
   layoutRows(ghost, Array.prototype.slice.call(ghost.children));
   items.forEach(function (li) { li.classList.remove("no-slash"); });
   layoutRows(list, items);
-  // re-flow the rows when the screen crosses the phone breakpoint
-  var lastPer = perRow();
-  window.addEventListener("resize", function () {
-    if (perRow() === lastPer) return;
-    lastPer = perRow();
-    layoutRows(ghost, Array.prototype.slice.call(ghost.children).filter(function (li) { return !li.classList.contains("row-break"); }));
-    items.forEach(function (li) { if (!li.classList.contains("row-break")) li.classList.remove("no-slash"); });
-    layoutRows(list, items.filter(function (li) { return !li.classList.contains("row-break"); }));
-  });
+  // re-flow the rows whenever the window changes size (and once the fonts are in, which changes the widths)
+  var relayout = function () {
+    if (list.classList.contains("compact")) return;
+    var plain = function (arr) { return arr.filter(function (li) { return !li.classList.contains("row-break"); }); };
+    layoutRows(ghost, plain(Array.prototype.slice.call(ghost.children)));
+    plain(items).forEach(function (li) { li.classList.remove("no-slash"); });
+    layoutRows(list, plain(items));
+  };
+  var rt;
+  window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(relayout, 80); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
 
   // ---- on load: the links pop in one after another, from the top left to the bottom right ----
   var links = items.filter(function (li) { return !li.classList.contains("row-break"); });
