@@ -268,7 +268,7 @@
     var narrow = window.innerWidth <= 700;
     // the project colour takes over the whole page
     // ...a lighter tint of it, so the card stands out against it
-    var lift = view.id === "view-nanni" ? 0.75 : 0.55; // how far toward white (Nanni's deep blue wants a lighter wash)
+    var lift = 0.55; // how far toward white
     var pageBg = (function (c) {
       var m = c.match(/[\d.]+/g);
       if (!m || m.length < 3) return c;
