@@ -238,8 +238,19 @@
     setPage(view, n, true, delta);
   }
 
+  // where every gallery link sits while the list is at rest, noted each time a project is opened from the gallery:
+  // a project reached by the chevrons collapses back to its link's resting place (the open row has moved by then)
+  var restSpots = {};
+  function noteRestSpots() {
+    if (list.classList.contains("compact")) return;
+    Array.prototype.forEach.call(document.querySelectorAll("#projectList [data-view]"), function (l) {
+      var r = l.getBoundingClientRect();
+      restSpots[l.getAttribute("data-view")] = { w: r.width + 44, h: r.height + 20, cx: r.left + r.width / 2, cy: r.top + r.height / 2, r: (r.height + 20) / 2 };
+    });
+  }
   function show(trigger, view, link) {
     if (open) return;
+    noteRestSpots();
     open = { view: view, trigger: trigger, link: link || trigger };
     setPage(view, 0, false);
     var vbody = view.querySelector(".viewBody");
@@ -386,9 +397,8 @@
     var b = open.bubble;
     // opened from a chevron: the card collapses back toward its own link in the gallery, not toward the chevron
     if (open_link && open_link !== trigger) {
-      var lb = bubbleOf(open_link);
-      lb.fill = b.fill || lb.fill;
-      b = lb;
+      var rs = restSpots[open_link.getAttribute("data-view")];
+      if (rs) b = { w: rs.w, h: rs.h, cx: rs.cx, cy: rs.cy, r: rs.r, fill: open_link.getAttribute("data-bubble") || null };
     }
     open = null;
 
