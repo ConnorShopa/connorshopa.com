@@ -150,6 +150,8 @@
   // embedded players only load once their page is shown
   function startMedia(scope) {
     scope.querySelectorAll("iframe[data-src]").forEach(function (f) { f.setAttribute("src", f.getAttribute("data-src")); });
+    // screen recordings play (from the start) while their page is the one showing
+    scope.querySelectorAll("video").forEach(function (v) { try { v.currentTime = 0; } catch (e) {} var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); });
   }
 
   // go to page n (dir: 1 = forward, -1 = back) with a short slide + fade; animate=false just swaps

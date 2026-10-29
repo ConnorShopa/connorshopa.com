@@ -19,7 +19,12 @@
   }
   // a screenshot inside an iPhone frame
   function phone(src, cls, extra) {
-    return '<div class="phone' + (cls ? " " + cls : "") + '"><img src="' + src + '" alt="" loading="lazy" decoding="async">' + (extra || "") + '<i class="phoneGlare"></i><i class="phoneIsland"></i><i class="phoneBtn l"></i><i class="phoneBtn r"></i></div>';
+    // an .mp4 is a screen recording: it loops silently and only plays while its page is showing (js/project.js startMedia);
+    // "poster" is the still it shows before it plays
+    var screen = /\.mp4$/.test(src)
+      ? '<video src="' + src.replace(/^(.*)$/, "$1") + '" muted loop playsinline preload="metadata" disablepictureinpicture' + (extra && extra.poster ? ' poster="' + extra.poster + '"' : "") + "></video>"
+      : '<img src="' + src + '" alt="" loading="lazy" decoding="async">';
+    return '<div class="phone' + (cls ? " " + cls : "") + '">' + screen + (typeof extra === "string" ? extra : "") + '<i class="phoneGlare"></i><i class="phoneIsland"></i><i class="phoneBtn l"></i><i class="phoneBtn r"></i></div>';
   }
   function pfig(src) { return "<figure>" + phone(src) + "</figure>"; }
   function fact(label, value) { return '<div class="fact"><p class="eyebrow">' + label + '</p><p class="sub">' + value + "</p></div>"; }
@@ -238,20 +243,20 @@
           '<span class="stickyDots" data-d="16" data-fit></span><p class="coverTag">Collect yourself</p></div>' +
           '<div class="coverActions"><button type="button" class="lockBtn dlBtn">Download the app</button><button type="button" class="lockBtn dlBtn aboutBtn" aria-label="More">More<svg width="18" height="18" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 9.5l8 8 8-8"/></svg></button></div>' +
           '</div>' +
-          phone(A + "habbotAssets/app_screen01.png", "coverShot")),
+          phone(A + "habbotAssets/habbot_clip_welcome.mp4", "coverShot", { poster: A + "habbotAssets/app_screen01.png" })),
         // the pages "More" scrolls down to: a pill and some text where the CTA section was, one phone on the right
         pg("cover",
           '<div class="coverWrap"><span class="trioPill">About</span><p class="coverText">Throughout a two month roadtrip I would keep track of my meditation with two dots drawn in my journal.</p><p class="coverText">The distance between the dots represented the length of the meditation.</p><p class="coverText">While living in a remote Wyoming cabin, I digitized this process into an iOS application.</p></div>' +
-          phone(A + "habbotAssets/app_screen04.png", "coverShot")),
+          phone(A + "habbotAssets/habbot_clip_about.mp4", "coverShot", { poster: A + "habbotAssets/app_screen04.png" })),
         pg("cover",
           '<div class="coverWrap"><span class="trioPill">Creating a habbot</span><p class="coverLead">Set a time goal, or not</p><p class="coverLead">Organize your habbots with tags</p></div>' +
-          phone(A + "habbotAssets/app_screen05.png", "coverShot")),
+          phone(A + "habbotAssets/habbot_clip_create.mp4", "coverShot", { poster: A + "habbotAssets/app_screen05.png" })),
         pg("cover",
           '<div class="coverWrap"><span class="trioPill">List</span><p class="coverLead">Keep track of your habbots visually</p></div>' +
-          phone(A + "habbotAssets/app_screen01.png", "coverShot")),
+          phone(A + "habbotAssets/habbot_clip_list.mp4", "coverShot", { poster: A + "habbotAssets/app_screen01.png" })),
         pg("cover",
           '<div class="coverWrap"><span class="trioPill">Compile</span><p class="coverLead">See your progress stack up</p><p class="coverLead">Find which habbots are most frequent</p></div>' +
-          phone(A + "habbotAssets/app_screen03.png", "coverShot")),
+          phone(A + "habbotAssets/habbot_clip_compile.mp4", "coverShot", { poster: A + "habbotAssets/app_screen03.png" })),
       ],
     },
 

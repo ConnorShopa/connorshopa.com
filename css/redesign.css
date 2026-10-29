@@ -1088,7 +1088,8 @@ html.view-open .contactBlock {
 }
 
 .pgMedia .phone img,
-.phone img {
+.phone img,
+.phone video {
   position: absolute;
   top: 3cqw;
   left: 3cqw;
