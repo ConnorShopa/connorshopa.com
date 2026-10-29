@@ -1810,5 +1810,6 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
 .viewHead.floating.dark .viewLogo, .viewHead.floating.dark .viewWordmark { filter: brightness(0) invert(1); transition: filter 0.2s ease; }
 .viewHead.floating.dark:hover .viewLogo, .viewHead.floating.dark:hover .viewWordmark { filter: none; }
 .projNav { z-index: 13; }
-html:has(.view.scrollView:not([hidden])) #mouse-circle { mix-blend-mode: normal; }
+/* normal blending only while the bubble is behind one of these (the tabs and everything else keep the multiply blend) */
+html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #mouse-circle { mix-blend-mode: normal; }
 @media (max-width: 700px) { .viewHead.floating { padding: 8px 14px; } .viewClose.floating { width: 40px; height: 40px; } }
