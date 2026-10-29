@@ -456,12 +456,20 @@
     b.hidden = true;
     document.body.appendChild(b);
     b.addEventListener("click", function () { goProject(dir === "prev" ? -1 : 1); });
+    // the hover bubble is drawn on the button, in the page colour, and leans toward the cursor
+    b.addEventListener("mousemove", function (e) {
+      var r = b.getBoundingClientRect();
+      b.style.setProperty("--mx", (e.clientX - (r.left + r.width / 2)) * 0.3 + "px");
+      b.style.setProperty("--my", (e.clientY - (r.top + r.height / 2)) * 0.3 + "px");
+    });
+    b.addEventListener("mouseleave", function () { b.style.setProperty("--mx", "0px"); b.style.setProperty("--my", "0px"); });
     return b;
   });
   function showProjNav(view, top, height, side, narrow) {
     if (narrow) return;
     projNav.forEach(function (b, i) {
       b.hidden = false;
+      b.style.setProperty("--tint", view.style.getPropertyValue("--tint"));
       b.style.top = top + height / 2 + "px";
       b.style[i === 0 ? "left" : "right"] = (side - 40) / 2 + "px";
       gsap.fromTo(b, { autoAlpha: 0 }, { autoAlpha: 1, duration: t(0.3), delay: t(0.15), overwrite: "auto" });

@@ -1788,3 +1788,16 @@ html:has(.view.scrollView .viewClose:hover) #mouse-circle { opacity: 0 !importan
 .view.dark.scrollView .viewHead:hover .viewLogo, .view.dark.scrollView .viewHead:hover .viewWordmark,
 .view.dark.scrollView .viewHead:focus-visible .viewLogo, .view.dark.scrollView .viewHead:focus-visible .viewWordmark { filter: none; }
 html:has(.view.scrollView .viewHead:hover) #mouse-circle { opacity: 0 !important; }
+
+/* the previous / next project chevrons: the same hover bubble (page colour, stroke, soft shadow) as the close button */
+.projNav { color: #1A1A1A; }
+.projNav::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 50%; box-sizing: border-box;
+  background: var(--tint, #fff);
+  border: 1px solid rgba(47, 39, 37, 0.12);
+  box-shadow: 0px 8px 20px -8px rgba(47, 39, 37, 0.14), 0px 2px 6px 0px rgba(47, 39, 37, 0.05);
+  opacity: 0; transform: translate(var(--mx, 0px), var(--my, 0px)) scale(0.5);
+  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.projNav:hover::before, .projNav:focus-visible::before { opacity: 1; transform: translate(var(--mx, 0px), var(--my, 0px)) scale(1.1); }
+html:has(.projNav:hover) #mouse-circle { opacity: 0 !important; }
