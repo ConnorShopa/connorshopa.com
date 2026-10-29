@@ -59,7 +59,7 @@
   chips.forEach(function (c) {
     c.addEventListener("click", function () {
       var target = c.hasAttribute("data-work") ? null : c.getAttribute("data-panel");
-      var openView = document.documentElement.classList.contains("view-open") && document.querySelector(".view:not([hidden]) .viewClose");
+      var openView = document.documentElement.classList.contains("view-open") && document.querySelector(".viewClose.floating:not([hidden]), .view:not([hidden]) .viewClose");
       if (!openView || !target) { go(target); return; }
       // a project is open: close it first, then move to the new tab once it has finished closing
       openView.click();
