@@ -1063,8 +1063,12 @@ html.view-open .contactBlock {
   height: 100%;
   max-width: 100%;
   aspect-ratio: 0.475;
-  padding: 8px;
-  border-radius: 42px;
+  /* everything below is sized in units of the phone's own width (cqw), so the proportions hold at any size.
+     Apple's device corner is ~14.5% of the device width; the % radius below is that, as a circle (the x radius
+     is 14.5% of the width, the y radius the same length as a % of the height: 14.5 * 0.475) */
+  container-type: inline-size;
+  padding: 0;
+  border-radius: 14.5% / 6.89%;
   background: linear-gradient(135deg, #6a6d74 0%, #18191c 11%, #54575d 26%, #0f1013 42%, #7a7d84 56%, #17181b 72%, #5b5e64 88%, #232428 100%); /* midnight black, polished metal */
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.38),
@@ -1077,37 +1081,39 @@ html.view-open .contactBlock {
 .phone::before {
   content: "";
   position: absolute;
-  inset: 2.5px;
-  border-radius: 39.5px;
+  inset: 0.7cqw;
+  border-radius: 13.8cqw; /* concentric with the outer edge */
   background: #050506;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
 }
 
 .pgMedia .phone img,
 .phone img {
-  position: relative;
+  position: absolute;
+  top: 3cqw;
+  left: 3cqw;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 6cqw);
+  height: calc(100% - 6cqw);
   max-width: none;
   max-height: none;
   object-fit: cover;
-  border-radius: 34px;
+  border-radius: 11.5cqw; /* outer radius minus the bezel, so the corners stay concentric */
   box-shadow: none;
 }
 
 /* a faint reflection across the glass */
 .phoneGlare {
   position: absolute;
-  inset: 8px;
-  border-radius: 34px;
+  inset: 3cqw;
+  border-radius: 11.5cqw;
   background: linear-gradient(118deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 22%, rgba(255, 255, 255, 0) 38%);
   pointer-events: none;
 }
 
 .phoneIsland {
   position: absolute;
-  top: 18px;
+  top: 6.2cqw;
   left: 50%;
   translate: -50% 0;
   width: 29%;
@@ -1120,12 +1126,13 @@ html.view-open .contactBlock {
 /* action + volume buttons on the left, power on the right */
 .phoneBtn {
   position: absolute;
-  width: 3px;
+  width: 1.5cqw;
+  min-width: 2px;
   background: linear-gradient(to right, #1a1b1e, #3b3d42 60%, #26282b);
 }
 
 .phoneBtn.l {
-  left: -2.5px;
+  left: -1.1cqw;
   top: 13%;
   height: 22%;
   border-radius: 2px 0 0 2px;
@@ -1134,7 +1141,7 @@ html.view-open .contactBlock {
 }
 
 .phoneBtn.r {
-  right: -2.5px;
+  right: -1.1cqw;
   top: 21%;
   height: 8%;
   border-radius: 0 2px 2px 0;
@@ -1309,14 +1316,14 @@ html.view-open .contactBlock {
 /* a second screenshot over the phone's first, faded in with the second step */
 .phone .phoneAlt {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  width: calc(100% - 16px); /* a replaced element doesn't stretch between insets, so it is sized outright */
-  height: calc(100% - 16px);
+  top: 3cqw;
+  left: 3cqw;
+  width: calc(100% - 6cqw); /* a replaced element doesn't stretch between insets, so it is sized outright */
+  height: calc(100% - 6cqw);
   max-width: none;
   max-height: none;
   object-fit: cover;
-  border-radius: 34px;
+  border-radius: 11.5cqw;
   opacity: 0;
 }
 
