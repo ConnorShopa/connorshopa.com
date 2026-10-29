@@ -1871,3 +1871,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* Drawl: set in Nunito, like the Drawble app */
 .drawlText { font-family: "Nunito", "Host Grotesk", sans-serif; font-weight: 800; letter-spacing: -0.01em; }
 .drawlText { background: linear-gradient(100deg, #1FC8C0 0%, #F7D93A 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; text-shadow: none; }
+
+/* gradient text is only painted inside its own box: give the box room for descenders ("p") and the italic overhang */
+.sheepText, .drawlText { display: inline-block; line-height: 1.25; padding: 0.08em 0.14em 0.22em; margin: -0.08em -0.14em -0.22em; }
