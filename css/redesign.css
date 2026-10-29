@@ -1677,3 +1677,18 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
 .projNav { position: fixed; z-index: 12; transform: translateY(-50%); width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; border: 0; background: none; color: var(--ink); cursor: pointer; }
 .projNav[hidden] { display: none; }
 @media (max-width: 700px) { .projNav { display: none !important; } }
+
+/* wide screens: the links and logos in the list are larger */
+@media (min-width: 901px) {
+  .inline.big { font-size: 40px; }
+  .logo { height: 56px; max-width: 140px; }
+  .logo.wide { max-width: 140px; }
+  .rowLogo .logo { height: 48px; }
+  .rowLogo .wordmark { height: 22px; }
+  .stackLogo.small .logo { height: 32px; }
+  .withCaption .logo { height: 32px; }
+  .logo.altq { height: 24px; }
+  .logo.pollin { height: 40px; }
+  .logo.sheep { height: 28px; }
+  .spotIcon { width: 32px; height: 34px; }
+}
