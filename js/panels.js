@@ -106,8 +106,8 @@ document.addEventListener("submit", function (e) { if (e.target.closest && e.tar
   }, { passive: true });
 })();
 
-// The dark highlight behind the active tab is one shape that slides to whichever tab is active (click, scroll or
-// closing a project), instead of switching on and off
+// The dark highlight behind the active tab pops in softly on whichever tab becomes active (click, scroll or
+// closing a project)
 (function () {
   var group = document.querySelector(".filters");
   if (!group || typeof gsap === "undefined") return;
@@ -123,7 +123,11 @@ document.addEventListener("submit", function (e) { if (e.target.closest && e.tar
     if (!on) return;
     var to = { x: on.offsetLeft, y: on.offsetTop, width: on.offsetWidth, height: on.offsetHeight };
     if (!animate || first || reduce) { gsap.set(bg, to); first = false; gsap.set(bg, { autoAlpha: 1 }); }
-    else gsap.to(bg, Object.assign({ duration: 0.45, ease: "power3.out", overwrite: "auto" }, to));
+    else { // no sliding: the highlight appears on the new tab with a small, soft pop
+      gsap.killTweensOf(bg);
+      gsap.set(bg, to);
+      gsap.fromTo(bg, { scale: 0.88, autoAlpha: 0, transformOrigin: "50% 50%" }, { scale: 1, autoAlpha: 1, duration: 0.3, ease: "power2.out" });
+    }
   }
   new MutationObserver(function () { place(true); }).observe(group, { attributes: true, attributeFilter: ["aria-pressed"], subtree: true });
   window.addEventListener("resize", function () { place(false); });
