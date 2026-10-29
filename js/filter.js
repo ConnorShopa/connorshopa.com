@@ -29,7 +29,7 @@
   // phones report a wider window when something overflows, so the screen width counts too
   var perRow = function () {
     var w = Math.min(window.innerWidth, window.screen && screen.width ? screen.width : Infinity);
-    return w <= 700 ? 1 : w > 1100 ? 5 : 3; // one on phones, three on tablets, five on wide screens
+    return w <= 700 ? 2 : w > 1100 ? 5 : 3; // two on phones (never fewer than two), three on tablets, five on wide screens
   };
   function layoutRows(listEl, lis) {
     var per = perRow();
