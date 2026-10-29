@@ -288,34 +288,7 @@
     var lum = (0.299 * cm[0] + 0.587 * cm[1] + 0.114 * cm[2]) / 255;
     view.style.setProperty("--closeInk", lum < 0.55 ? "#FFFFFF" : "#1A1A1A");
     view.style.setProperty("--tint", pageBg);
-    var headEl = view.querySelector(".viewHead");
-    if (headEl && view.classList.contains("scrollView") && !headEl.__magnet) {
-      // the logo: a hover bubble like the close button's, and a click takes the content back to the top
-      headEl.__magnet = true;
-      headEl.setAttribute("role", "button");
-      headEl.setAttribute("tabindex", "0");
-      headEl.setAttribute("aria-label", "Back to the top");
-      var toTop = function () { var vb = view.querySelector(".viewBody"); if (vb) vb.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); };
-      headEl.addEventListener("click", toTop);
-      headEl.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toTop(); } });
-      headEl.addEventListener("mousemove", function (e) {
-        var r = headEl.getBoundingClientRect();
-        headEl.style.setProperty("--mx", (e.clientX - (r.left + r.width / 2)) * 0.2 + "px");
-        headEl.style.setProperty("--my", (e.clientY - (r.top + r.height / 2)) * 0.3 + "px");
-      });
-      headEl.addEventListener("mouseleave", function () { headEl.style.setProperty("--mx", "0px"); headEl.style.setProperty("--my", "0px"); });
-    }
-    var closeBtn = view.querySelector(".viewClose");
-    if (closeBtn && view.classList.contains("scrollView") && !closeBtn.__magnet) {
-      // its hover bubble is drawn on the button itself (in the page colour) and leans toward the cursor like the others
-      closeBtn.__magnet = true;
-      closeBtn.addEventListener("mousemove", function (e) {
-        var r = closeBtn.getBoundingClientRect();
-        closeBtn.style.setProperty("--mx", (e.clientX - (r.left + r.width / 2)) * 0.3 + "px");
-        closeBtn.style.setProperty("--my", (e.clientY - (r.top + r.height / 2)) * 0.3 + "px");
-      });
-      closeBtn.addEventListener("mouseleave", function () { closeBtn.style.setProperty("--mx", "0px"); closeBtn.style.setProperty("--my", "0px"); });
-    } // the floating logo and close button use the page's light colour
+    var darkCard = lum < 0.55;
     // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
     var top = TABS_TOP + chipsH + 24;
     var side = narrow ? 12 : SIDE;
@@ -325,7 +298,8 @@
     view.style.height = height + "px";
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height;
-    showProjNav(view, top, height, side, narrow);
+    showProjNav(view, top, height, side, narrow, pageBg);
+    showChrome(view, top, side, pageBg, narrow, darkCard);
     // the card IS the hover bubble: the bubble (js/mouse.js) grows to the card's size and shape, then the card
     // takes over and its contents fade in
     var b = bubbleOf(trigger);
@@ -366,7 +340,7 @@
       gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
     }, { x: b.cx, y: b.cy });
 
-    var close = view.querySelector(".viewClose");
+    var close = view._close || view.querySelector(".viewClose");
     if (close) gsap.delayedCall(t(0.2), function () { close.focus({ preventScroll: true }); });
   }
 
@@ -374,6 +348,7 @@
   // gallery isn't touched; show() below re-lays it out for the new project)
   function switchFrom(current) {
     var old = current.view;
+    hideChrome(old);
     open = null;
     gsap.killTweensOf(old);
     gsap.to(old, {
@@ -406,6 +381,7 @@
     var view = open.view;
     holdRow = false;
     hideProjNav();
+    hideChrome(view);
     restoreIntro();
     var trigger = open.trigger;
     var open_link = open.link;
@@ -456,23 +432,53 @@
     b.hidden = true;
     document.body.appendChild(b);
     b.addEventListener("click", function () { goProject(dir === "prev" ? -1 : 1); });
-    // the hover bubble is drawn on the button, in the page colour, and leans toward the cursor
-    b.addEventListener("mousemove", function (e) {
-      var r = b.getBoundingClientRect();
-      b.style.setProperty("--mx", (e.clientX - (r.left + r.width / 2)) * 0.3 + "px");
-      b.style.setProperty("--my", (e.clientY - (r.top + r.height / 2)) * 0.3 + "px");
-    });
-    b.addEventListener("mouseleave", function () { b.style.setProperty("--mx", "0px"); b.style.setProperty("--my", "0px"); });
     return b;
   });
-  function showProjNav(view, top, height, side, narrow) {
+  if (window.bindHover) window.bindHover(document); // the chevrons join the site-wide hover bubble
+  function showProjNav(view, top, height, side, narrow, tint) {
     if (narrow) return;
     projNav.forEach(function (b, i) {
       b.hidden = false;
-      b.style.setProperty("--tint", view.style.getPropertyValue("--tint"));
+      b.setAttribute("data-bubble", tint);
       b.style.top = top + height / 2 + "px";
       b.style[i === 0 ? "left" : "right"] = (side - 40) / 2 + "px";
       gsap.fromTo(b, { autoAlpha: 0 }, { autoAlpha: 1, duration: t(0.3), delay: t(0.15), overwrite: "auto" });
+    });
+  }
+  // the logo and close button of a scrolling project float above everything (they live on the page, above the
+  // cursor bubble), so the one site-wide bubble can sit behind them and change only colour and shape
+  function showChrome(view, top, side, tint, narrow, dark) {
+    if (!view.classList.contains("scrollView")) return;
+    var head = view._head || (view._head = view.querySelector(".viewHead"));
+    var close = view._close || (view._close = view.querySelector(".viewClose"));
+    if (!head || !close) return;
+    [head, close].forEach(function (el) {
+      if (el.parentNode !== document.body) document.body.appendChild(el);
+      el.classList.add("floating");
+      el.classList.toggle("dark", dark);
+      el.setAttribute("data-bubble", tint);
+      el.hidden = false;
+    });
+    if (!head.__toTop) {
+      head.__toTop = true;
+      head.setAttribute("role", "button");
+      head.setAttribute("tabindex", "0");
+      head.setAttribute("aria-label", "Back to the top");
+      var toTop = function () { var vb = view.querySelector(".viewBody"); if (vb) vb.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); };
+      head.addEventListener("click", toTop);
+      head.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toTop(); } });
+    }
+    var inset = narrow ? 20 : 52, drop = narrow ? 20 : 44;
+    head.style.left = side + inset + "px";
+    head.style.top = top + drop + "px";
+    close.style.right = side + inset + "px";
+    close.style.top = top + drop + "px";
+    close.style.color = dark ? "#FFFFFF" : "#1A1A1A";
+    gsap.fromTo([head, close], { autoAlpha: 0 }, { autoAlpha: 1, duration: t(0.3), delay: t(0.25), overwrite: "auto" });
+  }
+  function hideChrome(view) {
+    [view._head, view._close].forEach(function (el) {
+      if (el) gsap.to(el, { autoAlpha: 0, duration: t(0.15), overwrite: "auto", onComplete: function () { el.hidden = true; } });
     });
   }
   function hideProjNav() {

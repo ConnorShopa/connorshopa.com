@@ -1771,7 +1771,6 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
 .view.scrollView .viewClose:hover::before, .view.scrollView .viewClose:focus-visible::before { opacity: 1; transform: translate(var(--mx, 0px), var(--my, 0px)) scale(1.1); }
 
 /* over the scrolling projects' close button the button draws its own bubble, so the cursor dot steps aside */
-html:has(.view.scrollView .viewClose:hover) #mouse-circle { opacity: 0 !important; }
 
 /* the project logo: no backdrop at rest; the page-coloured bubble (with the stroke) grows in behind it on hover, and a click scrolls back to the top */
 .view.scrollView .viewHead { background: none; box-shadow: none; cursor: pointer; }
@@ -1787,7 +1786,6 @@ html:has(.view.scrollView .viewClose:hover) #mouse-circle { opacity: 0 !importan
 .view.dark.scrollView .viewLogo, .view.dark.scrollView .viewWordmark { filter: brightness(0) invert(1); transition: filter 0.2s ease; }
 .view.dark.scrollView .viewHead:hover .viewLogo, .view.dark.scrollView .viewHead:hover .viewWordmark,
 .view.dark.scrollView .viewHead:focus-visible .viewLogo, .view.dark.scrollView .viewHead:focus-visible .viewWordmark { filter: none; }
-html:has(.view.scrollView .viewHead:hover) #mouse-circle { opacity: 0 !important; }
 
 /* the previous / next project chevrons: the same hover bubble (page colour, stroke, soft shadow) as the close button */
 .projNav { color: #1A1A1A; }
@@ -1800,4 +1798,17 @@ html:has(.view.scrollView .viewHead:hover) #mouse-circle { opacity: 0 !important
   transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 .projNav:hover::before, .projNav:focus-visible::before { opacity: 1; transform: translate(var(--mx, 0px), var(--my, 0px)) scale(1.1); }
-html:has(.projNav:hover) #mouse-circle { opacity: 0 !important; }
+
+/* the logo, close button and project chevrons sit above the cursor bubble (z-index 13 vs its 12), so the same
+   bubble that follows the cursor everywhere is what shows behind them: only its colour and shape change */
+.viewHead.floating, .viewClose.floating { position: fixed; z-index: 13; background: none; box-shadow: none; }
+.viewHead.floating[hidden], .viewClose.floating[hidden] { display: none; }
+.viewHead.floating::before, .viewClose.floating::before, .projNav::before { display: none; }
+.viewHead.floating { padding: 12px 20px; border-radius: 999px; cursor: pointer; }
+.viewClose.floating { width: 48px; height: 48px; border-radius: 50%; }
+.viewClose.floating:hover, .viewClose.floating:focus-visible { color: #2F2725 !important; }
+.viewHead.floating.dark .viewLogo, .viewHead.floating.dark .viewWordmark { filter: brightness(0) invert(1); transition: filter 0.2s ease; }
+.viewHead.floating.dark:hover .viewLogo, .viewHead.floating.dark:hover .viewWordmark { filter: none; }
+.projNav { z-index: 13; }
+html:has(.view.scrollView:not([hidden])) #mouse-circle { mix-blend-mode: normal; }
+@media (max-width: 700px) { .viewHead.floating { padding: 8px 14px; } .viewClose.floating { width: 40px; height: 40px; } }
