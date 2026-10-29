@@ -1839,3 +1839,8 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .filters .pill { position: relative; z-index: 1; transition: color 0.3s ease; }
 .filters .pill[aria-pressed="true"] { background: transparent; box-shadow: none; color: var(--bg); }
 .filters .pill[aria-pressed="true"]::before { display: none; }
+
+/* Thoughtify's corner lockup: the same green icon and name as its gallery link */
+.viewSpot { display: inline-flex; align-items: center; gap: 8px; }
+.viewSpot .spotIcon { width: 24px; height: 26px; }
+.viewSpot .spot { font-size: 22px; line-height: 1; }

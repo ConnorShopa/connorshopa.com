@@ -110,7 +110,8 @@
 
     var html = '<div class="viewHead' + (proj.wordmark ? " stacked" : "") + '">';
     // an underline under the logo (Habbot) goes in a small column
-    if (proj.icon) html += '<span class="viewStack"><img class="viewLogo" src="' + proj.logo + '" alt=""><img class="viewIcon" src="' + proj.icon + '" alt=""></span>';
+    if (proj.headHtml) html += proj.headHtml;
+    else if (proj.icon) html += '<span class="viewStack"><img class="viewLogo" src="' + proj.logo + '" alt=""><img class="viewIcon" src="' + proj.icon + '" alt=""></span>';
     else if (proj.logo) html += '<img class="viewLogo" src="' + proj.logo + '" alt="">';
     // a wordmark replaces the written title (which stays for screen readers) and sits under the icon
     if (proj.wordmark) html += '<img class="viewWordmark" src="' + proj.wordmark + '" alt="">';
