@@ -287,7 +287,9 @@
     var cm = getComputedStyle(view).backgroundColor.match(/[\d.]+/g) || [255, 255, 255];
     var lum = (0.299 * cm[0] + 0.587 * cm[1] + 0.114 * cm[2]) / 255;
     view.style.setProperty("--closeInk", lum < 0.55 ? "#FFFFFF" : "#1A1A1A");
-    view.style.setProperty("--tint", pageBg); // the floating logo and close button use the page's light colour
+    view.style.setProperty("--tint", pageBg);
+    var closeBtn = view.querySelector(".viewClose");
+    if (closeBtn && view.classList.contains("scrollView")) closeBtn.setAttribute("data-bubble", pageBg); // the cursor bubble over it is the light tint // the floating logo and close button use the page's light colour
     // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
     var top = TABS_TOP + chipsH + 24;
     var side = narrow ? 12 : SIDE;

@@ -1756,14 +1756,6 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .view.scrollView .viewBody { padding-top: 92px; }
 }
 
-/* close button: just the icon, white or black for the project's colour; its round backdrop grows in on hover */
+/* close button: just the icon, white or black for the project's colour; the cursor bubble is its backdrop on hover */
 .view.scrollView .viewClose { background: none; box-shadow: none; color: var(--closeInk, #1A1A1A); transition: color 0.2s ease; }
-.view.scrollView .viewClose::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 50%;
-  background: var(--tint, #fff);
-  box-shadow: 0 8px 22px -8px rgba(47, 39, 37, 0.28), 0 2px 6px rgba(47, 39, 37, 0.1);
-  opacity: 0; transform: scale(0.5);
-  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-}
 .view.scrollView .viewClose:hover, .view.scrollView .viewClose:focus-visible { color: #2F2725; }
-.view.scrollView .viewClose:hover::before, .view.scrollView .viewClose:focus-visible::before { opacity: 1; transform: scale(1); }
