@@ -1769,3 +1769,6 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
 }
 .view.scrollView .viewClose:hover, .view.scrollView .viewClose:focus-visible { color: #2F2725; }
 .view.scrollView .viewClose:hover::before, .view.scrollView .viewClose:focus-visible::before { opacity: 1; transform: translate(var(--mx, 0px), var(--my, 0px)) scale(1.1); }
+
+/* over the scrolling projects' close button the button draws its own bubble, so the cursor dot steps aside */
+html:has(.view.scrollView .viewClose:hover) #mouse-circle { opacity: 0 !important; }
