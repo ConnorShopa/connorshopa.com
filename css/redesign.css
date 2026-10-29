@@ -1874,3 +1874,72 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* gradient text is only painted inside its own box: give the box room for descenders ("p") and the italic overhang */
 .sheepText, .drawlText { display: inline-block; line-height: 1.25; padding: 0.08em 0.14em 0.22em; margin: -0.08em -0.14em -0.22em; }
+
+/* =====================================================================================================
+   Project views (all but Habbot): one centred column per page, like the main page. The words sit centred on top
+   and the pictures centred under them, sized to fit the card: a single picture is as big as the card allows, a
+   row of pictures shares the width.
+   ===================================================================================================== */
+.view.scrollView .pg.two,
+.view.scrollView .pg.flip,
+.view.scrollView .pg.media,
+.view.scrollView .pg.one {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+  padding: 56px 0;
+}
+.view.scrollView .pg.flip .pgText { order: -1; } /* the words come first, whichever side the picture used to be on */
+
+.view.scrollView .pgText { align-items: center; max-width: 680px; width: 100%; gap: 18px; overflow: visible; max-height: none; text-align: center; }
+.view.scrollView .pg .lead { font-size: clamp(30px, 3.2vw, 44px); }
+.view.scrollView .pg .eyebrow { display: inline-block; }
+.view.scrollView .pg .facts { justify-content: center; text-align: center; width: 100%; }
+.view.scrollView .pg .fact { align-items: center; }
+.view.scrollView .pg .stats { justify-content: center; }
+.view.scrollView .pg .list { list-style-position: inside; padding-left: 0; text-align: center; }
+.view.scrollView .pg .list li + li { margin-top: 4px; }
+.view.scrollView .pg .quote { padding: 0; border: 0; font-style: italic; max-width: 540px; }
+.view.scrollView .pg .body { max-width: 620px; }
+
+/* pictures: centred, as big as fits */
+.view.scrollView .pgMedia {
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+.view.scrollView .pgMedia figure { flex: 0 1 auto; height: auto; min-width: 0; }
+.view.scrollView .pgMedia img,
+.view.scrollView .pgMedia video {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: min(58vh, 620px);
+  object-fit: contain;
+}
+/* two or three pictures side by side: each takes an even share, a little shorter so they sit as a row */
+.view.scrollView .pgMedia:has(figure:nth-child(2)) figure { flex: 1 1 0; }
+.view.scrollView .pgMedia:has(figure:nth-child(2)) img,
+.view.scrollView .pgMedia:has(figure:nth-child(2)) video { max-height: min(46vh, 480px); }
+.view.scrollView .pgMedia:has(figure:nth-child(4)) figure { flex: 1 1 22%; }
+.view.scrollView .pgMedia iframe { width: 100%; max-width: 880px; max-height: none; }
+.view.scrollView .pg.media .pgMedia img,
+.view.scrollView .pg.media .pgMedia video { max-height: min(66vh, 720px); }
+.view.scrollView .pg.media .pgMedia { max-width: 1000px; }
+
+/* the galleries (Sketchbook, Micro + Motion): the same centred width */
+.view.scrollView .pg.gallery { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+.view.scrollView .pgGallery { width: 100%; max-width: 1040px; max-height: none; overflow: visible; margin: 0 auto; }
+
+@media (max-width: 700px) {
+  .view.scrollView .pg.two, .view.scrollView .pg.flip, .view.scrollView .pg.media, .view.scrollView .pg.one { gap: 24px; padding: 28px 0; }
+  .view.scrollView .pgMedia img, .view.scrollView .pgMedia video { max-height: 52vh; }
+  .view.scrollView .pgMedia:has(figure:nth-child(2)) figure { flex: 1 1 100%; }
+}
