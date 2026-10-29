@@ -384,6 +384,12 @@
     var trigger = open.trigger;
     var open_link = open.link;
     var b = open.bubble;
+    // opened from a chevron: the card collapses back toward its own link in the gallery, not toward the chevron
+    if (open_link && open_link !== trigger) {
+      var lb = bubbleOf(open_link);
+      lb.fill = b.fill || lb.fill;
+      b = lb;
+    }
     open = null;
 
     gsap.killTweensOf(view);
