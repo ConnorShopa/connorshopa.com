@@ -105,3 +105,27 @@ document.addEventListener("submit", function (e) { if (e.target.closest && e.tar
     setTimeout(function () { busy = false; }, 1100); // one step per flick: trackpad momentum keeps sending events
   }, { passive: true });
 })();
+
+// The dark highlight behind the active tab is one shape that slides to whichever tab is active (click, scroll or
+// closing a project), instead of switching on and off
+(function () {
+  var group = document.querySelector(".filters");
+  if (!group || typeof gsap === "undefined") return;
+  var chips = Array.prototype.slice.call(group.querySelectorAll(".pill"));
+  var bg = document.createElement("span");
+  bg.className = "tabBg";
+  bg.setAttribute("aria-hidden", "true");
+  group.insertBefore(bg, group.firstChild);
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var first = true;
+  function place(animate) {
+    var on = chips.filter(function (c) { return c.getAttribute("aria-pressed") === "true"; })[0];
+    if (!on) return;
+    var to = { x: on.offsetLeft, y: on.offsetTop, width: on.offsetWidth, height: on.offsetHeight };
+    if (!animate || first || reduce) { gsap.set(bg, to); first = false; gsap.set(bg, { autoAlpha: 1 }); }
+    else gsap.to(bg, Object.assign({ duration: 0.45, ease: "power3.out", overwrite: "auto" }, to));
+  }
+  new MutationObserver(function () { place(true); }).observe(group, { attributes: true, attributeFilter: ["aria-pressed"], subtree: true });
+  window.addEventListener("resize", function () { place(false); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { first = true; place(false); }); else place(false);
+})();

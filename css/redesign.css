@@ -1813,3 +1813,21 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
 /* normal blending only while the bubble is behind one of these (the tabs and everything else keep the multiply blend) */
 html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #mouse-circle { mix-blend-mode: normal; }
 @media (max-width: 700px) { .viewHead.floating { padding: 8px 14px; } .viewClose.floating { width: 40px; height: 40px; } }
+
+/* the sliding highlight behind the active tab (js/panels.js): it carries the fill, stroke and shadow the active tab used to have */
+.filters { position: relative; }
+.tabBg {
+  position: absolute; left: 0; top: 0; z-index: 0; border-radius: 999px; pointer-events: none; opacity: 0;
+  background: var(--ink);
+  box-shadow: 0 6px 14px -4px rgba(47, 39, 37, 0.28), 0 2px 4px rgba(47, 39, 37, 0.12);
+}
+.tabBg::before {
+  content: ""; position: absolute; inset: -1px; padding: 1px; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.filters .pill { position: relative; z-index: 1; transition: color 0.3s ease; }
+.filters .pill[aria-pressed="true"] { background: transparent; box-shadow: none; color: var(--bg); }
+.filters .pill[aria-pressed="true"]::before { display: none; }
