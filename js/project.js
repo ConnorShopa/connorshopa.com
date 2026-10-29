@@ -289,7 +289,16 @@
     view.style.setProperty("--closeInk", lum < 0.55 ? "#FFFFFF" : "#1A1A1A");
     view.style.setProperty("--tint", pageBg);
     var closeBtn = view.querySelector(".viewClose");
-    if (closeBtn && view.classList.contains("scrollView")) closeBtn.setAttribute("data-bubble", pageBg); // the cursor bubble over it is the light tint // the floating logo and close button use the page's light colour
+    if (closeBtn && view.classList.contains("scrollView") && !closeBtn.__magnet) {
+      // its hover bubble is drawn on the button itself (in the page colour) and leans toward the cursor like the others
+      closeBtn.__magnet = true;
+      closeBtn.addEventListener("mousemove", function (e) {
+        var r = closeBtn.getBoundingClientRect();
+        closeBtn.style.setProperty("--mx", (e.clientX - (r.left + r.width / 2)) * 0.3 + "px");
+        closeBtn.style.setProperty("--my", (e.clientY - (r.top + r.height / 2)) * 0.3 + "px");
+      });
+      closeBtn.addEventListener("mouseleave", function () { closeBtn.style.setProperty("--mx", "0px"); closeBtn.style.setProperty("--my", "0px"); });
+    } // the floating logo and close button use the page's light colour
     // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
     var top = TABS_TOP + chipsH + 24;
     var side = narrow ? 12 : SIDE;
