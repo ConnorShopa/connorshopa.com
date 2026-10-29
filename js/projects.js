@@ -258,6 +258,7 @@
     // ---------------------------------------------------------------- Spotify dreams
     spotify: {
       title: "Spotify dreams",
+      logoOnly: true, // the corner shows just the Thoughtify lockup; the title stays for screen readers
       bg: "#CDEFD1", // a pale wash of Spotify green, so the green icon and name read on it
       logo: H + "spotifyDreams_projectImage.svg",
       headHtml: '<span class="viewSpot"><span class="spotIcon" aria-hidden="true"></span><span class="spot">Thoughtify</span></span>', // the same lockup as the gallery link
