@@ -129,11 +129,11 @@ document.addEventListener("submit", function (e) { if (e.target.closest && e.tar
         var ghost = bg.cloneNode(true);
         group.insertBefore(ghost, bg);
         gsap.set(ghost, { x: gsap.getProperty(bg, "x"), y: gsap.getProperty(bg, "y"), width: gsap.getProperty(bg, "width"), height: gsap.getProperty(bg, "height"), scale: gsap.getProperty(bg, "scale"), autoAlpha: gsap.getProperty(bg, "opacity"), transformOrigin: "50% 50%" });
-        gsap.to(ghost, { scale: 0.88, autoAlpha: 0, duration: 0.22, ease: "power2.in", onComplete: function () { ghost.remove(); } });
+        gsap.to(ghost, { scale: 0.6, autoAlpha: 0, duration: 0.25, ease: "power2.in", onComplete: function () { ghost.remove(); } });
       }
       gsap.killTweensOf(bg);
       gsap.set(bg, to);
-      gsap.fromTo(bg, { scale: 0.88, autoAlpha: 0, transformOrigin: "50% 50%" }, { scale: 1, autoAlpha: 1, duration: 0.3, ease: "power2.out" });
+      gsap.fromTo(bg, { scale: 0.6, autoAlpha: 0, transformOrigin: "50% 50%" }, { scale: 1, autoAlpha: 1, duration: 0.4, ease: "back.out(1.7)" });
     }
   }
   new MutationObserver(function () { place(true); }).observe(group, { attributes: true, attributeFilter: ["aria-pressed"], subtree: true });
