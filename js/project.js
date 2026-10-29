@@ -437,9 +437,13 @@
   if (window.bindHover) window.bindHover(document); // the chevrons join the site-wide hover bubble
   function showProjNav(view, top, height, side, narrow, tint) {
     if (narrow) return;
+    // each chevron's hover bubble takes the colour of the project it leads to
+    var links = Array.prototype.filter.call(document.querySelectorAll("#projectList [data-view]"), function (l) { return document.getElementById("view-" + l.getAttribute("data-view")); });
+    var cur = links.findIndex(function (l) { return document.getElementById("view-" + l.getAttribute("data-view")) === view; });
     projNav.forEach(function (b, i) {
       b.hidden = false;
-      b.setAttribute("data-bubble", tint);
+      var nb = cur < 0 ? null : links[(cur + (i === 0 ? -1 : 1) + links.length) % links.length].getAttribute("data-bubble");
+      if (nb) b.setAttribute("data-bubble", nb); else b.removeAttribute("data-bubble");
       b.style.top = top + height / 2 + "px";
       b.style[i === 0 ? "left" : "right"] = (side - 40) / 2 + "px";
       gsap.fromTo(b, { autoAlpha: 0 }, { autoAlpha: 1, duration: t(0.3), delay: t(0.15), overwrite: "auto" });
@@ -492,8 +496,6 @@
     var link = links[(i + delta + links.length) % links.length];
     var view = document.getElementById("view-" + link.getAttribute("data-view"));
     var btn = projNav[delta < 0 ? 0 : 1];
-    btn.setAttribute("data-bubble", link.getAttribute("data-bubble") || "");
-    if (!btn.getAttribute("data-bubble")) btn.removeAttribute("data-bubble");
     switchFrom(open);
     gsap.delayedCall(t(0.2), function () { show(btn, view, link); });
   }
