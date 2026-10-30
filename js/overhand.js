@@ -2,7 +2,7 @@
    They are pulled toward the middle of the pit, can't overlap each other (each one is a capsule),
    and the mouse pushes them away a little. */
 (function () {
-  var WORDS = ["renders", "business plans", "subscriptions", "ux flows", "product", "money", "mentorship", "ideas"];
+  var GIVE = ["renders", "business plans", "subscriptions", "ux flows"], GET = ["product", "money", "mentorship", "ideas"]; // the two sides of the trade, with "for" between
   // fill, text colour, size (font px), taken from the reference
   var STYLES = [
     ["#FDE9A8", "#0B1620"], ["#E4F9DC", "#0B1620"], ["#F5C97F", "#0B1620"], ["#FFDC5A", "#0B1620"],
@@ -17,18 +17,24 @@
   function build() {
     pit = document.querySelector(".ohPit");
     if (!pit) return;
-    // two rounds of the words, so the pile has enough bubbles
-    var list = WORDS.concat(WORDS.slice().reverse());
-    list.forEach(function (w, i) {
-      var s = STYLES[i % STYLES.length], el = document.createElement("span");
+    // each side is its words repeated, so it reads as "any of these for any of those"
+    var left = GIVE.concat(GIVE.slice().reverse(), GIVE.slice(1), GIVE.slice(0, 2)),
+        right = GET.concat(GET.slice().reverse(), GET.slice(1), GET.slice(0, 2)),
+        list = [];
+    left.forEach(function (w) { list.push([w, -1]); });
+    right.forEach(function (w) { list.push([w, 1]); });
+    list.splice(left.length, 0, ["for", 0]);
+    list.forEach(function (it, i) {
+      var s = STYLES[i % STYLES.length], el = document.createElement("span"), fs = SIZES[i % SIZES.length];
       el.className = "ohBub";
-      el.textContent = w;
-      el.style.background = s[0]; el.style.color = s[1];
-      var fs = SIZES[i % SIZES.length];
+      el.textContent = it[0];
+      if (it[1] === 0) { // "for": a dark pill in the middle, set a little larger
+        el.style.background = "#1B2430"; el.style.color = "#FFDD55"; fs = 24;
+      } else { el.style.background = s[0]; el.style.color = s[1]; }
       el.style.fontSize = fs + "px";
       el.style.padding = Math.round(fs * 0.62) + "px " + Math.round(fs * 1.25) + "px";
       pit.appendChild(el);
-      bubs.push({ el: el, x: 0, y: 0, vx: 0, vy: 0, hw: 0, r: 0 });
+      bubs.push({ el: el, side: it[1], x: 0, y: 0, vx: 0, vy: 0, hw: 0, r: 0 });
     });
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); }, { threshold: 0 }).observe(pit);
@@ -41,14 +47,17 @@
     window.addEventListener("resize", function () { ready = false; });
   }
 
+  // each side of the trade gathers around its own centre, left and right of the middle
+  function armX() { return Math.min(pit.offsetWidth * 0.26, 220); }
+
   function measure() {
     if (!pit.offsetWidth) return false;
     bubs.forEach(function (b, i) {
       var w = b.el.offsetWidth, h = b.el.offsetHeight;
       b.r = h / 2; b.hw = Math.max(0, w / 2 - h / 2); b.w = w; b.h = h;
       if (!ready) { // scatter around the middle on first layout
-        var a = (i / bubs.length) * 6.283 + i, d = 120 + (i % 5) * 28;
-        b.x = Math.cos(a) * d * 1.5; b.y = Math.sin(a) * d * 0.9; b.vx = b.vy = 0;
+        var a = i * 2.4, d = 60 + (i % 5) * 26;
+        b.x = b.side * armX() + Math.cos(a) * d; b.y = Math.sin(a) * d * 0.9; b.vx = b.vy = 0;
       }
     });
     ready = true; return true;
@@ -69,10 +78,10 @@
   }
 
   function step() {
-    var n = bubs.length, i, j, b, k;
+    var n = bubs.length, i, j, b, k, ax = armX();
     for (i = 0; i < n; i++) {
       b = bubs[i];
-      b.vx += -b.x * 0.0035; b.vy += -b.y * 0.0065; // gravity to the middle (a touch stronger vertically: a flatter pile)
+      b.vx += (b.side * ax - b.x) * (b.side ? 0.0035 : 0.02); b.vy += -b.y * 0.0065; // gravity to the middle (a touch stronger vertically: a flatter pile)
       var dx = b.x - mouse.x, dy = b.y - mouse.y, d = Math.sqrt(dx * dx + dy * dy);
       if (d < REACH && d > 0.5) { var f = (1 - d / REACH) * PUSH; b.vx += dx / d * f; b.vy += dy / d * f; }
       b.vx *= 0.86; b.vy *= 0.86;
