@@ -2080,3 +2080,4 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .view.scrollView .pg.one:has(.ohPit) .ohHero { top: 16px; }
 .view.scrollView .pg.one:has(.ohPit) .ohPit { top: 24px; bottom: 24px; }
 #view-overhand .pg .lead.ohTitle, #view-overhand.view.scrollView .pg:first-child .lead.ohTitle { font-size: clamp(60px, 8vw, 104px); line-height: 1; }
+.view.scrollView .pg.one:has(.ohPit) .ohHero { top: auto; bottom: calc(50% + var(--ohR, 190px) - 6px); }

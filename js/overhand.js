@@ -103,6 +103,7 @@
     [L, Rt, Ln].forEach(function (c) { c.style.width = c.style.height = d2 + "px"; c.style.top = (H - R) + "px"; });
     L.style.left = (W - ax - R) + "px"; Rt.style.left = (W + ax - R) + "px"; Ln.style.left = (W + ax - R) + "px";
     Ln.style.clipPath = "circle(" + R + "px at " + (R - 2 * ax) + "px " + R + "px)";
+    pit.parentNode.style.setProperty("--ohR", R + "px"); // so "Trade" can sit just above the circles
     ready = true;
   }
 
