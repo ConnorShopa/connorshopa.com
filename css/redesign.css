@@ -2173,8 +2173,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   .hero > nav { position: fixed; left: 0; right: 0; top: var(--hdrH); bottom: 0; margin: 0; z-index: 1; display: block; }
   .hero > nav > .ghost { display: none; }
   .hero > nav > #projectList {
-    position: absolute; left: 0; right: 0; top: calc(50dvh - var(--hdrH)); transform: translateY(-50%);
-    height: min(560px, calc(100dvh - 2 * var(--hdrH) - 12px)); min-height: 300px;
+    position: absolute; inset: 0; scroll-padding-bottom: var(--hdrH); /* the deck runs to the bottom of the screen; the snap point is the middle of the device */
     display: block; margin: 0; padding: 0; zoom: 1 !important;
     overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
     scroll-snap-type: y mandatory; perspective: 900px; perspective-origin: 50% 50%;
@@ -2182,15 +2181,16 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   }
   .hero > nav > #projectList::-webkit-scrollbar { display: none; }
   /* room above the first card and below the last, so each one can reach the middle */
-  .hero > nav > #projectList::before, .hero > nav > #projectList::after { content: ""; display: block; height: 11%; }
+  .hero > nav > #projectList::before { content: ""; display: block; height: 0; }
+  .hero > nav > #projectList::after { content: ""; display: block; height: 0; }
 
   #projectList li.row-break { display: none; }
   #projectList li:not(.row-break) {
     position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    box-sizing: border-box; width: calc(100% - 32px); height: 78%; margin: 0 16px -3% 16px; padding: 20px 16px 16px;
+    box-sizing: border-box; width: fit-content; min-width: 150px; max-width: calc(100% - 32px); height: auto; margin: 0 auto 18px; padding: 22px 26px;
     background: var(--card, #fff); border-radius: 26px; scroll-snap-align: center; scroll-snap-stop: always;
     box-shadow: 0 14px 34px -14px rgba(47, 39, 37, 0.28), 0 2px 8px rgba(47, 39, 37, 0.08);
-    will-change: scale, translate, rotate; text-align: center;
+    will-change: scale, translate, rotate; text-align: center; transform-origin: 50% 0 !important;
   }
   #projectList li.is-current:not(.row-break) { display: flex !important; } /* the deck stays whole while a project is open */
   #projectList li::after, #projectList li.no-slash::after, #projectList li:last-child::after {
@@ -2199,17 +2199,29 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   }
   #projectList li > a { flex: 1 1 auto; max-width: 100%; zoom: 1.5; }
   #projectList.compact { display: block; }
-  #projectList.compact li > a { filter: none; opacity: 1; }
-  #projectList li > a:hover { filter: none; }
+  /* logos are grey until their card is the one in the middle */
+  #projectList li > a, #projectList.compact li > a { transition: filter .4s ease; }
+  #projectList li:not(.isActive) > a, #projectList.compact li:not(.isActive) > a { filter: grayscale(1); opacity: 1; }
+  #projectList li.isActive > a, #projectList.compact li.isActive > a { filter: none; opacity: 1; }
+  #projectList li:not(.isActive) > a:hover { filter: grayscale(1); }
 
-  /* the button for the card in the middle */
+  /* a small grey copy of the logo on the part of a card that peeks out from behind the front one */
+  .peek { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; align-items: center; justify-content: center; zoom: .8; opacity: 0; transition: opacity .3s ease; pointer-events: none; filter: grayscale(1); }
+  .peek * { max-width: 100%; }
+  #projectList li.isBehind .peek { opacity: 1; }
+  #projectList li.isBehind > a { visibility: hidden; }
+
+  /* the one "Open project" button, fixed at the bottom of the screen, for the card in the middle */
   .openBtn {
-    display: block; flex: none; margin-top: 14px; font: inherit; font-size: 16px; font-weight: 500; letter-spacing: 0; padding: 13px 28px;
+    display: block; position: fixed; z-index: 7; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 26px); margin: 0;
+    font: inherit; font-size: 17px; font-weight: 500; letter-spacing: 0; padding: 15px 34px; white-space: nowrap;
     color: #fff; background: #1B2430; border: 0; border-radius: 999px; cursor: pointer; -webkit-tap-highlight-color: transparent;
-    opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .25s ease, transform .3s cubic-bezier(.2, .8, .2, 1), visibility 0s .3s;
+    box-shadow: 0 10px 24px -8px rgba(27, 36, 48, 0.5);
+    opacity: 0; visibility: hidden; pointer-events: none; transform: translate(-50%, 14px);
+    transition: opacity .25s ease, transform .3s cubic-bezier(.2, .8, .2, 1), visibility 0s .3s;
   }
-  #projectList li.isActive .openBtn { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
-  #projectList li:not(.isActive) .openBtn { pointer-events: none; }
+  .openBtn.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0); transition-delay: 0s; }
+  html.view-open .openBtn { visibility: hidden; }
   @media (prefers-reduced-motion: reduce) { .openBtn { transition: none; } }
 
   /* while a project is open the deck stays out of sight (the card covers the screen) */
