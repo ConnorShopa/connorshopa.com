@@ -387,7 +387,7 @@
 
           '<div class="ohHero">' + p("lead ohTitle", "Trade") + "</div>" +
           '<div class="ohPit" role="img" aria-label="Trade renders, business plans, subscriptions and ux flows for product, money, mentorship and ideas"></div>' +
-          '<form class="earlyForm" novalidate><input class="earlyInput" type="email" placeholder="Email address" autocomplete="email" aria-label="Email address">' +
+          '<form class="earlyForm" novalidate><input class="earlyInput" type="email" pattern="[^@\\s]+@[^@\\s]+\\.[^@\\s]+" placeholder="Email address" autocomplete="email" aria-label="Email address">' +
           '<button type="submit" class="lockBtn earlyBtn">Get early access</button></form>'
         )),
       ],

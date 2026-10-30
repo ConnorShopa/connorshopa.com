@@ -2128,3 +2128,8 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyInput { width: 240px; }
 .view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyBtn.lockBtn { width: auto; white-space: nowrap; }
 @media (max-width: 700px) { .view.scrollView .pg.one:has(.ohPit) .earlyForm { left: 50%; bottom: 28px; width: calc(100% - 24px); box-sizing: border-box; } .view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyInput { width: auto; flex: 1; min-width: 0; } }
+
+/* Overhand sign-up: no drop shadows on the field or card; the button gets a glow ring on hover once the email is valid */
+#view-overhand .earlyForm, #view-overhand .earlyInput, #view-overhand .earlyInput:focus { box-shadow: none; }
+#view-overhand .earlyBtn.lockBtn { transition: none; }
+#view-overhand .earlyForm:has(.earlyInput:not(:placeholder-shown):valid) .earlyBtn.lockBtn:hover:not(:disabled) { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 6px rgba(27, 36, 48, 0.55), 0 0 22px 6px rgba(27, 36, 48, 0.35); }
