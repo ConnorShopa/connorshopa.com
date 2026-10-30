@@ -88,6 +88,22 @@
   var rt;
   window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(relayout, 80); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+  // the rows are worked out from the links' widths, and those change as the logos and fonts arrive: lay the rows out
+  // again whenever the widths are different from the ones the current rows were made with (otherwise the last link
+  // can sit wrapped on a row of its own until something else re-flows the list)
+  var widthsNow = function () { return items.filter(function (li) { return !li.classList.contains("row-break"); }).map(function (li) { return li.offsetWidth; }).join(","); };
+  var widthsAtLayout = widthsNow();
+  var recheck = function () {
+    if (list.classList.contains("compact")) return;
+    var w = widthsNow();
+    if (w !== widthsAtLayout) { widthsAtLayout = w; relayout(); }
+  };
+  var rc;
+  var later = function () { clearTimeout(rc); rc = setTimeout(recheck, 60); };
+  list.querySelectorAll("img").forEach(function (img) { if (!img.complete) img.addEventListener("load", later); });
+  window.addEventListener("load", later);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(later);
+  if (window.ResizeObserver) { var ro = new ResizeObserver(later); items.forEach(function (li) { ro.observe(li); }); }
 
   // ---- on load: the links pop in one after another, from the top left to the bottom right ----
   var links = items.filter(function (li) { return !li.classList.contains("row-break"); });
