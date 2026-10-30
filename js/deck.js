@@ -33,7 +33,7 @@
   if (N < 3) return;
 
   var GAP = 12;    // space between neighbouring cards at the front of the wheel
-  var TIGHT = 0.7; // how close neighbours sit to the card in front (1 = evenly spaced, lower = tighter)
+  var TIGHT = 0.5; // how close neighbours sit to the card in front (1 = evenly spaced, lower = tighter)
   var R = 270;     // the wheel's radius, in px
   var STEP = 150;  // dragging this far moves one card
   var heights = [], dirty = true;
