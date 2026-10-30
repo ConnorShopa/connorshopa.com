@@ -152,7 +152,7 @@
           text(
             p("lead", "A Living Growing Style &amp; Design System") +
             '<div class="facts">' + fact("Built for", "A small team of engineers, designers, marketers &amp; good folk") + fact("Methodology", "Atomic Design System") + "</div>"
-          ) + media('<figure><div class="seedSprout" role="img" aria-label="A seed sprouting">' + "<svg class=\"sproutSvg\" viewBox=\"0 0 200 220\" aria-hidden=\"true\"><g class=\"sSway\"><path class=\"sStem\" pathLength=\"1\" d=\"M100 176 C90 142 114 112 102 62\"/><path class=\"sLeaf sLeafB\" d=\"M98 112 C84 92 56 90 34 100 C44 124 74 132 98 112Z\"/><path class=\"sLeaf sLeafA\" d=\"M102 66 C112 36 142 20 174 26 C172 58 140 80 102 66Z\"/></g><path class=\"sSeed\" d=\"M52 188 C68 160 132 160 148 188 C132 216 68 216 52 188Z\"/></svg>" + "</div></figure>")),
+          ) + media(fig(A + "seedsAssets/seeds_image00.png"))),
         pg("flip",
           media(fig(A + "seedsAssets/seeds_image01_cut.png")) +
           text(

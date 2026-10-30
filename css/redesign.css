@@ -1994,27 +1994,3 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* the Seeds icon, painted in Bank Blue through its own shape */
 .seedsIcon { display: block; height: 26px; aspect-ratio: 49 / 48; background: #003960; -webkit-mask: url("../assets/homeAssets/seeds_projectImage.svg") center / contain no-repeat; mask: url("../assets/homeAssets/seeds_projectImage.svg") center / contain no-repeat; filter: drop-shadow(0 2px 4px rgba(47, 39, 37, 0.22)); }
 @media (max-width: 700px) { .seedsIcon { height: 32px; } }
-
-/* the Seeds hero: a seed wobbles, a stem grows and curls up, two leaves unfurl, the plant sways, and it starts over */
-.seedSprout { display: flex; justify-content: center; align-items: center; width: 100%; padding: 8px 0; }
-.sproutSvg { display: block; height: min(36vh, 320px); width: auto; fill: #001428; overflow: visible; animation: sOut 8s infinite; }
-.sproutSvg * { animation-duration: 8s; animation-iteration-count: infinite; animation-timing-function: ease-in-out; }
-.sStem { fill: none; stroke: #001428; stroke-width: 8; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation-name: sStem; }
-.sSeed { transform-box: fill-box; transform-origin: 50% 100%; animation-name: sSeed; }
-.sLeaf { transform-box: fill-box; opacity: 0; transform: scale(0); }
-.sLeafB { transform-origin: 100% 60%; animation-name: sLeafB; }
-.sLeafA { transform-origin: 0% 100%; animation-name: sLeafA; }
-.sSway { transform-origin: 100px 176px; animation-name: sSway; }
-@keyframes sSeed {
-  0% { transform: scale(0.3); opacity: 0; }
-  6% { transform: scale(1.05, 0.95); opacity: 1; }
-  10% { transform: scale(1); opacity: 1; }
-  13% { transform: rotate(-5deg); } 16% { transform: rotate(5deg); } 19% { transform: rotate(-3deg); } 22% { transform: rotate(0deg) scale(1, 0.9); }
-  30%, 100% { transform: scale(1); opacity: 1; }
-}
-@keyframes sStem { 0%, 20% { stroke-dashoffset: 1; opacity: 0; } 21% { opacity: 1; } 48%, 100% { stroke-dashoffset: 0; opacity: 1; } }
-@keyframes sLeafB { 0%, 40% { transform: scale(0) rotate(-20deg); opacity: 0; } 41% { opacity: 1; } 58% { transform: scale(1.08) rotate(2deg); opacity: 1; } 64%, 100% { transform: scale(1) rotate(0); opacity: 1; } }
-@keyframes sLeafA { 0%, 50% { transform: scale(0) rotate(25deg); opacity: 0; } 51% { opacity: 1; } 70% { transform: scale(1.08) rotate(-2deg); opacity: 1; } 76%, 100% { transform: scale(1) rotate(0); opacity: 1; } }
-@keyframes sSway { 0%, 70% { transform: rotate(0); } 78% { transform: rotate(-2.5deg); } 86% { transform: rotate(2deg); } 92%, 100% { transform: rotate(0); } }
-@keyframes sOut { 0%, 92% { opacity: 1; } 98%, 100% { opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .sproutSvg, .sproutSvg * { animation: none !important; } .sStem { stroke-dashoffset: 0; } .sLeaf { opacity: 1; transform: none; } }
