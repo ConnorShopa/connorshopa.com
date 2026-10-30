@@ -1,0 +1,91 @@
+/* 3D clay phone mockup: a matte off-white slab with a thick black bezel and orange knurled side buttons.
+   Everything is sized from --cw (the phone's width) so it scales. The thickness is a stack of layers (built in clayphone.js). */
+.clayStage {
+  --cw: 260px;
+  position: relative;
+  width: calc(var(--cw) * 2.1);
+  height: calc(var(--cw) * 2.3);
+  perspective: calc(var(--cw) * 5);
+  perspective-origin: 50% 40%;
+}
+.clayPhone {
+  --cw: inherit;
+  --depth: calc(var(--cw) * 0.15);
+  --body: #e9e7e2;
+  --edge: #3a3a3c;
+  position: absolute;
+  left: 50%; top: 50%;
+  width: var(--cw);
+  height: calc(var(--cw) * 2.08);
+  margin: calc(var(--cw) * -1.04) 0 0 calc(var(--cw) * -0.5);
+  transform-style: preserve-3d;
+  transform: rotateX(58deg) rotateZ(-38deg) rotateY(0deg);
+}
+.clayPhone .slab, .clayPhone .face, .clayPhone .shadow {
+  position: absolute; inset: 0;
+  border-radius: calc(var(--cw) * 0.2);
+}
+/* the soft contact shadow on the surface under the phone */
+.clayPhone .shadow {
+  transform: translateZ(calc(var(--depth) * -0.6));
+  background: rgba(60, 58, 55, .5);
+  filter: blur(calc(var(--cw) * 0.09));
+  translate: calc(var(--cw) * 0.05) calc(var(--cw) * 0.08);
+}
+/* the extruded edge: dark brushed-metal sides, lighter toward the top */
+.clayPhone .slab { background: var(--edge); }
+.clayPhone .clayPhone .slab:nth-of-type(odd) { background: #55555a; }
+/* the top face: matte clay, with a soft inner light */
+.clayPhone .face {
+  transform: translateZ(var(--depth));
+  background:
+    radial-gradient(120% 90% at 22% 12%, #f6f5f1 0%, #ebe9e4 45%, #dcdad4 100%);
+  box-shadow:
+    inset 0 calc(var(--cw) * 0.012) calc(var(--cw) * 0.02) rgba(255,255,255,.9),
+    inset 0 calc(var(--cw) * -0.015) calc(var(--cw) * 0.03) rgba(120,116,108,.28);
+}
+/* the black bezel and the rounded screen on it */
+.clayPhone .bezel {
+  position: absolute;
+  inset: calc(var(--cw) * 0.06);
+  border-radius: calc(var(--cw) * 0.15);
+  background: #0b0b0c;
+  box-shadow: inset 0 0 0 calc(var(--cw) * 0.004) rgba(255,255,255,.07), 0 calc(var(--cw) * 0.004) calc(var(--cw) * 0.01) rgba(0,0,0,.35);
+}
+.clayPhone .screen {
+  position: absolute;
+  inset: calc(var(--cw) * 0.05);
+  border-radius: calc(var(--cw) * 0.108);
+  overflow: hidden;
+  background: #2f7be8; /* the placeholder for the screenshot */
+}
+.clayPhone .screen img, .clayPhone .screen video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.clayPhone .screen::after { /* faint sheen on the glass */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(118deg, rgba(255,255,255,.18), rgba(255,255,255,0) 38%);
+}
+.clayPhone .notch {
+  position: absolute; top: calc(var(--cw) * 0.03); left: 50%; translate: -50% 0;
+  width: 27%; height: calc(var(--cw) * 0.075);
+  border-radius: 999px; background: #0b0b0c;
+}
+/* knurled orange buttons on the left edge: a little extruded block with ridged top */
+.clayPhone .cbtn {
+  position: absolute;
+  left: calc(var(--cw) * -0.07);
+  width: calc(var(--cw) * 0.085);
+  height: calc(var(--cw) * 0.2);
+  transform-style: preserve-3d;
+  transform: translateZ(calc(var(--depth) * 0.5));
+}
+.clayPhone .cbtn i {
+  position: absolute; inset: 0;
+  border-radius: calc(var(--cw) * 0.018);
+  background: #e8573a;
+}
+.clayPhone .cbtn i.top {
+  background:
+    repeating-linear-gradient(0deg, #f06a4c 0 calc(var(--cw) * 0.006), #c9432a calc(var(--cw) * 0.006) calc(var(--cw) * 0.012));
+}
