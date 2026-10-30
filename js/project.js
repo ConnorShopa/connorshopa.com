@@ -349,12 +349,7 @@
       introState = { restTop: introFilters.getBoundingClientRect().top, bg: getComputedStyle(document.body).backgroundColor };
     }
     var chipsH = introFilters ? introFilters.offsetHeight : 32;
-    if (introFilters && introState) {
-      gsap.killTweensOf(introFilters);
-      if (!narrow) gsap.to(introFilters, { y: TABS_TOP - introState.restTop, duration: t(0.38), ease: "power3.out" }); // (phones: the header is hidden by CSS instead)
-    }
-    if (introTop && !narrow) gsap.to(introTop, { autoAlpha: 0, duration: t(0.25), ease: "power2.out" });
-    gsap.to([document.documentElement, document.body], { backgroundColor: pageBg, duration: t(0.38), ease: "power2.out", overwrite: "auto" });
+    // (the name, tagline and tabs stay where they are on desktop; phones hide the header with CSS)
     // the close icon is white or black, whichever reads on this project's colour
     var cm = getComputedStyle(view).backgroundColor.match(/[\d.]+/g) || [255, 255, 255];
     var lum = (0.299 * cm[0] + 0.587 * cm[1] + 0.114 * cm[2]) / 255;
@@ -363,12 +358,20 @@
     var darkCard = lum < 0.55;
     // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
     var PAD = 8; // phones: the card takes the whole screen, with a small margin
-    var top = narrow ? PAD : TABS_TOP + chipsH + 24;
-    var side = narrow ? PAD : SIDE;
-    var bottomGap = narrow ? PAD : BOTTOM_ROOM; // desktop: the gallery row stays beneath the card, 48px above the bottom edge
-    var height = Math.max(300, window.innerHeight - top - bottomGap);
-    view.style.width = (window.innerWidth - side * 2) + "px";
+    // desktop: the card starts just under the intro (name, tagline, tabs), keeps its 3:2 shape, and sits as near the
+    // middle of the window as the tabs above and the gallery row below allow
+    var top = narrow ? PAD : (intro ? intro.getBoundingClientRect().bottom + 24 : 80);
+    var fullW = narrow ? window.innerWidth - PAD * 2 : Math.min(window.innerWidth * 0.86, 1100);
+    var height = narrow
+      ? Math.max(300, window.innerHeight - PAD * 2)
+      : Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
+    var cardW = narrow ? fullW : Math.min(fullW, height * CARD_RATIO);
+    var side = (window.innerWidth - cardW) / 2;
+    view.style.width = cardW + "px";
     view.style.height = height + "px";
+    var minTop = top;
+    var maxTop = Math.max(minTop, window.innerHeight - (narrow ? PAD : BOTTOM_ROOM) - height);
+    top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height;
     showProjNav(view, top, height, side, narrow, tintBg);
@@ -408,7 +411,7 @@
       var n = nav.getBoundingClientRect();
       var rowH = list.getBoundingClientRect().height;
       // the row sits 48px above the bottom edge of the screen (phones keep it just under the card)
-      var rowCentre = window.innerWidth > 700 ? window.innerHeight - 48 - (rowH * MINI) / 2 : cardBottom + GAP + (rowH * MINI) / 2;
+      var rowCentre = cardBottom + GAP + (rowH * MINI) / 2;
       var drop = rowCentre - (n.top + n.height / 2);
       gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
     }, { x: b.cx, y: b.cy });
@@ -445,7 +448,6 @@
     introState = null;
     if (introFilters) { gsap.killTweensOf(introFilters); gsap.to(introFilters, { y: 0, duration: t(0.4), ease: "power2.inOut", onComplete: function () { gsap.set(introFilters, { clearProps: "y" }); } }); }
     if (introTop) { gsap.killTweensOf(introTop); gsap.to(introTop, { autoAlpha: 1, duration: t(0.3), delay: t(0.1), ease: "power2.out", onComplete: function () { gsap.set(introTop, { clearProps: "opacity,visibility" }); } }); }
-    gsap.to([document.documentElement, document.body], { backgroundColor: bg, duration: t(0.4), ease: "power2.inOut", overwrite: "auto", onComplete: function () { gsap.set([document.documentElement, document.body], { clearProps: "backgroundColor" }); } });
   }
 
   function hide() {
