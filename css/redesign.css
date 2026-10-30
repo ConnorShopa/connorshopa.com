@@ -1,3 +1,6 @@
+/* Sailec, the Plunk design system's typeface; one file serves every weight */
+@font-face { font-family: "Sailec"; src: url("../fonts/Sailec/Sailec-Regular.otf") format("opentype"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
 /* Nunito, the Drawble app's font (variable: every weight in one file) */
 @font-face { font-family: "Nunito"; src: url("../fonts/Nunito/Nunito-Variable.ttf") format("truetype"); font-weight: 200 1000; font-style: normal; font-display: swap; }
 @font-face { font-family: "Nunito"; src: url("../fonts/Nunito/Nunito-VariableItalic.ttf") format("truetype"); font-weight: 200 1000; font-style: italic; font-display: swap; }
@@ -1982,3 +1985,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* Seeds: the pictures have had their white backdrop cut out (seeds_image0N_cut.png), so the card's colour shows behind them */
 #view-seeds .pgMedia img { background: none; border-radius: 0; box-shadow: none; }
+
+/* the Seeds link on the main screen is set in Sailec */
+.withCaption .label, .withCaption .caption { font-family: "Sailec", "Host Grotesk", sans-serif; }
