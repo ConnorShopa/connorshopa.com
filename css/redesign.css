@@ -2160,7 +2160,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .logo.happly { height: 72px; max-width: none; }
 @media (max-width: 700px) { .logo.happly { height: 60px; } }
 
-/* ======== Phones: the project list is a scrollable deck of cards (js/deck.js) ======== */
+/* ======== Phones: the project list is a stacked deck of cards (js/deck.js) ======== */
 .openBtn, .peek { display: none; }
 @media (max-width: 700px) {
   :root { --hdrH: 190px; }
@@ -2169,60 +2169,41 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   .hero { display: block; min-height: 0; }
   .hero > header { position: fixed; top: 0; left: 0; right: 0; z-index: 6; width: auto; max-width: none; box-sizing: border-box; padding: 26px 16px 10px; background: var(--bg); }
 
-  /* the deck lives in the rest of the screen, centred on the device */
+  /* the deck fills the screen under the header, so its middle is the middle of the device */
   .hero > nav { position: fixed; left: 0; right: 0; top: var(--hdrH); bottom: 0; margin: 0; z-index: 1; display: block; }
   .hero > nav > .ghost { display: none; }
   .hero > nav > #projectList {
-    position: absolute; left: 0; right: 0; bottom: 0; top: calc(-1 * var(--hdrH)); /* the deck fills the whole screen (the header sits over its top), so its middle is the middle of the device */
-    display: block; margin: 0; padding: 0; zoom: 1 !important;
-    overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
-    scroll-snap-type: y mandatory; perspective: 900px; perspective-origin: 50% 50%;
-    scrollbar-width: none; font-size: 26px; overflow-anchor: none; /* the deck moves cards round itself and fixes the scroll position by hand: no automatic scroll anchoring on top of that */
+    position: absolute; left: 0; right: 0; bottom: 0; top: calc(-1 * var(--hdrH));
+    display: block; margin: 0; padding: 0; zoom: 1 !important; overflow: hidden; font-size: 26px;
+    touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
   }
-  .hero > nav > #projectList::-webkit-scrollbar { display: none; }
-  /* room above the first card and below the last, so each one can reach the middle */
-  .hero > nav > #projectList::before { content: ""; display: block; height: 0; }
-  .hero > nav > #projectList::after { content: ""; display: block; height: 0; }
 
   #projectList li.row-break { display: none; }
+  /* every card sits in the middle of the deck; js/deck.js moves, scales and fades them */
   #projectList li:not(.row-break) {
-    position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    box-sizing: border-box; width: fit-content; min-width: 150px; max-width: calc(100% - 32px); height: auto; margin: 0 auto 18px; padding: 22px 26px;
-    background: var(--card, #fff); border-radius: 26px; scroll-snap-align: center; scroll-snap-stop: always;
+    position: absolute; left: 0; right: 0; top: 50%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-sizing: border-box; width: fit-content; min-width: 150px; max-width: calc(100% - 32px); height: auto; padding: 22px 26px;
+    background: var(--card, #fff); border-radius: 26px; text-align: center;
     box-shadow: 0 14px 34px -14px rgba(47, 39, 37, 0.28), 0 2px 8px rgba(47, 39, 37, 0.08);
-    will-change: scale, translate, rotate; text-align: center; transform-origin: 50% 0 !important;
+    will-change: translate, scale, opacity; transform-origin: 50% 50% !important;
   }
   #projectList li.is-current:not(.row-break) { display: flex !important; } /* the deck stays whole while a project is open */
   #projectList li::after, #projectList li.no-slash::after, #projectList li:last-child::after {
     content: ""; position: absolute; inset: 0; margin: 0; border-radius: inherit; background: var(--bg); opacity: var(--dim, 0);
     pointer-events: none; text-shadow: none;
   }
-  #projectList li > a { flex: 1 1 auto; max-width: 100%; zoom: 1.5; }
+  #projectList li > a { max-width: 100%; zoom: 1.5; }
   #projectList.compact { display: block; }
-  /* logos are grey until their card is the one in the middle */
+
+  /* logos are grey until their card is the one in front */
   #projectList li > a, #projectList.compact li > a { transition: filter .4s ease; }
-  #projectList li:not(.isActive) > a, #projectList.compact li:not(.isActive) > a { filter: grayscale(1); opacity: 1; }
-  #projectList li.isActive > a, #projectList.compact li.isActive > a { filter: none; opacity: 1; }
+  #projectList li:not(.isActive) > a, #projectList.compact li:not(.isActive) > a { filter: grayscale(1); opacity: calc(1 - var(--pk, 0)); }
+  #projectList li.isActive > a, #projectList.compact li.isActive > a { filter: none; opacity: calc(1 - var(--pk, 0)); }
   #projectList li:not(.isActive) > a:hover { filter: grayscale(1); }
 
   /* a small grey copy of the logo on the part of a card that peeks out from behind the front one */
-  .peek { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; align-items: center; justify-content: center; zoom: .8; opacity: 0; transition: opacity .3s ease; pointer-events: none; filter: grayscale(1); }
+  .peek { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; align-items: center; justify-content: center; zoom: .8; opacity: var(--pk, 0); pointer-events: none; filter: grayscale(1); }
   .peek * { max-width: 100%; }
-  #projectList li.isBehind .peek { opacity: 1; }
-  #projectList li.isBehind > a { visibility: hidden; }
-
-  /* the one "Open project" button, fixed at the bottom of the screen, for the card in the middle */
-  .openBtn {
-    display: block; position: fixed; z-index: 7; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 26px); margin: 0;
-    font: inherit; font-size: 17px; font-weight: 500; letter-spacing: 0; padding: 15px 34px; white-space: nowrap;
-    color: #fff; background: #1B2430; border: 0; border-radius: 999px; cursor: pointer; -webkit-tap-highlight-color: transparent;
-    box-shadow: 0 10px 24px -8px rgba(27, 36, 48, 0.5);
-    opacity: 0; visibility: hidden; pointer-events: none; transform: translate(-50%, 14px);
-    transition: opacity .25s ease, transform .3s cubic-bezier(.2, .8, .2, 1), visibility 0s .3s;
-  }
-  .openBtn.show { opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0); transition-delay: 0s; }
-  html.view-open .openBtn { visibility: hidden; }
-  @media (prefers-reduced-motion: reduce) { .openBtn { transition: none; } }
 
   /* while a project is open the deck stays out of sight (the card covers the screen) */
   html.view-open .hero > nav { visibility: hidden; }

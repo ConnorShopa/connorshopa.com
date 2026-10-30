@@ -1,157 +1,164 @@
-// Phones: the project list is a looping deck of cards. The deck scrolls (snapping one card at a time); as it moves,
-// the cards behind the current one stay piled up (each peeking out a little lower, with a small grey copy of its
-// logo), the ones passed ride up and fade, and the logo of the card in the middle turns to colour. One "Open project"
-// button sits at the bottom of the screen and opens whichever card is in the middle.
+// Phones: the project list is a stacked deck of cards, driven by dragging (no scrolling element, so nothing to snap or
+// fight). The card in the middle is the current project (it opens on the first in the list); the cards that follow are
+// stacked behind it, each peeking out a little lower and smaller, with a small grey copy of its logo. Dragging up (or
+// wheeling down) slides the current card away and brings the next one forward; dragging down brings the previous one
+// back from above. It loops, and settles on a card when let go. Logos are grey until their card is the current one.
 (function () {
   var list = document.getElementById("projectList");
   if (!list) return;
   var header = document.querySelector(".hero > header");
-  var hero = document.querySelector(".hero");
   var mq = window.matchMedia("(max-width: 700px)");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var first = null; // the first project in the list: the deck opens with it in the middle
 
-  function cardsAll() { return Array.prototype.filter.call(list.children, function (li) { return li.tagName === "LI" && li.classList.contains("deckCard"); }); }
-  function shown() { return cardsAll().filter(function (li) { return li.offsetHeight > 0; }); }
-
-  // each card: its colour (the link's bubble colour) and a small copy of its logo for the part that peeks out
+  var cards = [];
   Array.prototype.forEach.call(list.children, function (li) {
     if (li.tagName !== "LI" || li.classList.contains("row-break")) return;
     var a = li.querySelector("a");
     if (!a) return;
     li.classList.add("deckCard");
-    if (!first) first = li;
     li.style.setProperty("--card", a.getAttribute("data-bubble") || "#FFFFFF");
-    var pk = document.createElement("span");
+    var pk = document.createElement("span"); // a small copy of the logo for the part of the card that peeks out
     pk.className = "peek"; pk.setAttribute("aria-hidden", "true");
     pk.innerHTML = a.innerHTML;
     li.appendChild(pk);
+    cards.push(li);
   });
+  var N = cards.length;
+  if (N < 3) return;
 
-  // the one button, fixed at the bottom of the screen
-  var btn = document.createElement("button");
-  btn.type = "button"; btn.className = "openBtn"; btn.textContent = "Open project"; btn.tabIndex = -1;
-  (hero || document.body).appendChild(btn);
-  var activeLink = null;
-  btn.addEventListener("click", function () { if (activeLink) activeLink.click(); });
-  function linkOf(li) {
-    var a = li && li.querySelector("a");
-    return a && !a.classList.contains("noLink") && a.getAttribute("href") ? a : null;
-  }
+  var PEEK = 56;   // how much of each card behind shows below the one in front, in px
+  var STEP = 150;  // dragging this far moves one card
+  var heights = [], dirty = true;
+  var pos = 0, target = 0, vel = 0, anim = 0, dragging = false, moved = false;
+  var lastT = 0;
 
   function measureHeader() {
     if (!header || !mq.matches) return;
     document.documentElement.style.setProperty("--hdrH", Math.ceil(header.getBoundingClientRect().bottom + 12) + "px");
   }
-  function middle() { return list.scrollTop + window.innerHeight / 2 - list.getBoundingClientRect().top; } // the middle of the device
-  function centre(li) { list.scrollTop = li.offsetTop + li.offsetHeight / 2 - (window.innerHeight / 2 - list.getBoundingClientRect().top); }
+  function measure() { heights = cards.map(function (li) { return li.offsetHeight || 100; }); dirty = false; }
 
-  // the deck loops: while it is at rest, cards are moved from one end to the other until the middle card is back in the
-  // middle of the pile, and the scroll position is adjusted by exactly the height that moved, so nothing visibly
-  // changes. (Never while a finger is down or the deck is coasting: changing the scroll position then would stop it.)
-  var recent = [];
-  function loop() {
-    var vis = shown();
-    if (vis.length < 6) return;
-    var mid = middle(), idx = 0, bd = 1e9, target = Math.floor(vis.length / 2), guard = 0;
-    vis.forEach(function (li, i) { var d = Math.abs(li.offsetTop + li.offsetHeight / 2 - mid); if (d < bd) { bd = d; idx = i; } });
-    if (idx >= target - 1 && idx <= target + 1) return;    // already in the middle of the pile: nothing to move
-    var now = Date.now(); recent = recent.filter(function (t) { return now - t < 2000; });
-    if (recent.length >= 3) return;                         // moving cards over and over: something is fighting it, so stop
-    recent.push(now);
-    list.style.scrollSnapType = "none";                    // (snapping would re-snap to the wrong card while the cards are moved)
-    while (idx < target - 1 && guard++ < 20) {   // too close to the top: bring the last card round to the front
-      var ref = vis[0], y0 = ref.offsetTop, last = vis.pop();
-      list.insertBefore(last, ref); vis.unshift(last); idx++;
-      list.scrollTop += ref.offsetTop - y0;
-    }
-    while (idx > target + 1 && guard++ < 40) {   // too close to the bottom: send the first card round to the back
-      var f = vis.shift(), ref2 = vis[0], y1 = ref2.offsetTop;
-      list.appendChild(f); vis.push(f); idx--;
-      list.scrollTop += ref2.offsetTop - y1;
-    }
-    if (landed) requestAnimationFrame(function () { list.style.scrollSnapType = ""; });
-  }
-  var touching = false, idleT = 0;
-  function idle() { clearTimeout(idleT); idleT = setTimeout(function () { if (!touching && mq.matches) { loop(); queue(); } }, 180); }
-
-  var raf = 0, landed = false;
-  // style writes are skipped when nothing changed (browsers normalise the values, so the last write is remembered); a
-  // value that something else wiped (GSAP sets scale / translate / rotate to "none") is written again
+  // style writes are skipped when nothing changed; a value something else wiped (GSAP sets scale / translate to "none")
+  // is written again
   function put(li, prop, val) {
     var c = li.__v || (li.__v = {}), cur = li.style[prop];
     if (c[prop] !== val || (val !== "" && (cur === "" || cur === "none"))) { li.style[prop] = val; c[prop] = val; }
   }
   function putVar(li, val) { var c = li.__v || (li.__v = {}); if (c.dim !== val) { li.style.setProperty("--dim", val); c.dim = val; } }
-  function update() {
-    raf = 0;
+  function putPk(li, val) { var c = li.__v || (li.__v = {}); if (c.pk !== val) { li.style.setProperty("--pk", val); c.pk = val; } }
+  function wrap(k) { return ((k + N / 2) % N + N) % N - N / 2; }
+
+  function render() {
     if (!mq.matches) return;
-    if (!landed) land();
-    var mid = middle(), best = null, bestD = 1e9;
-    shown().forEach(function (li) {
-      var h = li.offsetHeight || 1;
-      var d = (li.offsetTop + h / 2 - mid) / h;      // 0 = centred, > 0 = further down the deck, < 0 = already passed
-      var a = Math.abs(d);
-      if (a < bestD) { bestD = a; best = li; }
-      li.classList.toggle("isBehind", d > 0.45);
-      if (reduce) { putVar(li, a > 0.5 ? "0.5" : "0"); return; }
-      if (d > 0) {
-        // the cards still to come are piled behind the current one, each a little lower and smaller: only a strip of
-        // its bottom edge shows
-        var dd = Math.min(d, 3), sc = Math.max(0.8, 1 - d * 0.05);
-        put(li, "scale", String(sc));
-        put(li, "translate", "0 " + ((h * (1 - sc)) / 2 + 62 * dd - d * h).toFixed(1) + "px");
-        put(li, "rotate", "");
-        put(li, "zIndex", String(50 - Math.round(d * 10)));
-        putVar(li, Math.min(d * 0.15, 0.4).toFixed(2));
-        put(li, "visibility", d > 3.2 ? "hidden" : "");
+    if (dirty) measure();
+    var p = ((pos % N) + N) % N, j = Math.floor(p), f = p - j;
+    var Hc = heights[j] + (heights[(j + 1) % N] - heights[j]) * f; // the height of the card in front, blended while moving
+    var best = -1, bestA = 9;
+    for (var i = 0; i < N; i++) {
+      var li = cards[i], H = heights[i], k = wrap(i - pos), a = Math.abs(k);
+      if (a < bestA) { bestA = a; best = i; }
+      var y, s, op, dim, z;
+      if (k >= 0) {
+        // still to come: stacked behind the front card, lower and smaller
+        var kk = Math.min(k, 3.4);
+        s = 1 - 0.05 * kk;
+        y = Hc / 2 + PEEK * kk - (H * s) / 2;
+        op = kk <= 2.4 ? 1 : Math.max(0, 1 - (kk - 2.4));
+        dim = Math.min(kk * 0.15, 0.4);
+        z = 100 - Math.round(kk * 10);
       } else {
-        // a card that has been passed rides up and away: it tilts back, shrinks and fades
-        put(li, "translate", "");
-        put(li, "scale", String(Math.max(0.8, 1 - a * 0.12)));
-        put(li, "rotate", "1 0 0 " + Math.min(a * 14, 20).toFixed(1) + "deg");
-        put(li, "zIndex", String(52 - Math.round(a * 10)));
-        putVar(li, Math.min(a * 0.8, 0.9).toFixed(2));
-        put(li, "visibility", a > 2 ? "hidden" : "");
+        // passed: slides up and away, fading (and comes back down the same way)
+        s = 1 - 0.06 * Math.min(a, 1);
+        y = -a * (H + 60) * 0.9;
+        op = Math.max(0, 1 - a * 1.15);
+        dim = Math.min(a * 0.6, 0.7);
+        z = 106 - Math.round(a * 10);
       }
-    });
-    cardsAll().forEach(function (li) { li.classList.toggle("isActive", li === best && bestD < 0.3); });
-    activeLink = list.style.visibility === "hidden" ? null : linkOf(best && bestD < 0.3 ? best : null);
-    btn.classList.toggle("show", !!activeLink);
-    btn.setAttribute("aria-label", activeLink ? "Open " + (activeLink.getAttribute("aria-label") || (activeLink.querySelector("img[alt]:not([alt=''])") || {}).alt || (activeLink.textContent || "").trim() || "project") : "Open project");
+      put(li, "scale", s.toFixed(4));
+      put(li, "translate", "0 " + (y - H / 2).toFixed(1) + "px");
+      put(li, "opacity", op.toFixed(3));
+      put(li, "zIndex", String(z));
+      put(li, "visibility", op < 0.02 ? "hidden" : "");
+      putVar(li, dim.toFixed(2));
+      putPk(li, Math.max(0, Math.min(1, (k - 0.15) / 0.5)).toFixed(2)); // the logo fades into its small copy as the card goes behind
+    }
+    for (var m = 0; m < N; m++) cards[m].classList.toggle("isActive", m === best && bestA < 0.3);
   }
-  function queue() { if (!raf) raf = requestAnimationFrame(update); }
 
-  function clear() {
-    cardsAll().forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.rotate = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.classList.remove("isActive", "isBehind"); });
-    btn.classList.remove("show");
+  // ---- movement ----
+  function frame(t) {
+    var dt = Math.min((t - lastT) / 1000, 0.05); lastT = t;
+    if (!dragging) {
+      var d = target - pos;
+      pos += d * (1 - Math.exp(-dt * 11));          // an ease-out settle onto the target card
+      if (Math.abs(target - pos) < 0.0008) { pos = target; render(); anim = 0; return; }
+    }
+    render();
+    anim = requestAnimationFrame(frame);
   }
-  // opens with the first project in the middle, and keeps it there (as logos, fonts and the pop-in settle and the cards
-  // change size) until the person first touches the deck
-  function land() {
-    if (landed || !first || !mq.matches) return;
-    loop();
-    var want = first.offsetTop + first.offsetHeight / 2 - (window.innerHeight / 2 - list.getBoundingClientRect().top);
-    if (Math.abs(list.scrollTop - want) > 0.5) list.scrollTop = want;
-    loop();
-    want = first.offsetTop + first.offsetHeight / 2 - (window.innerHeight / 2 - list.getBoundingClientRect().top);
-    if (Math.abs(list.scrollTop - want) > 0.5) list.scrollTop = want;
-  }
-  function refresh() { if (mq.matches) { measureHeader(); land(); queue(); } else clear(); }
+  function kick() { if (!anim) { lastT = performance.now(); anim = requestAnimationFrame(frame); } }
+  function goTo(t) { target = t; if (reduce) { pos = t; render(); return; } kick(); }
+  function settle(v) { goTo(Math.round(pos + Math.max(-2.5, Math.min(2.5, v * 0.1)))); }
 
-  ["touchstart", "wheel", "pointerdown", "keydown"].forEach(function (ev) { list.addEventListener(ev, function () { landed = true; list.style.scrollSnapType = ""; }, { passive: true }); });
-  list.addEventListener("scroll", function () { queue(); idle(); }, { passive: true });
-  list.addEventListener("touchstart", function () { touching = true; }, { passive: true });
-  ["touchend", "touchcancel"].forEach(function (ev) { list.addEventListener(ev, function () { touching = false; idle(); }, { passive: true }); });
+  // ---- drag (touch, pen or mouse) ----
+  var sy = 0, sp = 0, hist = [];
+  list.addEventListener("pointerdown", function (e) {
+    if (!mq.matches || (e.pointerType === "mouse" && e.button !== 0)) return;
+    dragging = true; moved = false; sy = e.clientY; sp = pos; hist = [{ t: e.timeStamp, p: pos }];
+    target = pos;
+    try { list.setPointerCapture(e.pointerId); } catch (x) {}
+    kick();
+  });
+  list.addEventListener("pointermove", function (e) {
+    if (!dragging) return;
+    var dy = e.clientY - sy;
+    if (Math.abs(dy) > 6) moved = true;
+    pos = sp - dy / STEP;
+    hist.push({ t: e.timeStamp, p: pos });
+    while (hist.length > 2 && e.timeStamp - hist[0].t > 100) hist.shift();
+  });
+  function release(e) {
+    if (!dragging) return;
+    dragging = false;
+    var h0 = hist[0], h1 = hist[hist.length - 1], v = 0;
+    if (h0 && h1 && h1.t > h0.t) v = ((h1.p - h0.p) / (h1.t - h0.t)) * 1000; // cards per second
+    settle(moved ? v : 0);
+  }
+  list.addEventListener("pointerup", release);
+  list.addEventListener("pointercancel", release);
+  // a drag is not a tap; tapping a card behind the front one brings it forward instead of opening it
+  list.addEventListener("click", function (e) {
+    if (!mq.matches) return;
+    var li = e.target.closest && e.target.closest("li.deckCard");
+    if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; return; }
+    if (li && !li.classList.contains("isActive")) {
+      e.preventDefault(); e.stopPropagation();
+      var i = cards.indexOf(li), k = wrap(i - Math.round(pos));
+      goTo(Math.round(pos) + k);
+    }
+  }, true);
+  // a wheel or trackpad (a narrow desktop window)
+  var wheelT = 0;
+  list.addEventListener("wheel", function (e) {
+    if (!mq.matches) return;
+    e.preventDefault();
+    target = pos = pos + e.deltaY / (STEP * 1.6);
+    render();
+    clearTimeout(wheelT); wheelT = setTimeout(function () { settle(0); }, 120);
+  }, { passive: false });
+
+  function refresh() {
+    if (mq.matches) { measureHeader(); dirty = true; render(); }
+    else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.removeProperty("--pk"); li.classList.remove("isActive"); });
+  }
   window.addEventListener("resize", refresh);
   window.addEventListener("load", function () { refresh(); setTimeout(refresh, 1200); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
   if (mq.addEventListener) mq.addEventListener("change", refresh);
-  if (window.ResizeObserver && header) new ResizeObserver(refresh).observe(header);
+  if (window.ResizeObserver) { var ro = new ResizeObserver(function () { dirty = true; render(); }); cards.forEach(function (li) { ro.observe(li); }); if (header) ro.observe(header); }
+  cards.forEach(function (li) { Array.prototype.forEach.call(li.querySelectorAll("img"), function (img) { if (!img.complete) img.addEventListener("load", refresh); }); });
   // something else (a pop-in, say) wiping the cards' transforms: put them back
-  if (window.MutationObserver) new MutationObserver(queue).observe(list, { attributes: true, attributeFilter: ["style"], subtree: true });
-  if (window.ResizeObserver) { var ro = new ResizeObserver(queue); cardsAll().forEach(function (li) { ro.observe(li); }); }
-  Array.prototype.forEach.call(list.querySelectorAll("img"), function (img) { if (!img.complete) img.addEventListener("load", refresh); });
+  if (window.MutationObserver) new MutationObserver(function () { if (!anim) render(); }).observe(list, { attributes: true, attributeFilter: ["style"], subtree: true });
   refresh();
-  setTimeout(refresh, 600); // after the pop-in on load has finished
+  setTimeout(refresh, 600);
 })();
