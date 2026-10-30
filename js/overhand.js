@@ -3,12 +3,12 @@
    Every bubble is pulled toward a slot in its pile (rows that make a circle), can't overlap its neighbours,
    and the mouse pushes bubbles away a little before they settle back. */
 (function () {
-  var ALL = ["renders", "business plans", "subscriptions", "ux flows", "product", "money", "mentorship", "ideas"];
+  var ALL = ["renders", "business plans", "subscriptions", "ux flows", "product", "money", "mentorship", "ideas", "logos", "code", "feedback", "photos", "time", "skills", "advice", "equity"];
   var STYLES = [
     ["#FDE9A8", "#0B1620"], ["#E4F9DC", "#0B1620"], ["#F5C97F", "#0B1620"], ["#FFDC5A", "#0B1620"],
     ["#9BE8E8", "#0B1620"], ["#E1E5E9", "#0B1620"], ["#9B96F6", "#0B1620"], ["#F07B7B", "#fff"],
   ];
-  var ROWS = [1, 2, 3, 2, 1]; // items per row, top to bottom; the middle row's centre is "anything" (so 2 bubbles + the word)
+  var CAP = [1, 3, 3, 2, 3, 3, 1], FILL = [3, 2, 4, 1, 5, 0, 6]; // bubbles per row, top to bottom (the middle row holds "anything" between its two), and the order rows fill: the widest words go in the middle
   var GAP = 10, REACH = 120, PUSH = 2.6, FS = 22;
   var pit = null, bubs = [], anchors = [], mouse = { x: -9999, y: -9999 }, raf = 0, ready = false, visible = false, forEl = null;
 
@@ -25,7 +25,7 @@
     if (!pit) return;
     [-1, 1].forEach(function (side) {
       ALL.forEach(function (w, i) {
-        var k = side < 0 ? i : (i + 4) % 8, s = STYLES[k];
+        var k = side < 0 ? i : (i + 8) % ALL.length, s = STYLES[k % STYLES.length];
         bubs.push({ el: mk(w, "ohBub", s[0], s[1]), side: side, x: 0, y: 0, vx: 0, vy: 0, sx: 0, sy: 0 });
       });
       anchors.push({ el: mk("anything", "ohBub ohFor ohAny"), side: side });
@@ -42,33 +42,52 @@
     window.addEventListener("resize", function () { ready = false; });
   }
 
-  function armX() { return Math.min(pit.offsetWidth * 0.3, 330); }
 
-  // work out each bubble's slot: rows of a circle, the widest words in the middle rows
-  function layout() {
-    var ax = armX();
+  function setSize(fs) {
+    bubs.forEach(function (b) { b.el.style.fontSize = fs + "px"; b.el.style.padding = Math.round(fs * 0.62) + "px " + Math.round(fs * 2) + "px"; });
+    anchors.forEach(function (a) { a.el.style.fontSize = Math.round(fs * 2.3) + "px"; });
+    forEl.style.fontSize = Math.round(fs * 1.4) + "px";
+  }
+  function measureAll() {
     bubs.forEach(function (b) { b.w = b.el.offsetWidth; b.h = b.el.offsetHeight; b.r = b.h / 2; b.hw = Math.max(0, b.w / 2 - b.r); });
     anchors.forEach(function (a) { a.w = a.el.offsetWidth; a.h = a.el.offsetHeight; });
     forEl.w = forEl.offsetWidth; forEl.h = forEl.offsetHeight;
-    var pitch = 0; bubs.forEach(function (b) { pitch = Math.max(pitch, b.h); }); pitch += GAP;
+  }
+  function rowsFor(side) {
+    var mine = bubs.filter(function (b) { return b.side === side; }).sort(function (a, b) { return b.w - a.w; });
+    var any = anchors.filter(function (a) { return a.side === side; })[0], rows = [[], [], [], [], [], [], []], at = 0;
+    FILL.forEach(function (ri) { rows[ri] = mine.slice(at, at + CAP[ri]); at += CAP[ri]; });
+    rows[3] = [rows[3][0], { w: any.w, any: true }, rows[3][1]];
+    return { any: any, rows: rows };
+  }
+  function rowW(items) { return items.reduce(function (s, it) { return s + it.w; }, 0) + GAP * (items.length - 1); }
+
+  // work out each bubble's slot: rows of a circle around "anything". The type shrinks until both piles fit beside "for".
+  function layout() {
+    var W = pit.offsetWidth / 2, fs = FS, avail, pile;
+    for (;;) {
+      setSize(fs); measureAll();
+      var wall = forEl.w / 2 + 28; avail = W - wall - 6; pile = 0;
+      [-1, 1].forEach(function (side) { rowsFor(side).rows.forEach(function (r) { pile = Math.max(pile, rowW(r)); }); });
+      var ph = 0; bubs.forEach(function (b) { ph = Math.max(ph, b.h); });
+      if ((pile <= avail && (ph + GAP) * CAP.length <= pit.offsetHeight - 10) || fs <= 10) break;
+      fs--;
+    }
+    var ax = wall + avail / 2 + 3, pitch = 0;
+    bubs.forEach(function (b) { pitch = Math.max(pitch, b.h); }); pitch += GAP;
     [-1, 1].forEach(function (side) {
-      var mine = bubs.filter(function (b) { return b.side === side; }).sort(function (a, b) { return b.w - a.w; });
-      var anyW = anchors.filter(function (a) { return a.side === side; })[0].w;
-      // order of filling: middle row (2), the rows either side of it (2 + 2), the top and bottom (1 + 1), widest first
-      var order = [[2, 0], [1, 0], [1, 1], [3, 0], [3, 1], [0, 0], [4, 0]]; // row, index
-      var rows = [[], [], [], [], []], i = 0;
-      rows[2] = [mine[0], mine[1]]; rows[1] = [mine[2], mine[3]]; rows[3] = [mine[4], mine[5]]; rows[0] = [mine[6]]; rows[4] = [mine[7]];
-      rows.forEach(function (row, ri) {
-        var items = ri === 2 ? [row[0], { w: anyW, any: true }, row[1]] : row;
-        var total = items.reduce(function (s, it) { return s + it.w; }, 0) + GAP * (items.length - 1), x = -total / 2;
-        items.forEach(function (it) {
+      var set = rowsFor(side);
+      set.rows.forEach(function (row, ri) {
+        var x = -rowW(row) / 2;
+        row.forEach(function (it) {
           it.cx = x + it.w / 2; x += it.w + GAP;
-          if (!it.any) { it.sx = side * ax + it.cx; it.sy = (ri - 2) * pitch; if (!ready) { it.x = it.sx + (Math.random() - .5) * 200; it.y = it.sy + (Math.random() - .5) * 200; it.vx = it.vy = 0; } }
-          else it.ax = side * ax + it.cx;
+          if (it.any) { set.any.x = side * ax + it.cx; set.any.y = 0; return; }
+          it.sx = side * ax + it.cx; it.sy = (ri - 3) * pitch;
+          if (!ready) { it.x = it.sx + (Math.random() - .5) * 120; it.y = it.sy + (Math.random() - .5) * 120; it.vx = it.vy = 0; }
         });
-        if (ri === 2) anchors.filter(function (a) { return a.side === side; })[0].x = items[1].ax;
       });
     });
+    forEl.x = 0; forEl.y = 0;
     ready = true;
   }
 
@@ -94,12 +113,24 @@
       if (d < REACH && d > 0.5) { var f = (1 - d / REACH) * PUSH; b.vx += dx / d * f; b.vy += dy / d * f; }
       b.vx *= 0.82; b.vy *= 0.82; b.x += b.vx; b.y += b.vy;
     }
-    var wall = forEl.w / 2 + 28;
-    for (k = 0; k < 3; k++) for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) collide(bubs[i], bubs[j]);
+    var wall = forEl.w / 2 + 28, fixed = anchors.concat([forEl]);
+    for (k = 0; k < 6; k++) {
+      for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) collide(bubs[i], bubs[j]);
+      for (i = 0; i < n; i++) fixed.forEach(function (f) { // the words "anything" and "for" don't move; bubbles go round them
+        var hw = Math.max(0, f.w / 2 - f.h / 2);
+        var ghost = { x: f.x, y: f.y, hw: hw, r: f.h / 2 + 4 }, bb = bubs[i];
+        var a0 = bb.x - bb.hw, a1 = bb.x + bb.hw, b0 = ghost.x - hw, b1 = ghost.x + hw, pa, pb, lo = Math.max(a0, b0), hi = Math.min(a1, b1);
+        if (lo <= hi) pa = pb = (lo + hi) / 2; else if (a1 < b0) { pa = a1; pb = b0; } else { pa = a0; pb = b1; }
+        var dx = pa - pb, dy = bb.y - ghost.y, d = Math.sqrt(dx * dx + dy * dy), min = bb.r + ghost.r + 2;
+        if (d < min) { var nx = d < 0.001 ? 0 : dx / d, ny = d < 0.001 ? 1 : dy / d; bb.x += nx * (min - d); bb.y += ny * (min - d); }
+      });
+    }
     for (i = 0; i < n; i++) {
       b = bubs[i];
       var m = wall + b.hw + b.r; // "for" is a wall: neither pile crosses the middle
       if (b.side < 0 && b.x > -m) b.x = -m; if (b.side > 0 && b.x < m) b.x = m;
+      var ex = W - b.hw - b.r, ey = H - b.r; // and nothing leaves the pit
+      if (b.x > ex) b.x = ex; if (b.x < -ex) b.x = -ex; if (b.y > ey) b.y = ey; if (b.y < -ey) b.y = -ey;
       b.el.style.transform = "translate(" + (W + b.x - b.w / 2).toFixed(1) + "px," + (H + b.y - b.h / 2).toFixed(1) + "px)";
     }
     anchors.forEach(function (a) { a.el.style.transform = "translate(" + (W + a.x - a.w / 2).toFixed(1) + "px," + (H - a.h / 2).toFixed(1) + "px)"; });

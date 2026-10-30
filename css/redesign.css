@@ -1547,7 +1547,7 @@ body { position: relative; }
 
 /* Overhand: yellow card, pill chips with a thin dark stroke, early-access form */
 /* the bubbles are positioned by js/overhand.js (gravity to the middle, pushed away by the mouse) */
-.ohPit { position: relative; width: min(100%, 1120px); height: 520px; margin: 20px auto 0; overflow: visible; touch-action: pan-y; }
+.ohPit { position: relative; width: min(100%, 1120px); height: 640px; margin: 20px auto 0; overflow: visible; touch-action: pan-y; }
 .ohBub { position: absolute; left: 0; top: 0; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border: 1.5px solid #0B1620; border-radius: 999px; box-shadow: 0 2px 0 rgba(11, 22, 32, 0.12); white-space: nowrap; line-height: 1; will-change: transform; pointer-events: none; user-select: none; }
 .earlyForm { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: 18px; }
 .earlyInput { font: inherit; font-size: 16px; width: 260px; padding: 12px 18px; color: #1B2430; background: #fff; border: 1px solid #1B2430; border-radius: 999px; outline: none; }
@@ -2015,3 +2015,10 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .view.scrollView .pg:first-child .lead.ohTitle { font-size: clamp(120px, 22vw, 260px); white-space: normal; }
 .earlyBtn.lockBtn { border: 0; padding: 13px 24px; }
 .earlyForm { align-self: center; justify-content: center; margin: 0 auto 8px; width: 100%; }
+
+/* Overhand: the logo moves out of the corner into a left-aligned column: logo, "Let's you", "Trade" */
+#view-overhand .viewHead { display: none; }
+.ohHero { align-self: flex-start; display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 6px; margin: 8px 0 0; }
+.ohLogo { height: 56px; width: auto; display: block; margin-bottom: 14px; }
+.pg .lead.ohLets, .view.scrollView .pg:first-child .lead.ohLets { font-size: clamp(26px, 3vw, 40px); font-weight: 500; line-height: 1; text-align: left; align-self: flex-start; margin: 0; width: auto; white-space: normal; color: #1B2430; }
+.pg .lead.ohTitle, .view.scrollView .pg:first-child .lead.ohTitle { font-size: clamp(64px, 9vw, 120px); text-align: left; align-self: flex-start; margin: 0; width: auto; }
