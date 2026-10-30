@@ -1980,5 +1980,5 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .view.scrollView .pg:first-child .lead { white-space: nowrap; width: max-content; max-width: none; align-self: center; font-size: clamp(24px, 3vw, 44px); }
 @media (max-width: 700px) { .view.scrollView .pg:first-child .lead { white-space: normal; width: auto; align-self: stretch; } }
 
-/* Seeds: the design system pictures have a white backdrop; multiplying them onto the card lets the card's colour show through it */
-#view-seeds .pgMedia img { mix-blend-mode: multiply; background: none; border-radius: 0; box-shadow: none; }
+/* Seeds: the pictures have had their white backdrop cut out (seeds_image0N_cut.png), so the card's colour shows behind them */
+#view-seeds .pgMedia img { background: none; border-radius: 0; box-shadow: none; }

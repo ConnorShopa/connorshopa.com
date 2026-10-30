@@ -154,13 +154,13 @@
             '<div class="facts">' + fact("Built for", "A small team of engineers, designers, marketers &amp; good folk") + fact("Methodology", "Atomic Design System") + "</div>"
           ) + media(fig(A + "seedsAssets/seeds_image00.png"))),
         pg("flip",
-          media(fig(A + "seedsAssets/seeds_image01.png")) +
+          media(fig(A + "seedsAssets/seeds_image01_cut.png")) +
           text(
             p("eyebrow", "The goal") +
             p("lead", "To design and build an internal design system that would ameliorate developer hand offs and product iteration.")
           )),
-        pg("media", media(fig(A + "seedsAssets/seeds_image02.png"), fig(A + "seedsAssets/seeds_image03.png"))),
-        pg("media", media(fig(A + "seedsAssets/seeds_image04.png"))),
+        pg("media", media(fig(A + "seedsAssets/seeds_image02_cut.png"), fig(A + "seedsAssets/seeds_image03_cut.png"))),
+        pg("media", media(fig(A + "seedsAssets/seeds_image04_cut.png"))),
       ],
     },
 
