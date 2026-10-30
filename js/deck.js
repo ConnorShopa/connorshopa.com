@@ -60,8 +60,8 @@
   function putPk(li, val) { var c = li.__v || (li.__v = {}); if (c.pk !== val) { li.style.setProperty("--pk", val); c.pk = val; } }
   // ---- the floating "View" button: ready only while a project is settled in focus ----
   var viewBtn = document.createElement("button");
-  viewBtn.type = "button"; viewBtn.className = "deckView"; viewBtn.textContent = "View"; viewBtn.disabled = true;
-  viewBtn.setAttribute("aria-label", "View the project in focus");
+  viewBtn.type = "button"; viewBtn.className = "deckView"; viewBtn.textContent = "Open"; viewBtn.disabled = true;
+  viewBtn.setAttribute("aria-label", "Open the project in focus");
   document.body.appendChild(viewBtn);
   var wheeling = false, fromBtn = false;
   function focusCard() { return cards[((Math.round(target) % N) + N) % N]; }
@@ -83,8 +83,8 @@
   });
   function wrap(k) { return ((k + N / 2) % N + N) % N - N / 2; }
 
-  // how big a card is by how many places it is from the front (the front card is 1.3x, then they drop away)
-  function scaleAt(k) { var a = Math.abs(k); return 0.3 + 1.0 / (1 + (a * a) / 0.49); }
+  // how big a card is by how many places it is from the front (the front card is 1.5x, then they drop away)
+  function scaleAt(k) { var a = Math.abs(k); return 0.3 + 1.0 / (1 + (a * a) / 0.49) + 0.2 / (1 + (a * a) / 0.1); } // the card in front is 1.5x; the rest are as before
   function render() {
     if (!mq.matches) return;
     if (dirty) measure();
