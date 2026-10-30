@@ -5,7 +5,7 @@
 import * as THREE from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
-var W = 1, H = 2.08, D = 0.035, R = 0.2, BEV = 0.02;
+var W = 1, H = 2.08, D = 0.004, R = 0.2, BEV = 0.036;
 
 function roundedRect(w, h, r) {
   var s = new THREE.Shape(), x = -w / 2, y = -h / 2;
@@ -47,13 +47,13 @@ export function mountClayPhone(el, opts) {
 
   // the body: a rounded slab with a soft bevel all round
   var body = new THREE.Mesh(new THREE.ExtrudeGeometry(roundedRect(W, H, R), {
-    depth: D, bevelEnabled: true, bevelThickness: BEV, bevelSize: BEV, bevelOffset: -BEV, bevelSegments: 12, curveSegments: 64
+    depth: D, bevelEnabled: true, bevelThickness: BEV, bevelSize: BEV, bevelOffset: -BEV, bevelSegments: 20, curveSegments: 64
   }), clay);
   body.geometry.translate(0, 0, -D / 2);
   phone.add(body);
 
   var top = D / 2 + BEV; // the z of the front face
-  var bezel = new THREE.Mesh(new THREE.ExtrudeGeometry(roundedRect(W - 0.07, H - 0.07, R - 0.035), { depth: 0.006, bevelEnabled: false, curveSegments: 64 }), black);
+  var bezel = new THREE.Mesh(new THREE.ExtrudeGeometry(roundedRect(W - 0.13, H - 0.13, R - 0.065), { depth: 0.006, bevelEnabled: false, curveSegments: 64 }), black);
   bezel.position.z = top - 0.001;
   phone.add(bezel);
 
@@ -64,7 +64,7 @@ export function mountClayPhone(el, opts) {
     tex.colorSpace = THREE.SRGBColorSpace;
     screenMat.map = tex; screenMat.color.set(0xffffff);
   }
-  var screen = new THREE.Mesh(screenGeometry(W - 0.13, H - 0.13, R - 0.065), screenMat);
+  var screen = new THREE.Mesh(screenGeometry(W - 0.18, H - 0.18, R - 0.09), screenMat);
   screen.position.z = top + 0.006;
   phone.add(screen);
 
