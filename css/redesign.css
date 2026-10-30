@@ -2050,7 +2050,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* Clash Grotesk, lighter */
 #view-overhand .lead.ohTitle { font-weight: 500; letter-spacing: -0.03em; }
-#view-overhand .ohBub { font-weight: 350; }
+#view-overhand .ohBub { font-weight: 420; }
 #view-overhand .ohBub.ohFor { font-weight: 400; }
 #view-overhand .ohBub.ohFor.ohAny { font-weight: 500; }
 #view-overhand .earlyBtn.lockBtn { font-weight: 500; }
