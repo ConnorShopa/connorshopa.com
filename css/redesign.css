@@ -1994,3 +1994,33 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* the Seeds icon, painted in Bank Blue through its own shape */
 .seedsIcon { display: block; height: 26px; aspect-ratio: 49 / 48; background: #003960; -webkit-mask: url("../assets/homeAssets/seeds_projectImage.svg") center / contain no-repeat; mask: url("../assets/homeAssets/seeds_projectImage.svg") center / contain no-repeat; filter: drop-shadow(0 2px 4px rgba(47, 39, 37, 0.22)); }
 @media (max-width: 700px) { .seedsIcon { height: 32px; } }
+
+/* the Seeds hero: a seed sprouts (seed, then stem, then leaf), holds, and starts over. The shapes are traced from
+   seeds_image00.png (its three stages); each is a layer of one SVG. */
+.seedSprout { display: flex; justify-content: center; align-items: center; width: 100%; padding: 8px 0; }
+.sproutSvg { display: block; height: min(34vh, 300px); width: auto; fill: #001428; overflow: visible; }
+.sproutSvg path { transform-box: fill-box; opacity: 0; animation-duration: 7s; animation-iteration-count: infinite; animation-timing-function: cubic-bezier(0.3, 0.8, 0.3, 1); }
+.sSeed { transform-origin: 50% 100%; animation-name: sproutSeed; }
+.sStem { transform-origin: 50% 100%; animation-name: sproutStem; }
+.sLeaf { transform-origin: 6% 100%; animation-name: sproutLeaf; }
+@keyframes sproutSeed {
+  0% { opacity: 0; transform: scale(0.4); }
+  9% { opacity: 1; transform: scale(1.08, 0.92); }
+  15% { opacity: 1; transform: scale(1); }
+  88% { opacity: 1; transform: scale(1); }
+  96%, 100% { opacity: 0; transform: scale(1); }
+}
+@keyframes sproutStem {
+  0%, 22% { opacity: 1; transform: scaleY(0); }
+  40% { opacity: 1; transform: scaleY(1); }
+  88% { opacity: 1; transform: scaleY(1); }
+  96%, 100% { opacity: 0; transform: scaleY(1); }
+}
+@keyframes sproutLeaf {
+  0%, 38% { opacity: 1; transform: scale(0) rotate(-18deg); }
+  58% { opacity: 1; transform: scale(1.06) rotate(3deg); }
+  66% { opacity: 1; transform: scale(1) rotate(0deg); }
+  88% { opacity: 1; transform: scale(1) rotate(0deg); }
+  96%, 100% { opacity: 0; transform: scale(1) rotate(0deg); }
+}
+@media (prefers-reduced-motion: reduce) { .sproutSvg path { animation: none; opacity: 1; } }
