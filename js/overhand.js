@@ -2,7 +2,7 @@
    They are pulled toward the middle of the pit, can't overlap each other (each one is a capsule),
    and the mouse pushes them away a little. */
 (function () {
-  var GIVE = ["renders", "business plans", "subscriptions", "ux flows"], GET = ["product", "money", "mentorship", "ideas"]; // the two sides of the trade, with "for" between
+  var ALL = ["renders", "business plans", "subscriptions", "ux flows", "product", "money", "mentorship", "ideas"]; // anything for anything: both sides offer every word once
   // fill, text colour, size (font px), taken from the reference
   var STYLES = [
     ["#FDE9A8", "#0B1620"], ["#E4F9DC", "#0B1620"], ["#F5C97F", "#0B1620"], ["#FFDC5A", "#0B1620"],
@@ -18,8 +18,7 @@
     pit = document.querySelector(".ohPit");
     if (!pit) return;
     // each side is its words repeated, so it reads as "any of these for any of those"
-    function three(w) { return w.concat(w.slice().reverse(), w.slice(2), w.slice(0, 2)); } // every word exactly three times
-    var left = three(GIVE), right = three(GET), list = [];
+    var left = ALL.slice(), right = ALL.slice(4).concat(ALL.slice(0, 4)), list = [];
     left.forEach(function (w, k) { list.push([w, -1, k]); });
     right.forEach(function (w, k) { list.push([w, 1, k]); });
     list.splice(left.length, 0, ["for", 0, 0]);
