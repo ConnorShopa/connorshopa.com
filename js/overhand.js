@@ -23,9 +23,10 @@
   function build() {
     pit = document.querySelector(".ohPit");
     if (!pit) return;
+    var pick = ALL.map(function () { return Math.floor(Math.random() * STYLES.length); });
     [-1, 1].forEach(function (side) {
       ALL.forEach(function (w, i) {
-        var k = side < 0 ? i : (i + 8) % ALL.length, s = STYLES[k % STYLES.length];
+        var s = STYLES[side < 0 ? pick[i] : (pick[i] + 1 + Math.floor(Math.random() * (STYLES.length - 1))) % STYLES.length]; // random colours, and a word never has the same colour in both groups
         bubs.push({ el: mk(w, "ohBub", s[0], s[1]), side: side, x: 0, y: 0, vx: 0, vy: 0, sx: 0, sy: 0 });
       });
       anchors.push({ el: mk("anything", "ohBub ohFor ohAny"), side: side });
