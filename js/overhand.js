@@ -4,7 +4,8 @@
 (function () {
   var WORDS = ["renders", "business plans", "subscriptions", "ux flows", "product", "money", "mentorship", "ideas", "logos", "code", "feedback", "photos", "time", "skills", "advice", "equity",
     "illustrations", "websites", "apps", "prototypes", "copywriting", "branding", "strategy", "research", "podcasts", "music", "videos", "animations", "tutoring", "lessons",
-    "coaching", "contacts", "intros", "tools", "templates", "fonts", "icons", "mockups", "reviews", "audits", "pitch decks", "data", "hosting", "favors", "recipes", "art", "books", "tickets"];
+    "coaching", "contacts", "intros", "tools", "templates", "fonts", "icons", "mockups", "reviews", "audits", "pitch decks", "data", "hosting", "favors", "recipes", "art", "books", "tickets",
+    "stickers", "posters", "packaging", "newsletters", "captions", "scripts", "stories", "translations", "spreadsheets", "dashboards", "wireframes", "courses", "workshops", "playlists", "sketches", "patterns", "samples", "gear", "space", "rides", "paintings", "jingles", "memes", "gifs"];
   // fill, text. One family: soft, light-to-mid tones of similar weight, all with dark text, spread around the colour wheel
   var STYLES = [
     ["#FDE9A8", "#0B1620"], ["#E4F9DC", "#0B1620"], ["#F5C97F", "#0B1620"], ["#FFDC5A", "#0B1620"],
@@ -61,7 +62,7 @@
     forEl.w = forEl.offsetWidth; forEl.h = forEl.offsetHeight;
   }
   function setSize(fs, big) {
-    bubs.forEach(function (b) { var f = fs * b.scale; b.el.style.fontSize = f.toFixed(1) + "px"; b.el.style.padding = Math.round(f * 0.55) + "px " + Math.round(f * 1.5) + "px"; });
+    bubs.forEach(function (b) { var f = fs * b.scale; b.el.style.fontSize = f.toFixed(1) + "px"; b.el.style.padding = Math.round(f * 0.5) + "px " + Math.round(f * 1.25) + "px"; });
     anchors.forEach(function (a) { a.el.style.fontSize = Math.round(big * 0.2) + "px"; });
     forEl.style.fontSize = Math.round(big * 0.14) + "px";
   }
@@ -69,29 +70,32 @@
   // pack each circle with rows of words (as many as fit), "anything" in the middle of the middle row
   function layout() {
     var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2, r0 = Math.min(H - 6, W * 0.62);
-    setSize(Math.max(9, r0 / 21), r0); measureAll();
+    setSize(Math.max(7, r0 / 25), r0); measureAll();
     var lens = forEl.w + 36;
     R = 0.58 * Math.min(r0, (W + lens / 2) / 2 - 2); // a little smaller than the space, so the circles float in the card
-    var fs = Math.max(9, R / 21), ax = R - lens / 2;
+    var fs = Math.max(7, R / 25), ax = R - lens / 2;
     setSize(fs, R); measureAll();
     lens = forEl.w + 36; ax = R - lens / 2; wallX = forEl.w / 2 + 12;
     var maxH = 0; bubs.forEach(function (b) { maxH = Math.max(maxH, b.h); });
-    var pitch = maxH + GAP * 1.1, half = Math.floor((R - maxH / 2) / pitch);
+    var pitch = maxH + GAP * 0.55, half = Math.floor((R - maxH / 2) / pitch);
     active = [];
     [-1, 1].forEach(function (side) {
       var queue = bubs.filter(function (b) { return b.side === side; }).sort(function (a, b) { return a.order - b.order; }), any = anchors.filter(function (a) { return a.side === side; })[0];
       function fill(lo, hi, y) { // greedily take words that fit [lo, hi], centre them
         var got = [], used = 0, room = hi - lo, i = 0;
         if (room <= 40) return;
-        while (i < queue.length && i < 12) {
-          var b = queue[i], need = b.w + GAP * 1.5;
+        while (i < queue.length) {
+          var b = queue[i], need = b.w + GAP;
           if (used + need <= room) { got.push(b); used += need; queue.splice(i, 1); i = 0; } else i++;
         }
-        var x = (lo + hi) / 2 - used / 2;
-        got.forEach(function (b) { b.sx = side * ax + x + b.w / 2; b.sy = y; x += b.w + GAP; active.push(b); });
+        // spread what's left over evenly between the words, so the row reads as full
+        var extra = got.length ? Math.min((room - (used - GAP * (got.length - 1) + GAP * (got.length - 1))) / (got.length + 1), GAP * 3) : 0, x;
+        var total = got.reduce(function (t, b) { return t + b.w; }, 0), gp = got.length > 1 ? Math.min((room - total) / (got.length + 1), GAP * 3) : 0;
+        x = (lo + hi) / 2 - (total + gp * (got.length - 1)) / 2;
+        got.forEach(function (b) { b.sx = side * ax + x + b.w / 2; b.sy = y; x += b.w + gp; active.push(b); });
       }
       for (var k = -half; k <= half; k++) {
-        var y = k * pitch, d = R - 24, c = Math.sqrt(Math.max(0, d * d - Math.pow(Math.abs(y) + maxH / 2, 2)));
+        var y = k * pitch, d = R - 8, c = Math.sqrt(Math.max(0, d * d - Math.pow(Math.abs(y) + maxH / 2, 2)));
         var lo = -c, hi = c, inner = ax - wallX - 4; // "for" and the overlap are kept clear
         if (side < 0) hi = Math.min(hi, inner); else lo = Math.max(lo, -inner);
         if (Math.abs(y) < any.h / 2 + maxH / 2 + 6) { var aw = any.w + 2 * GAP + 8; // rows beside the big word leave room for it
