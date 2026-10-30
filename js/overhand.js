@@ -5,10 +5,16 @@
   var WORDS = ["renders", "business plans", "subscriptions", "ux flows", "product", "money", "mentorship", "ideas", "logos", "code", "feedback", "photos", "time", "skills", "advice", "equity",
     "illustrations", "websites", "apps", "prototypes", "copywriting", "branding", "strategy", "research", "podcasts", "music", "videos", "animations", "tutoring", "lessons",
     "coaching", "contacts", "intros", "tools", "templates", "fonts", "icons", "mockups", "reviews", "audits", "pitch decks", "data", "hosting", "favors", "recipes", "art", "books", "tickets"];
+  // fill, text. The first eight are the reference palette; the rest add the hues it was missing (a triad/complement
+  // spread around the wheel: pink, lime, orange, sky, violet, teal) plus a few deep tones, so neighbours stay distinct
   var STYLES = [
     ["#FDE9A8", "#0B1620"], ["#E4F9DC", "#0B1620"], ["#F5C97F", "#0B1620"], ["#FFDC5A", "#0B1620"],
     ["#9BE8E8", "#0B1620"], ["#E1E5E9", "#0B1620"], ["#9B96F6", "#0B1620"], ["#F07B7B", "#fff"],
+    ["#F9A8D4", "#0B1620"], ["#C7F26B", "#0B1620"], ["#FF9F43", "#0B1620"], ["#7DB8FF", "#0B1620"],
+    ["#C9A7FF", "#0B1620"], ["#52D3B0", "#0B1620"], ["#2F3436", "#fff"], ["#4C5FD5", "#fff"],
+    ["#D6336C", "#fff"], ["#1F8A70", "#fff"],
   ];
+
   var GAP = 8, REACH = 120, PUSH = 2.6;
   var pit = null, bubs = [], anchors = [], circles = [], active = [], mouse = { x: -9999, y: -9999 }, raf = 0, ready = false, visible = false, forEl = null, R = 0, wallX = 0;
 
