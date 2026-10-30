@@ -66,7 +66,7 @@
     var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2, r0 = Math.min(H - 6, W * 0.62);
     setSize(Math.max(9, r0 / 21), r0); measureAll();
     var lens = forEl.w + 36;
-    R = 0.78 * Math.min(r0, (W + lens / 2) / 2 - 2); // a little smaller than the space, so the circles float in the card
+    R = 0.58 * Math.min(r0, (W + lens / 2) / 2 - 2); // a little smaller than the space, so the circles float in the card
     var fs = Math.max(9, R / 21), ax = R - lens / 2;
     setSize(fs, R); measureAll();
     lens = forEl.w + 36; ax = R - lens / 2; wallX = forEl.w / 2 + 12;

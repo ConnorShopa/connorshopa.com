@@ -2075,3 +2075,8 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 #view-overhand .ohBub { backdrop-filter: none; }
 #view-overhand .ohBub { border: 1.5px solid rgba(11, 22, 32, 0.5); box-shadow: none; }
 #view-overhand .ohBub.ohFor { border: 0; }
+
+/* Overhand: a large "Trade" at the top, the smaller circles centred on the card */
+.view.scrollView .pg.one:has(.ohPit) .ohHero { top: 16px; }
+.view.scrollView .pg.one:has(.ohPit) .ohPit { top: 24px; bottom: 24px; }
+#view-overhand .pg .lead.ohTitle, #view-overhand.view.scrollView .pg:first-child .lead.ohTitle { font-size: clamp(60px, 8vw, 104px); line-height: 1; }
