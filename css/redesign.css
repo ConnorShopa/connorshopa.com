@@ -2183,8 +2183,8 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   /* every card sits in the middle of the deck; js/deck.js moves, scales and fades them */
   #projectList li:not(.row-break) {
     position: absolute; left: 0; right: 0; top: 50%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    box-sizing: border-box; width: fit-content; min-width: 150px; max-width: calc(100% - 32px); height: auto; padding: 24px 34px;
-    background: var(--card, #fff); border-radius: 46px; text-align: center; backface-visibility: hidden;
+    box-sizing: border-box; width: fit-content; min-width: 110px; max-width: calc(100% - 32px); height: auto; padding: 16px 24px;
+    background: var(--card, #fff); border-radius: 36px; text-align: center; backface-visibility: hidden;
     box-shadow: 0 14px 34px -14px rgba(47, 39, 37, 0.28), 0 2px 8px rgba(47, 39, 37, 0.08);
     will-change: translate, scale, rotate, opacity; transform-origin: 50% 50% !important;
   }
@@ -2193,7 +2193,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
     content: ""; position: absolute; inset: 0; margin: 0; border-radius: inherit; background: var(--bg); opacity: var(--dim, 0);
     pointer-events: none; text-shadow: none;
   }
-  #projectList li > a { max-width: 100%; zoom: 1.5; }
+  #projectList li > a { max-width: 100%; zoom: 1.05; }
   #projectList.compact { display: block; }
 
   /* logos are grey until their card is the one in front */
