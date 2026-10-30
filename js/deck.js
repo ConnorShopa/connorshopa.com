@@ -44,7 +44,11 @@
     if (!header || !mq.matches) return;
     document.documentElement.style.setProperty("--hdrH", Math.ceil(header.getBoundingClientRect().bottom + 12) + "px");
   }
-  function measure() { heights = cards.map(function (li) { return li.offsetHeight || 100; }); dirty = false; }
+  var RADIUS = 0.25; // a card's corner radius as a share of its own height, so every card is rounded the same amount
+  function measure() {
+    heights = cards.map(function (li) { var h = li.offsetHeight || 100; li.style.borderRadius = Math.round(h * RADIUS) + "px"; return h; });
+    dirty = false;
+  }
 
   // style writes are skipped when nothing changed; a value something else wiped (GSAP sets scale / translate to "none")
   // is written again
@@ -152,7 +156,7 @@
 
   function refresh() {
     if (mq.matches) { measureHeader(); dirty = true; render(); }
-    else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.classList.remove("isActive"); });
+    else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.style.borderRadius = ""; li.classList.remove("isActive"); });
   }
   window.addEventListener("resize", refresh);
   // on load the cards grow in from the middle and spread out to their places

@@ -295,9 +295,11 @@
     var cr = view.getBoundingClientRect();
     return "inset(" + (box.top - cr.top) + "px " + (cr.right - box.right) + "px " + (cr.bottom - box.bottom) + "px " + (box.left - cr.left) + "px round " + radius + "px)";
   }
+  // the deck card's corner radius as it is drawn (the card is scaled)
+  function cardRadius(li) { var r = li.getBoundingClientRect(); return (parseFloat(getComputedStyle(li).borderTopLeftRadius) || 22) * (li.offsetHeight ? r.height / li.offsetHeight : 1); }
   function phoneGrow(view, li, reveal) {
     if (!li) { reveal(); return; }
-    var from = clipOf(view, li.getBoundingClientRect(), 22);
+    var from = clipOf(view, li.getBoundingClientRect(), cardRadius(li));
     var cardBg = getComputedStyle(li).backgroundColor, viewBg = getComputedStyle(view).backgroundColor;
     gsap.set(view, { autoAlpha: 1, clipPath: from, backgroundColor: cardBg });
     gsap.to(view, { clipPath: "inset(0px 0px 0px 0px round 28px)", backgroundColor: viewBg, duration: t(0.5), ease: "power3.inOut", onComplete: function () { gsap.set(view, { clearProps: "clipPath,backgroundColor" }); } });
@@ -308,7 +310,7 @@
     document.documentElement.classList.remove("view-open"); // the deck shows again behind the closing card
     var cardBg = getComputedStyle(li).backgroundColor, viewBg = getComputedStyle(view).backgroundColor;
     gsap.set(view, { autoAlpha: 1, clipPath: "inset(0px 0px 0px 0px round 28px)", backgroundColor: viewBg });
-    gsap.to(view, { clipPath: clipOf(view, li.getBoundingClientRect(), 22), backgroundColor: cardBg, duration: t(0.45), ease: "power3.inOut", onComplete: function () { gsap.set(view, { clearProps: "clipPath,backgroundColor" }); finish(); } });
+    gsap.to(view, { clipPath: clipOf(view, li.getBoundingClientRect(), cardRadius(li)), backgroundColor: cardBg, duration: t(0.45), ease: "power3.inOut", onComplete: function () { gsap.set(view, { clearProps: "clipPath,backgroundColor" }); finish(); } });
   }
 
   function show(trigger, view, link) {
