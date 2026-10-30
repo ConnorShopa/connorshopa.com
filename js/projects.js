@@ -374,7 +374,7 @@
       logo: H + "happlycations_logo.svg",
       logoOnly: true,
       bg: "#CFE6FA",
-      pages: [],
+      pages: [pg("one", '<div class="clayMount"></div>')], // the 3D clay phone (js/clayphone.js), blue placeholder screen for now
     },
 
     // ---------------------------------------------------------------- Overhand (no content yet)
