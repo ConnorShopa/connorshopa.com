@@ -10,7 +10,7 @@
 }
 .clayPhone {
   --cw: inherit;
-  --depth: calc(var(--cw) * 0.15);
+  --depth: calc(var(--cw) * 0.08);
   --body: #e9e7e2;
   --edge: #3a3a3c;
   position: absolute;
@@ -37,6 +37,8 @@
 .clayPhone .clayPhone .slab:nth-of-type(odd) { background: #55555a; }
 /* the top face: matte clay, with a soft inner light */
 .clayPhone .face {
+  inset: calc(var(--cw) * 0.03);
+  border-radius: calc(var(--cw) * 0.17);
   transform: translateZ(var(--depth));
   background:
     radial-gradient(120% 90% at 22% 12%, #f6f5f1 0%, #ebe9e4 45%, #dcdad4 100%);
@@ -71,21 +73,21 @@
   width: 27%; height: calc(var(--cw) * 0.075);
   border-radius: 999px; background: #0b0b0c;
 }
-/* knurled orange buttons on the left edge: a little extruded block with ridged top */
+/* knurled orange buttons on the left edge: rounded blocks pushed out of the side, ridged on the outside */
 .clayPhone .cbtn {
   position: absolute;
-  left: calc(var(--cw) * -0.07);
-  width: calc(var(--cw) * 0.085);
-  height: calc(var(--cw) * 0.2);
+  left: 0;
+  width: 0;
+  height: calc(var(--cw) * 0.17);
   transform-style: preserve-3d;
-  transform: translateZ(calc(var(--depth) * 0.5));
 }
 .clayPhone .cbtn i {
-  position: absolute; inset: 0;
-  border-radius: calc(var(--cw) * 0.018);
-  background: #e8573a;
+  position: absolute; left: 0; top: 0;
+  width: calc(var(--cw) * 0.04); height: 100%;
+  transform-origin: 0 50%;
+  border-radius: calc(var(--cw) * 0.016);
+  background: #d9482c;
 }
 .clayPhone .cbtn i.top {
-  background:
-    repeating-linear-gradient(0deg, #f06a4c 0 calc(var(--cw) * 0.006), #c9432a calc(var(--cw) * 0.006) calc(var(--cw) * 0.012));
+  background: repeating-linear-gradient(0deg, #f46b4a 0 calc(var(--cw) * 0.0055), #c8422a calc(var(--cw) * 0.0055) calc(var(--cw) * 0.011));
 }
