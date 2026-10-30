@@ -106,21 +106,21 @@
       y += h + g;
     };
     while (i < N) {
-      var target = base * (0.8 + 0.55 * (((row + 1) * 0.6180339887) % 1)); // 0.8x .. 1.35x of the base height
+      var target = base * (0.92 + 0.16 * (((row + 1) * 0.6180339887) % 1)); // 0.92x .. 1.08x of the base height: the rows stay close in size
       var sum = 0, n = 0, prevH = Infinity, j2 = i;
       for (; j2 < N; j2++) {
         sum += nat[j2].w / nat[j2].h; n++;
         var h = (W - g * (n - 1)) / sum;
         if (h <= target) {
           // the row is full: keep this card, or leave it for the next row, whichever lands nearer the target height
-          if (n > 1 && Math.abs(prevH - target) < Math.abs(h - target)) { n--; h = prevH; } else { j2++; }
+          if (n > 1 && (Math.abs(prevH - target) < Math.abs(h - target) || h < target * 0.88)) { n--; h = prevH; } else { j2++; }
           prevH = h; break;
         }
         prevH = h;
       }
       if (j2 >= N && n === N - i && prevH > target) { /* ran out of cards before the row filled: keep its natural look */ }
       var rowH = prevH, stretch = true;
-      if (rowH > target * 1.2) { rowH = target * 1.2; stretch = false; } // a short last row (or a lone card) is not blown up; it is centred
+      if (rowH > target * 1.08) { rowH = target * 1.08; stretch = false; } // a row never grows past the target: it is centred instead, so cards stay close in size
       place(i, j2 > i ? j2 : i + 1, rowH, stretch); i = j2 > i ? j2 : i + 1;
       row++;
     }
