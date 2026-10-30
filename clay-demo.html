@@ -1,4 +1,16 @@
-<!doctype html><meta charset=utf-8><link rel=stylesheet href="css/clayphone.css">
-<body style="margin:0;background:#e6e7e8;display:grid;place-items:center;height:100vh">
-<div class=clayStage><div class=clayPhone></div></div>
-<script src="js/clayphone.js"></script>
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clay phone</title>
+<style>html,body{margin:0;height:100%;background:#e6e7e8}#stage{position:fixed;inset:0}</style>
+<div id="stage"></div>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+  import { mountClayPhone } from "./js/clayphone.js";
+  mountClayPhone(document.getElementById("stage"));
+</script>
