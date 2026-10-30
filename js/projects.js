@@ -13,6 +13,12 @@
   function pg(layout, html) { return { layout: layout, html: html }; }
   function text(html) { return '<div class="pgText">' + html + "</div>"; }
   function media() { return '<div class="pgMedia">' + Array.prototype.join.call(arguments, "") + "</div>"; }
+  // tabs: [[label, html], ...]. js/tabs.js switches the panels
+  function tabs(items) {
+    return '<div class="sTabs"><div class="sTabBar" role="tablist">' +
+      items.map(function (t, i) { return '<button type="button" role="tab" class="sTab' + (i ? "" : " on") + '" data-tab="' + i + '">' + t[0] + "</button>"; }).join("") +
+      "</div>" + items.map(function (t, i) { return '<div class="sPanel' + (i ? "" : " on") + '" data-panel="' + i + '">' + t[1] + "</div>"; }).join("") + "</div>";
+  }
   function fig(src, caption) {
     return "<figure><img src=\"" + src + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">" +
       (caption ? "<figcaption>" + caption + "</figcaption>" : "") + "</figure>";
@@ -156,9 +162,13 @@
         pg("one", text(
             p("eyebrow", "The goal") +
             p("lead", "To design and build an internal design system that would ameliorate developer hand offs and product iteration."))),
-        pg("media", media(
-          fig(A + "seedsAssets/seeds_image01.png"), fig(A + "seedsAssets/seeds_image02.png"),
-          fig(A + "seedsAssets/seeds_image03.png"), fig(A + "seedsAssets/seeds_image04.png"))),
+        // the system, split by Atomic Design level: one tab per level
+        pg("media", media(tabs([
+          ["Style System", fig(A + "seedsAssets/seeds_image01.png")],
+          ["Atoms", fig(A + "seedsAssets/seeds_atoms.png")],
+          ["Molecules", fig(A + "seedsAssets/seeds_molecules_a.png") + fig(A + "seedsAssets/seeds_image03.png")],
+          ["Templates", fig(A + "seedsAssets/seeds_image04.png")],
+        ]))),
       ],
     },
 
