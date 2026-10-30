@@ -44,6 +44,12 @@
     if (!header || !mq.matches) return;
     document.documentElement.style.setProperty("--hdrH", Math.ceil(header.getBoundingClientRect().bottom + 12) + "px");
   }
+  // a few cards are a little bigger or smaller than the rest while they are in focus (1 = the same as the others)
+  var adj = cards.map(function (li) {
+    if (li.querySelector(".drawlText")) return 1.3;
+    var a = li.querySelector("a"), v = a && a.getAttribute("data-view");
+    return v === "touchtunes" ? 0.88 : 1;
+  });
   var RADIUS = 0.25; // a card's corner radius as a share of its own height, so every card is rounded the same amount
   function measure() {
     heights = cards.map(function (li) { var h = li.offsetHeight || 100; li.style.borderRadius = Math.round(h * RADIUS) + "px"; return h; });
@@ -89,7 +95,7 @@
     if (!mq.matches) return;
     if (dirty) measure();
     var b = Math.floor(pos), f = pos - b, ks = [], sc = [], ys = [], i, n;
-    for (i = 0; i < N; i++) { ks[i] = wrap(i - pos); sc[i] = scaleAt(ks[i]); }
+    for (i = 0; i < N; i++) { ks[i] = wrap(i - pos); sc[i] = scaleAt(ks[i]) * (1 + (adj[i] - 1) * Math.max(0, 1 - Math.abs(ks[i]))); }
     // the cards are laid out one after the other, each a fixed gap from the one before (measured between the edges of
     // the cards as they are drawn, i.e. after scaling), so the distance between neighbours is the same everywhere
     var d = function (x, z) { return (heights[x] * sc[x] + heights[z] * sc[z]) / 2 + GAP; };

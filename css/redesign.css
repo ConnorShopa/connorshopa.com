@@ -2267,7 +2267,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* phones: Nanni's icon-over-wordmark logo also gets more room in its deck card */
 @media (max-width: 700px) {
-  #projectList li:has(> a[data-view="nanni"]):not(.row-break) { padding: 18px 28px; }
+  #projectList li:has(> a[data-view="nanni"]):not(.row-break) { padding: 18px 46px; }
 }
 
 /* phones: only the card in focus has the soft shadow on its logo and text; the others are flat */
