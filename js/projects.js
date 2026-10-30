@@ -371,6 +371,8 @@
     // ---------------------------------------------------------------- Happlycations (an empty skeleton on the old site)
     happlycations: {
       title: "Happlycations",
+      logo: H + "happlycations_logo.svg",
+      logoOnly: true,
       bg: "#CFE6FA",
       pages: [],
     },
