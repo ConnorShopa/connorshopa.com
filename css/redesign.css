@@ -1947,3 +1947,13 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* a project's first page opens with its hero picture, above the title */
 .view.scrollView .pg:first-child .pgMedia { order: -2; }
 .view.scrollView .pg:first-child .pgText { order: -1; }
+
+/* Seeds: the design system pictures run the full width of the page, with some padding, one under the other */
+#view-seeds .pgMedia { flex-direction: column; flex-wrap: nowrap; width: 100%; max-width: none; padding: 0 28px; box-sizing: border-box; }
+#view-seeds .pgMedia figure,
+#view-seeds .pgMedia:has(figure:nth-child(2)) figure { flex: none; width: 100%; }
+#view-seeds .pgMedia img,
+#view-seeds .pg.media .pgMedia img,
+#view-seeds .pgMedia:has(figure:nth-child(2)) img { width: 100%; max-width: 100%; max-height: none; height: auto; }
+#view-seeds .pg.media { padding-left: 0; padding-right: 0; }
+@media (max-width: 700px) { #view-seeds .pgMedia { padding: 0 8px; } }
