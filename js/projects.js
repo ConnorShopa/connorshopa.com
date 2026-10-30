@@ -150,7 +150,7 @@
       pages: [
         pg("two",
           text(
-            p("lead", ": a Style &amp; Design System for Plunk") +
+            p("lead", "A Living Growing Style &amp; Design System") +
             '<div class="facts">' + fact("Built for", "A small team of engineers, designers, marketers &amp; good folk") + fact("Methodology", "Atomic Design System") + "</div>"
           ) + media(fig(A + "seedsAssets/seeds_image00.png"))),
         pg("flip",
