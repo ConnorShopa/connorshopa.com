@@ -33,6 +33,7 @@
   if (N < 3) return;
 
   var GAP = 12;    // space between neighbouring cards at the front of the wheel
+  var TIGHT = 0.7; // how close neighbours sit to the card in front (1 = evenly spaced, lower = tighter)
   var R = 270;     // the wheel's radius, in px
   var STEP = 150;  // dragging this far moves one card
   var heights = [], dirty = true;
@@ -77,9 +78,10 @@
       var th = lin / R;                                      // how far round the wheel the card is, in radians
       var a = Math.abs(th), k = wrap(i - pos);
       if (Math.abs(k) < bestA) { bestA = Math.abs(k); best = i; }
-      var y = R * Math.sin(Math.max(-1.6, Math.min(1.6, th)));
+      // the cards bunch up close to the one in front and spread out the further they are from it
+      var u = Math.min(Math.abs(lin), 1.6 * R), y = (lin < 0 ? -1 : 1) * (TIGHT * u + (1 - TIGHT) * u * u / R);
       var op = Math.max(0, 1 - Math.pow(a / 1.45, 2.2));
-      put(li, "scale", (0.8 + 0.2 * Math.cos(Math.min(a, 1.5))).toFixed(4));
+      put(li, "scale", Math.max(0.4, 1 - 0.3 * a - 0.12 * a * a).toFixed(4)); // smaller the further from the front, a little more with each step
       put(li, "translate", "0 " + (y - H / 2).toFixed(1) + "px");
       put(li, "rotate", "1 0 0 " + (-th * 57.3 * 0.85).toFixed(1) + "deg");
       put(li, "opacity", op.toFixed(3));
