@@ -35,7 +35,7 @@
   if (N < 3) return;
 
   var STEP = 150;  // dragging this far moves one card
-  var GAP = 6;     // the space between neighbouring cards (edge to edge), the same all the way round
+  var GAP = 3;     // the space between neighbouring cards (edge to edge), the same all the way round
   var heights = [], dirty = true;
   var spread = 1, introRaf = 0, pos = 0, target = 0, vel = 0, anim = 0, dragging = false, moved = false;
   var lastT = 0;
@@ -83,8 +83,8 @@
   });
   function wrap(k) { return ((k + N / 2) % N + N) % N - N / 2; }
 
-  // how big a card is by how many places it is from the front (the front card is 1.5x, then they drop away)
-  function scaleAt(k) { var a = Math.abs(k); return 0.3 + 1.0 / (1 + (a * a) / 0.49) + 0.2 / (1 + (a * a) / 0.1); } // the card in front is 1.5x; the rest are as before
+  // how big a card is by how many places it is from the front (the front card is 1.3x, then they drop away)
+  function scaleAt(k) { var a = Math.abs(k); return 0.2 + 1.1 / (1 + (a * a) / 0.49); } // front 1.3x; the rest are smaller
   function render() {
     if (!mq.matches) return;
     if (dirty) measure();
