@@ -2118,3 +2118,13 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .jfig { margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; flex: none; }
 .jfig img { width: 100%; }
 .jnote { align-self: flex-start; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5C534E; background: #FFFFFF; padding: 5px 10px; border: 1px solid rgba(42, 37, 34, 0.35); border-radius: 2px; line-height: 1; box-shadow: 0 2px 4px rgba(42, 37, 34, 0.12); }
+
+/* Overhand: the circles run the full width, the same distance from the sides as the logo and the sign-up card; "Trade" has room above them */
+@media (max-width: 1100px) { .view.scrollView .pg.one:has(.ohPit) .ohPit { left: 40px; right: 40px; top: 130px; bottom: 130px; } }
+@media (max-width: 700px) { .view.scrollView .pg.one:has(.ohPit) .ohPit { left: 12px; right: 12px; top: 150px; bottom: 120px; } }
+
+/* Overhand sign-up card: one row, centred at the bottom of the view */
+.view.scrollView .pg.one:has(.ohPit) .earlyForm { flex-direction: row; align-items: center; width: auto; left: 50%; right: auto; transform: translateX(-50%); bottom: 61px; }
+.view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyInput { width: 240px; }
+.view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyBtn.lockBtn { width: auto; white-space: nowrap; }
+@media (max-width: 700px) { .view.scrollView .pg.one:has(.ohPit) .earlyForm { left: 50%; bottom: 28px; width: calc(100% - 24px); box-sizing: border-box; } .view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyInput { width: auto; flex: 1; min-width: 0; } }

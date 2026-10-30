@@ -69,13 +69,26 @@
 
   // pack each circle with rows of words (as many as fit), "anything" in the middle of the middle row
   function layout() {
-    var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2, r0 = Math.min(H - 6, W * 0.62);
-    setSize(Math.max(7, r0 / 25), r0); measureAll();
-    var lens = forEl.w + 90;
-    R = 0.58 * Math.min(r0, (W + lens / 2) / 2 - 2); // a little smaller than the space, so the circles float in the card
-    var fs = Math.max(7, R / 25), ax = R - lens / 2;
-    setSize(fs, R); measureAll();
-    lens = forEl.w + 90; ax = R - lens / 2; wallX = forEl.w / 2 + 30;
+    var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2, ax, fs;
+    if (window.innerWidth > 1100) { // normal screens: circles float in the middle of the card
+      var r0 = Math.min(H - 6, W * 0.62);
+      setSize(Math.max(7, r0 / 25), r0); measureAll();
+      var lens = forEl.w + 90;
+      R = 0.58 * Math.min(r0, (W + lens / 2) / 2 - 2);
+      fs = Math.max(7, R / 25); ax = R - lens / 2;
+      setSize(fs, R); measureAll();
+      lens = forEl.w + 90; ax = R - lens / 2; wallX = forEl.w / 2 + 30;
+    } else { // smaller screens: the circles run edge to edge of the pit
+      var Rh = H - 6;
+      setSize(Math.max(9, Math.min(Rh, W * 0.6) / 25), Math.min(Rh, W * 0.6)); measureAll();
+      var lensWant = forEl.w + 90;
+      R = Math.min(Rh, (W + lensWant / 2) / 2 - 2);
+      if (W - 2 * R - 2 < 0) { /* overlapping */ } else if (2 * (W - 2 * R - 2) < forEl.w + 60) R = Math.max(40, (W - (forEl.w + 60) / 2 - 2) / 2);
+      ax = W - R - 2;
+      fs = Math.max(9, R / 25);
+      setSize(fs, R); measureAll();
+      wallX = forEl.w / 2 + 30;
+    }
     var maxH = 0; bubs.forEach(function (b) { maxH = Math.max(maxH, b.h); });
     var pitch = maxH + GAP * 0.55, half = Math.floor((R - maxH / 2) / pitch);
     active = [];
