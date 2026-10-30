@@ -2314,3 +2314,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   html.deckGallery #projectList li:not(.isActive) .logo, html.deckGallery #projectList li:not(.isActive) .wordmark { filter: drop-shadow(0 2px 4px rgba(47, 39, 37, 0.22)); }
 }
 @media (prefers-reduced-motion: reduce) { .deckMode { transition: none; } }
+
+/* phones: no Open / mode buttons while About or Contact is showing */
+@media (max-width: 700px) {
+  html:has(.panelText:not([hidden])) .deckView, html:has(.panelText:not([hidden])) .deckMode { transform: translateX(-50%) scale(0) !important; opacity: 0 !important; pointer-events: none !important; }
+  html:has(.panelText:not([hidden])) .deckMode { transform: scale(0) !important; }
+}
