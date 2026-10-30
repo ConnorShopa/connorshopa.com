@@ -1954,16 +1954,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* Seeds: the design system pictures run the full width of the page, with some padding, one under the other */
 #view-seeds .pg.media { padding-left: 0; padding-right: 0; }
 #view-seeds .pgMedia { flex-direction: column; flex-wrap: nowrap; align-items: stretch; width: 100%; max-width: none; padding: 0 28px; box-sizing: border-box; }
-.sTabs { width: 100%; }
-.sTabBar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 22px; }
-.sTab { font: inherit; font-weight: 600; font-size: 15px; padding: 9px 20px; border-radius: 999px; border: 1.5px solid #003960; background: transparent; color: #003960; cursor: url("cursor_linkHover.png"), pointer; transition: background .2s, color .2s; }
-.sTab:hover { background: rgba(0, 57, 96, .1); }
-.sTab.on { background: #003960; color: #fff; }
-.sPanel { display: none; flex-direction: column; gap: 14px; }
-.sPanel.on { display: flex; }
-#view-seeds .sPanel figure { flex: none; width: 100%; }
-#view-seeds .sPanel img { width: 100%; max-width: 100%; max-height: none; height: auto; }
-@media (max-width: 700px) { #view-seeds .pgMedia { padding: 0 8px; } .sTab { font-size: 13px; padding: 8px 14px; } }
+#view-seeds .pgMedia figure { flex: none; width: 100%; }
+#view-seeds .pgMedia img, #view-seeds .pg.media .pgMedia img { width: 100%; max-width: 100%; max-height: none; height: auto; }
+@media (max-width: 700px) { #view-seeds .pgMedia { padding: 0 8px; } }
 
 /* the text blocks stay centred in the view, but the words inside them read from the left */
 .view.scrollView .pg.two,
