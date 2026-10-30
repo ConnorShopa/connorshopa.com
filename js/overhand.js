@@ -118,7 +118,7 @@
       for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) collide(bubs[i], bubs[j]);
       for (i = 0; i < n; i++) fixed.forEach(function (f) { // the words "anything" and "for" don't move; bubbles go round them
         var hw = Math.max(0, f.w / 2 - f.h / 2);
-        var ghost = { x: f.x, y: f.y, hw: hw, r: f.h / 2 + 4 }, bb = bubs[i];
+        var ghost = { x: f.x, y: f.y, hw: hw, r: f.h / 2 + 16 }, bb = bubs[i];
         var a0 = bb.x - bb.hw, a1 = bb.x + bb.hw, b0 = ghost.x - hw, b1 = ghost.x + hw, pa, pb, lo = Math.max(a0, b0), hi = Math.min(a1, b1);
         if (lo <= hi) pa = pb = (lo + hi) / 2; else if (a1 < b0) { pa = a1; pb = b0; } else { pa = a0; pb = b1; }
         var dx = pa - pb, dy = bb.y - ghost.y, d = Math.sqrt(dx * dx + dy * dy), min = bb.r + ghost.r + 2;

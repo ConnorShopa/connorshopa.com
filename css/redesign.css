@@ -2017,7 +2017,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .earlyForm { align-self: center; justify-content: center; margin: 0 auto 8px; width: 100%; }
 
 /* Overhand: the logo moves out of the corner into a left-aligned column: logo, "Let's you", "Trade" */
-#view-overhand .viewHead { display: none; }
 .ohHero { align-self: flex-start; display: flex; flex-direction: column; align-items: flex-start; text-align: left; gap: 6px; margin: 8px 0 0; }
 .ohLogo { height: 56px; width: auto; display: block; margin-bottom: 14px; }
 .pg .lead.ohLets, .view.scrollView .pg:first-child .lead.ohLets { font-size: clamp(26px, 3vw, 40px); font-weight: 500; line-height: 1; text-align: left; align-self: flex-start; margin: 0; width: auto; white-space: normal; color: #1B2430; }
@@ -2027,3 +2026,4 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .ohHero { align-self: center; align-items: center; text-align: center; }
 .pg .lead.ohLets, .view.scrollView .pg:first-child .lead.ohLets,
 .pg .lead.ohTitle, .view.scrollView .pg:first-child .lead.ohTitle { text-align: center; align-self: center; }
+.ohBub.ohFor.ohAny { padding: 0 26px; }

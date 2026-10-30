@@ -384,7 +384,7 @@
         pg("one", text(
           '<form class="earlyForm" novalidate><input class="earlyInput" type="email" placeholder="Email address" autocomplete="email" aria-label="Email address">' +
           '<button type="submit" class="lockBtn earlyBtn">Get early access</button></form>' +
-          '<div class="ohHero"><img class="ohLogo" src="' + H + 'overhand_logo.svg" alt="Overhand">' + p("lead ohLets", "Let&rsquo;s you") + p("lead ohTitle", "Trade") + "</div>" +
+          '<div class="ohHero">' + p("lead ohLets", "Let&rsquo;s you") + p("lead ohTitle", "Trade") + "</div>" +
           '<div class="ohPit" role="img" aria-label="Trade renders, business plans, subscriptions and ux flows for product, money, mentorship and ideas"></div>'
         )),
       ],
