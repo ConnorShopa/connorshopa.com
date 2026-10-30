@@ -2022,3 +2022,8 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .ohLogo { height: 56px; width: auto; display: block; margin-bottom: 14px; }
 .pg .lead.ohLets, .view.scrollView .pg:first-child .lead.ohLets { font-size: clamp(26px, 3vw, 40px); font-weight: 500; line-height: 1; text-align: left; align-self: flex-start; margin: 0; width: auto; white-space: normal; color: #1B2430; }
 .pg .lead.ohTitle, .view.scrollView .pg:first-child .lead.ohTitle { font-size: clamp(64px, 9vw, 120px); text-align: left; align-self: flex-start; margin: 0; width: auto; }
+
+/* the column is centred in the view, and its contents are centred in it */
+.ohHero { align-self: center; align-items: center; text-align: center; }
+.pg .lead.ohLets, .view.scrollView .pg:first-child .lead.ohLets,
+.pg .lead.ohTitle, .view.scrollView .pg:first-child .lead.ohTitle { text-align: center; align-self: center; }
