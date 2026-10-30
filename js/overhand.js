@@ -31,7 +31,7 @@
         el.className = "ohBub ohFor"; fs = 30;
       } else { el.style.background = s[0]; el.style.color = s[1]; }
       el.style.fontSize = fs + "px";
-      if (it[1] !== 0) el.style.padding = Math.round(fs * 0.62) + "px " + Math.round(fs * 1.25) + "px";
+      if (it[1] !== 0) el.style.padding = Math.round(fs * 0.62) + "px " + Math.round(fs * 2) + "px";
       pit.appendChild(el);
       bubs.push({ el: el, side: it[1], fixed: it[1] === 0, x: 0, y: 0, vx: 0, vy: 0, hw: 0, r: 0 });
     });
@@ -52,7 +52,7 @@
   }
 
   // each side of the trade gathers around its own centre, left and right of the middle
-  function armX() { return Math.min(pit.offsetWidth * 0.3, 260); }
+  function armX() { return Math.min(pit.offsetWidth * 0.3, 290); }
 
   function measure() {
     if (!pit.offsetWidth) return false;
