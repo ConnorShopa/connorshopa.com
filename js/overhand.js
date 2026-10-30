@@ -24,7 +24,7 @@
     list.splice(left.length, 0, ["for", 0, 0]);
     list.push(["anything", -1, 0, true], ["anything", 1, 0, true]); // static centres of the two groups
     list.forEach(function (it, i) {
-      var s = STYLES[it[2] % STYLES.length], el = document.createElement("span"), fs = SIZES[it[2] % SIZES.length]; // same colours and sizes on both sides
+      var s = STYLES[it[2] % STYLES.length], el = document.createElement("span"), fs = Math.round(SIZES[it[2] % SIZES.length] * 1.3); // same colours and sizes on both sides
       el.className = "ohBub";
       el.textContent = it[0];
       if (it[1] === 0 || it[3]) { // "for" and "anything": plain text, not bubbles
@@ -84,7 +84,7 @@
     for (i = 0; i < n; i++) {
       b = bubs[i];
       if (b.fixed) { b.x = b.anchor * ax; b.y = b.vx = b.vy = 0; continue; }
-      b.vx += (b.side * ax - b.x) * (b.side ? 0.0015 : 0.02); b.vy += -b.y * 0.0065; // gravity to the middle (a touch stronger vertically: a flatter pile)
+      b.vx += (b.side * ax - b.x) * (b.side ? 0.005 : 0.02); b.vy += -b.y * (b.side ? 0.005 : 0.02); // the same pull both ways, so each group packs into a circle around its "anything"
       var dx = b.x - mouse.x, dy = b.y - mouse.y, d = Math.sqrt(dx * dx + dy * dy);
       if (d < REACH && d > 0.5) { var f = (1 - d / REACH) * PUSH; b.vx += dx / d * f; b.vy += dy / d * f; }
       b.vx *= 0.86; b.vy *= 0.86;
