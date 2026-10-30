@@ -64,7 +64,7 @@ export function mountClayPhone(el, opts) {
     tex.colorSpace = THREE.SRGBColorSpace;
     screenMat.map = tex; screenMat.color.set(0xffffff);
   }
-  var screen = new THREE.Mesh(screenGeometry(W - 0.15, H - 0.15, R - 0.075), screenMat);
+  var screen = new THREE.Mesh(screenGeometry(W - 0.11, H - 0.11, R - 0.055), screenMat);
   screen.position.z = top + 0.006;
   phone.add(screen);
 
