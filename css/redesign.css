@@ -2072,3 +2072,4 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .view.scrollView .pg.one:has(.ohPit) .ohPit { position: absolute; left: 24px; right: 24px; top: 96px; bottom: 96px; width: auto; height: auto; margin: 0; }
 .view.scrollView .pg.one:has(.ohPit) .earlyForm { position: absolute; left: 24px; bottom: 24px; margin: 0; align-self: auto; }
 #view-overhand .pg .lead.ohTitle, #view-overhand.view.scrollView .pg:first-child .lead.ohTitle { font-size: clamp(36px, 4.4vw, 60px); line-height: 1; }
+#view-overhand .ohBub { backdrop-filter: none; }

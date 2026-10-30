@@ -13,10 +13,12 @@
   var pit = null, bubs = [], anchors = [], circles = [], active = [], mouse = { x: -9999, y: -9999 }, raf = 0, ready = false, visible = false, forEl = null, R = 0, wallX = 0;
 
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  // the bubbles are see-through, so the circle's colour shows through them
+  function see(hex) { var n = parseInt(hex.slice(1), 16); return "rgba(" + (n >> 16) + "," + ((n >> 8) & 255) + "," + (n & 255) + ",0.62)"; }
   function mk(text, cls, bg, fg) {
     var el = document.createElement("span");
     el.className = cls; el.textContent = text;
-    if (bg) { el.style.background = bg; el.style.color = fg; }
+    if (bg) { el.style.background = see(bg); el.style.color = fg; }
     pit.appendChild(el);
     return el;
   }
@@ -64,12 +66,12 @@
     var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2, r0 = Math.min(H - 6, W * 0.62);
     setSize(Math.max(9, r0 / 21), r0); measureAll();
     var lens = forEl.w + 36;
-    R = Math.min(r0, (W + lens / 2) / 2 - 2);
+    R = 0.78 * Math.min(r0, (W + lens / 2) / 2 - 2); // a little smaller than the space, so the circles float in the card
     var fs = Math.max(9, R / 21), ax = R - lens / 2;
     setSize(fs, R); measureAll();
     lens = forEl.w + 36; ax = R - lens / 2; wallX = forEl.w / 2 + 12;
     var maxH = 0; bubs.forEach(function (b) { maxH = Math.max(maxH, b.h); });
-    var pitch = maxH + GAP * 0.8, half = Math.floor((R - maxH / 2) / pitch);
+    var pitch = maxH + GAP * 1.1, half = Math.floor((R - maxH / 2) / pitch);
     active = [];
     [-1, 1].forEach(function (side) {
       var queue = bubs.filter(function (b) { return b.side === side; }).sort(function (a, b) { return a.order - b.order; }), any = anchors.filter(function (a) { return a.side === side; })[0];
@@ -77,17 +79,18 @@
         var got = [], used = 0, room = hi - lo, i = 0;
         if (room <= 40) return;
         while (i < queue.length && i < 12) {
-          var b = queue[i], need = b.w + (got.length ? GAP : 0);
+          var b = queue[i], need = b.w + GAP * 1.5;
           if (used + need <= room) { got.push(b); used += need; queue.splice(i, 1); i = 0; } else i++;
         }
         var x = (lo + hi) / 2 - used / 2;
         got.forEach(function (b) { b.sx = side * ax + x + b.w / 2; b.sy = y; x += b.w + GAP; active.push(b); });
       }
       for (var k = -half; k <= half; k++) {
-        var y = k * pitch, d = R - 4, c = Math.sqrt(Math.max(0, d * d - Math.pow(Math.abs(y) + maxH / 2, 2)));
+        var y = k * pitch, d = R - 24, c = Math.sqrt(Math.max(0, d * d - Math.pow(Math.abs(y) + maxH / 2, 2)));
         var lo = -c, hi = c, inner = ax - wallX - 4; // "for" and the overlap are kept clear
         if (side < 0) hi = Math.min(hi, inner); else lo = Math.max(lo, -inner);
-        if (k === 0) { var aw = any.w + 2 * GAP; fill(lo, -aw / 2, y); fill(aw / 2, hi, y); } else fill(lo, hi, y);
+        if (Math.abs(y) < any.h / 2 + maxH / 2 + 6) { var aw = any.w + 2 * GAP + 8; // rows beside the big word leave room for it
+           fill(lo, -aw / 2, y); fill(aw / 2, hi, y); } else fill(lo, hi, y);
       }
       any.x = side * ax; any.y = 0;
     });
@@ -128,7 +131,7 @@
       b.vx *= 0.82; b.vy *= 0.82; b.x += b.vx; b.y += b.vy;
     }
     var fixed = anchors.concat([forEl]);
-    for (k = 0; k < 4; k++) {
+    for (k = 0; k < 8; k++) {
       for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) collide(active[i], active[j]);
       for (i = 0; i < n; i++) fixed.forEach(function (fx) { // the words "anything" and "for" don't move; bubbles go round them
         var ghost = { x: fx.x, y: fx.y, hw: Math.max(0, fx.w / 2 - fx.h / 2), r: fx.h / 2 + 8 }, bb = active[i], g = gap(bb, ghost, 2);
