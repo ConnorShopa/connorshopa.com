@@ -69,9 +69,17 @@
   function idle() { clearTimeout(idleT); idleT = setTimeout(function () { if (!touching && mq.matches) { loop(); queue(); } }, 180); }
 
   var raf = 0, landed = false;
+  // style writes are skipped when nothing changed (browsers normalise the values, so the last write is remembered); a
+  // value that something else wiped (GSAP sets scale / translate / rotate to "none") is written again
+  function put(li, prop, val) {
+    var c = li.__v || (li.__v = {}), cur = li.style[prop];
+    if (c[prop] !== val || (val !== "" && (cur === "" || cur === "none"))) { li.style[prop] = val; c[prop] = val; }
+  }
+  function putVar(li, val) { var c = li.__v || (li.__v = {}); if (c.dim !== val) { li.style.setProperty("--dim", val); c.dim = val; } }
   function update() {
     raf = 0;
     if (!mq.matches) return;
+    if (!landed) land();
     var mid = middle(), best = null, bestD = 1e9;
     shown().forEach(function (li) {
       var h = li.offsetHeight || 1;
@@ -79,25 +87,25 @@
       var a = Math.abs(d);
       if (a < bestD) { bestD = a; best = li; }
       li.classList.toggle("isBehind", d > 0.45);
-      if (reduce) { li.style.setProperty("--dim", a > 0.5 ? "0.5" : "0"); return; }
+      if (reduce) { putVar(li, a > 0.5 ? "0.5" : "0"); return; }
       if (d > 0) {
         // the cards still to come are piled behind the current one, each a little lower and smaller: only a strip of
         // its bottom edge shows
         var dd = Math.min(d, 3), sc = Math.max(0.8, 1 - d * 0.05);
-        li.style.scale = String(sc);
-        li.style.translate = "0 " + ((h * (1 - sc)) / 2 + 62 * dd - d * h).toFixed(1) + "px";
-        li.style.rotate = "";
-        li.style.zIndex = String(50 - Math.round(d * 10));
-        li.style.setProperty("--dim", Math.min(d * 0.15, 0.4).toFixed(2));
-        li.style.visibility = d > 3.2 ? "hidden" : "";
+        put(li, "scale", String(sc));
+        put(li, "translate", "0 " + ((h * (1 - sc)) / 2 + 62 * dd - d * h).toFixed(1) + "px");
+        put(li, "rotate", "");
+        put(li, "zIndex", String(50 - Math.round(d * 10)));
+        putVar(li, Math.min(d * 0.15, 0.4).toFixed(2));
+        put(li, "visibility", d > 3.2 ? "hidden" : "");
       } else {
         // a card that has been passed rides up and away: it tilts back, shrinks and fades
-        li.style.translate = "";
-        li.style.scale = String(Math.max(0.8, 1 - a * 0.12));
-        li.style.rotate = "1 0 0 " + Math.min(a * 14, 20).toFixed(1) + "deg";
-        li.style.zIndex = String(52 - Math.round(a * 10));
-        li.style.setProperty("--dim", Math.min(a * 0.8, 0.9).toFixed(2));
-        li.style.visibility = a > 2 ? "hidden" : "";
+        put(li, "translate", "");
+        put(li, "scale", String(Math.max(0.8, 1 - a * 0.12)));
+        put(li, "rotate", "1 0 0 " + Math.min(a * 14, 20).toFixed(1) + "deg");
+        put(li, "zIndex", String(52 - Math.round(a * 10)));
+        putVar(li, Math.min(a * 0.8, 0.9).toFixed(2));
+        put(li, "visibility", a > 2 ? "hidden" : "");
       }
     });
     cardsAll().forEach(function (li) { li.classList.toggle("isActive", li === best && bestD < 0.3); });
@@ -108,11 +116,20 @@
   function queue() { if (!raf) raf = requestAnimationFrame(update); }
 
   function clear() {
-    cardsAll().forEach(function (li) { li.style.scale = li.style.translate = li.style.rotate = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.classList.remove("isActive", "isBehind"); });
+    cardsAll().forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.rotate = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.classList.remove("isActive", "isBehind"); });
     btn.classList.remove("show");
   }
-  // opens with the first project in the middle (until the person scrolls, it is kept there as logos and fonts settle)
-  function land() { if (!landed && first && mq.matches) { loop(); centre(first); loop(); centre(first); } }
+  // opens with the first project in the middle, and keeps it there (as logos, fonts and the pop-in settle and the cards
+  // change size) until the person first touches the deck
+  function land() {
+    if (landed || !first || !mq.matches) return;
+    loop();
+    var want = first.offsetTop + first.offsetHeight / 2 - (window.innerHeight / 2 - list.getBoundingClientRect().top);
+    if (Math.abs(list.scrollTop - want) > 0.5) list.scrollTop = want;
+    loop();
+    want = first.offsetTop + first.offsetHeight / 2 - (window.innerHeight / 2 - list.getBoundingClientRect().top);
+    if (Math.abs(list.scrollTop - want) > 0.5) list.scrollTop = want;
+  }
   function refresh() { if (mq.matches) { measureHeader(); land(); queue(); } else clear(); }
 
   ["touchstart", "wheel", "pointerdown", "keydown"].forEach(function (ev) { list.addEventListener(ev, function () { landed = true; }, { passive: true }); });
@@ -124,7 +141,10 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
   if (mq.addEventListener) mq.addEventListener("change", refresh);
   if (window.ResizeObserver && header) new ResizeObserver(refresh).observe(header);
-  if (window.MutationObserver) new MutationObserver(queue).observe(list, { attributes: true, attributeFilter: ["style"] });
+  // something else (a pop-in, say) wiping the cards' transforms: put them back
+  if (window.MutationObserver) new MutationObserver(queue).observe(list, { attributes: true, attributeFilter: ["style"], subtree: true });
+  if (window.ResizeObserver) { var ro = new ResizeObserver(queue); cardsAll().forEach(function (li) { ro.observe(li); }); }
+  Array.prototype.forEach.call(list.querySelectorAll("img"), function (img) { if (!img.complete) img.addEventListener("load", refresh); });
   refresh();
   setTimeout(refresh, 600); // after the pop-in on load has finished
 })();

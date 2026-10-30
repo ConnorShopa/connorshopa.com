@@ -115,7 +115,9 @@
 
   // ---- on load: the links pop in one after another, from the top left to the bottom right ----
   var links = items.filter(function (li) { return !li.classList.contains("row-break"); });
-  gsap.set(links, { scale: 0, opacity: 0 });
+  // (phones show the deck of cards instead, which sets its own transforms: no pop-in there)
+  var phone = window.matchMedia("(max-width: 700px)").matches;
+  if (!phone) gsap.set(links, { scale: 0, opacity: 0 });
   var play = function () {
     gsap.to(links, {
       scale: 1,
@@ -127,5 +129,6 @@
       onComplete: function () { gsap.set(links, { clearProps: "transform,opacity" }); },
     });
   };
+  if (phone) return;
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(play); else play();
 })();
