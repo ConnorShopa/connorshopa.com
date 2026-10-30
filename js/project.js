@@ -128,6 +128,28 @@
     return b;
   }
 
+  // Phones have no hover bubble (js/mouse.js is off there), so the card opens out of the project's own card in the
+  // deck: the view is clipped to the deck card's box and the clip opens to the whole screen (and back on close)
+  function clipOf(view, box, radius) {
+    var cr = view.getBoundingClientRect();
+    return "inset(" + (box.top - cr.top) + "px " + (cr.right - box.right) + "px " + (cr.bottom - box.bottom) + "px " + (box.left - cr.left) + "px round " + radius + "px)";
+  }
+  function phoneGrow(view, li, reveal) {
+    if (!li) { reveal(); return; }
+    var from = clipOf(view, li.getBoundingClientRect(), 22);
+    var cardBg = getComputedStyle(li).backgroundColor, viewBg = getComputedStyle(view).backgroundColor;
+    gsap.set(view, { autoAlpha: 1, clipPath: from, backgroundColor: cardBg });
+    gsap.to(view, { clipPath: "inset(0px 0px 0px 0px round 28px)", backgroundColor: viewBg, duration: t(0.5), ease: "power3.inOut", onComplete: function () { gsap.set(view, { clearProps: "clipPath,backgroundColor" }); } });
+    gsap.delayedCall(t(0.22), reveal);
+  }
+  function phoneShrink(view, li, finish) {
+    if (!li) { finish(); return; }
+    document.documentElement.classList.remove("view-open"); // the deck shows again behind the closing card
+    var cardBg = getComputedStyle(li).backgroundColor;
+    gsap.set(view, { autoAlpha: 1, clipPath: "inset(0px 0px 0px 0px round 28px)" });
+    gsap.to(view, { clipPath: clipOf(view, li.getBoundingClientRect(), 22), backgroundColor: cardBg, duration: t(0.4), ease: "power3.inOut", onComplete: function () { gsap.set(view, { clearProps: "clipPath,backgroundColor" }); finish(); } });
+  }
+
   // centre of a link on screen
   function centreOf(el) {
     var r = el.getBoundingClientRect();
@@ -327,7 +349,7 @@
       // the image layers fade in from the peach (a frame later, so the CSS transition has something to run from)
       requestAnimationFrame(function () { requestAnimationFrame(function () { if (open && open.view === view && (view._page === 0 || view.classList.contains("vertical"))) view.classList.add("imgIn"); }); });
     };
-    if (window.bubble) window.bubble.grow(to, b, 0.38, reveal); else reveal();
+    if (window.bubble) window.bubble.grow(to, b, 0.38, reveal); else if (narrow) phoneGrow(view, currentLi, reveal); else reveal();
     popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
       // still be shrunk or have a stale item hidden, which would throw the measurements below off
@@ -419,7 +441,7 @@
       duration: t(0.05),
       onComplete: function () {
         gsap.set(view, { autoAlpha: 0 });
-        if (window.bubble) window.bubble.shrink(fromCard, b, 0.2, finish); else finish();
+        if (window.bubble) window.bubble.shrink(fromCard, b, 0.2, finish); else if (window.innerWidth <= 700) phoneShrink(view, trigger.closest("li"), finish); else finish();
       },
     });
     popGallery(function () {
