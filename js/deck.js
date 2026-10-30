@@ -89,13 +89,13 @@
   var spacer = null;
   function layoutGallery() {
     if (!gallery) return;
-    var W = list.clientWidth - 28, g = 10, base = 118, i = 0, row = 0, y = 14, tops = [];
+    var M = 24, W = list.clientWidth - M * 2, g = 22, base = 70, i = 0, row = 0, y = 18, tops = [];
     var nat = cards.map(function (li) { return { w: li.offsetWidth || 100, h: li.offsetHeight || 60 }; });
     var place = function (from, to, h, stretch) {
       var widths = [], total = 0, k;
       for (k = from; k < to; k++) { widths[k - from] = nat[k].w / nat[k].h * h; total += widths[k - from]; }
       total += g * (to - from - 1);
-      var x = 14 + (stretch ? 0 : (W - total) / 2);
+      var x = M + (stretch ? 0 : (W - total) / 2);
       for (k = from; k < to; k++) {
         var li = cards[k], f = h / nat[k].h;
         li.style.scale = String(f); li.style.translate = x.toFixed(1) + "px " + y.toFixed(1) + "px";
@@ -120,7 +120,7 @@
       }
       if (j2 >= N && n === N - i && prevH > target) { /* ran out of cards before the row filled: keep its natural look */ }
       var rowH = prevH, stretch = true;
-      if (rowH > target * 1.4) { rowH = target * 1.4; stretch = false; } // a short last row (or a lone card) is not blown up; it is centred
+      if (rowH > target * 1.2) { rowH = target * 1.2; stretch = false; } // a short last row (or a lone card) is not blown up; it is centred
       place(i, j2 > i ? j2 : i + 1, rowH, stretch); i = j2 > i ? j2 : i + 1;
       row++;
     }
