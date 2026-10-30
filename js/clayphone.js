@@ -27,18 +27,6 @@ function screenGeometry(w, h, r) {
   return g;
 }
 
-function dial() { // a knurled wheel, axis along y (it sits in the left edge and shows its ridged rim)
-  var g = new THREE.CylinderGeometry(0.068, 0.068, 0.11, 96, 1), p = g.attributes.position;
-  for (var i = 0; i < p.count; i++) {
-    var x = p.getX(i), z = p.getZ(i), a = Math.atan2(z, x), r = Math.hypot(x, z);
-    if (r < 0.01) continue;
-    var k = 1 + 0.06 * Math.sign(Math.sin(a * 30)); // the ridges
-    p.setX(i, x * k); p.setZ(i, z * k);
-  }
-  g.computeVertexNormals();
-  return g;
-}
-
 export function mountClayPhone(el, opts) {
   opts = opts || {};
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -55,9 +43,7 @@ export function mountClayPhone(el, opts) {
   camera.position.set(0, 0, 8);
 
   var clay = new THREE.MeshStandardMaterial({ color: 0xe9e7e1, roughness: 0.8, metalness: 0 });
-  var dark = new THREE.MeshStandardMaterial({ color: 0x3c3c40, roughness: 0.45, metalness: 0.6 });
-  var black = new THREE.MeshStandardMaterial({ color: 0x08080a, roughness: 0.3, metalness: 0.1 });
-  var orange = new THREE.MeshStandardMaterial({ color: 0xea5a3c, roughness: 0.7, metalness: 0 });
+    var black = new THREE.MeshStandardMaterial({ color: 0x08080a, roughness: 0.3, metalness: 0.1 });
 
   var phone = new THREE.Group();
 
@@ -68,12 +54,6 @@ export function mountClayPhone(el, opts) {
   body.geometry.translate(0, 0, -D / 2);
   body.castShadow = body.receiveShadow = true;
   phone.add(body);
-
-  // a thin dark metal band round the middle of the edge
-  var band = new THREE.Mesh(new THREE.ExtrudeGeometry(roundedRect(W + 0.008, H + 0.008, R + 0.004), { depth: D * 0.7, bevelEnabled: false, curveSegments: 64 }), dark);
-  band.geometry.translate(0, 0, -D * 0.35);
-  band.castShadow = true;
-  phone.add(band);
 
   var top = D / 2 + BEV; // the z of the front face
   var bezel = new THREE.Mesh(new THREE.ExtrudeGeometry(roundedRect(W - 0.1, H - 0.1, R - 0.05), { depth: 0.006, bevelEnabled: false, curveSegments: 64 }), black);
@@ -90,18 +70,6 @@ export function mountClayPhone(el, opts) {
   var screen = new THREE.Mesh(screenGeometry(W - 0.2, H - 0.2, R - 0.1), screenMat);
   screen.position.z = top + 0.006;
   phone.add(screen);
-
-  var notch = new THREE.Mesh(new THREE.ShapeGeometry(roundedRect(0.28, 0.075, 0.0375), 24), black);
-  notch.position.set(0, H / 2 - 0.1 - 0.075, top + 0.0065);
-  phone.add(notch);
-
-  // two knurled dials in the left edge
-  [0.42, -0.04].forEach(function (y) {
-    var d = new THREE.Mesh(dial(), orange);
-    d.position.set(-W / 2 - 0.012, y, 0);
-    d.castShadow = true;
-    phone.add(d);
-  });
 
   // the ground, parallel to the phone, catching a soft shadow
   var ground = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.ShadowMaterial({ opacity: 0.22 }));
