@@ -1988,5 +1988,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* the Seeds link on the main screen is set in Sailec */
 .withCaption .label, .withCaption .caption { font-family: "Sailec", "Host Grotesk", sans-serif; }
-.withCaption .label { color: #003960; letter-spacing: -0.01em; } /* Bank Blue, from the design system */
+.withCaption .label { color: #003960; font-size: 26px; letter-spacing: -0.01em; } /* Bank Blue, from the design system */
 .withCaption .caption { color: #003960; opacity: 0.7; }
+
+/* the Seeds icon, painted in Bank Blue through its own shape */
+.seedsIcon { display: block; height: 26px; aspect-ratio: 49 / 48; background: #003960; -webkit-mask: url("../assets/homeAssets/seeds_projectImage.svg") center / contain no-repeat; mask: url("../assets/homeAssets/seeds_projectImage.svg") center / contain no-repeat; filter: drop-shadow(0 2px 4px rgba(47, 39, 37, 0.22)); }
+@media (max-width: 700px) { .seedsIcon { height: 32px; } }
