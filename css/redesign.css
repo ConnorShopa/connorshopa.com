@@ -2132,4 +2132,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* Overhand sign-up: no drop shadows on the field or card; the button gets a glow ring on hover once the email is valid */
 #view-overhand .earlyForm, #view-overhand .earlyInput, #view-overhand .earlyInput:focus { box-shadow: none; }
 #view-overhand .earlyBtn.lockBtn { transition: none; }
-#view-overhand .earlyForm:has(.earlyInput:not(:placeholder-shown):valid) .earlyBtn.lockBtn:hover:not(:disabled) { box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.9), 0 0 0 6px rgba(27, 36, 48, 0.55), 0 0 22px 6px rgba(27, 36, 48, 0.35); }
+#view-overhand .earlyForm:has(.earlyInput:not(:placeholder-shown):valid) .earlyBtn.lockBtn:hover:not(:disabled) { animation: ohRing 1.1s ease-out infinite; }
+@keyframes ohRing {
+  0%   { box-shadow: 0 0 0 2px #1B2430, 0 0 0 5px #FFE866, 0 0 14px 6px rgba(255, 232, 102, 0.9); }
+  100% { box-shadow: 0 0 0 2px #1B2430, 0 0 0 14px rgba(255, 232, 102, 0), 0 0 28px 16px rgba(255, 232, 102, 0); }
+}
+@media (prefers-reduced-motion: reduce) { #view-overhand .earlyForm:has(.earlyInput:not(:placeholder-shown):valid) .earlyBtn.lockBtn:hover:not(:disabled) { animation: none; box-shadow: 0 0 0 2px #1B2430, 0 0 0 5px #FFE866; } }
