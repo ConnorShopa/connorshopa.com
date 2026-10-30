@@ -2175,7 +2175,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   .hero > nav > #projectList {
     position: absolute; left: 0; right: 0; bottom: 0; top: calc(-1 * var(--hdrH));
     display: block; margin: 0; padding: 0; zoom: 1 !important; overflow: hidden; font-size: 26px;
-    align-self: stretch; height: auto; min-width: 0; /* (filter.js puts the nav in a centred grid: .stack > #projectList { align-self: center } would shrink the deck to nothing) */
+    align-self: stretch; height: auto; min-width: 0; perspective: 900px; perspective-origin: 50% 50%; /* (filter.js puts the nav in a centred grid: .stack > #projectList { align-self: center } would shrink the deck to nothing) */
     touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
   }
 
@@ -2183,10 +2183,10 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   /* every card sits in the middle of the deck; js/deck.js moves, scales and fades them */
   #projectList li:not(.row-break) {
     position: absolute; left: 0; right: 0; top: 50%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    box-sizing: border-box; width: fit-content; min-width: 150px; max-width: calc(100% - 32px); height: auto; padding: 22px 26px;
-    background: var(--card, #fff); border-radius: 26px; text-align: center;
+    box-sizing: border-box; width: fit-content; min-width: 150px; max-width: calc(100% - 32px); height: auto; padding: 24px 34px;
+    background: var(--card, #fff); border-radius: 46px; text-align: center; backface-visibility: hidden;
     box-shadow: 0 14px 34px -14px rgba(47, 39, 37, 0.28), 0 2px 8px rgba(47, 39, 37, 0.08);
-    will-change: translate, scale, opacity; transform-origin: 50% 50% !important;
+    will-change: translate, scale, rotate, opacity; transform-origin: 50% 50% !important;
   }
   #projectList li.is-current:not(.row-break) { display: flex !important; } /* the deck stays whole while a project is open */
   #projectList li::after, #projectList li.no-slash::after, #projectList li:last-child::after {

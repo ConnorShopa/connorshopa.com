@@ -1,8 +1,8 @@
-// Phones: the project list is a stacked deck of cards, driven by dragging (no scrolling element, so nothing to snap or
-// fight). The card in the middle is the current project (it opens on the first in the list); the cards that follow are
-// stacked behind it, each peeking out a little lower and smaller, with a small grey copy of its logo. Dragging up (or
-// wheeling down) slides the current card away and brings the next one forward; dragging down brings the previous one
-// back from above. It loops, and settles on a card when let go. Logos are grey until their card is the current one.
+// Phones: the project list is a wheel of cards, driven by dragging (no scrolling element, so nothing to snap or fight).
+// The card in the middle is the current project (it opens on the first in the list); the ones before it curve away
+// above and the ones after it below, shrinking, tilting back and fading like the drum of a picker. Dragging up (or
+// wheeling down) turns it forward, dragging down turns it back; it loops, and settles on a card when let go.
+// Logos are grey until their card is the current one.
 (function () {
   var failed = function (e) { document.documentElement.classList.add("deckFail"); if (window.console) console.error("deck:", e); };
   try { init(); } catch (e) { failed(e); }
@@ -27,16 +27,13 @@
     if (!a) return;
     li.classList.add("deckCard");
     li.style.setProperty("--card", a.getAttribute("data-bubble") || "#FFFFFF");
-    var pk = document.createElement("span"); // a small copy of the logo for the part of the card that peeks out
-    pk.className = "peek"; pk.setAttribute("aria-hidden", "true");
-    pk.innerHTML = a.innerHTML;
-    li.appendChild(pk);
     cards.push(li);
   });
   var N = cards.length;
   if (N < 3) return;
 
-  var PEEK = 56;   // how much of each card behind shows below the one in front, in px
+  var GAP = 14;    // space between neighbouring cards at the front of the wheel
+  var R = 300;     // the wheel's radius, in px
   var STEP = 150;  // dragging this far moves one card
   var heights = [], dirty = true;
   var pos = 0, target = 0, vel = 0, anim = 0, dragging = false, moved = false;
@@ -46,8 +43,14 @@
     if (!header || !mq.matches) return;
     document.documentElement.style.setProperty("--hdrH", Math.ceil(header.getBoundingClientRect().bottom + 12) + "px");
   }
-  function measure() { heights = cards.map(function (li) { return li.offsetHeight || 100; }); dirty = false; }
-
+  var cum = [], T = 1;
+  function measure() {
+    heights = cards.map(function (li) { return li.offsetHeight || 100; });
+    cum = []; var c = 0;
+    for (var i = 0; i < N; i++) { cum.push(c); c += (heights[i] + heights[(i + 1) % N]) / 2 + GAP; }
+    T = c; // the length of the whole loop
+    dirty = false;
+  }
   // style writes are skipped when nothing changed; a value something else wiped (GSAP sets scale / translate to "none")
   // is written again
   function put(li, prop, val) {
@@ -58,39 +61,31 @@
   function putPk(li, val) { var c = li.__v || (li.__v = {}); if (c.pk !== val) { li.style.setProperty("--pk", val); c.pk = val; } }
   function wrap(k) { return ((k + N / 2) % N + N) % N - N / 2; }
 
+  // the centre of the card at (fractional) position p, measured along the loop
+  function centreAt(p) {
+    var q = ((p % N) + N) % N, j = Math.floor(q), f = q - j;
+    var c0 = cum[j], c1 = j + 1 < N ? cum[j + 1] : T;
+    return c0 + (c1 - c0) * f;
+  }
   function render() {
     if (!mq.matches) return;
     if (dirty) measure();
-    var p = ((pos % N) + N) % N, j = Math.floor(p), f = p - j;
-    var Hc = heights[j] + (heights[(j + 1) % N] - heights[j]) * f; // the height of the card in front, blended while moving
-    var best = -1, bestA = 9;
+    var c = centreAt(pos), best = -1, bestA = 9;
     for (var i = 0; i < N; i++) {
-      var li = cards[i], H = heights[i], k = wrap(i - pos), a = Math.abs(k);
-      if (a < bestA) { bestA = a; best = i; }
-      var y, s, op, dim, z;
-      if (k >= 0) {
-        // still to come: stacked behind the front card, lower and smaller
-        var kk = Math.min(k, 3.4);
-        s = 1 - 0.05 * kk;
-        y = Hc / 2 + PEEK * kk - (H * s) / 2;
-        op = kk <= 2.4 ? 1 : Math.max(0, 1 - (kk - 2.4));
-        dim = Math.min(kk * 0.15, 0.4);
-        z = 100 - Math.round(kk * 10);
-      } else {
-        // passed: slides up and away, fading (and comes back down the same way)
-        s = 1 - 0.06 * Math.min(a, 1);
-        y = -a * (H + 60) * 0.9;
-        op = Math.max(0, 1 - a * 1.15);
-        dim = Math.min(a * 0.6, 0.7);
-        z = 106 - Math.round(a * 10);
-      }
-      put(li, "scale", s.toFixed(4));
+      var li = cards[i], H = heights[i];
+      var lin = ((cum[i] - c) % T + T + T / 2) % T - T / 2;   // distance from the middle along the loop, wrapped to +-T/2
+      var th = lin / R;                                      // how far round the wheel the card is, in radians
+      var a = Math.abs(th), k = wrap(i - pos);
+      if (Math.abs(k) < bestA) { bestA = Math.abs(k); best = i; }
+      var y = R * Math.sin(Math.max(-1.6, Math.min(1.6, th)));
+      var op = Math.max(0, 1 - Math.pow(a / 1.45, 2.2));
+      put(li, "scale", (0.62 + 0.38 * Math.cos(Math.min(a, 1.5))).toFixed(4));
       put(li, "translate", "0 " + (y - H / 2).toFixed(1) + "px");
+      put(li, "rotate", "1 0 0 " + (-th * 57.3 * 0.85).toFixed(1) + "deg");
       put(li, "opacity", op.toFixed(3));
-      put(li, "zIndex", String(z));
+      put(li, "zIndex", String(100 - Math.round(a * 30)));
       put(li, "visibility", op < 0.02 ? "hidden" : "");
-      putVar(li, dim.toFixed(2));
-      putPk(li, Math.max(0, Math.min(1, (k - 0.15) / 0.5)).toFixed(2)); // the logo fades into its small copy as the card goes behind
+      putVar(li, Math.min(a * 0.3, 0.45).toFixed(2));
     }
     for (var m = 0; m < N; m++) cards[m].classList.toggle("isActive", m === best && bestA < 0.3);
   }
@@ -159,7 +154,7 @@
 
   function refresh() {
     if (mq.matches) { measureHeader(); dirty = true; render(); }
-    else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.removeProperty("--pk"); li.classList.remove("isActive"); });
+    else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.classList.remove("isActive"); });
   }
   window.addEventListener("resize", refresh);
   window.addEventListener("load", function () { refresh(); setTimeout(refresh, 1200); });
