@@ -2205,6 +2205,12 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   .peek { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; align-items: center; justify-content: center; zoom: .8; opacity: var(--pk, 0); pointer-events: none; filter: grayscale(1); }
   .peek * { max-width: 100%; }
 
+  /* if the deck's script fails, the cards fall back to a plain scrolling list */
+  html.deckFail .hero > nav > #projectList { overflow-y: auto; touch-action: pan-y; padding: 8px 0 40px; }
+  html.deckFail #projectList li:not(.row-break) { position: relative; top: auto; left: auto; right: auto; margin: 0 auto 14px; translate: none !important; scale: none !important; opacity: 1 !important; visibility: visible !important; }
+  html.deckFail #projectList li > a { opacity: 1 !important; filter: none !important; }
+  html.deckFail .peek { display: none !important; }
+
   /* while a project is open the deck stays out of sight (the card covers the screen) */
   html.view-open .hero > nav { visibility: hidden; }
 

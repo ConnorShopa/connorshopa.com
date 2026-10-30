@@ -4,6 +4,16 @@
 // wheeling down) slides the current card away and brings the next one forward; dragging down brings the previous one
 // back from above. It loops, and settles on a card when let go. Logos are grey until their card is the current one.
 (function () {
+  var failed = function (e) { document.documentElement.classList.add("deckFail"); if (window.console) console.error("deck:", e); };
+  try { init(); } catch (e) { failed(e); }
+  // safety net: if the deck has not put a card in front a moment after loading, fall back to a plain scrolling list
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      var l = document.getElementById("projectList");
+      if (l && window.matchMedia("(max-width: 700px)").matches && !l.querySelector("li.isActive")) failed("no card in front");
+    }, 2500);
+  });
+  function init() {
   var list = document.getElementById("projectList");
   if (!list) return;
   var header = document.querySelector(".hero > header");
@@ -161,4 +171,5 @@
   if (window.MutationObserver) new MutationObserver(function () { if (!anim) render(); }).observe(list, { attributes: true, attributeFilter: ["style"], subtree: true });
   refresh();
   setTimeout(refresh, 600);
+  }
 })();
