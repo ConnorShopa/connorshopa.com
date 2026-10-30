@@ -87,6 +87,9 @@
   layoutRows(list, items);
   // re-flow the rows whenever the window changes size (and once the fonts are in, which changes the widths)
   var relayout = function () {
+    // phones: the list is the deck / gallery (js/deck.js), laid out by its own script; the rows and the shrink-to-fit
+    // zoom below are for wider screens (they were re-running on every resize, which phones fire as the address bar slides away)
+    if (window.matchMedia("(max-width: 700px)").matches) { list.style.zoom = ""; return; }
     if (list.classList.contains("compact")) return;
     var plain = function (arr) { return arr.filter(function (li) { return !li.classList.contains("row-break"); }); };
     layoutRows(ghost, plain(Array.prototype.slice.call(ghost.children)));

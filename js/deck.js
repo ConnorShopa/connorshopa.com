@@ -273,7 +273,12 @@
     if (mq.matches) { measureHeader(); dirty = true; render(); }
     else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.style.borderRadius = ""; li.classList.remove("isActive"); });
   }
-  window.addEventListener("resize", function () { refresh(); layoutGallery(); });
+  var lastW = window.innerWidth;
+  window.addEventListener("resize", function () {
+    // (phones also fire "resize" when the address bar slides away while scrolling: only a change of width re-lays the gallery)
+    var widthChanged = window.innerWidth !== lastW; lastW = window.innerWidth;
+    refresh(); if (widthChanged) layoutGallery();
+  });
   if (mq.addEventListener) mq.addEventListener("change", function () { if (!mq.matches) { viewBtn.classList.remove("shown", "ready"); viewBtn.disabled = true; modeBtn.classList.remove("shown"); if (gallery) { gallery = false; document.documentElement.classList.remove("deckGallery"); } } });
   // on load the cards grow in from the middle and spread out to their places
   function intro() {

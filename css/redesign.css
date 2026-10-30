@@ -2298,13 +2298,15 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   html.view-open .deckMode, html.deckFail .deckMode { transform: scale(0); opacity: 0; pointer-events: none; }
 
   html.deckGallery #projectList { overflow-y: auto; overflow-x: hidden; touch-action: pan-y; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; perspective: none; }
+  html.deckGallery #projectList { -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22px, #000 calc(100% - 70px), transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 22px, #000 calc(100% - 70px), transparent 100%); }
   html.deckGallery #projectList .deckSpacer { position: absolute; left: 0; width: 1px; height: 1px; pointer-events: none; }
   /* the art wall: js/deck.js places and scales each card (translate / scale from the top left) */
   html.deckGallery #projectList li:not(.row-break) {
     position: absolute !important; top: 0 !important; left: 0 !important; right: auto !important; margin: 0 !important; max-width: none !important;
     transform-origin: 0 0 !important; opacity: 1; visibility: visible;
     background: var(--card, #F4F4F4); box-shadow: 0 6px 16px -8px rgba(47, 39, 37, 0.3), 0 1px 3px rgba(47, 39, 37, 0.08);
-    animation: wallIn .5s cubic-bezier(.2, .7, .2, 1) both; animation-delay: calc(var(--i, 0) * 28ms);
+    will-change: auto !important; backface-visibility: visible !important;
+    animation: wallIn .5s cubic-bezier(.2, .7, .2, 1) backwards; animation-delay: calc(var(--i, 0) * 28ms);
   }
   @keyframes wallIn { from { opacity: 0; } to { opacity: 1; } }
   html.deckGallery #projectList li::after { display: none; }
