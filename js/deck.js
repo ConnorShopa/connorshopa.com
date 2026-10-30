@@ -69,11 +69,44 @@
   viewBtn.type = "button"; viewBtn.className = "deckView"; viewBtn.textContent = "Open"; viewBtn.disabled = true;
   viewBtn.setAttribute("aria-label", "Open the project in focus");
   document.body.appendChild(viewBtn);
-  var wheeling = false, fromBtn = false;
+  var wheeling = false, fromBtn = false, gallery = false;
+  // ---- the round button next to it: switch between the stacked carousel and a plain scrolling gallery ----
+  var modeBtn = document.createElement("button");
+  modeBtn.type = "button"; modeBtn.className = "deckMode";
+  modeBtn.innerHTML = '<svg class="icGrid" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>' +
+    '<svg class="icStack" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="7" y="3.5" width="10" height="4" rx="2"/><rect x="4.5" y="9.5" width="15" height="5.5" rx="2.75"/><rect x="7" y="17" width="10" height="4" rx="2"/></svg>';
+  modeBtn.setAttribute("aria-label", "Switch to the gallery view");
+  document.body.appendChild(modeBtn);
+  function clearCardStyles() {
+    cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.style.borderRadius = ""; li.classList.remove("isActive"); });
+  }
+  function setGallery(on) {
+    if (on === gallery) return;
+    var root = document.documentElement;
+    list.style.transition = "opacity .18s ease"; list.style.opacity = "0";
+    setTimeout(function () {
+      if (on) {
+        gallery = true; cancelAnimationFrame(anim); anim = 0;
+        clearCardStyles();
+        root.classList.add("deckGallery");
+        var cur = cards[((Math.round(target) % N) + N) % N];
+        list.scrollTop = Math.max(0, cur.offsetTop - (list.clientHeight - cur.offsetHeight) / 2);
+      } else {
+        gallery = false;
+        root.classList.remove("deckGallery");
+        dirty = true; render();
+      }
+      modeBtn.setAttribute("aria-label", on ? "Switch to the stacked view" : "Switch to the gallery view");
+      list.style.opacity = "1"; updateBtn();
+      setTimeout(function () { list.style.transition = ""; list.style.opacity = ""; }, 220);
+    }, reduce ? 0 : 180);
+  }
+  modeBtn.addEventListener("click", function (e) { e.stopPropagation(); setGallery(!gallery); });
   function focusCard() { return cards[((Math.round(target) % N) + N) % N]; }
   function updateBtn() {
     // ready the moment a card is chosen (as the finger lifts), not once it has finished sliding into place
-    var ready = mq.matches && !dragging && !wheeling && spread >= 1;
+    var ready = mq.matches && !dragging && !wheeling && spread >= 1 && !gallery;
+    modeBtn.classList.toggle("shown", mq.matches && spread >= 1);
     if (ready) {
       viewBtn.classList.add("shown");
       viewBtn.style.setProperty("--btn", focusCard().style.getPropertyValue("--card") || "#F4F4F4"); // the colour of its card
@@ -92,7 +125,7 @@
   // how big a card is by how many places it is from the front (the front card is 1.3x, then they drop away)
   function scaleAt(k) { var a = Math.abs(k); return 0.2 + 1.1 / (1 + (a * a) / 0.49); } // front 1.3x; the rest are smaller
   function render() {
-    if (!mq.matches) return;
+    if (!mq.matches || gallery) return;
     if (dirty) measure();
     var b = Math.floor(pos), f = pos - b, ks = [], sc = [], ys = [], i, n;
     for (i = 0; i < N; i++) { ks[i] = wrap(i - pos); sc[i] = scaleAt(ks[i]) * (1 + (adj[i] - 1) * Math.max(0, 1 - Math.abs(ks[i]))); }
@@ -140,7 +173,7 @@
   // ---- drag (touch, pen or mouse) ----
   var sy = 0, sp = 0, hist = [];
   list.addEventListener("pointerdown", function (e) {
-    if (!mq.matches || (e.pointerType === "mouse" && e.button !== 0)) return;
+    if (!mq.matches || gallery || (e.pointerType === "mouse" && e.button !== 0)) return;
     dragging = true; moved = false; updateBtn(); sy = e.clientY; sp = pos; hist = [{ t: e.timeStamp, p: pos }];
     target = pos;
     try { list.setPointerCapture(e.pointerId); } catch (x) {}
@@ -166,7 +199,7 @@
   list.addEventListener("pointercancel", release);
   // a drag is not a tap; tapping a card behind the front one brings it forward instead of opening it
   list.addEventListener("click", function (e) {
-    if (!mq.matches || fromBtn) return;
+    if (!mq.matches || gallery || fromBtn) return;
     var li = e.target.closest && e.target.closest("li.deckCard");
     if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; return; }
     if (li && !li.classList.contains("isActive")) {
@@ -178,7 +211,7 @@
   // a wheel or trackpad (a narrow desktop window)
   var wheelT = 0;
   list.addEventListener("wheel", function (e) {
-    if (!mq.matches) return;
+    if (!mq.matches || gallery) return;
     e.preventDefault();
     wheeling = true; updateBtn();
     target = pos = pos + e.deltaY / (STEP * 1.6);
@@ -191,7 +224,7 @@
     else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.style.borderRadius = ""; li.classList.remove("isActive"); });
   }
   window.addEventListener("resize", refresh);
-  if (mq.addEventListener) mq.addEventListener("change", function () { if (!mq.matches) { viewBtn.classList.remove("shown", "ready"); viewBtn.disabled = true; } });
+  if (mq.addEventListener) mq.addEventListener("change", function () { if (!mq.matches) { viewBtn.classList.remove("shown", "ready"); viewBtn.disabled = true; modeBtn.classList.remove("shown"); if (gallery) { gallery = false; document.documentElement.classList.remove("deckGallery"); } } });
   // on load the cards grow in from the middle and spread out to their places
   function intro() {
     if (introRaf || spread >= 1) return;
