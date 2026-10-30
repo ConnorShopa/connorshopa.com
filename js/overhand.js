@@ -18,14 +18,13 @@
     pit = document.querySelector(".ohPit");
     if (!pit) return;
     // each side is its words repeated, so it reads as "any of these for any of those"
-    var left = GIVE.concat(GIVE.slice().reverse(), GIVE.slice(1), GIVE.slice(0, 2)),
-        right = GET.concat(GET.slice().reverse(), GET.slice(1), GET.slice(0, 2)),
-        list = [];
-    left.forEach(function (w) { list.push([w, -1]); });
-    right.forEach(function (w) { list.push([w, 1]); });
-    list.splice(left.length, 0, ["for", 0]);
+    function three(w) { return w.concat(w.slice().reverse(), w.slice(2), w.slice(0, 2)); } // every word exactly three times
+    var left = three(GIVE), right = three(GET), list = [];
+    left.forEach(function (w, k) { list.push([w, -1, k]); });
+    right.forEach(function (w, k) { list.push([w, 1, k]); });
+    list.splice(left.length, 0, ["for", 0, 0]);
     list.forEach(function (it, i) {
-      var s = STYLES[i % STYLES.length], el = document.createElement("span"), fs = SIZES[i % SIZES.length];
+      var s = STYLES[it[2] % STYLES.length], el = document.createElement("span"), fs = SIZES[it[2] % SIZES.length]; // same colours and sizes on both sides
       el.className = "ohBub";
       el.textContent = it[0];
       if (it[1] === 0) { // "for": plain text in the middle, not a bubble
