@@ -49,11 +49,17 @@
   // the deck loops: while it is at rest, cards are moved from one end to the other until the middle card is back in the
   // middle of the pile, and the scroll position is adjusted by exactly the height that moved, so nothing visibly
   // changes. (Never while a finger is down or the deck is coasting: changing the scroll position then would stop it.)
+  var recent = [];
   function loop() {
     var vis = shown();
     if (vis.length < 6) return;
     var mid = middle(), idx = 0, bd = 1e9, target = Math.floor(vis.length / 2), guard = 0;
     vis.forEach(function (li, i) { var d = Math.abs(li.offsetTop + li.offsetHeight / 2 - mid); if (d < bd) { bd = d; idx = i; } });
+    if (idx >= target - 1 && idx <= target + 1) return;    // already in the middle of the pile: nothing to move
+    var now = Date.now(); recent = recent.filter(function (t) { return now - t < 2000; });
+    if (recent.length >= 3) return;                         // moving cards over and over: something is fighting it, so stop
+    recent.push(now);
+    list.style.scrollSnapType = "none";                    // (snapping would re-snap to the wrong card while the cards are moved)
     while (idx < target - 1 && guard++ < 20) {   // too close to the top: bring the last card round to the front
       var ref = vis[0], y0 = ref.offsetTop, last = vis.pop();
       list.insertBefore(last, ref); vis.unshift(last); idx++;
@@ -64,6 +70,7 @@
       list.appendChild(f); vis.push(f); idx--;
       list.scrollTop += ref2.offsetTop - y1;
     }
+    if (landed) requestAnimationFrame(function () { list.style.scrollSnapType = ""; });
   }
   var touching = false, idleT = 0;
   function idle() { clearTimeout(idleT); idleT = setTimeout(function () { if (!touching && mq.matches) { loop(); queue(); } }, 180); }
@@ -132,7 +139,7 @@
   }
   function refresh() { if (mq.matches) { measureHeader(); land(); queue(); } else clear(); }
 
-  ["touchstart", "wheel", "pointerdown", "keydown"].forEach(function (ev) { list.addEventListener(ev, function () { landed = true; }, { passive: true }); });
+  ["touchstart", "wheel", "pointerdown", "keydown"].forEach(function (ev) { list.addEventListener(ev, function () { landed = true; list.style.scrollSnapType = ""; }, { passive: true }); });
   list.addEventListener("scroll", function () { queue(); idle(); }, { passive: true });
   list.addEventListener("touchstart", function () { touching = true; }, { passive: true });
   ["touchend", "touchcancel"].forEach(function (ev) { list.addEventListener(ev, function () { touching = false; idle(); }, { passive: true }); });

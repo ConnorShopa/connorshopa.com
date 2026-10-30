@@ -2177,7 +2177,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
     display: block; margin: 0; padding: 0; zoom: 1 !important;
     overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
     scroll-snap-type: y mandatory; perspective: 900px; perspective-origin: 50% 50%;
-    scrollbar-width: none; font-size: 26px;
+    scrollbar-width: none; font-size: 26px; overflow-anchor: none; /* the deck moves cards round itself and fixes the scroll position by hand: no automatic scroll anchoring on top of that */
   }
   .hero > nav > #projectList::-webkit-scrollbar { display: none; }
   /* room above the first card and below the last, so each one can reach the middle */
