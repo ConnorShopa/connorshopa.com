@@ -16,12 +16,9 @@
   var INTRO_GAP = 16;  // the gap left above the filter chips once the about-me lines are gone
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
-  var BOTTOM_ROOM = 104; // space kept under the card for the gallery row: 48px to the screen edge + the row + the gap above it
+  var BOTTOM_ROOM = 160; // space kept under the card for the gallery row
 
-  var open = null; // { view, trigger, link }
-  var holdRow = false; // while a project is open the gallery row stays hidden (it pops back in on close)
-  var TABS_TOP = 48;   // the tabs sit this far from the top of the screen while a project is open
-  var SIDE = 88;       // room left and right of the card for the previous / next project chevrons
+  var open = null; // { view, trigger }
 
   // the gallery items currently on screen
   function items() { return document.querySelectorAll("#projectList li:not(.is-hidden):not(.is-current):not(.row-break)"); }
@@ -102,7 +99,6 @@
         }
       } else {
         gsap.set(next, { scale: 0, opacity: 0 });
-        if (holdRow) return; // a project is open: the row stays away
         popIn = gsap.to(next, { scale: 1, opacity: 1, duration: t(0.2), ease: "power2.out", stagger: t(0.018) });
       }
     });
@@ -150,57 +146,12 @@
   // embedded players only load once their page is shown
   function startMedia(scope) {
     scope.querySelectorAll("iframe[data-src]").forEach(function (f) { f.setAttribute("src", f.getAttribute("data-src")); });
-    // looping screen recordings (Habbot's phones) play from the start while their page is showing; videos with their own
-    // controls (Plunk's) never start by themselves
-    scope.querySelectorAll("video[loop]").forEach(function (v) { try { v.currentTime = 0; } catch (e) {} var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); });
   }
 
   // go to page n (dir: 1 = forward, -1 = back) with a short slide + fade; animate=false just swaps
-  // Habbot: one phone stays put while the text scrolls past; each page only changes the recording playing on it (the phone keeps one angle, from the CSS).
-  // The first time the view is paged, every page's phone is lifted out into one shared stage over the pages.
-  function ensureShared(view) {
-    if (view._shared !== undefined) return view._shared;
-    view._shared = null;
-    var vb = view.querySelector(".viewBody");
-    var pgs = Array.prototype.slice.call(pagesOf(view));
-    var clips = pgs.map(function (p) { var v = p.querySelector(".phone video"); return v ? v.getAttribute("src") : null; });
-    if (!vb || !clips[0] || !view.classList.contains("vertical")) return null;
-    var stage = document.createElement("div");
-    stage.className = "sharedStage";
-    var phone = pgs[0].querySelector(".phone");
-    pgs.forEach(function (p, i) { var ph = p.querySelector(".phone"); if (ph && ph !== phone) ph.remove(); });
-    stage.appendChild(phone);
-    vb.appendChild(stage);
-    view._shared = { phone: phone, video: phone.querySelector("video"), clips: clips, cur: -1 };
-    return view._shared;
-  }
-  function syncShared(view, n) {
-    var sh = ensureShared(view);
-    if (!sh || !sh.clips[n]) return;
-    var v = sh.video;
-    var play = function () { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); };
-    if (sh.cur === n) { play(); return; }
-    var first = sh.cur === -1;
-    sh.cur = n;
-    if (first) { v.currentTime = 0; play(); return; }
-    // the old recording fades out, the next one starts from its beginning
-    gsap.killTweensOf(v);
-    gsap.to(v, { opacity: 0, duration: reduce ? 0 : 0.2, ease: "power1.in", onComplete: function () {
-      v.src = sh.clips[n];
-      v.load();
-      play();
-      gsap.to(v, { opacity: 1, duration: reduce ? 0 : 0.3, ease: "power1.out" });
-    } });
-  }
-
   function setPage(view, n, animate, dir) {
     var pages = pagesOf(view);
     if (!pages.length) return;
-    if (view.classList.contains("scrollView")) { // every page is on, one under the other: the card scrolls
-      view._page = 0;
-      pages.forEach(function (p) { p.classList.add("is-on"); startMedia(p); });
-      return;
-    }
     n = Math.max(0, Math.min(pages.length - 1, n));
     var from = view._page || 0;
     var old = pages[from];
@@ -211,7 +162,6 @@
     if (old !== next) stopMedia(old);
     next.classList.add("is-on");
     startMedia(next);
-    syncShared(view, n);
     view._page = n;
     // a project's first page can carry a background image (proj.bgImage); in a vertical view it stays behind every page
     // (the pages scroll over it)
@@ -264,7 +214,6 @@
 
   function step(delta) {
     if (!open) return;
-    if (open.view.classList.contains("scrollView")) return;
     var view = open.view;
     if (view.querySelector(".coverReveal") && (view._page || 0) === 0) {
       var k = view._step || 0;
@@ -279,23 +228,10 @@
     setPage(view, n, true, delta);
   }
 
-  // where every gallery link sits while the list is at rest, noted each time a project is opened from the gallery:
-  // a project reached by the chevrons collapses back to its link's resting place (the open row has moved by then)
-  var restSpots = {};
-  function noteRestSpots() {
-    if (list.classList.contains("compact")) return;
-    Array.prototype.forEach.call(document.querySelectorAll("#projectList [data-view]"), function (l) {
-      var r = l.getBoundingClientRect();
-      restSpots[l.getAttribute("data-view")] = { w: r.width + 44, h: r.height + 20, cx: r.left + r.width / 2, cy: r.top + r.height / 2, r: (r.height + 20) / 2 };
-    });
-  }
-  function show(trigger, view, link) {
+  function show(trigger, view) {
     if (open) return;
-    noteRestSpots();
-    open = { view: view, trigger: trigger, link: link || trigger };
+    open = { view: view, trigger: trigger };
     setPage(view, 0, false);
-    var vbody = view.querySelector(".viewBody");
-    if (vbody) vbody.scrollTop = 0;
     view.classList.remove("imgIn"); // the background image fades in after the bubble hands over (see reveal)
     sceneTo(view, 0, false);
 
@@ -317,44 +253,64 @@
     // the risen chips.
     var introTop = intro && intro.querySelector(".introTop");
     var introFilters = intro && intro.querySelector(".filters");
-    var narrow = window.innerWidth <= 700;
-    // the project colour takes over the whole page
-    // ...a lighter tint of it, so the card stands out against it
-    // the page behind takes the project's own colour; the card (and the hover bubble that grows into it) is the lighter tint
-    var pageBg = view.style.getPropertyValue("--page-bg") || "#E4E4E4";
-    var tintBg = getComputedStyle(view).backgroundColor;
-    if (!introState && introFilters) { // first open: the tabs rise to the top of the screen, the name and tagline fade
-      introState = { restTop: introFilters.getBoundingClientRect().top, bg: getComputedStyle(document.body).backgroundColor };
+    var collapseBy = 0;
+    var freshIntro = false;
+    if (false && introTop && introFilters && !introState) { // the header no longer moves when a project opens
+      // first open: remember how far the chips rise so closing can undo it
+      var mt = parseFloat(getComputedStyle(introFilters).marginTop) || 0;
+      // only the tagline goes (the name stays): the chips rise by its height plus the gap under the name
+      var tg = introTop.querySelector(".tagline");
+      var tgGap = tg ? parseFloat(getComputedStyle(tg.parentNode).rowGap) || 0 : 0;
+      var lost = tg ? tg.offsetHeight + tgGap : introTop.offsetHeight;
+      introState = { rise: Math.max(0, lost + mt - INTRO_GAP), fBottom: introFilters.getBoundingClientRect().bottom };
+      freshIntro = true;
     }
-    var chipsH = introFilters ? introFilters.offsetHeight : 32;
-    if (introFilters && introState) {
-      gsap.killTweensOf(introFilters);
-      gsap.to(introFilters, { y: TABS_TOP - introState.restTop, duration: t(0.38), ease: "power3.out" });
-    }
-    if (introTop) gsap.to(introTop, { autoAlpha: 0, duration: t(0.25), ease: "power2.out" });
-    gsap.to([document.documentElement, document.body], { backgroundColor: pageBg, duration: t(0.38), ease: "power2.out", overwrite: "auto" });
-    // the close icon is white or black, whichever reads on this project's colour
-    var cm = getComputedStyle(view).backgroundColor.match(/[\d.]+/g) || [255, 255, 255];
-    var lum = (0.299 * cm[0] + 0.587 * cm[1] + 0.114 * cm[2]) / 255;
-    view.style.setProperty("--closeInk", lum < 0.55 ? "#FFFFFF" : "#1A1A1A");
-    view.style.setProperty("--tint", tintBg);
-    var darkCard = lum < 0.55;
-    // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
-    var top = TABS_TOP + chipsH + 24;
-    var side = narrow ? 12 : SIDE;
-    var bottomGap = narrow ? 12 : BOTTOM_ROOM; // desktop: the gallery row stays beneath the card, 48px above the bottom edge
-    var height = Math.max(300, window.innerHeight - top - bottomGap);
-    view.style.width = (window.innerWidth - side * 2) + "px";
+    if (introState) collapseBy = introState.rise; // the header's own box never shrinks (the lines and chips are only moved)
+    var top = intro ? intro.getBoundingClientRect().bottom - collapseBy + 24 : 80;
+    // the card keeps a familiar shape (3:2): it takes the room available, but never gets taller than that shape
+    // allows, and when the room is short it gets narrower instead of squatter
+    var narrow = window.innerWidth <= 700; // phones: the card is nearly full width and as tall as the room allows (no 3:2)
+    var PAD = 8; // phones: the card takes the whole screen, with a small margin
+    var fullW = narrow ? window.innerWidth - PAD * 2 : Math.min(window.innerWidth * 0.86, 1100);
+    var height = narrow
+      ? Math.max(300, window.innerHeight - PAD * 2)
+      : Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
+    view.style.width = (narrow ? fullW : Math.min(fullW, height * CARD_RATIO)) + "px";
     view.style.height = height + "px";
+    // and it sits dead centre in the window, as long as that leaves it clear of the chips above and the gallery row
+    // under it (otherwise it sits as close to the middle as those allow)
+    var minTop = narrow ? PAD : top;
+    var maxTop = Math.max(minTop, window.innerHeight - (narrow ? PAD : BOTTOM_ROOM) - height);
+    top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
-    var cardBottom = top + height;
-    showProjNav(view, top, height, side, narrow, tintBg);
-    showChrome(view, top, side, tintBg, narrow, darkCard);
+    var cardBottom = top + height; // measured from layout, not the rect: the card is left shrunk after a close
     // the card IS the hover bubble: the bubble (js/mouse.js) grows to the card's size and shape, then the card
     // takes over and its contents fade in
     var b = bubbleOf(trigger);
     open.bubble = b;
-    var currentLi = (open.link || trigger).closest("li");
+    var currentLi = trigger.closest("li");
+
+    if (freshIntro) {
+      var aboutEls = introEls();
+      gsap.killTweensOf(aboutEls);
+      // straight up (never sideways, so the lines stay centred wherever the bubble came from), the line nearest the
+      // bubble first and the others following
+      gsap.to(aboutEls, {
+        x: 0,
+        y: function (i, el) { return push(el, { x: b.cx, y: b.cy }).y; },
+        scale: 0.7,
+        opacity: 0,
+        duration: t(0.3),
+        delay: function (i) { return t(0.05 * (aboutEls.length - 1 - i)); },
+        ease: "power2.out",
+        transformOrigin: "50% 50%",
+      });
+    }
+    // the chips settle the same distance above the card as the gallery row sits under it (GAP)
+    if (introFilters && introState) {
+      gsap.killTweensOf(introFilters);
+      gsap.to(introFilters, { y: top - GAP - introState.fBottom, duration: t(0.38), ease: "power3.out" }); // the same length as the bubble's growth, so they move in time with it
+    }
 
     gsap.killTweensOf(view);
     gsap.killTweensOf(view.children);
@@ -384,13 +340,11 @@
       // slide the (shrunken) row so it sits just under the card
       var n = nav.getBoundingClientRect();
       var rowH = list.getBoundingClientRect().height;
-      // the row sits 48px above the bottom edge of the screen (phones keep it just under the card)
-      var rowCentre = window.innerWidth > 700 ? window.innerHeight - 48 - (rowH * MINI) / 2 : cardBottom + GAP + (rowH * MINI) / 2;
-      var drop = rowCentre - (n.top + n.height / 2);
+      var drop = cardBottom + GAP + (rowH * MINI) / 2 - (n.top + n.height / 2);
       gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
     }, { x: b.cx, y: b.cy });
 
-    var close = view._close || view.querySelector(".viewClose");
+    var close = view.querySelector(".viewClose");
     if (close) gsap.delayedCall(t(0.2), function () { close.focus({ preventScroll: true }); });
   }
 
@@ -398,72 +352,49 @@
   // gallery isn't touched; show() below re-lays it out for the new project)
   function switchFrom(current) {
     var old = current.view;
-    hideChrome(old);
     open = null;
     gsap.killTweensOf(old);
     gsap.to(old, {
       autoAlpha: 0,
-      scale: 0.9,
-      duration: t(0.22),
+      duration: t(0.15),
       ease: "power2.in",
-      onComplete: function () { old.hidden = true; gsap.set(old, { scale: 1 }); stopMedia(old); gsap.set(old.children, { clearProps: "opacity" }); },
+      onComplete: function () { old.hidden = true; stopMedia(old); gsap.set(old.children, { clearProps: "opacity" }); },
     });
   }
 
   // the about-me text (the tagline; the name stays put)
   function introEls() { return intro ? intro.querySelectorAll(".introTop .tagline .tl") : []; }
 
-  // closing: the tabs drop back, the name and tagline return and the page goes back to its own colour
-  function restoreIntro() {
+  // the reverse of the push: they start shoved away, small and faint, and are drawn back to their places, the
+  // nearer ones first, like the gallery links
+  function restoreIntro(origin) {
     var introFilters = intro && intro.querySelector(".filters");
-    var introTop = intro && intro.querySelector(".introTop");
-    if (!introState) return;
-    var bg = introState.bg;
+    if (!introState || !introFilters) return;
     introState = null;
-    if (introFilters) { gsap.killTweensOf(introFilters); gsap.to(introFilters, { y: 0, duration: t(0.4), ease: "power2.inOut", onComplete: function () { gsap.set(introFilters, { clearProps: "y" }); } }); }
-    if (introTop) { gsap.killTweensOf(introTop); gsap.to(introTop, { autoAlpha: 1, duration: t(0.3), delay: t(0.1), ease: "power2.out", onComplete: function () { gsap.set(introTop, { clearProps: "opacity,visibility" }); } }); }
-    gsap.to([document.documentElement, document.body], { backgroundColor: bg, duration: t(0.4), ease: "power2.inOut", overwrite: "auto", onComplete: function () { gsap.set([document.documentElement, document.body], { clearProps: "backgroundColor" }); } });
+    var els = introEls();
+    gsap.killTweensOf(els);
+    gsap.killTweensOf(introFilters);
+    gsap.set(els, { clearProps: "x,y,scale,opacity" }); // measure from their own places
+    els.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      var len = Math.hypot(r.left + r.width / 2 - origin.x, r.top + r.height / 2 - origin.y);
+      var far = Math.min(len / 700, 1);
+      var from = push(el, origin, true);
+      var delay = t(0.14 * far);
+      gsap.set(el, { x: 0, y: from.y, scale: 0.8, opacity: 0, transformOrigin: "50% 50%" });
+      gsap.to(el, { scale: 1, opacity: 1, duration: t(0.16), delay: delay, ease: "power2.out" });
+      gsap.to(el, { x: 0, y: 0, duration: t(0.22 + 0.14 * far), delay: delay, ease: "power2.inOut", onComplete: function () { gsap.set(el, { clearProps: "x,y,scale,opacity,transformOrigin" }); } });
+    });
+    gsap.to(introFilters, { y: 0, duration: t(0.4), ease: "power2.inOut", onComplete: function () { gsap.set(introFilters, { clearProps: "y" }); } });
   }
 
   function hide() {
     if (typeof syncChips === "function") syncChips(null);
     if (!open) return;
     var view = open.view;
-    holdRow = false;
-    hideProjNav();
-    hideChrome(view);
-    restoreIntro();
+    restoreIntro({ x: open.bubble.cx, y: open.bubble.cy });
     var trigger = open.trigger;
-    var open_link = open.link;
     var b = open.bubble;
-    // opened from a chevron: the card collapses back toward its own link in the gallery, not toward the chevron
-    if (open_link && open_link !== trigger) {
-      var rs = restSpots[open_link.getAttribute("data-view")];
-      if (rs) b = { w: rs.w, h: rs.h, cx: rs.cx, cy: rs.cy, r: rs.r, fill: open_link.getAttribute("data-bubble") || null };
-    }
-    // wherever the list has moved to while the card was open, the card collapses into the link's real resting place:
-    // put the row back as it is at rest (same rows as before the card opened), then measure the link there, minus
-    // any shove the gallery animation has put on it
-    if (open_link) {
-      // the row under the card is shrunk and slid down (the nav is scaled); put it all back first, or the link would
-      // be measured at its mini size
-      gsap.killTweensOf(nav);
-      gsap.set(nav, { clearProps: "transform" });
-      var lis = list.querySelectorAll("li");
-      gsap.killTweensOf(lis);
-      list.classList.remove("compact");
-      list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
-      if (window.layoutGalleryRows) window.layoutGalleryRows();
-      var rest = open_link.getBoundingClientRect(), sc = +gsap.getProperty(open_link.closest("li"), "scale") || 1;
-      if (rest.width > 0) {
-        // (a link that is scaled about its centre keeps its centre; only the size is scaled)
-        b = { w: rest.width / sc + 44, h: rest.height / sc + 20, cx: rest.left + rest.width / 2, cy: rest.top + rest.height / 2, r: (rest.height / sc + 20) / 2, fill: b.fill };
-        // the links shoved aside by the card sit off their places: their own x/y are cleared in the layout step below,
-        // so measure from a clean copy of the position
-        var dxs = +gsap.getProperty(open_link.closest("li"), "x") || 0, dys = +gsap.getProperty(open_link.closest("li"), "y") || 0;
-        b.cx -= dxs; b.cy -= dys;
-      }
-    }
     open = null;
 
     gsap.killTweensOf(view);
@@ -479,9 +410,6 @@
         window.scrollTo(0, y);
       }
       document.documentElement.classList.remove("view-open");
-      // the page scrollbar is back, so the gallery is a little narrower than when its rows were last worked out
-      // (while the card was closing, the page had no scrollbar): lay the rows out again so the last link can't wrap
-      if (window.layoutGalleryRows && !list.classList.contains("compact")) window.layoutGalleryRows();
       stopMedia(view);
       gsap.set(view.children, { clearProps: "opacity" });
     };
@@ -499,86 +427,8 @@
       list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
       fixSlashes();
       gsap.set(nav, { clearProps: "transform" });
-    }, { x: b.cx, y: b.cy }, true, (open_link || trigger).closest("li"));
+    }, { x: b.cx, y: b.cy }, true, trigger.closest("li"));
     trigger.focus({ preventScroll: true });
-  }
-
-  // ---- previous / next project: chevrons outside the card, left and right ----
-  var projNav = ["prev", "next"].map(function (dir) {
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = "projNav " + dir;
-    b.setAttribute("aria-label", dir === "prev" ? "Previous project" : "Next project");
-    b.innerHTML = '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="' + (dir === "prev" ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7") + '" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    b.hidden = true;
-    document.body.appendChild(b);
-    b.addEventListener("click", function () { goProject(dir === "prev" ? -1 : 1); });
-    return b;
-  });
-  if (window.bindHover) window.bindHover(document); // the chevrons join the site-wide hover bubble
-  function showProjNav(view, top, height, side, narrow, tint) {
-    if (narrow) return;
-    // each chevron's hover bubble takes the colour of the project it leads to
-    var links = Array.prototype.filter.call(document.querySelectorAll("#projectList [data-view]"), function (l) { return document.getElementById("view-" + l.getAttribute("data-view")); });
-    var cur = links.findIndex(function (l) { return document.getElementById("view-" + l.getAttribute("data-view")) === view; });
-    projNav.forEach(function (b, i) {
-      b.hidden = false;
-      var nb = cur < 0 ? null : links[(cur + (i === 0 ? -1 : 1) + links.length) % links.length].getAttribute("data-bubble");
-      if (nb) b.setAttribute("data-bubble", nb); else b.removeAttribute("data-bubble");
-      b.style.top = top + height / 2 + "px";
-      b.style[i === 0 ? "left" : "right"] = (side - 40) / 2 + "px";
-      gsap.fromTo(b, { autoAlpha: 0 }, { autoAlpha: 1, duration: t(0.3), delay: t(0.15), overwrite: "auto" });
-    });
-  }
-  // the logo and close button of a scrolling project float above everything (they live on the page, above the
-  // cursor bubble), so the one site-wide bubble can sit behind them and change only colour and shape
-  function showChrome(view, top, side, tint, narrow, dark) {
-    if (!view.classList.contains("scrollView")) return;
-    var head = view._head || (view._head = view.querySelector(".viewHead"));
-    var close = view._close || (view._close = view.querySelector(".viewClose"));
-    if (!head || !close) return;
-    [head, close].forEach(function (el) {
-      if (el.parentNode !== document.body) document.body.appendChild(el);
-      el.classList.add("floating");
-      el.classList.toggle("dark", dark);
-      el.setAttribute("data-bubble", tint);
-      el.hidden = false;
-    });
-    if (!head.__toTop) {
-      head.__toTop = true;
-      head.setAttribute("role", "button");
-      head.setAttribute("tabindex", "0");
-      head.setAttribute("aria-label", "Back to the top");
-      var toTop = function () { var vb = view.querySelector(".viewBody"); if (vb) vb.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" }); };
-      head.addEventListener("click", toTop);
-      head.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toTop(); } });
-    }
-    var inset = narrow ? 20 : 52, drop = narrow ? 20 : 44;
-    head.style.left = side + inset + "px";
-    head.style.top = top + drop + "px";
-    close.style.right = side + inset + "px";
-    close.style.top = top + drop + "px";
-    close.style.color = dark ? "#FFFFFF" : "#1A1A1A";
-    gsap.fromTo([head, close], { autoAlpha: 0 }, { autoAlpha: 1, duration: t(0.3), delay: t(0.25), overwrite: "auto" });
-  }
-  function hideChrome(view) {
-    [view._head, view._close].forEach(function (el) {
-      if (el) gsap.to(el, { autoAlpha: 0, duration: t(0.15), overwrite: "auto", onComplete: function () { el.hidden = true; } });
-    });
-  }
-  function hideProjNav() {
-    projNav.forEach(function (b) { gsap.to(b, { autoAlpha: 0, duration: t(0.15), overwrite: "auto", onComplete: function () { b.hidden = true; } }); });
-  }
-  // the card collapses, the next (or previous) project's card grows out of the chevron
-  function goProject(delta) {
-    if (!open) return;
-    var links = Array.prototype.filter.call(document.querySelectorAll("#projectList [data-view]"), function (l) { return document.getElementById("view-" + l.getAttribute("data-view")); });
-    var i = links.findIndex(function (l) { return document.getElementById("view-" + l.getAttribute("data-view")) === open.view; });
-    var link = links[(i + delta + links.length) % links.length];
-    var view = document.getElementById("view-" + link.getAttribute("data-view"));
-    var btn = projNav[delta < 0 ? 0 : 1];
-    switchFrom(open);
-    gsap.delayedCall(t(0.2), function () { show(btn, view, link); });
   }
 
   function bindViewLink(link) {
@@ -616,7 +466,7 @@
   var wheelLock = 0;
   // while a view is open nothing outside it may scroll: wheel, touch and the scrolling keys are all stopped (except
   // inside a text block that genuinely needs to scroll)
-  function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText, .pgGallery, .pg, .viewBody"); }
+  function insideScroller(e) { return e.target && e.target.closest && e.target.closest(".pgText, .pgGallery"); }
   function onWheel(e) {
     if (!open) return;
     if (!insideScroller(e)) e.preventDefault(); // stops page scrolling and the elastic bounce
@@ -631,21 +481,6 @@
   // in the capture phase, on both the document and the window, so nothing can get in ahead of it
   document.addEventListener("wheel", onWheel, { passive: false, capture: true });
   window.addEventListener("wheel", onWheel, { passive: false, capture: true });
-  // touch screens: swipe sideways to go between pages (up / down in the vertical Habbot view)
-  var swipe = null;
-  document.addEventListener("touchstart", function (e) {
-    if (!open || !e.touches[0] || !e.target.closest(".view")) { swipe = null; return; }
-    swipe = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-  }, { passive: true });
-  document.addEventListener("touchend", function (e) {
-    if (!swipe || !open || !e.changedTouches[0]) return;
-    var dx = e.changedTouches[0].clientX - swipe.x, dy = e.changedTouches[0].clientY - swipe.y;
-    swipe = null;
-    var vertical = open.view.classList.contains("vertical");
-    var d = vertical ? dy : dx, o = vertical ? dx : dy;
-    if (Math.abs(d) > 60 && Math.abs(d) > Math.abs(o) * 1.5) step(d < 0 ? 1 : -1);
-  }, { passive: true });
-
   window.addEventListener("touchmove", function (e) { if (open && !insideScroller(e)) e.preventDefault(); }, { passive: false });
   document.addEventListener("keydown", function (e) {
     if (!open || /^(input|textarea|select)$/i.test(e.target.tagName)) return;
