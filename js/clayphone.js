@@ -9,7 +9,7 @@ var W = 1, H = 2.08, D = 0.035, R = 0.2, BEV = 0.02;
 
 function roundedRect(w, h, r) {
   var s = new THREE.Shape(), x = -w / 2, y = -h / 2;
-  s.moveTo(x + r, y);
+  s.moveTo(0, y); // start mid-edge: the last arc ends on (x + r, y), so starting there would double that point and smear the bevel
   s.lineTo(x + w - r, y);
   s.absarc(x + w - r, y + r, r, -Math.PI / 2, 0, false);
   s.lineTo(x + w, y + h - r);
@@ -64,7 +64,7 @@ export function mountClayPhone(el, opts) {
     tex.colorSpace = THREE.SRGBColorSpace;
     screenMat.map = tex; screenMat.color.set(0xffffff);
   }
-  var screen = new THREE.Mesh(screenGeometry(W - 0.13, H - 0.13, R - 0.065), screenMat);
+  var screen = new THREE.Mesh(screenGeometry(W - 0.15, H - 0.15, R - 0.075), screenMat);
   screen.position.z = top + 0.006;
   phone.add(screen);
 
