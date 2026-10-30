@@ -2140,3 +2140,14 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 }
 @keyframes ohRing { 0% { inset: -4px; opacity: 1; } 100% { inset: -18px; opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { #view-overhand .earlyForm:has(.earlyInput:not(:placeholder-shown):valid) .earlyBtn.lockBtn:hover:not(:disabled)::after { animation: none; } }
+
+/* Overhand sign-up button: turns white on hover and an arrow slides in (the width stays put: the text shifts left to make room) */
+#view-overhand .earlyBtn.lockBtn { transition: background-color .25s ease, color .25s ease, padding .25s ease; }
+#view-overhand .earlyBtn.lockBtn::before {
+  content: "\2192"; position: absolute; inset: auto; right: 16px; top: 50%; padding: 0; width: auto; height: auto; border-radius: 0;
+  background: none; -webkit-mask: none; mask: none; font-size: 20px; line-height: 1; color: #1B2430; pointer-events: none;
+  opacity: 0; transform: translate(-14px, -52%); transition: opacity .25s ease, transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+#view-overhand .earlyBtn.lockBtn:hover:not(:disabled) { background: #fff; color: #1B2430; padding-left: 14px; padding-right: 34px; }
+#view-overhand .earlyBtn.lockBtn:hover:not(:disabled)::before { opacity: 1; transform: translate(0, -52%); }
+@media (prefers-reduced-motion: reduce) { #view-overhand .earlyBtn.lockBtn, #view-overhand .earlyBtn.lockBtn::before { transition: none; } }
