@@ -34,7 +34,7 @@
       el.style.fontSize = fs + "px";
       el.style.padding = Math.round(fs * 0.62) + "px " + Math.round(fs * 1.25) + "px";
       pit.appendChild(el);
-      bubs.push({ el: el, side: it[1], x: 0, y: 0, vx: 0, vy: 0, hw: 0, r: 0 });
+      bubs.push({ el: el, side: it[1], fixed: it[1] === 0, x: 0, y: 0, vx: 0, vy: 0, hw: 0, r: 0 });
     });
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); }, { threshold: 0 }).observe(pit);
@@ -73,14 +73,18 @@
     if (d >= min) return;
     var nx, ny;
     if (d < 0.001) { nx = 0; ny = 1; d = 0; } else { nx = dx / d; ny = dy / d; }
-    var push = (min - d) / 2;
-    a.x += nx * push; a.y += ny * push; b.x -= nx * push; b.y -= ny * push;
+    if (a.fixed && b.fixed) return;
+    var push = a.fixed || b.fixed ? min - d : (min - d) / 2;
+    if (!a.fixed) { a.x += nx * push; a.y += ny * push; }
+    if (!b.fixed) { b.x -= nx * push; b.y -= ny * push; }
   }
 
   function step() {
-    var n = bubs.length, i, j, b, k, ax = armX();
+    var n = bubs.length, i, j, b, k, ax = armX(), barrier = 0;
+    for (i = 0; i < n; i++) if (bubs[i].fixed) barrier = bubs[i].w / 2 + 6;
     for (i = 0; i < n; i++) {
       b = bubs[i];
+      if (b.fixed) { b.x = b.y = b.vx = b.vy = 0; continue; }
       b.vx += (b.side * ax - b.x) * (b.side ? 0.0035 : 0.02); b.vy += -b.y * 0.0065; // gravity to the middle (a touch stronger vertically: a flatter pile)
       var dx = b.x - mouse.x, dy = b.y - mouse.y, d = Math.sqrt(dx * dx + dy * dy);
       if (d < REACH && d > 0.5) { var f = (1 - d / REACH) * PUSH; b.vx += dx / d * f; b.vy += dy / d * f; }
@@ -91,7 +95,11 @@
     var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2;
     for (i = 0; i < n; i++) { // stay inside the pit
       b = bubs[i];
+      if (b.fixed) { b.el.style.transform = "translate(" + (W - b.w / 2).toFixed(1) + "px," + (H - b.h / 2).toFixed(1) + "px)"; continue; }
       var mx = W - b.hw - b.r, my = H - b.r;
+      // "for" is a wall: the left pile can't cross to the right of it, nor the right pile to the left
+      var wall = barrier + b.hw + b.r;
+      if (b.side < 0 && b.x > -wall) b.x = -wall; if (b.side > 0 && b.x < wall) b.x = wall;
       if (b.x > mx) b.x = mx; if (b.x < -mx) b.x = -mx; if (b.y > my) b.y = my; if (b.y < -my) b.y = -my;
       b.el.style.transform = "translate(" + (W + b.x - b.w / 2).toFixed(1) + "px," + (H + b.y - b.h / 2).toFixed(1) + "px)";
     }
