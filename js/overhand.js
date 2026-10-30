@@ -23,11 +23,18 @@
   function build() {
     pit = document.querySelector(".ohPit");
     if (!pit) return;
-    var pick = ALL.map(function () { return Math.floor(Math.random() * STYLES.length); });
+    // colours: every colour is used the same number of times in a group, in a random order, and a word never has the same colour in both groups
+    function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+    function deck() { var d = []; for (var i = 0; i < ALL.length; i++) d.push(i % STYLES.length); return shuffle(d); }
+    var left = deck(), right, tries = 0;
+    do { right = deck(); tries++; } while (tries < 200 && right.some(function (c, i) { return c === left[i]; }));
+    var colours = { "-1": left, "1": right };
     [-1, 1].forEach(function (side) {
       ALL.forEach(function (w, i) {
-        var s = STYLES[side < 0 ? pick[i] : (pick[i] + 1 + Math.floor(Math.random() * (STYLES.length - 1))) % STYLES.length]; // random colours, and a word never has the same colour in both groups
-        bubs.push({ el: mk(w, "ohBub", s[0], s[1]), side: side, x: 0, y: 0, vx: 0, vy: 0, sx: 0, sy: 0 });
+        var s = STYLES[colours[side][i]];
+        var b = { el: mk(w, "ohBub", s[0], s[1]), side: side, x: 0, y: 0, vx: 0, vy: 0, sx: 0, sy: 0 };
+        b.scale = [0.85, 0.95, 1, 1, 1.1, 1.2][Math.floor(Math.random() * 6)]; // some bubbles larger, some smaller
+        bubs.push(b);
       });
       anchors.push({ el: mk("anything", "ohBub ohFor ohAny"), side: side });
     });
@@ -45,9 +52,9 @@
 
 
   function setSize(fs) {
-    bubs.forEach(function (b) { b.el.style.fontSize = fs + "px"; b.el.style.padding = Math.round(fs * 0.62) + "px " + Math.round(fs * 2) + "px"; });
-    anchors.forEach(function (a) { a.el.style.fontSize = Math.round(fs * 2.3) + "px"; });
-    forEl.style.fontSize = Math.round(fs * 1.4) + "px";
+    bubs.forEach(function (b) { var f = fs * b.scale; b.el.style.fontSize = f.toFixed(1) + "px"; b.el.style.padding = Math.round(f * 0.62) + "px " + Math.round(f * 2) + "px"; });
+    anchors.forEach(function (a) { a.el.style.fontSize = Math.round(fs * 3) + "px"; });
+    forEl.style.fontSize = Math.round(fs * 2.2) + "px";
   }
   function measureAll() {
     bubs.forEach(function (b) { b.w = b.el.offsetWidth; b.h = b.el.offsetHeight; b.r = b.h / 2; b.hw = Math.max(0, b.w / 2 - b.r); });
