@@ -5,7 +5,7 @@
 import * as THREE from "three";
 import { RoomEnvironment } from "three/addons/environments/RoomEnvironment.js";
 
-var W = 1, H = 2.08, D = 0.085, R = 0.2, BEV = 0.03;
+var W = 1, H = 2.08, D = 0.035, R = 0.2, BEV = 0.02;
 
 function roundedRect(w, h, r) {
   var s = new THREE.Shape(), x = -w / 2, y = -h / 2;
@@ -31,8 +31,6 @@ export function mountClayPhone(el, opts) {
   opts = opts || {};
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.domElement.style.cssText = "display:block;width:100%;height:100%";
   el.appendChild(renderer.domElement);
 
@@ -42,7 +40,7 @@ export function mountClayPhone(el, opts) {
   var camera = new THREE.PerspectiveCamera(26, 1, 0.1, 50);
   camera.position.set(0, 0, 8);
 
-  var clay = new THREE.MeshStandardMaterial({ color: 0xe9e7e1, roughness: 0.8, metalness: 0 });
+  var clay = new THREE.MeshStandardMaterial({ color: 0xf4c4aa, roughness: 0.8, metalness: 0 });
     var black = new THREE.MeshStandardMaterial({ color: 0x08080a, roughness: 0.3, metalness: 0.1 });
 
   var phone = new THREE.Group();
@@ -52,11 +50,10 @@ export function mountClayPhone(el, opts) {
     depth: D, bevelEnabled: true, bevelThickness: BEV, bevelSize: BEV, bevelOffset: -BEV, bevelSegments: 12, curveSegments: 64
   }), clay);
   body.geometry.translate(0, 0, -D / 2);
-  body.castShadow = body.receiveShadow = true;
   phone.add(body);
 
   var top = D / 2 + BEV; // the z of the front face
-  var bezel = new THREE.Mesh(new THREE.ExtrudeGeometry(roundedRect(W - 0.1, H - 0.1, R - 0.05), { depth: 0.006, bevelEnabled: false, curveSegments: 64 }), black);
+  var bezel = new THREE.Mesh(new THREE.ExtrudeGeometry(roundedRect(W - 0.07, H - 0.07, R - 0.035), { depth: 0.006, bevelEnabled: false, curveSegments: 64 }), black);
   bezel.position.z = top - 0.001;
   phone.add(bezel);
 
@@ -67,23 +64,12 @@ export function mountClayPhone(el, opts) {
     tex.colorSpace = THREE.SRGBColorSpace;
     screenMat.map = tex; screenMat.color.set(0xffffff);
   }
-  var screen = new THREE.Mesh(screenGeometry(W - 0.2, H - 0.2, R - 0.1), screenMat);
+  var screen = new THREE.Mesh(screenGeometry(W - 0.13, H - 0.13, R - 0.065), screenMat);
   screen.position.z = top + 0.006;
   phone.add(screen);
 
-  // the ground, parallel to the phone, catching a soft shadow
-  var ground = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.ShadowMaterial({ opacity: 0.22 }));
-  ground.position.z = -D / 2 - BEV - 0.18;
-  ground.receiveShadow = true;
-  phone.add(ground);
-
   var sun = new THREE.DirectionalLight(0xffffff, 2.2);
   sun.position.set(-2.5, 3.5, 5);
-  sun.castShadow = true;
-  sun.shadow.mapSize.set(2048, 2048);
-  sun.shadow.radius = 10;
-  sun.shadow.bias = -0.0004;
-  var sc = sun.shadow.camera; sc.left = -3; sc.right = 3; sc.top = 3; sc.bottom = -3; sc.near = 1; sc.far = 14;
   phone.add(sun);
 
   scene.add(phone);
