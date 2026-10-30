@@ -2087,3 +2087,5 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* the email card is as far in from the corner as the logo is from its corner */
 .view.scrollView .pg.one:has(.ohPit) .earlyForm { left: 86px; bottom: 61px; }
 @media (max-width: 700px) { .view.scrollView .pg.one:has(.ohPit) .earlyForm { left: 34px; bottom: 28px; } }
+#view-overhand .ohBub { box-shadow: 0 2px 0 rgba(11, 22, 32, 0.18), 0 4px 10px rgba(11, 22, 32, 0.12); }
+#view-overhand .ohBub.ohFor { box-shadow: none; }
