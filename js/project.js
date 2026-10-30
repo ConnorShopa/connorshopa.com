@@ -134,20 +134,34 @@
     var cr = view.getBoundingClientRect();
     return "inset(" + (box.top - cr.top) + "px " + (cr.right - box.right) + "px " + (cr.bottom - box.bottom) + "px " + (box.left - cr.left) + "px round " + radius + "px)";
   }
+  // the page behind the card on phones is the project's own (darker) colour, like the desktop page behind its card
+  var backdrop = null;
+  function phoneBackdrop(view, on, d) {
+    if (!backdrop) {
+      backdrop = document.createElement("div");
+      backdrop.style.cssText = "position:fixed;inset:0;z-index:10;pointer-events:none;opacity:0;visibility:hidden";
+      document.body.appendChild(backdrop);
+    }
+    gsap.killTweensOf(backdrop);
+    if (on) { backdrop.style.background = view.style.getPropertyValue("--page-bg") || "#E4E4E4"; gsap.set(backdrop, { visibility: "visible" }); gsap.to(backdrop, { opacity: 1, duration: d, ease: "power2.out" }); }
+    else gsap.to(backdrop, { opacity: 0, duration: d, ease: "power2.inOut", onComplete: function () { gsap.set(backdrop, { visibility: "hidden" }); } });
+  }
   function phoneGrow(view, li, reveal) {
     if (!li) { reveal(); return; }
     var from = clipOf(view, li.getBoundingClientRect(), 22);
     var cardBg = getComputedStyle(li).backgroundColor, viewBg = getComputedStyle(view).backgroundColor;
+    phoneBackdrop(view, true, t(0.5));
     gsap.set(view, { autoAlpha: 1, clipPath: from, backgroundColor: cardBg });
     gsap.to(view, { clipPath: "inset(0px 0px 0px 0px round 28px)", backgroundColor: viewBg, duration: t(0.5), ease: "power3.inOut", onComplete: function () { gsap.set(view, { clearProps: "clipPath,backgroundColor" }); } });
     gsap.delayedCall(t(0.22), reveal);
   }
   function phoneShrink(view, li, finish) {
-    if (!li) { finish(); return; }
+    if (!li) { phoneBackdrop(view, false, 0); finish(); return; }
     document.documentElement.classList.remove("view-open"); // the deck shows again behind the closing card
-    var cardBg = getComputedStyle(li).backgroundColor;
-    gsap.set(view, { autoAlpha: 1, clipPath: "inset(0px 0px 0px 0px round 28px)" });
-    gsap.to(view, { clipPath: clipOf(view, li.getBoundingClientRect(), 22), backgroundColor: cardBg, duration: t(0.4), ease: "power3.inOut", onComplete: function () { gsap.set(view, { clearProps: "clipPath,backgroundColor" }); finish(); } });
+    var cardBg = getComputedStyle(li).backgroundColor, viewBg = getComputedStyle(view).backgroundColor;
+    phoneBackdrop(view, false, t(0.45));
+    gsap.set(view, { autoAlpha: 1, clipPath: "inset(0px 0px 0px 0px round 28px)", backgroundColor: viewBg });
+    gsap.to(view, { clipPath: clipOf(view, li.getBoundingClientRect(), 22), backgroundColor: cardBg, duration: t(0.45), ease: "power3.inOut", onComplete: function () { gsap.set(view, { clearProps: "clipPath,backgroundColor" }); finish(); } });
   }
 
   // centre of a link on screen
@@ -350,7 +364,7 @@
       requestAnimationFrame(function () { requestAnimationFrame(function () { if (open && open.view === view && (view._page === 0 || view.classList.contains("vertical"))) view.classList.add("imgIn"); }); });
     };
     if (window.bubble) window.bubble.grow(to, b, 0.38, reveal); else if (narrow) phoneGrow(view, currentLi, reveal); else reveal();
-    popGallery(function () {
+    if (!narrow) popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
       // still be shrunk or have a stale item hidden, which would throw the measurements below off
       gsap.set(nav, { clearProps: "transform" });
@@ -435,6 +449,12 @@
       stopMedia(view);
       gsap.set(view.children, { clearProps: "opacity" });
     };
+    if (window.innerWidth <= 700 && !window.bubble) {
+      // phones: the contents fade while the card closes back into its deck card (the deck was never moved)
+      gsap.to(view.children, { opacity: 0, duration: t(0.18), ease: "none" });
+      phoneShrink(view, trigger.closest("li"), finish);
+      return; // (no focus ring left on the deck card)
+    }
     // contents fade, then the card is swapped for the identical grey box, which shrinks into the bubble
     gsap.to(view.children, {
       opacity: 0,
