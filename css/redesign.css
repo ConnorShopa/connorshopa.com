@@ -2235,3 +2235,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   .view .lockBox .lockInput { flex: 1 1 auto; min-width: 0; text-align: center; }
   .view .lockBox .lockAsk, .view .lockBox .lockMsg, .view .lockBox .lockApp { text-align: center; }
 }
+
+/* phones: while a project is open the name, tagline and tabs fade away (the card takes the whole screen) */
+@media (max-width: 700px) {
+  .hero > header { transition: opacity .3s ease; }
+  html.view-open .hero > header { opacity: 0; pointer-events: none; }
+}
