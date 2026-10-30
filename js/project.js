@@ -442,14 +442,15 @@
       if (rs) b = { w: rs.w, h: rs.h, cx: rs.cx, cy: rs.cy, r: rs.r, fill: open_link.getAttribute("data-bubble") || null };
     }
     // wherever the list has moved to while the card was open, the card collapses into the link's real resting place:
-    // measure it with the row laid out as at rest, and take off any shove the gallery animation has put on it
-    if (open_link && list.classList.contains("compact")) {
+    // put the row back as it is at rest (same rows as before the card opened), then measure the link there, minus
+    // any shove the gallery animation has put on it
+    if (open_link) {
       list.classList.remove("compact");
+      list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
+      if (window.layoutGalleryRows) window.layoutGalleryRows();
       var li = open_link.closest("li"), rr = open_link.getBoundingClientRect(), dxs = 0, dys = 0;
       [open_link, li, nav].forEach(function (el) { if (!el) return; dxs += +gsap.getProperty(el, "x") || 0; dys += +gsap.getProperty(el, "y") || 0; });
-      list.classList.add("compact");
-      var rest = { w: rr.width + 44, h: rr.height + 20, cx: rr.left + rr.width / 2 - dxs, cy: rr.top + rr.height / 2 - dys, r: (rr.height + 20) / 2, fill: b.fill };
-      if (rr.width > 0 && Math.abs(rest.cx - b.cx) + Math.abs(rest.cy - b.cy) > 6) b = rest;
+      if (rr.width > 0) b = { w: rr.width + 44, h: rr.height + 20, cx: rr.left + rr.width / 2 - dxs, cy: rr.top + rr.height / 2 - dys, r: (rr.height + 20) / 2, fill: b.fill };
     }
     open = null;
 
