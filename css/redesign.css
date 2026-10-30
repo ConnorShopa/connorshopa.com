@@ -2094,3 +2094,12 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .lottieBox { display: block; width: 100%; margin: 0 0 16px; background: none; box-shadow: none; border-radius: 0; break-inside: avoid; }
 .lottieBox svg { display: block; width: 100%; height: auto; }
 @media (max-width: 700px) { .lottieBox { margin-bottom: 10px; } }
+
+/* Sketchbook: a ransom note, each letter in a different typeface of the site and a different colour */
+.rn { display: inline-block; line-height: 1; }
+.rnCrimson { font-family: "Crimson Pro", Georgia, serif; font-weight: 600; font-size: 1.12em; }
+.rnNunito { font-family: "Nunito", sans-serif; font-weight: 800; }
+.rnClash { font-family: "Clash Grotesk", sans-serif; font-weight: 600; }
+.rnHost { font-family: "Host Grotesk", sans-serif; font-weight: 700; }
+.rnSailec { font-family: "Sailec", sans-serif; font-weight: 500; }
+.rnFigtree { font-family: "Figtree", sans-serif; font-weight: 700; }
