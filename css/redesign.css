@@ -2007,3 +2007,4 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .ohBub.ohFor { border: 0; background: none !important; box-shadow: none; color: #1B2430; font-weight: 500; }
 .earlyBtn.lockBtn, .earlyBtn.lockBtn:hover:not(:disabled), .earlyBtn.lockBtn:active:not(:disabled) { box-shadow: none; transform: none; }
 .earlyBtn.lockBtn:hover:not(:disabled) { background: #2B3644; }
+.ohBub { text-transform: capitalize; } .ohBub.ohFor { text-transform: none; }
