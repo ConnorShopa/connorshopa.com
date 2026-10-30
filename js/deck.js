@@ -26,9 +26,9 @@
     var a = li.querySelector("a");
     if (!a) return;
     li.classList.add("deckCard");
-    // the card in front takes the colour of its project view (the page behind the project)
-    var pr = (window.PROJECTS || {})[a.getAttribute("data-view")];
-    li.style.setProperty("--card", (pr && pr.bg) || "#E4E4E4");
+    // the card in front is the colour of its project view's card (so the card opens out of and closes back into the same colour)
+    var vw = document.getElementById("view-" + a.getAttribute("data-view"));
+    li.style.setProperty("--card", (vw && vw.style.getPropertyValue("--view-bg")) || "#F4F4F4");
     cards.push(li);
   });
   var N = cards.length;
