@@ -2175,6 +2175,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   .hero > nav > #projectList {
     position: absolute; left: 0; right: 0; bottom: 0; top: calc(-1 * var(--hdrH));
     display: block; margin: 0; padding: 0; zoom: 1 !important; overflow: hidden; font-size: 26px;
+    align-self: stretch; height: auto; min-width: 0; /* (filter.js puts the nav in a centred grid: .stack > #projectList { align-self: center } would shrink the deck to nothing) */
     touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
   }
 
