@@ -1,3 +1,4 @@
+@font-face { font-family: "Clash Grotesk"; src: url("../fonts/ClashGrotesk/ClashGrotesk-Variable.ttf") format("truetype"); font-weight: 200 700; font-style: normal; font-display: swap; }
 /* Sailec, the Plunk design system's typeface; one file serves every weight */
 @font-face { font-family: "Sailec"; src: url("../fonts/Sailec/Sailec-Medium.otf") format("opentype"); font-weight: 100 900; font-style: normal; font-display: swap; }
 
@@ -2043,3 +2044,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* the early-access button has no hover or press animation */
 .earlyBtn.lockBtn, .earlyBtn.lockBtn:hover, .earlyBtn.lockBtn:hover:not(:disabled), .earlyBtn.lockBtn:active:not(:disabled) { transition: none; transform: none; box-shadow: none; background: #1B2430; }
 .earlyBtn.lockBtn::before, .earlyBtn.lockBtn::after { content: none; }
+
+/* Overhand's project view is set in Clash Grotesk */
+#view-overhand, #view-overhand .pg, #view-overhand .lead, #view-overhand .ohBub, #view-overhand .earlyInput, #view-overhand .earlyBtn, #view-overhand .viewTitle { font-family: "Clash Grotesk", "Host Grotesk", sans-serif; }
