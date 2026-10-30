@@ -63,19 +63,23 @@
   viewBtn.type = "button"; viewBtn.className = "deckView"; viewBtn.textContent = "View"; viewBtn.disabled = true;
   viewBtn.setAttribute("aria-label", "View the project in focus");
   document.body.appendChild(viewBtn);
-  var wheeling = false;
+  var wheeling = false, fromBtn = false;
+  function focusCard() { return cards[((Math.round(target) % N) + N) % N]; }
   function updateBtn() {
-    var active = list.querySelector("li.isActive");
-    var ready = mq.matches && !!active && !dragging && !anim && !wheeling && spread >= 1;
-    if (ready) viewBtn.classList.add("shown");
+    // ready the moment a card is chosen (as the finger lifts), not once it has finished sliding into place
+    var ready = mq.matches && !dragging && !wheeling && spread >= 1;
+    if (ready) {
+      viewBtn.classList.add("shown");
+      viewBtn.style.setProperty("--btn", focusCard().style.getPropertyValue("--card") || "#F4F4F4"); // the colour of its card
+    }
     viewBtn.classList.toggle("ready", ready);
     viewBtn.disabled = !ready;
   }
   viewBtn.addEventListener("click", function (e) {
     e.stopPropagation(); // (the page closes a project on any click outside its card: this one opens it)
-    var active = list.querySelector("li.isActive"), a = active && active.querySelector("a");
+    var a = focusCard().querySelector("a");
     moved = false; // (a swipe's flag must not swallow this tap)
-    if (a && !viewBtn.disabled) a.click();
+    if (a && !viewBtn.disabled) { fromBtn = true; a.click(); fromBtn = false; }
   });
   function wrap(k) { return ((k + N / 2) % N + N) % N - N / 2; }
 
@@ -131,7 +135,7 @@
   var sy = 0, sp = 0, hist = [];
   list.addEventListener("pointerdown", function (e) {
     if (!mq.matches || (e.pointerType === "mouse" && e.button !== 0)) return;
-    dragging = true; moved = false; sy = e.clientY; sp = pos; hist = [{ t: e.timeStamp, p: pos }];
+    dragging = true; moved = false; updateBtn(); sy = e.clientY; sp = pos; hist = [{ t: e.timeStamp, p: pos }];
     target = pos;
     try { list.setPointerCapture(e.pointerId); } catch (x) {}
     kick();
@@ -149,14 +153,14 @@
     dragging = false;
     var h0 = hist[0], h1 = hist[hist.length - 1], v = 0;
     if (h0 && h1 && h1.t > h0.t) v = ((h1.p - h0.p) / (h1.t - h0.t)) * 1000; // cards per second
-    settle(moved ? v : 0);
+    settle(moved ? v : 0); updateBtn();
     setTimeout(function () { moved = false; }, 60); // a click right after a swipe is swallowed; later taps are not
   }
   list.addEventListener("pointerup", release);
   list.addEventListener("pointercancel", release);
   // a drag is not a tap; tapping a card behind the front one brings it forward instead of opening it
   list.addEventListener("click", function (e) {
-    if (!mq.matches) return;
+    if (!mq.matches || fromBtn) return;
     var li = e.target.closest && e.target.closest("li.deckCard");
     if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; return; }
     if (li && !li.classList.contains("isActive")) {
@@ -170,10 +174,10 @@
   list.addEventListener("wheel", function (e) {
     if (!mq.matches) return;
     e.preventDefault();
-    wheeling = true;
+    wheeling = true; updateBtn();
     target = pos = pos + e.deltaY / (STEP * 1.6);
     render();
-    clearTimeout(wheelT); wheelT = setTimeout(function () { wheeling = false; settle(0); }, 120);
+    clearTimeout(wheelT); wheelT = setTimeout(function () { wheeling = false; settle(0); updateBtn(); }, 120);
   }, { passive: false });
 
   function refresh() {
