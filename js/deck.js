@@ -35,7 +35,7 @@
   if (N < 3) return;
 
   var STEP = 150;  // dragging this far moves one card
-  var GAP = 3;     // the space between neighbouring cards (edge to edge), the same all the way round
+  var GAP = -3;    // the space between neighbouring cards (edge to edge), the same all the way round; negative = they overlap like a stack
   var heights = [], dirty = true;
   var spread = 1, introRaf = 0, pos = 0, target = 0, vel = 0, anim = 0, dragging = false, moved = false;
   var lastT = 0;
