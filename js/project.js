@@ -466,6 +466,9 @@
         window.scrollTo(0, y);
       }
       document.documentElement.classList.remove("view-open");
+      // the page scrollbar is back, so the gallery is a little narrower than when its rows were last worked out
+      // (while the card was closing, the page had no scrollbar): lay the rows out again so the last link can't wrap
+      if (window.layoutGalleryRows && !list.classList.contains("compact")) window.layoutGalleryRows();
       stopMedia(view);
       gsap.set(view.children, { clearProps: "opacity" });
     };

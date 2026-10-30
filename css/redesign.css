@@ -2113,3 +2113,8 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* each sketch hangs in a gallery frame: a thin dark frame, a white mat, and a soft shadow */
 .pgGallery.justified img { box-sizing: border-box; padding: clamp(8px, 1.6vw, 18px); background: #FFFFFF; border: 4px solid #2A2522; border-radius: 2px; object-fit: contain; box-shadow: 0 10px 24px -10px rgba(42, 37, 34, 0.45), 0 2px 5px rgba(42, 37, 34, 0.18); }
 @media (max-width: 700px) { .pgGallery.justified img { border-width: 3px; border-radius: 2px; } }
+
+/* the gallery note under each frame, like the little card on a museum wall */
+.jfig { margin: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; flex: none; }
+.jfig img { width: 100%; }
+.jnote { align-self: flex-start; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #5C534E; background: #FFFFFF; padding: 5px 10px; border: 1px solid rgba(42, 37, 34, 0.35); border-radius: 2px; line-height: 1; box-shadow: 0 2px 4px rgba(42, 37, 34, 0.12); }

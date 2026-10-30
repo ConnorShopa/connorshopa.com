@@ -35,14 +35,21 @@
       var h = (W - gap * (r[1] - r[0] - 1)) / sum;
       for (i = r[0]; i < r[1]; i++) {
         var im = imgs[i]; im.style.width = (asp[i] * h).toFixed(2) + "px"; im.style.height = h.toFixed(2) + "px"; im.style.margin = "0";
-        row.appendChild(im);
+        im._fig.style.width = (asp[i] * h).toFixed(2) + "px";
+        row.appendChild(im._fig);
       }
       box.appendChild(row);
     });
   }
   function init() {
     document.querySelectorAll(".pgGallery.justified").forEach(function (box) {
-      box._imgs = Array.prototype.slice.call(box.querySelectorAll("img")).map(function (im) { im._a = +im.getAttribute("width") / +im.getAttribute("height"); return im; });
+      box._imgs = Array.prototype.slice.call(box.querySelectorAll("img")).map(function (im) { im._a = +im.getAttribute("width") / +im.getAttribute("height");
+        // a little gallery note under each frame: the sketch's own number
+        var fig = document.createElement("figure"), cap = document.createElement("figcaption"), n = (im.getAttribute("src").match(/sketch(\d+)/) || [])[1];
+        fig.className = "jfig"; cap.className = "jnote"; cap.textContent = "No. " + (n || "");
+        im.parentNode.insertBefore(fig, im); fig.appendChild(im); fig.appendChild(cap);
+        im._fig = fig;
+        return im; });
       var last = 0;
       var go = function () { var w = box.clientWidth; if (w && w !== last) { last = w; layout(box); } };
       if (window.ResizeObserver) new ResizeObserver(go).observe(box); else { window.addEventListener("resize", go); go(); }
