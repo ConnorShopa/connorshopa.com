@@ -404,7 +404,7 @@
       title: "Micro + Motion",
       bg: "#DAEAFD",
       pages: [
-        pg("gallery", '<div class="pgGallery">' + ["assets/micros/heroAnim01.gif", "assets/micros/heroAnim02.gif", "assets/micros/heroAnim03.gif", "assets/micros/micro_gif01.gif", "assets/micros/micro_gif02.gif"].map(function (src) { return "<img src=\"" + src + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
+        pg("gallery", '<div class="pgGallery"><div class="lottieBox" data-lottie="assets/micros/automationScan.json"></div><div class="lottieBox" data-lottie="assets/micros/emotionalStates.json"></div>' + ["assets/micros/heroAnim01.gif", "assets/micros/heroAnim02.gif", "assets/micros/heroAnim03.gif", "assets/micros/micro_gif01.gif", "assets/micros/micro_gif02.gif"].map(function (src) { return "<img src=\"" + src + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
       ],
     },
   };

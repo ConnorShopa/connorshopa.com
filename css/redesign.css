@@ -2089,3 +2089,8 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 @media (max-width: 700px) { .view.scrollView .pg.one:has(.ohPit) .earlyForm { left: 34px; bottom: 28px; } }
 #view-overhand .ohBub { box-shadow: 0 2px 0 rgba(11, 22, 32, 0.18), 0 4px 10px rgba(11, 22, 32, 0.12); }
 #view-overhand .ohBub.ohFor { box-shadow: none; }
+
+/* live Lotties in the Micro + Motion gallery: no container background, sized like the pictures */
+.lottieBox { display: block; width: 100%; margin: 0 0 16px; background: none; box-shadow: none; border-radius: 0; break-inside: avoid; }
+.lottieBox svg { display: block; width: 100%; height: auto; }
+@media (max-width: 700px) { .lottieBox { margin-bottom: 10px; } }
