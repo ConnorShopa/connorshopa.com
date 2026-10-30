@@ -81,7 +81,7 @@
       // every card sits the same distance from the next (TIGHT x its natural spacing), all the way round
       var y = TIGHT * Math.max(-1.6 * R, Math.min(1.6 * R, lin));
       var op = Math.max(0, 1 - Math.pow(a / 1.45, 2.2));
-      put(li, "scale", (0.35 + 1.15 / (1 + Math.pow(a / 0.3, 2))).toFixed(4)); // the front card is the largest (1.5x); the rest drop away quickly
+      put(li, "scale", (0.3 + 1.0 / (1 + Math.pow(a / 0.3, 2))).toFixed(4)); // the front card is the largest (1.3x); the rest drop away quickly
       put(li, "translate", "0 " + (y - H / 2).toFixed(1) + "px");
       put(li, "rotate", "");                                  // (no tilt)
       put(li, "opacity", op.toFixed(3));
