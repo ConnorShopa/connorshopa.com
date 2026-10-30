@@ -29,7 +29,7 @@
   // phones report a wider window when something overflows, so the screen width counts too
   var perRow = function () {
     var w = Math.min(window.innerWidth, window.screen && screen.width ? screen.width : Infinity);
-    return w <= 700 ? 1 : w > 1700 ? 7 : w > 1100 ? 5 : 3; // one on phones, three on tablets, five on wide screens, seven on very wide ones (15 links: 7 + 6 + the last two)
+    return w <= 700 ? 1 : w > 1100 ? 5 : 3; // one on phones, three on tablets, five on wide screens
   };
   function layoutRows(listEl, lis) {
     listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
@@ -41,8 +41,16 @@
     var apply = function (per) {
       listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
       var sizes = [], left = shown.length;
-      while (left > 0) { sizes.push(Math.min(per, left)); left -= per; }
-      if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
+      if (per === 5 && shown.length >= 10) {
+        // wide screens: the last two links (Micro + Motion, Overhand) sit on a row of their own under the rest, and
+        // the others are shared out evenly over as many rows as they need (5 + 4 + 4, then 2)
+        var rest = shown.length - 2, rowsN = Math.ceil(rest / per), base = Math.floor(rest / rowsN), extra = rest % rowsN;
+        for (var q = 0; q < rowsN; q++) sizes.push(base + (q < extra ? 1 : 0));
+        sizes.push(2);
+      } else {
+        while (left > 0) { sizes.push(Math.min(per, left)); left -= per; }
+        if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
+      }
       var ends = {}, run = 0;
       sizes.forEach(function (n) { run += n; ends[run - 1] = true; });
       shown.forEach(function (li, i) {
