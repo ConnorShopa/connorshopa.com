@@ -1547,7 +1547,7 @@ body { position: relative; }
 
 /* Overhand: yellow card, pill chips with a thin dark stroke, early-access form */
 /* the bubbles are positioned by js/overhand.js (gravity to the middle, pushed away by the mouse) */
-.ohPit { position: relative; width: min(100%, 780px); height: 380px; margin: 6px auto 0; overflow: visible; touch-action: pan-y; }
+.ohPit { position: relative; width: min(100%, 880px); height: 460px; margin: 56px auto 0; overflow: visible; touch-action: pan-y; }
 .ohBub { position: absolute; left: 0; top: 0; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border: 1.5px solid #0B1620; border-radius: 999px; box-shadow: 0 2px 0 rgba(11, 22, 32, 0.12); white-space: nowrap; line-height: 1; will-change: transform; pointer-events: none; user-select: none; }
 .earlyForm { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: 18px; }
 .earlyInput { font: inherit; font-size: 16px; width: 260px; padding: 12px 18px; color: #1B2430; background: #fff; border: 1px solid #1B2430; border-radius: 999px; outline: none; }
@@ -2000,3 +2000,10 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .earlyBtn.lockBtn { border-radius: 4px; border: 2px solid #1B2430; padding: 11px 22px; box-shadow: 4px 4px 0 rgba(27, 36, 48, 0.35); transition: transform .12s ease, box-shadow .12s ease; }
 .earlyBtn.lockBtn:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 #1B2430; }
 .earlyBtn.lockBtn:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #1B2430; }
+
+/* Overhand: a very large "Trade", the two piles titled "anything", and a plain "for" between them */
+.pg .lead.ohTitle { font-size: clamp(72px, 13vw, 150px); line-height: .95; font-weight: 700; letter-spacing: -0.04em; color: #1B2430; }
+.ohLabel { position: absolute; top: -40px; transform: translateX(-50%); font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: #1B2430; white-space: nowrap; }
+.ohBub.ohFor { border: 0; background: none !important; box-shadow: none; color: #1B2430; font-weight: 500; }
+.earlyBtn.lockBtn, .earlyBtn.lockBtn:hover:not(:disabled), .earlyBtn.lockBtn:active:not(:disabled) { box-shadow: none; transform: none; }
+.earlyBtn.lockBtn:hover:not(:disabled) { background: #2B3644; }
