@@ -445,12 +445,24 @@
     // put the row back as it is at rest (same rows as before the card opened), then measure the link there, minus
     // any shove the gallery animation has put on it
     if (open_link) {
+      // the row under the card is shrunk and slid down (the nav is scaled); put it all back first, or the link would
+      // be measured at its mini size
+      gsap.killTweensOf(nav);
+      gsap.set(nav, { clearProps: "transform" });
+      var lis = list.querySelectorAll("li");
+      gsap.killTweensOf(lis);
       list.classList.remove("compact");
       list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
       if (window.layoutGalleryRows) window.layoutGalleryRows();
-      var li = open_link.closest("li"), rr = open_link.getBoundingClientRect(), dxs = 0, dys = 0;
-      [open_link, li, nav].forEach(function (el) { if (!el) return; dxs += +gsap.getProperty(el, "x") || 0; dys += +gsap.getProperty(el, "y") || 0; });
-      if (rr.width > 0) b = { w: rr.width + 44, h: rr.height + 20, cx: rr.left + rr.width / 2 - dxs, cy: rr.top + rr.height / 2 - dys, r: (rr.height + 20) / 2, fill: b.fill };
+      var rest = open_link.getBoundingClientRect(), sc = +gsap.getProperty(open_link.closest("li"), "scale") || 1;
+      if (rest.width > 0) {
+        // (a link that is scaled about its centre keeps its centre; only the size is scaled)
+        b = { w: rest.width / sc + 44, h: rest.height / sc + 20, cx: rest.left + rest.width / 2, cy: rest.top + rest.height / 2, r: (rest.height / sc + 20) / 2, fill: b.fill };
+        // the links shoved aside by the card sit off their places: their own x/y are cleared in the layout step below,
+        // so measure from a clean copy of the position
+        var dxs = +gsap.getProperty(open_link.closest("li"), "x") || 0, dys = +gsap.getProperty(open_link.closest("li"), "y") || 0;
+        b.cx -= dxs; b.cy -= dys;
+      }
     }
     open = null;
 
