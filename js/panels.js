@@ -85,6 +85,12 @@
 
 // Overhand's "Get early access" form is a placeholder for now: it doesn't send anywhere
 document.addEventListener("submit", function (e) { if (e.target.closest && e.target.closest(".earlyForm")) e.preventDefault(); });
+// the early-access button stays disabled until the field holds a valid email address
+document.addEventListener("input", function (e) {
+  var inp = e.target; if (!inp.classList || !inp.classList.contains("earlyInput")) return;
+  var btn = inp.form && inp.form.querySelector(".earlyBtn");
+  if (btn) btn.disabled = !(inp.value.trim() && inp.validity.valid);
+});
 
 // Scrolling the main view loops through the tabs: Work, About, Contact, and round again (a project being open
 // takes the wheel for itself; phones keep their normal page scroll)

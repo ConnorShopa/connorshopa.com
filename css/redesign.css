@@ -2151,3 +2151,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 #view-overhand .earlyBtn.lockBtn:hover:not(:disabled) { background: #fff; color: #1B2430; padding-left: 14px; padding-right: 34px; }
 #view-overhand .earlyBtn.lockBtn:hover:not(:disabled)::before { opacity: 1; transform: translate(0, -52%); }
 @media (prefers-reduced-motion: reduce) { #view-overhand .earlyBtn.lockBtn, #view-overhand .earlyBtn.lockBtn::before { transition: none; } }
+
+/* Overhand sign-up button: inert until the email is valid */
+#view-overhand .earlyBtn.lockBtn:disabled { opacity: .4; cursor: default; background: #1B2430; color: #FFDD55; }
+#view-overhand .earlyBtn.lockBtn:disabled::before, #view-overhand .earlyBtn.lockBtn:disabled::after { content: none; animation: none; }
