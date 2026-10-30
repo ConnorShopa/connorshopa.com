@@ -2103,3 +2103,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .rnHost { font-family: "Host Grotesk", sans-serif; font-weight: 700; }
 .rnSailec { font-family: "Sailec", sans-serif; font-weight: 500; }
 .rnFigtree { font-family: "Figtree", sans-serif; font-weight: 700; }
+
+/* Sketchbook: a justified grid, rows run edge to edge (js/justified.js) */
+.pgGallery.justified { column-count: auto; overflow: visible; }
+.pgGallery.justified img { display: block; margin: 0; border-radius: 12px; object-fit: cover; flex: none; }
+.pgGallery.justified .jrow { width: 100%; }
+@media (max-width: 700px) { .pgGallery.justified img { border-radius: 8px; } }
