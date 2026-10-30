@@ -14,7 +14,7 @@
 
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   // the bubbles are see-through, so the circle's colour shows through them
-  function see(hex) { var n = parseInt(hex.slice(1), 16); return "rgba(" + (n >> 16) + "," + ((n >> 8) & 255) + "," + (n & 255) + ",0.62)"; }
+  function see(hex) { var n = parseInt(hex.slice(1), 16); return "rgba(" + (n >> 16) + "," + ((n >> 8) & 255) + "," + (n & 255) + ",1)"; }
   function mk(text, cls, bg, fg) {
     var el = document.createElement("span");
     el.className = cls; el.textContent = text;
