@@ -31,17 +31,18 @@ export function mountClayPhone(el, opts) {
   opts = opts || {};
   var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.shadowMap.enabled = true; // the dappled-light spotlight needs it on (nothing casts a shadow)
   renderer.domElement.style.cssText = "display:block;width:100%;height:100%";
   el.appendChild(renderer.domElement);
 
   var scene = new THREE.Scene();
   var pmrem = new THREE.PMREMGenerator(renderer);
-  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; // kept low: the forest light below does the work
   var camera = new THREE.PerspectiveCamera(26, 1, 0.1, 50);
   camera.position.set(0, 0, 8);
 
-  var clay = new THREE.MeshStandardMaterial({ color: 0xf4c4aa, roughness: 0.8, metalness: 0 });
-    var black = new THREE.MeshStandardMaterial({ color: 0x08080a, roughness: 0.3, metalness: 0.1 });
+  var clay = new THREE.MeshStandardMaterial({ color: 0xf4c4aa, roughness: 0.8, metalness: 0, envMapIntensity: 0.3 });
+    var black = new THREE.MeshStandardMaterial({ color: 0x08080a, roughness: 0.3, metalness: 0.1, envMapIntensity: 0.3 });
 
   var phone = new THREE.Group();
 
@@ -68,9 +69,28 @@ export function mountClayPhone(el, opts) {
   screen.position.z = top + 0.006;
   phone.add(screen);
 
-  var sun = new THREE.DirectionalLight(0xffffff, 2.2);
-  sun.position.set(-2.5, 3.5, 5);
-  phone.add(sun);
+  // ---- forest light: green skylight from the canopy, and warm sun coming through the leaves in patches ----
+  scene.add(new THREE.HemisphereLight(0xb7d8a4, 0x213a24, 1.1));
+
+  var c = document.createElement("canvas"); c.width = c.height = 512;
+  var g = c.getContext("2d"), seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
+  g.fillStyle = "#2c3426"; g.fillRect(0, 0, 512, 512); // the shade between the leaves
+  if ("filter" in g) g.filter = "blur(7px)";
+  for (var i = 0; i < 70; i++) {
+    var px = rnd() * 512, py = rnd() * 512, pr = 14 + rnd() * 46;
+    var grad = g.createRadialGradient(px, py, 0, px, py, pr);
+    grad.addColorStop(0, "rgba(255,255,255," + (0.55 + rnd() * 0.45) + ")"); grad.addColorStop(1, "rgba(255,255,255,0)");
+    g.fillStyle = grad; g.beginPath(); g.ellipse(px, py, pr, pr * (0.6 + rnd() * 0.5), rnd() * 3, 0, 7); g.fill();
+  }
+  var dapple = new THREE.CanvasTexture(c);
+  dapple.colorSpace = THREE.SRGBColorSpace;
+  var sun = new THREE.SpotLight(0xffe2a6, 90, 0, 0.55, 0.7, 2);
+  sun.position.set(-2.6, 3.4, 6);
+  sun.target.position.set(0, 0, 0);
+  sun.map = dapple;
+  sun.castShadow = true; // (required for a spotlight's map to show)
+  scene.add(sun, sun.target);
 
   scene.add(phone);
 
@@ -101,6 +121,7 @@ export function mountClayPhone(el, opts) {
     if (!live) return;
     cx += (tx - cx) * 0.06; cz += (tz - cz) * 0.06;
     pose();
+    var t = performance.now() / 1000; sun.position.x = -2.6 + Math.sin(t * 0.35) * 0.35; sun.position.y = 3.4 + Math.cos(t * 0.27) * 0.3; // the light drifts a little, like a breeze in the leaves
     renderer.render(scene, camera);
   })();
 
