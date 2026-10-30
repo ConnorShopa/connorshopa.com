@@ -2039,3 +2039,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .view.scrollView .pg.one:has(.ohPit) .ohHero { grid-row: 1; align-self: start; }
 .view.scrollView .pg.one:has(.ohPit) .ohPit { grid-row: 2; margin: 0 auto; }
 .view.scrollView .pg.one:has(.ohPit) .earlyForm { grid-row: 3; align-self: end; justify-self: start; margin: 0 0 0 20px; }
+
+/* the early-access button has no hover or press animation */
+.earlyBtn.lockBtn, .earlyBtn.lockBtn:hover, .earlyBtn.lockBtn:hover:not(:disabled), .earlyBtn.lockBtn:active:not(:disabled) { transition: none; transform: none; box-shadow: none; background: #1B2430; }
+.earlyBtn.lockBtn::before, .earlyBtn.lockBtn::after { content: none; }
