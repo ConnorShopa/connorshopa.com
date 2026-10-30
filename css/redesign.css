@@ -1943,3 +1943,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   .view.scrollView .pgMedia img, .view.scrollView .pgMedia video { max-height: 52vh; }
   .view.scrollView .pgMedia:has(figure:nth-child(2)) figure { flex: 1 1 100%; }
 }
+
+/* a project's first page opens with its hero picture, above the title */
+.view.scrollView .pg:first-child .pgMedia { order: -2; }
+.view.scrollView .pg:first-child .pgText { order: -1; }
