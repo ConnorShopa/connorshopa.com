@@ -345,7 +345,7 @@ a:focus-visible {
   margin-top: -2px;
 }
 
-.stackLogo.small .logo { height: 26px; }
+.stackLogo.small .logo { height: 20px; }
 
 .stackLogo .logo {
   height: 38px;
@@ -1701,7 +1701,7 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .logo.wide { max-width: 140px; }
   .rowLogo .logo { height: 48px; }
   .rowLogo .wordmark { height: 22px; }
-  .stackLogo.small .logo { height: 32px; }
+  .stackLogo.small .logo { height: 24px; }
   .withCaption .logo { height: 32px; }
   .logo.altq { height: 24px; }
   .logo.pollin { height: 40px; }
