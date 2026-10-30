@@ -52,7 +52,7 @@
   }
 
   // each side of the trade gathers around its own centre, left and right of the middle
-  function armX() { return Math.min(pit.offsetWidth * 0.3, 290); }
+  function armX() { return Math.min(pit.offsetWidth * 0.3, 330); }
 
   function measure() {
     if (!pit.offsetWidth) return false;
@@ -92,7 +92,7 @@
     for (i = 0; i < n; i++) {
       b = bubs[i];
       if (b.fixed) { b.x = b.y = b.vx = b.vy = 0; continue; }
-      b.vx += (b.side * ax - b.x) * (b.side ? 0.0035 : 0.02); b.vy += -b.y * 0.0065; // gravity to the middle (a touch stronger vertically: a flatter pile)
+      b.vx += (b.side * ax - b.x) * (b.side ? 0.0015 : 0.02); b.vy += -b.y * 0.0065; // gravity to the middle (a touch stronger vertically: a flatter pile)
       var dx = b.x - mouse.x, dy = b.y - mouse.y, d = Math.sqrt(dx * dx + dy * dy);
       if (d < REACH && d > 0.5) { var f = (1 - d / REACH) * PUSH; b.vx += dx / d * f; b.vy += dy / d * f; }
       b.vx *= 0.86; b.vy *= 0.86;
