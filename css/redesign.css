@@ -2269,3 +2269,10 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 @media (max-width: 700px) {
   #projectList li:has(> a[data-view="nanni"]):not(.row-break) { padding: 18px 28px; }
 }
+
+/* phones: only the card in focus has the soft shadow on its logo and text; the others are flat */
+@media (max-width: 700px) {
+  #projectList .logo, #projectList .wordmark { transition: filter .3s ease; }
+  #projectList li:not(.isActive) .logo, #projectList li:not(.isActive) .wordmark { filter: none; }
+  #projectList li:not(.isActive), #projectList li:not(.isActive) * { text-shadow: none; }
+}
