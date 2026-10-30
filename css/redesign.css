@@ -2226,3 +2226,12 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   #mouse-circle { display: none !important; }
   *, *::before, *::after { cursor: auto !important; }
 }
+
+/* phones: the password / NDA block of a locked project (TouchTunes) sits in the middle of the card */
+@media (max-width: 700px) {
+  .view .pg.one { align-items: center; align-content: center; justify-items: center; height: 100%; }
+  .view .pg.one .pgText.lockBox { width: 100%; align-items: center; justify-content: center; text-align: center; margin: 0 auto; }
+  .view .lockBox .lockForm { justify-content: center; width: 100%; max-width: 360px; }
+  .view .lockBox .lockInput { flex: 1 1 auto; min-width: 0; text-align: center; }
+  .view .lockBox .lockAsk, .view .lockBox .lockMsg, .view .lockBox .lockApp { text-align: center; }
+}
