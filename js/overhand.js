@@ -71,11 +71,11 @@
   function layout() {
     var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2, r0 = Math.min(H - 6, W * 0.62);
     setSize(Math.max(7, r0 / 25), r0); measureAll();
-    var lens = forEl.w + 36;
+    var lens = forEl.w + 90;
     R = 0.58 * Math.min(r0, (W + lens / 2) / 2 - 2); // a little smaller than the space, so the circles float in the card
     var fs = Math.max(7, R / 25), ax = R - lens / 2;
     setSize(fs, R); measureAll();
-    lens = forEl.w + 36; ax = R - lens / 2; wallX = forEl.w / 2 + 12;
+    lens = forEl.w + 90; ax = R - lens / 2; wallX = forEl.w / 2 + 30;
     var maxH = 0; bubs.forEach(function (b) { maxH = Math.max(maxH, b.h); });
     var pitch = maxH + GAP * 0.55, half = Math.floor((R - maxH / 2) / pitch);
     active = [];
@@ -144,7 +144,7 @@
     for (k = 0; k < 8; k++) {
       for (i = 0; i < n; i++) for (j = i + 1; j < n; j++) collide(active[i], active[j]);
       for (i = 0; i < n; i++) fixed.forEach(function (fx) { // the words "anything" and "for" don't move; bubbles go round them
-        var ghost = { x: fx.x, y: fx.y, hw: Math.max(0, fx.w / 2 - fx.h / 2), r: fx.h / 2 + 8 }, bb = active[i], g = gap(bb, ghost, 2);
+        var ghost = { x: fx.x, y: fx.y, hw: Math.max(0, fx.w / 2 - fx.h / 2), r: fx.h / 2 + 14 }, bb = active[i], g = gap(bb, ghost, 2);
         if (g.d < g.min) { var nx = g.d < 0.001 ? 0 : g.dx / g.d, ny = g.d < 0.001 ? 1 : g.dy / g.d; bb.x += nx * (g.min - g.d); bb.y += ny * (g.min - g.d); }
       });
     }
