@@ -2058,8 +2058,8 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* Overhand: the two circles are a Venn diagram in the logo's colours; the words sit on top */
 .ohCircle { position: absolute; left: 0; top: 0; border-radius: 50%; pointer-events: none; }
-.ohCircle.ohL { background: none; border: 2px solid rgba(60, 64, 198, 0.6); box-sizing: border-box; }
-.ohCircle.ohR { background: none; border: 2px solid rgba(255, 63, 52, 0.6); box-sizing: border-box; }
+.ohCircle.ohL { background: none; border: 2px solid rgba(60, 64, 198, 0.3); box-sizing: border-box; }
+.ohCircle.ohR { background: none; border: 2px solid rgba(255, 63, 52, 0.3); box-sizing: border-box; }
 .ohCircle.ohLens { background: none; }
 #view-overhand .ohBub.ohFor.ohAny { color: #fff; }
 #view-overhand { width: min(96vw, 1500px); }
@@ -2073,4 +2073,5 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .view.scrollView .pg.one:has(.ohPit) .earlyForm { position: absolute; left: 24px; bottom: 24px; margin: 0; align-self: auto; }
 #view-overhand .pg .lead.ohTitle, #view-overhand.view.scrollView .pg:first-child .lead.ohTitle { font-size: clamp(36px, 4.4vw, 60px); line-height: 1; }
 #view-overhand .ohBub { backdrop-filter: none; }
-#view-overhand .ohBub { border: 0; box-shadow: none; }
+#view-overhand .ohBub { border: 1.5px solid rgba(11, 22, 32, 0.5); box-shadow: none; }
+#view-overhand .ohBub.ohFor { border: 0; }
