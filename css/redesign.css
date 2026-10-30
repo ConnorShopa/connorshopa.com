@@ -1952,14 +1952,11 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .view.scrollView .pg:first-child .pgText { order: -1; }
 
 /* Seeds: the design system pictures run the full width of the page, with some padding, one under the other */
-#view-seeds .pgMedia { flex-direction: column; flex-wrap: nowrap; width: 100%; max-width: none; padding: 0 28px; box-sizing: border-box; }
-#view-seeds .pgMedia figure,
-#view-seeds .pgMedia:has(figure:nth-child(2)) figure { flex: none; width: 100%; }
-#view-seeds .pgMedia img,
-#view-seeds .pg.media .pgMedia img,
-#view-seeds .pgMedia:has(figure:nth-child(2)) img { width: 100%; max-width: 100%; max-height: none; height: auto; }
 #view-seeds .pg.media { padding-left: 0; padding-right: 0; }
-@media (max-width: 700px) { #view-seeds .pgMedia { padding: 0 8px; } }
+#view-seeds .pgMedia { flex-direction: row; flex-wrap: nowrap; align-items: flex-start; gap: 14px; width: 100%; max-width: none; padding: 0 28px; box-sizing: border-box; }
+#view-seeds .pgMedia figure { flex: 1 1 0; width: auto; min-width: 0; }
+#view-seeds .pgMedia img, #view-seeds .pg.media .pgMedia img { width: 100%; max-width: 100%; max-height: none; height: auto; }
+@media (max-width: 700px) { #view-seeds .pgMedia { padding: 0 8px; gap: 6px; } }
 
 /* the text blocks stay centred in the view, but the words inside them read from the left */
 .view.scrollView .pg.two,
@@ -1984,7 +1981,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 @media (max-width: 700px) { .view.scrollView .pg:first-child .lead { white-space: normal; width: auto; align-self: stretch; } }
 
 /* Seeds: the pictures have had their white backdrop cut out (seeds_image0N_cut.png), so the card's colour shows behind them */
-#view-seeds .pgMedia img { background: none; border-radius: 0; box-shadow: none; }
 
 /* the Seeds link on the main screen is set in Sailec */
 .withCaption .label, .withCaption .caption { font-family: "Sailec", "Host Grotesk", sans-serif; }
