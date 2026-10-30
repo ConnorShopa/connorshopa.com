@@ -26,7 +26,9 @@
     var a = li.querySelector("a");
     if (!a) return;
     li.classList.add("deckCard");
-    li.style.setProperty("--card", a.getAttribute("data-bubble") || "#FFFFFF");
+    // the card in front takes the colour of its project view (the page behind the project)
+    var pr = (window.PROJECTS || {})[a.getAttribute("data-view")];
+    li.style.setProperty("--card", (pr && pr.bg) || "#E4E4E4");
     cards.push(li);
   });
   var N = cards.length;
@@ -74,8 +76,8 @@
     for (i = 0; i < N; i++) {
       var li = cards[i], H = heights[i], a = Math.abs(ks[i]);
       if (a < bestA) { bestA = a; best = i; }
-      var op = Math.max(0, 1 - Math.pow(a / 3.4, 2.2)) * (1 - (1 - spread) * Math.min(a, 1));
-      put(li, "scale", sc[i].toFixed(4));
+      var op = Math.max(0, 1 - Math.pow(a / 3.4, 2.2)) * Math.min(1, spread * 1.6);
+      put(li, "scale", (sc[i] * (0.5 + 0.5 * spread)).toFixed(4));
       put(li, "translate", "0 " + (ys[i] - H / 2).toFixed(1) + "px");
       put(li, "rotate", "");
       put(li, "opacity", op.toFixed(3));
@@ -153,13 +155,13 @@
     else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.classList.remove("isActive"); });
   }
   window.addEventListener("resize", refresh);
-  // on load the cards start stacked in the middle and spread out to their places
+  // on load the cards grow in from the middle and spread out to their places
   function intro() {
     if (introRaf || spread >= 1) return;
     var t0 = 0;
     var step = function (t) {
       if (!t0) t0 = t;
-      var p = Math.min((t - t0) / 1100, 1);
+      var p = Math.min((t - t0) / 700, 1);
       spread = 1 - Math.pow(1 - p, 3);
       render();
       introRaf = p < 1 ? requestAnimationFrame(step) : 0;
