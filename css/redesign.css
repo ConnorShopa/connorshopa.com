@@ -1546,10 +1546,9 @@ body { position: relative; }
 .inline.big li.row-break::after { content: none !important; }
 
 /* Overhand: yellow card, pill chips with a thin dark stroke, early-access form */
-.ohTrade { display: flex; align-items: center; justify-content: center; gap: 20px; }
-.ohStack { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-.ohChip { padding: 7px 18px; font-size: 17px; line-height: 1; color: #1B2430; background: #FFE99A; border: 1px solid #1B2430; border-radius: 999px; box-shadow: 0 2px 0 rgba(27, 36, 48, 0.18); white-space: nowrap; }
-.ohFor { font-size: 15px; color: #1B2430; }
+/* the bubbles are positioned by js/overhand.js (gravity to the middle, pushed away by the mouse) */
+.ohPit { position: relative; width: min(100%, 780px); height: 380px; margin: 6px auto 0; overflow: visible; touch-action: pan-y; }
+.ohBub { position: absolute; left: 0; top: 0; display: flex; align-items: center; justify-content: center; box-sizing: border-box; border: 1.5px solid #0B1620; border-radius: 999px; box-shadow: 0 2px 0 rgba(11, 22, 32, 0.12); white-space: nowrap; line-height: 1; will-change: transform; pointer-events: none; user-select: none; }
 .earlyForm { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: 18px; }
 .earlyInput { font: inherit; font-size: 16px; width: 260px; padding: 12px 18px; color: #1B2430; background: #fff; border: 1px solid #1B2430; border-radius: 999px; outline: none; }
 .earlyInput:focus { box-shadow: 0 0 0 3px rgba(27, 36, 48, 0.18); }
@@ -1990,3 +1989,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* the Seeds icon, painted in Bank Blue through its own shape */
 .seedsIcon { display: block; height: 26px; aspect-ratio: 49 / 48; background: #003960; -webkit-mask: url("../assets/homeAssets/seeds_projectImage.svg") center / contain no-repeat; mask: url("../assets/homeAssets/seeds_projectImage.svg") center / contain no-repeat; filter: drop-shadow(0 2px 4px rgba(47, 39, 37, 0.22)); }
 @media (max-width: 700px) { .seedsIcon { height: 32px; } }
+
+/* with a project open, the logos in the list below are grey until you hover them */
+#projectList.compact li > a { filter: grayscale(1); opacity: .85; transition: filter .25s ease, opacity .25s ease; }
+#projectList.compact li > a:hover { filter: none; opacity: 1; }
