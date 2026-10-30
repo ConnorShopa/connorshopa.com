@@ -53,8 +53,8 @@
 
   function setSize(fs) {
     bubs.forEach(function (b) { var f = fs * b.scale; b.el.style.fontSize = f.toFixed(1) + "px"; b.el.style.padding = Math.round(f * 0.62) + "px " + Math.round(f * 2) + "px"; });
-    anchors.forEach(function (a) { a.el.style.fontSize = Math.round(fs * 3) + "px"; });
-    forEl.style.fontSize = Math.round(fs * 2.2) + "px";
+    anchors.forEach(function (a) { a.el.style.fontSize = Math.round(fs * 4.2) + "px"; });
+    forEl.style.fontSize = Math.round(fs * 3) + "px";
   }
   function measureAll() {
     bubs.forEach(function (b) { b.w = b.el.offsetWidth; b.h = b.el.offsetHeight; b.r = b.h / 2; b.hw = Math.max(0, b.w / 2 - b.r); });

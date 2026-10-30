@@ -2047,3 +2047,11 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* Overhand's project view is set in Clash Grotesk */
 #view-overhand, #view-overhand .pg, #view-overhand .lead, #view-overhand .ohBub, #view-overhand .earlyInput, #view-overhand .earlyBtn, #view-overhand .viewTitle { font-family: "Clash Grotesk", "Host Grotesk", sans-serif; }
+
+/* Clash Grotesk, lighter */
+#view-overhand .lead.ohTitle { font-weight: 500; letter-spacing: -0.03em; }
+#view-overhand .ohBub { font-weight: 350; }
+#view-overhand .ohBub.ohFor { font-weight: 400; }
+#view-overhand .ohBub.ohFor.ohAny { font-weight: 500; }
+#view-overhand .earlyBtn.lockBtn { font-weight: 500; }
+#view-overhand .earlyInput { font-weight: 400; }
