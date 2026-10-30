@@ -22,22 +22,18 @@
     left.forEach(function (w, k) { list.push([w, -1, k]); });
     right.forEach(function (w, k) { list.push([w, 1, k]); });
     list.splice(left.length, 0, ["for", 0, 0]);
+    list.push(["anything", -1, 0, true], ["anything", 1, 0, true]); // static centres of the two groups
     list.forEach(function (it, i) {
       var s = STYLES[it[2] % STYLES.length], el = document.createElement("span"), fs = SIZES[it[2] % SIZES.length]; // same colours and sizes on both sides
       el.className = "ohBub";
       el.textContent = it[0];
-      if (it[1] === 0) { // "for": plain text in the middle, not a bubble
-        el.className = "ohBub ohFor"; fs = 30;
+      if (it[1] === 0 || it[3]) { // "for" and "anything": plain text, not bubbles
+        el.className = "ohBub ohFor"; fs = it[3] ? 34 : 30;
       } else { el.style.background = s[0]; el.style.color = s[1]; }
       el.style.fontSize = fs + "px";
-      if (it[1] !== 0) el.style.padding = Math.round(fs * 0.62) + "px " + Math.round(fs * 2) + "px";
+      if (it[1] !== 0 && !it[3]) el.style.padding = Math.round(fs * 0.62) + "px " + Math.round(fs * 2) + "px";
       pit.appendChild(el);
-      bubs.push({ el: el, side: it[1], fixed: it[1] === 0, x: 0, y: 0, vx: 0, vy: 0, hw: 0, r: 0 });
-    });
-    [-1, 1].forEach(function (side) { // each pile is titled "anything"
-      var h = document.createElement("span");
-      h.className = "ohLabel"; h.textContent = "anything"; h.setAttribute("data-side", side);
-      pit.appendChild(h);
+      bubs.push({ el: el, side: it[1], fixed: it[1] === 0 || !!it[3], anchor: it[3] ? it[1] : 0, plain: it[1] === 0, x: 0, y: 0, vx: 0, vy: 0, hw: 0, r: 0 });
     });
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) start(); }, { threshold: 0 }).observe(pit);
@@ -58,13 +54,10 @@
     bubs.forEach(function (b, i) {
       var w = b.el.offsetWidth, h = b.el.offsetHeight;
       b.r = h / 2; b.hw = Math.max(0, w / 2 - h / 2); b.w = w; b.h = h;
-      if (!ready) { // scatter around the middle on first layout
+      if (!ready && !b.fixed) { // scatter around the middle on first layout
         var a = i * 2.4, d = 60 + (i % 5) * 26;
         b.x = b.side * armX() + Math.cos(a) * d; b.y = Math.sin(a) * d * 0.9; b.vx = b.vy = 0;
       }
-    });
-    pit.querySelectorAll(".ohLabel").forEach(function (h) {
-      h.style.left = (pit.offsetWidth / 2 + h.getAttribute("data-side") * armX()) + "px";
     });
     ready = true; return true;
   }
@@ -87,10 +80,10 @@
 
   function step() {
     var n = bubs.length, i, j, b, k, ax = armX(), barrier = 0;
-    for (i = 0; i < n; i++) if (bubs[i].fixed) barrier = bubs[i].w / 2 + 28;
+    for (i = 0; i < n; i++) if (bubs[i].plain) barrier = bubs[i].w / 2 + 28;
     for (i = 0; i < n; i++) {
       b = bubs[i];
-      if (b.fixed) { b.x = b.y = b.vx = b.vy = 0; continue; }
+      if (b.fixed) { b.x = b.anchor * ax; b.y = b.vx = b.vy = 0; continue; }
       b.vx += (b.side * ax - b.x) * (b.side ? 0.0015 : 0.02); b.vy += -b.y * 0.0065; // gravity to the middle (a touch stronger vertically: a flatter pile)
       var dx = b.x - mouse.x, dy = b.y - mouse.y, d = Math.sqrt(dx * dx + dy * dy);
       if (d < REACH && d > 0.5) { var f = (1 - d / REACH) * PUSH; b.vx += dx / d * f; b.vy += dy / d * f; }
@@ -101,7 +94,7 @@
     var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2;
     for (i = 0; i < n; i++) { // stay inside the pit
       b = bubs[i];
-      if (b.fixed) { b.el.style.transform = "translate(" + (W - b.w / 2).toFixed(1) + "px," + (H - b.h / 2).toFixed(1) + "px)"; continue; }
+      if (b.fixed) { b.el.style.transform = "translate(" + (W + b.x - b.w / 2).toFixed(1) + "px," + (H - b.h / 2).toFixed(1) + "px)"; continue; }
       var mx = W - b.hw - b.r, my = H - b.r;
       // "for" is a wall: the left pile can't cross to the right of it, nor the right pile to the left
       var wall = barrier + b.hw + b.r;
