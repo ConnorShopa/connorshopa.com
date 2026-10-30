@@ -32,26 +32,18 @@
   var N = cards.length;
   if (N < 3) return;
 
-  var GAP = 12;    // space between neighbouring cards at the front of the wheel
-  var TIGHT = 0.5; // how close neighbours sit to the card in front (1 = evenly spaced, lower = tighter)
-  var R = 270;     // the wheel's radius, in px
   var STEP = 150;  // dragging this far moves one card
+  var GAP = 6;     // the space between neighbouring cards (edge to edge), the same all the way round
   var heights = [], dirty = true;
-  var pos = 0, target = 0, vel = 0, anim = 0, dragging = false, moved = false;
+  var spread = 1, introRaf = 0, pos = 0, target = 0, vel = 0, anim = 0, dragging = false, moved = false;
   var lastT = 0;
 
   function measureHeader() {
     if (!header || !mq.matches) return;
     document.documentElement.style.setProperty("--hdrH", Math.ceil(header.getBoundingClientRect().bottom + 12) + "px");
   }
-  var cum = [], T = 1;
-  function measure() {
-    heights = cards.map(function (li) { return li.offsetHeight || 100; });
-    cum = []; var c = 0;
-    for (var i = 0; i < N; i++) { cum.push(c); c += (heights[i] + heights[(i + 1) % N]) / 2 + GAP; }
-    T = c; // the length of the whole loop
-    dirty = false;
-  }
+  function measure() { heights = cards.map(function (li) { return li.offsetHeight || 100; }); dirty = false; }
+
   // style writes are skipped when nothing changed; a value something else wiped (GSAP sets scale / translate to "none")
   // is written again
   function put(li, prop, val) {
@@ -62,32 +54,34 @@
   function putPk(li, val) { var c = li.__v || (li.__v = {}); if (c.pk !== val) { li.style.setProperty("--pk", val); c.pk = val; } }
   function wrap(k) { return ((k + N / 2) % N + N) % N - N / 2; }
 
-  // the centre of the card at (fractional) position p, measured along the loop
-  function centreAt(p) {
-    var q = ((p % N) + N) % N, j = Math.floor(q), f = q - j;
-    var c0 = cum[j], c1 = j + 1 < N ? cum[j + 1] : T;
-    return c0 + (c1 - c0) * f;
-  }
+  // how big a card is by how many places it is from the front (the front card is 1.3x, then they drop away)
+  function scaleAt(k) { var a = Math.abs(k); return 0.3 + 1.0 / (1 + (a * a) / 0.49); }
   function render() {
     if (!mq.matches) return;
     if (dirty) measure();
-    var c = centreAt(pos), best = -1, bestA = 9;
-    for (var i = 0; i < N; i++) {
-      var li = cards[i], H = heights[i];
-      var lin = ((cum[i] - c) % T + T + T / 2) % T - T / 2;   // distance from the middle along the loop, wrapped to +-T/2
-      var th = lin / R;                                      // how far round the wheel the card is, in radians
-      var a = Math.abs(th), k = wrap(i - pos);
-      if (Math.abs(k) < bestA) { bestA = Math.abs(k); best = i; }
-      // every card sits the same distance from the next (TIGHT x its natural spacing), all the way round
-      var y = TIGHT * Math.max(-1.6 * R, Math.min(1.6 * R, lin));
-      var op = Math.max(0, 1 - Math.pow(a / 1.45, 2.2));
-      put(li, "scale", (0.3 + 1.0 / (1 + Math.pow(a / 0.3, 2))).toFixed(4)); // the front card is the largest (1.3x); the rest drop away quickly
-      put(li, "translate", "0 " + (y - H / 2).toFixed(1) + "px");
-      put(li, "rotate", "");                                  // (no tilt)
+    var b = Math.floor(pos), f = pos - b, ks = [], sc = [], ys = [], i, n;
+    for (i = 0; i < N; i++) { ks[i] = wrap(i - pos); sc[i] = scaleAt(ks[i]); }
+    // the cards are laid out one after the other, each a fixed gap from the one before (measured between the edges of
+    // the cards as they are drawn, i.e. after scaling), so the distance between neighbours is the same everywhere
+    var d = function (x, z) { return (heights[x] * sc[x] + heights[z] * sc[z]) / 2 + GAP; };
+    var ib = ((b % N) + N) % N, inext = (ib + 1) % N;
+    ys[ib] = -f * d(ib, inext);
+    var half = Math.ceil(N / 2);
+    for (n = 1; n <= half; n++) { var q = (ib + n) % N, pq = (ib + n - 1) % N; ys[q] = ys[pq] + d(pq, q); }
+    for (n = 1; n < N - half; n++) { var q2 = ((ib - n) % N + N) % N, nq = (q2 + 1) % N; ys[q2] = ys[nq] - d(q2, nq); }
+    for (i = 0; i < N; i++) ys[i] *= spread;
+    var best = -1, bestA = 9;
+    for (i = 0; i < N; i++) {
+      var li = cards[i], H = heights[i], a = Math.abs(ks[i]);
+      if (a < bestA) { bestA = a; best = i; }
+      var op = Math.max(0, 1 - Math.pow(a / 3.4, 2.2)) * (1 - (1 - spread) * Math.min(a, 1));
+      put(li, "scale", sc[i].toFixed(4));
+      put(li, "translate", "0 " + (ys[i] - H / 2).toFixed(1) + "px");
+      put(li, "rotate", "");
       put(li, "opacity", op.toFixed(3));
-      put(li, "zIndex", String(100 - Math.round(a * 30)));
+      put(li, "zIndex", String(100 - Math.round(a * 10)));
       put(li, "visibility", op < 0.02 ? "hidden" : "");
-      putVar(li, Math.min(a * 0.3, 0.45).toFixed(2));
+      putVar(li, Math.min(a * 0.12, 0.35).toFixed(2));
     }
     for (var m = 0; m < N; m++) cards[m].classList.toggle("isActive", m === best && bestA < 0.3);
   }
@@ -159,7 +153,21 @@
     else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.classList.remove("isActive"); });
   }
   window.addEventListener("resize", refresh);
-  window.addEventListener("load", function () { refresh(); setTimeout(refresh, 1200); });
+  // on load the cards start stacked in the middle and spread out to their places
+  function intro() {
+    if (introRaf || spread >= 1) return;
+    var t0 = 0;
+    var step = function (t) {
+      if (!t0) t0 = t;
+      var p = Math.min((t - t0) / 1100, 1);
+      spread = 1 - Math.pow(1 - p, 3);
+      render();
+      introRaf = p < 1 ? requestAnimationFrame(step) : 0;
+    };
+    introRaf = requestAnimationFrame(step);
+  }
+  if (mq.matches && !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) { spread = 0; setTimeout(function () { if (spread < 1 && !introRaf) { spread = 1; render(); } }, 3500); }
+  window.addEventListener("load", function () { refresh(); setTimeout(refresh, 1200); setTimeout(intro, 150); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
   if (mq.addEventListener) mq.addEventListener("change", refresh);
   if (window.ResizeObserver) { var ro = new ResizeObserver(function () { dirty = true; render(); }); cards.forEach(function (li) { ro.observe(li); }); if (header) ro.observe(header); }
