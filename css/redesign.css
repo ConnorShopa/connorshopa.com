@@ -2159,3 +2159,62 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 /* Happlycations logo, larger than the default list logo */
 .logo.happly { height: 72px; max-width: none; }
 @media (max-width: 700px) { .logo.happly { height: 60px; } }
+
+/* ======== Phones: the project list is a scrollable deck of cards (js/deck.js) ======== */
+.openBtn { display: none; }
+@media (max-width: 700px) {
+  :root { --hdrH: 190px; }
+
+  /* name, tagline and tabs stay put at the top */
+  .hero { display: block; min-height: 0; }
+  .hero > header { position: fixed; top: 0; left: 0; right: 0; z-index: 6; width: auto; max-width: none; box-sizing: border-box; padding: 26px 16px 10px; background: var(--bg); }
+
+  /* the deck lives in the rest of the screen, centred on the device */
+  .hero > nav { position: fixed; left: 0; right: 0; top: var(--hdrH); bottom: 0; margin: 0; z-index: 1; display: block; }
+  .hero > nav > .ghost { display: none; }
+  .hero > nav > #projectList {
+    position: absolute; left: 0; right: 0; top: calc(50dvh - var(--hdrH)); transform: translateY(-50%);
+    height: min(560px, calc(100dvh - 2 * var(--hdrH) - 12px)); min-height: 300px;
+    display: block; margin: 0; padding: 0; zoom: 1 !important;
+    overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+    scroll-snap-type: y mandatory; perspective: 900px; perspective-origin: 50% 50%;
+    scrollbar-width: none; font-size: 26px;
+  }
+  .hero > nav > #projectList::-webkit-scrollbar { display: none; }
+  /* room above the first card and below the last, so each one can reach the middle */
+  .hero > nav > #projectList::before, .hero > nav > #projectList::after { content: ""; display: block; height: 11%; }
+
+  #projectList li.row-break { display: none; }
+  #projectList li:not(.row-break) {
+    position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-sizing: border-box; width: calc(100% - 32px); height: 78%; margin: 0 16px -3% 16px; padding: 20px 16px 16px;
+    background: var(--card, #fff); border-radius: 26px; scroll-snap-align: center; scroll-snap-stop: always;
+    box-shadow: 0 14px 34px -14px rgba(47, 39, 37, 0.28), 0 2px 8px rgba(47, 39, 37, 0.08);
+    will-change: scale, translate, rotate; text-align: center;
+  }
+  #projectList li.is-current:not(.row-break) { display: flex !important; } /* the deck stays whole while a project is open */
+  #projectList li::after, #projectList li.no-slash::after, #projectList li:last-child::after {
+    content: ""; position: absolute; inset: 0; margin: 0; border-radius: inherit; background: var(--bg); opacity: var(--dim, 0);
+    pointer-events: none; text-shadow: none;
+  }
+  #projectList li > a { flex: 1 1 auto; max-width: 100%; zoom: 1.5; }
+  #projectList.compact { display: block; }
+  #projectList.compact li > a { filter: none; opacity: 1; }
+  #projectList li > a:hover { filter: none; }
+
+  /* the button for the card in the middle */
+  .openBtn {
+    display: block; flex: none; margin-top: 14px; font: inherit; font-size: 16px; font-weight: 500; letter-spacing: 0; padding: 13px 28px;
+    color: #fff; background: #1B2430; border: 0; border-radius: 999px; cursor: pointer; -webkit-tap-highlight-color: transparent;
+    opacity: 0; visibility: hidden; transform: translateY(10px); transition: opacity .25s ease, transform .3s cubic-bezier(.2, .8, .2, 1), visibility 0s .3s;
+  }
+  #projectList li.isActive .openBtn { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+  #projectList li:not(.isActive) .openBtn { pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) { .openBtn { transition: none; } }
+
+  /* while a project is open the deck stays out of sight (the card covers the screen) */
+  html.view-open .hero > nav { visibility: hidden; }
+
+  /* About / Contact sit right under the fixed header */
+  .panelText:has(.aboutJobs) { top: 0; bottom: 0; overflow-y: auto; padding-top: 8px; }
+}
