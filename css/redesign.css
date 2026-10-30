@@ -2058,9 +2058,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* Overhand: the two circles are a Venn diagram in the logo's colours; the words sit on top */
 .ohCircle { position: absolute; left: 0; top: 0; border-radius: 50%; pointer-events: none; }
-.ohCircle.ohL { background: none; border: 2px solid rgba(60, 64, 198, 0.3); box-sizing: border-box; }
-.ohCircle.ohR { background: none; border: 2px solid rgba(255, 63, 52, 0.3); box-sizing: border-box; }
-.ohCircle.ohLens { background: none; }
+.ohCircle.ohL { background: rgba(60, 64, 198, 0.12); border: 2px solid rgba(60, 64, 198, 0.3); box-sizing: border-box; }
+.ohCircle.ohR { background: rgba(255, 63, 52, 0.12); border: 2px solid rgba(255, 63, 52, 0.3); box-sizing: border-box; }
+.ohCircle.ohLens { background: rgba(206, 111, 139, 0.12); }
 #view-overhand .ohBub.ohFor.ohAny { color: #000; }
 #view-overhand { width: min(96vw, 1500px); }
 
