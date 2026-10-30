@@ -2032,3 +2032,10 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .earlyForm { position: sticky; bottom: 24px; z-index: 6; align-self: flex-start; flex-direction: column; align-items: stretch; justify-content: flex-start; width: 270px; max-width: 100%; margin: 24px 0 0; padding: 18px; gap: 10px; background: #FFDD55; border: 1px solid #1E272E; border-radius: 4px; box-shadow: 0 12px 32px rgba(27, 36, 48, 0.28), 0 2px 6px rgba(27, 36, 48, 0.18); }
 .earlyForm .earlyInput { width: 100%; box-sizing: border-box; }
 .earlyForm .earlyBtn.lockBtn { width: 100%; }
+
+/* Overhand: the two piles sit at the exact centre of the card; "Trade" is above them and the form below */
+.view.scrollView .pg.one:has(.ohPit) { min-height: 100%; padding: 0; align-content: stretch; gap: 0; }
+.view.scrollView .pg.one:has(.ohPit) .pgText { display: grid; grid-template-rows: minmax(0, 1fr) auto minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); align-items: center; justify-items: center; height: 100%; min-height: 100%; gap: 0; padding: 20px 0; box-sizing: border-box; }
+.view.scrollView .pg.one:has(.ohPit) .ohHero { grid-row: 1; align-self: start; }
+.view.scrollView .pg.one:has(.ohPit) .ohPit { grid-row: 2; margin: 0 auto; }
+.view.scrollView .pg.one:has(.ohPit) .earlyForm { grid-row: 3; align-self: end; justify-self: start; margin: 0 0 0 20px; }
