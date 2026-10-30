@@ -2161,7 +2161,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 @media (max-width: 700px) { .logo.happly { height: 60px; } }
 
 /* ======== Phones: the project list is a scrollable deck of cards (js/deck.js) ======== */
-.openBtn { display: none; }
+.openBtn, .peek { display: none; }
 @media (max-width: 700px) {
   :root { --hdrH: 190px; }
 
@@ -2173,7 +2173,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   .hero > nav { position: fixed; left: 0; right: 0; top: var(--hdrH); bottom: 0; margin: 0; z-index: 1; display: block; }
   .hero > nav > .ghost { display: none; }
   .hero > nav > #projectList {
-    position: absolute; inset: 0; scroll-padding-bottom: var(--hdrH); /* the deck runs to the bottom of the screen; the snap point is the middle of the device */
+    position: absolute; left: 0; right: 0; bottom: 0; top: calc(-1 * var(--hdrH)); /* the deck fills the whole screen (the header sits over its top), so its middle is the middle of the device */
     display: block; margin: 0; padding: 0; zoom: 1 !important;
     overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
     scroll-snap-type: y mandatory; perspective: 900px; perspective-origin: 50% 50%;
@@ -2229,4 +2229,10 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
   /* About / Contact sit right under the fixed header */
   .panelText:has(.aboutJobs) { top: 0; bottom: 0; overflow-y: auto; padding-top: 8px; }
+}
+
+/* phones and touch screens: no cursor effects at all (no cursor dot, no custom cursors) */
+@media (max-width: 700px), (hover: none), (pointer: coarse) {
+  #mouse-circle { display: none !important; }
+  *, *::before, *::after { cursor: auto !important; }
 }

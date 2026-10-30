@@ -46,31 +46,32 @@
   function middle() { return list.scrollTop + window.innerHeight / 2 - list.getBoundingClientRect().top; } // the middle of the device
   function centre(li) { list.scrollTop = li.offsetTop + li.offsetHeight / 2 - (window.innerHeight / 2 - list.getBoundingClientRect().top); }
 
-  // the deck loops: when the middle card is near either end, a card from the other end is moved over (and the scroll
-  // position adjusted by exactly its height, so nothing visibly moves)
+  // the deck loops: while it is at rest, cards are moved from one end to the other until the middle card is back in the
+  // middle of the pile, and the scroll position is adjusted by exactly the height that moved, so nothing visibly
+  // changes. (Never while a finger is down or the deck is coasting: changing the scroll position then would stop it.)
   function loop() {
     var vis = shown();
     if (vis.length < 6) return;
-    var mid = middle(), idx = 0, bd = 1e9;
+    var mid = middle(), idx = 0, bd = 1e9, target = Math.floor(vis.length / 2), guard = 0;
     vis.forEach(function (li, i) { var d = Math.abs(li.offsetTop + li.offsetHeight / 2 - mid); if (d < bd) { bd = d; idx = i; } });
-    var guard = 0;
-    while (idx < 3 && guard++ < 8) {            // too close to the top: bring the last card round to the front
+    while (idx < target - 1 && guard++ < 20) {   // too close to the top: bring the last card round to the front
       var ref = vis[0], y0 = ref.offsetTop, last = vis.pop();
       list.insertBefore(last, ref); vis.unshift(last); idx++;
       list.scrollTop += ref.offsetTop - y0;
     }
-    while (vis.length - 1 - idx < 4 && guard++ < 16) { // too close to the bottom: send the first card round to the back
+    while (idx > target + 1 && guard++ < 40) {   // too close to the bottom: send the first card round to the back
       var f = vis.shift(), ref2 = vis[0], y1 = ref2.offsetTop;
       list.appendChild(f); vis.push(f); idx--;
       list.scrollTop += ref2.offsetTop - y1;
     }
   }
+  var touching = false, idleT = 0;
+  function idle() { clearTimeout(idleT); idleT = setTimeout(function () { if (!touching && mq.matches) { loop(); queue(); } }, 180); }
 
   var raf = 0, landed = false;
   function update() {
     raf = 0;
     if (!mq.matches) return;
-    loop();
     var mid = middle(), best = null, bestD = 1e9;
     shown().forEach(function (li) {
       var h = li.offsetHeight || 1;
@@ -115,7 +116,9 @@
   function refresh() { if (mq.matches) { measureHeader(); land(); queue(); } else clear(); }
 
   ["touchstart", "wheel", "pointerdown", "keydown"].forEach(function (ev) { list.addEventListener(ev, function () { landed = true; }, { passive: true }); });
-  list.addEventListener("scroll", queue, { passive: true });
+  list.addEventListener("scroll", function () { queue(); idle(); }, { passive: true });
+  list.addEventListener("touchstart", function () { touching = true; }, { passive: true });
+  ["touchend", "touchcancel"].forEach(function (ev) { list.addEventListener(ev, function () { touching = false; idle(); }, { passive: true }); });
   window.addEventListener("resize", refresh);
   window.addEventListener("load", function () { refresh(); setTimeout(refresh, 1200); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
