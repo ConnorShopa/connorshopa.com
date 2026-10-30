@@ -80,6 +80,54 @@
   function clearCardStyles() {
     cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.style.borderRadius = ""; li.classList.remove("isActive"); });
   }
+  // The gallery is a justified "art wall": the cards are packed into rows that each fill the width exactly. For a row of
+  // n cards with width : height ratios r1..rn and a gap g, the row height that makes them fill a width W is
+  //     h = (W - g(n - 1)) / (r1 + ... + rn)
+  // and every card is scaled to that height (so it keeps its shape). Cards are added to a row until its height drops to
+  // the row's target, keeping whichever count lands nearest it; the targets vary row to row along a golden-ratio
+  // sequence, so the wall has a hung, uneven rhythm instead of a grid.
+  var spacer = null;
+  function layoutGallery() {
+    if (!gallery) return;
+    var W = list.clientWidth - 28, g = 10, base = 118, i = 0, row = 0, y = 14, tops = [];
+    var nat = cards.map(function (li) { return { w: li.offsetWidth || 100, h: li.offsetHeight || 60 }; });
+    var place = function (from, to, h, stretch) {
+      var widths = [], total = 0, k;
+      for (k = from; k < to; k++) { widths[k - from] = nat[k].w / nat[k].h * h; total += widths[k - from]; }
+      total += g * (to - from - 1);
+      var x = 14 + (stretch ? 0 : (W - total) / 2);
+      for (k = from; k < to; k++) {
+        var li = cards[k], f = h / nat[k].h;
+        li.style.scale = String(f); li.style.translate = x.toFixed(1) + "px " + y.toFixed(1) + "px";
+        li.style.borderRadius = Math.round(nat[k].h * RADIUS) + "px";
+        li.style.setProperty("--i", String(k));
+        tops[k] = y; x += widths[k - from] + g;
+      }
+      y += h + g;
+    };
+    while (i < N) {
+      var target = base * (0.8 + 0.55 * (((row + 1) * 0.6180339887) % 1)); // 0.8x .. 1.35x of the base height
+      var sum = 0, n = 0, prevH = Infinity, j2 = i;
+      for (; j2 < N; j2++) {
+        sum += nat[j2].w / nat[j2].h; n++;
+        var h = (W - g * (n - 1)) / sum;
+        if (h <= target) {
+          // the row is full: keep this card, or leave it for the next row, whichever lands nearer the target height
+          if (n > 1 && Math.abs(prevH - target) < Math.abs(h - target)) { n--; h = prevH; } else { j2++; }
+          prevH = h; break;
+        }
+        prevH = h;
+      }
+      if (j2 >= N && n === N - i && prevH > target) { /* ran out of cards before the row filled: keep its natural look */ }
+      var rowH = prevH, stretch = true;
+      if (rowH > target * 1.4) { rowH = target * 1.4; stretch = false; } // a short last row (or a lone card) is not blown up; it is centred
+      place(i, j2 > i ? j2 : i + 1, rowH, stretch); i = j2 > i ? j2 : i + 1;
+      row++;
+    }
+    if (!spacer) { spacer = document.createElement("div"); spacer.className = "deckSpacer"; list.appendChild(spacer); }
+    spacer.style.top = (y + 130) + "px";
+    return tops;
+  }
   function setGallery(on) {
     if (on === gallery) return;
     var root = document.documentElement;
@@ -89,11 +137,13 @@
         gallery = true; cancelAnimationFrame(anim); anim = 0;
         clearCardStyles();
         root.classList.add("deckGallery");
-        var cur = cards[((Math.round(target) % N) + N) % N];
-        list.scrollTop = Math.max(0, cur.offsetTop - (list.clientHeight - cur.offsetHeight) / 2);
+        var cur = ((Math.round(target) % N) + N) % N, tops = layoutGallery();
+        var curH = cards[cur].offsetHeight * parseFloat(cards[cur].style.scale || 1);
+        list.scrollTop = Math.max(0, tops[cur] - (list.clientHeight - curH) / 2);
       } else {
         gallery = false;
         root.classList.remove("deckGallery");
+        clearCardStyles(); if (spacer) { spacer.remove(); spacer = null; }
         dirty = true; render();
       }
       modeBtn.setAttribute("aria-label", on ? "Switch to the stacked view" : "Switch to the gallery view");
@@ -223,7 +273,7 @@
     if (mq.matches) { measureHeader(); dirty = true; render(); }
     else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.style.borderRadius = ""; li.classList.remove("isActive"); });
   }
-  window.addEventListener("resize", refresh);
+  window.addEventListener("resize", function () { refresh(); layoutGallery(); });
   if (mq.addEventListener) mq.addEventListener("change", function () { if (!mq.matches) { viewBtn.classList.remove("shown", "ready"); viewBtn.disabled = true; modeBtn.classList.remove("shown"); if (gallery) { gallery = false; document.documentElement.classList.remove("deckGallery"); } } });
   // on load the cards grow in from the middle and spread out to their places
   function intro() {
@@ -242,7 +292,7 @@
   window.addEventListener("load", function () { refresh(); setTimeout(refresh, 1200); setTimeout(intro, 150); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
   if (mq.addEventListener) mq.addEventListener("change", refresh);
-  if (window.ResizeObserver) { var ro = new ResizeObserver(function () { dirty = true; render(); }); cards.forEach(function (li) { ro.observe(li); }); if (header) ro.observe(header); }
+  if (window.ResizeObserver) { var ro = new ResizeObserver(function () { dirty = true; render(); layoutGallery(); }); cards.forEach(function (li) { ro.observe(li); }); if (header) ro.observe(header); }
   cards.forEach(function (li) { Array.prototype.forEach.call(li.querySelectorAll("img"), function (img) { if (!img.complete) img.addEventListener("load", refresh); }); });
   // something else (a pop-in, say) wiping the cards' transforms: put them back
   if (window.MutationObserver) new MutationObserver(function () { if (!anim) render(); }).observe(list, { attributes: true, attributeFilter: ["style"], subtree: true });
