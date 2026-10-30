@@ -58,6 +58,25 @@
   }
   function putVar(li, val) { var c = li.__v || (li.__v = {}); if (c.dim !== val) { li.style.setProperty("--dim", val); c.dim = val; } }
   function putPk(li, val) { var c = li.__v || (li.__v = {}); if (c.pk !== val) { li.style.setProperty("--pk", val); c.pk = val; } }
+  // ---- the floating "View" button: ready only while a project is settled in focus ----
+  var viewBtn = document.createElement("button");
+  viewBtn.type = "button"; viewBtn.className = "deckView"; viewBtn.textContent = "View"; viewBtn.disabled = true;
+  viewBtn.setAttribute("aria-label", "View the project in focus");
+  document.body.appendChild(viewBtn);
+  var wheeling = false;
+  function updateBtn() {
+    var active = list.querySelector("li.isActive");
+    var ready = mq.matches && !!active && !dragging && !anim && !wheeling && spread >= 1;
+    if (ready) viewBtn.classList.add("shown");
+    viewBtn.classList.toggle("ready", ready);
+    viewBtn.disabled = !ready;
+  }
+  viewBtn.addEventListener("click", function (e) {
+    e.stopPropagation(); // (the page closes a project on any click outside its card: this one opens it)
+    var active = list.querySelector("li.isActive"), a = active && active.querySelector("a");
+    moved = false; // (a swipe's flag must not swallow this tap)
+    if (a && !viewBtn.disabled) a.click();
+  });
   function wrap(k) { return ((k + N / 2) % N + N) % N - N / 2; }
 
   // how big a card is by how many places it is from the front (the front card is 1.3x, then they drop away)
@@ -90,6 +109,7 @@
       putVar(li, Math.min(a * 0.12, 0.35).toFixed(2));
     }
     for (var m = 0; m < N; m++) cards[m].classList.toggle("isActive", m === best && bestA < 0.3);
+    updateBtn();
   }
 
   // ---- movement ----
@@ -98,7 +118,7 @@
     if (!dragging) {
       var d = target - pos;
       pos += d * (1 - Math.exp(-dt * 11));          // an ease-out settle onto the target card
-      if (Math.abs(target - pos) < 0.0008) { pos = target; render(); anim = 0; return; }
+      if (Math.abs(target - pos) < 0.0008) { pos = target; render(); anim = 0; updateBtn(); return; }
     }
     render();
     anim = requestAnimationFrame(frame);
@@ -130,6 +150,7 @@
     var h0 = hist[0], h1 = hist[hist.length - 1], v = 0;
     if (h0 && h1 && h1.t > h0.t) v = ((h1.p - h0.p) / (h1.t - h0.t)) * 1000; // cards per second
     settle(moved ? v : 0);
+    setTimeout(function () { moved = false; }, 60); // a click right after a swipe is swallowed; later taps are not
   }
   list.addEventListener("pointerup", release);
   list.addEventListener("pointercancel", release);
@@ -149,9 +170,10 @@
   list.addEventListener("wheel", function (e) {
     if (!mq.matches) return;
     e.preventDefault();
+    wheeling = true;
     target = pos = pos + e.deltaY / (STEP * 1.6);
     render();
-    clearTimeout(wheelT); wheelT = setTimeout(function () { settle(0); }, 120);
+    clearTimeout(wheelT); wheelT = setTimeout(function () { wheeling = false; settle(0); }, 120);
   }, { passive: false });
 
   function refresh() {
@@ -159,6 +181,7 @@
     else cards.forEach(function (li) { li.__v = null; li.style.scale = li.style.translate = li.style.opacity = li.style.zIndex = li.style.visibility = ""; li.style.removeProperty("--dim"); li.style.rotate = ""; li.style.borderRadius = ""; li.classList.remove("isActive"); });
   }
   window.addEventListener("resize", refresh);
+  if (mq.addEventListener) mq.addEventListener("change", function () { if (!mq.matches) { viewBtn.classList.remove("shown", "ready"); viewBtn.disabled = true; } });
   // on load the cards grow in from the middle and spread out to their places
   function intro() {
     if (introRaf || spread >= 1) return;
