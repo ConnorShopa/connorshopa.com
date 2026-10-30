@@ -2055,3 +2055,20 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 #view-overhand .ohBub.ohFor.ohAny { font-weight: 500; }
 #view-overhand .earlyBtn.lockBtn { font-weight: 500; }
 #view-overhand .earlyInput { font-weight: 400; }
+
+/* Overhand: the two circles are a Venn diagram in the logo's colours; the words sit on top */
+.ohCircle { position: absolute; left: 0; top: 0; border-radius: 50%; pointer-events: none; }
+.ohCircle.ohL { background: #3C40C6; }
+.ohCircle.ohR { background: #FF3F34; }
+.ohCircle.ohLens { background: #CE6F8B; }
+#view-overhand .ohBub.ohFor.ohAny { color: #fff; }
+#view-overhand { width: min(96vw, 1500px); }
+
+/* Overhand never scrolls: the page fills the card. "Trade" sits top centre, the circles are centred on the card, the form is bottom left */
+#view-overhand .viewBody { overflow: hidden; padding: 0; }
+.view.scrollView .pg.one:has(.ohPit) { position: absolute; inset: 0; min-height: 0; height: 100%; padding: 0; display: block; }
+.view.scrollView .pg.one:has(.ohPit) .pgText { display: block; position: static; height: 100%; min-height: 0; max-width: none; width: 100%; padding: 0; }
+.view.scrollView .pg.one:has(.ohPit) .ohHero { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); margin: 0; align-self: auto; }
+.view.scrollView .pg.one:has(.ohPit) .ohPit { position: absolute; left: 24px; right: 24px; top: 96px; bottom: 96px; width: auto; height: auto; margin: 0; }
+.view.scrollView .pg.one:has(.ohPit) .earlyForm { position: absolute; left: 24px; bottom: 24px; margin: 0; align-self: auto; }
+#view-overhand .pg .lead.ohTitle, #view-overhand.view.scrollView .pg:first-child .lead.ohTitle { font-size: clamp(36px, 4.4vw, 60px); line-height: 1; }
