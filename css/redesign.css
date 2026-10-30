@@ -2061,7 +2061,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .ohCircle.ohL { background: none; border: 2px solid rgba(60, 64, 198, 0.3); box-sizing: border-box; }
 .ohCircle.ohR { background: none; border: 2px solid rgba(255, 63, 52, 0.3); box-sizing: border-box; }
 .ohCircle.ohLens { background: none; }
-#view-overhand .ohBub.ohFor.ohAny { color: #fff; }
+#view-overhand .ohBub.ohFor.ohAny { color: #000; }
 #view-overhand { width: min(96vw, 1500px); }
 
 /* Overhand never scrolls: the page fills the card. "Trade" sits top centre, the circles are centred on the card, the form is bottom left */
