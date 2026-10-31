@@ -21,6 +21,7 @@ body { overflow: hidden; }
   -webkit-mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
   mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
 }
+.happlyPage[data-app="drawl"] .happlyWord { background: url("../assets/homeAssets/drawl_sketch_fill.svg") center / 100% 100% no-repeat; } /* scribbled in, like a pen drawing */
 .happlyPage[data-app="habbot"] .happlyWord { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
 /* the three apps as a row of buttons; the chosen one is a floaty pill */
