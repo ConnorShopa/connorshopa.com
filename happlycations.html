@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=55" />
+    <link rel="stylesheet" href="css/happlycations.css?v=56" />
 </head>
 
 <body>
@@ -87,22 +87,32 @@
             var page = document.querySelector(".happlyPage");
             var tabs = document.querySelectorAll(".happlyTab");
             var head = document.querySelector(".happlyHead"), token = 0, want = "drawl", still = window.matchMedia("(prefers-reduced-motion: reduce)");
+            var OUT = { transform: "scale(0.96)", opacity: 0 }, IN = { transform: "scale(1)", opacity: 1 };
             function pick(app) {
                 if (app === want) return;
                 want = app;
                 var me = ++token;
                 tabs.forEach(function (t) { var on = t.dataset.app === app; t.classList.toggle("on", on); t.setAttribute("aria-selected", on); });
-                // the phone, text and button swap straight away
-                document.querySelectorAll(".happlyInfo, .happlyPhone").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
-                function swap() { page.setAttribute("data-app", app); }
+                // the phone swaps straight away
+                document.querySelectorAll(".happlyPhone").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
+                // the logo + wordmark (and their fill) and the download button swap at the midpoint of the transition
+                function swap() {
+                    page.setAttribute("data-app", app);
+                    document.querySelectorAll(".happlyInfo").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
+                }
                 if (still.matches || !head.animate) { swap(); return; }
-                head.getAnimations().forEach(function (a) { a.cancel(); });
-                // only the logo + wordmark: a subtle scale about their centre with a fade, out then in
-                head.animate([{ transform: "scale(1)", opacity: 1 }, { transform: "scale(0.96)", opacity: 0 }], { duration: 140, easing: "ease-in", fill: "forwards" }).onfinish = function () {
-                    if (me !== token) return;
-                    swap();
-                    head.animate([{ transform: "scale(0.96)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }], { duration: 200, easing: "ease-out" }).onfinish = function () { head.getAnimations().forEach(function (x) { x.cancel(); }); };
-                };
+                var out = [head, document.querySelector(".happlyInfo.on .happlyCta")];
+                out.forEach(function (el) { el.getAnimations().forEach(function (a) { a.cancel(); }); });
+                var done = 0;
+                // a subtle scale about their centre with a fade, out then in
+                out.forEach(function (el) {
+                    el.animate([IN, OUT], { duration: 140, easing: "ease-in", fill: "forwards" }).onfinish = function () {
+                        if (++done < out.length || me !== token) return;
+                        out.forEach(function (x) { x.getAnimations().forEach(function (a) { a.cancel(); }); });
+                        swap();
+                        [head, document.querySelector(".happlyInfo.on .happlyCta")].forEach(function (x) { x.animate([OUT, IN], { duration: 200, easing: "ease-out" }); });
+                    };
+                });
             }
             tabs.forEach(function (t) { t.addEventListener("click", function () { pick(t.dataset.app); }); });
         })();
