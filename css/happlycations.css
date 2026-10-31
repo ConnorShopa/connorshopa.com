@@ -54,12 +54,12 @@ body { overflow: hidden; }
   background: linear-gradient(135deg, #16234D 0%, #3351B3 100%); -webkit-background-clip: text; background-clip: text;
   color: transparent; -webkit-text-fill-color: transparent;
 }
-.happlyBody { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.happlyBody .happlyPhone { margin-bottom: 48px; }
-.happlyBody .happlyBrand { margin-bottom: 14px; }
+.happlyBody { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 24px; } /* one even gap between phone, name, title and button */
+
+
 
 .happlyTitle s { text-decoration-thickness: 0.08em; }
-.happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(19px, 1.65vw, 25px); line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; min-height: 2.3em; display: flex; align-items: center; justify-content: center; /* two lines of room, so every download button lines up */ }
+.happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(19px, 1.65vw, 25px); line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; display: flex; align-items: center; justify-content: center; /* two lines of room, so every download button lines up */ }
 .happlySub { margin: 8px 0 0; max-width: 30ch; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; line-height: 1.4; color: rgba(17, 17, 17, 0.6); }
 .happlyCta {
   margin-top: 14px; padding: 12px 22px; border-radius: 999px; background: #111; color: #fff; text-decoration: none;
@@ -91,7 +91,7 @@ body { overflow: hidden; }
 .happlySec[data-app="habbot"] { --glow: 250, 152, 58; }
 @property --ringA { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 /* the button sits in a wrapper that does the hover effects: it pops up with a little overshoot, and carries the ring + glow, so the glow can sit behind the button without bleeding through it */
-.happlyCtaWrap { position: relative; isolation: isolate; display: block; margin-top: 14px; border-radius: 999px; transition: transform .5s cubic-bezier(.34, 1.56, .64, 1); }
+.happlyCtaWrap { position: relative; isolation: isolate; display: block; margin-top: 0; border-radius: 999px; transition: transform .5s cubic-bezier(.34, 1.56, .64, 1); }
 .happlyCtaWrap .happlyCta { display: block; margin-top: 0; }
 .happlySec:hover .happlyCtaWrap { transform: scale(1.07); }
 /* the ring (1px off the button) and a soft glow behind it: both are a gradient in the app's colour that travels round the button */
