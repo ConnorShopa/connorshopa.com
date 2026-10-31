@@ -54,7 +54,7 @@ body { overflow: hidden; }
   margin-top: 14px; padding: 12px 22px; border-radius: 999px; background: #111; color: #fff; text-decoration: none;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; font-weight: 600; transition: transform .2s ease, background .2s ease;
 }
-.happlyCta:hover { background: #333; transform: scale(1.07); }
+.happlyCta:hover { background: #333; }
 
 /* the phone: a thin metal rim, a thin black bezel, a drop shadow */
 .happlyPhone {
@@ -78,22 +78,24 @@ body { overflow: hidden; }
 .happlySec[data-app="drawl"] { --glow: 12, 30, 68; }
 .happlySec[data-app="sheep"] { --glow: 47, 74, 163; }
 .happlySec[data-app="habbot"] { --glow: 250, 152, 58; }
-.happlyCta { transition: transform .2s ease, background .2s ease, box-shadow .3s ease; }
 @property --ringA { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.happlyCta { position: relative; }
-/* a solid 2px ring in the app's colour, 1px off the button, with a lighter stretch that slowly travels round it */
-.happlyCta::before {
-  content: ""; position: absolute; inset: -3px; border-radius: inherit; padding: 2px; pointer-events: none;
-  background: conic-gradient(from var(--ringA), rgb(var(--glow)) 0%, rgba(var(--glow), 0.3) 40%, rgb(var(--glow)) 75%, rgb(var(--glow)) 100%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-  opacity: 0; transition: opacity .3s ease;
+/* the button sits in a wrapper that does the hover effects: it pops up with a little overshoot, and carries the ring + glow, so the glow can sit behind the button without bleeding through it */
+.happlyCtaWrap { position: relative; isolation: isolate; display: block; margin-top: 14px; border-radius: 999px; transition: transform .5s cubic-bezier(.34, 1.56, .64, 1); }
+.happlyCtaWrap .happlyCta { display: block; margin-top: 0; }
+.happlySec:hover .happlyCtaWrap { transform: scale(1.07); }
+/* the ring (1px off the button) and a soft glow behind it: both are a gradient in the app's colour that travels round the button */
+.happlyCtaWrap::before, .happlyCtaWrap::after {
+  content: ""; position: absolute; inset: -3px; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s ease;
+  background: conic-gradient(from var(--ringA), rgba(var(--glow), 0.15) 0%, rgba(var(--glow), 1) 30%, rgba(var(--glow), 0.15) 65%, rgba(var(--glow), 0.15) 100%);
 }
-.happlySec:hover .happlyCta::before { opacity: 1; animation: happlyRing 3.2s linear infinite; }
+.happlyCtaWrap::before { padding: 2px; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.happlyCtaWrap::after { z-index: -1; filter: blur(10px); }
+.happlySec:hover .happlyCtaWrap::before { opacity: 1; animation: happlyRing 3.2s linear infinite; }
+.happlySec:hover .happlyCtaWrap::after { opacity: 0.9; animation: happlyRing 3.2s linear infinite; }
 @keyframes happlyRing { to { --ringA: 360deg; } }
 .happlyPhone { transform-origin: 50% 100%; /* grow from the bottom edge, so it rises */ transition: translate .4s cubic-bezier(.215, .61, .355, 1), scale .4s cubic-bezier(.215, .61, .355, 1); }
 .happlySec:hover .happlyPhone { scale: 1.03; }
-@media (prefers-reduced-motion: reduce) { .happlyPhone, .happlyCta { transition: none; }  }
+@media (prefers-reduced-motion: reduce) { .happlyPhone, .happlyCtaWrap, .happlyCta { transition: none; } .happlySec:hover .happlyCtaWrap::before, .happlySec:hover .happlyCtaWrap::after { animation: none; } }
 
 @media (max-width: 700px) {
   body { overflow: auto; }
