@@ -34,12 +34,12 @@ body { overflow: hidden; }
 /* three tiers: each app is a column with its icon, phone, title and button, all always showing */
 .happlyApps { display: flex; justify-content: center; align-items: flex-start; gap: clamp(24px, 5vw, 80px); width: 100%; }
 .happlySec { flex: 0 1 clamp(220px, 24vw, 340px); min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; }
-.happlyBrand { display: inline-flex; align-items: center; gap: 10px; }
-.happlyIcon { display: block; height: 56px; width: 56px; border-radius: 22%; filter: drop-shadow(0 12px 14px rgba(20, 28, 60, 0.38)) drop-shadow(0 3px 5px rgba(20, 28, 60, 0.28)); } /* the app icon floats, with a pronounced drop shadow */
-.habbotMark { display: block; height: 23px; width: auto; color: #FA983A; } /* habbot's wordmark, inline, in its orange. The three names are sized so their tall letters (d, l, h, b) are the same height */
-.drawlText { font-family: "Pally", sans-serif; font-weight: 700; font-size: 30px; letter-spacing: -0.02em; color: #0C1E44; }
+.happlyBrand { display: inline-flex; align-items: center; gap: 8px; }
+.happlyIcon { display: block; height: 42px; width: 42px; border-radius: 22%; filter: drop-shadow(0 12px 14px rgba(20, 28, 60, 0.38)) drop-shadow(0 3px 5px rgba(20, 28, 60, 0.28)); } /* the app icon floats, with a pronounced drop shadow */
+.habbotMark { display: block; height: 17px; width: auto; color: #FA983A; } /* habbot's wordmark, inline, in its orange. The three names are sized so their tall letters (d, l, h, b) are the same height */
+.drawlText { font-family: "Pally", sans-serif; font-weight: 700; font-size: 23px; letter-spacing: -0.02em; color: #0C1E44; }
 .sheepText {
-  font-family: "Crimson Pro", Georgia, serif; font-weight: 600; font-size: 32px; line-height: 1.25; padding: 0 0.1em 0.12em;
+  font-family: "Crimson Pro", Georgia, serif; font-weight: 600; font-size: 24px; line-height: 1.25; padding: 0 0.1em 0.12em;
   background: linear-gradient(135deg, #16234D 0%, #3351B3 100%); -webkit-background-clip: text; background-clip: text;
   color: transparent; -webkit-text-fill-color: transparent;
 }
