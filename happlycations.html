@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=84" />
+    <link rel="stylesheet" href="css/happlycations.css?v=85" />
 </head>
 
 <body>
@@ -114,7 +114,7 @@
             function go(i) {
                 i = Math.max(0, Math.min(secs.length - 1, i));
                 cur = i;
-                secs.forEach(function (s, k) { s.classList.toggle("on", k === i); s.setAttribute("aria-hidden", k !== i); });
+                secs.forEach(function (s, k) { s.classList.toggle("on", k === i); s.classList.toggle("before", k < i); s.setAttribute("aria-hidden", k !== i); });
                 tabBtns.forEach(function (t, k) { t.classList.toggle("on", k === i); t.setAttribute("aria-selected", k === i); });
                 pick(secs[i].dataset.app);
             }
