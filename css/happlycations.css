@@ -18,10 +18,10 @@ body { overflow: hidden; }
   display: grid; grid-template-rows: auto minmax(0, 1fr) auto; justify-items: center;
 }
 
-.happlyHead { margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; }
-.happlyHand { display: block; height: clamp(30px, 3.6vw, 52px); width: auto; }
+.happlyHead { --w: clamp(44px, 6vw, 84px); margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; }
+.happlyHand { display: block; height: clamp(30px, 3.6vw, 52px); width: auto; transform: translateY(calc(var(--w) * 0.06)); /* sits on the middle of the capital letters, not of the line box */ }
 .happlyWord {
-  font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(44px, 6vw, 84px); line-height: 1; letter-spacing: -0.02em;
+  font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: var(--w); line-height: 1; letter-spacing: -0.02em;
   color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px #111; /* outline only, no fill */
 }
 
