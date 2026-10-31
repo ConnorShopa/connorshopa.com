@@ -48,17 +48,17 @@ body { overflow: hidden; }
 .happlyBody .happlyBrand { margin-bottom: 18px; }
 
 .happlyTitle s { text-decoration-thickness: 0.08em; }
-.happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(24px, 2.3vw, 34px); line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; min-height: 2.3em; display: flex; align-items: center; justify-content: center; /* two lines of room, so every download button lines up */ }
+.happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(19px, 1.65vw, 25px); line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; min-height: 2.3em; display: flex; align-items: center; justify-content: center; /* two lines of room, so every download button lines up */ }
 .happlySub { margin: 8px 0 0; max-width: 30ch; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; line-height: 1.4; color: rgba(17, 17, 17, 0.6); }
 .happlyCta {
   margin-top: 14px; padding: 12px 22px; border-radius: 999px; background: #111; color: #fff; text-decoration: none;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; font-weight: 600; transition: transform .2s ease, background .2s ease;
 }
-.happlyCta:hover { background: #333; transform: translateY(-1px); }
+.happlyCta:hover { background: #333; transform: scale(1.07); }
 
 /* the phone: a thin metal rim, a thin black bezel, a drop shadow */
 .happlyPhone {
-  --h: calc(clamp(210px, 28dvh, 420px) * 0.8); /* the phone's resting height; on hover it scales up a touch (1.08) */
+  --h: calc(clamp(210px, 28dvh, 420px) * 0.8); /* the phone's resting height; on hover it scales up a touch (1.03) */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
   position: relative; aspect-ratio: 689 / 1406; height: var(--h);
   box-sizing: border-box; padding: calc(var(--u) * 2.6); /* the rim (0.9) + the thin black bezel (1.7) */
@@ -92,7 +92,7 @@ body { overflow: hidden; }
 .happlySec:hover .happlyCta::before { opacity: 1; animation: happlyRing 3.2s linear infinite; }
 @keyframes happlyRing { to { --ringA: 360deg; } }
 .happlyPhone { transform-origin: 50% 100%; /* grow from the bottom edge, so it rises */ transition: translate .4s cubic-bezier(.215, .61, .355, 1), scale .4s cubic-bezier(.215, .61, .355, 1); }
-.happlySec:hover .happlyPhone { scale: 1.08; }
+.happlySec:hover .happlyPhone { scale: 1.03; }
 @media (prefers-reduced-motion: reduce) { .happlyPhone, .happlyCta { transition: none; }  }
 
 @media (max-width: 700px) {
