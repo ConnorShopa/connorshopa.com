@@ -7,7 +7,7 @@ body { overflow: hidden; }
 
 .happlyPage {
   box-sizing: border-box; height: 100vh; height: 100dvh; padding: 22px; background: #f5f5f5;
-  display: grid; grid-template-columns: 1fr; align-content: center; justify-items: center; gap: 68px;
+  display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; justify-items: center; gap: 56px; padding-top: 14px;
 }
 
 /* the logo + wordmark, centred at the top */
@@ -42,24 +42,24 @@ body { overflow: hidden; }
 .happlySec { flex: 0 0 var(--sw); min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; scroll-snap-align: center; scroll-snap-stop: always; opacity: 0.3; scale: 0.9; transition: opacity .4s ease, scale .4s cubic-bezier(.215, .61, .355, 1); cursor: pointer; }
 .happlySec.on { opacity: 1; scale: 1; cursor: default; }
 /* the apps as tabs, icons only: the chosen one floats on a soft pill */
-.happlyTabs { display: flex; gap: 14px; }
-.happlyTab { padding: 8px; border: 0; border-radius: 22px; background: transparent; cursor: pointer; opacity: 0.5; transition: opacity .25s ease, background .25s ease, box-shadow .25s ease; }
-.happlyTab img { display: block; height: 40px; width: 40px; }
+.happlyTabs { display: flex; gap: 20px; }
+.happlyTab { padding: 10px; border: 0; border-radius: 34px; background: transparent; cursor: pointer; opacity: 0.5; transition: opacity .25s ease, background .25s ease, box-shadow .25s ease; }
+.happlyTab img { display: block; height: 84px; width: 84px; }
 .happlyTab:hover, .happlyTab.on { opacity: 1; }
 .happlyTab.on { background: #ececec; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.1); }
 .happlyTab:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
 .happlyBrand { display: inline-flex; align-items: center; gap: 8px; }
 .happlyIcon { display: block; height: 42px; width: 42px; border-radius: 22%; filter: drop-shadow(0 5px 7px rgba(20, 28, 60, 0.2)) drop-shadow(0 1px 2px rgba(20, 28, 60, 0.16)); } /* the app icon floats, with a soft drop shadow */
-.habbotMark { display: block; height: 17px; width: auto; color: #FA983A; } /* habbot's wordmark, inline, in its orange. The three names are sized so their tall letters (d, l, h, b) are the same height */
-.drawlText { font-family: "Pally", sans-serif; font-weight: 700; font-size: 23px; letter-spacing: -0.02em; color: #0C1E44; }
+.habbotMark { display: block; height: 28px; width: auto; color: #FA983A; } /* habbot's wordmark, inline, in its orange. The three names are sized so their tall letters (d, l, h, b) are the same height */
+.drawlText { font-family: "Pally", sans-serif; font-weight: 700; font-size: 38px; letter-spacing: -0.02em; color: #0C1E44; }
 .sheepText {
-  font-family: "Crimson Pro", Georgia, serif; font-weight: 600; font-size: 24px; line-height: 1.25; padding: 0 0.1em 0.12em;
+  font-family: "Crimson Pro", Georgia, serif; font-weight: 600; font-size: 40px; line-height: 1.25; padding: 0 0.1em 0.12em;
   background: linear-gradient(135deg, #16234D 0%, #3351B3 100%); -webkit-background-clip: text; background-clip: text;
   color: transparent; -webkit-text-fill-color: transparent;
 }
 .happlyBody { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .happlyBody .happlyPhone { margin-bottom: 48px; }
-.happlyBody .happlyBrand { margin-bottom: 18px; }
+.happlyBody .happlyBrand { margin-bottom: 14px; }
 
 .happlyTitle s { text-decoration-thickness: 0.08em; }
 .happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(19px, 1.65vw, 25px); line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; min-height: 2.3em; display: flex; align-items: center; justify-content: center; /* two lines of room, so every download button lines up */ }
@@ -117,4 +117,9 @@ body { overflow: hidden; }
   .happlyHead { --w: calc((100vw - 28px - 60px) / 8); }
   .happlyCarousel { --sw: 76vw; }
   .happlyPhone { --h: 240px; }
+  .happlyTabs { gap: 12px; }
+  .happlyTab img { height: 64px; width: 64px; }
+  .drawlText { font-size: 32px; }
+  .sheepText { font-size: 34px; }
+  .habbotMark { height: 24px; }
 }
