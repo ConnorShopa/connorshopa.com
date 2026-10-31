@@ -8,11 +8,11 @@ body { overflow: hidden; }
 
 .happlyPage {
   box-sizing: border-box; height: 100vh; height: 100dvh; padding: 22px; background: #f5f5f5;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+  display: grid; grid-template-columns: 1fr; align-content: center; justify-items: center; gap: 28px;
 }
-.happlyLeft { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; padding: 0 24px; }
+.happlyLeft { min-width: 0; display: flex; flex-direction: column; align-items: center; }
 
-.happlyHead { --w: clamp(34px, calc((50vw - 100px) / 6.5), 120px); /* the wordmark's height: as big as fits in the left half */ margin: 0; display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 500; }
+.happlyHead { --w: min(clamp(34px, calc((100vw - 120px) / 6.5), 150px), 15dvh); /* the wordmark's height: as big as fits across the page, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 500; }
 .happlyHand {
   display: block; flex: none; height: calc(var(--w) * 0.72); aspect-ratio: 91 / 135; transform: translateY(calc(var(--w) * -0.1)); /* sits on the middle of the capital letters, not of the line box (the wordmark's descenders hang below) */
   -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
@@ -27,11 +27,9 @@ body { overflow: hidden; }
 }
 .happlyPage[data-app="drawl"] .happlyHand { background: #0C1E44; } /* the hand is just the line drawing (no fill), in each app's colour */
 .happlyPage[data-app="drawl"] .happlyWord { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; } /* drawl's wordmark is the hand-scribbled artwork itself, not a mask */
-.happlyPage[data-app="sheep"] :is(.happlyWord, .happlyHand) { background-color: #4a6aa0; background-image: url("../assets/homeAssets/sheep_clouds.jpg"); background-size: calc(var(--w) * 5.97) auto; } /* one cloud photo spread across the logo + wordmark, set so the cloud tops sit at the letters' middle: sky above, cloud below */
 .happlyWordWrap { display: block; flex: none; }
-.happlyPage[data-app="sheep"] .happlyWordWrap { filter: drop-shadow(1px 0 0 #2F4AA3) drop-shadow(-1px 0 0 #2F4AA3) drop-shadow(0 1px 0 #2F4AA3) drop-shadow(0 -1px 0 #2F4AA3); } /* a 1px outline in the sheep icon's blue (#2F4AA3), drawn on a wrapper (the four chained shadows compound into a square 1px outline) because a mask would cut off a shadow on the masked element itself. Wordmark only. */
-.happlyPage[data-app="sheep"] .happlyWord { background-position: 0 calc(var(--w) * -1.0); }
-.happlyPage[data-app="sheep"] .happlyHand { background-position: calc(var(--w) * 0.48 + 12px) calc(var(--w) * -1.15); }
+.happlyPage[data-app="sheep"] .happlyWordWrap { filter: url(#happlyOutline); } /* sheep: the wordmark is a 1px outline in the sheep icon's blue, no fill (see the SVG filter in the page) */
+.happlyPage[data-app="sheep"] .happlyHand { background: #2F4AA3; }
 .happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
 /* the three apps as a row of buttons; the chosen one is a floaty pill */
@@ -89,7 +87,7 @@ body { overflow: hidden; }
 @media (max-width: 700px) {
   body { overflow: auto; }
   .happlyPage { height: auto; min-height: 100dvh; padding: 14px; grid-template-columns: 1fr; }
-  .happlyLeft { padding: 28px 0 32px; gap: 28px; }
+  .happlyLeft { min-width: 0; display: flex; flex-direction: column; align-items: center; }
   .happlyPanel { min-height: 480px; }
   .happlyPhone { --h: 380px; }
   .happlyHead { --w: calc((100vw - 28px - 60px) / 6.5); }

@@ -6,12 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=51" />
+    <link rel="stylesheet" href="css/happlycations.css?v=53" />
 </head>
 
 <body>
     <!-- a full-window page of its own, opened in a new tab from the home page as if it were another website.
          Left: the name, the three apps as a row of buttons, and the chosen app's text. Right: a rounded panel with its phone. -->
+    <!-- sheep's wordmark outline: grow the letters by 1px, keep only that ring (the letters themselves go clear), colour it the sheep icon's blue -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <filter id="happlyOutline" x="-3%" y="-10%" width="106%" height="120%" color-interpolation-filters="sRGB">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="grown" />
+            <feComposite in="grown" in2="SourceAlpha" operator="out" result="ring" />
+            <feFlood flood-color="#2F4AA3" result="ink" />
+            <feComposite in="ink" in2="ring" operator="in" />
+        </filter>
+    </svg>
+
     <main class="happlyPage" data-app="drawl">
         <div class="happlyLeft">
             <h1 class="happlyHead">
