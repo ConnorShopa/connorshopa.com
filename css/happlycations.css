@@ -28,7 +28,7 @@ body { overflow: hidden; }
 .happlyPage[data-app="drawl"] .happlyHand { background: #0C1E44; } /* the hand is just the line drawing (no fill), in each app's colour */
 .happlyPage[data-app="drawl"] .happlyWord { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; } /* drawl's wordmark is the hand-scribbled artwork itself, not a mask */
 .happlyWordWrap { display: block; flex: none; }
-.happlyPage[data-app="sheep"] .happlyWordWrap { filter: url(#happlyOutline); } /* sheep: the wordmark is a 1px outline in the sheep icon's blue, no fill (see the SVG filter in the page) */
+.happlyPage[data-app="sheep"] .happlyWordWrap { filter: url(#happlyOutline); } /* sheep: the wordmark is a 2px outline in the sheep icon's blue, no fill (see the SVG filter in the page) */
 .happlyPage[data-app="sheep"] .happlyHand { background: #2F4AA3; }
 .happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
