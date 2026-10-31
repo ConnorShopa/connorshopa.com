@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=56" />
+    <link rel="stylesheet" href="css/happlycations.css?v=58" />
 </head>
 
 <body>
@@ -52,17 +52,17 @@
             <div class="happlyPhone" data-app="habbot"><div class="happlyScreen"></div></div>
             <div class="happlyInfos">
                 <div class="happlyInfo on" data-app="drawl">
-                <h2 class="happlyTitle">Lorem ipsum dolor sit amet</h2>
+                <h2 class="happlyTitle">drawl</h2>
                 <p class="happlySub">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
                 <a class="happlyCta" href="#">Download drawl</a>
             </div>
                 <div class="happlyInfo" data-app="sheep">
-                <h2 class="happlyTitle">Lorem ipsum dolor sit amet</h2>
+                <h2 class="happlyTitle">sheep</h2>
                 <p class="happlySub">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
                 <a class="happlyCta" href="#">Download sheep</a>
             </div>
                 <div class="happlyInfo" data-app="habbot">
-                <h2 class="happlyTitle">Lorem ipsum dolor sit amet</h2>
+                <h2 class="happlyTitle">habbot</h2>
                 <p class="happlySub">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
                 <a class="happlyCta" href="#">Download habbot</a>
             </div>
@@ -93,15 +93,14 @@
                 want = app;
                 var me = ++token;
                 tabs.forEach(function (t) { var on = t.dataset.app === app; t.classList.toggle("on", on); t.setAttribute("aria-selected", on); });
-                // the phone swaps straight away
-                document.querySelectorAll(".happlyPhone").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
-                // the logo + wordmark (and their fill) and the download button swap at the midpoint of the transition
+                // the logo + wordmark (and their fill), the phone and the text + button all swap at the midpoint of the transition
                 function swap() {
                     page.setAttribute("data-app", app);
-                    document.querySelectorAll(".happlyInfo").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
+                    document.querySelectorAll(".happlyInfo, .happlyPhone").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
                 }
                 if (still.matches || !head.animate) { swap(); return; }
-                var out = [head, document.querySelector(".happlyInfo.on .happlyCta")];
+                function shown() { return [head, document.querySelector(".happlyPhone.on"), document.querySelector(".happlyInfo.on")]; }
+                var out = shown();
                 out.forEach(function (el) { el.getAnimations().forEach(function (a) { a.cancel(); }); });
                 var done = 0;
                 // a subtle scale about their centre with a fade, out then in
@@ -110,7 +109,7 @@
                         if (++done < out.length || me !== token) return;
                         out.forEach(function (x) { x.getAnimations().forEach(function (a) { a.cancel(); }); });
                         swap();
-                        [head, document.querySelector(".happlyInfo.on .happlyCta")].forEach(function (x) { x.animate([OUT, IN], { duration: 200, easing: "ease-out" }); });
+                        shown().forEach(function (x) { x.animate([OUT, IN], { duration: 200, easing: "ease-out" }); });
                     };
                 });
             }
