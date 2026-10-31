@@ -5,21 +5,21 @@
 html, body { margin: 0; height: 100%; background: #fff; color: #111; }
 body { overflow: hidden; }
 
-
 .happlyPage {
   box-sizing: border-box; height: 100vh; height: 100dvh; padding: 22px; background: #f5f5f5;
   display: grid; grid-template-columns: 1fr; align-content: center; justify-items: center; gap: 28px;
 }
-.happlyLeft { min-width: 0; display: flex; flex-direction: column; align-items: center; }
 
+/* the logo + wordmark, centred at the top */
 .happlyHead { --w: min(clamp(28px, calc((100vw - 120px) / 8.7), 112px), 11.5dvh); /* the wordmark's height: as big as fits across the page, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 500; }
 .happlyHand {
   display: block; flex: none; height: calc(var(--w) * 0.72); aspect-ratio: 91 / 135; transform: translateY(calc(var(--w) * -0.1)); /* sits on the middle of the capital letters, not of the line box (the wordmark's descenders hang below) */
   -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
   mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
 }
-/* the wordmark is a mask: whatever is painted behind it shows through the letters. Solid ink for drawl and sheep, the grass photo for habbot. */
+/* the wordmark is a mask: whatever is painted behind it shows through the letters. Each app has its own treatment below. */
 .happlyHand, .happlyWord { background: #111 center / cover no-repeat; }
+.happlyWordWrap { display: block; flex: none; }
 .happlyWord {
   display: block; height: var(--w); aspect-ratio: 418 / 70; flex: none;
   -webkit-mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
@@ -27,24 +27,24 @@ body { overflow: hidden; }
 }
 .happlyPage[data-app="drawl"] .happlyHand { background: #0C1E44; } /* the hand is just the line drawing (no fill), in each app's colour */
 .happlyPage[data-app="drawl"] .happlyWord { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; } /* drawl's wordmark is the hand-scribbled artwork itself, not a mask */
-.happlyWordWrap { display: block; flex: none; }
 .happlyPage[data-app="sheep"] .happlyWordWrap { filter: url(#happlyOutline); } /* sheep: the wordmark is a 2px outline in the sheep icon's blue, no fill (see the SVG filter in the page) */
 .happlyPage[data-app="sheep"] .happlyHand { background: #2F4AA3; }
 .happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
-/* the three apps as a row of buttons; the chosen one is a floaty pill */
-.happlyTabs { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; } /* the apps stacked, beside the phone */
-.happlyTab {
-  display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px 12px 12px; border: 0; border-radius: 999px; background: transparent; cursor: pointer; font: inherit;
-  transition: background .25s ease, box-shadow .25s ease;
-}
-.happlyTab img { display: block; height: 44px; width: auto; }
-.happlyTab:hover { background: rgba(0, 0, 0, 0.04); }
-.happlyTab.on { background: #ececec; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22), 0 2px 5px rgba(0, 0, 0, 0.12); }
-.happlyTab:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+/* three tiers: each app is a column showing only its icon until it's the chosen one, then its phone, title and button reveal */
+.happlyApps { display: flex; justify-content: center; align-items: flex-start; gap: clamp(24px, 5vw, 80px); width: 100%; }
+.happlySec { flex: 0 1 clamp(220px, 24vw, 340px); min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.happlyIcon { padding: 10px; border: 0; border-radius: 26px; background: transparent; cursor: pointer; opacity: 0.55; transition: opacity .25s ease, background .25s ease, box-shadow .25s ease; }
+.happlyIcon img { display: block; height: 64px; width: 64px; }
+.happlyIcon:hover, .happlySec.on .happlyIcon { opacity: 1; }
+.happlySec.on .happlyIcon { background: #ececec; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22), 0 2px 5px rgba(0, 0, 0, 0.12); } /* the chosen app's icon floats */
+.happlyIcon:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+/* the phone + text are always laid out (so nothing jumps) but only the chosen app's is visible: a subtle scale + fade */
+.happlyBody { display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; visibility: hidden; transform: scale(0.96); transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s; }
+.happlySec.on .happlyBody { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.happlyBody .happlyPhone { margin-bottom: 28px; }
+@media (prefers-reduced-motion: reduce) { .happlyBody, .happlyIcon { transition: none; } }
 
-.happlyInfo { display: none; flex-direction: column; align-items: center; text-align: center; }
-.happlyInfo.on { display: flex; }
 .happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.1; letter-spacing: -0.01em; }
 .happlySub { margin: 8px 0 0; max-width: 30ch; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; line-height: 1.4; color: rgba(17, 17, 17, 0.6); }
 .happlyCta {
@@ -53,22 +53,16 @@ body { overflow: hidden; }
 }
 .happlyCta:hover { background: #333; transform: translateY(-1px); }
 
-/* the phone sits on the page itself, no panel behind it. Perspective lets it flip in 3D */
-.happlyPanel { min-width: 0; display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; column-gap: clamp(32px, 6vw, 96px); row-gap: 28px; align-items: center; justify-content: center; }
-.happlyPanel > .happlyTabs { grid-column: 1; grid-row: 1 / span 2; }
-.happlyPanel > .happlyPhone { grid-column: 2; grid-row: 1; justify-self: center; }
-.happlyPanel > .happlyInfos { grid-column: 2; grid-row: 2; }
-.happlyInfos { display: grid; justify-items: center; }
+/* the phone: a thin metal rim, a thin black bezel, a drop shadow */
 .happlyPhone {
   --h: clamp(210px, 28dvh, 420px); /* the phone's height */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
-  display: none; position: relative; aspect-ratio: 689 / 1406; height: var(--h);
+  position: relative; aspect-ratio: 689 / 1406; height: var(--h);
   box-sizing: border-box; padding: calc(var(--u) * 2.6); /* the rim (0.9) + the thin black bezel (1.7) */
   border-radius: calc(var(--u) * 15);
   background: linear-gradient(135deg, #b3bfce 0%, #7f8da2 38%, #a9b5c5 62%, #76849a 100%); /* the blue-grey metal rim */
   box-shadow: 0 calc(var(--u) * 12) calc(var(--u) * 20) calc(var(--u) * -4) rgba(45, 30, 60, 0.45), 0 calc(var(--u) * 2) calc(var(--u) * 5) rgba(45, 30, 60, 0.22); /* the drop shadow */
 }
-.happlyPhone.on { display: block; }
 /* the screen: a screenshot or a video goes inside it. Its box-shadow draws the black bezel round it. */
 .happlyScreen {
   position: relative; width: 100%; height: 100%; overflow: hidden; background: #999;
@@ -77,29 +71,12 @@ body { overflow: hidden; }
 }
 .happlyScreen img, .happlyScreen video { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-.habbotMark { display: block; height: 20px; width: auto; color: #FA983A; } /* the wordmark, inline, in Habbot's orange. The three names are sized so their tall letters (d, l, h, b) are the same height: ~20px */
-
-.drawlText { font-family: "Pally", sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: #0C1E44; }
-.sheepText {
-  font-family: "Crimson Pro", Georgia, serif; font-weight: 600; font-size: 28px; line-height: 1.25; padding: 0 0.1em 0.12em;
-  background: linear-gradient(135deg, #16234D 0%, #3351B3 100%); -webkit-background-clip: text; background-clip: text;
-  color: transparent; -webkit-text-fill-color: transparent;
-}
-
-
 @media (max-width: 700px) {
   body { overflow: auto; }
-  .happlyPage { height: auto; min-height: 100dvh; padding: 14px; grid-template-columns: 1fr; }
-  .happlyLeft { min-width: 0; display: flex; flex-direction: column; align-items: center; }
-  .happlyPanel { min-height: 480px; }
-  .happlyPhone { --h: 380px; }
+  .happlyPage { height: auto; min-height: 100dvh; padding: 14px; }
   .happlyHead { --w: calc((100vw - 28px - 60px) / 8); }
-  .happlyPanel { grid-template-columns: 1fr; row-gap: 24px; }
-  .happlyPanel > .happlyTabs { grid-column: 1; grid-row: auto; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; }
-  .happlyPanel > .happlyPhone { grid-column: 1; grid-row: auto; }
-  .happlyPanel > .happlyInfos { grid-column: 1; grid-row: auto; }
-  .happlyTab { padding-right: 14px; }
-  .habbotMark { height: 17px; }
-  .drawlText { font-size: 22px; }
-  .sheepText { font-size: 24px; }
+  .happlyApps { flex-direction: column; align-items: center; gap: 40px; }
+  .happlySec { flex: none; width: 100%; }
+  .happlySec:not(.on) .happlyBody { display: none; } /* on a phone only the chosen app takes up room */
+  .happlyPhone { --h: 300px; }
 }
