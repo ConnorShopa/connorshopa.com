@@ -34,7 +34,7 @@ body { overflow: hidden; }
 }
 .happlyApp:hover { background: #efefef; box-shadow: 0 10px 22px -8px rgba(47, 39, 37, 0.45), 0 2px 5px rgba(47, 39, 37, 0.15); }
 .happlyApp img { display: block; height: 44px; width: auto; }
-.habbotMark { display: block; height: 24px; aspect-ratio: 80 / 19; background: #FA983A; -webkit-mask: url("../assets/homeAssets/habbot_projectImage.svg") center / contain no-repeat; mask: url("../assets/homeAssets/habbot_projectImage.svg") center / contain no-repeat; } /* the wordmark in Habbot's orange */
+.habbotMark { display: block; height: 24px; width: auto; color: #FA983A; } /* the wordmark, inline, in Habbot's orange */
 
 .drawlText { font-family: "Pally", sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: #0C1E44; }
 .sheepText {
