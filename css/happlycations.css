@@ -33,7 +33,7 @@ body { overflow: hidden; }
 .happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
 /* the three apps as a row of buttons; the chosen one is a floaty pill */
-.happlyTabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; }
+.happlyTabs { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; } /* the apps stacked, beside the phone */
 .happlyTab {
   display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px 12px 12px; border: 0; border-radius: 999px; background: transparent; cursor: pointer; font: inherit;
   transition: background .25s ease, box-shadow .25s ease;
@@ -54,7 +54,10 @@ body { overflow: hidden; }
 .happlyCta:hover { background: #333; transform: translateY(-1px); }
 
 /* the phone sits on the page itself, no panel behind it. Perspective lets it flip in 3D */
-.happlyPanel { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+.happlyPanel { min-width: 0; display: grid; grid-template-columns: auto auto; grid-template-rows: auto auto; column-gap: clamp(32px, 6vw, 96px); row-gap: 28px; align-items: center; justify-content: center; }
+.happlyPanel > .happlyTabs { grid-column: 1; grid-row: 1 / span 2; }
+.happlyPanel > .happlyPhone { grid-column: 2; grid-row: 1; justify-self: center; }
+.happlyPanel > .happlyInfos { grid-column: 2; grid-row: 2; }
 .happlyInfos { display: grid; justify-items: center; }
 .happlyPhone {
   --h: clamp(210px, 28dvh, 420px); /* the phone's height */
@@ -91,7 +94,10 @@ body { overflow: hidden; }
   .happlyPanel { min-height: 480px; }
   .happlyPhone { --h: 380px; }
   .happlyHead { --w: calc((100vw - 28px - 60px) / 6.5); }
-  .happlyTabs { gap: 10px; }
+  .happlyPanel { grid-template-columns: 1fr; row-gap: 24px; }
+  .happlyPanel > .happlyTabs { grid-column: 1; grid-row: auto; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  .happlyPanel > .happlyPhone { grid-column: 1; grid-row: auto; }
+  .happlyPanel > .happlyInfos { grid-column: 1; grid-row: auto; }
   .happlyTab { padding-right: 14px; }
   .habbotMark { height: 17px; }
   .drawlText { font-size: 22px; }
