@@ -41,7 +41,7 @@ body { overflow: hidden; }
 /* the apps as tabs, icons only: the chosen one floats on a soft pill */
 .happlyTabs { display: flex; gap: clamp(12px, 1.6vw, 24px); }
 .happlyTab { padding: 10px; border: 0; border-radius: 34px; background: transparent; cursor: pointer; opacity: 0.5; transition: opacity .25s ease, background .25s ease, box-shadow .25s ease; }
-.happlyTab img { display: block; height: clamp(72px, 8.5vw, 124px); width: clamp(72px, 8.5vw, 124px); }
+.happlyTab img { display: block; height: clamp(60px, 6vw, 92px); width: clamp(60px, 6vw, 92px); }
 .happlyTab:hover, .happlyTab.on { opacity: 1; }
 .happlyTab.on { background: #ececec; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.1); }
 .happlyTab:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
@@ -115,7 +115,7 @@ body { overflow: hidden; }
   .happlyHead { --w: calc((100vw - 28px - 60px) / 8); }
   .happlyPhone { --h: 300px; }
   .happlyTabs { gap: 12px; }
-  .happlyTab img { height: 80px; width: 80px; }
+  .happlyTab img { height: 64px; width: 64px; }
   .drawlText { font-size: 32px; }
   .sheepText { font-size: 34px; }
   .habbotMark { height: 24px; }
