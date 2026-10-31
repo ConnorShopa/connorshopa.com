@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=28" />
+    <link rel="stylesheet" href="css/happlycations.css?v=29" />
 </head>
 
 <body>
@@ -74,10 +74,22 @@
         (function () {
             var page = document.querySelector(".happlyPage");
             var tabs = document.querySelectorAll(".happlyTab");
+            var token = 0, still = window.matchMedia("(prefers-reduced-motion: reduce)");
             function pick(app) {
+                if (app === page.getAttribute("data-app")) return;
+                var from = document.querySelector(".happlyPhone.on"), to = document.querySelector('.happlyPhone[data-app="' + app + '"]'), me = ++token;
                 page.setAttribute("data-app", app);
                 tabs.forEach(function (t) { var on = t.dataset.app === app; t.classList.toggle("on", on); t.setAttribute("aria-selected", on); });
-                document.querySelectorAll(".happlyInfo, .happlyPhone").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
+                document.querySelectorAll(".happlyInfo").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
+                document.querySelectorAll(".happlyPhone").forEach(function (el) { el.getAnimations().forEach(function (a) { a.cancel(); }); });
+                function swap() { from.classList.remove("on"); to.classList.add("on"); }
+                if (still.matches || !from.animate) { swap(); return; }
+                // one full 360 turn about the vertical axis: the old phone turns the first half, the new one finishes it
+                from.animate([{ transform: "rotateY(0deg)" }, { transform: "rotateY(180deg)" }], { duration: 450, easing: "cubic-bezier(.55,.06,.68,.19)" }).onfinish = function () {
+                    if (me !== token) return;
+                    swap();
+                    to.animate([{ transform: "rotateY(180deg)" }, { transform: "rotateY(360deg)" }], { duration: 450, easing: "cubic-bezier(.215,.61,.355,1)" });
+                };
             }
             tabs.forEach(function (t) { t.addEventListener("click", function () { pick(t.dataset.app); }); });
         })();

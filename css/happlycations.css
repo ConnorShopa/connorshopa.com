@@ -40,10 +40,8 @@ body { overflow: hidden; }
 }
 .happlyCta:hover { background: #333; transform: translateY(-1px); }
 
-/* the rounded colour panel with the phone in it (placeholder colours per app) */
-.happlyPanel { min-width: 0; display: grid; place-items: center; border-radius: 48px; background: #0C1E44; transition: background .4s ease; }
-.happlyPage[data-app="sheep"] .happlyPanel { background: #2B4396; }
-.happlyPage[data-app="habbot"] .happlyPanel { background: #101820; }
+/* the phone sits on the page itself, no panel behind it. Perspective lets it flip in 3D */
+.happlyPanel { min-width: 0; display: grid; place-items: center; perspective: 1400px; }
 .happlyPhone {
   --h: clamp(300px, 40dvh, 560px); /* the phone's height */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
@@ -76,7 +74,7 @@ body { overflow: hidden; }
   body { overflow: auto; }
   .happlyPage { height: auto; min-height: 100dvh; padding: 14px; grid-template-columns: 1fr; }
   .happlyLeft { padding: 28px 0 32px; gap: 28px; }
-  .happlyPanel { min-height: 520px; border-radius: 36px; }
+  .happlyPanel { min-height: 480px; }
   .happlyPhone { --h: 380px; }
   .happlyTabs { gap: 10px; }
   .happlyTab { padding-right: 14px; }
