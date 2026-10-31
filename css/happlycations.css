@@ -41,18 +41,28 @@ body { overflow: hidden; }
 .happlyCta:hover { background: #333; transform: translateY(-1px); }
 
 /* the phone sits on the page itself, no panel behind it. Perspective lets it flip in 3D */
-.happlyPanel { min-width: 0; display: grid; place-items: center; perspective: 1400px; }
+.happlyPanel { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; perspective: 1400px; }
+.happlyInfos { display: grid; justify-items: center; }
 .happlyPhone {
-  --h: clamp(300px, 40dvh, 560px); /* the phone's height */
+  --h: clamp(210px, 28dvh, 420px); /* the phone's height */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
-  display: none; position: relative; aspect-ratio: 689 / 1406; height: var(--h);
-  box-sizing: border-box; padding: calc(var(--u) * 2.6); /* the rim (0.9) + the thin black bezel (1.7) */
-  border-radius: calc(var(--u) * 15);
-  background: linear-gradient(135deg, #b3bfce 0%, #7f8da2 38%, #a9b5c5 62%, #76849a 100%); /* the blue-grey metal rim */
-  box-shadow: 0 calc(var(--u) * 12) calc(var(--u) * 20) calc(var(--u) * -4) rgba(45, 30, 60, 0.45), 0 calc(var(--u) * 2) calc(var(--u) * 5) rgba(45, 30, 60, 0.22); /* the drop shadow */
+  --D: calc(var(--u) * 8); /* its thickness */
+  display: none; position: relative; aspect-ratio: 689 / 1406; height: var(--h); transform-style: preserve-3d;
 }
-/* the screen: a screenshot or a video goes inside it. Its box-shadow draws the black bezel round it. */
 .happlyPhone.on { display: block; }
+.happlyPhone > * { position: absolute; inset: 0; border-radius: calc(var(--u) * 15); box-sizing: border-box; }
+/* front: the metal rim, the thin black bezel and the screen */
+.happlyFace {
+  padding: calc(var(--u) * 2.6); transform: translateZ(calc(var(--D) / 2)); backface-visibility: hidden;
+  background: linear-gradient(135deg, #b3bfce 0%, #7f8da2 38%, #a9b5c5 62%, #76849a 100%);
+}
+/* the sides: slabs stacked through the thickness, a touch darker towards the back so the edge shades like metal */
+.happlyEdge { transform: translateZ(calc(var(--D) * var(--k))); background: linear-gradient(135deg, #8f9db1, #68768c 50%, #8794a8); filter: brightness(calc(1 + var(--k) * -0.25)); }
+/* back: plain metal, carries the drop shadow */
+.happlyBack {
+  transform: rotateY(180deg) translateZ(calc(var(--D) / 2)); backface-visibility: hidden; background: linear-gradient(135deg, #a9b5c5, #76849a);
+  box-shadow: 0 calc(var(--u) * 12) calc(var(--u) * 20) calc(var(--u) * -4) rgba(45, 30, 60, 0.45), 0 calc(var(--u) * 2) calc(var(--u) * 5) rgba(45, 30, 60, 0.22);
+}
 .happlyScreen {
   position: relative; width: 100%; height: 100%; overflow: hidden; background: #999;
   border-radius: calc(var(--u) * 12.4);
