@@ -21,7 +21,7 @@ body { overflow: hidden; }
 .happlyHead { margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; }
 .happlyHand { display: block; height: clamp(40px, 5vw, 70px); width: auto; }
 .happlyWord {
-  font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(44px, 6vw, 84px); line-height: 1; letter-spacing: -0.01em;
+  font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(44px, 6vw, 84px); line-height: 1; letter-spacing: -0.02em;
   color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px #111; /* outline only, no fill */
 }
 
