@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=40" />
+    <link rel="stylesheet" href="css/happlycations.css?v=41" />
 </head>
 
 <body>
@@ -76,7 +76,7 @@
             var page = document.querySelector(".happlyPage");
             var tabs = document.querySelectorAll(".happlyTab");
             var head = document.querySelector(".happlyHead"), token = 0, want = "drawl", still = window.matchMedia("(prefers-reduced-motion: reduce)");
-            var SHRUNK = { transform: "translateY(10px) scale(0.93)", opacity: 0 }, FULL = { transform: "translateY(0) scale(1)", opacity: 1 };
+            var SHRUNK = { transform: "translateY(10px) scale(0.93)" }, FULL = { transform: "translateY(0) scale(1)" };
             function shown() { return [head, document.querySelector(".happlyPhone.on"), document.querySelector(".happlyInfo.on .happlyCta")]; }
             function pick(app) {
                 if (app === want) return;

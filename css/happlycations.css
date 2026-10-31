@@ -26,6 +26,7 @@ body { overflow: hidden; }
   mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
 }
 .happlyPage[data-app="drawl"] :is(.happlyWord, .happlyHand) { background: url("../assets/homeAssets/drawl_sketch_fill.svg") center / 100% 100% no-repeat; } /* scribbled in, like a pen drawing */
+.happlyPage[data-app="drawl"] .happlyWord { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; } /* drawl's wordmark is the hand-scribbled artwork itself, not a mask */
 .happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
 /* the three apps as a row of buttons; the chosen one is a floaty pill */
