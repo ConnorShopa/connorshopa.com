@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=39" />
+    <link rel="stylesheet" href="css/happlycations.css?v=40" />
 </head>
 
 <body>
@@ -77,7 +77,7 @@
             var tabs = document.querySelectorAll(".happlyTab");
             var head = document.querySelector(".happlyHead"), token = 0, want = "drawl", still = window.matchMedia("(prefers-reduced-motion: reduce)");
             var SHRUNK = { transform: "translateY(10px) scale(0.93)", opacity: 0 }, FULL = { transform: "translateY(0) scale(1)", opacity: 1 };
-            function shown() { return [head, document.querySelector(".happlyPhone.on"), document.querySelector(".happlyInfo.on")]; }
+            function shown() { return [head, document.querySelector(".happlyPhone.on"), document.querySelector(".happlyInfo.on .happlyCta")]; }
             function pick(app) {
                 if (app === want) return;
                 want = app;
@@ -90,7 +90,7 @@
                 if (still.matches || !head.animate) { swap(); return; }
                 var out = shown();
                 out.forEach(function (el) { el.getAnimations().forEach(function (a) { a.cancel(); }); });
-                // the logo + wordmark, the phone and the text + download button all shrink a touch and sink, then the new ones appear and settle back up
+                // the logo + wordmark, the phone and the download button shrink (the title and subtitle just swap) a touch and sink, then the new ones appear and settle back up
                 var done = 0;
                 out.forEach(function (el) {
                     el.animate([FULL, SHRUNK], { duration: 170, easing: "cubic-bezier(.55,.06,.68,.19)", fill: "forwards" }).onfinish = function () {
