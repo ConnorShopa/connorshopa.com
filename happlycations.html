@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=42" />
+    <link rel="stylesheet" href="css/happlycations.css?v=44" />
 </head>
 
 <body>
@@ -20,7 +20,7 @@
             </h1>
 
             <div class="happlyTabs" role="tablist" aria-label="Apps">
-                <button class="happlyTab on" role="tab" aria-selected="true" data-app="drawl"><img class="drawlScribble" src="assets/homeAssets/drawl_scribble.svg" alt="" /><span class="drawlText">drawl</span></button>
+                <button class="happlyTab on" role="tab" aria-selected="true" data-app="drawl"><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /><span class="drawlText">drawl</span></button>
                 <button class="happlyTab" role="tab" aria-selected="false" data-app="sheep"><img src="assets/homeAssets/sheep_app_icon.svg" alt="" /><span class="sheepText">sheep</span></button>
                 <button class="happlyTab" role="tab" aria-selected="false" data-app="habbot"><img src="assets/homeAssets/habbot_app_icon.svg" alt="" /><svg class="habbotMark" role="img" aria-label="habbot" width="80" height="19" viewBox="0 0 80 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M3.38913 18.6369V11.0652C3.38913 8.98999 4.63921 7.47565 6.77823 7.47565C8.50056 7.47565 9.63952 8.59738 9.63952 10.925V18.6369H13.0286V10.1117C13.0286 6.52218 11.2507 4.36285 7.86163 4.36285C5.88929 4.36285 4.27808 5.23219 3.41691 6.57827L3.41688 0.464846H0L3.39105e-05 18.6369H3.38913Z" fill="currentColor"/>
@@ -75,31 +75,11 @@
         (function () {
             var page = document.querySelector(".happlyPage");
             var tabs = document.querySelectorAll(".happlyTab");
-            var head = document.querySelector(".happlyHead"), token = 0, want = "drawl", still = window.matchMedia("(prefers-reduced-motion: reduce)");
-            var SHRUNK = { transform: "translateY(10px) scale(0.93)" }, FULL = { transform: "translateY(0) scale(1)" };
-            function shown() { return [head, document.querySelector(".happlyPhone.on"), document.querySelector(".happlyInfo.on .happlyCta")]; }
             function pick(app) {
-                if (app === want) return;
-                want = app;
-                var me = ++token;
+                if (app === page.getAttribute("data-app")) return;
+                page.setAttribute("data-app", app);
                 tabs.forEach(function (t) { var on = t.dataset.app === app; t.classList.toggle("on", on); t.setAttribute("aria-selected", on); });
-                function swap() {
-                    page.setAttribute("data-app", app);
-                    document.querySelectorAll(".happlyInfo, .happlyPhone").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
-                }
-                if (still.matches || !head.animate) { swap(); return; }
-                var out = shown();
-                out.forEach(function (el) { el.getAnimations().forEach(function (a) { a.cancel(); }); });
-                // the logo + wordmark, the phone and the download button shrink (the title and subtitle just swap) a touch and sink, then the new ones appear and settle back up
-                var done = 0;
-                out.forEach(function (el) {
-                    el.animate([FULL, SHRUNK], { duration: 170, easing: "cubic-bezier(.55,.06,.68,.19)", fill: "forwards" }).onfinish = function () {
-                        if (++done < out.length || me !== token) return;
-                        out.forEach(function (x) { x.getAnimations().forEach(function (a) { a.cancel(); }); });
-                        swap();
-                        shown().forEach(function (x) { x.animate([SHRUNK, FULL], { duration: 260, easing: "cubic-bezier(.215,.61,.355,1)" }); });
-                    };
-                });
+                document.querySelectorAll(".happlyInfo, .happlyPhone").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
             }
             tabs.forEach(function (t) { t.addEventListener("click", function () { pick(t.dataset.app); }); });
         })();
