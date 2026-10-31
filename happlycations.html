@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=29" />
+    <link rel="stylesheet" href="css/happlycations.css?v=30" />
 </head>
 
 <body>
@@ -85,10 +85,10 @@
                 function swap() { from.classList.remove("on"); to.classList.add("on"); }
                 if (still.matches || !from.animate) { swap(); return; }
                 // one full 360 turn about the vertical axis: the old phone turns the first half, the new one finishes it
-                from.animate([{ transform: "rotateY(0deg)" }, { transform: "rotateY(180deg)" }], { duration: 450, easing: "cubic-bezier(.55,.06,.68,.19)" }).onfinish = function () {
+                from.animate([{ transform: "scale(1) rotateY(0deg)" }, { transform: "scale(0.8) rotateY(180deg)" }], { duration: 280, easing: "cubic-bezier(.55,.06,.68,.19)" }).onfinish = function () {
                     if (me !== token) return;
                     swap();
-                    to.animate([{ transform: "rotateY(180deg)" }, { transform: "rotateY(360deg)" }], { duration: 450, easing: "cubic-bezier(.215,.61,.355,1)" });
+                    to.animate([{ transform: "scale(0.8) rotateY(180deg)" }, { transform: "scale(1) rotateY(360deg)" }], { duration: 280, easing: "cubic-bezier(.215,.61,.355,1)" });
                 };
             }
             tabs.forEach(function (t) { t.addEventListener("click", function () { pick(t.dataset.app); }); });
