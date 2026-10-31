@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=32" />
+    <link rel="stylesheet" href="css/happlycations.css?v=33" />
 </head>
 
 <body>
@@ -36,9 +36,9 @@
 
         <!-- the phone, with the chosen app's text (lorem ipsum for now) below it. Each screen is a random grey for now; put an <img> or <video> inside .happlyScreen to fill it -->
         <div class="happlyPanel">
-            <div class="happlyPhone on" data-app="drawl"><div class="happlyFace"><div class="happlyScreen"></div></div></div>
-            <div class="happlyPhone" data-app="sheep"><div class="happlyFace"><div class="happlyScreen"></div></div></div>
-            <div class="happlyPhone" data-app="habbot"><div class="happlyFace"><div class="happlyScreen"></div></div></div>
+            <div class="happlyPhone on" data-app="drawl"><div class="happlyScreen"></div></div>
+            <div class="happlyPhone" data-app="sheep"><div class="happlyScreen"></div></div>
+            <div class="happlyPhone" data-app="habbot"><div class="happlyScreen"></div></div>
             <div class="happlyInfos">
                 <div class="happlyInfo on" data-app="drawl">
                 <h2 class="happlyTitle">Lorem ipsum dolor sit amet</h2>
@@ -68,23 +68,6 @@
                 do { l = 50 + Math.floor(Math.random() * 36); } while (used.some(function (u) { return Math.abs(u - l) < 8; }));
                 used.push(l);
                 el.style.background = "hsl(0 0% " + l + "%)";
-            });
-        })();
-
-        // give each phone its thickness: a stack of rounded slabs between the front face and the back (real depth when it turns)
-        (function () {
-            document.querySelectorAll(".happlyPhone").forEach(function (p) {
-                var n = 18, f = 0.4, i, s, t, e;
-                for (i = 0; i < n; i++) {
-                    t = -0.95 + 1.9 * i / (n - 1);            // -0.95 .. 0.95 across the thickness (-1 = back, 1 = front)
-                    e = Math.max(0, (Math.abs(t) - (1 - f)) / f); // 0 along the flat middle, up to 1 at the rounded edges
-                    s = document.createElement("div");
-                    s.className = "happlyEdge";
-                    s.style.setProperty("--k", (t / 2).toFixed(3));
-                    s.style.setProperty("--b", (1 - Math.sqrt(Math.max(0, 1 - e * e))).toFixed(3)); // 0 flat, 1 fully pulled in: a quarter-round bevel
-                    p.insertBefore(s, p.firstChild);
-                }
-                s = document.createElement("div"); s.className = "happlyBack"; p.insertBefore(s, p.firstChild);
             });
         })();
 
