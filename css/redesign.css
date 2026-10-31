@@ -1875,7 +1875,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* Drawl: set in Pally, next to its app icon */
 .drawlText { font-family: "Pally", "Nunito", "Host Grotesk", sans-serif; font-weight: 700; letter-spacing: -0.02em; }
-.logo.drawl { height: 54px; width: auto; max-width: none; margin-right: 0; border-radius: 22%; }
+.logo.drawl { height: 40px; width: auto; max-width: none; margin-right: 0; border-radius: 22%; }
 #projectList a:has(.logo.drawl) .bubble { margin-right: 2px; } /* the gap between the icon and the word */
 #projectList .drawlText { margin-left: 0; font-size: 0.8em; }
 .drawlText { color: #0C1E44; } /* the navy of the scribble in its icon */
