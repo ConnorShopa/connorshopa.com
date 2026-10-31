@@ -46,20 +46,23 @@ body { overflow: hidden; }
 .happlyPhone {
   --h: clamp(210px, 28dvh, 420px); /* the phone's height */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
-  --D: calc(var(--u) * 8); /* its thickness */
+  --D: calc(var(--u) * 10); /* its thickness */
+  --B: calc(var(--u) * 2.2); /* how far the edges are rounded off (the bevel) */
   display: none; position: relative; aspect-ratio: 689 / 1406; height: var(--h); transform-style: preserve-3d;
 }
 .happlyPhone.on { display: block; }
 .happlyPhone > * { position: absolute; inset: 0; border-radius: calc(var(--u) * 15); box-sizing: border-box; }
 /* front: the metal rim, the thin black bezel and the screen */
 .happlyFace {
-  padding: calc(var(--u) * 2.6); transform: translateZ(calc(var(--D) / 2)); backface-visibility: hidden;
+  inset: var(--B); border-radius: calc(var(--u) * 15 - var(--B));
+  padding: calc(var(--u) * 2.2); transform: translateZ(calc(var(--D) / 2)); backface-visibility: hidden;
   background: linear-gradient(135deg, #b3bfce 0%, #7f8da2 38%, #a9b5c5 62%, #76849a 100%);
 }
 /* the sides: slabs stacked through the thickness, a touch darker towards the back so the edge shades like metal */
-.happlyEdge { transform: translateZ(calc(var(--D) * var(--k))); background: linear-gradient(135deg, #8f9db1, #68768c 50%, #8794a8); filter: brightness(calc(1 + var(--k) * -0.25)); }
+.happlyEdge { inset: calc(var(--B) * var(--b)); border-radius: calc(var(--u) * 15 - var(--B) * var(--b)); transform: translateZ(calc(var(--D) * var(--k))); background: linear-gradient(135deg, #8f9db1, #68768c 50%, #8794a8); filter: brightness(calc(1.12 - var(--b) * 0.35 - var(--k) * 0.2)); }
 /* back: plain metal, carries the drop shadow */
 .happlyBack {
+  inset: var(--B); border-radius: calc(var(--u) * 15 - var(--B));
   transform: rotateY(180deg) translateZ(calc(var(--D) / 2)); backface-visibility: hidden; background: linear-gradient(135deg, #a9b5c5, #76849a);
   box-shadow: 0 calc(var(--u) * 12) calc(var(--u) * 20) calc(var(--u) * -4) rgba(45, 30, 60, 0.45), 0 calc(var(--u) * 2) calc(var(--u) * 5) rgba(45, 30, 60, 0.22);
 }
