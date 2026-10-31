@@ -371,10 +371,20 @@
     // ---------------------------------------------------------------- Happlycations (an empty skeleton on the old site)
     happlycations: {
       title: "Happlycations",
-      logo: H + "happlycations_logo.svg",
-      logoOnly: true,
+      logoOnly: true, // the name is set on the page itself (hand + Cooper wordmark), so the card's head stays empty
+      noNav: true,
       bg: "#CFE6FA",
-      pages: [pg("one", '<div class="clayMount"></div>')], // the 3D clay phone (js/clayphone.js), blue placeholder screen for now
+      // the structure: the name at the top, the 3D clay phone (js/clayphone.js, blue placeholder screen) in the middle,
+      // and the other apps along the bottom (placeholders for now: not links yet)
+      pages: [pg("one",
+        '<div class="happlyPage">' +
+        '<div class="happlyHead"><img class="happlyHand" src="' + H + 'happlycations_logo.svg" alt=""><span class="happlyWord" aria-hidden="true">Happlycations</span></div>' +
+        '<div class="clayMount"></div>' +
+        '<div class="happlyApps">' +
+        '<span class="happlyApp"><img src="' + H + 'drawl_logo.svg" alt=""><span class="drawlText">drawl</span></span>' +
+        '<span class="happlyApp"><img src="' + H + 'sheep_logo.svg" alt=""><span class="sheepText">sheep</span></span>' +
+        '<span class="happlyApp"><img class="happlyHabbot" src="' + H + 'habbot_projectImage.svg" alt="habbot"></span>' +
+        '</div></div>')],
     },
 
     // ---------------------------------------------------------------- Overhand (no content yet)
