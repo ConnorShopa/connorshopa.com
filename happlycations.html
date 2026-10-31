@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=90" />
+    <link rel="stylesheet" href="css/happlycations.css?v=92" />
 </head>
 
 <body>
@@ -32,17 +32,12 @@
         </div>
 
         <div class="happlyBelow">
-        <!-- the apps as tabs: just the icons -->
-        <div class="happlyTabs" role="tablist" aria-label="Apps">
-            <button class="happlyTab on" type="button" role="tab" aria-selected="true" aria-label="drawl" data-app="drawl"><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /></button>
-            <button class="happlyTab" type="button" role="tab" aria-selected="false" aria-label="sheep" data-app="sheep"><img src="assets/homeAssets/sheep_app_icon.svg" alt="" /></button>
-            <button class="happlyTab" type="button" role="tab" aria-selected="false" aria-label="habbot" data-app="habbot"><img src="assets/homeAssets/habbot_app_icon.svg" alt="" /></button>
-        </div>
 
         <div class="happlyCarousel">
         <div class="happlyApps">
-            <section class="happlySec on" data-app="drawl">
+            <section class="happlySec" data-app="drawl">
                 <div class="happlyBody">
+                    <img class="happlyAppIcon" src="assets/homeAssets/drawl_app_icon.svg" alt="" />
                     <div class="happlyBrand"><span class="drawlText">drawl</span></div>
                     <div class="happlyCtas">
                         <span class="happlyCtaWrap"><a class="happlyCta" href="#">Download drawl</a></span>
@@ -52,6 +47,7 @@
             </section>
             <section class="happlySec" data-app="sheep">
                 <div class="happlyBody">
+                    <img class="happlyAppIcon" src="assets/homeAssets/sheep_app_icon.svg" alt="" />
                     <div class="happlyBrand"><span class="sheepText">sheep</span></div>
                     <div class="happlyCtas">
                         <span class="happlyCtaWrap"><a class="happlyCta" href="#">Download sheep</a></span>
@@ -61,6 +57,7 @@
             </section>
             <section class="happlySec" data-app="habbot">
                 <div class="happlyBody">
+                    <img class="happlyAppIcon" src="assets/homeAssets/habbot_app_icon.svg" alt="" />
                     <div class="happlyBrand"><svg class="habbotMark" role="img" aria-label="habbot" width="80" height="19" viewBox="0 0 80 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M3.38913 18.6369V11.0652C3.38913 8.98999 4.63921 7.47565 6.77823 7.47565C8.50056 7.47565 9.63952 8.59738 9.63952 10.925V18.6369H13.0286V10.1117C13.0286 6.52218 11.2507 4.36285 7.86163 4.36285C5.88929 4.36285 4.27808 5.23219 3.41691 6.57827L3.41688 0.464846H0L3.39105e-05 18.6369H3.38913Z" fill="currentColor"/>
 <path d="M18.4975 19.0014C20.6365 19.0014 22.4977 18.0199 23.0811 16.5897L23.0255 18.6369H26.3035V10.2239C26.3035 6.38197 24.0256 4.36285 20.3309 4.36285C16.6085 4.36285 14.1639 6.32588 14.1639 9.32651H17.053C17.053 7.86826 18.1641 7.02696 20.1643 7.02696C21.8866 7.02696 22.9978 7.78413 22.9978 9.66303V9.9715L18.8864 10.28C15.6362 10.5324 13.8028 12.1308 13.8028 14.6828C13.8028 17.2908 15.5806 19.0014 18.4975 19.0014ZM19.6087 16.4214C18.0808 16.4214 17.2474 15.8045 17.2474 14.5426C17.2474 13.4208 18.053 12.7197 20.1643 12.5234L23.0255 12.2991V13.0282C23.0255 15.1595 21.6921 16.4214 19.6087 16.4214Z" fill="currentColor"/>
@@ -101,16 +98,14 @@
                     head.animate([{ transform: "scale(0.96)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }], { duration: 200, easing: "ease-out" }).onfinish = function () { head.getAnimations().forEach(function (x) { x.cancel(); }); };
                 };
             }
-            // two columns: logo + app icons on the left, one app at a time on the right; the phone and text slide/fade between apps
-            var tabBtns = document.querySelectorAll(".happlyTab"), cur = 0;
-            function go(i) {
-                i = Math.max(0, Math.min(secs.length - 1, i));
-                cur = i;
-                secs.forEach(function (s, k) { s.classList.toggle("on", k === i); s.classList.toggle("before", k < i); s.setAttribute("aria-hidden", k !== i); });
-                tabBtns.forEach(function (t, k) { t.classList.toggle("on", k === i); t.setAttribute("aria-selected", k === i); });
-                pick(secs[i].dataset.app);
-            }
-            tabBtns.forEach(function (t, k) { t.addEventListener("click", function () { go(k); }); t.addEventListener("keydown", function (e) { if (e.key === "ArrowRight") { go(cur + 1); tabBtns[cur].focus(); e.preventDefault(); } if (e.key === "ArrowLeft") { go(cur - 1); tabBtns[cur].focus(); e.preventDefault(); } }); });
+            // all three apps always show; pointing at (or tapping) one dresses the logo + wordmark in that app's fill
+            secs.forEach(function (s) {
+                var app = s.dataset.app;
+                s.addEventListener("mouseenter", function () { pick(app); });
+                s.addEventListener("focusin", function () { pick(app); });
+                s.addEventListener("click", function () { pick(app); });
+            });
+            if (page) page.addEventListener("mouseleave", function () { pick("drawl"); });
         })();
     </script>
 </body>
