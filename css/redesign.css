@@ -2,6 +2,8 @@
 /* Sailec, the Plunk design system's typeface; one file serves every weight */
 @font-face { font-family: "Sailec"; src: url("../fonts/Sailec/Sailec-Medium.otf") format("opentype"); font-weight: 100 900; font-style: normal; font-display: swap; }
 
+/* Pally (Indian Type Foundry, variable): Drawl */
+@font-face { font-family: "Pally"; src: url("../fonts/Pally/Pally-Variable.woff2") format("woff2"), url("../fonts/Pally/Pally-Variable.ttf") format("truetype"); font-weight: 400 700; font-style: normal; font-display: swap; }
 /* Nunito, the Drawble app's font (variable: every weight in one file) */
 @font-face { font-family: "Nunito"; src: url("../fonts/Nunito/Nunito-Variable.ttf") format("truetype"); font-weight: 200 1000; font-style: normal; font-display: swap; }
 @font-face { font-family: "Nunito"; src: url("../fonts/Nunito/Nunito-VariableItalic.ttf") format("truetype"); font-weight: 200 1000; font-style: italic; font-display: swap; }
@@ -1871,8 +1873,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .sharedStage .coverShot { grid-column: 2; position: relative; top: -26px; left: 110px; justify-self: center; align-self: center; height: min(calc(100% + 50px), 71.5vw); }
 @media (max-width: 700px) { .sharedStage { display: none; } }
 
-/* Drawl: set in Nunito, like the Drawble app */
-.drawlText { font-family: "Nunito", "Host Grotesk", sans-serif; font-weight: 800; letter-spacing: -0.07em; }
+/* Drawl: set in Pally, next to its app icon */
+.drawlText { font-family: "Pally", "Nunito", "Host Grotesk", sans-serif; font-weight: 700; letter-spacing: -0.02em; }
+.logo.drawl { height: 38px; width: auto; max-width: none; margin-right: 0.35em; border-radius: 22%; }
 .drawlText { background: linear-gradient(100deg, #F29A1F 0%, #F2879F 100%); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; text-shadow: none; }
 
 /* gradient text is only painted inside its own box: give the box room for descenders ("p") and the italic overhang */
@@ -2333,4 +2336,11 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
     width: calc(92vw / 0.4);
     justify-self: center;
   }
+}
+
+/* desktop: the project links float. The shadow is a big, very soft one pushed down and to the right, tinted a
+   little purple-grey, so each logo and label looks lifted off the page on its own */
+@media (min-width: 701px) {
+  #projectList { text-shadow: 12px 20px 40px rgba(45, 30, 60, 0.28); }
+  #projectList .logo, #projectList .wordmark { filter: drop-shadow(12px 20px 38px rgba(45, 30, 60, 0.34)); }
 }
