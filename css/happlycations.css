@@ -13,16 +13,20 @@ body { overflow: hidden; }
 .happlyLeft { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; padding: 0 24px; }
 
 .happlyHead { --w: clamp(36px, 5.6vw, 80px); /* the wordmark's height */ margin: 0; display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 500; }
-.happlyHand { display: block; height: clamp(30px, 3.6vw, 52px); width: auto; transform: translateY(calc(var(--w) * -0.1)); /* sits on the middle of the capital letters, not of the line box (the wordmark's descenders hang below) */ }
+.happlyHand {
+  display: block; flex: none; height: clamp(34px, 4vw, 58px); aspect-ratio: 91 / 135; transform: translateY(calc(var(--w) * -0.1)); /* sits on the middle of the capital letters, not of the line box (the wordmark's descenders hang below) */
+  -webkit-mask: url("../assets/homeAssets/happlycations_hand_mask.svg") center / contain no-repeat;
+  mask: url("../assets/homeAssets/happlycations_hand_mask.svg") center / contain no-repeat;
+}
 /* the wordmark is a mask: whatever is painted behind it shows through the letters. Solid ink for drawl and sheep, the grass photo for habbot. */
+.happlyHand, .happlyWord { background: #111 center / cover no-repeat; }
 .happlyWord {
   display: block; height: var(--w); aspect-ratio: 418 / 70; flex: none;
-  background: #111 center / cover no-repeat;
   -webkit-mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
   mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
 }
-.happlyPage[data-app="drawl"] .happlyWord { background: url("../assets/homeAssets/drawl_sketch_fill.svg") center / 100% 100% no-repeat; } /* scribbled in, like a pen drawing */
-.happlyPage[data-app="habbot"] .happlyWord { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
+.happlyPage[data-app="drawl"] :is(.happlyWord, .happlyHand) { background: url("../assets/homeAssets/drawl_sketch_fill.svg") center / 100% 100% no-repeat; } /* scribbled in, like a pen drawing */
+.happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
 /* the three apps as a row of buttons; the chosen one is a floaty pill */
 .happlyTabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 28px; }
