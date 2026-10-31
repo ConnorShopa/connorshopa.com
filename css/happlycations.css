@@ -34,7 +34,7 @@ body { overflow: hidden; }
 }
 .happlyApp:hover { background: #efefef; box-shadow: 0 10px 22px -8px rgba(47, 39, 37, 0.45), 0 2px 5px rgba(47, 39, 37, 0.15); }
 .happlyApp img { display: block; height: 44px; width: auto; }
-.habbotMark { display: block; height: 24px; width: auto; color: #FA983A; } /* the wordmark, inline, in Habbot's orange */
+.habbotMark { display: block; height: 20px; width: auto; color: #FA983A; } /* the wordmark, inline, in Habbot's orange. The three names are sized so their tall letters (d, l, h, b) are the same height: ~20px */
 
 .drawlText { font-family: "Pally", sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -0.02em; color: #0C1E44; }
 .sheepText {
@@ -49,5 +49,7 @@ body { overflow: hidden; }
   .happlyApps { gap: 6px 14px; }
   .happlyApp { padding: 8px 12px 8px 10px; }
   .happlyApp img { height: 34px; }
-  .habbotMark { height: 18px; }
+  .habbotMark { height: 17px; }
+  .drawlText { font-size: 22px; }
+  .sheepText { font-size: 24px; }
 }
