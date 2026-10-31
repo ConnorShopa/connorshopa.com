@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>connorshopa : projects : happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=8" />
+    <link rel="stylesheet" href="css/happlycations.css?v=9" />
 </head>
 
 <body>
@@ -20,7 +20,12 @@
             <span class="happlyWord">Happlycations</span>
         </h1>
 
-        <div class="clayMount" id="clay"></div>
+        <!-- three sections: hover one and it opens out while the others make room (the same easing and soft bubble look as the home page's hover bubble) -->
+        <div class="happlySections">
+            <section class="happlySec" tabindex="0" aria-label="Section one"></section>
+            <section class="happlySec" tabindex="0" aria-label="Section two"></section>
+            <section class="happlySec" tabindex="0" aria-label="Section three"></section>
+        </div>
 
         <div class="happlyApps">
             <span class="happlyApp"><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /><span class="drawlText">drawl</span></span>
@@ -35,12 +40,6 @@
 </svg></span>
         </div>
     </main>
-
-    <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }</script>
-    <script type="module">
-        import { mountClayPhone } from "./js/clayphone.js";
-        mountClayPhone(document.getElementById("clay"));
-    </script>
     <script>
         document.addEventListener("keydown", function (e) { if (e.key === "Escape") window.location.href = "./index.html"; });
     </script>

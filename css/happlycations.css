@@ -25,7 +25,20 @@ body { overflow: hidden; }
   color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px #111; /* outline only, no fill */
 }
 
-.clayMount { width: 100%; height: 100%; min-height: 0; }
+/* three sections: hovering (or tabbing to) one opens it out while the others make room */
+.happlySections { display: flex; gap: 16px; width: 100%; height: 100%; min-height: 0; padding: 28px 0; box-sizing: border-box; }
+.happlySec {
+  flex: 1 1 0; min-width: 0; outline: none;
+  border-radius: 44px; background: #F4F4F4; border: 1px solid rgba(47, 39, 37, 0.12);
+  box-shadow: 0px 8px 20px -8px rgba(47, 39, 37, 0.14), 0px 2px 6px 0px rgba(47, 39, 37, 0.05); /* the home page bubble's look */
+  transition: flex-grow .6s cubic-bezier(.22, 1, .36, 1), box-shadow .4s ease, background .4s ease;
+}
+.happlySections:has(.happlySec:hover, .happlySec:focus-visible) .happlySec { flex-grow: 0.55; }
+.happlySections .happlySec:hover, .happlySections .happlySec:focus-visible {
+  flex-grow: 2.6; background: #fff;
+  box-shadow: 0px 22px 44px -14px rgba(47, 39, 37, 0.28), 0px 4px 10px 0px rgba(47, 39, 37, 0.08);
+}
+@media (prefers-reduced-motion: reduce) { .happlySec { transition: none; } }
 
 .happlyApps { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 48px; }
 .happlyApp {
@@ -46,6 +59,8 @@ body { overflow: hidden; }
 @media (max-width: 700px) {
   .happlyPage { padding: 84px 20px 24px; }
   .happlyClose { top: 14px; right: 14px; }
+  .happlySections { flex-direction: column; gap: 10px; padding: 14px 0; }
+  .happlySec { border-radius: 28px; }
   .happlyApps { gap: 6px 14px; }
   .happlyApp { padding: 8px 12px 8px 10px; }
   .happlyApp img { height: 34px; }
