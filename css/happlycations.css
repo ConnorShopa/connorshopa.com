@@ -19,7 +19,7 @@ body { overflow: hidden; }
 }
 
 /* three apps side by side; each is a column */
-.happlySections { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; width: 100%; height: 100%; min-height: 0; max-width: 1200px; }
+.happlySections { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 96px; width: 100%; height: 100%; min-height: 0; max-width: 1280px; }
 .happlySec { display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 0; }
 .happlyBrand { display: inline-flex; align-items: center; gap: 8px; }
 .happlyBrand img { display: block; height: 44px; width: auto; }
@@ -33,7 +33,7 @@ body { overflow: hidden; }
 /* the phone gets the rest of the column's height */
 .happlyStage { container-type: size; flex: 1 1 0; min-height: 0; width: 100%; display: grid; place-items: center; padding: 24px 0 10px; box-sizing: border-box; }
 .happlyPhone {
-  --h: calc(min(100cqh, 100cqw * 2.0407) * 0.92); /* the tallest that fits the space left in its column */
+  --h: calc(min(100cqh, 100cqw * 2.0407) * 0.736); /* 0.8 of the tallest that fits the space left in its column */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
   position: relative; flex: none; aspect-ratio: 689 / 1406; height: var(--h);
   box-sizing: border-box; padding: calc(var(--u) * 2.6); /* the rim (0.9) + the thin black bezel (1.7) */
