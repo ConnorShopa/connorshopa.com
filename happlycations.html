@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=37" />
+    <link rel="stylesheet" href="css/happlycations.css?v=39" />
 </head>
 
 <body>
@@ -75,11 +75,31 @@
         (function () {
             var page = document.querySelector(".happlyPage");
             var tabs = document.querySelectorAll(".happlyTab");
+            var head = document.querySelector(".happlyHead"), token = 0, want = "drawl", still = window.matchMedia("(prefers-reduced-motion: reduce)");
+            var SHRUNK = { transform: "translateY(10px) scale(0.93)", opacity: 0 }, FULL = { transform: "translateY(0) scale(1)", opacity: 1 };
+            function shown() { return [head, document.querySelector(".happlyPhone.on"), document.querySelector(".happlyInfo.on")]; }
             function pick(app) {
-                if (app === page.getAttribute("data-app")) return;
-                page.setAttribute("data-app", app);
+                if (app === want) return;
+                want = app;
+                var me = ++token;
                 tabs.forEach(function (t) { var on = t.dataset.app === app; t.classList.toggle("on", on); t.setAttribute("aria-selected", on); });
-                document.querySelectorAll(".happlyInfo, .happlyPhone").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
+                function swap() {
+                    page.setAttribute("data-app", app);
+                    document.querySelectorAll(".happlyInfo, .happlyPhone").forEach(function (el) { el.classList.toggle("on", el.dataset.app === app); });
+                }
+                if (still.matches || !head.animate) { swap(); return; }
+                var out = shown();
+                out.forEach(function (el) { el.getAnimations().forEach(function (a) { a.cancel(); }); });
+                // the logo + wordmark, the phone and the text + download button all shrink a touch and sink, then the new ones appear and settle back up
+                var done = 0;
+                out.forEach(function (el) {
+                    el.animate([FULL, SHRUNK], { duration: 170, easing: "cubic-bezier(.55,.06,.68,.19)", fill: "forwards" }).onfinish = function () {
+                        if (++done < out.length || me !== token) return;
+                        out.forEach(function (x) { x.getAnimations().forEach(function (a) { a.cancel(); }); });
+                        swap();
+                        shown().forEach(function (x) { x.animate([SHRUNK, FULL], { duration: 260, easing: "cubic-bezier(.215,.61,.355,1)" }); });
+                    };
+                });
             }
             tabs.forEach(function (t) { t.addEventListener("click", function () { pick(t.dataset.app); }); });
         })();
