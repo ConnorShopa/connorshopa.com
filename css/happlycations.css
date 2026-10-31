@@ -15,8 +15,8 @@ body { overflow: hidden; }
 .happlyHead { --w: clamp(36px, 5.6vw, 80px); /* the wordmark's height */ margin: 0; display: flex; align-items: center; justify-content: center; gap: 12px; font-weight: 500; }
 .happlyHand {
   display: block; flex: none; height: clamp(34px, 4vw, 58px); aspect-ratio: 91 / 135; transform: translateY(calc(var(--w) * -0.1)); /* sits on the middle of the capital letters, not of the line box (the wordmark's descenders hang below) */
-  -webkit-mask: url("../assets/homeAssets/happlycations_hand_mask.svg") center / contain no-repeat;
-  mask: url("../assets/homeAssets/happlycations_hand_mask.svg") center / contain no-repeat;
+  -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
+  mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
 }
 /* the wordmark is a mask: whatever is painted behind it shows through the letters. Solid ink for drawl and sheep, the grass photo for habbot. */
 .happlyHand, .happlyWord { background: #111 center / cover no-repeat; }
@@ -25,7 +25,7 @@ body { overflow: hidden; }
   -webkit-mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
   mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
 }
-.happlyPage[data-app="drawl"] .happlyHand { background: #0C1E44; -webkit-mask-image: url("../assets/homeAssets/happlycations_hand_lines.svg"); mask-image: url("../assets/homeAssets/happlycations_hand_lines.svg"); } /* drawl's hand is just the blue line drawing, no fill */
+.happlyPage[data-app="drawl"] .happlyHand { background: #0C1E44; } /* the hand is just the line drawing (no fill), in each app's colour */
 .happlyPage[data-app="drawl"] .happlyWord { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; } /* drawl's wordmark is the hand-scribbled artwork itself, not a mask */
 .happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
