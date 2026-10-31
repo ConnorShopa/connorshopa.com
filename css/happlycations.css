@@ -24,14 +24,19 @@ body { overflow: hidden; }
   --h: calc(min(100cqh, (100cqw - 8cqw) / 3 * 2.0407) * 0.5); /* half of the tallest that fits both ways (3 across, and the height of the row) */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
   position: relative; flex: none; aspect-ratio: 689 / 1406; height: var(--h);
-  box-sizing: border-box; padding: calc(var(--u) * 1.6); /* a thin bezel */
-  border-radius: calc(var(--u) * 15); background: #000;
+  box-sizing: border-box; padding: calc(var(--u) * 2.6); /* the rim (0.9) + the thin black bezel (1.7) */
+  border-radius: calc(var(--u) * 15);
+  background: linear-gradient(135deg, #b3bfce 0%, #7f8da2 38%, #a9b5c5 62%, #76849a 100%); /* the blue-grey metal rim */
+  box-shadow: 0 calc(var(--u) * 12) calc(var(--u) * 20) calc(var(--u) * -4) rgba(45, 30, 60, 0.45), 0 calc(var(--u) * 2) calc(var(--u) * 5) rgba(45, 30, 60, 0.22); /* the drop shadow */
 }
-/* the screen: a screenshot or a video goes inside it */
+/* the screen: a screenshot or a video goes inside it. Its box-shadow draws the black bezel round it. */
 .happlyScreen {
-  width: 100%; height: 100%; overflow: hidden; background: #999;
-  border-radius: calc(var(--u) * 13.4); /* concentric with the phone's corner */
+  position: relative; width: 100%; height: 100%; overflow: hidden; background: #999;
+  border-radius: calc(var(--u) * 12.4);
+  box-shadow: 0 0 0 calc(var(--u) * 1.7) #000;
 }
+/* the pill at the top of the screen */
+.happlyScreen::after { content: ""; position: absolute; top: calc(var(--u) * 3); left: 50%; translate: -50% 0; width: calc(var(--u) * 26); height: calc(var(--u) * 7); border-radius: 999px; background: #000; }
 .happlyScreen img, .happlyScreen video { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 .happlyApps { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 48px; }
