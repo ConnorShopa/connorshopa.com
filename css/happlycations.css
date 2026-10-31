@@ -7,7 +7,7 @@ body { overflow: hidden; }
 
 .happlyPage {
   box-sizing: border-box; height: 100vh; height: 100dvh; padding: 22px; background: #f5f5f5;
-  display: grid; grid-template-columns: 1fr; align-content: center; justify-items: center; gap: 28px;
+  display: grid; grid-template-columns: 1fr; align-content: center; justify-items: center; gap: 48px;
 }
 
 /* the logo + wordmark, centred at the top */
@@ -44,7 +44,7 @@ body { overflow: hidden; }
   color: transparent; -webkit-text-fill-color: transparent;
 }
 .happlyBody { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.happlyBody .happlyPhone { margin-bottom: 36px; }
+.happlyBody .happlyPhone { margin-bottom: 48px; }
 .happlyBody .happlyBrand { margin-bottom: 18px; }
 
 .happlyTitle s { text-decoration-thickness: 0.08em; }
@@ -58,7 +58,7 @@ body { overflow: hidden; }
 
 /* the phone: a thin metal rim, a thin black bezel, a drop shadow */
 .happlyPhone {
-  --h: clamp(210px, 28dvh, 420px); /* the phone's height */
+  --h: calc(clamp(210px, 28dvh, 420px) * 0.8); /* the phone's resting height; on hover it scales up by 1.25 to the full size */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
   position: relative; aspect-ratio: 689 / 1406; height: var(--h);
   box-sizing: border-box; padding: calc(var(--u) * 2.6); /* the rim (0.9) + the thin black bezel (1.7) */
@@ -80,8 +80,8 @@ body { overflow: hidden; }
 .happlySec[data-app="habbot"] { --glow: 250, 152, 58; }
 .happlyCta { transition: transform .2s ease, background .2s ease, box-shadow .3s ease; }
 .happlySec:hover .happlyCta { box-shadow: 0 6px 24px 0 rgba(var(--glow), 0.55), 0 0 14px 2px rgba(var(--glow), 0.4); }
-.happlyPhone { transform-origin: 50% 85%; transition: translate .4s cubic-bezier(.215, .61, .355, 1); }
-.happlySec:hover .happlyPhone { translate: 0 -10px; }
+.happlyPhone { transform-origin: 50% 40%; transition: translate .4s cubic-bezier(.215, .61, .355, 1), scale .4s cubic-bezier(.215, .61, .355, 1); }
+.happlySec:hover .happlyPhone { translate: 0 -6px; scale: 1.25; }
 @media (prefers-reduced-motion: reduce) { .happlyPhone, .happlyCta { transition: none; }  }
 
 @media (max-width: 700px) {
@@ -90,5 +90,5 @@ body { overflow: hidden; }
   .happlyHead { --w: calc((100vw - 28px - 60px) / 8); }
   .happlyApps { flex-direction: column; align-items: center; gap: 40px; }
   .happlySec { flex: none; width: 100%; }
-  .happlyPhone { --h: 300px; }
+  .happlyPhone { --h: 240px; }
 }
