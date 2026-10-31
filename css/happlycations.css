@@ -19,8 +19,8 @@ body { overflow: hidden; }
 }
 
 /* three apps side by side; each is a column */
-.happlySections { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: 96px; width: 100%; height: 100%; min-height: 0; max-width: 1280px; align-items: center; }
-.happlySec { display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 0; }
+.happlySections { display: flex; gap: 96px; width: 100%; height: 100%; min-height: 0; max-width: 1280px; align-items: center; }
+.happlySec { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 0; }
 /* Habbot's section sits on its grass, in a rounded card */
 .happlySec.onGrass {
   padding: 30px 10px 32px; border-radius: 44px; color: #fff;
@@ -43,7 +43,7 @@ body { overflow: hidden; }
 /* the phone gets the rest of the column's height */
 .happlyStage { container-type: inline-size; width: 100%; display: grid; place-items: center; padding: 14px 0 20px; box-sizing: border-box; }
 .happlyPhone {
-  --h: calc(min(100cqw * 2.0407, 100dvh - 420px) * 0.8); /* 0.8 of the tallest that fits the column's width and the window's height */
+  --h: calc(min(100cqw * 2.0407, 100dvh - 420px) * 0.64); /* 0.64 of the tallest that fits the column's width and the window's height */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
   position: relative; flex: none; aspect-ratio: 689 / 1406; height: var(--h);
   box-sizing: border-box; padding: calc(var(--u) * 2.6); /* the rim (0.9) + the thin black bezel (1.7) */
@@ -68,20 +68,20 @@ body { overflow: hidden; }
   color: transparent; -webkit-text-fill-color: transparent;
 }
 
-/* hover (or tab to) a section and its column grows wider while the other two give way. The columns animate, and the
-   phone scales with its column. The easing is the home page's cursor easing (power3.out). */
+/* hover (or tab to) a section and it grows wider while the other two give way. The columns animate (flex-grow), and the
+   easing is the home page's cursor easing (power3.out). */
 @media (min-width: 701px) {
-  .happlySections { transition: grid-template-columns 0.55s cubic-bezier(0.215, 0.61, 0.355, 1); }
-  .happlySections:has(.happlySec:nth-child(1):is(:hover, :focus-within)) { grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.75fr) minmax(0, 0.75fr); }
-  .happlySections:has(.happlySec:nth-child(2):is(:hover, :focus-within)) { grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.5fr) minmax(0, 0.75fr); }
-  .happlySections:has(.happlySec:nth-child(3):is(:hover, :focus-within)) { grid-template-columns: minmax(0, 0.75fr) minmax(0, 0.75fr) minmax(0, 1.5fr); }
+  .happlySec { transition: flex-grow 0.55s cubic-bezier(0.215, 0.61, 0.355, 1); }
+  .happlySections:has(.happlySec:is(:hover, :focus-within)) .happlySec { flex-grow: 0.5; }
+  .happlySections:has(.happlySec:is(:hover, :focus-within)) .happlySec:is(:hover, :focus-within) { flex-grow: 1.5; }
 }
-@media (prefers-reduced-motion: reduce) { .happlySections { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .happlySec { transition: none !important; } }
 
 @media (max-width: 700px) {
   body { overflow: auto; }
   .happlyPage { height: auto; min-height: 100dvh; padding: 28px 20px 40px; grid-template-rows: auto auto; }
-  .happlySections { grid-template-columns: 1fr; gap: 56px; height: auto; }
+  .happlySections { flex-direction: column; gap: 56px; height: auto; }
+  .happlySec { flex: none; }
   .happlyPhone { --h: 380px; }
   .habbotMark { height: 17px; }
   .drawlText { font-size: 22px; }
