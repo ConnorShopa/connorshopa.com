@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=60" />
+    <link rel="stylesheet" href="css/happlycations.css?v=61" />
 </head>
 
 <body>
@@ -35,8 +35,8 @@
         <!-- three tiers, one per app. Each shows its app icon as the hint; hover (or tap) one and its phone, title and button reveal.
              Each screen is a random grey for now; put an <img> or <video> inside .happlyScreen to fill it. -->
         <div class="happlyApps">
-            <section class="happlySec on" data-app="drawl">
-                <button class="happlyIcon" type="button" aria-label="drawl" aria-pressed="true"><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /></button>
+            <section class="happlySec" data-app="drawl">
+                <button class="happlyIcon" type="button" aria-label="drawl"><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /></button>
                 <div class="happlyBody">
                     <div class="happlyPhone"><div class="happlyScreen"></div></div>
                     <h2 class="happlyTitle">drawl</h2>
@@ -45,7 +45,7 @@
                 </div>
             </section>
             <section class="happlySec" data-app="sheep">
-                <button class="happlyIcon" type="button" aria-label="sheep" aria-pressed="false"><img src="assets/homeAssets/sheep_app_icon.svg" alt="" /></button>
+                <button class="happlyIcon" type="button" aria-label="sheep"><img src="assets/homeAssets/sheep_app_icon.svg" alt="" /></button>
                 <div class="happlyBody">
                     <div class="happlyPhone"><div class="happlyScreen"></div></div>
                     <h2 class="happlyTitle">sheep</h2>
@@ -54,7 +54,7 @@
                 </div>
             </section>
             <section class="happlySec" data-app="habbot">
-                <button class="happlyIcon" type="button" aria-label="habbot" aria-pressed="false"><img src="assets/homeAssets/habbot_app_icon.svg" alt="" /></button>
+                <button class="happlyIcon" type="button" aria-label="habbot"><img src="assets/homeAssets/habbot_app_icon.svg" alt="" /></button>
                 <div class="happlyBody">
                     <div class="happlyPhone"><div class="happlyScreen"></div></div>
                     <h2 class="happlyTitle">habbot</h2>
@@ -77,7 +77,7 @@
             });
         })();
 
-        // hovering or tapping an app's icon reveals that app (the last one stays open); the logo + wordmark fill follows it
+        // the apps are always showing; pointing at (or tapping) one just dresses the logo + wordmark in that app's fill
         (function () {
             var page = document.querySelector(".happlyPage"), head = document.querySelector(".happlyHead");
             var secs = document.querySelectorAll(".happlySec"), token = 0, want = "drawl";
@@ -86,7 +86,6 @@
                 if (app === want) return;
                 want = app;
                 var me = ++token;
-                secs.forEach(function (s) { var on = s.dataset.app === app; s.classList.toggle("on", on); s.querySelector(".happlyIcon").setAttribute("aria-pressed", on); });
                 function swap() { page.setAttribute("data-app", app); }
                 if (still.matches || !head.animate) { swap(); return; }
                 head.getAnimations().forEach(function (a) { a.cancel(); });
@@ -99,9 +98,9 @@
             }
             secs.forEach(function (s) {
                 var go = function () { pick(s.dataset.app); };
-                s.querySelector(".happlyIcon").addEventListener("click", go);
-                s.querySelector(".happlyIcon").addEventListener("mouseenter", go);
-                s.querySelector(".happlyIcon").addEventListener("focus", go);
+                s.addEventListener("mouseenter", go);
+                s.addEventListener("focusin", go);
+                s.addEventListener("click", go);
             });
         })();
     </script>

@@ -31,19 +31,13 @@ body { overflow: hidden; }
 .happlyPage[data-app="sheep"] .happlyHand { background: #2F4AA3; }
 .happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
-/* three tiers: each app is a column showing only its icon until it's the chosen one, then its phone, title and button reveal */
+/* three tiers: each app is a column with its icon, phone, title and button, all always showing */
 .happlyApps { display: flex; justify-content: center; align-items: flex-start; gap: clamp(24px, 5vw, 80px); width: 100%; }
 .happlySec { flex: 0 1 clamp(220px, 24vw, 340px); min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; }
-.happlyIcon { padding: 10px; border: 0; border-radius: 26px; background: transparent; cursor: pointer; opacity: 0.55; transition: opacity .25s ease, background .25s ease, box-shadow .25s ease; }
+.happlyIcon { padding: 0; border: 0; background: transparent; cursor: default; }
 .happlyIcon img { display: block; height: 64px; width: 64px; }
-.happlyIcon:hover, .happlySec.on .happlyIcon { opacity: 1; }
-.happlySec.on .happlyIcon { background: #ececec; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22), 0 2px 5px rgba(0, 0, 0, 0.12); } /* the chosen app's icon floats */
-.happlyIcon:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
-/* the phone + text are always laid out (so nothing jumps) but only the chosen app's is visible: a subtle scale + fade */
-.happlyBody { display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; visibility: hidden; transform: scale(0.96); transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s; }
-.happlySec.on .happlyBody { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+.happlyBody { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .happlyBody .happlyPhone { margin-bottom: 28px; }
-@media (prefers-reduced-motion: reduce) { .happlyBody, .happlyIcon { transition: none; } }
 
 .happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(32px, 3.6vw, 52px); line-height: 1.1; letter-spacing: -0.01em; }
 .happlySub { margin: 8px 0 0; max-width: 30ch; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; line-height: 1.4; color: rgba(17, 17, 17, 0.6); }
@@ -77,6 +71,5 @@ body { overflow: hidden; }
   .happlyHead { --w: calc((100vw - 28px - 60px) / 8); }
   .happlyApps { flex-direction: column; align-items: center; gap: 40px; }
   .happlySec { flex: none; width: 100%; }
-  .happlySec:not(.on) .happlyBody { display: none; } /* on a phone only the chosen app takes up room */
   .happlyPhone { --h: 300px; }
 }
