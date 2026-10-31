@@ -32,8 +32,21 @@ body { overflow: hidden; }
 .happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
 /* three tiers: each app is a column with its icon, phone, title and button, all always showing */
-.happlyApps { display: flex; justify-content: center; align-items: flex-start; gap: clamp(24px, 5vw, 80px); width: 100%; }
-.happlySec { flex: 0 1 clamp(220px, 24vw, 340px); min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.happlyCarousel { --sw: clamp(240px, 26vw, 360px); position: relative; width: 100%; }
+.happlyApps {
+  position: relative; display: flex; gap: clamp(32px, 5vw, 72px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  padding: 36px calc(50% - var(--sw) / 2); margin: -36px 0; /* side padding lets the first and last app sit in the centre; the vertical padding leaves room for the hover glow */
+}
+.happlyApps::-webkit-scrollbar { display: none; }
+.happlyApps:focus-visible { outline: none; }
+.happlySec { flex: 0 0 var(--sw); min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 24px; scroll-snap-align: center; scroll-snap-stop: always; opacity: 0.3; scale: 0.9; transition: opacity .4s ease, scale .4s cubic-bezier(.215, .61, .355, 1); cursor: pointer; }
+.happlySec.on { opacity: 1; scale: 1; cursor: default; }
+/* the arrows sit just outside the centred app */
+.happlyArrow { position: absolute; top: 50%; z-index: 2; width: 44px; height: 44px; margin-top: -22px; display: grid; place-items: center; border: 0; border-radius: 50%; background: #fff; color: #111; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.1); transition: opacity .25s ease, transform .2s ease; }
+.happlyArrow:hover:not(:disabled) { transform: scale(1.08); }
+.happlyArrow:disabled { opacity: 0.25; cursor: default; }
+.happlyArrow.prev { left: calc(50% - var(--sw) / 2 - 72px); }
+.happlyArrow.next { right: calc(50% - var(--sw) / 2 - 72px); }
 .happlyBrand { display: inline-flex; align-items: center; gap: 8px; }
 .happlyIcon { display: block; height: 42px; width: 42px; border-radius: 22%; filter: drop-shadow(0 5px 7px rgba(20, 28, 60, 0.2)) drop-shadow(0 1px 2px rgba(20, 28, 60, 0.16)); } /* the app icon floats, with a soft drop shadow */
 .habbotMark { display: block; height: 17px; width: auto; color: #FA983A; } /* habbot's wordmark, inline, in its orange. The three names are sized so their tall letters (d, l, h, b) are the same height */
@@ -101,7 +114,7 @@ body { overflow: hidden; }
   body { overflow: auto; }
   .happlyPage { height: auto; min-height: 100dvh; padding: 14px; }
   .happlyHead { --w: calc((100vw - 28px - 60px) / 8); }
-  .happlyApps { flex-direction: column; align-items: center; gap: 40px; }
-  .happlySec { flex: none; width: 100%; }
+  .happlyCarousel { --sw: 76vw; }
+  .happlyArrow { display: none; } /* swipe on a phone */
   .happlyPhone { --h: 240px; }
 }
