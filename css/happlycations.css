@@ -44,7 +44,8 @@ body { overflow: hidden; }
   color: transparent; -webkit-text-fill-color: transparent;
 }
 .happlyBody { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.happlyBody .happlyPhone { margin-bottom: 28px; }
+.happlyBody .happlyPhone { margin-bottom: 36px; }
+.happlyBody .happlyBrand { margin-bottom: 18px; }
 
 .happlyTitle s { text-decoration-thickness: 0.08em; }
 .happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(24px, 2.3vw, 34px); line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; }
