@@ -50,7 +50,7 @@ body { overflow: hidden; }
 .happlyCta:hover { background: #333; transform: translateY(-1px); }
 
 /* the phone sits on the page itself, no panel behind it. Perspective lets it flip in 3D */
-.happlyPanel { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; perspective: 1400px; }
+.happlyPanel { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
 .happlyInfos { display: grid; justify-items: center; }
 .happlyPhone {
   --h: clamp(210px, 28dvh, 420px); /* the phone's height */
