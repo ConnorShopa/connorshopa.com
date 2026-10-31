@@ -28,7 +28,7 @@
     li.classList.add("deckCard");
     // the card in front is the colour of its project view's card (so the card opens out of and closes back into the same colour)
     var vw = document.getElementById("view-" + a.getAttribute("data-view"));
-    li.style.setProperty("--card", (vw && vw.style.getPropertyValue("--view-bg")) || "#F4F4F4");
+    li.style.setProperty("--card", (vw && vw.style.getPropertyValue("--view-bg")) || a.getAttribute("data-bubble") || "#F4F4F4");
     cards.push(li);
   });
   var N = cards.length;

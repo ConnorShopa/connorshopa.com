@@ -2,13 +2,6 @@
 /* Sailec, the Plunk design system's typeface; one file serves every weight */
 @font-face { font-family: "Sailec"; src: url("../fonts/Sailec/Sailec-Medium.otf") format("opentype"); font-weight: 100 900; font-style: normal; font-display: swap; }
 
-/* Cooper (Owen Earl, indestructible type*): the Happlycations view */
-@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
-@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
-@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-ExtraBold.woff2") format("woff2"); font-weight: 800; font-style: normal; font-display: swap; }
-@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-Black.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
 /* Pally (Indian Type Foundry, variable): Drawl */
 @font-face { font-family: "Pally"; src: url("../fonts/Pally/Pally-Variable.woff2") format("woff2"), url("../fonts/Pally/Pally-Variable.ttf") format("truetype"); font-weight: 400 700; font-style: normal; font-display: swap; }
 /* Nunito, the Drawble app's font (variable: every weight in one file) */
@@ -2333,8 +2326,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   html:has(.panelText:not([hidden])) .deckMode { transform: scale(0) !important; }
 }
 
-/* the 3D clay phone in the Happlycations view: fills the page, centred */
-.clayMount { width: 100%; height: 100%; min-height: 360px; }
 
 /* desktop: the row under an open project wraps onto more lines when it won't fit as one.
    It is shown shrunk to 40% (MINI in js/project.js), so it gets a layout width of 92vw / 0.4: that way it only
@@ -2353,24 +2344,3 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   #projectList { text-shadow: 12px 20px 40px rgba(45, 30, 60, 0.28); }
   #projectList .logo, #projectList .wordmark { filter: drop-shadow(12px 20px 38px rgba(45, 30, 60, 0.34)); }
 }
-
-/* ---- Happlycations view: the hand + the name in Cooper at the top, the work in the middle, the sister apps along the bottom ---- */
-#view-happlycations .viewBody { inset: 44px 48px 36px; }
-.happlyPage { position: absolute; inset: 0; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; justify-items: center; }
-.happlyHead { display: flex; align-items: center; justify-content: center; gap: 10px; }
-.happlyHand { display: block; height: 64px; width: auto; }
-.happlyWord {
-  font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: 78px; line-height: 1; letter-spacing: -0.01em;
-  color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px #111; /* outline only, no fill */
-}
-.happlyPage .clayMount { width: 100%; height: 100%; min-height: 0; }
-.happlyApps { display: flex; align-items: center; justify-content: center; gap: 48px; }
-.happlyApp {
-  display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px 10px 14px; border-radius: 999px;
-  transition: background .25s ease, box-shadow .25s ease;
-}
-.happlyApp:hover { background: #efefef; box-shadow: 0 10px 22px -8px rgba(47, 39, 37, 0.45), 0 2px 5px rgba(47, 39, 37, 0.15); }
-.happlyApp img { display: block; height: 44px; width: auto; }
-.happlyApp img.happlyHabbot { height: 24px; }
-.happlyApp .drawlText { font-size: 26px; }
-.happlyApp .sheepText { font-size: 28px; }
