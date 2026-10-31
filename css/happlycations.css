@@ -27,6 +27,11 @@ body { overflow: hidden; }
 }
 .happlyPage[data-app="drawl"] .happlyHand { background: #0C1E44; } /* the hand is just the line drawing (no fill), in each app's colour */
 .happlyPage[data-app="drawl"] .happlyWord { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; } /* drawl's wordmark is the hand-scribbled artwork itself, not a mask */
+.happlyPage[data-app="sheep"] :is(.happlyWord, .happlyHand) { background-color: #4a6aa0; background-image: url("../assets/homeAssets/sheep_clouds.jpg"); background-size: calc(var(--w) * 5.97) auto; } /* one cloud photo spread across the logo + wordmark, set so the cloud tops sit at the letters' middle: sky above, cloud below */
+.happlyWordWrap { display: block; flex: none; }
+.happlyPage[data-app="sheep"] .happlyWordWrap { filter: drop-shadow(1px 0 0 #2F4AA3) drop-shadow(-1px 0 0 #2F4AA3) drop-shadow(0 1px 0 #2F4AA3) drop-shadow(0 -1px 0 #2F4AA3); } /* a 1px outline in the sheep icon's blue (#2F4AA3), drawn on a wrapper (the four chained shadows compound into a square 1px outline) because a mask would cut off a shadow on the masked element itself. Wordmark only. */
+.happlyPage[data-app="sheep"] .happlyWord { background-position: 0 calc(var(--w) * -1.0); }
+.happlyPage[data-app="sheep"] .happlyHand { background-position: calc(var(--w) * 0.48 + 12px) calc(var(--w) * -1.15); }
 .happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
 
 /* the three apps as a row of buttons; the chosen one is a floaty pill */
