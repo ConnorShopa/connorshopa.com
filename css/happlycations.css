@@ -7,8 +7,8 @@ body { overflow: hidden; }
 
 
 .happlyPage {
-  box-sizing: border-box; height: 100vh; height: 100dvh; padding: 44px 48px 36px;
-  display: grid; grid-template-rows: auto minmax(0, 1fr); justify-items: center; gap: 36px;
+  box-sizing: border-box; height: 100vh; height: 100dvh; padding: 32px 48px 28px;
+  display: grid; grid-template-rows: auto minmax(0, 1fr); justify-items: center; gap: 24px;
 }
 
 .happlyHead { --w: clamp(44px, 6vw, 84px); margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; }
@@ -19,21 +19,21 @@ body { overflow: hidden; }
 }
 
 /* three apps side by side; each is a column */
-.happlySections { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 96px; width: 100%; height: 100%; min-height: 0; max-width: 1280px; }
+.happlySections { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 96px; width: 100%; height: 100%; min-height: 0; max-width: 1280px; align-items: center; }
 .happlySec { display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 0; }
 .happlyBrand { display: inline-flex; align-items: center; gap: 8px; }
 .happlyBrand img { display: block; height: 44px; width: auto; }
-.happlyTitle { margin: 10px 0 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(20px, 2vw, 28px); line-height: 1.15; letter-spacing: -0.01em; }
+.happlyTitle { margin: 6px 0 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(20px, 2vw, 28px); line-height: 1.15; letter-spacing: -0.01em; }
 .happlySub { margin: 8px 0 0; max-width: 30ch; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; line-height: 1.4; color: rgba(17, 17, 17, 0.6); }
 .happlyCta {
-  margin-top: 16px; padding: 12px 22px; border-radius: 999px; background: #111; color: #fff; text-decoration: none;
+  margin-top: 12px; padding: 12px 22px; border-radius: 999px; background: #111; color: #fff; text-decoration: none;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; font-weight: 600; transition: transform .2s ease, background .2s ease;
 }
 .happlyCta:hover { background: #333; transform: translateY(-1px); }
 /* the phone gets the rest of the column's height */
-.happlyStage { container-type: size; flex: 1 1 0; min-height: 0; width: 100%; display: grid; place-items: center; padding: 24px 0 10px; box-sizing: border-box; }
+.happlyStage { container-type: inline-size; width: 100%; display: grid; place-items: center; padding: 14px 0 20px; box-sizing: border-box; }
 .happlyPhone {
-  --h: calc(min(100cqh, 100cqw * 2.0407) * 0.736); /* 0.8 of the tallest that fits the space left in its column */
+  --h: calc(min(100cqw * 2.0407, 100dvh - 420px) * 0.8); /* 0.8 of the tallest that fits the column's width and the window's height */
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
   position: relative; flex: none; aspect-ratio: 689 / 1406; height: var(--h);
   box-sizing: border-box; padding: calc(var(--u) * 2.6); /* the rim (0.9) + the thin black bezel (1.7) */
@@ -62,7 +62,7 @@ body { overflow: hidden; }
   body { overflow: auto; }
   .happlyPage { height: auto; min-height: 100dvh; padding: 28px 20px 40px; grid-template-rows: auto auto; }
   .happlySections { grid-template-columns: 1fr; gap: 56px; height: auto; }
-  .happlyStage { flex: none; height: 420px; }
+  .happlyPhone { --h: 380px; }
   .habbotMark { height: 17px; }
   .drawlText { font-size: 22px; }
   .sheepText { font-size: 24px; }
