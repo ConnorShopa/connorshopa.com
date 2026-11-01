@@ -13,7 +13,7 @@ body { overflow: auto; }
 }
 
 /* the logo + wordmark, small, top left */
-.happlyHead { --w: min(calc((100vw - 10vw) / 44), 3.2dvh); /* the wordmark's height: as big as fits across the page, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; margin-bottom: 14px; }
+.happlyHead { --w: min(calc((100vw - 10vw) / 24), 6.5dvh); /* the wordmark's height: as big as fits across the page, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; margin-bottom: 14px; }
 .happlyHand {
   display: block; flex: none; height: calc(var(--w) * 0.72); aspect-ratio: 91 / 135; transform: translateY(calc(var(--w) * -0.1)); /* sits on the middle of the capital letters, not of the line box (the wordmark's descenders hang below) */
   -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
@@ -53,8 +53,8 @@ body { overflow: auto; }
 .happlySec.leaving { translate: 0 36px; } /* whichever app is leaving always exits downward, and the next always drops in from above, whichever way round the tabs go */
 .happlySec.on { opacity: 1; translate: 0 0; visibility: visible; pointer-events: auto; transition: opacity .4s ease .12s, translate .5s cubic-bezier(.215, .61, .355, 1) .12s, visibility 0s; }
 
-/* the big titles: the app name in Cooper Bold, outline only (1px black, no fill), the same for every app */
-.happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 700; font-size: clamp(72px, 10vw, 168px); line-height: 1; letter-spacing: -0.02em; padding: 0 0.04em 0.1em 0; color: transparent; -webkit-text-stroke: 1px #000; }
+/* the app name: Cooper Bold, solid black, the same for every app */
+.happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 700; font-size: clamp(48px, 6vw, 96px); line-height: 1; letter-spacing: -0.02em; padding: 0 0.04em 0.1em 0; color: #000; }
 .happlySub { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 600; font-size: clamp(20px, 2.1vw, 34px); line-height: 1.2; letter-spacing: -0.01em; color: #111; text-wrap: balance; max-width: 22ch; }
 
 .happlyCtas { margin-top: clamp(16px, 3dvh, 28px); justify-content: center; display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
@@ -113,8 +113,8 @@ body { overflow: auto; }
 
 @media (max-width: 800px) {
   .happlyPage { padding: 20px 16px 28px; }
-  .happlyHead { --w: calc((100vw - 32px) / 18); }
+  .happlyHead { --w: calc((100vw - 32px) / 9); }
   .happlyMain { grid-template-columns: minmax(0, 1fr); gap: 36px; }
   .happlyStage { --h: 320px; }
-  .happlyTitle { font-size: clamp(64px, 22vw, 110px); }
+  .happlyTitle { font-size: clamp(44px, 14vw, 72px); }
 }
