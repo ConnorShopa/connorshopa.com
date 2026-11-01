@@ -9,11 +9,11 @@ body { overflow: auto; }
 
 .happlyPage {
   box-sizing: border-box; min-height: 100vh; min-height: 100dvh; padding: 28px clamp(22px, 5vw, 80px) 36px; background: #f5f5f5;
-  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: 1fr; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; row-gap: 12px;
 }
 
 /* the logo + wordmark, small, top left */
-.happlyHead { --w: min(calc((100vw - 10vw) / 24), 6.5dvh); /* the wordmark's height: as big as fits across the page, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; margin-bottom: 14px; }
+.happlyHead { --w: min(calc((100vw - 10vw) / 24), 6.5dvh); /* the wordmark's height: as big as fits across the page, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: flex-start; gap: 10px; font-weight: 500; }
 .happlyHand {
   display: block; flex: none; height: calc(var(--w) * 0.72); aspect-ratio: 91 / 135; transform: translateY(calc(var(--w) * -0.1)); /* sits on the middle of the capital letters, not of the line box (the wordmark's descenders hang below) */
   -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
@@ -49,13 +49,13 @@ body { overflow: auto; }
 
 /* the three apps share one cell; only the chosen one shows, and switching slides it up/down */
 .happlyApps { display: grid; width: 100%; }
-.happlySec { grid-area: 1 / 1; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(8px, 1.5dvh, 16px); opacity: 0; translate: 0 -36px; visibility: hidden; pointer-events: none; transition: opacity .35s ease, translate .45s cubic-bezier(.215, .61, .355, 1), visibility 0s .45s; }
-.happlySec.leaving { translate: 0 36px; } /* whichever app is leaving always exits downward, and the next always drops in from above, whichever way round the tabs go */
-.happlySec.on { opacity: 1; translate: 0 0; visibility: visible; pointer-events: auto; transition: opacity .4s ease .12s, translate .5s cubic-bezier(.215, .61, .355, 1) .12s, visibility 0s; }
+:is(.happlySec, .happlyCtaSet) { grid-area: 1 / 1; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(8px, 1.5dvh, 16px); opacity: 0; translate: 0 -36px; visibility: hidden; pointer-events: none; transition: opacity .35s ease, translate .45s cubic-bezier(.215, .61, .355, 1), visibility 0s .45s; }
+:is(.happlySec, .happlyCtaSet).leaving { translate: 0 36px; } /* whichever app is leaving always exits downward, and the next always drops in from above, whichever way round the tabs go */
+:is(.happlySec, .happlyCtaSet).on { opacity: 1; translate: 0 0; visibility: visible; pointer-events: auto; transition: opacity .4s ease .12s, translate .5s cubic-bezier(.215, .61, .355, 1) .12s, visibility 0s; }
 
 /* the app name: Cooper Bold, solid black, the same for every app */
 .happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 700; font-size: clamp(48px, 6vw, 96px); line-height: 1; letter-spacing: -0.02em; padding: 0 0.04em 0.1em 0; color: #000; }
-.happlySub { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 600; font-size: clamp(20px, 2.1vw, 34px); line-height: 1.2; letter-spacing: -0.01em; color: #111; text-wrap: balance; max-width: 22ch; }
+.happlySub { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 600; font-size: clamp(20px, 2.1vw, 34px); line-height: 1.2; letter-spacing: -0.01em; color: #555; text-wrap: balance; max-width: 22ch; }
 
 .happlyCtas { margin-top: clamp(16px, 3dvh, 28px); justify-content: center; display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 .happlyCta {
@@ -67,7 +67,9 @@ body { overflow: auto; }
 .happlyCta2:hover { background: rgba(17, 17, 17, 0.06); border-color: #111; }
 
 /* the phone floats; its shadow lies on the "floor" below it and doesn't spin with it */
-.happlyStage { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; perspective: 1400px; padding-bottom: 56px; }
+.happlyStage { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.happlyPhoneStage { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; perspective: 1400px; padding-bottom: 56px; }
+.happlyCtaStack { width: auto; }
 .happlyFloor { position: absolute; left: 50%; bottom: 14px; width: calc(var(--h) * 0.42); height: 26px; translate: -50% 0; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(40, 28, 60, 0.42) 0%, rgba(40, 28, 60, 0.18) 45%, rgba(40, 28, 60, 0) 72%); filter: blur(6px); }
 .happlyStage { --h: clamp(260px, 52dvh, 560px); }
 .happlyPhone {
@@ -77,10 +79,10 @@ body { overflow: auto; }
   transform-origin: 50% 100%; transform-style: preserve-3d; transform: rotateY(-16deg); /* resting at a slight angle, so its thickness shows */
   box-sizing: border-box; padding: calc(var(--u) * 2.6);
   border-radius: calc(var(--u) * 15);
-  background: linear-gradient(135deg, #b3bfce 0%, #7f8da2 38%, #a9b5c5 62%, #76849a 100%); /* the blue-grey metal rim */
+  background: linear-gradient(135deg, #3b3b3f 0%, #17171a 38%, #2e2e32 62%, #0d0d0f 100%); /* the near-black metal rim */
 }
 /* the phone's thickness: a stack of rim-coloured slices behind the face, so the rounded edge has depth */
-.happlySlice { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(135deg, #8f9db1 0%, #5d6b80 50%, #7d8ba0 100%); pointer-events: none; }
+.happlySlice { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(135deg, #2a2a2e 0%, #0e0e10 50%, #202024 100%); pointer-events: none; }
 .happlyScreen { position: relative; width: 100%; height: 100%; overflow: hidden; background: #999; border-radius: calc(var(--u) * 12.4); box-shadow: 0 0 0 calc(var(--u) * 1.7) #000; transition: background .2s ease; }
 .happlyScreen img, .happlyScreen video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .happlyPhone[data-app="drawl"] .happlyScreen { background: hsl(0 0% 64%); }
@@ -88,14 +90,14 @@ body { overflow: auto; }
 .happlyPhone[data-app="habbot"] .happlyScreen { background: hsl(0 0% 56%); }
 
 /* hovering a section: its download button gets a ring in the app's colour that slowly spins,  */
-.happlySec[data-app="drawl"] { --glow: 12, 30, 68; }
-.happlySec[data-app="sheep"] { --glow: 47, 74, 163; }
-.happlySec[data-app="habbot"] { --glow: 250, 152, 58; }
+:is(.happlySec, .happlyCtaSet)[data-app="drawl"] { --glow: 12, 30, 68; }
+:is(.happlySec, .happlyCtaSet)[data-app="sheep"] { --glow: 47, 74, 163; }
+:is(.happlySec, .happlyCtaSet)[data-app="habbot"] { --glow: 250, 152, 58; }
 @property --ringA { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 /* the button sits in a wrapper that does the hover effects: it pops up with a little overshoot, and carries the ring + glow, so the glow can sit behind the button without bleeding through it */
 .happlyCtaWrap { position: relative; isolation: isolate; display: block; border-radius: 999px; transition: transform .5s cubic-bezier(.34, 1.56, .64, 1); }
 .happlyCtaWrap .happlyCta { display: block; margin-top: 0; }
-.happlySec:hover .happlyCtaWrap { transform: scale(1.07); }
+:is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap { transform: scale(1.07); }
 /* the ring (1px off the button) and a soft glow behind it: both are a gradient in the app's colour that travels round the button */
 .happlyCtaWrap::before, .happlyCtaWrap::after {
   content: ""; position: absolute; inset: -3px; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s ease;
@@ -103,10 +105,10 @@ body { overflow: auto; }
 }
 .happlyCtaWrap::before { padding: 2px; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
 .happlyCtaWrap::after { z-index: -1; filter: blur(10px); }
-.happlySec:hover .happlyCtaWrap::before { opacity: 1; animation: happlyRing 3.2s linear infinite; }
-.happlySec:hover .happlyCtaWrap::after { opacity: 0.9; animation: happlyRing 3.2s linear infinite; }
+:is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap::before { opacity: 1; animation: happlyRing 3.2s linear infinite; }
+:is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap::after { opacity: 0.9; animation: happlyRing 3.2s linear infinite; }
 @keyframes happlyRing { to { --ringA: 360deg; } }
-@media (prefers-reduced-motion: reduce) { .happlyCtaWrap, .happlySec { transition: none; } .happlySec:hover .happlyCtaWrap::before, .happlySec:hover .happlyCtaWrap::after { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .happlyCtaWrap, :is(.happlySec, .happlyCtaSet) { transition: none; } :is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap::before, :is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap::after { animation: none; } }
 
 @media (max-width: 800px) {
   .happlyPage { padding: 20px 16px 28px; }

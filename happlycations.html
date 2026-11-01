@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=126" />
+    <link rel="stylesheet" href="css/happlycations.css?v=128" />
 </head>
 
 <body>
@@ -22,12 +22,15 @@
 
     <main class="happlyPage" data-app="drawl">
 
-        <div class="happlyMain">
-            <div class="happlyCopy">
-                <h1 class="happlyHead">
+        <header class="happlyTop">
+            <h1 class="happlyHead">
                 <span class="happlyHand" aria-hidden="true"></span>
                 <span class="happlyWordWrap"><span class="happlyWord" role="img" aria-label="Happlycations"></span></span>
             </h1>
+        </header>
+
+        <div class="happlyMain">
+            <div class="happlyCopy">
                 <div class="happlyTabs" role="tablist" aria-label="Apps">
                     <button class="happlyTab on" type="button" role="tab" aria-selected="true" aria-label="drawl" data-app="drawl"><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /></button>
                     <button class="happlyTab" type="button" role="tab" aria-selected="false" aria-label="sheep" data-app="sheep"><img src="assets/homeAssets/sheep_app_icon.svg" alt="" /></button>
@@ -37,24 +40,28 @@
                     <section class="happlySec on" data-app="drawl">
                         <h2 class="happlyTitle">drawl</h2>
                         <p class="happlySub">Draw the prompt, vote your favorites</p>
-                        <div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download drawl</a></span><a class="happlyCta2" href="#">Learn more</a></div>
                     </section>
                     <section class="happlySec" data-app="sheep">
                         <h2 class="happlyTitle">sheep</h2>
                         <p class="happlySub">How many words do you know?</p>
-                        <div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download sheep</a></span><a class="happlyCta2" href="#">Learn more</a></div>
                     </section>
                     <section class="happlySec" data-app="habbot">
                         <h2 class="happlyTitle">habbot</h2>
                         <p class="happlySub">Collect yourself</p>
-                        <div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download habbot</a></span><a class="happlyCta2" href="#">Learn more</a></div>
                     </section>
                 </div>
             </div>
 
             <div class="happlyStage">
+                <div class="happlyPhoneStage">
                 <div class="happlyFloor" aria-hidden="true"></div>
                 <div class="happlyPhone" data-app="drawl"><div class="happlyScreen"><img src="assets/projectAssets/habbotAssets/app_screen01.png" alt="" /></div> <!-- test: the habbot screenshot on every app for now --></div>
+                </div>
+                <div class="happlyApps happlyCtaStack">
+                    <div class="happlyCtaSet on" data-app="drawl"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download drawl</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
+                    <div class="happlyCtaSet" data-app="sheep"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download sheep</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
+                    <div class="happlyCtaSet" data-app="habbot"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download habbot</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
+                </div>
             </div>
         </div>
     </main>
@@ -104,6 +111,10 @@
                 if (i === cur) return;
                 cur = i;
                 var app = secs[i].dataset.app;
+                document.querySelectorAll(".happlyCtaSet").forEach(function (c) {
+                    if (c.dataset.app === app) { c.classList.remove("leaving"); c.classList.add("on"); }
+                    else if (c.classList.contains("on")) { c.classList.remove("on"); c.classList.add("leaving"); setTimeout(function () { c.classList.remove("leaving"); }, 650); }
+                });
                 secs.forEach(function (s, k) {
                     if (k === i) { s.classList.remove("leaving"); s.classList.add("on"); }
                     else if (s.classList.contains("on")) { s.classList.remove("on"); s.classList.add("leaving"); setTimeout(function () { s.classList.remove("leaving"); }, 650); }
