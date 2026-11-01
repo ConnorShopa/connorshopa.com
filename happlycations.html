@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=106" />
+    <link rel="stylesheet" href="css/happlycations.css?v=107" />
 </head>
 
 <body>
@@ -86,17 +86,19 @@
             }
             // the phone spins once round; its screen changes while it's edge-on
             var spinTimer;
+            var REST = { drawl: -16, sheep: -10, habbot: -22 }; // each app's resting angle (matches --rest in the CSS)
             function spin(app) {
                 clearTimeout(spinTimer);
                 if (still.matches || !phone.animate) { phone.dataset.app = app; return; }
                 phone.getAnimations().forEach(function (a) { a.cancel(); });
                 // a swing: it whips round, overshoots its resting angle, swings back past it, and settles (with a little sway and lift)
+                var s = REST[phone.dataset.app], e = REST[app];
                 phone.animate([
-                    { transform: "translateY(0) rotateZ(0deg) rotateY(-16deg)", easing: "cubic-bezier(.45,.05,.3,1)" },
-                    { transform: "translateY(-3px) rotateZ(-0.4deg) rotateY(353deg)", offset: 0.55, easing: "ease-in-out" },
-                    { transform: "translateY(-1px) rotateZ(0.2deg) rotateY(341deg)", offset: 0.78, easing: "ease-in-out" },
-                    { transform: "translateY(0) rotateZ(0deg) rotateY(344.8deg)", offset: 0.91, easing: "ease-in-out" },
-                    { transform: "translateY(0) rotateZ(0deg) rotateY(344deg)" }
+                    { transform: "translateY(0) rotateZ(0deg) rotateY(" + s + "deg)", easing: "cubic-bezier(.45,.05,.3,1)" },
+                    { transform: "translateY(-3px) rotateZ(-0.4deg) rotateY(" + (e + 369) + "deg)", offset: 0.55, easing: "ease-in-out" },
+                    { transform: "translateY(-1px) rotateZ(0.2deg) rotateY(" + (e + 357) + "deg)", offset: 0.78, easing: "ease-in-out" },
+                    { transform: "translateY(0) rotateZ(0deg) rotateY(" + (e + 360.8) + "deg)", offset: 0.91, easing: "ease-in-out" },
+                    { transform: "translateY(0) rotateZ(0deg) rotateY(" + (e + 360) + "deg)" }
                 ], { duration: 950 });
                 spinTimer = setTimeout(function () { phone.dataset.app = app; }, 230);
             }
