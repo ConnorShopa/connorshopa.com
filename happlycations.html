@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=104" />
+    <link rel="stylesheet" href="css/happlycations.css?v=105" />
 </head>
 
 <body>
@@ -93,11 +93,11 @@
                 // a swing: it whips round, overshoots its resting angle, swings back past it, and settles (with a little sway and lift)
                 phone.animate([
                     { transform: "translateY(0) rotateZ(0deg) rotateY(-16deg)", easing: "cubic-bezier(.45,.05,.3,1)" },
-                    { transform: "translateY(-8px) rotateZ(-1.5deg) rotateY(376deg)", offset: 0.55, easing: "ease-in-out" },
-                    { transform: "translateY(-2px) rotateZ(1deg) rotateY(334deg)", offset: 0.78, easing: "ease-in-out" },
-                    { transform: "translateY(0) rotateZ(-0.4deg) rotateY(347deg)", offset: 0.91, easing: "ease-in-out" },
+                    { transform: "translateY(-5px) rotateZ(-0.8deg) rotateY(362deg)", offset: 0.55, easing: "ease-in-out" },
+                    { transform: "translateY(-1px) rotateZ(0.5deg) rotateY(339deg)", offset: 0.78, easing: "ease-in-out" },
+                    { transform: "translateY(0) rotateZ(-0.2deg) rotateY(345.5deg)", offset: 0.91, easing: "ease-in-out" },
                     { transform: "translateY(0) rotateZ(0deg) rotateY(344deg)" }
-                ], { duration: 1100 });
+                ], { duration: 1000 });
                 spinTimer = setTimeout(function () { phone.dataset.app = app; }, 230);
             }
             function go(i) {
