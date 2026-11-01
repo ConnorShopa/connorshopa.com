@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=121" />
+    <link rel="stylesheet" href="css/happlycations.css?v=122" />
 </head>
 
 <body>
@@ -89,18 +89,16 @@
                 if (still.matches || !phone.animate) { phone.dataset.app = app; return; }
                 phone.getAnimations().forEach(function (a) { a.cancel(); });
                 // a swing: the angle follows a damped spring (one smooth curve: whips round, overshoots a hair, settles, with no stop-start between keyframes);
-                // the shrink, lift and sway are curves over the same time (the shrink is plain linear, not springy): it shrinks from the moment of the click down to halfway, then grows back
+                // the lift and sway are smooth sine curves over the same time
                 var s = REST[phone.dataset.app], e = REST[app];
-                var Z = 0.77, WN = 7.8, WD = WN * Math.sqrt(1 - Z * Z), N = 48, frames = [], scales = [];
+                var Z = 0.77, WN = 7.8, WD = WN * Math.sqrt(1 - Z * Z), N = 48, frames = [];
                 for (var i = 0; i <= N; i++) {
                     var t = i / N;
                     var x = 1 - Math.exp(-Z * WN * t) * (Math.cos(WD * t) + (Z * WN / WD) * Math.sin(WD * t));
                     var q = Math.max(0, (t - 0.82) / 0.18); x += (1 - x) * q * q * (3 - 2 * q); // ease the last bit of residual to exactly 1
                     frames.push({ offset: t, easing: "linear", transform: "translateY(" + (-3 * Math.sin(Math.PI * t)).toFixed(2) + "px) rotateZ(" + (0.5 * Math.sin(2 * Math.PI * t)).toFixed(3) + "deg) rotateY(" + (s + (e + 360 - s) * x).toFixed(3) + "deg)" });
-                    scales.push({ offset: t, easing: "linear", scale: (1 - 0.08 * (1 - Math.abs(2 * t - 1))).toFixed(4) }); // linear: straight down to halfway, straight back up
                 }
                 phone.animate(frames, { duration: 950 });
-                phone.animate(scales, { duration: 950 });
                 spinTimer = setTimeout(function () { phone.dataset.app = app; }, 200);
             }
             function go(i) {
