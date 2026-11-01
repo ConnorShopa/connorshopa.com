@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=96" />
+    <link rel="stylesheet" href="css/happlycations.css?v=98" />
 </head>
 
 <body>
@@ -67,6 +67,8 @@
             var page = document.querySelector(".happlyPage"), head = document.querySelector(".happlyHead"), phone = document.querySelector(".happlyPhone");
             var secs = document.querySelectorAll(".happlySec"), tabBtns = document.querySelectorAll(".happlyTab");
             var token = 0, want = "drawl", cur = 0;
+            // the phone's thickness: slices of the rim stacked behind the face
+            for (var z = 0; z < 14; z++) { var sl = document.createElement("span"); sl.className = "happlySlice"; sl.style.transform = "translateZ(calc(var(--d) * " + (-(z + 1) / 14).toFixed(3) + "))"; phone.insertBefore(sl, phone.firstChild); }
             var still = window.matchMedia("(prefers-reduced-motion: reduce)");
             // the small logo + wordmark: a subtle scale about their centre with a fade, out then in, dressed in the chosen app's fill
             function pick(app) {
@@ -88,7 +90,7 @@
                 clearTimeout(spinTimer);
                 if (still.matches || !phone.animate) { phone.dataset.app = app; return; }
                 phone.getAnimations().forEach(function (a) { a.cancel(); });
-                phone.animate([{ transform: "rotateY(0deg)" }, { transform: "rotateY(360deg)" }], { duration: 750, easing: "ease-in-out" });
+                phone.animate([{ transform: "rotateY(-16deg)" }, { transform: "rotateY(344deg)" }], { duration: 750, easing: "ease-in-out" });
                 spinTimer = setTimeout(function () { phone.dataset.app = app; }, 270);
             }
             function go(i) {
