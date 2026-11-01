@@ -6,12 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=93" />
+    <link rel="stylesheet" href="css/happlycations.css?v=94" />
 </head>
 
 <body>
-    <!-- a full-window page of its own, opened in a new tab from the home page as if it were another website.
-         Left: the name, the three apps as a row of buttons, and the chosen app's text. Right: a rounded panel with its phone. -->
     <!-- sheep's wordmark outline: grow the letters by 2px, keep only that ring (the letters themselves go clear), colour it the sheep icon's blue -->
     <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
         <filter id="happlyOutline" x="-3%" y="-10%" width="106%" height="120%" color-interpolation-filters="sRGB">
@@ -23,67 +21,51 @@
     </svg>
 
     <main class="happlyPage" data-app="drawl">
-        <div class="happlyLeft">
+        <header class="happlyTop">
             <h1 class="happlyHead">
                 <span class="happlyHand" aria-hidden="true"></span>
                 <span class="happlyWordWrap"><span class="happlyWord" role="img" aria-label="Happlycations"></span></span>
             </h1>
             <p class="happlyTagline">Where happy apps are born</p>
-        </div>
+        </header>
 
-        <div class="happlyBelow">
+        <div class="happlyMain">
+            <div class="happlyCopy">
+                <div class="happlyTabs" role="tablist" aria-label="Apps">
+                    <button class="happlyTab on" type="button" role="tab" aria-selected="true" aria-label="drawl" data-app="drawl"><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /></button>
+                    <button class="happlyTab" type="button" role="tab" aria-selected="false" aria-label="sheep" data-app="sheep"><img src="assets/homeAssets/sheep_app_icon.svg" alt="" /></button>
+                    <button class="happlyTab" type="button" role="tab" aria-selected="false" aria-label="habbot" data-app="habbot"><img src="assets/homeAssets/habbot_app_icon.svg" alt="" /></button>
+                </div>
+                <div class="happlyApps">
+                    <section class="happlySec on" data-app="drawl">
+                        <h2 class="happlyTitle">Draw the prompt, vote your favorites</h2>
+                        <div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download drawl</a></span><a class="happlyCta2" href="#">Learn more</a></div>
+                    </section>
+                    <section class="happlySec" data-app="sheep">
+                        <h2 class="happlyTitle">How many words do you know?</h2>
+                        <div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download sheep</a></span><a class="happlyCta2" href="#">Learn more</a></div>
+                    </section>
+                    <section class="happlySec" data-app="habbot">
+                        <h2 class="happlyTitle">Collect yourself</h2>
+                        <div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download habbot</a></span><a class="happlyCta2" href="#">Learn more</a></div>
+                    </section>
+                </div>
+            </div>
 
-        <div class="happlyCarousel">
-        <div class="happlyApps">
-            <section class="happlySec" data-app="drawl">
-                <div class="happlyBody">
-                    <img class="happlyAppIcon" src="assets/homeAssets/drawl_app_icon.svg" alt="" />
-                    <div class="happlyBrand"><span class="drawlText">drawl</span></div>
-                    <div class="happlyCtas">
-                        <span class="happlyCtaWrap"><a class="happlyCta" href="#">Download drawl</a></span>
-                        <a class="happlyCta2" href="#">Learn more</a>
-                    </div>
-                </div>
-            </section>
-            <section class="happlySec" data-app="sheep">
-                <div class="happlyBody">
-                    <img class="happlyAppIcon" src="assets/homeAssets/sheep_app_icon.svg" alt="" />
-                    <div class="happlyBrand"><span class="sheepText">sheep</span></div>
-                    <div class="happlyCtas">
-                        <span class="happlyCtaWrap"><a class="happlyCta" href="#">Download sheep</a></span>
-                        <a class="happlyCta2" href="#">Learn more</a>
-                    </div>
-                </div>
-            </section>
-            <section class="happlySec" data-app="habbot">
-                <div class="happlyBody">
-                    <img class="happlyAppIcon" src="assets/homeAssets/habbot_app_icon.svg" alt="" />
-                    <div class="happlyBrand"><svg class="habbotMark" role="img" aria-label="habbot" width="80" height="19" viewBox="0 0 80 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M3.38913 18.6369V11.0652C3.38913 8.98999 4.63921 7.47565 6.77823 7.47565C8.50056 7.47565 9.63952 8.59738 9.63952 10.925V18.6369H13.0286V10.1117C13.0286 6.52218 11.2507 4.36285 7.86163 4.36285C5.88929 4.36285 4.27808 5.23219 3.41691 6.57827L3.41688 0.464846H0L3.39105e-05 18.6369H3.38913Z" fill="currentColor"/>
-<path d="M18.4975 19.0014C20.6365 19.0014 22.4977 18.0199 23.0811 16.5897L23.0255 18.6369H26.3035V10.2239C26.3035 6.38197 24.0256 4.36285 20.3309 4.36285C16.6085 4.36285 14.1639 6.32588 14.1639 9.32651H17.053C17.053 7.86826 18.1641 7.02696 20.1643 7.02696C21.8866 7.02696 22.9978 7.78413 22.9978 9.66303V9.9715L18.8864 10.28C15.6362 10.5324 13.8028 12.1308 13.8028 14.6828C13.8028 17.2908 15.5806 19.0014 18.4975 19.0014ZM19.6087 16.4214C18.0808 16.4214 17.2474 15.8045 17.2474 14.5426C17.2474 13.4208 18.053 12.7197 20.1643 12.5234L23.0255 12.2991V13.0282C23.0255 15.1595 21.6921 16.4214 19.6087 16.4214Z" fill="currentColor"/>
-<path d="M31.1053 18.6369L31.0497 16.4775C31.8553 18.076 33.6054 19.0014 35.6611 19.0014C39.6058 19.0014 42.1893 16.0569 42.1893 11.7943C42.1893 7.41957 39.8002 4.33481 35.8833 4.33481C33.7999 4.33481 31.9664 5.26024 31.0775 6.80262L31.0774 0.464846H27.6883L27.6884 18.6369H31.1053ZM31.1053 11.6541C31.1053 9.15825 32.6331 7.41957 34.9666 7.41957C37.3556 7.41957 38.7724 9.18629 38.7724 11.6541C38.7724 14.1219 37.3556 15.8606 34.9666 15.8606C32.6331 15.8606 31.1053 14.1499 31.1053 11.6541Z" fill="currentColor"/>
-<path d="M46.3601 18.6369L46.3046 16.4775C47.1102 18.076 48.8603 19.0014 50.916 19.0014C54.8606 19.0014 57.4441 16.0569 57.4441 11.7943C57.4441 7.41957 55.0551 4.33481 51.1382 4.33481C49.0547 4.33481 47.2213 5.26024 46.3323 6.80262L46.3323 0.464846H42.9432L42.9432 18.6369H46.3601ZM46.3601 11.6541C46.3601 9.15825 47.888 7.41957 50.2215 7.41957C52.6105 7.41957 54.0273 9.18629 54.0273 11.6541C54.0273 14.1219 52.6105 15.8606 50.2215 15.8606C47.888 15.8606 46.3601 14.1499 46.3601 11.6541Z" fill="currentColor"/>
-<path d="M57.3925 11.6821C57.3925 16.0008 60.476 18.9734 64.7263 18.9734C68.9765 18.9734 72.0601 16.0008 72.0601 11.6821C72.0601 7.36348 68.9765 4.3909 64.7263 4.3909C60.476 4.3909 57.3925 7.36348 57.3925 11.6821ZM60.7816 11.6821C60.7816 9.15825 62.3928 7.44761 64.7263 7.44761C67.0597 7.44761 68.671 9.15825 68.671 11.6821C68.671 14.206 67.0597 15.9167 64.7263 15.9167C62.3928 15.9167 60.7816 14.206 60.7816 11.6821Z" fill="currentColor"/>
-<path d="M77.3332 18.6369V7.64391H80V4.7835H77.3332V0.464844H73.9441V4.7835H71.305V7.64391H73.9441V18.6369H77.3332Z" fill="currentColor"/>
-</svg></div>
-                    <div class="happlyCtas">
-                        <span class="happlyCtaWrap"><a class="happlyCta" href="#">Download habbot</a></span>
-                        <a class="happlyCta2" href="#">Learn more</a>
-                    </div>
-                </div>
-            </section>
-        </div>
-        </div>
+            <div class="happlyStage">
+                <div class="happlyFloor" aria-hidden="true"></div>
+                <div class="happlyPhone" data-app="drawl"><div class="happlyScreen"></div></div>
+            </div>
         </div>
     </main>
 
     <script>
-
-        // the apps are always showing; pointing at (or tapping) one just dresses the logo + wordmark in that app's fill
         (function () {
-            var page = document.querySelector(".happlyPage"), head = document.querySelector(".happlyHead");
-            var secs = document.querySelectorAll(".happlySec"), token = 0, want = "drawl";
+            var page = document.querySelector(".happlyPage"), head = document.querySelector(".happlyHead"), phone = document.querySelector(".happlyPhone");
+            var secs = document.querySelectorAll(".happlySec"), tabBtns = document.querySelectorAll(".happlyTab");
+            var token = 0, want = "drawl", cur = 0;
             var still = window.matchMedia("(prefers-reduced-motion: reduce)");
+            // the small logo + wordmark: a subtle scale about their centre with a fade, out then in, dressed in the chosen app's fill
             function pick(app) {
                 if (app === want) return;
                 want = app;
@@ -91,21 +73,38 @@
                 function swap() { page.setAttribute("data-app", app); }
                 if (still.matches || !head.animate) { swap(); return; }
                 head.getAnimations().forEach(function (a) { a.cancel(); });
-                // the logo + wordmark: a subtle scale about their centre with a fade, out then in
                 head.animate([{ transform: "scale(1)", opacity: 1 }, { transform: "scale(0.96)", opacity: 0 }], { duration: 140, easing: "ease-in", fill: "forwards" }).onfinish = function () {
                     if (me !== token) return;
                     swap();
                     head.animate([{ transform: "scale(0.96)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }], { duration: 200, easing: "ease-out" }).onfinish = function () { head.getAnimations().forEach(function (x) { x.cancel(); }); };
                 };
             }
-            // all three apps always show; pointing at (or tapping) one dresses the logo + wordmark in that app's fill
-            secs.forEach(function (s) {
-                var app = s.dataset.app;
-                s.addEventListener("mouseenter", function () { pick(app); });
-                s.addEventListener("focusin", function () { pick(app); });
-                s.addEventListener("click", function () { pick(app); });
+            // the phone spins once round; its screen changes while it's edge-on
+            var spinTimer;
+            function spin(app) {
+                clearTimeout(spinTimer);
+                if (still.matches || !phone.animate) { phone.dataset.app = app; return; }
+                phone.getAnimations().forEach(function (a) { a.cancel(); });
+                phone.animate([{ transform: "rotateY(0deg)" }, { transform: "rotateY(360deg)" }], { duration: 750, easing: "ease-in-out" });
+                spinTimer = setTimeout(function () { phone.dataset.app = app; }, 270);
+            }
+            function go(i) {
+                i = Math.max(0, Math.min(secs.length - 1, i));
+                if (i === cur) return;
+                cur = i;
+                var app = secs[i].dataset.app;
+                secs.forEach(function (s, k) { s.classList.toggle("on", k === i); s.classList.toggle("before", k < i); s.setAttribute("aria-hidden", k !== i); });
+                tabBtns.forEach(function (t, k) { t.classList.toggle("on", k === i); t.setAttribute("aria-selected", k === i); });
+                pick(app);
+                spin(app);
+            }
+            tabBtns.forEach(function (t, k) {
+                t.addEventListener("click", function () { go(k); });
+                t.addEventListener("keydown", function (e) {
+                    if (e.key === "ArrowRight") { go(cur + 1); tabBtns[cur].focus(); e.preventDefault(); }
+                    if (e.key === "ArrowLeft") { go(cur - 1); tabBtns[cur].focus(); e.preventDefault(); }
+                });
             });
-            if (page) page.addEventListener("mouseleave", function () { pick("drawl"); });
         })();
     </script>
 </body>
