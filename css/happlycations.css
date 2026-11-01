@@ -11,7 +11,7 @@ body { overflow: auto; }
 }
 
 /* the logo + wordmark, small, top left */
-.happlyHead { --w: min(calc((100vw - 10vw) / 22), 6dvh); /* the wordmark's height: as big as fits across the page, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: flex-start; gap: 10px; font-weight: 500; }
+.happlyHead { --w: min(calc((100vw - 10vw) / 44), 3.2dvh); /* the wordmark's height: as big as fits across the page, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: flex-start; gap: 10px; font-weight: 500; }
 .happlyHand {
   display: block; flex: none; height: calc(var(--w) * 0.72); aspect-ratio: 91 / 135; transform: translateY(calc(var(--w) * -0.1)); /* sits on the middle of the capital letters, not of the line box (the wordmark's descenders hang below) */
   -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
@@ -33,7 +33,7 @@ body { overflow: auto; }
 
 
 .happlyTop { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
-.happlyTagline { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(14px, 1.35vw, 20px); letter-spacing: -0.005em; color: #111; }
+.happlyTagline { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(12px, 0.95vw, 15px); letter-spacing: -0.005em; color: #111; }
 
 /* two columns: the chosen app's big title + buttons (with the app tabs above) on the left, its phone on the right */
 .happlyMain { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 4vw, 72px); }
@@ -106,7 +106,7 @@ body { overflow: auto; }
 
 @media (max-width: 800px) {
   .happlyPage { padding: 20px 16px 28px; }
-  .happlyHead { --w: calc((100vw - 32px) / 10); }
+  .happlyHead { --w: calc((100vw - 32px) / 18); }
   .happlyMain { grid-template-columns: minmax(0, 1fr); gap: 36px; }
   .happlyStage { --h: 320px; }
   .happlyTitle { font-size: clamp(36px, 11vw, 56px); }
