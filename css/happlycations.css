@@ -74,7 +74,7 @@ body { overflow: auto; }
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
   --d: calc(var(--u) * 11); /* the phone's thickness */
   position: relative; aspect-ratio: 689 / 1406; height: var(--h); margin-bottom: 28px;
-  transform-style: preserve-3d; transform: rotateY(var(--rest, -16deg)); /* resting at a slight angle, so its thickness shows */
+  transform-origin: 50% 100%; transform-style: preserve-3d; transform: rotateY(var(--rest, -16deg)); /* resting at a slight angle, so its thickness shows */
   box-sizing: border-box; padding: calc(var(--u) * 2.6);
   border-radius: calc(var(--u) * 15);
   background: linear-gradient(135deg, #b3bfce 0%, #7f8da2 38%, #a9b5c5 62%, #76849a 100%); /* the blue-grey metal rim */
