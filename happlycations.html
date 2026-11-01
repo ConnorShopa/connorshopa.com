@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=122" />
+    <link rel="stylesheet" href="css/happlycations.css?v=123" />
 </head>
 
 <body>
@@ -83,14 +83,14 @@
             }
             // the phone spins once round; its screen changes while it's edge-on
             var spinTimer;
-            var REST = { drawl: -16, sheep: -10, habbot: -22 }; // each app's resting angle (matches --rest in the CSS)
+            var REST = -16; // the phone's resting angle (matches the CSS)
             function spin(app) {
                 clearTimeout(spinTimer);
                 if (still.matches || !phone.animate) { phone.dataset.app = app; return; }
                 phone.getAnimations().forEach(function (a) { a.cancel(); });
                 // a swing: the angle follows a damped spring (one smooth curve: whips round, overshoots a hair, settles, with no stop-start between keyframes);
                 // the lift and sway are smooth sine curves over the same time
-                var s = REST[phone.dataset.app], e = REST[app];
+                var s = REST, e = REST;
                 var Z = 0.77, WN = 7.8, WD = WN * Math.sqrt(1 - Z * Z), N = 48, frames = [];
                 for (var i = 0; i <= N; i++) {
                     var t = i / N;

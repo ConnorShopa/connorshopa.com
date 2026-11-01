@@ -74,7 +74,7 @@ body { overflow: auto; }
   --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
   --d: calc(var(--u) * 11); /* the phone's thickness */
   position: relative; aspect-ratio: 689 / 1406; height: var(--h); margin-bottom: 28px;
-  transform-origin: 50% 100%; transform-style: preserve-3d; transform: rotateY(var(--rest, -16deg)); /* resting at a slight angle, so its thickness shows */
+  transform-origin: 50% 100%; transform-style: preserve-3d; transform: rotateY(-16deg); /* resting at a slight angle, so its thickness shows */
   box-sizing: border-box; padding: calc(var(--u) * 2.6);
   border-radius: calc(var(--u) * 15);
   background: linear-gradient(135deg, #b3bfce 0%, #7f8da2 38%, #a9b5c5 62%, #76849a 100%); /* the blue-grey metal rim */
@@ -83,9 +83,6 @@ body { overflow: auto; }
 .happlySlice { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(135deg, #8f9db1 0%, #5d6b80 50%, #7d8ba0 100%); pointer-events: none; }
 .happlyScreen { position: relative; width: 100%; height: 100%; overflow: hidden; background: #999; border-radius: calc(var(--u) * 12.4); box-shadow: 0 0 0 calc(var(--u) * 1.7) #000; transition: background .2s ease; }
 .happlyScreen img, .happlyScreen video { display: block; width: 100%; height: 100%; object-fit: cover; }
-.happlyPhone[data-app="drawl"] { --rest: -16deg; } /* each app's phone comes to rest at its own slightly different angle (keep in step with REST in the script) */
-.happlyPhone[data-app="sheep"] { --rest: -10deg; }
-.happlyPhone[data-app="habbot"] { --rest: -22deg; }
 .happlyPhone[data-app="drawl"] .happlyScreen { background: hsl(0 0% 64%); }
 .happlyPhone[data-app="sheep"] .happlyScreen { background: hsl(0 0% 76%); }
 .happlyPhone[data-app="habbot"] .happlyScreen { background: hsl(0 0% 56%); }
