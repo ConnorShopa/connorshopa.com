@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=132" />
+    <link rel="stylesheet" href="css/happlycations.css?v=133" />
 </head>
 
 <body>
@@ -38,7 +38,10 @@
             <div class="landMid">
                 <h1 class="landWord">
                     <span class="landHand" aria-hidden="true"></span>
-                    <span class="landWordText">Happlycations</span>
+                    <span class="landWordBox">
+                        <span class="landWordText">Happlycations</span>
+                        <span class="landWordArt" aria-hidden="true"><span></span></span>
+                    </span>
                 </h1>
                 <p class="landTag">Where happy apps are born</p>
                 <ul class="landApps">
@@ -155,9 +158,18 @@
                 spin(app);
             }
             // landing: an app tile opens that app's view; the small logo + wordmark there comes back
+            // hovering an app dresses the big wordmark in that app's treatment (drawl's scribble, sheep's blue outline, habbot's grass)
+            var landApps = document.querySelector(".landApps");
+            document.querySelectorAll(".landApp").forEach(function (b) {
+                var on = function () { page.setAttribute("data-hover", b.dataset.app); };
+                var off = function () { page.removeAttribute("data-hover"); };
+                b.addEventListener("mouseenter", on); b.addEventListener("focus", on);
+                b.addEventListener("mouseleave", off); b.addEventListener("blur", off);
+            });
             document.querySelectorAll(".landApp").forEach(function (b) {
                 b.addEventListener("click", function () {
                     for (var k = 0; k < secs.length; k++) if (secs[k].dataset.app === b.dataset.app) go(k);
+                    page.removeAttribute("data-hover");
                     page.setAttribute("data-view", "app");
                     window.scrollTo(0, 0);
                 });

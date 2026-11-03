@@ -144,6 +144,19 @@ body { overflow: auto; }
 .landWord { --lw: min(8.4vw, 13.5dvh); /* the wordmark's size: about three quarters of the page wide, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: calc(var(--lw) * 0.3); }
 .landHand { display: block; flex: none; height: calc(var(--lw) * 1.02); aspect-ratio: 91 / 135; background: #111; transform: translateY(calc(var(--lw) * -0.04)); -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
 .landWordText { font-family: "Cooper", Georgia, serif; font-weight: 900; font-size: var(--lw); line-height: 1.1; letter-spacing: -0.02em; color: transparent; -webkit-text-stroke: 2px #111; paint-order: stroke fill; white-space: nowrap; } /* an outline only: the letters show the page */
+.landWordBox { position: relative; display: block; }
+.landWordText, .landWordArt { transition: opacity .22s ease, transform .32s cubic-bezier(.215, .61, .355, 1); }
+.landWordArt { position: absolute; left: 50%; top: 50%; width: 100%; aspect-ratio: 418 / 70; translate: -50% -50%; opacity: 0; transform: scale(0.96); pointer-events: none; }
+.landWordArt > span { display: block; width: 100%; height: 100%; background: #111; -webkit-mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat; }
+.happlyPage[data-hover] .landWordText { opacity: 0; transform: scale(0.96); }
+.happlyPage[data-hover] .landWordArt { opacity: 1; transform: none; }
+.landHand { transition: background-color .25s ease; }
+/* drawl: the hand-scribbled artwork itself; sheep: a 2px outline in the sheep blue; habbot: filled with grass */
+.happlyPage[data-hover="drawl"] .landHand { background: #0C1E44; }
+.happlyPage[data-hover="drawl"] .landWordArt > span { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; }
+.happlyPage[data-hover="sheep"] .landHand { background: #2F4AA3; }
+.happlyPage[data-hover="sheep"] .landWordArt { filter: url(#happlyOutline); }
+.happlyPage[data-hover="habbot"] :is(.landHand, .landWordArt > span) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); background-size: cover; }
 .landTag { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 500; font-size: clamp(18px, 2.75vw, 56px); letter-spacing: -0.01em; color: #111; text-align: center; }
 
 .landApps { list-style: none; margin: clamp(28px, 6dvh, 72px) 0 0; padding: 0; display: flex; gap: clamp(28px, 4.6vw, 92px); }
