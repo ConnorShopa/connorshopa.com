@@ -17,6 +17,7 @@
   var INTRO_GAP = 16;  // the gap left above the filter chips once the about-me lines are gone
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
+  var VIEW_SCALE = 0.92; // the card is this much of the largest 16:10 card that fits
   var BOTTOM_ROOM = 32; // space kept under the card (the gallery row now sits above it, between the intro and the card)
 
   var open = null; // { view, trigger, link }
@@ -378,6 +379,7 @@
       var bigH = maxH, bigW = bigH * CARD_RATIO;
       var maxW = window.innerWidth * 0.9;
       if (bigW > maxW) { bigW = maxW; bigH = bigW / CARD_RATIO; }
+      bigW *= VIEW_SCALE; bigH *= VIEW_SCALE; // a little under the most the screen allows
       cardW = bigW; height = bigH;
     }
     var side = (window.innerWidth - cardW) / 2;
