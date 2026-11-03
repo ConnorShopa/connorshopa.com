@@ -86,12 +86,8 @@
       wordmark: H + "nanni_wordmark.svg",
       pages: [
         pg("two",
-          lab("About") + text(
-            '<div class="facts">' + fact("Audience", "Over 25k monthly caregivers") + fact("Team", "Startup : pre-seed stage") + "</div>" +
-            p("eyebrow", "About") +
-            p("body", "Nanni is a mobile app that predicts why a newborn is crying, using a hyper-accurate algorithm, while also offering caregivers the abilty to create &amp; follow a healthy sleep schedule.") +
-            p("body", "While the application was performing well, Nanni found through user metrics and interviews, that users were having issues performing tasks inside the application. It was also brought to Nanni&rsquo;s attention that they were being seen as an entertainment application, rather than the science backed healthcare application they originally positioned themselves as.") +
-            p("body", "&ndash; I worked with Ubenwa to redesign the application with a focus on product clarity &amp; brand maturity.")
+          lab("Intro") + text(
+            p("lead", "Nanni is a pediatric care application that translates baby cries into actionable, useful insights and information for nearly 500,000 caregivers")
           ) + media(fig(A + "nanniAssets/nanni_image_01.png"))),
         pg("flip",
           lab("Goals") + media(fig(A + "nanniAssets/nanni_image_03.png")) +
