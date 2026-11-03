@@ -2359,7 +2359,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 #view-touchtunes { container-type: size; }
 #view-touchtunes.scrollView .pg.split {
   /* each page is as tall as the whole card, so its words and phone sit in the card's own middle (the card's top padding is pulled back in) */
-  position: absolute; inset: 0; margin: 0; min-height: 0; padding: 0 11cqw 0 11.4cqw;
+  position: absolute; inset: 0; margin: 0; min-height: 0; padding: 0 8cqw 0 7.6cqw;
   grid-template-columns: minmax(0, 1fr) auto;
   justify-items: start;
   align-items: center;
@@ -2373,16 +2373,16 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 #view-touchtunes.scrollView .pg.split .pgMedia { order: 0; width: auto; height: auto; flex-wrap: nowrap; justify-self: end; }
 #view-touchtunes.scrollView .pg.split .pgMedia figure { flex: none; }
 
-/* the page label ("Intro", "Onboarding") is the page's tab: the label itself is an invisible spacer that keeps the sentence level,
-   and js/views.js puts one shared tab bar (.ttTabs) over it, built from the labels of every page */
-#view-touchtunes .pg.split .pgText { position: relative; }
-#view-touchtunes .pg.split .eyebrow.ttLabel { visibility: hidden; height: 4.4cqw; margin: 0 0 1.4cqw; padding: 0; font-size: 1px; }
-#view-touchtunes .pg.split .eyebrow.ttLabel::before { display: none; }
-.ttTabs { position: absolute; left: 0; top: 0; width: 100%; height: 4.4cqw; box-sizing: border-box; display: flex; align-items: flex-start; gap: 0.5cqw; padding-bottom: 1.2cqw; border-bottom: 1px solid rgba(255, 255, 255, 0.14); pointer-events: auto; z-index: 2; }
-.ttTab { position: relative; z-index: 1; height: 3.1cqw; padding: 0 1.2cqw; border: 0; border-radius: 999px; background: none; color: rgba(250, 250, 250, 0.5); font: inherit; font-size: clamp(12px, 1.7cqw, 24px); line-height: 1; cursor: pointer; transition: color 0.3s ease; white-space: nowrap; }
+/* the page label ("Intro", "Onboarding") is the page's entry in the nav list on the left of the sentence: js/views.js builds one shared
+   list (.ttTabs) from the labels of every page, with a thin line (.ttRule) between it and the sentence. The labels themselves are hidden. */
+#view-touchtunes .pg.split .pgText { position: relative; padding-left: 12.1cqw; }
+#view-touchtunes .pg.split .eyebrow.ttLabel { display: none; }
+.ttTabs { position: absolute; left: -0.75cqw; top: 0.3cqw; width: 10.6cqw; display: flex; flex-direction: column; align-items: flex-start; gap: 0.85cqw; pointer-events: auto; z-index: 2; }
+.ttTab { position: relative; z-index: 1; display: block; padding: 0.55cqw 0.75cqw; border: 0; border-radius: 999px; background: none; color: rgba(250, 250, 250, 0.5); font: inherit; font-size: clamp(12px, 1.75cqw, 26px); line-height: 1.25; text-align: left; cursor: pointer; transition: color 0.3s ease; white-space: nowrap; }
 .ttTab:hover { color: rgba(250, 250, 250, 0.85); }
 .ttTab.on { color: #FAFAFA; }
-.ttTabPill { position: absolute; left: 0; top: 0; height: 3.1cqw; width: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); box-sizing: border-box; pointer-events: none; }
+.ttTabPill { position: absolute; left: 0; top: 0; width: 0; height: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); box-sizing: border-box; pointer-events: none; }
+.ttRule { position: absolute; left: 10.6cqw; top: 0; bottom: 0; width: 1px; background: rgba(255, 255, 255, 0.14); pointer-events: none; }
 .ttTxt { display: inline-block; white-space: pre; }
 .ttPill { transform-origin: 50% 55%; }
 
@@ -2418,6 +2418,11 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   #view-touchtunes.scrollView .pg.split { grid-template-columns: minmax(0, 1fr); row-gap: 28px; margin: 0; min-height: 0; padding: 28px 0; }
   #view-touchtunes.scrollView .pg.split .pgMedia { justify-self: center; }
   #view-touchtunes .pg.split .ttHead { font-size: clamp(17px, 5.6cqw, 28px); }
+  #view-touchtunes .pg.split .pgText { padding-left: 0; }
+  #view-touchtunes .pg.split .eyebrow.ttLabel { display: block; visibility: hidden; height: 44px; margin: 0 0 8px; padding: 0; font-size: 1px; }
+  .ttTabs { left: 0; top: 0; width: 100%; flex-direction: row; flex-wrap: wrap; gap: 6px; }
+  .ttTab { font-size: 14px; padding: 8px 14px; }
+  .ttRule { display: none; }
   .ttLine { white-space: normal; }
   .phoneBlank { height: min(420px, 62dvh); }
 }

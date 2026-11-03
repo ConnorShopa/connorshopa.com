@@ -56,7 +56,7 @@
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var d = reduce ? 0 : 1;
     var pgs = Array.prototype.slice.call(sec.querySelectorAll(".viewBody .pg"));
-    var cur = 0;
+    var cur = 0, busy = false;
 
     // the plain words of each line get their own span, so they can move while the pills do something else
     pgs.forEach(function (pg) {
@@ -82,12 +82,14 @@
         b.setAttribute("role", "tab"); b.addEventListener("click", function () { goTo(i); });
         btns.push(b); tabs.appendChild(b);
       });
-      pgs[0].querySelector(".pgText").appendChild(tabs);
+      var col = pgs[0].querySelector(".pgText");
+      col.appendChild(tabs);
+      var rule = document.createElement("span"); rule.className = "ttRule"; col.appendChild(rule); // the thin line between the tabs and the sentence
     }
     function markTab(animate) {
       btns.forEach(function (b, i) { b.classList.toggle("on", i === cur); b.setAttribute("aria-selected", i === cur ? "true" : "false"); });
       var b = btns[cur]; if (!b) return;
-      gsap.to(pill, { x: b.offsetLeft, width: b.offsetWidth, duration: animate ? 0.4 * d : 0, ease: "power3.out" });
+      gsap.to(pill, { x: b.offsetLeft, y: b.offsetTop, width: b.offsetWidth, height: b.offsetHeight, duration: animate ? 0.4 * d : 0, ease: "power3.out" });
     }
 
     pgs.forEach(function (pg, i) {
@@ -98,48 +100,25 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { markTab(false); });
     window.addEventListener("resize", function () { markTab(false); });
 
-    // switching never waits: whatever is mid-animation is taken over from where it is, so tabs can be clicked in quick succession.
-    // Every page that is not the current one is always sent to "hidden", and a final settle makes sure nothing is left half way.
-    var settle = null;
-    var allParts = function (pg) { var p = parts(pg); return p.txt.concat(p.pills); };
     function goTo(n) {
-      if (n === cur || n < 0 || n >= pgs.length) return;
-      var dir = n > cur ? 1 : -1;
-      if (settle) settle.kill();
-      pgs.forEach(function (pg, i) {
-        var p = parts(pg);
-        gsap.killTweensOf(allParts(pg));
-        if (i === n) return;
-        gsap.to(p.txt, { autoAlpha: 0, y: -36 * dir, duration: 0.3 * d, ease: "power2.in", stagger: 0.03 * d });
-        gsap.to(p.pills, { scale: 0.8, autoAlpha: 0, duration: 0.2 * d, ease: "power2.in", stagger: 0.02 * d });
-      });
-      var inn = parts(pgs[n]);
-      var visible = allParts(pgs[n]).some(function (el) { return gsap.getProperty(el, "opacity") > 0.01; });
-      if (!visible) { gsap.set(inn.txt, { autoAlpha: 0, y: 36 * dir }); gsap.set(inn.pills, { scale: 0.8, autoAlpha: 0 }); }
-      gsap.to(inn.txt, { autoAlpha: 1, y: 0, duration: 0.55 * d, ease: "power3.out", stagger: 0.06 * d, delay: 0.2 * d });
-      // the pills ease in, one after the other, once their words are arriving
-      gsap.to(inn.pills, { scale: 1, autoAlpha: 1, duration: 0.5 * d, ease: "back.out(0.6)", stagger: 0.1 * d, delay: 0.4 * d });
+      if (busy || n === cur || n < 0 || n >= pgs.length) return;
+      busy = true;
+      var dir = n > cur ? 1 : -1, out = parts(pgs[cur]), inn = parts(pgs[n]);
+      gsap.to(out.txt, { autoAlpha: 0, y: -36 * dir, duration: 0.35 * d, ease: "power2.in", stagger: 0.04 * d });
+      gsap.to(out.pills, { scale: 0.8, autoAlpha: 0, duration: 0.25 * d, ease: "power2.in", stagger: 0.03 * d });
+      gsap.fromTo(inn.txt, { autoAlpha: 0, y: 36 * dir }, { autoAlpha: 1, y: 0, duration: 0.6 * d, ease: "power3.out", stagger: 0.07 * d, delay: 0.3 * d });
+      // the pills bounce in, one after the other, once their words are arriving
+      gsap.fromTo(inn.pills, { scale: 0.8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.5 * d, ease: "back.out(0.6)", stagger: 0.12 * d, delay: 0.5 * d,
+        onComplete: function () { busy = false; } });
       cur = n;
       markTab(true);
-      // when the dust has settled, the current page is fully shown and every other page fully hidden
-      settle = gsap.delayedCall(1.6 * d + 0.05, function () {
-        pgs.forEach(function (pg, i) {
-          var p = parts(pg);
-          gsap.killTweensOf(allParts(pg));
-          if (i === cur) { gsap.set(p.txt, { autoAlpha: 1, y: 0 }); gsap.set(p.pills, { autoAlpha: 1, scale: 1 }); }
-          else { gsap.set(p.txt, { autoAlpha: 0, y: 36 }); gsap.set(p.pills, { autoAlpha: 0, scale: 0.8 }); }
-        });
-      });
     }
     var go = function (delta) { goTo(cur + delta); };
 
     var gone = function () { return sec.hidden || sec.style.visibility === "hidden"; };
-    var lastWheel = 0;
     sec.addEventListener("wheel", function (e) {
       e.preventDefault();
-      var now = Date.now();
-      if (Math.abs(e.deltaY) < 12 || now - lastWheel < 650) return; // one page per scroll gesture (a trackpad keeps sending events)
-      lastWheel = now;
+      if (Math.abs(e.deltaY) < 12) return;
       go(e.deltaY > 0 ? 1 : -1);
     }, { passive: false });
     var y0 = null;
