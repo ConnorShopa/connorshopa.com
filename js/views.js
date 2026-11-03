@@ -147,6 +147,7 @@
       sec.style.setProperty("--view-bg", lifted);
       sec.style.setProperty("--page-bg", proj.bg);
     } else sec.style.setProperty("--page-bg", "#E4E4E4");
+    if (proj.cardBg) sec.style.setProperty("--view-bg", proj.cardBg); // an exact card colour (TouchTunes' near-black), instead of the lifted tint
     // url() inside a custom property resolves against the stylesheet, so it gets the full address
     if (proj.bgImage) { sec.style.setProperty("--view-img", 'url("' + new URL(proj.bgImage, document.baseURI).href + '")'); sec.classList.add("hasBgImage"); }
     if (proj.bgImageBlur) sec.style.setProperty("--view-img-blur", 'url("' + new URL(proj.bgImageBlur, document.baseURI).href + '")');

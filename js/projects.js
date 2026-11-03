@@ -67,6 +67,8 @@
       wordmark: H + "touchtunes_wordmark.svg",
       appLinks: { apple: "https://apps.apple.com/us/app/id378351144", android: "https://play.google.com/store/apps/details?id=com.touchtunes.android" },
       locked: true, // the pages live encrypted in js/locked/touchtunes.json (see tools/lock.mjs)
+      dark: true,
+      cardBg: "#03070F", // the near-black card
       pages: [],
     },
 
