@@ -86,6 +86,12 @@
       col.appendChild(tabs);
       var rule = document.createElement("span"); rule.className = "ttRule"; col.appendChild(rule); // the thin line between the tabs and the sentence
     }
+    // the nav column is as wide as its longest label (so a long label never runs into the line beside it), and at least its share of the card
+    function sizeNav() {
+      var w = 0;
+      btns.forEach(function (b) { w = Math.max(w, b.offsetWidth); });
+      if (w) sec.style.setProperty("--tt-nav-px", Math.ceil(w) + "px");
+    }
     function markTab(animate) {
       btns.forEach(function (b, i) { b.classList.toggle("on", i === cur); b.setAttribute("aria-selected", i === cur ? "true" : "false"); });
     }
@@ -103,9 +109,9 @@
       pg.style.pointerEvents = "none"; // the tabs set their own pointer-events
       if (i) { var p = parts(pg); gsap.set(p.txt, { autoAlpha: 0, y: 36 }); gsap.set(p.pills, { scale: 0.8, autoAlpha: 0 }); }
     });
-    markTab(false);
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { markTab(false); });
-    window.addEventListener("resize", function () { markTab(false); });
+    sizeNav(); markTab(false);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { sizeNav(); markTab(false); });
+    window.addEventListener("resize", function () { sizeNav(); markTab(false); });
 
     function goTo(n) {
       if (busy || n === cur || n < 0 || n >= pgs.length) return;
