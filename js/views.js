@@ -106,7 +106,7 @@
       gsap.to(out.pills, { scale: 0, duration: 0.25 * d, ease: "power2.in", stagger: 0.03 * d });
       gsap.fromTo(inn.txt, { autoAlpha: 0, y: 36 * dir }, { autoAlpha: 1, y: 0, duration: 0.6 * d, ease: "power3.out", stagger: 0.07 * d, delay: 0.3 * d });
       // the pills bounce in, one after the other, once their words are arriving
-      gsap.fromTo(inn.pills, { scale: 0 }, { scale: 1, duration: 0.8 * d, ease: "back.out(2.6)", stagger: 0.12 * d, delay: 0.5 * d,
+      gsap.fromTo(inn.pills, { scale: 0 }, { scale: 1, duration: 0.55 * d, ease: "back.out(0.9)", stagger: 0.12 * d, delay: 0.5 * d,
         onComplete: function () { busy = false; } });
       cur = n;
       markTab(true);
