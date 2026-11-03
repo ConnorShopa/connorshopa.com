@@ -1,3 +1,6 @@
+@font-face { font-family: "Proxima Nova"; src: url("../fonts/ProximaNova/ProximaNova-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Proxima Nova"; src: url("../fonts/ProximaNova/ProximaNova-Semibold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Proxima Nova"; src: url("../fonts/ProximaNova/ProximaNova-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
 @font-face { font-family: "Clash Grotesk"; src: url("../fonts/ClashGrotesk/ClashGrotesk-Variable.ttf") format("truetype"); font-weight: 200 700; font-style: normal; font-display: swap; }
 /* Sailec, the Plunk design system's typeface; one file serves every weight */
 @font-face { font-family: "Sailec"; src: url("../fonts/Sailec/Sailec-Medium.otf") format("opentype"); font-weight: 100 900; font-style: normal; font-display: swap; }
@@ -2423,3 +2426,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .view.dark .lockBtn:disabled { color: rgba(250, 250, 250, 0.4); background: rgba(255, 255, 255, 0.1); box-shadow: none; }
 .view.dark .lockForm.has-error .lockInput { border-color: #E5655C; background: rgba(229, 101, 92, 0.15); }
 .view.dark .lockMsg { color: #FF8E86; }
+
+/* TouchTunes is set in Proxima Nova */
+#view-touchtunes, #view-touchtunes input, #view-touchtunes button { font-family: "Proxima Nova", "Host Grotesk", sans-serif; }
