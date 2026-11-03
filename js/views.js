@@ -89,6 +89,15 @@
       btns.forEach(function (b, i) { b.classList.toggle("on", i === cur); b.setAttribute("aria-selected", i === cur ? "true" : "false"); });
     }
 
+    // the scroll cue at the bottom centre: a mouse with a wheel that rolls; it goes away on the last page
+    var cue = document.createElement("button");
+    cue.type = "button"; cue.className = "ttScroll"; cue.setAttribute("aria-label", "Next page");
+    cue.innerHTML = '<span class="ttMouse"><span class="ttWheel"></span></span>';
+    cue.addEventListener("click", function () { go(1); });
+    sec.appendChild(cue);
+    var cueState = function () { cue.classList.toggle("gone", cur >= pgs.length - 1); };
+    cueState();
+
     pgs.forEach(function (pg, i) {
       pg.style.pointerEvents = "none"; // the tabs set their own pointer-events
       if (i) { var p = parts(pg); gsap.set(p.txt, { autoAlpha: 0, y: 36 }); gsap.set(p.pills, { scale: 0.8, autoAlpha: 0 }); }
@@ -109,6 +118,7 @@
         onComplete: function () { busy = false; } });
       cur = n;
       markTab(true);
+      cueState();
     }
     var go = function (delta) { goTo(cur + delta); };
 
