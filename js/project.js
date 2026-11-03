@@ -18,7 +18,6 @@
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
   var BOTTOM_ROOM = 32; // space kept under the card (the gallery row now sits above it, between the intro and the card)
-  var ROW_H = 36;       // about how tall the minimised gallery row is: the room reserved for it above the card
 
   var open = null; // { view, trigger, link }
   var holdRow = false; // while a project is open the gallery row stays hidden (it pops back in on close)
@@ -364,7 +363,7 @@
     var PAD = 8; // phones: the card takes the whole screen, with a small margin
     // desktop: the card starts just under the intro (name, tagline, tabs), keeps its 16:10 shape, and sits as near the
     // middle of the window as the tabs above and the gallery row below allow
-    var minTop = narrow ? PAD : (intro ? intro.getBoundingClientRect().bottom + 24 : 80) + ROW_H + GAP; // desktop: the gallery row fits between the intro and the card
+    var minTop = narrow ? PAD : (intro ? intro.getBoundingClientRect().bottom + 24 : 80); // desktop: the card starts just under the intro (the gallery row is hidden while a view is open)
     var top = minTop;
     var fullW = narrow ? window.innerWidth - PAD * 2 : Math.min(window.innerWidth * 0.86, 1100);
     var height = narrow
