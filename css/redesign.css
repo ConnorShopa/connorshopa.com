@@ -2403,9 +2403,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .ttPill.blue { --pill: #4a8af7; --pill2: #2f67dc; }
 .ttPill.indigo { --pill: #3E3EE7; --pill2: #3232DC; }
 .ttPill.green { --pill: #3f9f6d; --pill2: #28784c; }
-.ttPill .ttPin { height: 0.95em; margin: 0; }
-.ttPill .ttUser { height: 1.2em; width: auto; margin: -0.1em -0.1em -0.1em -0.2em; }
-.ttEmoji { font-size: 0.72em; line-height: 1; font-weight: 400; }
+.ttPill .ttPin { height: 0.72em; margin: 0; }
+.ttPill .ttUser { height: 0.9em; width: auto; margin: -0.1em -0.05em -0.1em -0.1em; }
+.ttEmoji { font-size: 0.6em; line-height: 1; font-weight: 400; }
 
 /* the blank phone, until the screens are in */
 .phoneBlank {
