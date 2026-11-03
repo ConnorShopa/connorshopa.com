@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=142" />
+    <link rel="stylesheet" href="css/happlycations.css?v=143" />
 </head>
 
 <body>
@@ -184,6 +184,7 @@
                 if (still.matches || !ltrWrap.animate) { ltrs.forEach(function (l) { l.dataset.skin = skin; }); return; }
                 // the swap speeds up as it travels left to right: each gap between letters is shorter than the last, and each letter's own
                 // out / in gets quicker too
+                var dir = skin === "norm" ? -1 : 1; // the original wordmark always drops in from the top; the app wordmarks rise in from below
                 var at = 0;
                 ltrs.forEach(function (l, i) {
                     var gap = 80 * Math.pow(0.8, i), k = 1 - 0.45 * (i / (ltrs.length - 1)); // gap in ms; k scales the durations (1 -> 0.55)
@@ -191,12 +192,12 @@
                     if (l.dataset.skin === skin) return;
                     swapTimers.push(setTimeout(function () {
                         if (me !== swapToken) return;
-                        var out = l.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(-55%) scale(.7)", opacity: 0 }], { duration: 260 * k, easing: "cubic-bezier(.5, 0, .75, 0)", fill: "forwards" });
+                        var out = l.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(" + (-dir * 55) + "%) scale(.7)", opacity: 0 }], { duration: 260 * k, easing: "cubic-bezier(.5, 0, .75, 0)", fill: "forwards" });
                         out.onfinish = function () {
                             if (me !== swapToken) return;
                             l.dataset.skin = skin;
                             out.cancel();
-                            l.animate([{ transform: "translateY(55%) scale(.7)", opacity: 0 }, { transform: "translateY(0) scale(1)", opacity: 1 }], { duration: 340 * k, easing: "cubic-bezier(.215,.61,.355,1)" });
+                            l.animate([{ transform: "translateY(" + (dir * 55) + "%) scale(.7)", opacity: 0 }, { transform: "translateY(0) scale(1)", opacity: 1 }], { duration: 340 * k, easing: "cubic-bezier(.215,.61,.355,1)" });
                         };
                     }, when));
                 });
