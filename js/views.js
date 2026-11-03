@@ -56,7 +56,7 @@
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var d = reduce ? 0 : 1;
     var pgs = Array.prototype.slice.call(sec.querySelectorAll(".viewBody .pg"));
-    var cur = 0, busy = false;
+    var cur = 0;
 
     // the plain words of each line get their own span, so they can move while the pills do something else
     pgs.forEach(function (pg) {
@@ -98,25 +98,38 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { markTab(false); });
     window.addEventListener("resize", function () { markTab(false); });
 
+    // switching never waits: whatever is mid-animation is taken over from where it is, so tabs can be clicked in quick succession
     function goTo(n) {
-      if (busy || n === cur || n < 0 || n >= pgs.length) return;
-      busy = true;
-      var dir = n > cur ? 1 : -1, out = parts(pgs[cur]), inn = parts(pgs[n]);
-      gsap.to(out.txt, { autoAlpha: 0, y: -36 * dir, duration: 0.35 * d, ease: "power2.in", stagger: 0.04 * d });
-      gsap.to(out.pills, { scale: 0.8, autoAlpha: 0, duration: 0.25 * d, ease: "power2.in", stagger: 0.03 * d });
-      gsap.fromTo(inn.txt, { autoAlpha: 0, y: 36 * dir }, { autoAlpha: 1, y: 0, duration: 0.6 * d, ease: "power3.out", stagger: 0.07 * d, delay: 0.3 * d });
-      // the pills bounce in, one after the other, once their words are arriving
-      gsap.fromTo(inn.pills, { scale: 0.8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.5 * d, ease: "back.out(0.6)", stagger: 0.12 * d, delay: 0.5 * d,
-        onComplete: function () { busy = false; } });
+      if (n === cur || n < 0 || n >= pgs.length) return;
+      var dir = n > cur ? 1 : -1;
+      pgs.forEach(function (pg, i) {
+        var p = parts(pg);
+        gsap.killTweensOf(p.txt.concat(p.pills));
+        if (i === n) return;
+        // every other page leaves (a page that is already hidden stays put)
+        var shown = p.txt.some(function (el) { return gsap.getProperty(el, "opacity") > 0.01; });
+        if (!shown) return;
+        gsap.to(p.txt, { autoAlpha: 0, y: -36 * dir, duration: 0.3 * d, ease: "power2.in", stagger: 0.03 * d });
+        gsap.to(p.pills, { scale: 0.8, autoAlpha: 0, duration: 0.2 * d, ease: "power2.in", stagger: 0.02 * d });
+      });
+      var inn = parts(pgs[n]);
+      var hidden = !inn.txt.some(function (el) { return gsap.getProperty(el, "opacity") > 0.01; });
+      if (hidden) { gsap.set(inn.txt, { autoAlpha: 0, y: 36 * dir }); gsap.set(inn.pills, { scale: 0.8, autoAlpha: 0 }); }
+      gsap.to(inn.txt, { autoAlpha: 1, y: 0, duration: 0.55 * d, ease: "power3.out", stagger: 0.06 * d, delay: 0.2 * d, overwrite: true });
+      // the pills ease in, one after the other, once their words are arriving
+      gsap.to(inn.pills, { scale: 1, autoAlpha: 1, duration: 0.5 * d, ease: "back.out(0.6)", stagger: 0.1 * d, delay: 0.4 * d, overwrite: true });
       cur = n;
       markTab(true);
     }
     var go = function (delta) { goTo(cur + delta); };
 
     var gone = function () { return sec.hidden || sec.style.visibility === "hidden"; };
+    var lastWheel = 0;
     sec.addEventListener("wheel", function (e) {
       e.preventDefault();
-      if (Math.abs(e.deltaY) < 12) return;
+      var now = Date.now();
+      if (Math.abs(e.deltaY) < 12 || now - lastWheel < 650) return; // one page per scroll gesture (a trackpad keeps sending events)
+      lastWheel = now;
       go(e.deltaY > 0 ? 1 : -1);
     }, { passive: false });
     var y0 = null;
