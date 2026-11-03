@@ -107,7 +107,7 @@
             p("quote", "&quot;I often miss a babies cry because it takes multiple taps to get to the recording screen.&quot;") +
             p("quote", "&quot;Routines is confusing. I forget where to go to see all my recordings.&quot;") +
             p("quote", "&quot;Users are not submitting feedback from the feedback screen, 90% of the time it&rsquo;s from the results screen.&quot;")
-          ) + media(fig(A + "nanniAssets/nanni_image_10.png"))),
+          ) + media(fig(A + "nanniAssets/nanni_image_10.png", "Previous navigation menu"))),
         pg("two",
           lab("Iterations") + text(
             p("eyebrow", "The navigation menu went through several iterations, with intention to minimize actions, and prioritize recording a newborns cry.") +
@@ -138,8 +138,8 @@
           lab("History") + text(
             p("lead", "Journal : History") +
             p("body", "A filterable history of all recorded cries or events. Visible by other caregivers for posterity and support.")
-          ) + media(fig(A + "nanniAssets/nanni_image_06.png"), fig(A + "nanniAssets/nanni_image_07.png"), fig(A + "nanniAssets/nanni_image_08.png"))),
-        pg("media", lab("Screens") + media(fig(A + "nanniAssets/nanni_image_09.png"))),
+          ) + media(fig(A + "nanniAssets/nanni_image_06.png"), fig(A + "nanniAssets/nanni_image_07.png"), fig(A + "nanniAssets/nanni_image_08.png", "Previous screens"))),
+        pg("media", lab("Screens") + media(fig(A + "nanniAssets/nanni_image_09.png", "Redesigned screens"))),
         pg("one",
           lab("Results") + text(
             p("lead", "Results") +

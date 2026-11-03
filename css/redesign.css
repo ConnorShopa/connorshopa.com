@@ -2527,3 +2527,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* no project list while a project view is open (it stays in the page, so it can come back on close; the prev / next chevrons switch projects) */
 html.view-open #projectList { opacity: 0 !important; pointer-events: none !important; }
+
+/* Nanni's phones now float on the card (their backgrounds are cut out), so the captions that used to be inside the pictures are text under them */
+#view-nanni .pgMedia figcaption { margin-top: 1.2cqw; text-align: center; font-size: clamp(14px, 1.3cqw, 22px); font-weight: 500; color: var(--ink); }
