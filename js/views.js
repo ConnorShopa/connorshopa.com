@@ -92,7 +92,7 @@
     // the scroll cue at the bottom centre: a mouse with a wheel that rolls; it goes away on the last page
     var cue = document.createElement("button");
     cue.type = "button"; cue.className = "ttScroll"; cue.setAttribute("aria-label", "Next page");
-    cue.innerHTML = '<span class="ttMouse"><span class="ttWheel"></span></span>';
+    cue.innerHTML = '<span class="ttMouse"><span class="ttWheel"></span></span><span class="ttScrollText">Scroll to see more</span>';
     cue.addEventListener("click", function () { go(1); });
     sec.appendChild(cue);
     var cueState = function () { cue.classList.toggle("gone", cur >= pgs.length - 1); };
