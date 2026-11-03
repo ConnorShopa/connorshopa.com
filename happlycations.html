@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=128" />
+    <link rel="stylesheet" href="css/happlycations.css?v=132" />
 </head>
 
 <body>
@@ -20,7 +20,36 @@
         </filter>
     </svg>
 
-    <main class="happlyPage" data-app="drawl">
+    <main class="happlyPage" data-app="drawl" data-view="landing">
+
+        <!-- the landing page: logo, nav, the big outlined wordmark, and the three apps. An app opens its own view (below); the small logo there comes back here. -->
+        <section class="happlyLanding" aria-label="Happlycations">
+            <header class="landBar">
+                <a class="landLogo" href="happlycations.html" aria-label="Happlycations"><span class="landLogoHand" aria-hidden="true"></span></a>
+                <nav class="landNav" aria-label="Happlycations">
+                    <a class="on" href="happlycations.html" aria-current="page">Apps</a>
+                    <span class="landDot" aria-hidden="true"></span>
+                    <span class="landSoon">You + Us</span>
+                    <span class="landDot" aria-hidden="true"></span>
+                    <span class="landSoon">About</span>
+                </nav>
+                <span></span>
+            </header>
+            <div class="landMid">
+                <h1 class="landWord">
+                    <span class="landHand" aria-hidden="true"></span>
+                    <span class="landWordText">Happlycations</span>
+                </h1>
+                <p class="landTag">Where happy apps are born</p>
+                <ul class="landApps">
+                    <li><button type="button" class="landApp" data-app="drawl"><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /><span class="landName drawl">drawl</span></button></li>
+                    <li><button type="button" class="landApp" data-app="sheep"><img src="assets/homeAssets/sheep_app_icon.svg" alt="" /><span class="landName sheep">sheep</span></button></li>
+                    <li><button type="button" class="landApp" data-app="habbot"><img src="assets/homeAssets/habbot_app_icon.svg" alt="" /><span class="landName habbot">habbot</span></button></li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="happlyDetail">
 
         <header class="happlyTop">
             <h1 class="happlyHead">
@@ -63,6 +92,7 @@
                     <div class="happlyCtaSet" data-app="habbot"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download habbot</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
                 </div>
             </div>
+        </div>
         </div>
     </main>
 
@@ -124,6 +154,19 @@
                 pick(app);
                 spin(app);
             }
+            // landing: an app tile opens that app's view; the small logo + wordmark there comes back
+            document.querySelectorAll(".landApp").forEach(function (b) {
+                b.addEventListener("click", function () {
+                    for (var k = 0; k < secs.length; k++) if (secs[k].dataset.app === b.dataset.app) go(k);
+                    page.setAttribute("data-view", "app");
+                    window.scrollTo(0, 0);
+                });
+            });
+            head.setAttribute("role", "button"); head.setAttribute("tabindex", "0"); head.setAttribute("aria-label", "Back to Happlycations");
+            function home() { page.setAttribute("data-view", "landing"); window.scrollTo(0, 0); }
+            head.addEventListener("click", home);
+            head.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); home(); } });
+            document.querySelectorAll(".landLogo").forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); }); });
             tabBtns.forEach(function (t, k) {
                 t.addEventListener("click", function () { go(k); });
                 t.addEventListener("keydown", function (e) {
