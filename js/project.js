@@ -12,6 +12,7 @@
 
   var MINI = 0.4;  // how small the gallery gets while a view is open
   var GAP = 28;    // space between the card and the minimised gallery
+  var CARD_SCALE = 1.33; // how much bigger the card is than the space between the tabs and the gallery row
   var CARD_RATIO = 16 / 10; // the expanded card's width : height (a MacBook screen's shape)
   var INTRO_GAP = 16;  // the gap left above the filter chips once the about-me lines are gone
   var lockY = null; // the scroll position the page is pinned at while a project is open
@@ -368,12 +369,23 @@
       ? Math.max(300, window.innerHeight - PAD * 2)
       : Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
     var cardW = narrow ? fullW : Math.min(fullW, height * CARD_RATIO);
+    // desktop: the card is CARD_SCALE times bigger than what fits between the tabs and the gallery row, as large as the window allows
+    // (the same shape), and centred above the gallery row, over the tabs
+    if (!narrow) {
+      var bigW = Math.min(cardW * CARD_SCALE, window.innerWidth * 0.86, 1100 * CARD_SCALE);
+      var bigH = bigW / CARD_RATIO;
+      var maxH = window.innerHeight - 24 - BOTTOM_ROOM; // 24px above, the gallery row below
+      if (bigH > maxH) { bigH = maxH; bigW = bigH * CARD_RATIO; }
+      cardW = bigW; height = bigH;
+    }
     var side = (window.innerWidth - cardW) / 2;
     view.style.width = cardW + "px";
     view.style.height = height + "px";
-    var minTop = top;
-    var maxTop = Math.max(minTop, window.innerHeight - (narrow ? PAD : BOTTOM_ROOM) - height);
-    top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
+    if (narrow) {
+      var minTop = top;
+      var maxTop = Math.max(minTop, window.innerHeight - PAD - height);
+      top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
+    } else top = Math.max(24, (window.innerHeight - BOTTOM_ROOM - height) / 2);
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height;
     showProjNav(view, top, height, side, narrow, tintBg);
