@@ -49,28 +49,70 @@
     });
   }
 
-  // "step" views (TouchTunes): the pages sit on top of each other and scroll / swipe / arrow keys step between them.
-  // Only the words animate (up and out, the next ones rise in); the phone stays where it is.
+  // "step" views (TouchTunes): the pages sit on top of each other and scroll / swipe / arrow keys / the tabs step between them.
+  // Only the words animate (the next ones rise in); the phone and the tabs stay where they are. The coloured pills bounce in.
+  // The tabs are made from each page's label (.ttLabel), so a new page gets its tab by being added to the project.
   function wireSteps(sec) {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var d = reduce ? 0 : 1;
     var pgs = Array.prototype.slice.call(sec.querySelectorAll(".viewBody .pg"));
-    var words = function (pg) { return Array.prototype.slice.call(pg.querySelectorAll(".pgText .eyebrow, .pgText .ttLine")); };
     var cur = 0, busy = false;
-    pgs.forEach(function (pg, i) {
-      pg.style.pointerEvents = i === 0 ? "" : "none";
-      if (i) gsap.set(words(pg), { autoAlpha: 0, y: 36 });
+
+    // the plain words of each line get their own span, so they can move while the pills do something else
+    pgs.forEach(function (pg) {
+      pg.querySelectorAll(".ttLine").forEach(function (line) {
+        Array.prototype.slice.call(line.childNodes).forEach(function (n) {
+          if (n.nodeType === 3 && n.textContent.trim()) {
+            var s = document.createElement("span"); s.className = "ttTxt"; s.textContent = n.textContent;
+            line.replaceChild(s, n);
+          }
+        });
+      });
     });
-    function go(delta) {
-      var n = cur + delta;
-      if (busy || n < 0 || n >= pgs.length) return;
+    var parts = function (pg) { return { txt: Array.prototype.slice.call(pg.querySelectorAll(".ttTxt")), pills: Array.prototype.slice.call(pg.querySelectorAll(".ttPill")) }; };
+
+    // tabs, in the first page's text column, over the (invisible) labels that keep every page's sentence at the same height
+    var labels = pgs.map(function (pg) { var l = pg.querySelector(".ttLabel"); return l ? l.textContent.trim() : ""; });
+    var tabs = null, pill = null, btns = [];
+    if (labels.some(Boolean) && pgs[0].querySelector(".pgText")) {
+      tabs = document.createElement("div"); tabs.className = "ttTabs"; tabs.setAttribute("role", "tablist");
+      pill = document.createElement("span"); pill.className = "ttTabPill"; tabs.appendChild(pill);
+      labels.forEach(function (name, i) {
+        var b = document.createElement("button"); b.type = "button"; b.className = "ttTab"; b.textContent = name || "Page " + (i + 1);
+        b.setAttribute("role", "tab"); b.addEventListener("click", function () { goTo(i); });
+        btns.push(b); tabs.appendChild(b);
+      });
+      pgs[0].querySelector(".pgText").appendChild(tabs);
+    }
+    function markTab(animate) {
+      btns.forEach(function (b, i) { b.classList.toggle("on", i === cur); b.setAttribute("aria-selected", i === cur ? "true" : "false"); });
+      var b = btns[cur]; if (!b) return;
+      gsap.to(pill, { x: b.offsetLeft, width: b.offsetWidth, duration: animate ? 0.4 * d : 0, ease: "power3.out" });
+    }
+
+    pgs.forEach(function (pg, i) {
+      pg.style.pointerEvents = "none"; // the tabs set their own pointer-events
+      if (i) { var p = parts(pg); gsap.set(p.txt, { autoAlpha: 0, y: 36 }); gsap.set(p.pills, { scale: 0 }); }
+    });
+    markTab(false);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { markTab(false); });
+    window.addEventListener("resize", function () { markTab(false); });
+
+    function goTo(n) {
+      if (busy || n === cur || n < 0 || n >= pgs.length) return;
       busy = true;
-      var out = words(pgs[cur]), inn = words(pgs[n]), d = reduce ? 0 : 1;
-      pgs[cur].style.pointerEvents = "none"; pgs[n].style.pointerEvents = "";
-      gsap.to(out, { autoAlpha: 0, y: -36 * delta, duration: 0.35 * d, ease: "power2.in", stagger: 0.04 * d });
-      gsap.fromTo(inn, { autoAlpha: 0, y: 36 * delta }, { autoAlpha: 1, y: 0, duration: 0.6 * d, ease: "power3.out", stagger: 0.07 * d, delay: 0.3 * d,
+      var dir = n > cur ? 1 : -1, out = parts(pgs[cur]), inn = parts(pgs[n]);
+      gsap.to(out.txt, { autoAlpha: 0, y: -36 * dir, duration: 0.35 * d, ease: "power2.in", stagger: 0.04 * d });
+      gsap.to(out.pills, { scale: 0, duration: 0.25 * d, ease: "power2.in", stagger: 0.03 * d });
+      gsap.fromTo(inn.txt, { autoAlpha: 0, y: 36 * dir }, { autoAlpha: 1, y: 0, duration: 0.6 * d, ease: "power3.out", stagger: 0.07 * d, delay: 0.3 * d });
+      // the pills bounce in, one after the other, once their words are arriving
+      gsap.fromTo(inn.pills, { scale: 0 }, { scale: 1, duration: 0.8 * d, ease: "back.out(2.6)", stagger: 0.12 * d, delay: 0.5 * d,
         onComplete: function () { busy = false; } });
       cur = n;
+      markTab(true);
     }
+    var go = function (delta) { goTo(cur + delta); };
+
     var gone = function () { return sec.hidden || sec.style.visibility === "hidden"; };
     sec.addEventListener("wheel", function (e) {
       e.preventDefault();

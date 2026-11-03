@@ -2373,9 +2373,18 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 #view-touchtunes.scrollView .pg.split .pgMedia { order: 0; width: auto; height: auto; flex-wrap: nowrap; justify-self: end; }
 #view-touchtunes.scrollView .pg.split .pgMedia figure { flex: none; }
 
-/* the small label above the sentence ("Intro", "Onboarding") */
-#view-touchtunes .pg.split .eyebrow.ttLabel { font-size: clamp(12px, 1.6cqw, 22px); letter-spacing: 0; text-transform: none; font-weight: 400; color: rgba(250, 250, 250, 0.5); margin-bottom: 1.2cqw; }
+/* the page label ("Intro", "Onboarding") is the page's tab: the label itself is an invisible spacer that keeps the sentence level,
+   and js/views.js puts one shared tab bar (.ttTabs) over it, built from the labels of every page */
+#view-touchtunes .pg.split .pgText { position: relative; }
+#view-touchtunes .pg.split .eyebrow.ttLabel { visibility: hidden; height: 4.4cqw; margin: 0 0 1.4cqw; padding: 0; font-size: 1px; }
 #view-touchtunes .pg.split .eyebrow.ttLabel::before { display: none; }
+.ttTabs { position: absolute; left: 0; top: 0; width: 100%; height: 4.4cqw; box-sizing: border-box; display: flex; align-items: flex-start; gap: 0.5cqw; padding-bottom: 1.2cqw; border-bottom: 1px solid rgba(255, 255, 255, 0.14); pointer-events: auto; z-index: 2; }
+.ttTab { position: relative; z-index: 1; height: 3.1cqw; padding: 0 1.2cqw; border: 0; border-radius: 999px; background: none; color: rgba(250, 250, 250, 0.5); font: inherit; font-size: clamp(12px, 1.7cqw, 24px); line-height: 1; cursor: pointer; transition: color 0.3s ease; white-space: nowrap; }
+.ttTab:hover { color: rgba(250, 250, 250, 0.85); }
+.ttTab.on { color: #FAFAFA; }
+.ttTabPill { position: absolute; left: 0; top: 0; height: 3.1cqw; width: 0; border-radius: 999px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.1); box-sizing: border-box; pointer-events: none; }
+.ttTxt { display: inline-block; white-space: pre; }
+.ttPill { transform-origin: 50% 55%; }
 
 /* the sentence: each line on its own row, tall enough for the pills */
 #view-touchtunes .pg.split .ttHead { font-size: clamp(16px, 2.55cqw, 38px); font-weight: 500; line-height: 2.05; letter-spacing: -0.015em; color: #FAFAFA; }
@@ -2392,6 +2401,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 }
 .ttPill.purple { --pill: #8a43f0; --pill2: #6a2bd2; }
 .ttPill.blue { --pill: #4a8af7; --pill2: #2f67dc; }
+.ttPill.indigo { --pill: #3E3EE7; --pill2: #3232DC; }
 .ttPill.green { --pill: #3f9f6d; --pill2: #28784c; }
 .ttPill .ttPin { height: 0.95em; margin: 0; }
 .ttEmoji { font-size: 0.72em; line-height: 1; font-weight: 400; }
@@ -2406,7 +2416,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   #view-touchtunes.scrollView .pg.split { grid-template-columns: minmax(0, 1fr); row-gap: 28px; margin: 0; min-height: 0; padding: 28px 0; }
   #view-touchtunes.scrollView .pg.split .pgMedia { justify-self: center; }
   #view-touchtunes .pg.split .ttHead { font-size: clamp(17px, 5.6cqw, 28px); }
-  #view-touchtunes .pg.split .eyebrow.ttLabel { font-size: 14px; }
   .ttLine { white-space: normal; }
   .phoneBlank { height: min(420px, 62dvh); }
 }
