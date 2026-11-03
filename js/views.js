@@ -73,10 +73,9 @@
 
     // tabs, in the first page's text column, over the (invisible) labels that keep every page's sentence at the same height
     var labels = pgs.map(function (pg) { var l = pg.querySelector(".ttLabel"); return l ? l.textContent.trim() : ""; });
-    var tabs = null, pill = null, btns = [];
+    var tabs = null, btns = [];
     if (labels.some(Boolean) && pgs[0].querySelector(".pgText")) {
       tabs = document.createElement("div"); tabs.className = "ttTabs"; tabs.setAttribute("role", "tablist");
-      pill = document.createElement("span"); pill.className = "ttTabPill"; tabs.appendChild(pill);
       labels.forEach(function (name, i) {
         var b = document.createElement("button"); b.type = "button"; b.className = "ttTab"; b.textContent = name || "Page " + (i + 1);
         b.setAttribute("role", "tab"); b.addEventListener("click", function () { goTo(i); });
@@ -88,8 +87,6 @@
     }
     function markTab(animate) {
       btns.forEach(function (b, i) { b.classList.toggle("on", i === cur); b.setAttribute("aria-selected", i === cur ? "true" : "false"); });
-      var b = btns[cur]; if (!b) return;
-      gsap.to(pill, { x: b.offsetLeft, y: b.offsetTop, width: b.offsetWidth, height: b.offsetHeight, duration: animate ? 0.4 * d : 0, ease: "power3.out" });
     }
 
     pgs.forEach(function (pg, i) {
