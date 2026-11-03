@@ -17,7 +17,8 @@
   var INTRO_GAP = 16;  // the gap left above the filter chips once the about-me lines are gone
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
-  var BOTTOM_ROOM = 104; // space kept under the card for the gallery row: 48px to the screen edge + the row + the gap above it
+  var BOTTOM_ROOM = 32; // space kept under the card (the gallery row now sits above it, between the intro and the card)
+  var ROW_H = 36;       // about how tall the minimised gallery row is: the room reserved for it above the card
 
   var open = null; // { view, trigger, link }
   var holdRow = false; // while a project is open the gallery row stays hidden (it pops back in on close)
@@ -363,19 +364,21 @@
     var PAD = 8; // phones: the card takes the whole screen, with a small margin
     // desktop: the card starts just under the intro (name, tagline, tabs), keeps its 16:10 shape, and sits as near the
     // middle of the window as the tabs above and the gallery row below allow
-    var top = narrow ? PAD : (intro ? intro.getBoundingClientRect().bottom + 24 : 80);
+    var minTop = narrow ? PAD : (intro ? intro.getBoundingClientRect().bottom + 24 : 80) + ROW_H + GAP; // desktop: the gallery row fits between the intro and the card
+    var top = minTop;
     var fullW = narrow ? window.innerWidth - PAD * 2 : Math.min(window.innerWidth * 0.86, 1100);
     var height = narrow
       ? Math.max(300, window.innerHeight - PAD * 2)
-      : Math.min(Math.max(300, window.innerHeight - top - BOTTOM_ROOM), fullW / CARD_RATIO);
+      : Math.min(Math.max(300, window.innerHeight - minTop - BOTTOM_ROOM), fullW / CARD_RATIO);
     var cardW = narrow ? fullW : Math.min(fullW, height * CARD_RATIO);
     // desktop: the card is CARD_SCALE times bigger than what fits between the tabs and the gallery row, as large as the window allows
     // (the same shape), and centred above the gallery row, over the tabs
     if (!narrow) {
-      var bigW = Math.min(cardW * CARD_SCALE, window.innerWidth * 0.86, 1100 * CARD_SCALE);
-      var bigH = bigW / CARD_RATIO;
-      var maxH = window.innerHeight - 24 - BOTTOM_ROOM; // 24px above, the gallery row below
-      if (bigH > maxH) { bigH = maxH; bigW = bigH * CARD_RATIO; }
+      // as large as the screen allows, in the same 16:10 shape: the room under the intro and the gallery row, down to BOTTOM_ROOM
+      var maxH = window.innerHeight - minTop - BOTTOM_ROOM;
+      var bigH = maxH, bigW = bigH * CARD_RATIO;
+      var maxW = window.innerWidth * 0.9;
+      if (bigW > maxW) { bigW = maxW; bigH = bigW / CARD_RATIO; }
       cardW = bigW; height = bigH;
     }
     var side = (window.innerWidth - cardW) / 2;
@@ -385,7 +388,7 @@
       var minTop = top;
       var maxTop = Math.max(minTop, window.innerHeight - PAD - height);
       top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
-    } else top = Math.max(24, (window.innerHeight - BOTTOM_ROOM - height) / 2);
+    } else top = minTop + Math.max(0, (window.innerHeight - BOTTOM_ROOM - minTop - height) / 2); // centred in what is left under the row
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height;
     showProjNav(view, top, height, side, narrow, tintBg);
@@ -424,8 +427,8 @@
       // slide the (shrunken) row so it sits just under the card
       var n = nav.getBoundingClientRect();
       var rowH = list.getBoundingClientRect().height;
-      // the row sits 48px above the bottom edge of the screen (phones keep it just under the card)
-      var rowCentre = cardBottom + GAP + (rowH * MINI) / 2;
+      // the row sits just above the card, under the intro
+      var rowCentre = top - GAP - (rowH * MINI) / 2;
       var drop = rowCentre - (n.top + n.height / 2);
       gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
     }, { x: b.cx, y: b.cy });
