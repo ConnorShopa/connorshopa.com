@@ -135,7 +135,7 @@ body { overflow: auto; }
 .landBar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
 .landLogo { justify-self: start; display: grid; place-items: center; width: clamp(44px, 3.5vw, 70px); aspect-ratio: 1; border-radius: 26%; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.03); }
 .landLogoHand { display: block; height: 62%; aspect-ratio: 91 / 135; background: #111; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
-.landNav { display: flex; align-items: center; gap: clamp(12px, 1.4vw, 28px); font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(13px, 1.3vw, 26px); color: #333; }
+.landNav { display: flex; align-items: center; gap: clamp(12px, 1.4vw, 28px); font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: 16px; color: #333; }
 .landNav a { color: #111; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
 .landSoon { cursor: default; }
 .landDot { width: 0.28em; height: 0.28em; border-radius: 50%; background: #777; }
@@ -159,7 +159,7 @@ body { overflow: auto; }
 .happlyPage[data-hover="drawl"] .landHand { background: #0C1E44; }
 .happlyPage[data-hover="sheep"] .landHand { background: #2F4AA3; }
 .happlyPage[data-hover="habbot"] .landHand { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); background-size: cover; }
-.landTag { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 500; font-size: clamp(15px, 2vw, 40px); letter-spacing: -0.01em; color: #111; text-align: center; }
+.landTag { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 500; font-size: 16px; letter-spacing: -0.01em; color: #111; text-align: center; }
 
 .landApps { list-style: none; margin: clamp(28px, 6dvh, 72px) 0 0; padding: 0; display: flex; gap: clamp(28px, 4.6vw, 92px); }
 .landApp { display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1vw, 18px); padding: 0; border: 0; background: none; cursor: pointer; transition: transform .45s cubic-bezier(.34, 1.56, .64, 1); }
@@ -175,5 +175,5 @@ body { overflow: auto; }
   .happlyLanding { min-height: calc(100dvh - 48px); }
   .landWord { --lw: calc((100vw - 32px) / 9.4); }
   .landApps { gap: 22px; }
-  .landNav { font-size: 13px; gap: 11px; }
+  .landNav { font-size: 16px; gap: 11px; }
 }
