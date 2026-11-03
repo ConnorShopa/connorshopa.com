@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=136" />
+    <link rel="stylesheet" href="css/happlycations.css?v=137" />
 </head>
 
 <body>
@@ -178,28 +178,35 @@
                 skinNow = skin;
                 var me = ++swapToken;
                 swapTimers.forEach(clearTimeout); swapTimers = [];
+                // whatever was half way is cancelled first, so no letter is left faded out or on the wrong treatment: every letter is
+                // then either already right (and fully shown) or is swapped, in order
+                ltrs.forEach(function (l) { l.getAnimations().forEach(function (a) { a.cancel(); }); });
                 if (still.matches || !ltrWrap.animate) { ltrs.forEach(function (l) { l.dataset.skin = skin; }); return; }
-                ltrs.forEach(function (l, i) {
+                var n = 0;
+                ltrs.forEach(function (l) {
+                    if (l.dataset.skin === skin) return;
                     swapTimers.push(setTimeout(function () {
-                        if (me !== swapToken || l.dataset.skin === skin) return;
-                        l.getAnimations().forEach(function (a) { a.cancel(); });
+                        if (me !== swapToken) return;
                         var out = l.animate([{ transform: "translateY(0)", opacity: 1 }, { transform: "translateY(-14%)", opacity: 0 }], { duration: 150, easing: "ease-in", fill: "forwards" });
                         out.onfinish = function () {
                             if (me !== swapToken) return;
                             l.dataset.skin = skin;
-                            l.getAnimations().forEach(function (a) { a.cancel(); });
+                            out.cancel();
                             l.animate([{ transform: "translateY(14%)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }], { duration: 220, easing: "cubic-bezier(.215,.61,.355,1)" });
                         };
-                    }, i * 45));
+                    }, (n++) * 45));
                 });
             }
             // hovering an app also dresses the hand in the app's colour (CSS, from data-hover)
+            var landRow = document.querySelector(".landApps");
             document.querySelectorAll(".landApp").forEach(function (b) {
                 var on = function () { page.setAttribute("data-hover", b.dataset.app); setSkin(b.dataset.app); };
-                var off = function () { page.removeAttribute("data-hover"); setSkin("norm"); };
                 b.addEventListener("mouseenter", on); b.addEventListener("focus", on);
-                b.addEventListener("mouseleave", off); b.addEventListener("blur", off);
             });
+            // back to the normal wordmark only when the pointer (or focus) leaves the whole row of apps, not when it passes between two of them
+            function rowLeft() { page.removeAttribute("data-hover"); setSkin("norm"); }
+            landRow.addEventListener("mouseleave", rowLeft);
+            landRow.addEventListener("focusout", function (e) { if (!e.relatedTarget || !landRow.contains(e.relatedTarget)) rowLeft(); });
             document.querySelectorAll(".landApp").forEach(function (b) {
                 b.addEventListener("click", function () {
                     for (var k = 0; k < secs.length; k++) if (secs[k].dataset.app === b.dataset.app) go(k);
