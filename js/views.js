@@ -98,28 +98,38 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { markTab(false); });
     window.addEventListener("resize", function () { markTab(false); });
 
-    // switching never waits: whatever is mid-animation is taken over from where it is, so tabs can be clicked in quick succession
+    // switching never waits: whatever is mid-animation is taken over from where it is, so tabs can be clicked in quick succession.
+    // Every page that is not the current one is always sent to "hidden", and a final settle makes sure nothing is left half way.
+    var settle = null;
+    var allParts = function (pg) { var p = parts(pg); return p.txt.concat(p.pills); };
     function goTo(n) {
       if (n === cur || n < 0 || n >= pgs.length) return;
       var dir = n > cur ? 1 : -1;
+      if (settle) settle.kill();
       pgs.forEach(function (pg, i) {
         var p = parts(pg);
-        gsap.killTweensOf(p.txt.concat(p.pills));
+        gsap.killTweensOf(allParts(pg));
         if (i === n) return;
-        // every other page leaves (a page that is already hidden stays put)
-        var shown = p.txt.some(function (el) { return gsap.getProperty(el, "opacity") > 0.01; });
-        if (!shown) return;
         gsap.to(p.txt, { autoAlpha: 0, y: -36 * dir, duration: 0.3 * d, ease: "power2.in", stagger: 0.03 * d });
         gsap.to(p.pills, { scale: 0.8, autoAlpha: 0, duration: 0.2 * d, ease: "power2.in", stagger: 0.02 * d });
       });
       var inn = parts(pgs[n]);
-      var hidden = !inn.txt.some(function (el) { return gsap.getProperty(el, "opacity") > 0.01; });
-      if (hidden) { gsap.set(inn.txt, { autoAlpha: 0, y: 36 * dir }); gsap.set(inn.pills, { scale: 0.8, autoAlpha: 0 }); }
-      gsap.to(inn.txt, { autoAlpha: 1, y: 0, duration: 0.55 * d, ease: "power3.out", stagger: 0.06 * d, delay: 0.2 * d, overwrite: true });
+      var visible = allParts(pgs[n]).some(function (el) { return gsap.getProperty(el, "opacity") > 0.01; });
+      if (!visible) { gsap.set(inn.txt, { autoAlpha: 0, y: 36 * dir }); gsap.set(inn.pills, { scale: 0.8, autoAlpha: 0 }); }
+      gsap.to(inn.txt, { autoAlpha: 1, y: 0, duration: 0.55 * d, ease: "power3.out", stagger: 0.06 * d, delay: 0.2 * d });
       // the pills ease in, one after the other, once their words are arriving
-      gsap.to(inn.pills, { scale: 1, autoAlpha: 1, duration: 0.5 * d, ease: "back.out(0.6)", stagger: 0.1 * d, delay: 0.4 * d, overwrite: true });
+      gsap.to(inn.pills, { scale: 1, autoAlpha: 1, duration: 0.5 * d, ease: "back.out(0.6)", stagger: 0.1 * d, delay: 0.4 * d });
       cur = n;
       markTab(true);
+      // when the dust has settled, the current page is fully shown and every other page fully hidden
+      settle = gsap.delayedCall(1.6 * d + 0.05, function () {
+        pgs.forEach(function (pg, i) {
+          var p = parts(pg);
+          gsap.killTweensOf(allParts(pg));
+          if (i === cur) { gsap.set(p.txt, { autoAlpha: 1, y: 0 }); gsap.set(p.pills, { autoAlpha: 1, scale: 1 }); }
+          else { gsap.set(p.txt, { autoAlpha: 0, y: 36 }); gsap.set(p.pills, { autoAlpha: 0, scale: 0.8 }); }
+        });
+      });
     }
     var go = function (delta) { goTo(cur + delta); };
 
