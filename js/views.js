@@ -57,6 +57,7 @@
     var d = reduce ? 0 : 1;
     var pgs = Array.prototype.slice.call(sec.querySelectorAll(".viewBody .pg"));
     var cur = 0, busy = false;
+    sec.style.setProperty("--tt-n", pgs.length); // the nav list is this many rows tall; every page's text block is as tall, so the sentence sits level with the middle of the list
 
     // the plain words of each line get their own span, so they can move while the pills do something else
     pgs.forEach(function (pg) {
