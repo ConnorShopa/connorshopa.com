@@ -49,6 +49,48 @@
     });
   }
 
+  // "step" views (TouchTunes): the pages sit on top of each other and scroll / swipe / arrow keys step between them.
+  // Only the words animate (up and out, the next ones rise in); the phone stays where it is.
+  function wireSteps(sec) {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var pgs = Array.prototype.slice.call(sec.querySelectorAll(".viewBody .pg"));
+    var words = function (pg) { return Array.prototype.slice.call(pg.querySelectorAll(".pgText .eyebrow, .pgText .ttLine")); };
+    var cur = 0, busy = false;
+    pgs.forEach(function (pg, i) {
+      pg.style.pointerEvents = i === 0 ? "" : "none";
+      if (i) gsap.set(words(pg), { autoAlpha: 0, y: 36 });
+    });
+    function go(delta) {
+      var n = cur + delta;
+      if (busy || n < 0 || n >= pgs.length) return;
+      busy = true;
+      var out = words(pgs[cur]), inn = words(pgs[n]), d = reduce ? 0 : 1;
+      pgs[cur].style.pointerEvents = "none"; pgs[n].style.pointerEvents = "";
+      gsap.to(out, { autoAlpha: 0, y: -36 * delta, duration: 0.35 * d, ease: "power2.in", stagger: 0.04 * d });
+      gsap.fromTo(inn, { autoAlpha: 0, y: 36 * delta }, { autoAlpha: 1, y: 0, duration: 0.6 * d, ease: "power3.out", stagger: 0.07 * d, delay: 0.3 * d,
+        onComplete: function () { busy = false; } });
+      cur = n;
+    }
+    var gone = function () { return sec.hidden || sec.style.visibility === "hidden"; };
+    sec.addEventListener("wheel", function (e) {
+      e.preventDefault();
+      if (Math.abs(e.deltaY) < 12) return;
+      go(e.deltaY > 0 ? 1 : -1);
+    }, { passive: false });
+    var y0 = null;
+    sec.addEventListener("touchstart", function (e) { y0 = e.touches[0] ? e.touches[0].clientY : null; }, { passive: true });
+    sec.addEventListener("touchend", function (e) {
+      if (y0 === null || !e.changedTouches[0]) return;
+      var dy = e.changedTouches[0].clientY - y0; y0 = null;
+      if (Math.abs(dy) > 50) go(dy < 0 ? 1 : -1);
+    }, { passive: true });
+    document.addEventListener("keydown", function (e) {
+      if (gone()) return;
+      if (e.key === "ArrowDown" || e.key === "PageDown" || e.key === " ") go(1);
+      else if (e.key === "ArrowUp" || e.key === "PageUp") go(-1);
+    });
+  }
+
   // put the decrypted pages into the view
   function showPages(sec, pages) {
         var body = sec.querySelector(".viewBody");
@@ -69,6 +111,7 @@
         }).join("");
       }
       sec._page = 0;
+    if (sec.classList.contains("stepView") && pages.length > 1 && !sec._stepWired) { sec._stepWired = true; wireSteps(sec); }
   }
 
   function wireLock(slug, sec) {
@@ -153,6 +196,7 @@
     sec.innerHTML = html;
     if (proj.download) sec.classList.add("hasDownload");
     sec.querySelector(".viewTitle").textContent = proj.title;
+    if (proj.stepText) sec.classList.add("stepView"); // pages step on scroll instead of scrolling as one long page
     if (!proj.noNav) sec.classList.add("scrollView"); // every project but Habbot: all the pages in one vertical scroll
     if (proj.noNav) sec.classList.add("vertical"); // pages move up and down (scroll or the chevron under the first page's button)
     if (proj.dark) sec.classList.add("dark");

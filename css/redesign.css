@@ -2356,7 +2356,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 #view-touchtunes { container-type: size; }
 #view-touchtunes.scrollView .pg.split {
   /* each page is as tall as the whole card, so its words and phone sit in the card's own middle (the card's top padding is pulled back in) */
-  margin: -120px -88px 0; min-height: calc(100% + 160px); padding: 0 11cqw 0 11.4cqw;
+  position: absolute; inset: 0; margin: 0; min-height: 0; padding: 0 11cqw 0 11.4cqw;
   grid-template-columns: minmax(0, 1fr) auto;
   justify-items: start;
   align-items: center;
@@ -2364,6 +2364,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   column-gap: 5cqw;
   text-align: left;
 }
+#view-touchtunes.scrollView .viewBody { padding: 0; overflow: hidden; }
 #view-touchtunes.scrollView .pg.split + .pg.split { margin-top: 0; }
 #view-touchtunes.scrollView .pg.split .pgText { order: 0; align-items: flex-start; text-align: left; max-width: none; width: auto; gap: 0; }
 #view-touchtunes.scrollView .pg.split .pgMedia { order: 0; width: auto; height: auto; flex-wrap: nowrap; justify-self: end; }
@@ -2389,6 +2390,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .ttPill.purple { --pill: #8a43f0; --pill2: #6a2bd2; }
 .ttPill.blue { --pill: #4a8af7; --pill2: #2f67dc; }
 .ttPill.green { --pill: #3f9f6d; --pill2: #28784c; }
+.ttPill .ttPin { height: 0.95em; margin: 0; }
 .ttEmoji { font-size: 0.72em; line-height: 1; font-weight: 400; }
 
 /* the blank phone, until the screens are in */
@@ -2408,3 +2410,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 /* TEMPORARY dev-only skip button on the password form (localhost) */
 .lockDev { margin-left: 8px; padding: 0 12px; border: 1px dashed currentColor; border-radius: 999px; background: none; color: inherit; font: inherit; font-size: 12px; opacity: 0.6; cursor: pointer; }
+
+/* TouchTunes: the app icon keeps its own colours in the card's header (dark cards otherwise turn logos white) */
+#view-touchtunes .viewLogo, #view-touchtunes .viewHead:hover .viewLogo { filter: none !important; }

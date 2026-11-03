@@ -68,6 +68,7 @@
       appLinks: { apple: "https://apps.apple.com/us/app/id378351144", android: "https://play.google.com/store/apps/details?id=com.touchtunes.android" },
       locked: true, // the pages live encrypted in js/locked/touchtunes.json (see tools/lock.mjs)
       dark: true,
+      stepText: true, // pages step on scroll: the words animate, the phone stays
       cardBg: "#03070F", // the near-black card
       pages: [],
     },
