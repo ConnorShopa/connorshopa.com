@@ -49,6 +49,28 @@
     });
   }
 
+  // put the decrypted pages into the view
+  function showPages(sec, pages) {
+        var body = sec.querySelector(".viewBody");
+      body.innerHTML = pages.map(function (page, i) {
+        return '<div class="pg ' + page.layout + (i === 0 ? " is-on" : "") + '">' + page.html + "</div>";
+      }).join("");
+      var many = pages.length > 1;
+      sec.querySelectorAll(".viewNav").forEach(function (b) { b.hidden = !many; });
+      var prev = sec.querySelector(".viewNav.prev");
+      if (prev) prev.disabled = true;
+      var next = sec.querySelector(".viewNav.next");
+      if (next) next.disabled = !many;
+      var dots = sec.querySelector(".viewDots");
+      if (dots) {
+        dots.hidden = !many;
+        dots.innerHTML = pages.map(function (_, i) {
+          return '<button type="button" class="viewDot" data-page="' + i + '" aria-label="Page ' + (i + 1) + " of " + pages.length + '"' + (i === 0 ? ' aria-current="true"' : "") + "></button>";
+        }).join("");
+      }
+      sec._page = 0;
+  }
+
   function wireLock(slug, sec) {
     var form = sec.querySelector(".lockForm");
     var input = sec.querySelector(".lockInput");
@@ -60,30 +82,25 @@
       msg.textContent = "";
       btn.disabled = !input.value;
     });
+    // TEMPORARY test button: only on localhost, skips the password by reading the plain pages in private/<slug>/ (git-ignored). Delete when done.
+    if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+      var dev = document.createElement("button");
+      dev.type = "button"; dev.className = "lockDev"; dev.textContent = "Skip (dev)";
+      form.appendChild(dev);
+      dev.addEventListener("click", function () {
+        fetch("private/" + slug + "/pages.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (pages) {
+          pages.forEach(function (p) { p.html = p.html.split("private:").join("private/" + slug + "/media/"); });
+          showPages(sec, pages);
+        }).catch(function () { msg.textContent = "No private/" + slug + "/pages.json found."; });
+      });
+    }
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!input.value) return;
       msg.textContent = "";
       form.classList.remove("has-error");
       decryptBundle(slug, input.value).then(function (pages) {
-        var body = sec.querySelector(".viewBody");
-        body.innerHTML = pages.map(function (page, i) {
-          return '<div class="pg ' + page.layout + (i === 0 ? " is-on" : "") + '">' + page.html + "</div>";
-        }).join("");
-        var many = pages.length > 1;
-        sec.querySelectorAll(".viewNav").forEach(function (b) { b.hidden = !many; });
-        var prev = sec.querySelector(".viewNav.prev");
-        if (prev) prev.disabled = true;
-        var next = sec.querySelector(".viewNav.next");
-        if (next) next.disabled = !many;
-        var dots = sec.querySelector(".viewDots");
-        if (dots) {
-          dots.hidden = !many;
-          dots.innerHTML = pages.map(function (_, i) {
-            return '<button type="button" class="viewDot" data-page="' + i + '" aria-label="Page ' + (i + 1) + " of " + pages.length + '"' + (i === 0 ? ' aria-current="true"' : "") + "></button>";
-          }).join("");
-        }
-        sec._page = 0;
+        showPages(sec, pages);
       }).catch(function (err) {
         msg.textContent = err && err.message === "missing" ? "Nothing has been added here yet." : "That password didn\u2019t work.";
         form.classList.remove("has-error");

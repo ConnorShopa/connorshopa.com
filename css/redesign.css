@@ -2405,3 +2405,6 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   .ttLine { white-space: normal; }
   .phoneBlank { height: min(420px, 62dvh); }
 }
+
+/* TEMPORARY dev-only skip button on the password form (localhost) */
+.lockDev { margin-left: 8px; padding: 0 12px; border: 1px dashed currentColor; border-radius: 999px; background: none; color: inherit; font: inherit; font-size: 12px; opacity: 0.6; cursor: pointer; }
