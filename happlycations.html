@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=149" />
+    <link rel="stylesheet" href="css/happlycations.css?v=150" />
 </head>
 
 <body>
@@ -205,8 +205,8 @@
                 var at = 0;
                 ltrs.forEach(function (l, i) {
                     var t = Math.max(0, (i - 6) / 6), // 0 for the first half of the word, then ramps 0 -> 1 over the second half
-                        gap = 34 * (1 + 1.5 * t * t),  // steady 34ms between letters, then widening to ~85ms: the wave slows from about halfway
-                        k = 1 + 0.6 * t;               // each letter's own roll also slows to 1.6x at the end
+                        gap = 34 * (1 + 0.5 * t * t),  // steady 34ms between letters, then widening gently to ~51ms: the wave slows from about halfway
+                        k = 1 + 0.25 * t;              // each letter's own roll also slows a touch, to 1.25x at the end
                     var when = at; at += gap;
                     if (l.dataset.skin === skin) return;
                     swapTimers.push(setTimeout(function () {
