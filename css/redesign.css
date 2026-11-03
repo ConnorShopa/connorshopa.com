@@ -1,3 +1,4 @@
+@font-face { font-family: "Satoshi"; src: url("../fonts/Satoshi/Satoshi-Variable.ttf") format("truetype"); font-weight: 300 900; font-style: normal; font-display: swap; }
 @font-face { font-family: "Proxima Nova"; src: url("../fonts/ProximaNova/ProximaNova-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Proxima Nova"; src: url("../fonts/ProximaNova/ProximaNova-Semibold.ttf") format("truetype"); font-weight: 600; font-style: normal; font-display: swap; }
 @font-face { font-family: "Proxima Nova"; src: url("../fonts/ProximaNova/ProximaNova-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
@@ -2466,4 +2467,57 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   #view-touchtunes.scrollView .pg.split { column-gap: 2cqw; padding-right: 5cqw; padding-left: 5cqw; }
   #view-touchtunes .pg.split .ttHead { font-size: clamp(14px, 2.35cqw, 38px); }
   .phoneBlank { height: 54cqh; }
+}
+
+
+/* =====================================================================================================
+   Nanni: the same step view as TouchTunes (pages stack, scroll / swipe / keys / tabs step between them), on a cool pale grey card in
+   Satoshi. The tab list is fixed at the left of the card (js/views.js builds it from each page's .ttLabel); each page's words and
+   pictures sit to the right of it. Screens narrower than 901px keep the one long scrolling page (the step view isn't wired there).
+   ===================================================================================================== */
+#view-nanni { --ink: #0B1530; --ink-soft: rgba(11, 21, 48, 0.58); color: var(--ink); }
+#view-nanni, #view-nanni .pg, #view-nanni .pg *, #view-nanni button { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; }
+#view-nanni .ttLabel { display: none; }
+@media (min-width: 901px) {
+  #view-nanni { container-type: size; --tt-row: max(2.4cqw, 30px); --tt-gap: max(0.85cqw, 8px); --tt-nav-w: max(10.6cqw, var(--tt-nav-px, 0px)); }
+  #view-nanni.stepView .viewBody { padding: 0; overflow: hidden; }
+  #view-nanni.stepView .pg,
+  #view-nanni.stepView .pg.two, #view-nanni.stepView .pg.flip, #view-nanni.stepView .pg.one, #view-nanni.stepView .pg.media {
+    position: absolute; inset: 0; margin: 0; min-height: 0; gap: 0; column-gap: 3cqw; row-gap: 0;
+    padding: 0 6cqw 0 calc(7.6cqw + var(--tt-nav-w) + 3.4cqw);
+    display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); justify-items: start; align-items: center; align-content: center;
+    text-align: left;
+  }
+  #view-nanni.stepView .pg.one, #view-nanni.stepView .pg.media { grid-template-columns: minmax(0, 1fr); }
+  #view-nanni.stepView .pgText { order: -1; } /* the words first, whichever side the picture used to be on */
+  #view-nanni.stepView .pgMedia { order: 0; }
+  #view-nanni.stepView .pgText { align-items: flex-start; text-align: left; max-width: none; width: 100%; max-height: 82cqh; gap: clamp(8px, 1.2cqw, 18px); }
+  #view-nanni.stepView .pg .lead { font-size: clamp(22px, 2.6cqw, 42px); line-height: 1.12; letter-spacing: -0.02em; font-weight: 500; }
+  #view-nanni.stepView .pg .body, #view-nanni.stepView .pg .sub, #view-nanni.stepView .pg .quote { font-size: clamp(13px, 1.12cqw, 19px); line-height: 1.5; max-width: 40em; text-align: left; }
+  #view-nanni.stepView .pg .sub { font-weight: 600; }
+  #view-nanni.stepView .pg .eyebrow:not(.ttLabel) { font-size: clamp(13px, 1.12cqw, 19px); letter-spacing: 0; text-transform: none; font-weight: 500; color: var(--ink); line-height: 1.4; }
+  #view-nanni.stepView .pg .eyebrow::before { display: none; }
+  #view-nanni.stepView .pg .facts, #view-nanni.stepView .pg .stats { justify-content: flex-start; text-align: left; width: auto; }
+  #view-nanni.stepView .pg .fact { align-items: flex-start; }
+  #view-nanni.stepView .pg .quote { padding: 0; border: 0; font-style: italic; }
+  #view-nanni.stepView .pgMedia { width: 100%; height: auto; max-width: none; max-height: 78cqh; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 1.6cqw; }
+  #view-nanni.stepView .pgMedia figure { flex: 0 1 auto; min-width: 0; margin: 0; }
+  #view-nanni.stepView .pgMedia img, #view-nanni.stepView .pgMedia video { width: auto; height: auto; max-width: 100%; max-height: 78cqh; object-fit: contain; }
+  #view-nanni.stepView .pgMedia:has(figure:nth-child(2)) figure { flex: 1 1 0; }
+  #view-nanni.stepView .pgMedia:has(figure:nth-child(2)) img, #view-nanni.stepView .pgMedia:has(figure:nth-child(2)) video { max-height: 64cqh; }
+
+  /* the tab list, fixed at the left: the same look as TouchTunes, in dark ink on the pale card */
+  #view-nanni .ttNavWrap { position: absolute; left: 7.6cqw; top: 50%; width: var(--tt-nav-w); height: calc(var(--tt-n, 1) * (var(--tt-row) + var(--tt-gap)) - var(--tt-gap)); transform: translateY(-50%); z-index: 3; }
+  #view-nanni .ttTab { color: rgba(11, 21, 48, 0.5); }
+  #view-nanni .ttTab:hover { color: rgba(11, 21, 48, 0.85); }
+  #view-nanni .ttTab.on { color: #0B1530; }
+  #view-nanni .ttTab::before { background: rgba(11, 21, 48, 0.12); border-color: rgba(11, 21, 48, 0.06); }
+  #view-nanni .ttRule { background: rgba(11, 21, 48, 0.16); }
+  #view-nanni .ttScroll { color: rgba(11, 21, 48, 0.5); }
+}
+@media (min-width: 901px) {
+  #view-nanni .ttMouse { border-color: rgba(11, 21, 48, 0.4); }
+  #view-nanni .ttWheel { background: rgba(11, 21, 48, 0.7); }
+  #view-nanni .ttScrollText { color: rgba(11, 21, 48, 0.5); }
+  #view-nanni .ttScroll:hover .ttScrollText { color: rgba(11, 21, 48, 0.8); }
 }

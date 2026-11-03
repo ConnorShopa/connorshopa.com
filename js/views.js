@@ -70,7 +70,18 @@
         });
       });
     });
-    var parts = function (pg) { return { txt: Array.prototype.slice.call(pg.querySelectorAll(".ttTxt")), pills: Array.prototype.slice.call(pg.querySelectorAll(".ttPill")) }; };
+    var parts = function (pg) {
+      var txt = Array.prototype.slice.call(pg.querySelectorAll(".ttTxt"));
+      // a page that isn't a TouchTunes sentence (Nanni): its blocks of text and its pictures are what move
+      if (!txt.length) {
+        Array.prototype.forEach.call(pg.children, function (c) {
+          if (c.classList.contains("ttLabel")) return;
+          if (c.classList.contains("pgText")) Array.prototype.forEach.call(c.children, function (k) { txt.push(k); });
+          else txt.push(c);
+        });
+      }
+      return { txt: txt, pills: Array.prototype.slice.call(pg.querySelectorAll(".ttPill")) };
+    };
 
     // tabs, in the first page's text column, over the (invisible) labels that keep every page's sentence at the same height
     var labels = pgs.map(function (pg) { var l = pg.querySelector(".ttLabel"); return l ? l.textContent.trim() : ""; });
@@ -83,6 +94,10 @@
         btns.push(b); tabs.appendChild(b);
       });
       var col = pgs[0].querySelector(".pgText");
+      if (sec.classList.contains("navSide")) { // the tab list sits on its own at the left of the card, whatever the page
+        col = document.createElement("div"); col.className = "ttNavWrap";
+        sec.querySelector(".viewBody").appendChild(col);
+      }
       col.appendChild(tabs);
       var rule = document.createElement("span"); rule.className = "ttRule"; col.appendChild(rule); // the thin line between the tabs and the sentence
     }
@@ -112,6 +127,7 @@
     sizeNav(); markTab(false);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { sizeNav(); markTab(false); });
     window.addEventListener("resize", function () { sizeNav(); markTab(false); });
+    if (window.ResizeObserver) new ResizeObserver(function () { sizeNav(); }).observe(sec); // a view built while hidden has no label widths until it opens
 
     function goTo(n) {
       if (busy || n === cur || n < 0 || n >= pgs.length) return;
@@ -263,6 +279,7 @@
     sec.innerHTML = html;
     if (proj.download) sec.classList.add("hasDownload");
     sec.querySelector(".viewTitle").textContent = proj.title;
+    if (proj.stepNav === "side") sec.classList.add("navSide");
     if (proj.stepText) sec.classList.add("stepView"); // pages step on scroll instead of scrolling as one long page
     if (!proj.noNav) sec.classList.add("scrollView"); // every project but Habbot: all the pages in one vertical scroll
     if (proj.noNav) sec.classList.add("vertical"); // pages move up and down (scroll or the chevron under the first page's button)
@@ -281,5 +298,7 @@
     if (proj.bgImageBlur) sec.style.setProperty("--view-img-blur", 'url("' + new URL(proj.bgImageBlur, document.baseURI).href + '")');
     document.body.appendChild(sec);
     if (locked) wireLock(slug, sec);
+    // an open (not locked) step view is wired straight away, on screens wide enough for it; narrower ones keep the one long scrolling page
+    if (!locked && proj.stepText && proj.pages.length > 1 && window.matchMedia("(min-width: 901px)").matches && window.gsap) { sec._stepWired = true; wireSteps(sec); }
   });
 })();
