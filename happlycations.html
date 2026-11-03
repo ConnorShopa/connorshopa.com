@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=147" />
+    <link rel="stylesheet" href="css/happlycations.css?v=148" />
 </head>
 
 <body>
@@ -43,7 +43,12 @@
             </header>
             <div class="landMid">
                 <h1 class="landWord">
-                    <span class="landHand" aria-hidden="true"></span>
+                    <span class="landIcon" data-skin="norm" aria-hidden="true">
+                        <span class="tile"><i></i></span>
+                        <img class="i-drawl" src="assets/homeAssets/drawl_app_icon.svg" alt="" />
+                        <img class="i-sheep" src="assets/homeAssets/sheep_app_icon.svg" alt="" />
+                        <img class="i-habbot" src="assets/homeAssets/habbot_app_icon.svg" alt="" />
+                    </span>
                     <span class="landWordBox" role="img" aria-label="Happlycations"><span class="landLtrs" aria-hidden="true"></span></span>
                 </h1>
                 <p class="landTag">Where happy apps are born</p>
@@ -164,7 +169,7 @@
             // the big wordmark is cut into its 13 letters (the cut points are in the artwork's own 418-wide units). Hovering an app swaps
             // the letters to that app's treatment one after another, left to right: each goes up and out, and the new one drops in.
             var CUTS = [0, 39.9, 70.7, 109.3, 149.1, 170.6, 204.3, 236, 267.8, 291, 312.1, 349.6, 391.6, 418];
-            var ltrWrap = document.querySelector(".landLtrs"), ltrs = [], skinNow = "norm", swapToken = 0, swapTimers = [];
+            var ico = document.querySelector(".landIcon"), ltrWrap = document.querySelector(".landLtrs"), ltrs = [], skinNow = "norm", swapToken = 0, swapTimers = [];
             for (var li = 0; li < CUTS.length - 1; li++) {
                 var el = document.createElement("span");
                 el.className = "ltr"; el.dataset.skin = "norm";
@@ -181,10 +186,22 @@
                 // whatever was half way is cancelled first, so no letter is left faded out or on the wrong treatment: every letter is
                 // then either already right (and fully shown) or is swapped, in order
                 ltrs.forEach(function (l) { l.getAnimations().forEach(function (a) { a.cancel(); }); });
-                if (still.matches || !ltrWrap.animate) { ltrs.forEach(function (l) { l.dataset.skin = skin; }); return; }
+                ico.getAnimations().forEach(function (a) { a.cancel(); });
+                if (still.matches || !ltrWrap.animate) { ico.dataset.skin = skin; ltrs.forEach(function (l) { l.dataset.skin = skin; }); return; }
                 // the swap speeds up as it travels left to right: each gap between letters is shorter than the last, and each letter's own
                 // out / in gets quicker too
                 var dir = skin === "norm" ? -1 : 1; // the original wordmark always drops in from the top; the app wordmarks rise in from below
+                // the app shape rolls the same way, as the wave begins
+                swapTimers.push(setTimeout(function () {
+                    if (me !== swapToken) return;
+                    var o = ico.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(" + (-dir * 40) + "%) scale(.7)", opacity: 0 }], { duration: 120, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
+                    o.onfinish = function () {
+                        if (me !== swapToken) return;
+                        ico.dataset.skin = skin;
+                        o.cancel();
+                        ico.animate([{ transform: "translateY(" + (dir * 40) + "%) scale(.7)", opacity: 0 }, { transform: "translateY(0) scale(1)", opacity: 1 }], { duration: 260, easing: "cubic-bezier(.16, 1, .3, 1)" });
+                    };
+                }, 0));
                 var at = 0;
                 ltrs.forEach(function (l, i) {
                     var gap = 34 * Math.pow(0.85, i), k = 1 - 0.4 * (i / (ltrs.length - 1)); // gap in ms; k scales the durations (1 -> 0.55)

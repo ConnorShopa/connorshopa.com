@@ -142,7 +142,14 @@ body { overflow: auto; }
 
 .landMid { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(10px, 2dvh, 24px); padding-bottom: 4dvh; }
 .landWord { --lw: min(8.4vw, 13.5dvh); /* the wordmark's size: about three quarters of the page wide, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: calc(var(--lw) * 0.3); }
-.landHand { display: block; flex: none; height: calc(var(--lw) * 1.02); aspect-ratio: 91 / 135; background: #111; transform: translateY(calc(var(--lw) * -0.04)); -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
+/* the app shape beside the wordmark: the white Happlycations tile (as in the top left) that rolls into the hovered app's icon */
+.landIcon { position: relative; display: block; flex: none; width: calc(var(--lw) * 1.02); aspect-ratio: 1; top: calc(var(--lw) * -0.04); }
+.landIcon > * { position: absolute; inset: 0; display: none; }
+.landIcon img { width: 100%; height: 100%; filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.14)); }
+.landIcon .tile { place-items: center; border-radius: 26%; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.03); }
+.landIcon .tile i { display: block; height: 62%; aspect-ratio: 91 / 135; background: #111; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
+.landIcon[data-skin="norm"] .tile { display: grid; }
+.landIcon[data-skin="drawl"] .i-drawl, .landIcon[data-skin="sheep"] .i-sheep, .landIcon[data-skin="habbot"] .i-habbot { display: block; }
 .landWordBox { position: relative; display: block; flex: none; width: calc(var(--lw) * 7.85); aspect-ratio: 418 / 70; }
 .landLtrs { position: absolute; inset: 0; display: block; }
 /* each letter is the whole wordmark, clipped to that letter's slice (up and down are not clipped, so descenders stay) */
@@ -154,11 +161,7 @@ body { overflow: auto; }
 .ltr[data-skin="sheep"] .skin { filter: url(#happlyOutline); }
 .ltr[data-skin="drawl"] .skin > span { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; }
 .ltr[data-skin="habbot"] .skin > span { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); background-size: cover; }
-.landHand { transition: background-color .25s ease; }
 /* drawl: the hand-scribbled artwork itself; sheep: a 2px outline in the sheep blue; habbot: filled with grass */
-.happlyPage[data-hover="drawl"] .landHand { background: #0C1E44; }
-.happlyPage[data-hover="sheep"] .landHand { background: #2F4AA3; }
-.happlyPage[data-hover="habbot"] .landHand { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); background-size: cover; }
 .landTag { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 500; font-size: 16px; letter-spacing: -0.01em; color: #111; text-align: center; }
 
 .landApps { list-style: none; margin: clamp(28px, 6dvh, 72px) 0 0; padding: 0; display: flex; gap: clamp(28px, 4.6vw, 92px); }
