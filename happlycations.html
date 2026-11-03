@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=137" />
+    <link rel="stylesheet" href="css/happlycations.css?v=139" />
 </head>
 
 <body>
@@ -182,19 +182,23 @@
                 // then either already right (and fully shown) or is swapped, in order
                 ltrs.forEach(function (l) { l.getAnimations().forEach(function (a) { a.cancel(); }); });
                 if (still.matches || !ltrWrap.animate) { ltrs.forEach(function (l) { l.dataset.skin = skin; }); return; }
-                var n = 0;
-                ltrs.forEach(function (l) {
+                // the swap speeds up as it travels left to right: each gap between letters is shorter than the last, and each letter's own
+                // out / in gets quicker too
+                var at = 0;
+                ltrs.forEach(function (l, i) {
+                    var gap = 80 * Math.pow(0.8, i), k = 1 - 0.45 * (i / (ltrs.length - 1)); // gap in ms; k scales the durations (1 -> 0.55)
+                    var when = at; at += gap;
                     if (l.dataset.skin === skin) return;
                     swapTimers.push(setTimeout(function () {
                         if (me !== swapToken) return;
-                        var out = l.animate([{ transform: "translateY(0)", opacity: 1 }, { transform: "translateY(-14%)", opacity: 0 }], { duration: 150, easing: "ease-in", fill: "forwards" });
+                        var out = l.animate([{ transform: "translateY(0)", opacity: 1 }, { transform: "translateY(-14%)", opacity: 0 }], { duration: 150 * k, easing: "ease-in", fill: "forwards" });
                         out.onfinish = function () {
                             if (me !== swapToken) return;
                             l.dataset.skin = skin;
                             out.cancel();
-                            l.animate([{ transform: "translateY(14%)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }], { duration: 220, easing: "cubic-bezier(.215,.61,.355,1)" });
+                            l.animate([{ transform: "translateY(14%)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }], { duration: 220 * k, easing: "cubic-bezier(.215,.61,.355,1)" });
                         };
-                    }, (n++) * 45));
+                    }, when));
                 });
             }
             // hovering an app also dresses the hand in the app's colour (CSS, from data-hover)
