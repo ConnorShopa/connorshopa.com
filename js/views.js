@@ -114,6 +114,15 @@
     if (sec.classList.contains("stepView") && pages.length > 1 && !sec._stepWired) { sec._stepWired = true; wireSteps(sec); }
   }
 
+  // TEMPORARY (localhost only): the plain pages from private/<slug>/pages.json, so changes show without re-encrypting
+  var isLocal = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  function loadPlain(slug) {
+    return fetch("private/" + slug + "/pages.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (pages) {
+      pages.forEach(function (p) { p.html = p.html.split("private:").join("private/" + slug + "/media/"); });
+      return pages;
+    });
+  }
+
   function wireLock(slug, sec) {
     var form = sec.querySelector(".lockForm");
     var input = sec.querySelector(".lockInput");
@@ -131,10 +140,7 @@
       dev.type = "button"; dev.className = "lockDev"; dev.textContent = "Skip (dev)";
       form.appendChild(dev);
       dev.addEventListener("click", function () {
-        fetch("private/" + slug + "/pages.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (pages) {
-          pages.forEach(function (p) { p.html = p.html.split("private:").join("private/" + slug + "/media/"); });
-          showPages(sec, pages);
-        }).catch(function () { msg.textContent = "No private/" + slug + "/pages.json found."; });
+        loadPlain(slug).then(function (pages) { showPages(sec, pages); }).catch(function () { msg.textContent = "No private/" + slug + "/pages.json found."; });
       });
     }
     form.addEventListener("submit", function (e) {
@@ -143,6 +149,9 @@
       msg.textContent = "";
       form.classList.remove("has-error");
       decryptBundle(slug, input.value).then(function (pages) {
+        // on localhost the right password opens the plain, unencrypted pages if they exist (so edits show before re-encrypting)
+        return isLocal ? loadPlain(slug).catch(function () { return pages; }) : pages;
+      }).then(function (pages) {
         showPages(sec, pages);
       }).catch(function (err) {
         msg.textContent = err && err.message === "missing" ? "Nothing has been added here yet." : "That password didn\u2019t work.";
