@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=135" />
+    <link rel="stylesheet" href="css/happlycations.css?v=136" />
 </head>
 
 <body>
@@ -16,6 +16,12 @@
             <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="grown" />
             <feComposite in="grown" in2="SourceAlpha" operator="out" result="ring" />
             <feFlood flood-color="#2F4AA3" result="ink" />
+            <feComposite in="ink" in2="ring" operator="in" />
+        </filter>
+        <filter id="landOutline" x="-3%" y="-10%" width="106%" height="120%" color-interpolation-filters="sRGB">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="grown" />
+            <feComposite in="grown" in2="SourceAlpha" operator="out" result="ring" />
+            <feFlood flood-color="#111" result="ink" />
             <feComposite in="ink" in2="ring" operator="in" />
         </filter>
     </svg>
@@ -38,10 +44,7 @@
             <div class="landMid">
                 <h1 class="landWord">
                     <span class="landHand" aria-hidden="true"></span>
-                    <span class="landWordBox">
-                        <span class="landWordText" aria-label="Happlycations">happlycations</span>
-                        <span class="landWordArt" aria-hidden="true"><span></span></span>
-                    </span>
+                    <span class="landWordBox" role="img" aria-label="Happlycations"><span class="landLtrs" aria-hidden="true"></span></span>
                 </h1>
                 <p class="landTag">Where happy apps are born</p>
                 <ul class="landApps">
@@ -158,18 +161,49 @@
                 spin(app);
             }
             // landing: an app tile opens that app's view; the small logo + wordmark there comes back
-            // hovering an app dresses the big wordmark in that app's treatment (drawl's scribble, sheep's blue outline, habbot's grass)
-            var landApps = document.querySelector(".landApps");
+            // the big wordmark is cut into its 13 letters (the cut points are in the artwork's own 418-wide units). Hovering an app swaps
+            // the letters to that app's treatment one after another, left to right: each goes up and out, and the new one drops in.
+            var CUTS = [0, 39.9, 70.7, 109.3, 149.1, 170.6, 204.3, 236, 267.8, 291, 312.1, 349.6, 391.6, 418];
+            var ltrWrap = document.querySelector(".landLtrs"), ltrs = [], skinNow = "norm", swapToken = 0, swapTimers = [];
+            for (var li = 0; li < CUTS.length - 1; li++) {
+                var el = document.createElement("span");
+                el.className = "ltr"; el.dataset.skin = "norm";
+                el.style.setProperty("--l", (CUTS[li] / 418 * 100).toFixed(3) + "%");
+                el.style.setProperty("--r", (CUTS[li + 1] / 418 * 100).toFixed(3) + "%");
+                el.innerHTML = '<span class="skin"><span></span></span>';
+                ltrWrap.appendChild(el); ltrs.push(el);
+            }
+            function setSkin(skin) {
+                if (skin === skinNow) return;
+                skinNow = skin;
+                var me = ++swapToken;
+                swapTimers.forEach(clearTimeout); swapTimers = [];
+                if (still.matches || !ltrWrap.animate) { ltrs.forEach(function (l) { l.dataset.skin = skin; }); return; }
+                ltrs.forEach(function (l, i) {
+                    swapTimers.push(setTimeout(function () {
+                        if (me !== swapToken || l.dataset.skin === skin) return;
+                        l.getAnimations().forEach(function (a) { a.cancel(); });
+                        var out = l.animate([{ transform: "translateY(0)", opacity: 1 }, { transform: "translateY(-14%)", opacity: 0 }], { duration: 150, easing: "ease-in", fill: "forwards" });
+                        out.onfinish = function () {
+                            if (me !== swapToken) return;
+                            l.dataset.skin = skin;
+                            l.getAnimations().forEach(function (a) { a.cancel(); });
+                            l.animate([{ transform: "translateY(14%)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }], { duration: 220, easing: "cubic-bezier(.215,.61,.355,1)" });
+                        };
+                    }, i * 45));
+                });
+            }
+            // hovering an app also dresses the hand in the app's colour (CSS, from data-hover)
             document.querySelectorAll(".landApp").forEach(function (b) {
-                var on = function () { page.setAttribute("data-hover", b.dataset.app); };
-                var off = function () { page.removeAttribute("data-hover"); };
+                var on = function () { page.setAttribute("data-hover", b.dataset.app); setSkin(b.dataset.app); };
+                var off = function () { page.removeAttribute("data-hover"); setSkin("norm"); };
                 b.addEventListener("mouseenter", on); b.addEventListener("focus", on);
                 b.addEventListener("mouseleave", off); b.addEventListener("blur", off);
             });
             document.querySelectorAll(".landApp").forEach(function (b) {
                 b.addEventListener("click", function () {
                     for (var k = 0; k < secs.length; k++) if (secs[k].dataset.app === b.dataset.app) go(k);
-                    page.removeAttribute("data-hover");
+                    page.removeAttribute("data-hover"); setSkin("norm");
                     page.setAttribute("data-view", "app");
                     window.scrollTo(0, 0);
                 });
