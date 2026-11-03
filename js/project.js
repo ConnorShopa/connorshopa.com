@@ -12,7 +12,7 @@
 
   var MINI = 0.4;  // how small the gallery gets while a view is open
   var GAP = 28;    // space between the card and the minimised gallery
-  var CARD_RATIO = 3 / 2; // the expanded card's width : height
+  var CARD_RATIO = 16 / 10; // the expanded card's width : height (a MacBook screen's shape)
   var INTRO_GAP = 16;  // the gap left above the filter chips once the about-me lines are gone
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
@@ -360,7 +360,7 @@
     var darkCard = lum < 0.55;
     // the card takes the rest of the screen: 24px under the tabs, with room either side for the chevrons
     var PAD = 8; // phones: the card takes the whole screen, with a small margin
-    // desktop: the card starts just under the intro (name, tagline, tabs), keeps its 3:2 shape, and sits as near the
+    // desktop: the card starts just under the intro (name, tagline, tabs), keeps its 16:10 shape, and sits as near the
     // middle of the window as the tabs above and the gallery row below allow
     var top = narrow ? PAD : (intro ? intro.getBoundingClientRect().bottom + 24 : 80);
     var fullW = narrow ? window.innerWidth - PAD * 2 : Math.min(window.innerWidth * 0.86, 1100);
