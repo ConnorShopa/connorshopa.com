@@ -2412,4 +2412,14 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .lockDev { margin-left: 8px; padding: 0 12px; border: 1px dashed currentColor; border-radius: 999px; background: none; color: inherit; font: inherit; font-size: 12px; opacity: 0.6; cursor: pointer; }
 
 /* TouchTunes: the app icon keeps its own colours in the card's header (dark cards otherwise turn logos white) */
-#view-touchtunes .viewLogo, #view-touchtunes .viewHead:hover .viewLogo { filter: none !important; }
+.viewHead.keepLogo .viewLogo, .viewHead.keepLogo:hover .viewLogo { filter: none !important; }
+
+/* the password form on dark cards: pale-on-dark field, light button */
+.view.dark .lockInput { color: #FAFAFA; background: rgba(255, 255, 255, 0.1); }
+.view.dark .lockInput::placeholder { color: rgba(250, 250, 250, 0.5); }
+.view.dark .lockInput:focus { border-color: rgba(255, 255, 255, 0.45); }
+.view.dark .lockBtn { color: #03070F; background: #FAFAFA; box-shadow: 0 6px 14px -4px rgba(0, 0, 0, 0.5); }
+.view.dark .lockBtn::before { content: none; }
+.view.dark .lockBtn:disabled { color: rgba(250, 250, 250, 0.4); background: rgba(255, 255, 255, 0.1); box-shadow: none; }
+.view.dark .lockForm.has-error .lockInput { border-color: #E5655C; background: rgba(229, 101, 92, 0.15); }
+.view.dark .lockMsg { color: #FF8E86; }

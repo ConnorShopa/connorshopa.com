@@ -168,7 +168,7 @@
     sec.setAttribute("aria-labelledby", id + "-title");
     sec.hidden = true;
 
-    var html = '<div class="viewHead' + (proj.wordmark ? " stacked" : "") + '">';
+    var html = '<div class="viewHead' + (proj.wordmark ? " stacked" : "") + (proj.keepLogo ? " keepLogo" : "") + '">';
     // an underline under the logo (Habbot) goes in a small column
     if (proj.headHtml) html += proj.headHtml;
     else if (proj.icon) html += '<span class="viewStack"><img class="viewLogo" src="' + proj.logo + '" alt=""><img class="viewIcon" src="' + proj.icon + '" alt=""></span>';
