@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=139" />
+    <link rel="stylesheet" href="css/happlycations.css?v=140" />
 </head>
 
 <body>
@@ -191,12 +191,12 @@
                     if (l.dataset.skin === skin) return;
                     swapTimers.push(setTimeout(function () {
                         if (me !== swapToken) return;
-                        var out = l.animate([{ transform: "translateY(0)", opacity: 1 }, { transform: "translateY(-14%)", opacity: 0 }], { duration: 150 * k, easing: "ease-in", fill: "forwards" });
+                        var out = l.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(-55%) scale(.7)", opacity: 0 }], { duration: 260 * k, easing: "cubic-bezier(.5, 0, .75, 0)", fill: "forwards" });
                         out.onfinish = function () {
                             if (me !== swapToken) return;
                             l.dataset.skin = skin;
                             out.cancel();
-                            l.animate([{ transform: "translateY(14%)", opacity: 0 }, { transform: "translateY(0)", opacity: 1 }], { duration: 220 * k, easing: "cubic-bezier(.215,.61,.355,1)" });
+                            l.animate([{ transform: "translateY(55%) scale(.7)", opacity: 0 }, { transform: "translateY(0) scale(1)", opacity: 1 }], { duration: 340 * k, easing: "cubic-bezier(.215,.61,.355,1)" });
                         };
                     }, when));
                 });
