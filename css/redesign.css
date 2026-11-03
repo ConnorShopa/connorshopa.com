@@ -2369,7 +2369,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 }
 #view-touchtunes.scrollView .viewBody { padding: 0; overflow: hidden; }
 #view-touchtunes.scrollView .pg.split + .pg.split { margin-top: 0; }
-#view-touchtunes.scrollView .pg.split .pgText { order: 0; align-items: flex-start; text-align: left; max-width: none; width: auto; gap: 0; }
+#view-touchtunes.scrollView .pg.split .pgText { align-self: start; margin-top: 38cqh; order: 0; align-items: flex-start; text-align: left; max-width: none; width: auto; gap: 0; }
 #view-touchtunes.scrollView .pg.split .pgMedia { order: 0; width: auto; height: auto; flex-wrap: nowrap; justify-self: end; }
 #view-touchtunes.scrollView .pg.split .pgMedia figure { flex: none; }
 
@@ -2420,6 +2420,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   #view-touchtunes.scrollView .pg.split { grid-template-columns: minmax(0, 1fr); row-gap: 28px; margin: 0; min-height: 0; padding: 28px 0; }
   #view-touchtunes.scrollView .pg.split .pgMedia { justify-self: center; }
   #view-touchtunes .pg.split .ttHead { font-size: clamp(17px, 5.6cqw, 28px); }
+  #view-touchtunes.scrollView .pg.split .pgText { margin-top: 0; align-self: auto; }
   #view-touchtunes .pg.split .pgText { padding-left: 0; }
   #view-touchtunes .pg.split .eyebrow.ttLabel { display: block; visibility: hidden; height: 44px; margin: 0 0 8px; padding: 0; font-size: 1px; }
   .ttTabs { left: 0; top: 0; width: 100%; flex-direction: row; flex-wrap: wrap; gap: 6px; }
