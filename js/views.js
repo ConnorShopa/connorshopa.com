@@ -92,7 +92,7 @@
 
     pgs.forEach(function (pg, i) {
       pg.style.pointerEvents = "none"; // the tabs set their own pointer-events
-      if (i) { var p = parts(pg); gsap.set(p.txt, { autoAlpha: 0, y: 36 }); gsap.set(p.pills, { scale: 0 }); }
+      if (i) { var p = parts(pg); gsap.set(p.txt, { autoAlpha: 0, y: 36 }); gsap.set(p.pills, { scale: 0.8, autoAlpha: 0 }); }
     });
     markTab(false);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { markTab(false); });
@@ -103,10 +103,10 @@
       busy = true;
       var dir = n > cur ? 1 : -1, out = parts(pgs[cur]), inn = parts(pgs[n]);
       gsap.to(out.txt, { autoAlpha: 0, y: -36 * dir, duration: 0.35 * d, ease: "power2.in", stagger: 0.04 * d });
-      gsap.to(out.pills, { scale: 0, duration: 0.25 * d, ease: "power2.in", stagger: 0.03 * d });
+      gsap.to(out.pills, { scale: 0.8, autoAlpha: 0, duration: 0.25 * d, ease: "power2.in", stagger: 0.03 * d });
       gsap.fromTo(inn.txt, { autoAlpha: 0, y: 36 * dir }, { autoAlpha: 1, y: 0, duration: 0.6 * d, ease: "power3.out", stagger: 0.07 * d, delay: 0.3 * d });
       // the pills bounce in, one after the other, once their words are arriving
-      gsap.fromTo(inn.pills, { scale: 0 }, { scale: 1, duration: 0.55 * d, ease: "back.out(0.9)", stagger: 0.12 * d, delay: 0.5 * d,
+      gsap.fromTo(inn.pills, { scale: 0.8, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.5 * d, ease: "back.out(0.6)", stagger: 0.12 * d, delay: 0.5 * d,
         onComplete: function () { busy = false; } });
       cur = n;
       markTab(true);
