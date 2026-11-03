@@ -2397,7 +2397,7 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
   padding: 0.04em 0.6em 0.1em; border-radius: 999px; line-height: 1.45;
   font-weight: 700; letter-spacing: -0.01em; color: #fff;
   background: linear-gradient(180deg, var(--pill) 0%, var(--pill2) 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32), inset 0 -2px 5px rgba(0, 0, 0, 0.28), 0 6px 18px -8px var(--pill2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32), inset 0 -2px 5px rgba(0, 0, 0, 0.28);
 }
 .ttPill.purple { --pill: #8a43f0; --pill2: #6a2bd2; }
 .ttPill.blue { --pill: #4a8af7; --pill2: #2f67dc; }
