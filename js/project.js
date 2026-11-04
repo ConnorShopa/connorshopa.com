@@ -407,11 +407,11 @@
       gsap.set(view, { autoAlpha: 1 });
       if (window.bubble) window.bubble.handoff();
       var soft = view.classList.contains("hasBgImage");
-      gsap.to(view.children, { opacity: 1, duration: t(soft ? 0.55 : 0.15), ease: soft ? "power1.out" : "none", clearProps: "opacity" });
+      gsap.to(view.children, { opacity: 1, duration: t(soft ? 0.55 : 0.4), ease: "power1.out", clearProps: "opacity" });
       // the image layers fade in from the peach (a frame later, so the CSS transition has something to run from)
       requestAnimationFrame(function () { requestAnimationFrame(function () { if (open && open.view === view && (view._page === 0 || view.classList.contains("vertical"))) view.classList.add("imgIn"); }); });
     };
-    if (window.bubble) window.bubble.grow(to, b, 0.38, reveal); else if (narrow) phoneGrow(view, currentLi, reveal); else reveal();
+    if (window.bubble) window.bubble.grow(to, b, 0.72, reveal); else if (narrow) phoneGrow(view, currentLi, reveal); else reveal();
     if (!narrow) popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
       // still be shrunk or have a stale item hidden, which would throw the measurements below off
