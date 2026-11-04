@@ -2552,3 +2552,17 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
   #view-nanni.stepView .pg.media > .pgMedia img { max-height: 70cqh; }
   #view-nanni.stepView .pg.one > .pgText { grid-row: 1 / span 2; align-self: center; max-height: 78cqh; }
 }
+
+/* ...and centred on the card: one column in the middle, the words centred over the phones */
+@media (min-width: 901px) {
+  #view-nanni.stepView .pg, #view-nanni.stepView .pg.two, #view-nanni.stepView .pg.flip, #view-nanni.stepView .pg.one, #view-nanni.stepView .pg.media {
+    grid-template-columns: minmax(0, 1fr); justify-items: center; padding-left: 6cqw; padding-right: 6cqw;
+  }
+  #view-nanni.stepView .pg > .pgText, #view-nanni.stepView .pg > .pgMedia { grid-column: 1; }
+  #view-nanni.stepView .pg > .pgText { align-items: center; text-align: center; max-width: 62cqw; }
+  #view-nanni.stepView .pg > .pgText .lead, #view-nanni.stepView .pg > .pgText .body, #view-nanni.stepView .pg > .pgText .sub, #view-nanni.stepView .pg > .pgText .quote,
+  #view-nanni.stepView .pg > .pgText .eyebrow:not(.ttLabel) { text-align: center; margin-left: auto; margin-right: auto; }
+  #view-nanni.stepView .pg > .pgText .facts, #view-nanni.stepView .pg > .pgText .stats { justify-content: center; }
+  #view-nanni.stepView .pg > .pgMedia { justify-content: center; }
+  #view-nanni.stepView .pg:first-of-type .lead, #view-nanni.stepView .pg:first-child .lead { align-self: center; }
+}
