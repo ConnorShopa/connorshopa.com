@@ -115,7 +115,8 @@
             p("body", "&ndash;Logs were renamed as Journal, found to be more of a human representation of the feature.") +
             p("body", "&ndash; Translation became a floating action button, allowing caregivers to have instant access across the application, and never miss a cry or journal entry.") +
             p("body", "&ndash; The navigation menu itself became a floating bar, that got out of the way when the user was interacting with content across the experience.")
-          ) + media(fig(A + "nanniAssets/nanni_image_02.png"), fig(A + "nanniAssets/nanniGif_01.gif"))),
+          ) + media(fig(A + "nanniAssets/nanni_image_02.png"), fig(A + "nanniAssets/nanniGif_01.gif")) +
+          '<div class="pgFull"><img src="' + A + 'nanniAssets/nanniGif_03.gif" alt="" decoding="async"></div>'), // an earlier navigation menu: full width under the page's content
         pg("flip",
           lab("Translation") + media(fig(A + "nanniAssets/nanniGif_02.gif")) +
           text(

@@ -2566,3 +2566,20 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
   #view-nanni.stepView .pg > .pgMedia { justify-content: center; }
   #view-nanni.stepView .pg:first-of-type .lead, #view-nanni.stepView .pg:first-child .lead { align-self: center; }
 }
+
+
+/* a full-width picture under a page's content (Nanni's earlier navigation menu) */
+.pgFull { width: 100%; }
+.pgFull img { display: block; width: 100%; height: auto; }
+@media (min-width: 901px) {
+  /* in the step view it runs edge to edge along the bottom of the card, and the page's words and pictures sit in the room above it */
+  #view-nanni.stepView .pg:has(> .pgFull) { padding-bottom: 31cqh; }
+  #view-nanni.stepView .pg > .pgFull { position: absolute; left: 0; right: 0; bottom: 0; width: auto; height: 29cqh; grid-column: auto; grid-row: auto; margin: 0; overflow: hidden; }
+  #view-nanni.stepView .pg > .pgFull img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; } /* the sides are empty, so it is the middle that stays */
+  #view-nanni.stepView .pg:has(> .pgFull) > .pgText { max-height: 30cqh; }
+  #view-nanni.stepView .pg:has(> .pgFull) > .pgMedia { max-height: 26cqh; }
+  #view-nanni.stepView .pg:has(> .pgFull) > .pgMedia:has(figure) img, #view-nanni.stepView .pg:has(> .pgFull) > .pgMedia:has(figure) video { max-height: 26cqh; }
+}
+@media (min-width: 901px) {
+  #view-nanni.stepView .pg:has(> .pgFull) > .pgMedia:has(figure:nth-child(2)) figure { flex: 0 1 auto; } /* the pictures keep their own width and sit together in the middle */
+}
