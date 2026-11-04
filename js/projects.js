@@ -90,11 +90,10 @@
           '<section class="nnRow nnAbout"><div><span class="nnLab">&middot; About</span>' +
             '<p class="nnLead">Ubenwa health is putting science based tools in pockets of caregivers enabling them to care better.</p>' +
             '<p class="nnLead">Nanni translates baby cries into actionable insights for more than 500,000 parents and guardians.</p></div>' +
-            '<div class="nnLogo"><img class="nnWord" src="' + H + 'nanni_wordmark.svg" alt="Nanni"><span class="nnBy">an <img src="' + H + 'ubenwa_logo.svg" alt="Ubenwa"> tool</span></div></section>' +
-          '<section class="nnRow nnGoal"><div><span class="nnLab">&middot; Goal</span>' +
+            '<div class="nnShots"><img src="' + A + 'nanniAssets/nanni_screen_02.png" alt="" decoding="async"><img class="mid" src="' + A + 'nanniAssets/nanni_screen_01.png" alt="" decoding="async"><img src="' + A + 'nanniAssets/nanni_screen_03.png" alt="" decoding="async"></div></section>' +
+          '<section class="nnGoal"><span class="nnLab">&middot; Goal</span>' +
             '<p class="nnLead">Nanni is 98% accurate, trained on millions of cries, backed by industry standard medical research, yet perceived as a novelty toy.</p>' +
-            '<p class="nnLead">I defined a new product language that positioned Nanni as a healthcare tool.</p></div>' +
-            '<img class="nnShot" src="' + A + 'nanniAssets/nanni_phone_journal.png" alt="Nanni&rsquo;s Journal screen" decoding="async"></section>' +
+            '<p class="nnLead">I defined a new product language that positioned Nanni as a healthcare tool.</p></section>' +
           '<div class="nnFrame"><div class="nnMount"></div></div>' + // the hand-built navigation menu animation (js/nanniNav.js)
           '<section class="nnCols">' +
             '<div><span class="nnLab">&middot; Navigation</span><p class="nnBody">Nanni is 98% accurate, trained on millions of cries, backed by industry standard medical research, yet perceived as a novelty toy.</p><p class="nnBody">I defined a new product language that positioned Nanni as a healthcare tool.</p></div>' +

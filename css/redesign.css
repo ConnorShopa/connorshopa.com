@@ -2598,17 +2598,19 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 #view-nanni .nnBody + .nnBody { margin-top: 1.3em; }
 #view-nanni .nnRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 6cqw; row-gap: 5cqw; padding: 0 var(--nn-pad); }
 #view-nanni .nnAbout { padding-top: max(9cqw, 40px); padding-bottom: 12cqw; }
-#view-nanni .nnGoal { padding-bottom: 12cqw; }
-#view-nanni .nnLogo { display: flex; flex-direction: column; align-items: center; gap: 0.7cqw; width: clamp(130px, 21.7cqw, 340px); }
-#view-nanni .nnLogo .nnWord { width: 100%; height: auto; display: block; }
-#view-nanni .nnLogo .nnBy { display: flex; align-items: center; gap: 0.5cqw; font-size: clamp(10px, 1cqw, 16px); color: rgba(11, 21, 48, 0.55); }
-#view-nanni .nnLogo .nnBy img { height: clamp(11px, 1.9cqw, 30px); width: auto; display: block; }
-#view-nanni .nnShot { width: clamp(110px, 21.7cqw, 340px); height: auto; display: block; }
+#view-nanni .nnAbout .nnLead { max-width: 14em; }
+#view-nanni .nnShots { display: flex; align-items: flex-end; gap: 0.6cqw; }
+#view-nanni .nnShots img { display: block; width: clamp(70px, 11.9cqw, 190px); height: auto; filter: drop-shadow(0 0.8cqw 1.6cqw rgba(11, 21, 48, 0.16)); }
+#view-nanni .nnShots img.mid { width: clamp(76px, 12.8cqw, 205px); }
+#view-nanni .nnGoal { padding: 0 var(--nn-pad) 12cqw; }
+#view-nanni .nnGoal .nnLead { max-width: 30em; }
 #view-nanni .nnCols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3cqw; row-gap: 5cqw; padding: 1.6cqw var(--nn-pad) max(8cqw, 40px); }
 @media (max-width: 900px) {
   #view-nanni .nnRow { grid-template-columns: minmax(0, 1fr); }
-  #view-nanni .nnLogo, #view-nanni .nnShot { justify-self: start; }
   #view-nanni .nnCols { grid-template-columns: minmax(0, 1fr); }
+  #view-nanni .nnShots { justify-self: start; }
+  #view-nanni .nnShots img { width: 26vw; }
+  #view-nanni .nnShots img.mid { width: 28vw; }
 }
 @media (min-width: 901px) {
   #view-nanni .nnFrame { aspect-ratio: 2000 / 509; }
