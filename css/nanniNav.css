@@ -5,8 +5,8 @@
 
 .nnNav {
   --nn-ink: #001224;       /* the bezel, the floating button and the active tab */
-  --nn-gray: #707E92;      /* tabs that aren't active */
-  --nn-purple: #7A1FA2;    /* the Translate tab */
+  --nn-gray: #718093;      /* tabs that aren't active */
+  --nn-purple: #821AAF;    /* the Translate tab */
   --nn-screen: #F9F8F2;
   --nn-band: #E0DAE1;
   container-type: inline-size;
@@ -22,11 +22,9 @@
 /* the tabs share the width equally (flex-grow 1 each); the spacers either side let three tabs sit in the middle at the same width */
 .nnTabs { position: absolute; left: 0; right: 0; bottom: 7.6cqw; height: 14cqw; display: flex; align-items: center; }
 .nnSp { flex: 0 1 0; min-width: 0; }
-.nnTab { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.3cqw; color: var(--nn-gray); }
-.nnIcon { display: block; width: 7.4cqw; height: 7.4cqw; overflow: visible; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-.nnIcon .solid { fill: currentColor; stroke: none; }
-.nnIcon .hex { fill: var(--nn-purple); stroke: var(--nn-purple); stroke-width: 3; }
-.nnIcon .mic { stroke: #F4E9F8; stroke-width: 1.6; }
+.nnTab { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.1cqw; color: var(--nn-gray); }
+.nnIcon { display: block; overflow: visible; flex: none; }
+.nnIco { display: grid; place-items: center; width: 100%; height: 7.8cqw; }
 .nnTab[data-id="translate"] { color: var(--nn-purple); }
 .nnTab[data-id="logs"] .nnIcon .pen { fill: rgba(0, 18, 36, 0); }
 
