@@ -2535,3 +2535,20 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 @media (min-width: 901px) {
   #view-nanni.noTabs.stepView .pg, #view-nanni.noTabs.stepView .pg.two, #view-nanni.noTabs.stepView .pg.flip, #view-nanni.noTabs.stepView .pg.one, #view-nanni.noTabs.stepView .pg.media { padding-left: 8cqw; padding-right: 8cqw; }
 }
+
+/* Nanni: the words sit above the phones, both in the right-hand part of the card */
+@media (min-width: 901px) {
+  #view-nanni.stepView .pg, #view-nanni.stepView .pg.two, #view-nanni.stepView .pg.flip, #view-nanni.stepView .pg.one, #view-nanni.stepView .pg.media {
+    grid-template-columns: minmax(0, 0.5fr) minmax(0, 1.5fr); grid-template-rows: auto auto; row-gap: 2.2cqw; align-content: center; align-items: start;
+    padding-left: 6cqw; padding-right: 6cqw;
+  }
+  #view-nanni.stepView .pg > .pgText, #view-nanni.stepView .pg > .pgMedia { grid-column: 2; order: 0; }
+  #view-nanni.stepView .pg > .pgText { grid-row: 1; max-height: 34cqh; align-self: end; }
+  #view-nanni.stepView .pg > .pgMedia { grid-row: 2; max-height: 52cqh; justify-content: flex-start; }
+  #view-nanni.stepView .pg > .pgMedia img, #view-nanni.stepView .pg > .pgMedia video { max-height: 52cqh; }
+  #view-nanni.stepView .pg > .pgMedia:has(figure:nth-child(2)) img, #view-nanni.stepView .pg > .pgMedia:has(figure:nth-child(2)) video { max-height: 44cqh; }
+  /* a page with only pictures (Screens) or only words (Results) still sits in the right-hand column */
+  #view-nanni.stepView .pg.media > .pgMedia { grid-row: 1 / span 2; align-self: center; max-height: 78cqh; }
+  #view-nanni.stepView .pg.media > .pgMedia img { max-height: 70cqh; }
+  #view-nanni.stepView .pg.one > .pgText { grid-row: 1 / span 2; align-self: center; max-height: 78cqh; }
+}
