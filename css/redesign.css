@@ -2585,12 +2585,33 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 }
 
 /* the navigation menu animation in Nanni's view: centred, as big as the card comfortably allows */
-/* a lavender frame across the project's width; the phone sits in it at roughly 60% of its old size, cropped at the top */
-#view-nanni .nnFrame { position: relative; width: 100%; border-radius: 24px; aspect-ratio: 100 / 60; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; background: linear-gradient(180deg, #E8E1FC 0%, #D9CDF0 100%); }
+/* Nanni's page: About + logo, Goal + phone, the nav animation in a full-width lavender frame, then two columns of words */
+#view-nanni .nnFrame { position: relative; width: 100%; aspect-ratio: 100 / 60; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; background: linear-gradient(180deg, #E8E1FC 0%, #D9CDF0 100%); }
 #view-nanni .nnFrame .nnMount { width: 70%; max-width: none; flex: none; }
 #view-nanni .nnNav { max-width: none; }
+#view-nanni .nnDoc { box-sizing: border-box; width: 100%; color: var(--ink); --nn-pad: max(7.8cqw, 24px); }
+#view-nanni .nnDoc p { margin: 0; }
+#view-nanni .nnLab { display: block; margin-bottom: 0.9cqw; font-size: clamp(11px, 0.95cqw, 15px); font-weight: 500; color: rgba(11, 21, 48, 0.5); }
+#view-nanni .nnLead { font-size: clamp(20px, 2.5cqw, 40px); line-height: 1.3; letter-spacing: -0.015em; font-weight: 500; max-width: 19em; }
+#view-nanni .nnLead + .nnLead { margin-top: 1.3em; }
+#view-nanni .nnBody { font-size: clamp(15px, 1.75cqw, 28px); line-height: 1.5; font-weight: 500; letter-spacing: -0.01em; }
+#view-nanni .nnBody + .nnBody { margin-top: 1.3em; }
+#view-nanni .nnRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 6cqw; row-gap: 5cqw; padding: 0 var(--nn-pad); }
+#view-nanni .nnAbout { padding-top: max(9cqw, 40px); padding-bottom: 12cqw; }
+#view-nanni .nnGoal { padding-bottom: 12cqw; }
+#view-nanni .nnLogo { display: flex; flex-direction: column; align-items: center; gap: 0.7cqw; width: clamp(130px, 21.7cqw, 340px); }
+#view-nanni .nnLogo .nnWord { width: 100%; height: auto; display: block; }
+#view-nanni .nnLogo .nnBy { display: flex; align-items: center; gap: 0.5cqw; font-size: clamp(10px, 1cqw, 16px); color: rgba(11, 21, 48, 0.55); }
+#view-nanni .nnLogo .nnBy img { height: clamp(11px, 1.9cqw, 30px); width: auto; display: block; }
+#view-nanni .nnShot { width: clamp(110px, 21.7cqw, 340px); height: auto; display: block; }
+#view-nanni .nnCols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3cqw; row-gap: 5cqw; padding: 1.6cqw var(--nn-pad) max(8cqw, 40px); }
+@media (max-width: 900px) {
+  #view-nanni .nnRow { grid-template-columns: minmax(0, 1fr); }
+  #view-nanni .nnLogo, #view-nanni .nnShot { justify-self: start; }
+  #view-nanni .nnCols { grid-template-columns: minmax(0, 1fr); }
+}
 @media (min-width: 901px) {
   #view-nanni .nnFrame { aspect-ratio: 2000 / 509; }
   #view-nanni .nnFrame .nnMount { width: 35.3%; }
-  #view-nanni.stepView .pg > .nnFrame { grid-column: 1; grid-row: 1 / span 2; align-self: center; width: 100%; }
+  #view-nanni.stepView .pg.one:has(> .nnDoc) { display: block; padding: 0; overflow-y: auto; overflow-x: hidden; }
 }
