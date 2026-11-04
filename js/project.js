@@ -17,7 +17,7 @@
   var INTRO_GAP = 16;  // the gap left above the filter chips once the about-me lines are gone
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
-  var VIEW_SCALE = 0.92; // the card is this much of the largest 16:10 card that fits
+  var SCREEN_PAD = 24; // desktop: the card fills the screen, this far from every edge
   var BOTTOM_ROOM = 32; // space kept under the card (the gallery row now sits above it, between the intro and the card)
 
   var open = null; // { view, trigger, link }
@@ -374,12 +374,8 @@
     // desktop: the card is CARD_SCALE times bigger than what fits between the tabs and the gallery row, as large as the window allows
     // (the same shape), and centred above the gallery row, over the tabs
     if (!narrow) {
-      // as large as the screen allows, in the same 16:10 shape: the room under the intro and the gallery row, down to BOTTOM_ROOM
-      var maxH = window.innerHeight - minTop - BOTTOM_ROOM;
-      var bigH = maxH, bigW = bigH * CARD_RATIO;
-      var maxW = window.innerWidth * 0.9;
-      if (bigW > maxW) { bigW = maxW; bigH = bigW / CARD_RATIO; }
-      bigW *= VIEW_SCALE; bigH *= VIEW_SCALE; // a little under the most the screen allows
+      // the card is the whole screen, SCREEN_PAD from every edge
+      var bigW = window.innerWidth - SCREEN_PAD * 2, bigH = window.innerHeight - SCREEN_PAD * 2;
       cardW = bigW; height = bigH;
     }
     var side = (window.innerWidth - cardW) / 2;
@@ -389,7 +385,7 @@
       var minTop = top;
       var maxTop = Math.max(minTop, window.innerHeight - PAD - height);
       top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
-    } else top = minTop + Math.max(0, (window.innerHeight - BOTTOM_ROOM - minTop - height) / 2); // centred in what is left under the row
+    } else top = SCREEN_PAD;
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height;
     showProjNav(view, top, height, side, narrow, tintBg);
@@ -576,7 +572,7 @@
       var nb = cur < 0 ? null : links[(cur + (i === 0 ? -1 : 1) + links.length) % links.length].getAttribute("data-bubble");
       if (nb) b.setAttribute("data-bubble", nb); else b.removeAttribute("data-bubble");
       b.style.top = top + height / 2 + "px";
-      b.style[i === 0 ? "left" : "right"] = (side - 40) / 2 + "px";
+      b.style[i === 0 ? "left" : "right"] = (side >= 64 ? (side - 40) / 2 : side + 12) + "px"; // in the margin if there is room, else just inside the card's edge
       gsap.fromTo(b, { autoAlpha: 0 }, { autoAlpha: 1, duration: t(0.3), delay: t(0.15), overwrite: "auto" });
     });
   }
