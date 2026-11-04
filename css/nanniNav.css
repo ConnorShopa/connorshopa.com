@@ -10,10 +10,10 @@
   --nn-screen: #F9F8F2;
   --nn-band: #E0DAE1;
   container-type: inline-size;
-  position: relative; width: 100%; max-width: 480px; aspect-ratio: 100 / 55; overflow: hidden;
+  position: relative; width: 100%; max-width: 480px; aspect-ratio: 100 / 55; clip-path: inset(0 -25cqw -25cqw -25cqw);
   font-family: "Satoshi", system-ui, sans-serif; -webkit-font-smoothing: antialiased;
 }
-.nnPhone { position: absolute; left: 0; right: 0; top: -12cqw; bottom: 0; box-sizing: border-box; border: 1.05cqw solid var(--nn-ink); border-top: 0; border-radius: 0 0 11.5cqw 11.5cqw; background: var(--nn-screen); overflow: hidden; }
+.nnPhone { position: absolute; left: 0; right: 0; top: -12cqw; bottom: 0; box-sizing: border-box; border: 1.05cqw solid var(--nn-ink); border-top: 0; border-radius: 0 0 11.5cqw 11.5cqw; background: var(--nn-screen); overflow: hidden; filter: drop-shadow(0 4cqw 6cqw rgba(0,18,36,.18)) drop-shadow(0 1cqw 2cqw rgba(0,18,36,.12)); }
 
 /* the bar: a full-width band along the bottom first, then a floating pill */
 .nnBand { position: absolute; left: 0; right: 0; bottom: 0; height: 29.6cqw; background: var(--nn-band); }
@@ -34,5 +34,12 @@
 .nnLbl .b { opacity: 0; }
 
 /* the floating translate button, top right of the bar */
-.nnFab { position: absolute; right: 7.7cqw; bottom: 36.5cqw; width: 14.5cqw; height: 14.5cqw; display: grid; place-items: center; border-radius: 50%; background: var(--nn-ink); box-shadow: 0 1cqw 2.4cqw rgba(0, 18, 36, 0.22); opacity: 0; }
-.nnFab svg { width: 6.6cqw; height: 6.6cqw; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.nnFab { position: absolute; right: 7.7cqw; bottom: 36.5cqw; width: 14.5cqw; height: 14.5cqw; box-sizing: border-box; display: grid; place-items: center; border-radius: 50%; background: var(--nn-ink); border: 0.6cqw solid #FDFDFD; box-shadow: 0 1.6cqw 3.6cqw rgba(0, 18, 36, 0.32), 0 0.4cqw 1cqw rgba(0, 18, 36, 0.2); opacity: 0; }
+.nnFab svg { width: 6.6cqw; height: 6.6cqw; fill: #FDFDFD; }
+
+/* Journal's list: skeleton cards (no copy), under the bar */
+.nnList { position: absolute; left: 4.5cqw; right: 4.5cqw; top: 6cqw; height: 130cqw; display: flex; flex-direction: column; gap: 3.2cqw; }
+.nnCard { position: relative; flex: none; height: 17.5cqw; border-radius: 3.2cqw; background: #fff; box-shadow: 0 0.4cqw 1.6cqw rgba(0, 18, 36, 0.08); }
+.nnCard b { position: absolute; left: 3.2cqw; top: 3.2cqw; width: 11cqw; height: 11cqw; border-radius: 2.4cqw; }
+.nnCard u { position: absolute; left: 17.5cqw; top: 4.6cqw; right: 8cqw; height: 2.6cqw; border-radius: 1.3cqw; background: #E4E2DA; }
+.nnCard u.s { top: 9.6cqw; right: 22cqw; }

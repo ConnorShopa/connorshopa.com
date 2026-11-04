@@ -17,7 +17,7 @@
     logs: "<svg class=\"nnIcon\" style=\"width:8.3cqw;height:8.3cqw\" aria-hidden=\"true\" viewBox=\"0 0 27 27\" fill=\"none\"><path class=\"pen\" d=\"M18.6587 3.29304C18.9469 3.00477 19.2892 2.7761 19.6658 2.62009C20.0424 2.46409 20.4461 2.38379 20.8538 2.38379C21.2615 2.38379 21.6651 2.46409 22.0418 2.62009C22.4184 2.7761 22.7606 3.00477 23.0489 3.29304C23.3372 3.5813 23.5658 3.92352 23.7218 4.30016C23.8779 4.6768 23.9581 5.08048 23.9581 5.48815C23.9581 5.89582 23.8779 6.2995 23.7218 6.67614C23.5658 7.05278 23.3372 7.395 23.0489 7.68326L8.23188 22.5003L2.19531 24.1466L3.84165 18.1101L18.6587 3.29304Z\" stroke-width=\"2.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"currentColor\"/></svg>",
     fun: "<svg class=\"nnIcon\" style=\"width:7.67cqw;height:5.75cqw\" aria-hidden=\"true\" viewBox=\"0 0 28 21\" fill=\"none\"><mask id=\"h__U__\" maskUnits=\"userSpaceOnUse\" x=\"-1\" y=\"0\" width=\"30\" height=\"21\" fill=\"black\"><rect fill=\"white\" x=\"-1\" width=\"30\" height=\"21\"/><path d=\"M8.28577 2.41224C7.72696 2.97105 7.69603 3.57509 8.19371 4.20773C8.48866 4.58278 8.71623 4.67859 9.31097 4.67752C9.98848 4.67645 12.4602 4.16572 13.2307 3.86773C13.5176 3.75671 13.5435 3.91867 13.5435 5.8216V5.93011C13.5435 6.22629 13.7836 6.46639 14.0798 6.46639C14.376 6.46639 14.6161 6.22629 14.6161 5.93011V5.82875C14.6161 3.94102 14.6435 3.76941 14.9289 3.85915C16.1497 4.24277 18.1822 4.67877 18.7493 4.67877C19.5896 4.67877 20.1577 4.13694 20.1577 3.33555C20.1577 2.58439 19.5231 1.99644 18.7162 2.00002C18.1535 2.00252 16.2117 2.43423 14.6263 2.9092C14.0848 3.07152 13.7271 3.02772 12.3775 2.63427C11.4949 2.37685 10.3172 2.11746 9.76056 2.05794C8.83653 1.95908 8.708 1.99001 8.28577 2.41224Z\" fill-rule=\"evenodd\" clip-rule=\"evenodd\"/><path d=\"M9.07567 16.9735C8.91035 17.8303 9.57448 18.5998 10.4471 18.5998H17.5645C18.4407 18.5998 19.1057 17.8244 18.9344 16.9652C18.2961 13.7645 16.6301 6.98021 13.9745 6.98021C11.3165 6.98021 9.69259 13.7764 9.07567 16.9735Z\" fill-rule=\"evenodd\" clip-rule=\"evenodd\"/><path d=\"M17.3239 7.44001C20.5346 8.2802 23.4581 10.6245 24.7935 13.4296C25.4944 14.9017 25.7711 15.8565 25.9946 17.5721C26.0537 18.121 25.6235 18.6 25.0714 18.6H23.2529C22.5483 18.6 21.9487 18.0868 21.8399 17.3906L21.7985 17.1252C21.0759 13.0639 19.1313 9.61108 16.6199 7.92964C15.3453 7.07641 15.5064 6.96433 17.3239 7.44001Z\" fill-rule=\"evenodd\" clip-rule=\"evenodd\"/><path d=\"M10.6761 7.44001C7.46538 8.2802 4.5419 10.6245 3.20654 13.4296C2.50561 14.9017 2.22889 15.8565 2.00544 17.5721C1.94634 18.121 2.37648 18.6 2.92861 18.6H4.7471C5.45168 18.6 6.05129 18.0868 6.16005 17.3906L6.20153 17.1252C6.92409 13.0639 8.86866 9.61108 11.3801 7.92964C12.6547 7.07641 12.4936 6.96433 10.6761 7.44001Z\" fill-rule=\"evenodd\" clip-rule=\"evenodd\"/></mask><path d=\"M8.28577 2.41224C7.72696 2.97105 7.69603 3.57509 8.19371 4.20773C8.48866 4.58278 8.71623 4.67859 9.31097 4.67752C9.98848 4.67645 12.4602 4.16572 13.2307 3.86773C13.5176 3.75671 13.5435 3.91867 13.5435 5.8216V5.93011C13.5435 6.22629 13.7836 6.46639 14.0798 6.46639C14.376 6.46639 14.6161 6.22629 14.6161 5.93011V5.82875C14.6161 3.94102 14.6435 3.76941 14.9289 3.85915C16.1497 4.24277 18.1822 4.67877 18.7493 4.67877C19.5896 4.67877 20.1577 4.13694 20.1577 3.33555C20.1577 2.58439 19.5231 1.99644 18.7162 2.00002C18.1535 2.00252 16.2117 2.43423 14.6263 2.9092C14.0848 3.07152 13.7271 3.02772 12.3775 2.63427C11.4949 2.37685 10.3172 2.11746 9.76056 2.05794C8.83653 1.95908 8.708 1.99001 8.28577 2.41224ZM13.9745 6.98021C16.6301 6.98021 18.2961 13.7645 18.9344 16.9652C19.1057 17.8244 18.4407 18.5998 17.5645 18.5998H10.4471C9.57448 18.5998 8.91035 17.8303 9.07567 16.9735C9.69259 13.7764 11.3165 6.98021 13.9745 6.98021ZM17.3239 7.44001C20.5346 8.2802 23.4581 10.6245 24.7935 13.4296C25.4944 14.9017 25.7711 15.8565 25.9946 17.5721C26.0537 18.121 25.6235 18.6 25.0714 18.6H23.2529C22.5483 18.6 21.9487 18.0868 21.8399 17.3906L21.7985 17.1252C21.0759 13.0639 19.1313 9.61108 16.6199 7.92964C15.3453 7.07641 15.5064 6.96433 17.3239 7.44001ZM10.6761 7.44001C7.46538 8.2802 4.5419 10.6245 3.20654 13.4296C2.50561 14.9017 2.22889 15.8565 2.00544 17.5721C1.94634 18.121 2.37648 18.6 2.92861 18.6H4.7471C5.45168 18.6 6.05129 18.0868 6.16005 17.3906L6.20153 17.1252C6.92409 13.0639 8.86866 9.61108 11.3801 7.92964C12.6547 7.07641 12.4936 6.96433 10.6761 7.44001Z\" stroke-width=\"4\" stroke=\"currentColor\" mask=\"url(#h__U__)\"/></svg>"
   };
-  var MIC = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9.2" y="3" width="5.6" height="10" rx="2.8"/><path d="M6.4 11.2a5.6 5.6 0 0 0 11.2 0M12 16.8V20"/></svg>';
+  var MIC = '<svg viewBox="0 0 27 27" aria-hidden="true"><path d="M11.686 23.1564V24.7714C11.686 25.5457 12.3138 26.1735 13.0881 26.1735C13.8625 26.1735 14.4902 25.5458 14.4902 24.7714V23.1564C16.9205 22.8171 18.9302 21.6902 20.5193 19.7758C21.8102 18.2204 22.5768 16.4572 22.8189 14.486C22.9134 13.7174 22.2751 13.0872 21.5007 13.0872C20.7264 13.0872 20.1145 13.72 19.9808 14.4827C19.7316 15.9037 19.0874 17.1531 18.0481 18.2309C16.681 19.6485 15.0277 20.3574 13.0881 20.3574C11.1486 20.3574 9.49525 19.6485 8.1282 18.2309C7.08891 17.1531 6.44467 15.9037 6.1955 14.4827C6.06175 13.72 5.44989 13.0872 4.67554 13.0872C3.90118 13.0872 3.26289 13.7174 3.35732 14.486C3.59949 16.4572 4.36605 18.2204 5.65701 19.7758C7.24605 21.6902 9.25572 22.8171 11.686 23.1564Z" fill-rule="evenodd" clip-rule="evenodd"/><path d="M13.0881 17.4493C11.9197 17.4493 10.9266 17.0252 10.1087 16.177C9.29078 15.3289 8.88183 14.2989 8.88183 13.0872V4.36306C8.88183 3.15137 9.29078 2.12144 10.1087 1.27325C10.9266 0.425068 11.9197 0.000976562 13.0881 0.000976562C14.2565 0.000976562 15.2497 0.425068 16.0676 1.27325C16.8855 2.12144 17.2944 3.15137 17.2944 4.36306V13.0872C17.2944 14.2989 16.8855 15.3289 16.0676 16.177C15.2497 17.0252 14.2565 17.4493 13.0881 17.4493Z"/></svg>';
   var TABS = [
     { id: "translate", label: "Translate" },
     { id: "routines", label: "Routines" },
@@ -34,7 +34,10 @@
         '<span class="nnLbl"><span class="a">' + t.label + "</span>" + (t.then ? '<span class="b">' + t.then + "</span>" : "") + "</span></div>";
     }).join("");
     // the button is first, so it sits behind the bar and rises out from under it
-    return '<div class="nnPhone"><div class="nnFab">' + MIC + '</div><div class="nnBand"></div><div class="nnPill"></div>' +
+    var cards = ["#F9B44C","#F28B82","#8CB8F5","#8CCB9B","#F9B44C","#F28B82"].map(function (c) {
+      return '<i class="nnCard"><b style="background:' + c + '"></b><u></u><u class="s"></u></i>';
+    }).join("");
+    return '<div class="nnPhone"><div class="nnList">' + cards + '</div><div class="nnFab">' + MIC + '</div><div class="nnBand"></div><div class="nnPill"></div>' +
       '<div class="nnTabs"><i class="nnSp l"></i>' + tabs + '<i class="nnSp r"></i></div></div>';
   }
 
@@ -47,7 +50,7 @@
     root.setAttribute("aria-label", "Nanni's navigation menu, from five tabs to a floating bar with a translate button");
     var q = function (s) { return root.querySelector(s); };
     var tab = {}; TABS.forEach(function (t) { tab[t.id] = q('.nnTab[data-id="' + t.id + '"]'); });
-    var band = q(".nnBand"), pill = q(".nnPill"), fab = q(".nnFab"), spL = q(".nnSp.l"), spR = q(".nnSp.r");
+    var list = q(".nnList"), tabsEl = q(".nnTabs"), band = q(".nnBand"), pill = q(".nnPill"), fab = q(".nnFab"), spL = q(".nnSp.l"), spR = q(".nnSp.r");
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var api = { tl: null, goto: function () {}, play: function () {}, pause: function () {}, destroy: function () {} };
     if (!gsap) return api;
@@ -56,6 +59,9 @@
     gsap.set(fab, { autoAlpha: 0, scale: 0.6, xPercent: 0, yPercent: 230 });
     gsap.set(pill, { autoAlpha: 0, scaleX: 0.92, scaleY: 0.5, transformOrigin: "50% 100%" });
     gsap.set(root.querySelectorAll(".nnLbl .b"), { yPercent: 100 });
+
+    gsap.set(list, { autoAlpha: 0 });
+    gsap.set(list.children, { yPercent: 40, opacity: 0 });
 
     var tl = gsap.timeline({ paused: true, repeat: opts.loop === false ? 0 : -1, defaults: { ease: "power3.inOut" } });
     var T = {};
@@ -94,9 +100,26 @@
       .to(journal.querySelector(".pen"), { fill: "rgba(0,18,36,1)", duration: 0.45, ease: "power2.out" }, "s7")
       .fromTo(journal.querySelector(".nnIcon"), { scale: 0.8 }, { scale: 1, duration: 0.55, ease: "back.out(2.2)" }, "s7");
 
-    at("final", 8.1);
-    tl.to({}, { duration: 1.6 }, "final");               // hold the finished bar
-    tl.to(root, { opacity: 0, duration: 0.4, ease: "power1.in" }, "final+=1.6"); // then fade out and begin again
+    // s8: tapping Journal opens its list of cards
+    at("s8", 8.6);
+    tl.set(list, { autoAlpha: 1 }, "s8")
+      .to(list.children, { yPercent: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.08 }, "s8");
+
+    // s9: scrolling down: the cards move up, the bar slips away, the button drops to the bottom corner
+    at("s9", 10.0);
+    tl.to(list, { yPercent: -30, duration: 1.0, ease: "power2.inOut" }, "s9")
+      .to([pill, tabsEl], { yPercent: 160, opacity: 0, duration: 0.8, ease: "power2.inOut" }, "s9")
+      .to(fab, { yPercent: 214, duration: 1.0, ease: "power2.inOut" }, "s9");
+
+    // s10: scrolling back up: everything returns
+    at("s10", 11.7);
+    tl.to(list, { yPercent: 0, duration: 1.0, ease: "power2.inOut" }, "s10")
+      .to([pill, tabsEl], { yPercent: 0, opacity: 1, duration: 0.8, ease: "power2.inOut" }, "s10+=0.15")
+      .to(fab, { yPercent: 0, duration: 1.0, ease: "power2.inOut" }, "s10+=0.1");
+
+    at("final", 13.0);
+    tl.to({}, { duration: 1.3 }, "final");               // hold the finished bar
+    tl.to(root, { opacity: 0, duration: 0.4, ease: "power1.in" }, "final+=1.3"); // then fade out and begin again
 
     tl.addLabel("s1", 0.45);
 
@@ -114,9 +137,9 @@
     else tl.play(0);
 
     api.tl = tl;
-    // where each of the seven steps has finished moving (seconds on the timeline), for goto(1..7)
-    var STEP_END = [1.2, 2.6, 3.9, 4.6, 5.7, 7.2, 8.2];
-    api.goto = function (n) { api._manual = true; tl.pause(STEP_END[Math.max(1, Math.min(7, n)) - 1]); };
+    // where each of the seven steps has finished moving (seconds on the timeline), for goto(1..10)
+    var STEP_END = [1.2, 2.6, 3.9, 4.6, 5.7, 7.2, 8.2, 9.5, 11.2, 13.0];
+    api.goto = function (n) { api._manual = true; tl.pause(STEP_END[Math.max(1, Math.min(10, n)) - 1]); };
     api.play = function () { api._manual = false; tl.play(); };
     api.pause = function () { api._manual = true; tl.pause(); };
     api.destroy = function () { if (io) io.disconnect(); tl.kill(); root.innerHTML = ""; };
