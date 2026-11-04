@@ -86,7 +86,7 @@
       wordmark: H + "nanni_wordmark.svg",
       // the rest of the copy, pictures and layout are in git (commit 26c2461)
       pages: [
-        pg("one", '<div class="nnMount"></div>'), // the hand-built navigation menu animation (js/nanniNav.js)
+        pg("one", '<div class="nnFrame"><div class="nnMount"></div></div>'), // the hand-built navigation menu animation (js/nanniNav.js)
       ],
     },
 

@@ -2585,8 +2585,12 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 }
 
 /* the navigation menu animation in Nanni's view: centred, as big as the card comfortably allows */
-#view-nanni .nnMount { width: 100%; max-width: 560px; justify-self: center; }
+/* a lavender frame across the project's width; the phone sits in it at roughly 60% of its old size, cropped at the top */
+#view-nanni .nnFrame { position: relative; width: 100%; aspect-ratio: 100 / 60; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; background: linear-gradient(180deg, #E8E1FC 0%, #D9CDF0 100%); }
+#view-nanni .nnFrame .nnMount { width: 70%; max-width: none; flex: none; }
 #view-nanni .nnNav { max-width: none; }
 @media (min-width: 901px) {
-  #view-nanni.stepView .pg > .nnMount { grid-column: 1; grid-row: 1 / span 2; align-self: center; width: min(56cqw, 100cqh); max-width: none; }
+  #view-nanni .nnFrame { aspect-ratio: 2000 / 509; }
+  #view-nanni .nnFrame .nnMount { width: 35.3%; }
+  #view-nanni.stepView .pg > .nnFrame { grid-column: 1; grid-row: 1 / span 2; align-self: center; width: 100%; }
 }
