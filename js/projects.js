@@ -84,69 +84,7 @@
       stepNav: "none", // no tab list: the pages still step on scroll ("side" brings back the list fixed at the left)
       logo: H + "nanni_app_icon.svg",
       wordmark: H + "nanni_wordmark.svg",
-      pages: [
-        pg("two",
-          lab("Intro") + text(
-            p("lead", "Nanni is a pediatric care application that translates baby cries into actionable, useful insights and information for nearly 500,000 caregivers")
-          ) + media(fig(A + "nanniAssets/nanni_image_01.png"))),
-        pg("flip",
-          lab("Goals") + media(fig(A + "nanniAssets/nanni_image_03.png")) +
-          text(
-            p("eyebrow", "Goals") +
-            p("sub", "A. Organization") +
-            p("body", "With the launch of new key features, and a growing base of users, the application had become cluttered and difficult to navigate. I would focus on organizing existing elements into a clearly defined hierarchy, while leaving room for new features coming down the road.") +
-            p("sub", "B. Maturity") +
-            p("body", "Nanni is backed by scientific research, and uses pediatric science to provide tools for caregivers. We wanted to make sure the application relfected this.") +
-            p("sub", "C. Maintain the fun") +
-            p("body", "While a redesign was inevitable, there was no need to remove the &quot;fun&quot; from the product. A balance needed to be struck between keeping the product fun for caregivers, while also clearly defining itself as a useful and usable tool.")
-          )),
-        pg("two",
-          lab("Navigation") + text(
-            p("lead", "Navigation Menu") +
-            p("body", "Listening to both the audience and the internal help team explain their confusion and problems with navigating the application, we found three repeated issues.") +
-            p("quote", "&quot;I often miss a babies cry because it takes multiple taps to get to the recording screen.&quot;") +
-            p("quote", "&quot;Routines is confusing. I forget where to go to see all my recordings.&quot;") +
-            p("quote", "&quot;Users are not submitting feedback from the feedback screen, 90% of the time it&rsquo;s from the results screen.&quot;")
-          ) + media(fig(A + "nanniAssets/nanni_image_10.png", "Previous navigation menu"))),
-        pg("two",
-          lab("Iterations") + text(
-            p("eyebrow", "The navigation menu went through several iterations, with intention to minimize actions, and prioritize recording a newborns cry.") +
-            p("body", "&ndash; Feedback was moved to more pertinent locations across the experience, garnering more direct feedback from caregivers.") +
-            p("body", "&ndash;Logs were renamed as Journal, found to be more of a human representation of the feature.") +
-            p("body", "&ndash; Translation became a floating action button, allowing caregivers to have instant access across the application, and never miss a cry or journal entry.") +
-            p("body", "&ndash; The navigation menu itself became a floating bar, that got out of the way when the user was interacting with content across the experience.")
-          ) + media(fig(A + "nanniAssets/nanni_image_02.png"), fig(A + "nanniAssets/nanniGif_01.gif")) +
-          '<div class="pgFull"><img src="' + A + 'nanniAssets/nanniGif_03.gif" alt="" decoding="async"></div>'), // an earlier navigation menu: full width under the page's content
-        pg("flip",
-          lab("Translation") + media(fig(A + "nanniAssets/nanniGif_02.gif")) +
-          text(
-            p("lead", "An easy access translation flow") +
-            p("body", "&ndash; With one tap, from anywhere in the application, Nanni&rsquo;s audience was able to record a cry.")
-          )),
-        pg("two",
-          lab("Features") + text(
-            p("eyebrow", "Other feature changes") +
-            p("sub", "Routines went through a transformation and became Journal, a home for all recorded cries.") +
-            p("sub", "Split into two tabs, Journal matured into a space where caregivers could glean insights, and view their history.")
-          ) + media(fig(A + "nanniAssets/nanni_image_04.png"))),
-        pg("flip",
-          lab("Insights") + media(fig(A + "nanniAssets/nanni_image_11.png")) +
-          text(
-            p("lead", "Journal : Insights") +
-            p("body", "Caregiver&rsquo;s recorded cries generate insights, allowing them to further understand causes, trends and averages across their newborns data.")
-          )),
-        pg("two",
-          lab("History") + text(
-            p("lead", "Journal : History") +
-            p("body", "A filterable history of all recorded cries or events. Visible by other caregivers for posterity and support.")
-          ) + media(fig(A + "nanniAssets/nanni_image_06.png"), fig(A + "nanniAssets/nanni_image_07.png"), fig(A + "nanniAssets/nanni_image_08.png", "Previous screens"))),
-        pg("media", lab("Screens") + media(fig(A + "nanniAssets/nanni_image_09.png", "Redesigned screens"))),
-        pg("one",
-          lab("Results") + text(
-            p("lead", "Results") +
-            '<div class="stats">' + stat("12 million", "Downloads") + stat("4.7/5", "Stars rating") + stat("#62", "Health app worldwide") + "</div>"
-          )),
-      ],
+      pages: [], // emptied for now: the copy, pictures and layout are in git (commit 26c2461)
     },
 
     // ---------------------------------------------------------------- Seeds
