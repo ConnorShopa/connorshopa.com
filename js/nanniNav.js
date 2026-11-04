@@ -34,8 +34,8 @@
         '<span class="nnLbl"><span class="a">' + t.label + "</span>" + (t.then ? '<span class="b">' + t.then + "</span>" : "") + "</span></div>";
     }).join("");
     // the button is first, so it sits behind the bar and rises out from under it
-    var cards = ["#F9B44C","#F28B82","#8CB8F5","#8CCB9B","#F9B44C","#F28B82"].map(function (c) {
-      return '<i class="nnCard"><b style="background:' + c + '"></b><u></u><u class="s"></u></i>';
+    var cards = ["#F9B44C","#F28B82","#8CB8F5","#8CCB9B","#F9B44C","#F28B82"].map(function () {
+      return '<i class="nnCard"><b></b><u></u><u class="s"></u></i>';
     }).join("");
     return '<div class="nnPhone"><div class="nnList">' + cards + '</div><div class="nnFab">' + MIC + '</div><div class="nnBand"></div><div class="nnPill"></div>' +
       '<div class="nnTabs"><i class="nnSp l"></i>' + tabs + '<i class="nnSp r"></i></div></div>';
@@ -90,6 +90,7 @@
     at("s6", 6.0);
     tl.to(band, { opacity: 0, yPercent: 30, duration: 0.6 }, "s6")
       .to(pill, { autoAlpha: 1, scaleX: 1, scaleY: 1, duration: 0.75, ease: "power3.out" }, "s6+=0.1")
+      .to(fab, { yPercent: 28, duration: 0.7 }, "s6+=0.1")
       .to([spL, spR], { flexGrow: 0.25, duration: 0.75 }, "s6+=0.05");
 
     // s7: Journal is the active tab: darker, heavier, and its pencil fills in
@@ -101,27 +102,29 @@
       .fromTo(journal.querySelector(".nnIcon"), { scale: 0.8 }, { scale: 1, duration: 0.55, ease: "back.out(2.2)" }, "s7");
 
     // s8: tapping Journal opens its list of cards
-    at("s8", 8.6);
+    at("s8", 7.5);
     tl.set(list, { autoAlpha: 1 }, "s8")
       .to(list.children, { yPercent: 0, opacity: 1, duration: 0.7, ease: "power3.out", stagger: 0.08 }, "s8");
 
     // s9: scrolling down: the cards move up, the bar slips away, the button drops to the bottom corner
-    at("s9", 10.0);
+    at("s9", 9.0);
     tl.to(list, { yPercent: -30, duration: 1.0, ease: "power2.inOut" }, "s9")
       .to([pill, tabsEl], { yPercent: 160, opacity: 0, duration: 0.8, ease: "power2.inOut" }, "s9")
-      .to(fab, { yPercent: 214, duration: 1.0, ease: "power2.inOut" }, "s9");
+      .to(fab, { yPercent: 176, duration: 1.0, ease: "power2.inOut" }, "s9");
 
     // s10: scrolling back up: everything returns
-    at("s10", 11.7);
+    at("s10", 10.7);
     tl.to(list, { yPercent: 0, duration: 1.0, ease: "power2.inOut" }, "s10")
       .to([pill, tabsEl], { yPercent: 0, opacity: 1, duration: 0.8, ease: "power2.inOut" }, "s10+=0.15")
-      .to(fab, { yPercent: 0, duration: 1.0, ease: "power2.inOut" }, "s10+=0.1");
+      .to(fab, { yPercent: 28, duration: 1.0, ease: "power2.inOut" }, "s10+=0.1");
 
-    at("final", 13.0);
+    at("final", 12.0);
     tl.to({}, { duration: 1.3 }, "final");               // hold the finished bar
     tl.to(root, { opacity: 0, duration: 0.4, ease: "power1.in" }, "final+=1.3"); // then fade out and begin again
 
     tl.addLabel("s1", 0.45);
+
+    tl.timeScale(1.5);   // everything a little quicker
 
     var inView = true, io = null;
     if ("IntersectionObserver" in window) {
@@ -138,7 +141,7 @@
 
     api.tl = tl;
     // where each of the seven steps has finished moving (seconds on the timeline), for goto(1..10)
-    var STEP_END = [1.2, 2.6, 3.9, 4.6, 5.7, 7.2, 8.2, 9.5, 11.2, 13.0];
+    var STEP_END = [1.2, 2.6, 3.9, 4.6, 5.7, 7.2, 8.3, 10.0, 11.8, 12.0];
     api.goto = function (n) { api._manual = true; tl.pause(STEP_END[Math.max(1, Math.min(10, n)) - 1]); };
     api.play = function () { api._manual = false; tl.play(); };
     api.pause = function () { api._manual = true; tl.pause(); };
