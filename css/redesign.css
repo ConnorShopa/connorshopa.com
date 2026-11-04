@@ -2530,3 +2530,8 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 
 /* Nanni's phones now float on the card (their backgrounds are cut out), so the captions that used to be inside the pictures are text under them */
 #view-nanni .pgMedia figcaption { margin-top: 1.2cqw; text-align: center; font-size: clamp(14px, 1.3cqw, 22px); font-weight: 500; color: var(--ink); }
+
+/* Nanni without its tab list: the pages use the room the list had */
+@media (min-width: 901px) {
+  #view-nanni.noTabs.stepView .pg, #view-nanni.noTabs.stepView .pg.two, #view-nanni.noTabs.stepView .pg.flip, #view-nanni.noTabs.stepView .pg.one, #view-nanni.noTabs.stepView .pg.media { padding-left: 8cqw; padding-right: 8cqw; }
+}

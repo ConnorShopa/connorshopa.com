@@ -81,7 +81,7 @@
       bg: "#CBDCF1", // a pale wash of its logo blue, so the original blue logo and wordmark read on it
       cardBg: "#EDF1F5", // the project view itself is a cool pale grey
       stepText: true, // pages step on scroll with a tab list, like TouchTunes
-      stepNav: "side", // the tab list is fixed at the left of the card (TouchTunes puts it inside the first page)
+      stepNav: "none", // no tab list: the pages still step on scroll ("side" brings back the list fixed at the left)
       logo: H + "nanni_app_icon.svg",
       wordmark: H + "nanni_wordmark.svg",
       pages: [

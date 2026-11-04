@@ -86,7 +86,7 @@
     // tabs, in the first page's text column, over the (invisible) labels that keep every page's sentence at the same height
     var labels = pgs.map(function (pg) { var l = pg.querySelector(".ttLabel"); return l ? l.textContent.trim() : ""; });
     var tabs = null, btns = [];
-    if (labels.some(Boolean) && pgs[0].querySelector(".pgText")) {
+    if (!sec.classList.contains("noTabs") && labels.some(Boolean) && pgs[0].querySelector(".pgText")) {
       tabs = document.createElement("div"); tabs.className = "ttTabs"; tabs.setAttribute("role", "tablist");
       labels.forEach(function (name, i) {
         var b = document.createElement("button"); b.type = "button"; b.className = "ttTab"; b.textContent = name || "Page " + (i + 1);
@@ -280,6 +280,7 @@
     if (proj.download) sec.classList.add("hasDownload");
     sec.querySelector(".viewTitle").textContent = proj.title;
     if (proj.stepNav === "side") sec.classList.add("navSide");
+    if (proj.stepNav === "none") sec.classList.add("noTabs");
     if (proj.stepText) sec.classList.add("stepView"); // pages step on scroll instead of scrolling as one long page
     if (!proj.noNav) sec.classList.add("scrollView"); // every project but Habbot: all the pages in one vertical scroll
     if (proj.noNav) sec.classList.add("vertical"); // pages move up and down (scroll or the chevron under the first page's button)
