@@ -2583,3 +2583,10 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 @media (min-width: 901px) {
   #view-nanni.stepView .pg:has(> .pgFull) > .pgMedia:has(figure:nth-child(2)) figure { flex: 0 1 auto; } /* the pictures keep their own width and sit together in the middle */
 }
+
+/* the navigation menu animation in Nanni's view: centred, as big as the card comfortably allows */
+#view-nanni .nnMount { width: 100%; max-width: 560px; justify-self: center; }
+#view-nanni .nnNav { max-width: none; }
+@media (min-width: 901px) {
+  #view-nanni.stepView .pg > .nnMount { grid-column: 1; grid-row: 1 / span 2; align-self: center; width: min(56cqw, 100cqh); max-width: none; }
+}

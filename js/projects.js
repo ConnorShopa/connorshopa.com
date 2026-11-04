@@ -84,7 +84,10 @@
       stepNav: "none", // no tab list: the pages still step on scroll ("side" brings back the list fixed at the left)
       logo: H + "nanni_app_icon.svg",
       wordmark: H + "nanni_wordmark.svg",
-      pages: [], // emptied for now: the copy, pictures and layout are in git (commit 26c2461)
+      // the rest of the copy, pictures and layout are in git (commit 26c2461)
+      pages: [
+        pg("one", '<div class="nnMount"></div>'), // the hand-built navigation menu animation (js/nanniNav.js)
+      ],
     },
 
     // ---------------------------------------------------------------- Seeds

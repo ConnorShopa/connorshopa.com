@@ -299,6 +299,8 @@
     if (proj.bgImageBlur) sec.style.setProperty("--view-img-blur", 'url("' + new URL(proj.bgImageBlur, document.baseURI).href + '")');
     document.body.appendChild(sec);
     if (locked) wireLock(slug, sec);
+    // the hand-built navigation menu animation (Nanni) mounts into its box
+    if (window.NanniNav) sec.querySelectorAll(".nnMount").forEach(function (m) { window.NanniNav.mount(m); });
     // an open (not locked) step view is wired straight away, on screens wide enough for it; narrower ones keep the one long scrolling page
     if (!locked && proj.stepText && proj.pages.length > 1 && window.matchMedia("(min-width: 901px)").matches && window.gsap) { sec._stepWired = true; wireSteps(sec); }
   });
