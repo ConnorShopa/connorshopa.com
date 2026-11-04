@@ -71,7 +71,9 @@
 
     // s2: Feedback goes; the other four share the width
     at("s2", 1.5);
-    tl.to(tab.feedback, { flexGrow: 0, opacity: 0, scale: 0.7, duration: 0.7 }, "s2");
+    gsap.set(tab.feedback, { transformOrigin: "50% 50%" });
+    tl.to(tab.feedback, { scale: 0, opacity: 0, duration: 0.4, ease: "back.in(1.7)" }, "s2")      // pops out where it stands
+      .to(tab.feedback, { flexGrow: 0, duration: 0.55 }, "s2+=0.25");                              // then the others close the gap
 
     // s3: Logs rolls over into Journal
     at("s3", 2.8);
@@ -90,7 +92,7 @@
     at("s6", 6.0);
     tl.to(band, { opacity: 0, yPercent: 30, duration: 0.6 }, "s6")
       .to(pill, { autoAlpha: 1, scaleX: 1, scaleY: 1, duration: 0.75, ease: "power3.out" }, "s6+=0.1")
-      .to(fab, { yPercent: 28, duration: 0.7 }, "s6+=0.1")
+      .to(fab, { yPercent: 18, duration: 0.7 }, "s6+=0.1")
       .to([spL, spR], { flexGrow: 0.25, duration: 0.75 }, "s6+=0.05");
 
     // s7: Journal is the active tab: darker, heavier, and its pencil fills in
@@ -116,7 +118,7 @@
     at("s10", 10.7);
     tl.to(list, { yPercent: 0, duration: 1.0, ease: "power2.inOut" }, "s10")
       .to([pill, tabsEl], { yPercent: 0, opacity: 1, duration: 0.8, ease: "power2.inOut" }, "s10+=0.15")
-      .to(fab, { yPercent: 28, duration: 1.0, ease: "power2.inOut" }, "s10+=0.1");
+      .to(fab, { yPercent: 18, duration: 1.0, ease: "power2.inOut" }, "s10+=0.1");
 
     at("final", 12.0);
     tl.to({}, { duration: 1.3 }, "final");               // hold the finished bar
@@ -124,7 +126,7 @@
 
     tl.addLabel("s1", 0.45);
 
-    tl.timeScale(1.5);   // everything a little quicker
+    tl.timeScale(1.25);   // everything a little quicker
 
     var inView = true, io = null;
     if ("IntersectionObserver" in window) {
