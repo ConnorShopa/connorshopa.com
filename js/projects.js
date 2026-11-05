@@ -94,10 +94,19 @@
           '<section class="nnGoal"><span class="nnLab">&middot; Goal</span>' +
             '<p class="nnLead">Nanni is 98% accurate, trained on millions of cries, backed by industry standard medical research, yet perceived as a novelty toy.</p>' +
             '<p class="nnLead">I defined a new product language that positioned Nanni as a healthcare tool.</p></section>' +
-          '<div class="nnFrame"><div class="nnMount"></div></div>' + // the hand-built navigation menu animation (js/nanniNav.js)
+          '<div class="nnFrame"><div class="nnMount"></div><span class="nnCap">Navigation</span></div>' + // the hand-built navigation menu animation (js/nanniNav.js)
           '<section class="nnCols">' +
-            '<div><span class="nnLab">&middot; Navigation</span><p class="nnBody">Nanni is 98% accurate, trained on millions of cries, backed by industry standard medical research, yet perceived as a novelty toy.</p><p class="nnBody">I defined a new product language that positioned Nanni as a healthcare tool.</p></div>' +
-            '<div><span class="nnLab">&middot; Goal</span><p class="nnBody">Nanni is 98% accurate, trained on millions of cries, backed by industry standard medical research, yet perceived as a novelty toy.</p><p class="nnBody">I defined a new product language that positioned Nanni as a healthcare tool.</p></div>' +
+            '<div><span class="nnLab">&middot; Navigation</span><p class="nnLead nnHead">A clarified, focused, simple navigation structure</p>' +
+              '<span class="nnLab nnQLab">&middot; Quotes</span>' +
+              '<blockquote class="nnQuote">&ldquo;Users are not submitting feedback from the feedback screen, 90% of the time it&rsquo;s from the results screen.&rdquo;<cite>&ndash; Ubenwa support team</cite></blockquote>' +
+              '<blockquote class="nnQuote">&ldquo;I often miss a babies cry because it takes multiple taps to get to the recording screen.&rdquo;<cite>&ndash; Nanni AI user</cite></blockquote>' +
+              '<blockquote class="nnQuote">&ldquo;Routines is a confusing name. I forget where to go to see all my recordings.&rdquo;<cite>&ndash; Nanni AI user</cite></blockquote></div>' +
+            '<div class="nnColR">' +
+              '<p class="nnPt">&middot; Feedback became a prompt linked with insights and translation. Simpler for the caregiver, more relevant for Ubenwa to sharpen their tool</p>' +
+              '<p class="nnPt">&middot; Translating a cry is now one a one tap away for a faster &amp; easier process during moments where caregivers found translation stressful</p>' +
+              '<p class="nnPt">&middot; Journal is the new home for insights, past translations, &amp; notes</p>' +
+              '<p class="nnPt">&middot; Routines remains focused on Nanni&rsquo;s new LOREM IPSUM</p>' +
+              '<p class="nnPt">Fun zone is remains unchanged, keeping the fun that Ubenwa had envisioned for parts of the tool</p></div>' +
           '</section></div>'),
       ],
     },

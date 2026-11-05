@@ -2589,6 +2589,13 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 #view-nanni .nnFrame { position: relative; width: 100%; aspect-ratio: 100 / 60; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; background: linear-gradient(180deg, #E8E1FC 0%, #D9CDF0 100%); }
 #view-nanni .nnFrame .nnMount { width: 70%; max-width: none; flex: none; }
 #view-nanni .nnNav { max-width: none; }
+#view-nanni .nnCap { position: absolute; left: 0; right: 0; bottom: 4%; text-align: center; font-size: clamp(18px, 2.2cqw, 36px); font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
+#view-nanni .nnHead { max-width: 12em; }
+#view-nanni .nnQLab { margin-top: 5cqw; }
+#view-nanni .nnQuote { margin: 0 0 1.6cqw; font-size: clamp(14px, 1.4cqw, 23px); line-height: 1.4; font-style: italic; font-weight: 500; color: #821AAF; max-width: 30em; }
+#view-nanni .nnQuote cite { display: block; margin-top: 0.3cqw; font-style: normal; font-size: clamp(11px, 0.95cqw, 15px); color: rgba(11, 21, 48, 0.5); }
+#view-nanni .nnColR { padding-top: 1.9cqw; }
+#view-nanni .nnDoc .nnPt { margin: 0 0 1.6cqw; font-size: clamp(13px, 1.3cqw, 21px); line-height: 1.45; font-weight: 500; color: rgba(11, 21, 48, 0.82); max-width: 30em; }
 #view-nanni .nnDoc { box-sizing: border-box; width: 100%; color: var(--ink); --nn-pad: max(7.8cqw, 24px); }
 #view-nanni .nnDoc p { margin: 0; }
 #view-nanni .nnLab { display: block; margin-bottom: 0.9cqw; font-size: clamp(11px, 0.95cqw, 15px); font-weight: 500; color: rgba(11, 21, 48, 0.5); }
@@ -2613,7 +2620,7 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
   #view-nanni .nnShots img.mid { width: 28vw; }
 }
 @media (min-width: 901px) {
-  #view-nanni .nnFrame { aspect-ratio: 2000 / 509; }
+  #view-nanni .nnFrame { aspect-ratio: 100 / 29; }
   #view-nanni .nnFrame .nnMount { width: 35.3%; }
   #view-nanni.stepView .pg.one:has(> .nnDoc) { display: block; padding: 0; overflow-y: auto; overflow-x: hidden; }
 }
