@@ -106,7 +106,7 @@
               '<p class="nnPt">&middot; <b>Translating</b> a cry is now one a one tap away for a faster &amp; easier process during moments where caregivers found translation stressful</p>' +
               '<p class="nnPt">&middot; <b>Journal</b> is the new home for insights, past translations, &amp; notes</p>' +
               '<p class="nnPt">&middot; <b>Routines</b> remains focused on Nanni&rsquo;s new LOREM IPSUM</p>' +
-              '<p class="nnPt"><b>Fun zone</b> is remains unchanged, keeping the fun that Ubenwa had envisioned for parts of the tool</p></div>' +
+              '<p class="nnPt">&middot; <b>Fun zone</b> is remains unchanged, keeping the fun that Ubenwa had envisioned for parts of the tool</p></div>' +
           '</section></div>'),
       ],
     },
