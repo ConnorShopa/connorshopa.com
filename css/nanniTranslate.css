@@ -31,7 +31,7 @@
 .ntLabel span { position: absolute; left: 0; right: 0; top: 0; line-height: 11.2cqw; text-align: center; white-space: nowrap; }
 .ntHint { position: absolute; left: 10cqw; right: 10cqw; top: 198cqw; margin: 0; text-align: center; font-size: 3.5cqw; line-height: 4.8cqw; font-weight: 600; }
 .ntRoot .ntRec .ntBtn { background: #001428; }
-.ntBtn { position: absolute; left: 15cqw; right: 15cqw; bottom: 7.3cqw; height: 13cqw; border-radius: 99cqw; background: #001428; color: #fff; display: flex; align-items: center; justify-content: center; gap: 2cqw; font-size: 4.4cqw; font-weight: 500; }
+.ntBtn { position: absolute; left: 6cqw; right: 6cqw; bottom: 7cqw; height: 16.5cqw; box-shadow: 0 2.4cqw 5cqw rgba(0, 18, 36, 0.34), 0 0.6cqw 1.5cqw rgba(0, 18, 36, 0.24); border-radius: 99cqw; background: #001428; color: #fff; display: flex; align-items: center; justify-content: center; gap: 2cqw; font-size: 4.8cqw; font-weight: 500; }
 .ntBtn svg { width: 4.6cqw; height: 4.6cqw; fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
 /* the finger: a soft round marker where the screen is tapped */
