@@ -94,4 +94,4 @@
 .ntSkDot { background: #C9D2DC; }
 
 /* the Stop capturing button: it comes in under "Translating" once that has been pushed up above the card */
-.ntStop { position: absolute; z-index: 5; left: 50%; top: 77cqw; width: 42cqw; margin-left: -21cqw; height: 10cqw; border-radius: 99cqw; background: #001428; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 3.9cqw; font-weight: 600; letter-spacing: -0.005em; box-shadow: 0 1.6cqw 3.4cqw rgba(0, 18, 36, 0.28), 0 0.4cqw 1cqw rgba(0, 18, 36, 0.2); }
+.ntStop { position: absolute; z-index: 5; left: 50%; top: 70.5cqw; padding: 2.1cqw 4.6cqw; border-radius: 99cqw; background: #fff; color: #001428; white-space: nowrap; font-size: 3.7cqw; line-height: 1.2; font-weight: 600; letter-spacing: -0.005em; }

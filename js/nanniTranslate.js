@@ -166,7 +166,7 @@
     gsap.set([back, title, ring, label, hint], { autoAlpha: 0 });
     gsap.set(ring, { scale: 0.92 }); gsap.set([back, title], { y: -6 });
     gsap.set(hint, { y: 8 });
-    gsap.set(card, { yPercent: 108 }); gsap.set(stopBtn, { autoAlpha: 0, y: 12 });
+    gsap.set(card, { yPercent: 108 }); gsap.set(stopBtn, { autoAlpha: 0, y: 12, xPercent: -50 });
     gsap.set(lc, { yPercent: 100, autoAlpha: 0 });
     gsap.set(touch, { autoAlpha: 0, scale: 0.4 });
     draw(0);
