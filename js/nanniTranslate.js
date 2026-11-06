@@ -2,7 +2,7 @@
    the icons, the floating pill, the mic button), and follows the storyboard:
      1  Journal, the floating pill and the mic button
      2  the mic button is tapped; the "New translation" screen opens out of it and recording starts on its own
-     3  once the five seconds are in, the label reads "Ready to translate" and the bars keep moving
+     3  after three seconds the translating starts straight away
      4  the cry is translated by itself: the bars collapse into dots that gather into a spinning orb ("Translating"), then a blank result card slides up from the bottom
    NanniTranslate.mount(el) fills `el` and returns { tl, goto(n), play(), pause(), destroy() }. Everything is sized in cqw (a percent of the phone's width). */
 (function () {
@@ -30,8 +30,8 @@
       '<div class="ntRing"><div class="ntBars">' + new Array(BARS + 1).join('<i class="ntBar"></i>') + '</div>' +
         '<span class="ntTime">0:00</span></div>' +
       '<div class="ntOrb"></div>' +
-      '<div class="ntLabel"><span class="a">Capturing Gerald&rsquo;s cry</span><span class="b">Ready to translate</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
-      '<p class="ntHint">Nanni needs 5 seconds for accurate translations</p>' +
+      '<div class="ntLabel"><span class="a">Capturing Gerald&rsquo;s cry</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
+      '<p class="ntHint">Nanni needs 3 seconds for accurate translations</p>' +
       '<div class="ntCard"><i class="ntSk w30 h36"></i>' +
         '<div class="ntSkTop"><i class="ntSk pill"></i><span class="ntSkThumbs"><i class="ntSk"></i><i class="ntSk"></i></span></div>' +
         '<div class="ntSkBox"><i class="ntSk w88"></i><i class="ntSk w52"></i></div>' +
@@ -48,7 +48,7 @@
     var gsap = window.gsap, P = window.NanniNav && window.NanniNav.parts;
     root.classList.add("ntRoot");
     root.setAttribute("role", "img");
-    root.setAttribute("aria-label", "Nanni: tap the mic button, the cry is recorded for five seconds, then translated, and the result slides up");
+    root.setAttribute("aria-label", "Nanni: tap the mic button, the cry is recorded for three seconds, then translated, and the result slides up");
     var api = { tl: null, goto: function () {}, play: function () {}, pause: function () {}, destroy: function () {} };
     if (!P) return api;
     root.innerHTML = '<div class="ntPhone">' + homeMarkup(P) + recMarkup() + '<i class="ntTouch"></i></div>';
@@ -57,7 +57,7 @@
     var q = function (s) { return root.querySelector(s); };
     var phone = q(".ntPhone"), home = q(".ntHome"), rec = q(".ntRec"), fab = q(".ntFab"), pill = q(".ntPill"), tabs = q(".ntTabs");
     var touch = q(".ntTouch"), back = q(".ntBack"), title = q(".ntTitle"), ring = q(".ntRing"), bars = root.querySelectorAll(".ntBar"), time = q(".ntTime");
-    var orbEl = q(".ntOrb"), label = q(".ntLabel"), la = q(".ntLabel .a"), lb = q(".ntLabel .b"), lc = q(".ntLabel .c"), hint = q(".ntHint"), card = q(".ntCard");
+    var orbEl = q(".ntOrb"), label = q(".ntLabel"), la = q(".ntLabel .a"), lc = q(".ntLabel .c"), hint = q(".ntHint"), card = q(".ntCard");
     var journal = q('.nnTab[data-id="logs"]');
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -66,8 +66,8 @@
     journal.querySelector(".nnLbl").style.fontWeight = 700;
     var pen = journal.querySelector(".pen"); if (pen) pen.style.fill = INK;
 
-    // the noise level: p is 0..1 across the five seconds. Bars rise and fall like a live sound meter, and take
-    // Nanni's blue, green, yellow and red as they get louder. calm (0..1) settles them once five seconds are in.
+    // the noise level: p is 0..1 across the three seconds. Bars rise and fall like a live sound meter, and take
+    // Nanni's blue, green, yellow and red as they get louder..
     var calm = { v: 0 }, BRAND = ["#80BAFD", "#99CA9C", "#FBC157", "#F28C8C"];
     // every bar is one solid brand colour, picked at random (never the same as its neighbour)
     var prev = -1;
@@ -150,7 +150,7 @@
         lv[i] = Math.max(0.03, Math.min(1.05, lv[i]));
       }
       paint();
-      time.textContent = "0:0" + Math.min(5, Math.floor(p * 5 + 0.001));
+      time.textContent = "0:0" + Math.min(3, Math.floor(p * 3 + 0.001));
     }
 
     // places the touch marker over an element's centre (percent of the phone)
@@ -166,7 +166,7 @@
     gsap.set(ring, { scale: 0.92 }); gsap.set([back, title], { y: -6 });
     gsap.set(hint, { y: 8 });
     gsap.set(card, { yPercent: 108 });
-    gsap.set([lb, lc], { yPercent: 100, autoAlpha: 0 });
+    gsap.set(lc, { yPercent: 100, autoAlpha: 0 });
     gsap.set(touch, { autoAlpha: 0, scale: 0.4 });
     draw(0);
 
@@ -198,23 +198,16 @@
       .to(label, { autoAlpha: 1, duration: 0.45, ease: "power2.out" }, "rec+=0.25")
       .to(hint, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power3.out" }, "rec+=0.35");
     at("count", 3.1);
-    // the meter keeps showing noise after the five seconds (p goes past 1) until Translate is tapped and the screen changes
-    tl.to(prog, { p: 5.75 / 3.4, duration: 5.75, ease: "none", onUpdate: function () { draw(prog.p); } }, "count");
+    // the capture runs three seconds, then the translating starts at once
+    tl.to(prog, { p: 1, duration: 3.4, ease: "none", onUpdate: function () { draw(prog.p); } }, "count");
     tl.set(prog, { p: 0 }, 0);
     tl.set(calm, { v: 0 }, 0);
 
-    // 3: five seconds are in: the ring closes, the label rolls to "Ready to translate", the Translate button slides up
-    at("ready", 6.5);
-    tl.to(ring, { scale: 1.05, duration: 0.22, ease: "power2.out" }, "ready")
-      .to(ring, { scale: 1, duration: 0.5, ease: "back.out(2.2)" }, "ready+=0.22")
-      .to(la, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "ready")
-      .to(lb, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "ready+=0.14")
-      .to(hint, { autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.in" }, "ready");
-
-    // 3 -> 4: nothing to tap: after a moment on "Ready to translate" the translating starts by itself
-    at("work", 8.85);
+    // 3: the three seconds are in: the translating starts straight away (no "ready" screen)
+    at("work", 6.5);
     tl.to(time, { autoAlpha: 0, duration: 0.3, ease: "power2.in" }, "work")
-      .to(lb, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
+      .to(hint, { autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.in" }, "work")
+      .to(la, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
       .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14");
     tl.to(wk, { c: 1, duration: 0.3, ease: "back.out(2.2)", onUpdate: paint }, "work")                 // bars collapse into dots
       .to(wk, { g: 1, duration: 1.15, ease: "none", onUpdate: paint }, "work+=0.3")           // the dots gravitate to the centre
@@ -224,7 +217,7 @@
 
     // 4 -> 5: the translation is done: a blank result card slides up from the bottom, and the orb and "Translating"
     // rise with it so they stay in view above the card
-    at("result", 15.0);
+    at("result", 12.65);
     var up = { v: 0 }, UPO = 53.6, UPL = 67.7;
     function lift() { // the orb shrinks and the label closes in on it as they rise above the card
       orbEl.style.transform = "translateY(" + (-up.v * UPO) + "cqw) scale(" + (1 - 0.38 * up.v) + ")";
@@ -243,7 +236,7 @@
         .to(dots, { opacity: 0, duration: 0.2, ease: "power1.in" }, t0 + "+=0.95");
     }
 
-    at("final", 20.6);
+    at("final", 18.25);
     tl.to({}, { duration: 0.5 }, "final");
     tl.to(root, { opacity: 0, duration: 0.45, ease: "power1.in" }, "final+=0.5");
     tl.eventCallback("onRepeat", function () { wk.c = wk.g = wk.f = 0; orb.r = orb.o = orb.a = 0; up.v = 0; lift(); draw(0); renderOrb(); });
