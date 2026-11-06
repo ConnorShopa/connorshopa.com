@@ -28,7 +28,7 @@
       '<div class="ntRing"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="ntArc" cx="50" cy="50" r="' + R + '" /><circle class="ntHead" r="1.6" cx="50" cy="' + (50 - R) + '" /></svg>' +
         '<span class="ntTime">0:00</span></div>' +
       '<div class="ntBlob"></div>' +
-      '<div class="ntLabel"><span class="a">Recording</span><span class="b">Ready to translate</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
+      '<div class="ntLabel"><span class="a">Capturing cry</span><span class="b">Ready to translate</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
       '<p class="ntHint">Nanni needs 5 seconds for accurate translations</p>' +
       '<div class="ntBtn"><span>Translate</span>' + ARROW + "</div>" +
       "</div>";
