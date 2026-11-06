@@ -124,7 +124,8 @@
     renderOrb();
 
     function draw(p, tOv) {
-      var t = tOv != null ? tOv : p * 3.4, amp = Math.min(1, p / 0.05);
+      var t = tOv != null ? tOv : p * 3.4, amp = Math.min(1, p / 0.2); amp = amp * amp * (3 - 2 * amp); // they start flat and grow taller over the first moments of the capture
+      if (p <= 0) { for (var z = 0; z < BARS; z++) { lv[z] = 0.04; vel[z] = 0; } lastT = -1; } // back at the start (first play or a loop): flat again
       var dt = t - lastT; lastT = t;
       if (dt <= 0 || dt > 0.25) dt = 1 / 60; // a rewind, a seek or a loop: start the springs fresh
       var wail = Math.pow(0.5 + 0.5 * Math.sin(t * 3.7 - 1.3), 1.5);               // the long swells of the cry
