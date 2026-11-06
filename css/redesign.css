@@ -1566,9 +1566,9 @@ body { position: relative; }
 .logo.altq { height: 18px; width: auto; max-width: none; }
 
 /* Thoughtify: the icon and the word are both Spotify green */
-.spotIcon { display: block; width: 26px; height: 28px; background: #1DB954; -webkit-mask: url("../assets/homeAssets/spotifyDreams_projectImage.svg") center / contain no-repeat; mask: url("../assets/homeAssets/spotifyDreams_projectImage.svg") center / contain no-repeat; }
-.spot { color: #1DB954; }
-a:has(.spot) .bubble { margin-right: 10px; }
+.spotIcon { display: block; width: 20px; height: 22px; background: #1DB954; -webkit-mask: url("../assets/homeAssets/spotifyDreams_projectImage.svg") center / contain no-repeat; mask: url("../assets/homeAssets/spotifyDreams_projectImage.svg") center / contain no-repeat; }
+.spot { color: #1DB954; font-size: 0.8em; }
+a:has(.spot) .bubble { margin-right: 8px; }
 
 /* Poll.in's logo is a small wordmark */
 .logo.pollin { height: 32px; width: auto; max-width: none; }
@@ -1712,7 +1712,7 @@ a:has(.sheepText) .bubble { margin-right: 4px; }
   .logo.altq { height: 24px; }
   .logo.pollin { height: 40px; }
   .logo.sheep { height: 28px; }
-  .spotIcon { width: 32px; height: 34px; }
+  .spotIcon { width: 25px; height: 27px; }
 }
 
 /* ---- projects scroll vertically: every page sits under the one before, the card scrolls ---- */
@@ -1855,9 +1855,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 .filters .pill[aria-pressed="true"]::before { display: none; }
 
 /* Thoughtify's corner lockup: the same green icon and name as its gallery link */
-.viewSpot { display: inline-flex; align-items: center; gap: 8px; }
-.viewSpot .spotIcon { width: 24px; height: 26px; }
-.viewSpot .spot { font-size: 22px; line-height: 1; }
+.viewSpot { display: inline-flex; align-items: center; gap: 6px; }
+.viewSpot .spotIcon { width: 18px; height: 20px; }
+.viewSpot .spot { font-size: 17px; line-height: 1; }
 
 /* every gallery item (logo, lockup or plain text) is centred on its row's midline, and so is its slash */
 #projectList li:not(.row-break) { display: inline-flex; align-items: center; }
