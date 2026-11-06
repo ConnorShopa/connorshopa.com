@@ -27,7 +27,7 @@
   // THE NUMBER TO PLAY WITH: how hard each project link in the middle of the home screen sucks the bubble onto itself.
   // 0 = the old, gentle lean (the bubble drifts toward the cursor like the other links); 1 = the bubble sits dead centre on the link.
   // The higher the number, the less it drifts and the harder it is held. Try values live: type  LIST_GRAVITY = 0.9  in the browser console and move the mouse.
-  var LIST_GRAVITY = 0.7;
+  var LIST_GRAVITY = 0.4;
   var LINK_SCALE = 0.9;  // hovered links shrink to this fraction of their size...
   var MIN_PX = 14;       // ...but never below this font size
   var FOLLOW_TIME = 0.4; // how smoothly the dot / box trails its target
