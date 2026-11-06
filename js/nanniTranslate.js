@@ -105,20 +105,20 @@
         bars[i].style.opacity = wk.f ? 1 - wk.f : "";
       }
     }
-    var ORB_N = 64, ORB_R = 7.6, orb = { a: 0, r: 0, o: 0 }, orbDots = [], orbPts = [];
+    var ORB_N = 88, ORB_R = 7.6, orb = { a: 0, r: 0, o: 0 }, orbDots = [], orbPts = [], orbDelay = [], pop = bezier(0.22, 0.8, 0.25, 1);
     for (var oi = 0; oi < ORB_N; oi++) {
       var oy = 1 - 2 * (oi + 0.5) / ORB_N, orr = Math.sqrt(1 - oy * oy), th = oi * 2.399963; // an even spread of points over a sphere
       orbPts.push([Math.cos(th) * orr, oy, Math.sin(th) * orr]);
       var od = document.createElement("i"); od.className = "ntOrbDot"; od.style.background = BRAND[Math.floor(Math.random() * BRAND.length)];
-      orbEl.appendChild(od); orbDots.push(od);
+      orbEl.appendChild(od); orbDots.push(od); orbDelay.push(Math.random()); // each dot appears at its own random moment
     }
     function renderOrb() {
       var ca = Math.cos(orb.a), sa = Math.sin(orb.a), ct = Math.cos(0.42), st = Math.sin(0.42);
       for (var i = 0; i < ORB_N; i++) {
         var P = orbPts[i], x = P[0] * ca + P[2] * sa, z = -P[0] * sa + P[2] * ca, y = P[1] * ct - z * st, z2 = P[1] * st + z * ct;
-        var depth = (z2 + 1) / 2, sc = (0.45 + 0.75 * depth) * orb.r;
-        orbDots[i].style.transform = "translate(" + (x * ORB_R * orb.r) + "cqw," + (y * ORB_R * orb.r) + "cqw) scale(" + sc + ")";
-        orbDots[i].style.opacity = orb.o * (0.3 + 0.7 * depth);
+        var depth = (z2 + 1) / 2, e = pop(Math.max(0, Math.min(1, orb.r * 1.75 - orbDelay[i] * 0.75))), sc = (0.45 + 0.75 * depth) * e;
+        orbDots[i].style.transform = "translate(" + (x * ORB_R * e) + "cqw," + (y * ORB_R * e) + "cqw) scale(" + sc + ")";
+        orbDots[i].style.opacity = Math.min(1, e * 1.6) * (0.3 + 0.7 * depth);
       }
     }
     renderOrb();
@@ -221,7 +221,7 @@
     tl.to(wk, { c: 1, duration: 0.55, ease: "power3.inOut", onUpdate: paint }, "work")                 // bars collapse into dots
       .to(wk, { g: 1, duration: 1.15, ease: "none", onUpdate: paint }, "work+=0.4")           // the dots gravitate to the centre
       .to(wk, { f: 1, duration: 0.3, ease: "power2.in", onUpdate: paint }, "work+=1.4")                 // and give way to the orb
-      .to(orb, { r: 1, o: 1, duration: 1.1, ease: "power3.out", onUpdate: renderOrb }, "work+=1.4")      // the orb of dots opens out from the centre
+      .to(orb, { r: 1, o: 1, duration: 1.7, ease: "none", onUpdate: renderOrb }, "work+=1.4")      // the orb of dots opens out from the centre
       .to(orb, { a: Math.PI * 2 * 8.15 / 3.6, duration: 8.15, ease: "none", onUpdate: renderOrb }, "work+=1.4"); // and keeps turning
 
     // the three dots after "Translating" fill in one by one, then clear, until the cry is done

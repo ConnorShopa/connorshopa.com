@@ -44,7 +44,7 @@
 /* "Translating" and the blob shimmer: a slow, smooth drift through the blue, yellow and green of Nanni's app icon. */
 /* the loader: an orb of dots, placed by js/nanniTranslate.js; each dot is one brand colour */
 .ntOrb { position: absolute; left: 50%; top: 108cqw; width: 0; height: 0; }
-.ntOrbDot { position: absolute; left: -1cqw; top: -1cqw; width: 2cqw; height: 2cqw; border-radius: 50%; will-change: transform; }
+.ntOrbDot { position: absolute; left: -0.65cqw; top: -0.65cqw; width: 1.3cqw; height: 1.3cqw; border-radius: 50%; will-change: transform; }
 /* the word: one very wide, gentle blue, yellow, green cycle slides through it; it is exactly one phone wide, so it loops with no seam */
 .ntLabel .c { background-image: linear-gradient(90deg in oklab, #6CB0FC 0%, #FBC157 33.3%, #8FCB94 66.6%, #6CB0FC 100%); background-size: 100cqw 100%; background-repeat: repeat-x; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: ntSlide 5s linear infinite; }
 .ntLabel .c .ntDots { -webkit-text-fill-color: #8FCB94; }
