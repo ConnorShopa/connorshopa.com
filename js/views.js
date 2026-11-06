@@ -242,7 +242,7 @@
     var id = "view-" + slug;
     var locked = !!proj.locked; // the pages are encrypted (tools/lock.mjs) and open with a password
     // "legacy": the project keeps its original page (plunk.html, spotifyDreams.html) and shows it, unchanged, inside the card
-    var pages = proj.legacy ? [{ layout: "legacy", html: '<iframe class="legacyFrame" src="' + proj.legacy + '" title="' + proj.title.replace(/"/g, "") + '" loading="lazy"></iframe>' }] : proj.pages;
+    var pages = proj.legacy ? [{ layout: "legacy", html: '<iframe class="legacyFrame" data-src="' + proj.legacy + '" title="' + proj.title.replace(/"/g, "") + '"></iframe>' }] : proj.pages;
     var many = locked || pages.length > 1;
 
     var sec = document.createElement("section");
@@ -304,11 +304,16 @@
     if (locked) wireLock(slug, sec);
     // the hand-built navigation menu animation (Nanni) mounts into its box
     if (window.NanniNav) sec.querySelectorAll(".nnMount").forEach(function (m) { window.NanniNav.mount(m); });
-    // the original page inside its frame: its own header, footer and cursor are hidden (the card has its own close button), then it fades in
+    // the original page inside its frame. It loads the first time the card opens (not at page load). Its own header, footer and cursor are
+    // hidden (the card has its own close button) and it shows as soon as its content is parsed, without waiting for every picture and script
     sec.querySelectorAll(".legacyFrame").forEach(function (f) {
-      f.addEventListener("load", function () {
-        try {
-          var d = f.contentDocument, st = d.createElement("style");
+      var started = false, shown = false;
+      function show() {
+        if (shown) return;
+        var d; try { d = f.contentDocument; } catch (e) { d = null; }
+        if (d && d.head && !d.getElementById("legacyHide")) {
+          var st = d.createElement("style");
+          st.id = "legacyHide";
           st.textContent = ".headerBox, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; }";
           d.head.appendChild(st);
           // the mouse dot lives in this page, and a frame swallows the pointer, so the frame hands its movement up
@@ -316,9 +321,19 @@
             var r = f.getBoundingClientRect();
             window.dispatchEvent(new MouseEvent("mousemove", { clientX: e.clientX + r.left, clientY: e.clientY + r.top }));
           }, { passive: true });
-        } catch (e) {}
-        f.classList.add("ready");
-      });
+        }
+        if (d && d.body && d.readyState !== "loading") { shown = true; f.classList.add("ready"); }
+      }
+      function start() {
+        if (started) return;
+        started = true;
+        f.addEventListener("load", show);
+        f.src = f.getAttribute("data-src");
+        var n = 0, iv = setInterval(function () { show(); if (shown || ++n > 150) clearInterval(iv); }, 100);
+        setTimeout(function () { f.classList.add("ready"); }, 4000); // never leave it blank
+      }
+      if (!sec.hidden) start();
+      new MutationObserver(function () { if (!sec.hidden) start(); }).observe(sec, { attributes: true, attributeFilter: ["hidden", "class", "style"] });
     });
     // an open (not locked) step view is wired straight away, on screens wide enough for it; narrower ones keep the one long scrolling page
     if (!locked && proj.stepText && pages.length > 1 && window.matchMedia("(min-width: 901px)").matches && window.gsap) { sec._stepWired = true; wireSteps(sec); }
