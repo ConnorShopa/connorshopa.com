@@ -28,7 +28,7 @@
       '<div class="ntRing"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="ntArc" cx="50" cy="50" r="' + R + '" /><circle class="ntHead" r="1.6" cx="50" cy="' + (50 - R) + '" /></svg>' +
         '<span class="ntTime">0:00</span></div>' +
       '<div class="ntBlob"></div>' +
-      '<div class="ntLabel"><span class="a">Recording</span><span class="b">Ready to translate</span><span class="c">Translating</span></div>' +
+      '<div class="ntLabel"><span class="a">Recording</span><span class="b">Ready to translate</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
       '<p class="ntHint">Nanni needs 5 seconds for accurate translations</p>' +
       '<div class="ntBtn"><span>Translate</span>' + ARROW + "</div>" +
       "</div>";
@@ -158,6 +158,15 @@
       tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 2.4, ease: "sine.inOut" }, at0);
       if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 2.4, ease: "sine.inOut" }, at0);
     });
+
+    // the three dots after "Translating" fill in one by one, then clear, until the cry is done
+    var dots = root.querySelectorAll(".ntDots b");
+    gsap.set(dots, { opacity: 0 });
+    for (var c = 0; c < 7; c++) {
+      var t0 = "work+=" + (0.9 + c * 1.2);
+      tl.to(dots, { opacity: 1, duration: 0.25, stagger: 0.25, ease: "power1.out" }, t0)
+        .to(dots, { opacity: 0, duration: 0.2, ease: "power1.in" }, t0 + "+=0.95");
+    }
 
     at("final", 18.4);
     tl.to({}, { duration: 0.5 }, "final");
