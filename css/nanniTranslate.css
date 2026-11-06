@@ -64,5 +64,5 @@
 .ntRow { display: grid; grid-template-columns: minmax(0, 42%) minmax(0, 1fr); column-gap: 10.5%; align-items: center; padding: 2cqw var(--nn-pad, 48px) max(8cqw, 40px); }
 .ntRow .ntFrame { width: 100%; aspect-ratio: 100 / 170; border-radius: clamp(20px, 3.2cqw, 48px); background: linear-gradient(180deg, #DCE7FA 0%, #CFDEF5 100%); }
 .ntRow .ntFrame .ntMount { width: 62%; }
-.ntRow .nnHead { max-width: 12em; margin-bottom: 1.8cqw; }
+#view-nanni .ntRow .nnHead { max-width: 12em; margin: 0 0 4.2cqw; } /* more room between the heading and the first point */
 @media (max-width: 900px) { .ntRow { grid-template-columns: minmax(0, 1fr); row-gap: 8cqw; } .ntRow .ntFrame { max-width: 460px; margin: 0 auto; } .ntRow .ntFrame .ntMount { width: 62%; } }
