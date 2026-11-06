@@ -157,7 +157,7 @@
     gsap.set([back, title, ring, label, hint], { autoAlpha: 0 });
     gsap.set(ring, { scale: 0.92 }); gsap.set([back, title], { y: -6 });
     gsap.set(hint, { y: 8 });
-    gsap.set(btn, { autoAlpha: 0, scale: 0.6, transformOrigin: "50% 50%" });
+    gsap.set(btn, { autoAlpha: 0, yPercent: 140 });
     gsap.set([lb, lc], { yPercent: 100, autoAlpha: 0 });
     gsap.set(touch, { autoAlpha: 0, scale: 0.4 });
     draw(0);
@@ -202,8 +202,7 @@
       .to(la, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "ready")
       .to(lb, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "ready+=0.14")
       .to(hint, { autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.in" }, "ready")
-      .to(btn, { autoAlpha: 1, duration: 0.2, ease: "power1.out" }, "ready+=0.08")
-      .to(btn, { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, "ready+=0.08"); // pops in from its centre with a subtle spring
+      .to(btn, { autoAlpha: 1, yPercent: 0, duration: 0.5, ease: "power3.out" }, "ready+=0.14"); // slides up in time with "Ready to translate" rolling in
 
     // 3 -> 4: Translate is tapped
     at("tap2", 8.3);
@@ -214,7 +213,7 @@
       .to(touch, { autoAlpha: 0, scale: 1.5, duration: 0.4, ease: "power1.out" }, "tap2+=0.2");
 
     at("work", 8.85);
-    tl.to(btn, { scale: 0.8, autoAlpha: 0, duration: 0.35, ease: "power2.in" }, "work")
+    tl.to(btn, { yPercent: 150, autoAlpha: 0, duration: 0.55, ease: "power2.in" }, "work")
       .to(time, { autoAlpha: 0, duration: 0.3, ease: "power2.in" }, "work")
       .to(lb, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
       .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14");
