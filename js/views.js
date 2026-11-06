@@ -311,6 +311,7 @@
       function show() {
         if (shown) return;
         var d; try { d = f.contentDocument; } catch (e) { d = null; }
+        if (d && d.URL === "about:blank") return; // the frame's empty starting page, before the real one arrives
         if (d && d.head && !d.getElementById("legacyHide")) {
           var st = d.createElement("style");
           st.id = "legacyHide";
