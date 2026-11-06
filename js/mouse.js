@@ -37,6 +37,7 @@
   var DOT_FILL = "rgba(47, 39, 37, 0.10)";
   // inside an open dark project (TouchTunes) the dot is 30% white, so it shows on the black card
   function boxFill() { return document.documentElement.classList.contains("view-dark") ? "rgba(255, 255, 255, 0.3)" : BOX_FILL; } // the hover bubble round a link, in a dark card
+  function boxBorder() { return document.documentElement.classList.contains("view-dark") ? "rgba(255, 255, 255, 0.28)" : BOX_BORDER; } // the 1px stroke, light in a dark card
   function dotFill() { return document.documentElement.classList.contains("view-dark") ? "rgba(255, 255, 255, 0.3)" : DOT_FILL; }
   var DOT_BORDER = "rgba(47, 39, 37, 0)";
   var BOX_FILL = "#F4F4F4";
@@ -97,7 +98,7 @@
       height: h,
       borderRadius: radius,
       backgroundColor: (currentLink && currentLink.getAttribute("data-bubble")) || boxFill(),
-      borderColor: BOX_BORDER,
+      borderColor: boxBorder(),
       boxShadow: BOX_SHADOW,
       duration: t(MORPH_TIME),
       ease: "power3.out",
