@@ -213,18 +213,20 @@
       .to(wk, { g: 1, duration: 1.15, ease: "none", onUpdate: paint }, "work+=0.3")           // the dots gravitate to the centre
       .to(wk, { f: 1, duration: 0.3, ease: "power2.in", onUpdate: paint }, "work+=1.4")                 // and give way to the orb
       .to(orb, { r: 1, o: 1, duration: 1.7, ease: "none", onUpdate: renderOrb }, "work+=1.4")      // the orb of dots opens out from the centre
-      .to(orb, { a: Math.PI * 2 * 8.15 / 3.6, duration: 8.15, ease: "none", onUpdate: renderOrb }, "work+=1.4"); // and keeps turning
+      .to(orb, { a: Math.PI * 2 * 10.4 / 3.6, duration: 10.4, ease: "none", onUpdate: renderOrb }, "work+=1.4"); // and keeps turning
 
-    // 4 -> 5: the translation is done: the orb gathers away, and a blank result card slides up from the bottom
+    // 4 -> 5: the translation is done: a blank result card slides up from the bottom, and the orb and "Translating"
+    // rise with it so they stay in view above the card
     at("result", 15.0);
-    tl.to(orb, { r: 0, duration: 0.6, ease: "power2.in", onUpdate: renderOrb }, "result-0.15")
-      .to(lc, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "result-0.1")
+    var up = { v: 0 }, UP = 56;
+    function lift() { var t = "translateY(" + (-up.v * UP) + "cqw)"; orbEl.style.transform = t; label.style.transform = t; }
+    tl.to(up, { v: 1, duration: 0.85, ease: "power3.out", onUpdate: lift }, "result")
       .to(card, { yPercent: 0, duration: 0.85, ease: "power3.out" }, "result");
 
     // the three dots after "Translating" fill in one by one, then clear, until the cry is done
     var dots = root.querySelectorAll(".ntDots b");
     gsap.set(dots, { opacity: 0 });
-    var cycles = 5;
+    var cycles = 9;
     for (var c = 0; c < cycles; c++) {
       var t0 = "work+=" + (0.9 + c * 1.2);
       tl.to(dots, { opacity: 1, duration: 0.25, stagger: 0.25, ease: "power1.out" }, t0)
@@ -234,7 +236,7 @@
     at("final", 20.6);
     tl.to({}, { duration: 0.5 }, "final");
     tl.to(root, { opacity: 0, duration: 0.45, ease: "power1.in" }, "final+=0.5");
-    tl.eventCallback("onRepeat", function () { wk.c = wk.g = wk.f = 0; orb.r = orb.o = orb.a = 0; draw(0); renderOrb(); });
+    tl.eventCallback("onRepeat", function () { wk.c = wk.g = wk.f = 0; orb.r = orb.o = orb.a = 0; up.v = 0; lift(); draw(0); renderOrb(); });
 
     // step-through mode (opts.manual): the flow stops on each screen and waits for a button, so every transition can be tested.
     // STOP[n] is the time where screen n is showing; the bars and the orb keep moving while it waits.
