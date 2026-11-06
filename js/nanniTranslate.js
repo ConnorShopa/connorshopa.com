@@ -32,6 +32,7 @@
       '<div class="ntOrb"></div>' +
       '<div class="ntLabel"><span class="a">Capturing Gerald&rsquo;s cry</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
       '<p class="ntHint">Nanni needs 3 seconds for accurate translations</p>' +
+      '<div class="ntStop">Stop capturing</div>' +
       '<div class="ntCard"><i class="ntSk w30 h36"></i>' +
         '<div class="ntSkTop"><i class="ntSk pill"></i><span class="ntSkThumbs"><i class="ntSk"></i><i class="ntSk"></i></span></div>' +
         '<div class="ntSkBox"><i class="ntSk w88"></i><i class="ntSk w52"></i></div>' +
@@ -57,7 +58,7 @@
     var q = function (s) { return root.querySelector(s); };
     var phone = q(".ntPhone"), home = q(".ntHome"), rec = q(".ntRec"), fab = q(".ntFab"), pill = q(".ntPill"), tabs = q(".ntTabs");
     var touch = q(".ntTouch"), back = q(".ntBack"), title = q(".ntTitle"), ring = q(".ntRing"), bars = root.querySelectorAll(".ntBar"), time = q(".ntTime");
-    var orbEl = q(".ntOrb"), label = q(".ntLabel"), la = q(".ntLabel .a"), lc = q(".ntLabel .c"), hint = q(".ntHint"), card = q(".ntCard");
+    var orbEl = q(".ntOrb"), label = q(".ntLabel"), la = q(".ntLabel .a"), lc = q(".ntLabel .c"), hint = q(".ntHint"), card = q(".ntCard"), stopBtn = q(".ntStop");
     var journal = q('.nnTab[data-id="logs"]');
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -165,7 +166,7 @@
     gsap.set([back, title, ring, label, hint], { autoAlpha: 0 });
     gsap.set(ring, { scale: 0.92 }); gsap.set([back, title], { y: -6 });
     gsap.set(hint, { y: 8 });
-    gsap.set(card, { yPercent: 108 });
+    gsap.set(card, { yPercent: 108 }); gsap.set(stopBtn, { autoAlpha: 0, y: 12 });
     gsap.set(lc, { yPercent: 100, autoAlpha: 0 });
     gsap.set(touch, { autoAlpha: 0, scale: 0.4 });
     draw(0);
@@ -213,7 +214,7 @@
       .to(wk, { g: 1, duration: 1.15, ease: "none", onUpdate: paint }, "work+=0.3")           // the dots gravitate to the centre
       .to(wk, { f: 1, duration: 0.3, ease: "power2.in", onUpdate: paint }, "work+=1.4")                 // and give way to the orb
       .to(orb, { r: 1, o: 1, duration: 1.7, ease: "none", onUpdate: renderOrb }, "work+=1.4")      // the orb of dots opens out from the centre
-      .to(orb, { a: Math.PI * 2 * 10.4 / 3.6, duration: 10.4, ease: "none", onUpdate: renderOrb }, "work+=1.4"); // and keeps turning
+      .to(orb, { a: Math.PI * 2 * 14 / 3.6, duration: 14, ease: "none", onUpdate: renderOrb }, "work+=1.4"); // and keeps turning
 
     // 4 -> 5: the translation is done: a blank result card slides up from the bottom, and the orb and "Translating"
     // rise with it so they stay in view above the card
@@ -224,19 +225,20 @@
       label.style.transform = "translateY(" + (-up.v * UPL) + "cqw) scale(" + (1 - 0.18 * up.v) + ")";
     }
     tl.to(up, { v: 1, duration: 0.85, ease: "power3.out", onUpdate: lift }, "result")
-      .to(card, { yPercent: 0, duration: 0.85, ease: "power3.out" }, "result");
+      .to(card, { yPercent: 0, duration: 0.85, ease: "power3.out" }, "result")
+      .to(stopBtn, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power3.out" }, "result+=0.5"); // the Stop capturing button comes in under "Translating"
 
     // the three dots after "Translating" fill in one by one, then clear, until the cry is done
     var dots = root.querySelectorAll(".ntDots b");
     gsap.set(dots, { opacity: 0 });
-    var cycles = 9;
+    var cycles = 12;
     for (var c = 0; c < cycles; c++) {
       var t0 = "work+=" + (0.9 + c * 1.2);
       tl.to(dots, { opacity: 1, duration: 0.25, stagger: 0.25, ease: "power1.out" }, t0)
         .to(dots, { opacity: 0, duration: 0.2, ease: "power1.in" }, t0 + "+=0.95");
     }
 
-    at("final", 18.25);
+    at("final", 21.8);
     tl.to({}, { duration: 0.5 }, "final");
     tl.to(root, { opacity: 0, duration: 0.45, ease: "power1.in" }, "final+=0.5");
     tl.eventCallback("onRepeat", function () { wk.c = wk.g = wk.f = 0; orb.r = orb.o = orb.a = 0; up.v = 0; lift(); draw(0); renderOrb(); });
