@@ -1,0 +1,39 @@
+/* Nanni's "new translation" flow (js/nanniTranslate.js): a whole phone screen. Sized in cqw, a percent of the phone's width.
+   It borrows the navigation menu's pieces (css/nanniNav.css): the pill, the tabs and the mic button. */
+.ntFrame { position: relative; width: 100%; aspect-ratio: 100 / 62; overflow: hidden; display: flex; justify-content: center; align-items: center; background: linear-gradient(180deg, #E8E1FC 0%, #D9CDF0 100%); }
+.ntFrame .ntMount { width: 25%; flex: none; }
+@media (max-width: 900px) { .ntFrame { aspect-ratio: 100 / 150; } .ntFrame .ntMount { width: 56%; } }
+
+.ntRoot { container-type: inline-size; position: relative; width: 100%; aspect-ratio: 100 / 217; font-family: "Satoshi", system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #001428; }
+.ntRoot svg { overflow: visible; }
+.ntPhone { position: absolute; inset: 0; box-sizing: border-box; border: 0.8cqw solid #001428; border-radius: 12.5cqw; background: #FDF4E9; overflow: hidden; filter: drop-shadow(0 3cqw 6cqw rgba(0, 20, 40, 0.2)) drop-shadow(0 0.8cqw 1.6cqw rgba(0, 20, 40, 0.12)); }
+
+/* 1: Journal, the floating pill, the mic button */
+.ntHome { position: absolute; inset: 0; }
+.ntHome .ntPill { left: 4.5cqw; right: 4.5cqw; bottom: 8.5cqw; height: 19cqw; background: #FAF8F3; opacity: 1; }
+.ntHome .ntTabs { bottom: 11cqw; height: 14cqw; }
+.ntHome .nnSp { flex-grow: 0.25; }
+.ntHome .nnTab { color: #718093; }
+.ntHome .nnLbl { font-size: 3cqw; }
+.ntHome .ntFab { right: 9.3cqw; bottom: 35cqw; width: 18.3cqw; height: 18.3cqw; opacity: 1; border: 0.6cqw solid #FDFDFD; box-sizing: border-box; box-shadow: 0 1.6cqw 3.6cqw rgba(0, 18, 36, 0.32), 0 0.4cqw 1cqw rgba(0, 18, 36, 0.2); }
+.ntHome .ntFab svg { width: 8cqw; height: 8cqw; fill: #FDFDFD; }
+
+/* 2-4: New translation */
+.ntRec { position: absolute; inset: 0; background: #EDF1F5; }
+.ntBack { position: absolute; left: 5.8cqw; top: 16.7cqw; width: 10.6cqw; height: 10.6cqw; border-radius: 50%; background: #F6F8FA; display: grid; place-items: center; }
+.ntBack svg { width: 5cqw; height: 5cqw; fill: none; stroke: #001428; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ntTitle { position: absolute; left: 0; right: 0; top: 19cqw; text-align: center; font-size: 4.3cqw; line-height: 6cqw; font-weight: 500; letter-spacing: -0.005em; }
+.ntRing { position: absolute; left: 50%; top: 108cqw; width: 26cqw; height: 26cqw; margin: -13cqw 0 0 -13cqw; }
+.ntRing svg { display: block; width: 100%; height: 100%; }
+.ntArc { fill: none; stroke: #001428; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50px 50px; }
+.ntHead { fill: #001428; }
+.ntTime { position: absolute; inset: 0; display: grid; place-items: center; font-size: 6cqw; font-variant-numeric: tabular-nums; font-weight: 500; }
+.ntBlob { position: absolute; left: 50%; top: 108cqw; width: 24cqw; height: 24cqw; margin: -12cqw 0 0 -12cqw; background: #001428; border-radius: 58% 42% 49% 51% / 47% 58% 42% 53%; }
+.ntLabel { position: absolute; left: 0; right: 0; margin: 0 auto; top: 127.1cqw; width: 32cqw; height: 11.8cqw; box-sizing: border-box; border: 0.28cqw solid #718093; border-radius: 99cqw; background: #fff; overflow: hidden; font-size: 4.4cqw; font-weight: 500; letter-spacing: -0.005em; }
+.ntLabel span { position: absolute; left: 0; right: 0; top: 0; line-height: 11.2cqw; text-align: center; white-space: nowrap; }
+.ntHint { position: absolute; left: 10cqw; right: 10cqw; top: 198cqw; margin: 0; text-align: center; font-size: 4.3cqw; line-height: 5.8cqw; }
+.ntBtn { position: absolute; left: 15cqw; right: 15cqw; bottom: 7.3cqw; height: 13cqw; border-radius: 99cqw; background: #001428; color: #fff; display: flex; align-items: center; justify-content: center; gap: 2cqw; font-size: 4.4cqw; font-weight: 500; }
+.ntBtn svg { width: 4.6cqw; height: 4.6cqw; fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* the finger: a soft round marker where the screen is tapped */
+.ntTouch { position: absolute; left: 0; top: 0; width: 11cqw; height: 11cqw; margin: -5.5cqw 0 0 -5.5cqw; border-radius: 50%; background: rgba(125, 135, 155, 0.5); box-shadow: 0 0 0 0.6cqw rgba(255, 255, 255, 0.45); pointer-events: none; opacity: 0; z-index: 5; }

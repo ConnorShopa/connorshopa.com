@@ -151,5 +151,5 @@
     return api;
   }
 
-  window.NanniNav = { mount: mount };
+  window.NanniNav = { mount: mount, parts: { ICONS: ICONS, MIC: MIC, TABS: TABS } }; // the pieces are shared with js/nanniTranslate.js
 })();
