@@ -2642,3 +2642,15 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 
 /* inside a dark project card the mouse dot is plain white (no multiply, which would make white vanish on black) */
 html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
+
+/* phones: Plunk and Spotify dreams scroll as the card (the frame is as tall as the page inside it) */
+@media (max-width: 900px) {
+  .view.legacyView .pg.legacy { overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; touch-action: pan-y; }
+  .view.legacyView .legacyFrame { height: 100%; min-height: 100%; }
+}
+
+/* phones: TouchTunes' wordmark in the deck and the gallery is white */
+@media (max-width: 700px) {
+  #projectList li:has(> a[data-view="touchtunes"]) .wordmark,
+  html.deckGallery #projectList li:has(> a[data-view="touchtunes"]):not(.isActive) .wordmark { filter: brightness(0) invert(1) !important; }
+}

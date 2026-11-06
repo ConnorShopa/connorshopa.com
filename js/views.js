@@ -324,6 +324,20 @@
           }, { passive: true });
         }
         if (d && d.body && d.readyState !== "loading") { shown = true; f.classList.add("ready"); }
+        // phones: iOS won't scroll a page inside a frame reliably, so the frame grows to the page's full height and the card scrolls instead
+        if (shown && !f._fit && window.matchMedia("(max-width: 900px)").matches && d.body) {
+          f._fit = true;
+          var fit = function () {
+            try {
+              var b = d.body, r = b.getBoundingClientRect();
+              f.style.height = Math.ceil(r.height + Math.max(0, r.top) + 2) + "px";
+            } catch (e) {}
+          };
+          fit();
+          if (window.ResizeObserver) new ResizeObserver(fit).observe(d.body);
+          f.contentWindow.addEventListener("load", fit);
+          window.addEventListener("resize", fit);
+        }
       }
       function start() {
         if (started) return;
