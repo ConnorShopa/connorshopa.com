@@ -42,3 +42,10 @@
 /* the dots after "Translating" take no room, so the word stays centred in its pill */
 .ntDots { display: inline-block; width: 0; overflow: visible; white-space: nowrap; font-style: normal; }
 .ntDots b { font-weight: inherit; }
+
+/* "Translating" and the blob shimmer: a sweep of Nanni's purple and orange across the navy */
+.ntBlob { background: linear-gradient(115deg, #001224 0%, #001224 32%, #821AAF 46%, #FA983A 54%, #821AAF 62%, #001224 76%, #001224 100%); background-size: 320% 100%; animation: ntShimmer 2.6s linear infinite; }
+.ntLabel .c { background: linear-gradient(100deg, #001224 0%, #001224 34%, #821AAF 46%, #FA983A 54%, #821AAF 62%, #001224 74%, #001224 100%); background-size: 320% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: ntShimmer 2.6s linear infinite; }
+.ntLabel .c .ntDots { -webkit-text-fill-color: #821AAF; }
+@keyframes ntShimmer { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+@media (prefers-reduced-motion: reduce) { .ntBlob, .ntLabel .c { animation: none; } }
