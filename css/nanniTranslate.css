@@ -2,7 +2,7 @@
    It borrows the navigation menu's pieces (css/nanniNav.css): the pill, the tabs and the mic button. */
 .ntFrame { position: relative; width: 100%; aspect-ratio: 100 / 62; overflow: hidden; display: flex; justify-content: center; align-items: center; background: linear-gradient(180deg, #E8E1FC 0%, #D9CDF0 100%); }
 .ntFrame .ntMount { width: 25%; flex: none; }
-@media (max-width: 900px) { .ntFrame { aspect-ratio: 100 / 150; } .ntFrame .ntMount { width: 56%; } }
+@media (max-width: 900px) { .ntFrame { aspect-ratio: 100 / 178; } .ntFrame .ntMount { width: 56%; } }
 
 .ntRoot { --nn-ink: #001224; --nn-gray: #718093; --nn-purple: #821AAF; --nn-screen: #F9F8F2; --nn-band: #E0DAE1; container-type: inline-size; position: relative; width: 100%; aspect-ratio: 100 / 217; font-family: "Satoshi", system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #001428; }
 .ntRoot svg { overflow: visible; }
@@ -51,3 +51,11 @@
 @keyframes ntSlide { from { background-position: 0 0; } to { background-position: 100cqw 0; } }
 @media (prefers-reduced-motion: reduce) { .ntLabel .c { animation: none; } }
 
+
+/* the step buttons (manual mode): the flow waits on each screen until one is pressed */
+.ntCtl { position: absolute; right: 4%; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; align-items: stretch; z-index: 3; }
+.ntCtl button { font: inherit; font-size: 15px; font-weight: 600; padding: 10px 18px; border: 0; border-radius: 999px; background: rgba(0, 18, 36, 0.08); color: #001428; cursor: pointer; text-align: left; transition: background 0.2s ease, color 0.2s ease; }
+.ntCtl button:hover { background: rgba(0, 18, 36, 0.16); }
+.ntCtl button.on { background: #001428; color: #fff; }
+.ntCtl .re { background: transparent; box-shadow: inset 0 0 0 1.5px rgba(0, 18, 36, 0.25); text-align: center; }
+@media (max-width: 900px) { .ntCtl { right: auto; left: 50%; top: auto; bottom: 14px; transform: translateX(-50%); flex-direction: row; flex-wrap: wrap; justify-content: center; width: 92%; } .ntCtl button { font-size: 13px; padding: 8px 13px; } }

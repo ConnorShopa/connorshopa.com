@@ -101,8 +101,8 @@
     }
     renderOrb();
 
-    function draw(p) {
-      var t = p * 3.4, amp = Math.min(1, p / 0.05);
+    function draw(p, tOv) {
+      var t = tOv != null ? tOv : p * 3.4, amp = Math.min(1, p / 0.05);
       var dt = t - lastT; lastT = t;
       if (dt <= 0 || dt > 0.25) dt = 1 / 60; // a rewind, a seek or a loop: start the springs fresh
       var wail = Math.pow(0.5 + 0.5 * Math.sin(t * 3.7 - 1.3), 1.5);               // the long swells of the cry
@@ -140,7 +140,7 @@
     gsap.set(touch, { autoAlpha: 0, scale: 0.4 });
     draw(0);
 
-    var tl = gsap.timeline({ paused: true, repeat: opts.loop === false ? 0 : -1, defaults: { ease: "power3.inOut" } });
+    var tl = gsap.timeline({ paused: true, repeat: opts.loop === false || opts.manual ? 0 : -1, defaults: { ease: "power3.inOut" } });
     var T = {}, prog = { p: 0 };
     function at(n, t) { T[n] = t; tl.addLabel(n, t); return t; }
 
@@ -217,6 +217,35 @@
     tl.to(root, { opacity: 0, duration: 0.45, ease: "power1.in" }, "final+=0.5");
     tl.eventCallback("onRepeat", function () { wk.c = wk.g = wk.f = 0; orb.r = orb.o = orb.a = 0; draw(0); renderOrb(); });
 
+    // step-through mode (opts.manual): the flow stops on each screen and waits for a button, so every transition can be tested.
+    // STOP[n] is the time where screen n is showing; the bars and the orb keep moving while it waits.
+    var ctl = null;
+    if (opts.manual) {
+      api._manual = true;
+      var STOP = { 1: 1.0, 2: 6.4, 3: 7.6, 4: 11.85 }, at_ = 0, idleT = 0, ctlBtns = [];
+      var P_FIX = { 2: 0.97, 3: 1 };
+      var stopped = function (n) { return function () { tl.pause(); at_ = n; idleT = 0; mark(); }; };
+      [1, 2, 3, 4].forEach(function (n) { tl.call(stopped(n), null, STOP[n]); });
+      var mark = function () { ctlBtns.forEach(function (b, i) { b.classList.toggle("on", at_ === i + 1); }); };
+      var go = function (n) { // play the transition that leaves screen n
+        if (n === 0) { at_ = 0; mark(); tl.restart(); return; }
+        at_ = 0; mark(); tl.time(STOP[n] + 0.001, true); tl.play();
+      };
+      gsap.ticker.add(function (time, dt) {
+        if (!at_ || tl.isActive()) return;
+        idleT += dt / 1000;
+        if (at_ === 2 || at_ === 3) draw(P_FIX[at_], 3.4 * P_FIX[at_] + idleT);
+        else if (at_ === 4) { orb.a += dt / 1000 * Math.PI * 2 / 3.6; renderOrb(); }
+      });
+      ctl = document.createElement("div");
+      ctl.className = "ntCtl";
+      ctl.innerHTML = '<button type="button">1 &nbsp;Tap mic</button><button type="button">2 &nbsp;Finish capture</button><button type="button">3 &nbsp;Tap Translate</button><button type="button" class="re">Restart</button>';
+      var cb = ctl.querySelectorAll("button");
+      ctlBtns = [cb[0], cb[1], cb[2]];
+      cb[0].onclick = function () { go(1); }; cb[1].onclick = function () { go(2); }; cb[2].onclick = function () { go(3); }; cb[3].onclick = function () { go(0); };
+      root.parentNode.appendChild(ctl);
+    }
+
     tl.timeScale(1.1);
 
     var inView = true, io = null;
@@ -235,7 +264,7 @@
     api.goto = function (n) { api._manual = true; tl.pause(STEP_END[Math.max(1, Math.min(4, n)) - 1]); };
     api.play = function () { api._manual = false; tl.play(); };
     api.pause = function () { api._manual = true; tl.pause(); };
-    api.destroy = function () { if (io) io.disconnect(); tl.kill(); root.innerHTML = ""; };
+    api.destroy = function () { if (io) io.disconnect(); tl.kill(); if (ctl && ctl.parentNode) ctl.parentNode.removeChild(ctl); root.innerHTML = ""; };
     return api;
   }
 
