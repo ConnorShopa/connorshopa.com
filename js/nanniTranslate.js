@@ -68,15 +68,28 @@
       var ci; do { ci = Math.floor(Math.random() * BRAND.length); } while (ci === prev);
       prev = ci; bars[bi].style.background = BRAND[ci];
     }
+    // each bar is a spring, so it overshoots and bounces: it chases a target that follows a baby's cry,
+    // which comes in wails (swells) with quick gasps and a flicker between the bars
+    var lv = [], vel = [], lastT = -1;
+    for (var si = 0; si < BARS; si++) { lv[si] = 0.04; vel[si] = 0; }
     function draw(p) {
-      var t = p * 3.4, amp = Math.min(1, p / 0.06);
-      var swell = 0.62 + 0.38 * Math.sin(t * 2.1 + 0.6) * Math.sin(t * 0.9 + 1.2); // the cry gets louder and softer
+      var t = p * 3.4, amp = Math.min(1, p / 0.05);
+      var dt = t - lastT; lastT = t;
+      if (dt <= 0 || dt > 0.25) dt = 1 / 60; // a rewind, a seek or a loop: start the springs fresh
+      var wail = Math.pow(0.5 + 0.5 * Math.sin(t * 3.7 - 1.3), 1.5);               // the long swells of the cry
+      var gasp = Math.pow(Math.max(0, Math.sin(t * 11.5 + 0.4)), 4) * 0.35;        // quick sharp breaths
+      var drive = (0.22 + 0.78 * wail + gasp) * amp;
+      var steps = Math.max(1, Math.ceil(dt / 0.008)), h = dt / steps;
       for (var i = 0; i < BARS; i++) {
-        var u = (i - (BARS - 1) / 2) / 4.2, bell = 0.28 + 0.72 * Math.exp(-u * u);
-        var n = 0.5 + 0.5 * Math.sin(t * (4.2 + (i * 7 % 5) * 0.9) + i * 1.7) * Math.sin(t * 2.3 + i * 0.55 + 1.1);
-        var l = Math.max(0.04, Math.min(1, bell * swell * (0.25 + 0.95 * n) * amp));
-        l = l * (1 - calm.v) + 0.06 * calm.v;
-        bars[i].style.height = (2.4 + l * 15) + "cqw";
+        var u = (i - (BARS - 1) / 2) / 4.4, bell = 0.38 + 0.62 * Math.exp(-u * u);
+        var n = 0.5 + 0.5 * Math.sin(t * (9 + (i * 7 % 5) * 2.6) + i * 2.1) * Math.sin(t * 5.3 + i * 0.9);
+        var target = Math.max(0.04, Math.min(1, bell * drive * (0.3 + 0.9 * n) + (Math.random() - 0.5) * 0.14 * amp));
+        for (var k = 0; k < steps; k++) {
+          vel[i] += (300 * (target - lv[i]) - 10 * vel[i]) * h;
+          lv[i] += vel[i] * h;
+        }
+        lv[i] = Math.max(0.03, Math.min(1.05, lv[i]));
+        bars[i].style.height = (2.4 + lv[i] * 15) + "cqw";
       }
       time.textContent = "0:0" + Math.min(5, Math.floor(p * 5 + 0.001));
     }
