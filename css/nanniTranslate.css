@@ -68,7 +68,7 @@
 .ntCard { position: absolute; z-index: 4; left: 3.4cqw; right: 3.4cqw; bottom: 3.4cqw; height: 120cqw; overflow: hidden; box-sizing: border-box; padding: 6.2cqw; display: flex; flex-direction: column; border-radius: 9cqw; background: #EDF1F5; box-shadow: 0 -1.6cqw 5cqw rgba(0, 18, 36, 0.12), 0 2.4cqw 6cqw rgba(0, 18, 36, 0.16); }
 
 /* the skeleton inside the result card: grey placeholders in the shape of Nanni's result screen (cause, why, recommendations) */
-.ntSk { display: block; height: 3cqw; border-radius: 99cqw; background: linear-gradient(90deg, #DCE3EB 0%, #EBF0F5 50%, #DCE3EB 100%); background-size: 200% 100%; animation: ntSkel 1.8s ease-in-out infinite; flex: none; }
+.ntSk { display: block; height: 3cqw; border-radius: 99cqw; background: #D9E0E8; flex: none; }
 .ntSk.h36 { height: 3.6cqw; } .ntSk.h38 { height: 3.8cqw; }
 .ntSk.w28 { width: 28cqw; } .ntSk.w30 { width: 30cqw; } .ntSk.w32 { width: 32cqw; } .ntSk.w33 { width: 33cqw; } .ntSk.w34 { width: 34cqw; }
 .ntSk.w52 { width: 52%; } .ntSk.w62 { width: 62%; } .ntSk.w88 { width: 88%; } .ntSk.w92 { width: 92%; }
@@ -82,5 +82,13 @@
 .ntSkRow.big { height: 18cqw; flex-wrap: wrap; align-content: center; row-gap: 2.4cqw; padding-top: 0.5cqw; }
 .ntSkDot { width: 5.6cqw; height: 5.6cqw; border-radius: 50%; background: #DCE3EB; flex: none; }
 .ntSkBtns { display: flex; gap: 2cqw; width: 100%; padding-left: 0; } .ntSkBtns .ntSk { width: 19cqw; height: 5.2cqw; }
-@keyframes ntSkel { from { background-position: 100% 0; } to { background-position: -100% 0; } }
-@media (prefers-reduced-motion: reduce) { .ntSk { animation: none; } }
+/* an assortment of solid greys, no animation: darker for the cause, lighter for the lines of text */
+.ntSk.pill { background: #C4CED9; }
+.ntSk.h36, .ntSk.h38 { background: #CDD5DF; }
+.ntSkThumbs .ntSk { background: #E3E8EE; }
+.ntSkBox .ntSk, .ntSkSub .ntSk { background: #DEE4EB; }
+.ntSkBox .ntSk.w52, .ntSkSub .ntSk.w62 { background: #E6EBF1; }
+.ntSkRow .ntSk { background: #D3DAE3; }
+.ntSkBtns .ntSk { background: #E3E8EE; }
+.ntSkRow:nth-of-type(n+2) .ntSkDot { background: #D3DAE3; }
+.ntSkDot { background: #C9D2DC; }
