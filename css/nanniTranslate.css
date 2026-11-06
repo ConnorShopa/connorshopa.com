@@ -27,7 +27,6 @@
 .ntBars { position: absolute; left: 0; right: 0; top: 0; height: 19cqw; display: flex; align-items: center; justify-content: center; gap: 2.4cqw; }
 .ntBar { display: block; width: 3.2cqw; height: 2.4cqw; border-radius: 99cqw; background: #80BAFD; }
 .ntTime { position: absolute; left: 0; right: 0; top: 21cqw; text-align: center; font-size: 4.4cqw; line-height: 6cqw; font-variant-numeric: tabular-nums; font-weight: 500; color: #718093; }
-.ntBlob { position: absolute; left: 50%; top: 108cqw; width: 24cqw; height: 24cqw; margin: -12cqw 0 0 -12cqw; background: #001428; border-radius: 58% 42% 49% 51% / 47% 58% 42% 53%; }
 .ntLabel { position: absolute; left: 0; right: 0; top: 127.1cqw; height: 11.8cqw; overflow: hidden; font-size: 4.6cqw; font-weight: 700; letter-spacing: -0.005em; } /* plain bold text, each state rolls up into the next */
 .ntLabel span { position: absolute; left: 0; right: 0; top: 0; line-height: 11.2cqw; text-align: center; white-space: nowrap; }
 .ntHint { position: absolute; left: 10cqw; right: 10cqw; top: 198cqw; margin: 0; text-align: center; font-size: 4.3cqw; line-height: 5.8cqw; }
@@ -43,16 +42,12 @@
 .ntDots b { font-weight: inherit; }
 
 /* "Translating" and the blob shimmer: a slow, smooth drift through the blue, yellow and green of Nanni's app icon. */
-/* the blob: a hollow body with a blue, yellow and green stroke that turns around its edge (the ring follows the blob as it morphs) */
-@property --nt-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
-.ntBlob { background: transparent; overflow: visible; isolation: isolate; }
-.ntBlob::before, .ntBlob::after { content: ""; position: absolute; border-radius: inherit; pointer-events: none; }
-.ntBlob::before { inset: -1cqw; background: conic-gradient(from var(--nt-a) in oklab, #6CB0FC, #FBC157, #8FCB94, #6CB0FC); animation: ntSpin 5s linear infinite; }
-.ntBlob::after { inset: 0; background: #EDF1F5; } /* the inside is the screen colour: just the stroke is seen */
-@keyframes ntSpin { to { --nt-a: 360deg; } }
+/* the loader: an orb of dots, placed by js/nanniTranslate.js; each dot is one brand colour */
+.ntOrb { position: absolute; left: 50%; top: 108cqw; width: 0; height: 0; }
+.ntOrbDot { position: absolute; left: -1cqw; top: -1cqw; width: 2cqw; height: 2cqw; border-radius: 50%; will-change: transform; }
 /* the word: one very wide, gentle blue, yellow, green cycle slides through it; it is exactly one phone wide, so it loops with no seam */
 .ntLabel .c { background-image: linear-gradient(90deg in oklab, #6CB0FC 0%, #FBC157 33.3%, #8FCB94 66.6%, #6CB0FC 100%); background-size: 100cqw 100%; background-repeat: repeat-x; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: ntSlide 5s linear infinite; }
 .ntLabel .c .ntDots { -webkit-text-fill-color: #8FCB94; }
 @keyframes ntSlide { from { background-position: 0 0; } to { background-position: 100cqw 0; } }
-@media (prefers-reduced-motion: reduce) { .ntBlob::before, .ntLabel .c { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .ntLabel .c { animation: none; } }
 

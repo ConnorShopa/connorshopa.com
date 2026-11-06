@@ -3,7 +3,7 @@
      1  Journal, the floating pill and the mic button
      2  the mic button is tapped; the "New translation" screen opens out of it and recording starts on its own
      3  once the five seconds are in, "Ready to translate" and the Translate button slides up
-     4  Translate is tapped: the ring gives way to a breathing shape, and the cry is translated ("Translating")
+     4  Translate is tapped: the bars collapse into dots that gather into a spinning orb, and the cry is translated ("Translating")
    NanniTranslate.mount(el) fills `el` and returns { tl, goto(n), play(), pause(), destroy() }. Everything is sized in cqw (a percent of the phone's width). */
 (function () {
   var INK = "#001428";
@@ -29,7 +29,7 @@
       '<div class="ntBack">' + CHEV + '</div><div class="ntTitle">New translation</div>' +
       '<div class="ntRing"><div class="ntBars">' + new Array(BARS + 1).join('<i class="ntBar"></i>') + '</div>' +
         '<span class="ntTime">0:00</span></div>' +
-      '<div class="ntBlob"></div>' +
+      '<div class="ntOrb"></div>' +
       '<div class="ntLabel"><span class="a">Capturing Gerald&rsquo;s cry</span><span class="b">Ready to translate</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
       '<p class="ntHint">Nanni needs 5 seconds for accurate translations</p>' +
       '<div class="ntBtn"><span>Translate</span>' + ARROW + "</div>" +
@@ -50,7 +50,7 @@
     var q = function (s) { return root.querySelector(s); };
     var phone = q(".ntPhone"), home = q(".ntHome"), rec = q(".ntRec"), fab = q(".ntFab"), pill = q(".ntPill"), tabs = q(".ntTabs");
     var touch = q(".ntTouch"), back = q(".ntBack"), title = q(".ntTitle"), ring = q(".ntRing"), bars = root.querySelectorAll(".ntBar"), time = q(".ntTime");
-    var blob = q(".ntBlob"), label = q(".ntLabel"), la = q(".ntLabel .a"), lb = q(".ntLabel .b"), lc = q(".ntLabel .c"), hint = q(".ntHint"), btn = q(".ntBtn");
+    var orbEl = q(".ntOrb"), label = q(".ntLabel"), la = q(".ntLabel .a"), lb = q(".ntLabel .b"), lc = q(".ntLabel .c"), hint = q(".ntHint"), btn = q(".ntBtn");
     var journal = q('.nnTab[data-id="logs"]');
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -72,6 +72,35 @@
     // which comes in wails (swells) with quick gasps and a flicker between the bars
     var lv = [], vel = [], lastT = -1;
     for (var si = 0; si < BARS; si++) { lv[si] = 0.04; vel[si] = 0; }
+    // the work phase (4): the bars collapse into dots (c), the dots gravitate to the centre (g) and fade (f)
+    // as a spinning orb of dots (orb) takes over as the loader
+    var wk = { c: 0, g: 0, f: 0 }, PITCH = 5.6, DOT = 3.2;
+    function paint() {
+      for (var i = 0; i < BARS; i++) {
+        var h = (2.4 + lv[i] * 15) * (1 - wk.c) + DOT * wk.c;
+        bars[i].style.height = h + "cqw";
+        bars[i].style.transform = wk.g ? "translateX(" + (-(i - (BARS - 1) / 2) * PITCH * wk.g) + "cqw) scale(" + (1 - 0.35 * wk.f) + ")" : "";
+        bars[i].style.opacity = wk.f ? 1 - wk.f : "";
+      }
+    }
+    var ORB_N = 64, ORB_R = 7.6, orb = { a: 0, r: 0, o: 0 }, orbDots = [], orbPts = [];
+    for (var oi = 0; oi < ORB_N; oi++) {
+      var oy = 1 - 2 * (oi + 0.5) / ORB_N, orr = Math.sqrt(1 - oy * oy), th = oi * 2.399963; // an even spread of points over a sphere
+      orbPts.push([Math.cos(th) * orr, oy, Math.sin(th) * orr]);
+      var od = document.createElement("i"); od.className = "ntOrbDot"; od.style.background = BRAND[Math.floor(Math.random() * BRAND.length)];
+      orbEl.appendChild(od); orbDots.push(od);
+    }
+    function renderOrb() {
+      var ca = Math.cos(orb.a), sa = Math.sin(orb.a), ct = Math.cos(0.42), st = Math.sin(0.42);
+      for (var i = 0; i < ORB_N; i++) {
+        var P = orbPts[i], x = P[0] * ca + P[2] * sa, z = -P[0] * sa + P[2] * ca, y = P[1] * ct - z * st, z2 = P[1] * st + z * ct;
+        var depth = (z2 + 1) / 2, sc = (0.45 + 0.75 * depth) * orb.r;
+        orbDots[i].style.transform = "translate(" + (x * ORB_R * orb.r) + "cqw," + (y * ORB_R * orb.r) + "cqw) scale(" + sc + ")";
+        orbDots[i].style.opacity = orb.o * (0.3 + 0.7 * depth);
+      }
+    }
+    renderOrb();
+
     function draw(p) {
       var t = p * 3.4, amp = Math.min(1, p / 0.05);
       var dt = t - lastT; lastT = t;
@@ -89,8 +118,8 @@
           lv[i] += vel[i] * h;
         }
         lv[i] = Math.max(0.03, Math.min(1.05, lv[i]));
-        bars[i].style.height = (2.4 + lv[i] * 15) + "cqw";
       }
+      paint();
       time.textContent = "0:0" + Math.min(5, Math.floor(p * 5 + 0.001));
     }
 
@@ -106,9 +135,8 @@
     gsap.set([back, title, ring, label, hint], { autoAlpha: 0 });
     gsap.set(ring, { scale: 0.92 }); gsap.set([back, title], { y: -6 });
     gsap.set(hint, { y: 8 });
-    gsap.set(btn, { autoAlpha: 0, yPercent: 140 });
+    gsap.set(btn, { autoAlpha: 0, scale: 0.6, transformOrigin: "50% 50%" });
     gsap.set([lb, lc], { yPercent: 100, autoAlpha: 0 });
-    gsap.set(blob, { autoAlpha: 0, scale: 0.4 });
     gsap.set(touch, { autoAlpha: 0, scale: 0.4 });
     draw(0);
 
@@ -152,8 +180,8 @@
       .to(la, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "ready")
       .to(lb, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "ready+=0.14")
       .to(hint, { autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.in" }, "ready")
-      .to(btn, { autoAlpha: 1, yPercent: 0, duration: 0.34, ease: "back.out(2.6)" }, "ready+=0.06") // it snaps in, with urgency
-      .fromTo(btn, { scale: 0.86 }, { scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false }, "ready+=0.06");
+      .to(btn, { autoAlpha: 1, duration: 0.2, ease: "power1.out" }, "ready+=0.08")
+      .to(btn, { scale: 1, duration: 0.5, ease: "back.out(1.6)" }, "ready+=0.08"); // pops in from its centre with a subtle spring
 
     // 3 -> 4: Translate is tapped
     at("tap2", 8.3);
@@ -164,37 +192,30 @@
       .to(touch, { autoAlpha: 0, scale: 1.5, duration: 0.4, ease: "power1.out" }, "tap2+=0.2");
 
     at("work", 8.85);
-    tl.to(btn, { yPercent: 150, autoAlpha: 0, duration: 0.55, ease: "power2.in" }, "work")
-      .to(ring, { scale: 0.7, autoAlpha: 0, duration: 0.5, ease: "power2.in" }, "work")
+    tl.to(btn, { scale: 0.8, autoAlpha: 0, duration: 0.35, ease: "power2.in" }, "work")
+      .to(time, { autoAlpha: 0, duration: 0.3, ease: "power2.in" }, "work")
       .to(lb, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
-      .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14")
-      .to(blob, { autoAlpha: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, "work+=0.3");
-    var shapes = [
-      { r: "56% 44% 52% 48% / 48% 55% 45% 52%", x: 1.05, y: 0.96, k: -3, rot: -5 },
-      { r: "47% 53% 46% 54% / 55% 47% 53% 45%", x: 0.96, y: 1.05, k: 3, rot: 5 },
-      { r: "53% 47% 57% 43% / 46% 54% 46% 54%", x: 1.05, y: 0.96, k: -2, rot: -4 },
-      { r: "48% 52% 47% 53% / 53% 46% 54% 47%", x: 0.97, y: 1.04, k: 3, rot: 6 }
-    ];
-    shapes.forEach(function (sh, i) {
-      var at0 = "work+=" + (0.3 + i * 3.0);
-      tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 3.2, ease: "sine.inOut" }, at0);
-      if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 3.2, ease: "sine.inOut" }, at0);
-    });
+      .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14");
+    tl.to(wk, { c: 1, duration: 0.55, ease: "power3.inOut", onUpdate: paint }, "work")                 // bars collapse into dots
+      .to(wk, { g: 1, duration: 0.75, ease: "power3.inOut", onUpdate: paint }, "work+=0.45")           // the dots gravitate to the centre
+      .to(wk, { f: 1, duration: 0.3, ease: "power2.in", onUpdate: paint }, "work+=1.1")                 // and give way to the orb
+      .to(orb, { r: 1, o: 1, duration: 1.1, ease: "power3.out", onUpdate: renderOrb }, "work+=1.1")      // the orb of dots opens out from the centre
+      .to(orb, { a: Math.PI * 2 * 8.45 / 3.6, duration: 8.45, ease: "none", onUpdate: renderOrb }, "work+=1.1"); // and keeps turning
 
     // the three dots after "Translating" fill in one by one, then clear, until the cry is done
     var dots = root.querySelectorAll(".ntDots b");
     gsap.set(dots, { opacity: 0 });
-    var cycles = 11;
+    var cycles = 7;
     for (var c = 0; c < cycles; c++) {
       var t0 = "work+=" + (0.9 + c * 1.2);
       tl.to(dots, { opacity: 1, duration: 0.25, stagger: 0.25, ease: "power1.out" }, t0)
         .to(dots, { opacity: 0, duration: 0.2, ease: "power1.in" }, t0 + "+=0.95");
     }
 
-    at("final", 21.8);
+    at("final", 18.4);
     tl.to({}, { duration: 0.5 }, "final");
     tl.to(root, { opacity: 0, duration: 0.45, ease: "power1.in" }, "final+=0.5");
-    tl.eventCallback("onRepeat", function () { draw(0); });
+    tl.eventCallback("onRepeat", function () { wk.c = wk.g = wk.f = 0; orb.r = orb.o = orb.a = 0; draw(0); renderOrb(); });
 
     tl.timeScale(1.1);
 
@@ -207,7 +228,7 @@
       });
       io.observe(root);
     }
-    if (reduce) { tl.seek("work+=1").pause(); } else tl.play(0);
+    if (reduce) { tl.seek("work+=3").pause(); } else tl.play(0);
 
     api.tl = tl;
     var STEP_END = [1.0, 5.0, 7.4, 11.0]; // where each of the four screens is showing
