@@ -74,6 +74,21 @@
     for (var si = 0; si < BARS; si++) { lv[si] = 0.04; vel[si] = 0; }
     // the work phase (4): the bars collapse into dots (c), the dots gravitate to the centre (g) and fade (f)
     // as a spinning orb of dots (orb) takes over as the loader
+    // a CSS-style cubic-bezier(x1, y1, x2, y2) easing: solves x(t) for t by Newton steps, then returns y(t)
+    function bezier(x1, y1, x2, y2) {
+      var cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx, cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+      return function (x) {
+        if (x <= 0) return 0; if (x >= 1) return 1;
+        var t = x;
+        for (var n = 0; n < 8; n++) {
+          var xt = ((ax * t + bx) * t + cx) * t - x, dx = (3 * ax * t + 2 * bx) * t + cx;
+          if (Math.abs(xt) < 1e-5 || Math.abs(dx) < 1e-6) break;
+          t -= xt / dx;
+        }
+        return ((ay * t + by) * t + cy) * t;
+      };
+    }
+    var swoop = bezier(0.7, 0, 0.16, 1);
     var wk = { c: 0, g: 0, f: 0 }, PITCH = 5.6, DOT = 3.2;
     function paint() {
       for (var i = 0; i < BARS; i++) {
@@ -81,9 +96,10 @@
         bars[i].style.height = h + "cqw";
         var tr = "";
         if (wk.g) {
-          // each dot swoops in on its own curve: the outer ones set off first, and they arc up (left) or down (right) on the way
-          var k = i - (BARS - 1) / 2, far = Math.abs(k) / ((BARS - 1) / 2), local = Math.max(0, Math.min(1, (wk.g * 1.55 - 0.55 * (1 - far)) )), e = local < 0.5 ? 4 * local * local * local : 1 - Math.pow(-2 * local + 2, 3) / 2;
-          tr = "translate(" + (-k * PITCH * e) + "cqw," + (-(k < 0 ? 1 : -1) * Math.sin(Math.PI * e) * (2.5 + 5.5 * far)) + "cqw) scale(" + (1 - 0.35 * wk.f) + ")";
+          // each dot travels straight along the x axis, but on its own timing: the outer ones set off first, and the
+          // movement follows a cubic bezier (slow start, fast middle, soft landing)
+          var k = i - (BARS - 1) / 2, far = Math.abs(k) / ((BARS - 1) / 2), local = Math.max(0, Math.min(1, wk.g * 1.55 - 0.55 * (1 - far))), e = swoop(local);
+          tr = "translateX(" + (-k * PITCH * e) + "cqw) scale(" + (1 - 0.35 * wk.f) + ")";
         }
         bars[i].style.transform = tr;
         bars[i].style.opacity = wk.f ? 1 - wk.f : "";
