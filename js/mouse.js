@@ -24,6 +24,9 @@
   var MAGNET = 0.5;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
   var MAX_PULL_X = 32;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 16;
+  var MAGNET_LIST = 0.85;      // the same three, for the project list in the middle of the home screen
+  var MAX_PULL_X_LIST = 64;
+  var MAX_PULL_Y_LIST = 34;
   var LINK_SCALE = 0.9;  // hovered links shrink to this fraction of their size...
   var MIN_PX = 14;       // ...but never below this font size
   var FOLLOW_TIME = 0.4; // how smoothly the dot / box trails its target
@@ -69,8 +72,11 @@
     if (boxShown && base) {
       var cx = base.left + base.width / 2;
       var cy = base.top + base.height / 2;
-      x = cx + clamp((mouse.x - cx) * MAGNET, -MAX_PULL_X, MAX_PULL_X);
-      y = cy + clamp((mouse.y - cy) * MAGNET, -MAX_PULL_Y, MAX_PULL_Y);
+      // the project list in the middle of the home screen has a much stronger magnet: the bubble leans further toward the cursor
+      var strong = currentLink && currentLink.closest && currentLink.closest("#projectList");
+      var m = strong ? MAGNET_LIST : MAGNET, px = strong ? MAX_PULL_X_LIST : MAX_PULL_X, py = strong ? MAX_PULL_Y_LIST : MAX_PULL_Y;
+      x = cx + clamp((mouse.x - cx) * m, -px, px);
+      y = cy + clamp((mouse.y - cy) * m, -py, py);
     }
     moveX(x);
     moveY(y);
