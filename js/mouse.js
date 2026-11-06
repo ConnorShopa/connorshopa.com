@@ -35,6 +35,8 @@
   var ROUND_WIDE = 0.75; // how round the widest boxes are (1 = full pill, lower = squarer)
   var WIDE_AT = 6;       // width / height at which a box counts as "widest"
   var DOT_FILL = "rgba(47, 39, 37, 0.10)";
+  // inside an open dark project (TouchTunes) the dot is solid white, so it shows on the black card
+  function dotFill() { return document.documentElement.classList.contains("view-dark") ? "rgb(255, 255, 255)" : DOT_FILL; }
   var DOT_BORDER = "rgba(47, 39, 37, 0)";
   var BOX_FILL = "#F4F4F4";
   var BOX_BORDER = "rgba(47, 39, 37, 0.12)"; // a 1px stroke around the hover bubble
@@ -109,7 +111,7 @@
       width: DOT_SIZE,
       height: DOT_SIZE,
       borderRadius: DOT_SIZE / 2,
-      backgroundColor: DOT_FILL,
+      backgroundColor: dotFill(),
       borderColor: DOT_BORDER,
       boxShadow: DOT_SHADOW,
       duration: t(MORPH_TIME * 0.9),
@@ -261,7 +263,7 @@
     handoff: function () {
       gsap.set(dot, {
         x: mouse.x, y: mouse.y, width: DOT_SIZE, height: DOT_SIZE, borderRadius: DOT_SIZE / 2,
-        boxShadow: DOT_SHADOW, backgroundColor: DOT_FILL, borderColor: DOT_BORDER, opacity: 0,
+        boxShadow: DOT_SHADOW, backgroundColor: dotFill(), borderColor: DOT_BORDER, opacity: 0,
       });
       locked = false;
       gsap.set(dot, { clearProps: "zIndex,mixBlendMode" });

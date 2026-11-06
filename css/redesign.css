@@ -2639,3 +2639,6 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 #view-touchtunes .lockBox .body, #view-touchtunes .lockBox .lockMsg, #view-touchtunes .lockBox .lockApp, #view-touchtunes .lockBox .lockAsk { text-align: center; margin-left: auto; margin-right: auto; align-self: center; max-width: 40em; }
 #view-touchtunes .lockBox .lockForm { justify-content: center; width: 100%; max-width: 420px; }
 #view-touchtunes .lockBox .lockInput { flex: 1 1 auto; min-width: 0; text-align: center; }
+
+/* inside a dark project card the mouse dot is plain white (no multiply, which would make white vanish on black) */
+html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }

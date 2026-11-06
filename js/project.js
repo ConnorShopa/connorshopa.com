@@ -405,6 +405,7 @@
     var reveal = function () {
       if (!open || open.view !== view) return;
       gsap.set(view, { autoAlpha: 1 });
+      document.documentElement.classList.toggle("view-dark", view.classList.contains("dark")); // a dark card gets a white mouse dot
       if (window.bubble) window.bubble.handoff();
       var soft = view.classList.contains("hasBgImage");
       gsap.to(view.children, { opacity: 1, duration: t(soft ? 0.55 : 0.4), ease: "power1.out", clearProps: "opacity" });
@@ -470,6 +471,7 @@
     var view = open.view;
     holdRow = false;
     hideProjNav();
+    document.documentElement.classList.remove("view-dark");
     hideChrome(view);
     restoreIntro();
     var trigger = open.trigger;
