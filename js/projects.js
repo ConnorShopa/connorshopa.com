@@ -94,7 +94,6 @@
           '<section class="nnGoal"><span class="nnLab">&middot; Goal</span>' +
             '<p class="nnLead">Nanni is 98% accurate, trained on millions of cries, backed by industry standard medical research, yet perceived as a novelty toy.</p>' +
             '<p class="nnLead">I defined a new product language that positioned Nanni as a healthcare tool.</p></section>' +
-          '<div class="ntFrame"><div class="ntMount"></div></div>' +
           '<div class="nnFrame"><div class="nnMount"></div><span class="nnCap">Navigation</span></div>' + // the hand-built navigation menu animation (js/nanniNav.js)
           '<section class="nnCols">' +
             '<div><span class="nnLab">&middot; Navigation</span><p class="nnLead nnHead">A clarified, focused, simple navigation structure</p>' +
@@ -108,7 +107,15 @@
               '<p class="nnPt">&middot; <b>Journal</b> is the new home for insights, past translations, &amp; notes</p>' +
               '<p class="nnPt">&middot; <b>Routines</b> remains focused on Nanni&rsquo;s new LOREM IPSUM</p>' +
               '<p class="nnPt">&middot; <b>Fun zone</b> is remains unchanged, keeping the fun that Ubenwa had envisioned for parts of the tool</p></div>' +
-          '</section></div>'),
+          '</section>' +
+          // the new-translation animation (js/nanniTranslate.js) in a soft frame on the left, its words on the right
+          '<section class="ntRow"><div class="ntFrame"><div class="ntMount"></div></div>' +
+            '<div class="ntText"><span class="nnLab">&middot; Translation</span><p class="nnLead nnHead">Speedier, to the point translation</p>' +
+              '<p class="nnPt">&middot; <b>Feedback</b> became a prompt linked with insights and translation. Simpler for the caregiver, more relevant for Ubenwa to sharper their tool</p>' +
+              '<p class="nnPt">&middot; <b>Translating</b> a cry is now one a one tap away for a faster &amp; easier process during moments where caregivers found translation stressful</p>' +
+              '<p class="nnPt">&middot; <b>Journal</b> is the new home for insights, past translations, &amp; notes</p>' +
+              '<p class="nnPt">&middot; <b>Routines</b> remains focused on Nanni&rsquo;s new LOREM IPSUM</p>' +
+              '<p class="nnPt">&middot; <b>Fun zone</b> is remains unchanged, keeping the fun that Ubenwa had envisioned for parts of the tool</p></div></section></div>'),
       ],
     },
 
