@@ -15,6 +15,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
+    <!-- when the page is shown inside a project card (redesign), only its content shows: no header, nav menu, footer or custom cursor -->
+    <script>try { if (window.self !== window.top) { var st = document.createElement("style"); st.textContent = ".headerBox, .logoBox, .navLinksContainer, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; }"; document.head.appendChild(st); } } catch (e) {}</script>
+
     <title>connorshopa : projects : spotify dreams</title>
 </head>
 
