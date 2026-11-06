@@ -24,8 +24,8 @@
 .ntBack svg { width: 5cqw; height: 5cqw; fill: none; stroke: #001428; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .ntTitle { position: absolute; left: 0; right: 0; top: 19cqw; text-align: center; font-size: 4.3cqw; line-height: 6cqw; font-weight: 500; letter-spacing: -0.005em; }
 .ntRing { position: absolute; left: 50%; top: 112.5cqw; width: 70cqw; height: 28cqw; margin: -14cqw 0 0 -35cqw; }
-.ntBars { position: absolute; left: 0; right: 0; top: 0; height: 19cqw; display: flex; align-items: center; justify-content: center; gap: 1.25cqw; }
-.ntBar { display: block; width: 2cqw; height: 2cqw; border-radius: 99cqw; background: #80BAFD; }
+.ntBars { position: absolute; left: 0; right: 0; top: 0; height: 19cqw; display: flex; align-items: center; justify-content: center; gap: 2.4cqw; }
+.ntBar { display: block; width: 3.2cqw; height: 2.4cqw; border-radius: 99cqw; background: #80BAFD; }
 .ntTime { position: absolute; left: 0; right: 0; top: 21cqw; text-align: center; font-size: 4.4cqw; line-height: 6cqw; font-variant-numeric: tabular-nums; font-weight: 500; color: #718093; }
 .ntBlob { position: absolute; left: 50%; top: 108cqw; width: 24cqw; height: 24cqw; margin: -12cqw 0 0 -12cqw; background: #001428; border-radius: 58% 42% 49% 51% / 47% 58% 42% 53%; }
 .ntLabel { position: absolute; left: 0; right: 0; top: 127.1cqw; height: 11.8cqw; overflow: hidden; font-size: 4.6cqw; font-weight: 700; letter-spacing: -0.005em; } /* plain bold text, each state rolls up into the next */
@@ -56,5 +56,3 @@
 @keyframes ntSlide { from { background-position: 0 0; } to { background-position: 100cqw 0; } }
 @media (prefers-reduced-motion: reduce) { .ntBlob::before, .ntLabel .c { animation: none; } }
 
-/* Nanni's propeller-hat logo sits inside the blob (above its fill) and its propeller spins */
-.ntHatSvg { position: absolute; z-index: 1; left: 50%; top: 50%; width: 12cqw; height: 8.6cqw; margin: -4.3cqw 0 0 -6cqw; overflow: visible; }

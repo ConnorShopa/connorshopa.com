@@ -22,17 +22,14 @@
       '<div class="nnFab ntFab">' + P.MIC + "</div></div>";
   }
 
-  // Nanni's propeller-hat logo, cut from the app icon (assets/homeAssets/nanni_app_icon.svg): the propeller is its own piece so it can spin
-  var HAT = "<svg class=\"ntHatSvg\" viewBox=\"18 30 84 60\" aria-hidden=\"true\"><path class=\"ntProp\" fill=\"#99CA9C\" fill-rule=\"evenodd\" d=\"M40.9526 33.7262C39.0899 35.5876 38.9868 37.5996 40.6457 39.7069C41.6289 40.9562 42.3874 41.2754 44.3699 41.2718C46.6283 41.2682 54.8674 39.567 57.4356 38.5744C58.392 38.2046 58.4784 38.7441 58.4784 45.0827V45.4441C58.4784 46.4307 59.2788 47.2305 60.2661 47.2305C61.2533 47.2305 62.0537 46.4307 62.0537 45.4441V45.1065C62.0537 38.8185 62.1448 38.2469 63.0965 38.5458C67.1657 39.8236 73.9408 41.276 75.8309 41.276C78.6321 41.276 80.5258 39.4711 80.5258 36.8017C80.5258 34.2996 78.4104 32.3412 75.7207 32.3531C73.8448 32.3614 67.3725 33.7994 62.0876 35.3816C60.2827 35.9222 59.0904 35.7763 54.5915 34.4658C51.6497 33.6083 47.7241 32.7443 45.8685 32.546C42.7885 32.2167 42.36 32.3197 40.9526 33.7262Z\"/><path fill=\"#FBC157\" fill-rule=\"evenodd\" d=\"M43.5856 82.2296C43.0345 85.0835 45.2483 87.6465 48.1569 87.6465H71.8818C74.8022 87.6465 77.019 85.0637 76.4479 82.2016C74.3205 71.5403 68.767 48.942 59.915 48.942C51.0552 48.942 45.642 71.5799 43.5856 82.2296Z\"/><path fill=\"#F28C8C\" fill-rule=\"evenodd\" d=\"M71.0796 50.4736C81.7821 53.2722 91.527 61.081 95.9782 70.4249C98.3146 75.3284 99.237 78.5087 99.9819 84.2233C100.179 86.0519 98.7451 87.6471 96.9047 87.6471H90.843C88.4944 87.6471 86.4957 85.9377 86.1332 83.6189L85.9949 82.7347C83.5864 69.2066 77.1045 57.7054 68.733 52.1045C64.4844 49.2624 65.0213 48.8891 71.0796 50.4736Z\"/><path fill=\"#80BAFD\" fill-rule=\"evenodd\" d=\"M48.9204 50.4736C38.2179 53.2722 28.473 61.081 24.0218 70.4249C21.6854 75.3284 20.763 78.5087 20.0181 84.2233C19.8211 86.0519 21.2549 87.6471 23.0954 87.6471H29.157C31.5056 87.6471 33.5043 85.9377 33.8668 83.6189L34.0051 82.7347C36.4136 69.2066 42.8955 57.7054 51.267 52.1045C55.5156 49.2624 54.9787 48.8891 48.9204 50.4736Z\"/></svg>";
-
-  var BARS = 19;
+  var BARS = 11;
 
   function recMarkup() {
     return '<div class="ntRec">' +
       '<div class="ntBack">' + CHEV + '</div><div class="ntTitle">New translation</div>' +
       '<div class="ntRing"><div class="ntBars">' + new Array(BARS + 1).join('<i class="ntBar"></i>') + '</div>' +
         '<span class="ntTime">0:00</span></div>' +
-      '<div class="ntBlob">' + HAT + '</div>' +
+      '<div class="ntBlob"></div>' +
       '<div class="ntLabel"><span class="a">Capturing Gerald&rsquo;s cry</span><span class="b">Ready to translate</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
       '<p class="ntHint">Nanni needs 5 seconds for accurate translations</p>' +
       '<div class="ntBtn"><span>Translate</span>' + ARROW + "</div>" +
@@ -64,21 +61,22 @@
 
     // the noise level: p is 0..1 across the five seconds. Bars rise and fall like a live sound meter, and take
     // Nanni's blue, green, yellow and red as they get louder. calm (0..1) settles them once five seconds are in.
-    var calm = { v: 0 }, LV = [[128, 186, 253], [153, 202, 156], [251, 193, 87], [242, 140, 140]];
-    function levelColor(l) {
-      var x = Math.max(0, Math.min(0.999, l)) * 3, k = Math.floor(x), f = x - k, a = LV[k], b = LV[k + 1];
-      return "rgb(" + Math.round(a[0] + (b[0] - a[0]) * f) + "," + Math.round(a[1] + (b[1] - a[1]) * f) + "," + Math.round(a[2] + (b[2] - a[2]) * f) + ")";
+    var calm = { v: 0 }, BRAND = ["#80BAFD", "#99CA9C", "#FBC157", "#F28C8C"];
+    // every bar is one solid brand colour, picked at random (never the same as its neighbour)
+    var prev = -1;
+    for (var bi = 0; bi < BARS; bi++) {
+      var ci; do { ci = Math.floor(Math.random() * BRAND.length); } while (ci === prev);
+      prev = ci; bars[bi].style.background = BRAND[ci];
     }
     function draw(p) {
       var t = p * 3.4, amp = Math.min(1, p / 0.06);
       var swell = 0.62 + 0.38 * Math.sin(t * 2.1 + 0.6) * Math.sin(t * 0.9 + 1.2); // the cry gets louder and softer
       for (var i = 0; i < BARS; i++) {
-        var u = (i - (BARS - 1) / 2) / 6.2, bell = 0.28 + 0.72 * Math.exp(-u * u);
+        var u = (i - (BARS - 1) / 2) / 4.2, bell = 0.28 + 0.72 * Math.exp(-u * u);
         var n = 0.5 + 0.5 * Math.sin(t * (4.2 + (i * 7 % 5) * 0.9) + i * 1.7) * Math.sin(t * 2.3 + i * 0.55 + 1.1);
         var l = Math.max(0.04, Math.min(1, bell * swell * (0.25 + 0.95 * n) * amp));
         l = l * (1 - calm.v) + 0.06 * calm.v;
-        bars[i].style.height = (1.9 + l * 15.5) + "cqw";
-        bars[i].style.background = levelColor(l * 1.25);
+        bars[i].style.height = (2.4 + l * 15) + "cqw";
       }
       time.textContent = "0:0" + Math.min(5, Math.floor(p * 5 + 0.001));
     }
@@ -158,17 +156,6 @@
       .to(lb, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
       .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14")
       .to(blob, { autoAlpha: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, "work+=0.3");
-    {
-      // the propeller spins one full turn, comes to a stop, then spins again
-      var prop = q(".ntProp"), spin = { p: 0 };
-      gsap.set(prop, { svgOrigin: "60.2 40" });
-      var turn = function () { gsap.set(prop, { scaleX: Math.cos(spin.p * Math.PI * 2) }); };
-      for (var h = 0; h < 4; h++) {
-        tl.fromTo(spin, { p: 0 }, { p: 1, duration: 1.5, ease: "power2.inOut", onUpdate: turn, immediateRender: false }, "work+=" + (0.9 + h * 3.0));
-      }
-    }
-    // the shape keeps changing while the cry is translated
-    var hatEl = q(".ntHatSvg");
     var shapes = [
       { r: "56% 44% 52% 48% / 48% 55% 45% 52%", x: 1.05, y: 0.96, k: -3, rot: -5 },
       { r: "47% 53% 46% 54% / 55% 47% 53% 45%", x: 0.96, y: 1.05, k: 3, rot: 5 },
@@ -178,7 +165,6 @@
     shapes.forEach(function (sh, i) {
       var at0 = "work+=" + (0.3 + i * 3.0);
       tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 3.2, ease: "sine.inOut" }, at0);
-      tl.to(hatEl, { rotation: -sh.rot, skewX: i ? -sh.k : 0, duration: 3.2, ease: "sine.inOut" }, at0); // the logo stays upright
       if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 3.2, ease: "sine.inOut" }, at0);
     });
 
