@@ -30,9 +30,6 @@
 .ntLabel { position: absolute; left: 0; right: 0; top: 127.1cqw; height: 11.8cqw; overflow: hidden; font-size: 4.6cqw; font-weight: 700; letter-spacing: -0.005em; } /* plain bold text, each state rolls up into the next */
 .ntLabel span { position: absolute; left: 0; right: 0; top: 0; line-height: 11.2cqw; text-align: center; white-space: nowrap; }
 .ntHint { position: absolute; left: 10cqw; right: 10cqw; top: 198cqw; margin: 0; text-align: center; font-size: 3.5cqw; line-height: 4.8cqw; font-weight: 600; }
-.ntRoot .ntRec .ntBtn { background: #001428; }
-.ntBtn { position: absolute; left: 6cqw; right: 6cqw; bottom: 7cqw; height: 16.5cqw; box-shadow: 0 2.4cqw 5cqw rgba(0, 18, 36, 0.34), 0 0.6cqw 1.5cqw rgba(0, 18, 36, 0.24); border-radius: 99cqw; background: #001428; color: #fff; display: flex; align-items: center; justify-content: center; gap: 2cqw; font-size: 4.8cqw; font-weight: 500; }
-.ntBtn svg { width: 4.6cqw; height: 4.6cqw; fill: none; stroke: #fff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
 /* the finger: a soft round marker where the screen is tapped */
 .ntTouch { position: absolute; left: 0; top: 0; width: 11cqw; height: 11cqw; margin: -5.5cqw 0 0 -5.5cqw; border-radius: 50%; background: rgba(125, 135, 155, 0.5); box-shadow: 0 0 0 0.6cqw rgba(255, 255, 255, 0.45); pointer-events: none; opacity: 0; z-index: 5; }
@@ -66,3 +63,6 @@
 .ntRow .ntFrame .ntMount { width: 62%; }
 #view-nanni .ntRow .nnHead { max-width: 12em; margin: 0 0 4.2cqw; } /* more room between the heading and the first point */
 @media (max-width: 900px) { .ntRow { grid-template-columns: minmax(0, 1fr); row-gap: 8cqw; } .ntRow .ntFrame { max-width: 460px; margin: 0 auto; } .ntRow .ntFrame .ntMount { width: 62%; } }
+
+/* the blank result card (based on Nanni's result screen): it slides up from the bottom of the phone */
+.ntCard { position: absolute; z-index: 4; left: 3.4cqw; right: 3.4cqw; bottom: 3.4cqw; height: 120cqw; box-sizing: border-box; border: 0.9cqw solid #001428; border-radius: 9cqw; background: #EDF1F5; box-shadow: 0 -1.6cqw 5cqw rgba(0, 18, 36, 0.1), 0 2.4cqw 6cqw rgba(0, 18, 36, 0.16); }

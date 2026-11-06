@@ -2,8 +2,8 @@
    the icons, the floating pill, the mic button), and follows the storyboard:
      1  Journal, the floating pill and the mic button
      2  the mic button is tapped; the "New translation" screen opens out of it and recording starts on its own
-     3  once the five seconds are in, "Ready to translate" and the Translate button slides up
-     4  Translate is tapped: the bars collapse into dots that gather into a spinning orb, and the cry is translated ("Translating")
+     3  once the five seconds are in, the label reads "Ready to translate" and the bars keep moving
+     4  the cry is translated by itself: the bars collapse into dots that gather into a spinning orb ("Translating"), then a blank result card slides up from the bottom
    NanniTranslate.mount(el) fills `el` and returns { tl, goto(n), play(), pause(), destroy() }. Everything is sized in cqw (a percent of the phone's width). */
 (function () {
   var INK = "#001428";
@@ -32,7 +32,7 @@
       '<div class="ntOrb"></div>' +
       '<div class="ntLabel"><span class="a">Capturing Gerald&rsquo;s cry</span><span class="b">Ready to translate</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
       '<p class="ntHint">Nanni needs 5 seconds for accurate translations</p>' +
-      '<div class="ntBtn"><span>Translate</span>' + ARROW + "</div>" +
+      '<div class="ntCard"></div>' +
       "</div>";
   }
 
@@ -41,7 +41,7 @@
     var gsap = window.gsap, P = window.NanniNav && window.NanniNav.parts;
     root.classList.add("ntRoot");
     root.setAttribute("role", "img");
-    root.setAttribute("aria-label", "Nanni: tap the mic button, the cry is recorded for five seconds, tap Translate, and it is translated");
+    root.setAttribute("aria-label", "Nanni: tap the mic button, the cry is recorded for five seconds, then translated, and the result slides up");
     var api = { tl: null, goto: function () {}, play: function () {}, pause: function () {}, destroy: function () {} };
     if (!P) return api;
     root.innerHTML = '<div class="ntPhone">' + homeMarkup(P) + recMarkup() + '<i class="ntTouch"></i></div>';
@@ -50,7 +50,7 @@
     var q = function (s) { return root.querySelector(s); };
     var phone = q(".ntPhone"), home = q(".ntHome"), rec = q(".ntRec"), fab = q(".ntFab"), pill = q(".ntPill"), tabs = q(".ntTabs");
     var touch = q(".ntTouch"), back = q(".ntBack"), title = q(".ntTitle"), ring = q(".ntRing"), bars = root.querySelectorAll(".ntBar"), time = q(".ntTime");
-    var orbEl = q(".ntOrb"), label = q(".ntLabel"), la = q(".ntLabel .a"), lb = q(".ntLabel .b"), lc = q(".ntLabel .c"), hint = q(".ntHint"), btn = q(".ntBtn");
+    var orbEl = q(".ntOrb"), label = q(".ntLabel"), la = q(".ntLabel .a"), lb = q(".ntLabel .b"), lc = q(".ntLabel .c"), hint = q(".ntHint"), card = q(".ntCard");
     var journal = q('.nnTab[data-id="logs"]');
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -158,7 +158,7 @@
     gsap.set([back, title, ring, label, hint], { autoAlpha: 0 });
     gsap.set(ring, { scale: 0.92 }); gsap.set([back, title], { y: -6 });
     gsap.set(hint, { y: 8 });
-    gsap.set(btn, { autoAlpha: 0, yPercent: 140 });
+    gsap.set(card, { yPercent: 108 });
     gsap.set([lb, lc], { yPercent: 100, autoAlpha: 0 });
     gsap.set(touch, { autoAlpha: 0, scale: 0.4 });
     draw(0);
@@ -202,20 +202,11 @@
       .to(ring, { scale: 1, duration: 0.5, ease: "back.out(2.2)" }, "ready+=0.22")
       .to(la, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "ready")
       .to(lb, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "ready+=0.14")
-      .to(hint, { autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.in" }, "ready")
-      .to(btn, { autoAlpha: 1, yPercent: 0, duration: 0.5, ease: "power3.out" }, "ready+=0.14"); // slides up in time with "Ready to translate" rolling in
+      .to(hint, { autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.in" }, "ready");
 
-    // 3 -> 4: Translate is tapped
-    at("tap2", 8.3);
-    tl.add(function () { touchAt(btn); }, "tap2-=0.05")
-      .to(touch, { autoAlpha: 0.28, scale: 1, duration: 0.22, ease: "power2.out" }, "tap2")
-      .to(btn, { scale: 0.96, duration: 0.14, ease: "power2.out" }, "tap2+=0.04")
-      .to(btn, { scale: 1, duration: 0.4, ease: "back.out(2.2)" }, "tap2+=0.18")
-      .to(touch, { autoAlpha: 0, scale: 1.5, duration: 0.4, ease: "power1.out" }, "tap2+=0.2");
-
+    // 3 -> 4: nothing to tap: after a moment on "Ready to translate" the translating starts by itself
     at("work", 8.85);
-    tl.to(btn, { yPercent: 150, autoAlpha: 0, duration: 0.55, ease: "power2.in" }, "work")
-      .to(time, { autoAlpha: 0, duration: 0.3, ease: "power2.in" }, "work")
+    tl.to(time, { autoAlpha: 0, duration: 0.3, ease: "power2.in" }, "work")
       .to(lb, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
       .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14");
     tl.to(wk, { c: 1, duration: 0.3, ease: "back.out(2.2)", onUpdate: paint }, "work")                 // bars collapse into dots
@@ -224,17 +215,23 @@
       .to(orb, { r: 1, o: 1, duration: 1.7, ease: "none", onUpdate: renderOrb }, "work+=1.4")      // the orb of dots opens out from the centre
       .to(orb, { a: Math.PI * 2 * 8.15 / 3.6, duration: 8.15, ease: "none", onUpdate: renderOrb }, "work+=1.4"); // and keeps turning
 
+    // 4 -> 5: the translation is done: the orb gathers away, and a blank result card slides up from the bottom
+    at("result", 15.0);
+    tl.to(orb, { r: 0, duration: 0.6, ease: "power2.in", onUpdate: renderOrb }, "result-0.15")
+      .to(lc, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "result-0.1")
+      .to(card, { yPercent: 0, duration: 0.85, ease: "power3.out" }, "result");
+
     // the three dots after "Translating" fill in one by one, then clear, until the cry is done
     var dots = root.querySelectorAll(".ntDots b");
     gsap.set(dots, { opacity: 0 });
-    var cycles = 7;
+    var cycles = 5;
     for (var c = 0; c < cycles; c++) {
       var t0 = "work+=" + (0.9 + c * 1.2);
       tl.to(dots, { opacity: 1, duration: 0.25, stagger: 0.25, ease: "power1.out" }, t0)
         .to(dots, { opacity: 0, duration: 0.2, ease: "power1.in" }, t0 + "+=0.95");
     }
 
-    at("final", 18.4);
+    at("final", 20.6);
     tl.to({}, { duration: 0.5 }, "final");
     tl.to(root, { opacity: 0, duration: 0.45, ease: "power1.in" }, "final+=0.5");
     tl.eventCallback("onRepeat", function () { wk.c = wk.g = wk.f = 0; orb.r = orb.o = orb.a = 0; draw(0); renderOrb(); });
@@ -261,7 +258,7 @@
       });
       ctl = document.createElement("div");
       ctl.className = "ntCtl";
-      ctl.innerHTML = '<button type="button">1 &nbsp;Tap mic</button><button type="button">2 &nbsp;Finish capture</button><button type="button">3 &nbsp;Tap Translate</button><button type="button" class="re">Restart</button>';
+      ctl.innerHTML = '<button type="button">1 &nbsp;Tap mic</button><button type="button">2 &nbsp;Finish capture</button><button type="button">3 &nbsp;Translate</button><button type="button" class="re">Restart</button>';
       var cb = ctl.querySelectorAll("button");
       ctlBtns = [cb[0], cb[1], cb[2]];
       cb[0].onclick = function () { go(1); }; cb[1].onclick = function () { go(2); }; cb[2].onclick = function () { go(3); }; cb[3].onclick = function () { go(0); };
