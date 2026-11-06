@@ -311,6 +311,11 @@
           var d = f.contentDocument, st = d.createElement("style");
           st.textContent = ".headerBox, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; }";
           d.head.appendChild(st);
+          // the mouse dot lives in this page, and a frame swallows the pointer, so the frame hands its movement up
+          d.addEventListener("mousemove", function (e) {
+            var r = f.getBoundingClientRect();
+            window.dispatchEvent(new MouseEvent("mousemove", { clientX: e.clientX + r.left, clientY: e.clientY + r.top }));
+          }, { passive: true });
         } catch (e) {}
         f.classList.add("ready");
       });
