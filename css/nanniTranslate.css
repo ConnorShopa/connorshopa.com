@@ -4,7 +4,7 @@
 .ntFrame .ntMount { width: 25%; flex: none; }
 @media (max-width: 900px) { .ntFrame { aspect-ratio: 100 / 150; } .ntFrame .ntMount { width: 56%; } }
 
-.ntRoot { container-type: inline-size; position: relative; width: 100%; aspect-ratio: 100 / 217; font-family: "Satoshi", system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #001428; }
+.ntRoot { --nn-ink: #001224; --nn-gray: #718093; --nn-purple: #821AAF; --nn-screen: #F9F8F2; --nn-band: #E0DAE1; container-type: inline-size; position: relative; width: 100%; aspect-ratio: 100 / 217; font-family: "Satoshi", system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #001428; }
 .ntRoot svg { overflow: visible; }
 .ntPhone { position: absolute; inset: 0; box-sizing: border-box; border: 0.8cqw solid #001428; border-radius: 12.5cqw; background: #FDF4E9; overflow: hidden; filter: drop-shadow(0 3cqw 6cqw rgba(0, 20, 40, 0.2)) drop-shadow(0 0.8cqw 1.6cqw rgba(0, 20, 40, 0.12)); }
 
