@@ -218,8 +218,8 @@
       .to(time, { autoAlpha: 0, duration: 0.3, ease: "power2.in" }, "work")
       .to(lb, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
       .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14");
-    tl.to(wk, { c: 1, duration: 0.55, ease: "power3.inOut", onUpdate: paint }, "work")                 // bars collapse into dots
-      .to(wk, { g: 1, duration: 1.15, ease: "none", onUpdate: paint }, "work+=0.4")           // the dots gravitate to the centre
+    tl.to(wk, { c: 1, duration: 0.3, ease: "back.out(2.2)", onUpdate: paint }, "work")                 // bars collapse into dots
+      .to(wk, { g: 1, duration: 1.15, ease: "none", onUpdate: paint }, "work+=0.3")           // the dots gravitate to the centre
       .to(wk, { f: 1, duration: 0.3, ease: "power2.in", onUpdate: paint }, "work+=1.4")                 // and give way to the orb
       .to(orb, { r: 1, o: 1, duration: 1.7, ease: "none", onUpdate: renderOrb }, "work+=1.4")      // the orb of dots opens out from the centre
       .to(orb, { a: Math.PI * 2 * 8.15 / 3.6, duration: 8.15, ease: "none", onUpdate: renderOrb }, "work+=1.4"); // and keeps turning
