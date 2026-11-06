@@ -1464,6 +1464,7 @@ html.view-open .filters { position: relative; z-index: 20; }
 
 /* Micro + Motion: blue and bold */
 .hop, .hopLetter { color: #2563EB; font-weight: 600; }
+.hop { font-size: 0.8em; } /* the same smaller size as Thoughtify */
 
 /* Spotify dreams: Spotify's own typeface is Circular (proprietary), so this uses Circular if it is installed and Figtree, a close lookalike, otherwise */
 .spot { font-family: "Circular Std", "Circular", "CircularSp", "Figtree", "Host Grotesk", sans-serif; font-weight: 700; letter-spacing: -0.01em; }
