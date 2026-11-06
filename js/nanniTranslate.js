@@ -86,7 +86,6 @@
     gsap.set([lb, lc], { yPercent: 100, autoAlpha: 0 });
     gsap.set(blob, { autoAlpha: 0, scale: 0.4 });
     gsap.set(touch, { autoAlpha: 0, scale: 0.4 });
-    gsap.set(label, { width: "32cqw" });
     draw(0);
 
     var tl = gsap.timeline({ paused: true, repeat: opts.loop === false ? 0 : -1, defaults: { ease: "power3.inOut" } });
@@ -126,7 +125,6 @@
       .to(ring, { scale: 1, duration: 0.5, ease: "back.out(2.2)" }, "ready+=0.22")
       .to(la, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "ready")
       .to(lb, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "ready+=0.14")
-      .to(label, { width: "46.7cqw", duration: 0.6 }, "ready")
       .to(hint, { autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.in" }, "ready")
       .to(btn, { autoAlpha: 1, yPercent: 0, duration: 0.34, ease: "back.out(2.6)" }, "ready+=0.06") // it snaps in, with urgency
       .fromTo(btn, { scale: 0.86 }, { scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false }, "ready+=0.06");
@@ -144,7 +142,6 @@
       .to(ring, { scale: 0.7, autoAlpha: 0, duration: 0.5, ease: "power2.in" }, "work")
       .to(lb, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
       .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14")
-      .to(label, { width: "33cqw", duration: 0.6 }, "work")
       .to(blob, { autoAlpha: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, "work+=0.3");
     // the shape keeps changing while the cry is translated
     var shapes = [

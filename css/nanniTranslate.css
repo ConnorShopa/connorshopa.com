@@ -29,7 +29,7 @@
 .ntHead { fill: #001428; }
 .ntTime { position: absolute; inset: 0; display: grid; place-items: center; font-size: 6cqw; font-variant-numeric: tabular-nums; font-weight: 500; }
 .ntBlob { position: absolute; left: 50%; top: 108cqw; width: 24cqw; height: 24cqw; margin: -12cqw 0 0 -12cqw; background: #001428; border-radius: 58% 42% 49% 51% / 47% 58% 42% 53%; }
-.ntLabel { position: absolute; left: 0; right: 0; margin: 0 auto; top: 127.1cqw; width: 32cqw; height: 11.8cqw; box-sizing: border-box; border: 0.28cqw solid #718093; border-radius: 99cqw; background: #fff; overflow: hidden; font-size: 4.4cqw; font-weight: 500; letter-spacing: -0.005em; }
+.ntLabel { position: absolute; left: 0; right: 0; top: 127.1cqw; height: 11.8cqw; overflow: hidden; font-size: 4.6cqw; font-weight: 700; letter-spacing: -0.005em; } /* plain bold text, each state rolls up into the next */
 .ntLabel span { position: absolute; left: 0; right: 0; top: 0; line-height: 11.2cqw; text-align: center; white-space: nowrap; }
 .ntHint { position: absolute; left: 10cqw; right: 10cqw; top: 198cqw; margin: 0; text-align: center; font-size: 4.3cqw; line-height: 5.8cqw; }
 .ntRoot .ntRec .ntBtn { background: #001428; }
