@@ -589,7 +589,7 @@
       if (el.parentNode !== document.body) document.body.appendChild(el);
       el.classList.add("floating");
       el.classList.toggle("dark", dark);
-      el.setAttribute("data-bubble", tint);
+      el.setAttribute("data-bubble", dark ? "rgba(255, 255, 255, 0.3)" : tint); // a dark card (TouchTunes) gets a 30% white bubble, not its own near-black tint
       el.hidden = false;
     });
     if (!head.__toTop) {
