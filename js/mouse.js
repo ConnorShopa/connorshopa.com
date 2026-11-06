@@ -36,6 +36,7 @@
   var WIDE_AT = 6;       // width / height at which a box counts as "widest"
   var DOT_FILL = "rgba(47, 39, 37, 0.10)";
   // inside an open dark project (TouchTunes) the dot is 30% white, so it shows on the black card
+  function boxFill() { return document.documentElement.classList.contains("view-dark") ? "rgba(255, 255, 255, 0.3)" : BOX_FILL; } // the hover bubble round a link, in a dark card
   function dotFill() { return document.documentElement.classList.contains("view-dark") ? "rgba(255, 255, 255, 0.3)" : DOT_FILL; }
   var DOT_BORDER = "rgba(47, 39, 37, 0)";
   var BOX_FILL = "#F4F4F4";
@@ -95,7 +96,7 @@
       width: w,
       height: h,
       borderRadius: radius,
-      backgroundColor: (currentLink && currentLink.getAttribute("data-bubble")) || BOX_FILL,
+      backgroundColor: (currentLink && currentLink.getAttribute("data-bubble")) || boxFill(),
       borderColor: BOX_BORDER,
       boxShadow: BOX_SHADOW,
       duration: t(MORPH_TIME),

@@ -2654,3 +2654,7 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
   #projectList li:has(> a[data-view="touchtunes"]) .wordmark,
   html.deckGallery #projectList li:has(> a[data-view="touchtunes"]):not(.isActive) .wordmark { filter: brightness(0) invert(1) !important; }
 }
+
+/* dark card (TouchTunes): the close icon stays white when the 30% white bubble is behind it */
+.view.dark .viewClose.floating:hover, .view.dark .viewClose.floating:focus-visible,
+.view.dark.scrollView .viewClose:hover, .view.dark.scrollView .viewClose:focus-visible { color: #fff !important; }
