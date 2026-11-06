@@ -79,7 +79,13 @@
       for (var i = 0; i < BARS; i++) {
         var h = (2.4 + lv[i] * 15) * (1 - wk.c) + DOT * wk.c;
         bars[i].style.height = h + "cqw";
-        bars[i].style.transform = wk.g ? "translateX(" + (-(i - (BARS - 1) / 2) * PITCH * wk.g) + "cqw) scale(" + (1 - 0.35 * wk.f) + ")" : "";
+        var tr = "";
+        if (wk.g) {
+          // each dot swoops in on its own curve: the outer ones set off first, and they arc up (left) or down (right) on the way
+          var k = i - (BARS - 1) / 2, far = Math.abs(k) / ((BARS - 1) / 2), local = Math.max(0, Math.min(1, (wk.g * 1.55 - 0.55 * (1 - far)) )), e = local < 0.5 ? 4 * local * local * local : 1 - Math.pow(-2 * local + 2, 3) / 2;
+          tr = "translate(" + (-k * PITCH * e) + "cqw," + (-(k < 0 ? 1 : -1) * Math.sin(Math.PI * e) * (2.5 + 5.5 * far)) + "cqw) scale(" + (1 - 0.35 * wk.f) + ")";
+        }
+        bars[i].style.transform = tr;
         bars[i].style.opacity = wk.f ? 1 - wk.f : "";
       }
     }
@@ -197,10 +203,10 @@
       .to(lb, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
       .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14");
     tl.to(wk, { c: 1, duration: 0.55, ease: "power3.inOut", onUpdate: paint }, "work")                 // bars collapse into dots
-      .to(wk, { g: 1, duration: 0.75, ease: "power3.inOut", onUpdate: paint }, "work+=0.45")           // the dots gravitate to the centre
-      .to(wk, { f: 1, duration: 0.3, ease: "power2.in", onUpdate: paint }, "work+=1.1")                 // and give way to the orb
-      .to(orb, { r: 1, o: 1, duration: 1.1, ease: "power3.out", onUpdate: renderOrb }, "work+=1.1")      // the orb of dots opens out from the centre
-      .to(orb, { a: Math.PI * 2 * 8.45 / 3.6, duration: 8.45, ease: "none", onUpdate: renderOrb }, "work+=1.1"); // and keeps turning
+      .to(wk, { g: 1, duration: 1.15, ease: "none", onUpdate: paint }, "work+=0.4")           // the dots gravitate to the centre
+      .to(wk, { f: 1, duration: 0.3, ease: "power2.in", onUpdate: paint }, "work+=1.4")                 // and give way to the orb
+      .to(orb, { r: 1, o: 1, duration: 1.1, ease: "power3.out", onUpdate: renderOrb }, "work+=1.4")      // the orb of dots opens out from the centre
+      .to(orb, { a: Math.PI * 2 * 8.15 / 3.6, duration: 8.15, ease: "none", onUpdate: renderOrb }, "work+=1.4"); // and keeps turning
 
     // the three dots after "Translating" fill in one by one, then clear, until the cry is done
     var dots = root.querySelectorAll(".ntDots b");
