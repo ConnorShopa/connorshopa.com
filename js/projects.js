@@ -110,12 +110,12 @@
           '</section>' +
           // the new-translation animation (js/nanniTranslate.js) in a soft frame on the left, its words on the right
           '<section class="ntRow"><div class="ntFrame"><div class="ntMount"></div></div>' +
-            '<div class="ntText"><span class="nnLab">&middot; Translation</span><p class="nnLead nnHead">Speedier, to the point translation</p>' +
-              '<p class="nnPt">&middot; <b>Feedback</b> became a prompt linked with insights and translation. Simpler for the caregiver, more relevant for Ubenwa to sharper their tool</p>' +
-              '<p class="nnPt">&middot; <b>Translating</b> a cry is now one a one tap away for a faster &amp; easier process during moments where caregivers found translation stressful</p>' +
-              '<p class="nnPt">&middot; <b>Journal</b> is the new home for insights, past translations, &amp; notes</p>' +
-              '<p class="nnPt">&middot; <b>Routines</b> remains focused on Nanni&rsquo;s new LOREM IPSUM</p>' +
-              '<p class="nnPt">&middot; <b>Fun zone</b> is remains unchanged, keeping the fun that Ubenwa had envisioned for parts of the tool</p></div></section></div>'),
+            '<div class="ntText"><span class="nnLab">&middot; Translation</span><p class="nnLead nnHead">Lorem ipsum dolor sit amet consectetur</p>' +
+              '<p class="nnPt">&middot; <b>Lorem ipsum</b> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>' +
+              '<p class="nnPt">&middot; <b>Ut enim</b> ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure</p>' +
+              '<p class="nnPt">&middot; <b>Duis aute</b> irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>' +
+              '<p class="nnPt">&middot; <b>Excepteur sint</b> occaecat cupidatat non proident</p>' +
+              '<p class="nnPt">&middot; <b>Sunt in culpa</b> qui officia deserunt mollit anim id est laborum, sed ut perspiciatis unde omnis iste natus</p></div></section></div>'),
       ],
     },
 
