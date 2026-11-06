@@ -22,12 +22,15 @@
       '<div class="nnFab ntFab">' + P.MIC + "</div></div>";
   }
 
-  function recMarkup() {
+  // Nanni's propeller-hat logo, cut from the app icon (assets/homeAssets/nanni_app_icon.svg): the propeller is its own piece so it can spin
+  var HAT = "<svg class=\"ntHatSvg\" viewBox=\"18 30 84 60\" aria-hidden=\"true\"><path class=\"ntProp\" fill=\"#99CA9C\" fill-rule=\"evenodd\" d=\"M40.9526 33.7262C39.0899 35.5876 38.9868 37.5996 40.6457 39.7069C41.6289 40.9562 42.3874 41.2754 44.3699 41.2718C46.6283 41.2682 54.8674 39.567 57.4356 38.5744C58.392 38.2046 58.4784 38.7441 58.4784 45.0827V45.4441C58.4784 46.4307 59.2788 47.2305 60.2661 47.2305C61.2533 47.2305 62.0537 46.4307 62.0537 45.4441V45.1065C62.0537 38.8185 62.1448 38.2469 63.0965 38.5458C67.1657 39.8236 73.9408 41.276 75.8309 41.276C78.6321 41.276 80.5258 39.4711 80.5258 36.8017C80.5258 34.2996 78.4104 32.3412 75.7207 32.3531C73.8448 32.3614 67.3725 33.7994 62.0876 35.3816C60.2827 35.9222 59.0904 35.7763 54.5915 34.4658C51.6497 33.6083 47.7241 32.7443 45.8685 32.546C42.7885 32.2167 42.36 32.3197 40.9526 33.7262Z\"/><path fill=\"#FBC157\" fill-rule=\"evenodd\" d=\"M43.5856 82.2296C43.0345 85.0835 45.2483 87.6465 48.1569 87.6465H71.8818C74.8022 87.6465 77.019 85.0637 76.4479 82.2016C74.3205 71.5403 68.767 48.942 59.915 48.942C51.0552 48.942 45.642 71.5799 43.5856 82.2296Z\"/><path fill=\"#F28C8C\" fill-rule=\"evenodd\" d=\"M71.0796 50.4736C81.7821 53.2722 91.527 61.081 95.9782 70.4249C98.3146 75.3284 99.237 78.5087 99.9819 84.2233C100.179 86.0519 98.7451 87.6471 96.9047 87.6471H90.843C88.4944 87.6471 86.4957 85.9377 86.1332 83.6189L85.9949 82.7347C83.5864 69.2066 77.1045 57.7054 68.733 52.1045C64.4844 49.2624 65.0213 48.8891 71.0796 50.4736Z\"/><path fill=\"#80BAFD\" fill-rule=\"evenodd\" d=\"M48.9204 50.4736C38.2179 53.2722 28.473 61.081 24.0218 70.4249C21.6854 75.3284 20.763 78.5087 20.0181 84.2233C19.8211 86.0519 21.2549 87.6471 23.0954 87.6471H29.157C31.5056 87.6471 33.5043 85.9377 33.8668 83.6189L34.0051 82.7347C36.4136 69.2066 42.8955 57.7054 51.267 52.1045C55.5156 49.2624 54.9787 48.8891 48.9204 50.4736Z\"/></svg>";
+
+  function recMarkup(variant) {
     return '<div class="ntRec">' +
       '<div class="ntBack">' + CHEV + '</div><div class="ntTitle">New translation</div>' +
       '<div class="ntRing"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="ntArc" cx="50" cy="50" r="' + R + '" /><circle class="ntHead" r="1.6" cx="50" cy="' + (50 - R) + '" /></svg>' +
         '<span class="ntTime">0:00</span></div>' +
-      '<div class="ntBlob"></div>' +
+      (variant === "hat" ? '<div class="ntBlob ntHat">' + HAT + '</div>' : '<div class="ntBlob"></div>') +
       '<div class="ntLabel"><span class="a">Capturing cry</span><span class="b">Ready to translate</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
       '<p class="ntHint">Nanni needs 5 seconds for accurate translations</p>' +
       '<div class="ntBtn"><span>Translate</span>' + ARROW + "</div>" +
@@ -42,7 +45,7 @@
     root.setAttribute("aria-label", "Nanni: tap the mic button, the cry is recorded for five seconds, tap Translate, and it is translated");
     var api = { tl: null, goto: function () {}, play: function () {}, pause: function () {}, destroy: function () {} };
     if (!P) return api;
-    root.innerHTML = '<div class="ntPhone">' + homeMarkup(P) + recMarkup() + '<i class="ntTouch"></i></div>';
+    root.innerHTML = '<div class="ntPhone">' + homeMarkup(P) + recMarkup(opts.variant) + '<i class="ntTouch"></i></div>';
     if (!gsap) return api;
 
     var q = function (s) { return root.querySelector(s); };
@@ -143,8 +146,17 @@
       .to(lb, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "work")
       .to(lc, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "work+=0.14")
       .to(blob, { autoAlpha: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, "work+=0.3");
+    if (opts.variant === "hat") {
+      // the propeller spins one full turn, comes to a stop, then spins again
+      var prop = q(".ntProp"), spin = { p: 0 };
+      gsap.set(prop, { svgOrigin: "60.2 40" });
+      var turn = function () { gsap.set(prop, { scaleX: Math.cos(spin.p * Math.PI * 2) }); };
+      for (var h = 0; h < 3; h++) {
+        tl.fromTo(spin, { p: 0 }, { p: 1, duration: 1.5, ease: "power2.inOut", onUpdate: turn, immediateRender: false }, "work+=" + (0.9 + h * 3.0));
+      }
+    }
     // the shape keeps changing while the cry is translated
-    var shapes = [
+    var shapes = opts.variant === "hat" ? [] : [
       { r: "30% 70% 62% 38% / 44% 28% 72% 56%", x: 1.16, y: 0.88, k: -9, rot: -14 },
       { r: "68% 32% 30% 70% / 62% 66% 34% 38%", x: 0.9, y: 1.14, k: 8, rot: 12 },
       { r: "42% 58% 74% 26% / 30% 46% 54% 70%", x: 1.14, y: 0.9, k: -7, rot: -10 },

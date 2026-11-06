@@ -94,7 +94,8 @@
           '<section class="nnGoal"><span class="nnLab">&middot; Goal</span>' +
             '<p class="nnLead">Nanni is 98% accurate, trained on millions of cries, backed by industry standard medical research, yet perceived as a novelty toy.</p>' +
             '<p class="nnLead">I defined a new product language that positioned Nanni as a healthcare tool.</p></section>' +
-          '<div class="ntFrame"><div class="ntMount"></div></div>' + // the new-translation flow animation (js/nanniTranslate.js)
+          '<div class="ntFrame"><div class="ntMount"></div></div>' +
+          '<div class="ntFrame"><div class="ntMount" data-variant="hat"></div></div>' + // the same flow with the propeller-hat logo (trying both) // the new-translation flow animation (js/nanniTranslate.js)
           '<div class="nnFrame"><div class="nnMount"></div><span class="nnCap">Navigation</span></div>' + // the hand-built navigation menu animation (js/nanniNav.js)
           '<section class="nnCols">' +
             '<div><span class="nnLab">&middot; Navigation</span><p class="nnLead nnHead">A clarified, focused, simple navigation structure</p>' +

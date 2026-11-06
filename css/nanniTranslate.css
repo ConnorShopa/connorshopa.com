@@ -56,3 +56,8 @@
 .ntLabel .c .ntDots { -webkit-text-fill-color: #3F8F55; }
 @keyframes ntSlide { from { background-position: 0 0; } to { background-position: 100cqw 0; } }
 @media (prefers-reduced-motion: reduce) { .ntBlob::before, .ntLabel .c { animation: none; } }
+
+/* the propeller-hat version: Nanni's logo takes the blob's place, and its propeller spins */
+.ntBlob.ntHat { width: 32cqw; height: 22.9cqw; margin: -11.4cqw 0 0 -16cqw; border-radius: 0; }
+.ntBlob.ntHat::before, .ntBlob.ntHat::after { display: none; }
+.ntHatSvg { display: block; width: 100%; height: 100%; overflow: visible; }
