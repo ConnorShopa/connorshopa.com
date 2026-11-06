@@ -2663,3 +2663,7 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 /* dark card (TouchTunes): the bubble that grows behind the close icon and the logo / title is 30% white, not the card's near-black tint */
 .view.dark.scrollView .viewClose::before,
 .view.dark.scrollView .viewHead::before { background: rgba(255, 255, 255, 0.3); border-color: transparent; box-shadow: none; }
+
+/* Plunk and Spotify dreams: no scroll bar (the pages still scroll) */
+.view.legacyView .pg.legacy { scrollbar-width: none; }
+.view.legacyView .pg.legacy::-webkit-scrollbar { display: none; }
