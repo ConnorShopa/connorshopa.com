@@ -157,27 +157,28 @@
     }
     // the shape keeps changing while the cry is translated
     var shapes = opts.variant === "hat" ? [] : [
-      { r: "30% 70% 62% 38% / 44% 28% 72% 56%", x: 1.16, y: 0.88, k: -9, rot: -14 },
-      { r: "68% 32% 30% 70% / 62% 66% 34% 38%", x: 0.9, y: 1.14, k: 8, rot: 12 },
-      { r: "42% 58% 74% 26% / 30% 46% 54% 70%", x: 1.14, y: 0.9, k: -7, rot: -10 },
-      { r: "74% 26% 38% 62% / 52% 30% 70% 48%", x: 0.92, y: 1.12, k: 9, rot: 16 }
+      { r: "56% 44% 52% 48% / 48% 55% 45% 52%", x: 1.05, y: 0.96, k: -3, rot: -5 },
+      { r: "47% 53% 46% 54% / 55% 47% 53% 45%", x: 0.96, y: 1.05, k: 3, rot: 5 },
+      { r: "53% 47% 57% 43% / 46% 54% 46% 54%", x: 1.05, y: 0.96, k: -2, rot: -4 },
+      { r: "48% 52% 47% 53% / 53% 46% 54% 47%", x: 0.97, y: 1.04, k: 3, rot: 6 }
     ];
     shapes.forEach(function (sh, i) {
-      var at0 = "work+=" + (0.3 + i * 2.2);
-      tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 2.4, ease: "sine.inOut" }, at0);
-      if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 2.4, ease: "sine.inOut" }, at0);
+      var at0 = "work+=" + (0.3 + i * 3.0);
+      tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 3.2, ease: "sine.inOut" }, at0);
+      if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 3.2, ease: "sine.inOut" }, at0);
     });
 
     // the three dots after "Translating" fill in one by one, then clear, until the cry is done
     var dots = root.querySelectorAll(".ntDots b");
     gsap.set(dots, { opacity: 0 });
-    for (var c = 0; c < 7; c++) {
+    var cycles = opts.variant === "hat" ? 7 : 11;
+    for (var c = 0; c < cycles; c++) {
       var t0 = "work+=" + (0.9 + c * 1.2);
       tl.to(dots, { opacity: 1, duration: 0.25, stagger: 0.25, ease: "power1.out" }, t0)
         .to(dots, { opacity: 0, duration: 0.2, ease: "power1.in" }, t0 + "+=0.95");
     }
 
-    at("final", 18.4);
+    at("final", opts.variant === "hat" ? 18.4 : 21.8);
     tl.to({}, { duration: 0.5 }, "final");
     tl.to(root, { opacity: 0, duration: 0.45, ease: "power1.in" }, "final+=0.5");
     tl.eventCallback("onRepeat", function () { draw(0); });

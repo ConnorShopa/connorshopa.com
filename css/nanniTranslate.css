@@ -48,12 +48,12 @@
 @property --nt-a { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
 .ntBlob { background: transparent; overflow: visible; isolation: isolate; }
 .ntBlob::before, .ntBlob::after { content: ""; position: absolute; border-radius: inherit; pointer-events: none; }
-.ntBlob::before { inset: -1cqw; background: conic-gradient(from var(--nt-a) in oklab, #1F63B8, #E0A22A, #3F8F55, #1F63B8); animation: ntSpin 5s linear infinite; }
+.ntBlob::before { inset: -1cqw; background: conic-gradient(from var(--nt-a) in oklab, #6CB0FC, #FBC157, #8FCB94, #6CB0FC); animation: ntSpin 5s linear infinite; }
 .ntBlob::after { inset: 0; background: #EDF1F5; } /* the inside is the screen colour: just the stroke is seen */
 @keyframes ntSpin { to { --nt-a: 360deg; } }
 /* the word: one very wide, gentle blue, yellow, green cycle slides through it; it is exactly one phone wide, so it loops with no seam */
-.ntLabel .c { background-image: linear-gradient(90deg in oklab, #1F63B8 0%, #E0A22A 33.3%, #3F8F55 66.6%, #1F63B8 100%); background-size: 100cqw 100%; background-repeat: repeat-x; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: ntSlide 5s linear infinite; }
-.ntLabel .c .ntDots { -webkit-text-fill-color: #3F8F55; }
+.ntLabel .c { background-image: linear-gradient(90deg in oklab, #6CB0FC 0%, #FBC157 33.3%, #8FCB94 66.6%, #6CB0FC 100%); background-size: 100cqw 100%; background-repeat: repeat-x; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: ntSlide 5s linear infinite; }
+.ntLabel .c .ntDots { -webkit-text-fill-color: #8FCB94; }
 @keyframes ntSlide { from { background-position: 0 0; } to { background-position: 100cqw 0; } }
 @media (prefers-reduced-motion: reduce) { .ntBlob::before, .ntLabel .c { animation: none; } }
 
