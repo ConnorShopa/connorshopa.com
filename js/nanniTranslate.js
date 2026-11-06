@@ -127,14 +127,14 @@
       .to(label, { autoAlpha: 1, duration: 0.45, ease: "power2.out" }, "rec+=0.25")
       .to(hint, { autoAlpha: 1, y: 0, duration: 0.55, ease: "power3.out" }, "rec+=0.35");
     at("count", 3.1);
-    tl.to(prog, { p: 1, duration: 3.4, ease: "none", onUpdate: function () { draw(prog.p); } }, "count");
+    // the meter keeps showing noise after the five seconds (p goes past 1) until Translate is tapped and the screen changes
+    tl.to(prog, { p: 5.75 / 3.4, duration: 5.75, ease: "none", onUpdate: function () { draw(prog.p); } }, "count");
     tl.set(prog, { p: 0 }, 0);
     tl.set(calm, { v: 0 }, 0);
 
     // 3: five seconds are in: the ring closes, the label rolls to "Ready to translate", the Translate button slides up
     at("ready", 6.5);
-    tl.to(calm, { v: 1, duration: 0.7, ease: "power2.out", onUpdate: function () { draw(1); } }, "ready")
-      .to(ring, { scale: 1.05, duration: 0.22, ease: "power2.out" }, "ready")
+    tl.to(ring, { scale: 1.05, duration: 0.22, ease: "power2.out" }, "ready")
       .to(ring, { scale: 1, duration: 0.5, ease: "back.out(2.2)" }, "ready+=0.22")
       .to(la, { yPercent: -100, autoAlpha: 0, duration: 0.4, ease: "power2.in" }, "ready")
       .to(lb, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "ready+=0.14")
