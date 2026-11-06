@@ -2625,3 +2625,10 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
   #view-nanni .nnFrame .nnMount { width: 35.3%; }
   #view-nanni.stepView .pg.one:has(> .nnDoc) { display: block; padding: 0; overflow-y: auto; overflow-x: hidden; }
 }
+
+/* Plunk and Spotify dreams keep their original pages, shown as they were inside the card */
+.view.legacyView .viewBody { padding: 0; overflow: hidden; }
+.view.legacyView .pg.legacy { position: absolute; inset: 0; display: block; padding: 0; margin: 0; width: auto; height: auto; max-height: none; overflow: hidden; opacity: 1; transform: none; visibility: visible; }
+.view.legacyView .legacyFrame { display: block; width: 100%; height: 100%; border: 0; background: #fff; opacity: 0; transition: opacity 0.3s ease; }
+.view.legacyView .legacyFrame.ready { opacity: 1; }
+.view.legacyView .viewDots, .view.legacyView .viewNav { display: none; }

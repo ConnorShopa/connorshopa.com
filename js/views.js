@@ -241,7 +241,9 @@
     var proj = P[slug];
     var id = "view-" + slug;
     var locked = !!proj.locked; // the pages are encrypted (tools/lock.mjs) and open with a password
-    var many = locked || proj.pages.length > 1;
+    // "legacy": the project keeps its original page (plunk.html, spotifyDreams.html) and shows it, unchanged, inside the card
+    var pages = proj.legacy ? [{ layout: "legacy", html: '<iframe class="legacyFrame" src="' + proj.legacy + '" title="' + proj.title.replace(/"/g, "") + '" loading="lazy"></iframe>' }] : proj.pages;
+    var many = locked || pages.length > 1;
 
     var sec = document.createElement("section");
     sec.className = "view";
@@ -262,7 +264,7 @@
     html += '<button type="button" class="viewClose" aria-label="Close"' + (proj.bgImage ? ' data-bubble="rgba(255,255,255,0.3)"' : "") + '>&times;</button>';
     html += '<div class="viewBody">';
     if (locked) html += lockPage(proj);
-    else proj.pages.forEach(function (page, i) {
+    else pages.forEach(function (page, i) {
       html += '<div class="pg ' + page.layout + (i === 0 ? " is-on" : "") + '">' + page.html + "</div>";
     });
     html += "</div>";
@@ -271,8 +273,8 @@
       if (!proj.noNav) html += '<button type="button" class="viewNav prev" aria-label="Previous page" disabled' + (locked ? " hidden" : "") + ">" + CHEVRON("prev") + "</button>";
       if (!proj.noNav) html += '<button type="button" class="viewNav next" aria-label="Next page"' + (locked ? " hidden" : "") + ">" + CHEVRON("next") + "</button>";
       html += '<div class="viewDots"' + (locked ? " hidden" : "") + ">";
-      (locked ? [] : proj.pages).forEach(function (_, i) {
-        html += '<button type="button" class="viewDot" data-page="' + i + '" aria-label="Page ' + (i + 1) + " of " + proj.pages.length + '"' + (i === 0 ? ' aria-current="true"' : "") + "></button>";
+      (locked ? [] : pages).forEach(function (_, i) {
+        html += '<button type="button" class="viewDot" data-page="' + i + '" aria-label="Page ' + (i + 1) + " of " + pages.length + '"' + (i === 0 ? ' aria-current="true"' : "") + "></button>";
       });
       html += "</div>";
     }
@@ -284,6 +286,7 @@
     if (proj.stepText) sec.classList.add("stepView"); // pages step on scroll instead of scrolling as one long page
     if (!proj.noNav) sec.classList.add("scrollView"); // every project but Habbot: all the pages in one vertical scroll
     if (proj.noNav) sec.classList.add("vertical"); // pages move up and down (scroll or the chevron under the first page's button)
+    if (proj.legacy) sec.classList.add("legacyView");
     if (proj.dark) sec.classList.add("dark");
     if (proj.accent) sec.style.setProperty("--accent", proj.accent);
     // the project's colour is the page behind the card; the card itself is a lighter tint of it
@@ -301,7 +304,18 @@
     if (locked) wireLock(slug, sec);
     // the hand-built navigation menu animation (Nanni) mounts into its box
     if (window.NanniNav) sec.querySelectorAll(".nnMount").forEach(function (m) { window.NanniNav.mount(m); });
+    // the original page inside its frame: its own header, footer and cursor are hidden (the card has its own close button), then it fades in
+    sec.querySelectorAll(".legacyFrame").forEach(function (f) {
+      f.addEventListener("load", function () {
+        try {
+          var d = f.contentDocument, st = d.createElement("style");
+          st.textContent = ".headerBox, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; }";
+          d.head.appendChild(st);
+        } catch (e) {}
+        f.classList.add("ready");
+      });
+    });
     // an open (not locked) step view is wired straight away, on screens wide enough for it; narrower ones keep the one long scrolling page
-    if (!locked && proj.stepText && proj.pages.length > 1 && window.matchMedia("(min-width: 901px)").matches && window.gsap) { sec._stepWired = true; wireSteps(sec); }
+    if (!locked && proj.stepText && pages.length > 1 && window.matchMedia("(min-width: 901px)").matches && window.gsap) { sec._stepWired = true; wireSteps(sec); }
   });
 })();
