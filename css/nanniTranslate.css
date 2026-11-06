@@ -23,11 +23,10 @@
 .ntBack { position: absolute; left: 5.8cqw; top: 16.7cqw; width: 10.6cqw; height: 10.6cqw; border-radius: 50%; background: #F6F8FA; display: grid; place-items: center; }
 .ntBack svg { width: 5cqw; height: 5cqw; fill: none; stroke: #001428; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .ntTitle { position: absolute; left: 0; right: 0; top: 19cqw; text-align: center; font-size: 4.3cqw; line-height: 6cqw; font-weight: 500; letter-spacing: -0.005em; }
-.ntRing { position: absolute; left: 50%; top: 108cqw; width: 26cqw; height: 26cqw; margin: -13cqw 0 0 -13cqw; }
-.ntRing svg { display: block; width: 100%; height: 100%; }
-.ntArc { fill: none; stroke: #001428; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50px 50px; }
-.ntHead { fill: #001428; }
-.ntTime { position: absolute; inset: 0; display: grid; place-items: center; font-size: 6cqw; font-variant-numeric: tabular-nums; font-weight: 500; }
+.ntRing { position: absolute; left: 50%; top: 112.5cqw; width: 70cqw; height: 28cqw; margin: -14cqw 0 0 -35cqw; }
+.ntBars { position: absolute; left: 0; right: 0; top: 0; height: 19cqw; display: flex; align-items: center; justify-content: center; gap: 1.25cqw; }
+.ntBar { display: block; width: 2cqw; height: 2cqw; border-radius: 99cqw; background: #80BAFD; }
+.ntTime { position: absolute; left: 0; right: 0; top: 21cqw; text-align: center; font-size: 4.4cqw; line-height: 6cqw; font-variant-numeric: tabular-nums; font-weight: 500; color: #718093; }
 .ntBlob { position: absolute; left: 50%; top: 108cqw; width: 24cqw; height: 24cqw; margin: -12cqw 0 0 -12cqw; background: #001428; border-radius: 58% 42% 49% 51% / 47% 58% 42% 53%; }
 .ntLabel { position: absolute; left: 0; right: 0; top: 127.1cqw; height: 11.8cqw; overflow: hidden; font-size: 4.6cqw; font-weight: 700; letter-spacing: -0.005em; } /* plain bold text, each state rolls up into the next */
 .ntLabel span { position: absolute; left: 0; right: 0; top: 0; line-height: 11.2cqw; text-align: center; white-space: nowrap; }
