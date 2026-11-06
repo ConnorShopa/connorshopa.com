@@ -155,12 +155,12 @@
       { r: "36% 64% 54% 46% / 66% 40% 60% 34%", x: 1.08, y: 0.96, k: -5, rot: -6 }
     ];
     shapes.forEach(function (sh, i) {
-      var at0 = "work+=" + (0.3 + i * 0.66);
-      tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 0.7, ease: "sine.inOut" }, at0);
-      if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 0.7, ease: "sine.inOut" }, at0);
+      var at0 = "work+=" + (0.3 + i * 1.15);
+      tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 1.25, ease: "sine.inOut" }, at0);
+      if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 1.25, ease: "sine.inOut" }, at0);
     });
 
-    at("final", 12.6);
+    at("final", 15.1);
     tl.to({}, { duration: 0.5 }, "final");
     tl.to(root, { opacity: 0, duration: 0.45, ease: "power1.in" }, "final+=0.5");
     tl.eventCallback("onRepeat", function () { draw(0); });
