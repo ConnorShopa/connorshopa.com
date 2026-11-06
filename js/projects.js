@@ -332,9 +332,12 @@
     // ---------------------------------------------------------------- Rubin (no content yet)
     rubin: {
       title: "Rubin",
-      logo: H + "rubin_logo.svg",
-      logoOnly: true,
-      pages: [],
+      logoOnly: true, // the title stays for screen readers only
+      bg: "#ABEBA3", // Rubin's own green behind the card
+      // no corner logo: the card is the logo (the mark from rubin_logo.svg, its wordmark below, then "Coming soon")
+      pages: [
+        pg("one", '<div class="rbPage"><img class="rbMark" src="' + H + 'rubin_mark.svg" alt=""><img class="rbWord" src="' + H + 'rubin_wordmark.svg" alt="Rubin"><p class="rbSoon">Coming soon</p></div>'),
+      ],
     },
 
     // ---------------------------------------------------------------- Overhand (no content yet)
