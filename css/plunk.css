@@ -634,3 +634,6 @@ body {
 
   
 }
+
+/* the houses animation now sits in the hero, where the hero image was */
+.heroBox .tripleGifSection { width: 100%; box-sizing: border-box; }
