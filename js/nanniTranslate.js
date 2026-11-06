@@ -151,16 +151,15 @@
       { r: "30% 70% 62% 38% / 44% 28% 72% 56%", x: 1.16, y: 0.88, k: -9, rot: -14 },
       { r: "68% 32% 30% 70% / 62% 66% 34% 38%", x: 0.9, y: 1.14, k: 8, rot: 12 },
       { r: "42% 58% 74% 26% / 30% 46% 54% 70%", x: 1.14, y: 0.9, k: -7, rot: -10 },
-      { r: "74% 26% 38% 62% / 52% 30% 70% 48%", x: 0.92, y: 1.12, k: 9, rot: 16 },
-      { r: "36% 64% 54% 46% / 66% 40% 60% 34%", x: 1.08, y: 0.96, k: -5, rot: -6 }
+      { r: "74% 26% 38% 62% / 52% 30% 70% 48%", x: 0.92, y: 1.12, k: 9, rot: 16 }
     ];
     shapes.forEach(function (sh, i) {
-      var at0 = "work+=" + (0.3 + i * 1.15);
-      tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 1.25, ease: "sine.inOut" }, at0);
-      if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 1.25, ease: "sine.inOut" }, at0);
+      var at0 = "work+=" + (0.3 + i * 2.2);
+      tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 2.4, ease: "sine.inOut" }, at0);
+      if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 2.4, ease: "sine.inOut" }, at0);
     });
 
-    at("final", 15.1);
+    at("final", 18.4);
     tl.to({}, { duration: 0.5 }, "final");
     tl.to(root, { opacity: 0, duration: 0.45, ease: "power1.in" }, "final+=0.5");
     tl.eventCallback("onRepeat", function () { draw(0); });
