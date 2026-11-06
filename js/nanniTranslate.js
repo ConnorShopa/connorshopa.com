@@ -128,7 +128,8 @@
       .to(lb, { yPercent: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, "ready+=0.14")
       .to(label, { width: "46.7cqw", duration: 0.6 }, "ready")
       .to(hint, { autoAlpha: 0, y: 10, duration: 0.4, ease: "power2.in" }, "ready")
-      .to(btn, { autoAlpha: 1, yPercent: 0, duration: 0.75, ease: "back.out(1.35)" }, "ready+=0.3");
+      .to(btn, { autoAlpha: 1, yPercent: 0, duration: 0.34, ease: "back.out(2.6)" }, "ready+=0.06") // it snaps in, with urgency
+      .fromTo(btn, { scale: 0.86 }, { scale: 1, duration: 0.3, ease: "back.out(3)", immediateRender: false }, "ready+=0.06");
 
     // 3 -> 4: Translate is tapped
     at("tap2", 8.3);
@@ -146,9 +147,17 @@
       .to(label, { width: "33cqw", duration: 0.6 }, "work")
       .to(blob, { autoAlpha: 1, scale: 1, duration: 0.8, ease: "back.out(1.5)" }, "work+=0.3");
     // the shape keeps changing while the cry is translated
-    var shapes = ["58% 42% 49% 51% / 47% 58% 42% 53%", "45% 55% 58% 42% / 55% 45% 55% 45%", "52% 48% 40% 60% / 42% 56% 44% 58%", "60% 40% 52% 48% / 52% 40% 60% 48%"];
-    shapes.forEach(function (s, i) {
-      tl.to(blob, { borderRadius: s, rotation: (i % 2 ? 6 : -6), duration: 1.0, ease: "sine.inOut" }, "work+=" + (0.3 + i * 1.0));
+    var shapes = [
+      { r: "30% 70% 62% 38% / 44% 28% 72% 56%", x: 1.16, y: 0.88, k: -9, rot: -14 },
+      { r: "68% 32% 30% 70% / 62% 66% 34% 38%", x: 0.9, y: 1.14, k: 8, rot: 12 },
+      { r: "42% 58% 74% 26% / 30% 46% 54% 70%", x: 1.14, y: 0.9, k: -7, rot: -10 },
+      { r: "74% 26% 38% 62% / 52% 30% 70% 48%", x: 0.92, y: 1.12, k: 9, rot: 16 },
+      { r: "36% 64% 54% 46% / 66% 40% 60% 34%", x: 1.08, y: 0.96, k: -5, rot: -6 }
+    ];
+    shapes.forEach(function (sh, i) {
+      var at0 = "work+=" + (0.3 + i * 0.66);
+      tl.to(blob, { borderRadius: sh.r, rotation: sh.rot, duration: 0.7, ease: "sine.inOut" }, at0);
+      if (i) tl.to(blob, { scaleX: sh.x, scaleY: sh.y, skewX: sh.k, duration: 0.7, ease: "sine.inOut" }, at0);
     });
 
     at("final", 12.6);
