@@ -542,3 +542,7 @@ body {
 
   
 }
+
+/* the hero image sits at the very top, above everything */
+.content > .imageBox:first-child, .content > .imageBox { margin-top: 140px; }
+.content > .imageBox + .heroBox { margin-top: 48px; }
