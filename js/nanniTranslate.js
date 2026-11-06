@@ -33,14 +33,16 @@
       '<div class="ntLabel"><span class="a">Capturing Gerald&rsquo;s cry</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
       '<p class="ntHint">Nanni needs 3 seconds for accurate translations</p>' +
       '<div class="ntStop">Stop capturing</div>' +
-      '<div class="ntCard"><i class="ntSk w30 h36"></i>' +
-        '<div class="ntSkTop"><i class="ntSk pill"></i><span class="ntSkThumbs"><i class="ntSk"></i><i class="ntSk"></i></span></div>' +
-        '<div class="ntSkBox"><i class="ntSk w88"></i><i class="ntSk w52"></i></div>' +
-        '<i class="ntSkRule"></i><i class="ntSk w33 h38"></i>' +
-        '<div class="ntSkSub"><i class="ntSk w92"></i><i class="ntSk w62"></i></div>' +
-        '<div class="ntSkRow big"><span class="ntSkDot"></span><i class="ntSk w28"></i><div class="ntSkBtns"><i class="ntSk"></i><i class="ntSk"></i></div></div>' +
-        '<div class="ntSkRow"><span class="ntSkDot"></span><i class="ntSk w32"></i></div>' +
-        '<div class="ntSkRow"><span class="ntSkDot"></span><i class="ntSk w34"></i></div></div>' +
+      '<div class="ntCard">' +
+        '<div class="ntCLab">Most likely cause</div>' +
+        '<div class="ntCTop"><span class="ntCause">Tiredness</span><span class="ntThumbs"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10v12"/><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/></svg></i><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 14V2"/><path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22a3.13 3.13 0 0 1-3-3.88Z"/></svg></i></span></div>' +
+        '<div class="ntWhy">Gerald did not sleep well last night, he&rsquo;s spent the day tired</div>' +
+        '<i class="ntRule"></i>' +
+        '<div class="ntCLab">Recommendations</div>' +
+        '<p class="ntCSub">Try working through these recommendations in order to help calm Gerald down</p>' +
+        '<div class="ntRec1"><div class="ntRecRow"><span class="ntTick on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 12.6l4.6 4.6L19 7.8"/></svg></span>1. Sing a lullaby</div><div class="ntRecBtns"><span>This helped</span><span>This did not help</span></div></div>' +
+        '<div class="ntRec2"><span class="ntTick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 12.6l4.6 4.6L19 7.8"/></svg></span>2. Comfort item</div>' +
+        '<div class="ntRec2"><span class="ntTick"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5.2 12.6l4.6 4.6L19 7.8"/></svg></span>3. Calm environment</div></div>' +
       "</div>";
   }
 

@@ -67,31 +67,26 @@
 /* the blank result card (based on Nanni's result screen): it slides up from the bottom of the phone */
 .ntCard { position: absolute; z-index: 4; left: 3.4cqw; right: 3.4cqw; bottom: 3.4cqw; height: 120cqw; overflow: hidden; box-sizing: border-box; padding: 6.2cqw; display: flex; flex-direction: column; border-radius: 9cqw; background: #EDF1F5; box-shadow: 0 -1.6cqw 5cqw rgba(0, 18, 36, 0.12), 0 2.4cqw 6cqw rgba(0, 18, 36, 0.16); }
 
-/* the skeleton inside the result card: grey placeholders in the shape of Nanni's result screen (cause, why, recommendations) */
-.ntSk { display: block; height: 3cqw; border-radius: 99cqw; background: #D9E0E8; flex: none; }
-.ntSk.h36 { height: 3.6cqw; } .ntSk.h38 { height: 3.8cqw; }
-.ntSk.w28 { width: 28cqw; } .ntSk.w30 { width: 30cqw; } .ntSk.w32 { width: 32cqw; } .ntSk.w33 { width: 33cqw; } .ntSk.w34 { width: 34cqw; }
-.ntSk.w52 { width: 52%; } .ntSk.w62 { width: 62%; } .ntSk.w88 { width: 88%; } .ntSk.w92 { width: 92%; }
-.ntSkTop { display: flex; align-items: flex-end; justify-content: space-between; margin: 3cqw 0; }
-.ntSk.pill { width: 36cqw; height: 11cqw; }
-.ntSkThumbs { display: flex; gap: 1.6cqw; } .ntSkThumbs .ntSk { width: 8.4cqw; height: 6cqw; }
-.ntSkBox { background: #fff; border-radius: 5.5cqw; padding: 4cqw; display: flex; flex-direction: column; gap: 2cqw; }
-.ntSkRule { display: block; height: 0.25cqw; background: #C9D1DB; margin: 4cqw 0; flex: none; }
-.ntSkSub { display: flex; flex-direction: column; gap: 2cqw; margin: 2cqw 0 3cqw; }
-.ntSkRow { background: #fff; border-radius: 6cqw; height: 11.5cqw; margin-bottom: 2cqw; padding: 0 4.4cqw; display: flex; align-items: center; gap: 3.4cqw; flex: none; }
-.ntSkRow.big { height: 18cqw; flex-wrap: wrap; align-content: center; row-gap: 2.4cqw; padding-top: 0.5cqw; }
-.ntSkDot { width: 5.6cqw; height: 5.6cqw; border-radius: 50%; background: #DCE3EB; flex: none; }
-.ntSkBtns { display: flex; gap: 2cqw; width: 100%; padding-left: 0; } .ntSkBtns .ntSk { width: 19cqw; height: 5.2cqw; }
-/* an assortment of solid greys, no animation: darker for the cause, lighter for the lines of text */
-.ntSk.pill { background: #C4CED9; }
-.ntSk.h36, .ntSk.h38 { background: #CDD5DF; }
-.ntSkThumbs .ntSk { background: #E3E8EE; }
-.ntSkBox .ntSk, .ntSkSub .ntSk { background: #DEE4EB; }
-.ntSkBox .ntSk.w52, .ntSkSub .ntSk.w62 { background: #E6EBF1; }
-.ntSkRow .ntSk { background: #D3DAE3; }
-.ntSkBtns .ntSk { background: #E3E8EE; }
-.ntSkRow:nth-of-type(n+2) .ntSkDot { background: #D3DAE3; }
-.ntSkDot { background: #C9D2DC; }
-
+/* the result card's content, mocked up from Nanni's result screen */
+.ntCard { color: #001428; font-weight: 500; }
+.ntCLab { font-size: 3.9cqw; line-height: 5cqw; flex: none; }
+.ntCTop { display: flex; align-items: flex-end; justify-content: space-between; margin: 2.4cqw 0 2.6cqw; flex: none; }
+.ntCause { display: block; padding: 1.4cqw 4.6cqw 1.8cqw; border-radius: 99cqw; background: #FBC157; color: #fff; font-size: 7.4cqw; line-height: 9cqw; letter-spacing: -0.02em; box-shadow: 0 0.9cqw 1.8cqw rgba(160, 110, 20, 0.28); }
+.ntThumbs { display: flex; gap: 1.6cqw; margin-bottom: 0.6cqw; }
+.ntThumbs i { display: grid; place-items: center; width: 8.4cqw; height: 6.2cqw; border-radius: 99cqw; background: #fff; }
+.ntThumbs svg { width: 3.4cqw; height: 3.4cqw; fill: none; stroke: #001428; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ntWhy { background: #fff; border-radius: 5.2cqw; padding: 3.1cqw 2.9cqw 3.2cqw; margin-right: 2.4cqw; font-size: 3cqw; line-height: 5cqw; font-weight: 400; color: #7C8796; flex: none; }
+.ntRule { display: block; height: 0.25cqw; background: #C9D1DB; margin: 3.2cqw 0 3.2cqw; flex: none; }
+.ntCSub { margin: 1.6cqw 0 2.4cqw; font-size: 3cqw; line-height: 4.4cqw; font-weight: 400; flex: none; }
+.ntRec1, .ntRec2 { background: #fff; border-radius: 6.4cqw; flex: none; margin-bottom: 1.5cqw; font-size: 3.5cqw; }
+.ntRec1 { padding: 3.3cqw 3.3cqw 3.4cqw; }
+.ntRecRow, .ntRec2 { display: flex; align-items: center; gap: 2.7cqw; }
+.ntRec2 { height: 11.6cqw; padding: 0 3.8cqw; }
+.ntTick { display: grid; place-items: center; flex: none; width: 5.7cqw; height: 5.7cqw; border-radius: 50%; box-sizing: border-box; border: 0.2cqw solid #718093; }
+.ntTick svg { width: 3.1cqw; height: 3.1cqw; fill: none; stroke: #718093; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ntTick.on { background: #2B4AA0; border-color: #2B4AA0; }
+.ntTick.on svg { stroke: #fff; }
+.ntRecBtns { display: flex; gap: 1.8cqw; margin-top: 2.6cqw; }
+.ntRecBtns span { padding: 1.2cqw 2.4cqw; border: 0.2cqw solid #718093; border-radius: 99cqw; font-size: 2.7cqw; line-height: 1.2; font-weight: 400; }
 /* the Stop capturing button: it comes in under "Translating" once that has been pushed up above the card */
 .ntStop { position: absolute; z-index: 5; left: 50%; top: 70.5cqw; padding: 2.1cqw 4.6cqw; border-radius: 99cqw; background: #fff; color: #001428; white-space: nowrap; font-size: 3.7cqw; line-height: 1.2; font-weight: 600; letter-spacing: -0.005em; }
