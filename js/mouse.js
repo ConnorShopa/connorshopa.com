@@ -24,10 +24,10 @@
   var MAGNET = 0.5;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
   var MAX_PULL_X = 32;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 16;
-  // THE NUMBER TO PLAY WITH: how much gravity each project link in the middle of the home screen holds on the bubble.
-  // 0.5 = the old, gentle lean (same as the other links); 0.85 = the current setting; 1 = the bubble follows the cursor all the way (within a wider reach).
-  // You can also try values live: type  LIST_GRAVITY = 1.1  in the browser console and move the mouse.
-  var LIST_GRAVITY = 0.85;
+  // THE NUMBER TO PLAY WITH: how hard each project link in the middle of the home screen sucks the bubble onto itself.
+  // 0 = the old, gentle lean (the bubble drifts toward the cursor like the other links); 1 = the bubble sits dead centre on the link.
+  // The higher the number, the less it drifts and the harder it is held. Try values live: type  LIST_GRAVITY = 0.9  in the browser console and move the mouse.
+  var LIST_GRAVITY = 0.7;
   var LINK_SCALE = 0.9;  // hovered links shrink to this fraction of their size...
   var MIN_PX = 14;       // ...but never below this font size
   var FOLLOW_TIME = 0.4; // how smoothly the dot / box trails its target
@@ -76,7 +76,8 @@
       // the project list in the middle of the home screen has a much stronger magnet: the bubble leans further toward the cursor
       var strong = currentLink && currentLink.closest && currentLink.closest("#projectList");
       var g = typeof window.LIST_GRAVITY === "number" ? window.LIST_GRAVITY : LIST_GRAVITY;
-      var m = strong ? g : MAGNET, px = strong ? MAX_PULL_X * g / MAGNET : MAX_PULL_X, py = strong ? MAX_PULL_Y * g / MAGNET : MAX_PULL_Y; // the reach grows with it
+      var hold = strong ? Math.max(0, 1 - g) : 1; // 1 = free to drift as far as before, 0 = held dead centre
+      var m = MAGNET * hold, px = MAX_PULL_X * hold, py = MAX_PULL_Y * hold;
       x = cx + clamp((mouse.x - cx) * m, -px, px);
       y = cy + clamp((mouse.y - cy) * m, -py, py);
     }
