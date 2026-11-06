@@ -32,7 +32,14 @@
       '<div class="ntOrb"></div>' +
       '<div class="ntLabel"><span class="a">Capturing Gerald&rsquo;s cry</span><span class="b">Ready to translate</span><span class="c">Translating<i class="ntDots"><b>.</b><b>.</b><b>.</b></i></span></div>' +
       '<p class="ntHint">Nanni needs 5 seconds for accurate translations</p>' +
-      '<div class="ntCard"></div>' +
+      '<div class="ntCard"><i class="ntSk w30 h36"></i>' +
+        '<div class="ntSkTop"><i class="ntSk pill"></i><span class="ntSkThumbs"><i class="ntSk"></i><i class="ntSk"></i></span></div>' +
+        '<div class="ntSkBox"><i class="ntSk w88"></i><i class="ntSk w52"></i></div>' +
+        '<i class="ntSkRule"></i><i class="ntSk w33 h38"></i>' +
+        '<div class="ntSkSub"><i class="ntSk w92"></i><i class="ntSk w62"></i></div>' +
+        '<div class="ntSkRow big"><span class="ntSkDot"></span><i class="ntSk w28"></i><div class="ntSkBtns"><i class="ntSk"></i><i class="ntSk"></i></div></div>' +
+        '<div class="ntSkRow"><span class="ntSkDot"></span><i class="ntSk w32"></i></div>' +
+        '<div class="ntSkRow"><span class="ntSkDot"></span><i class="ntSk w34"></i></div></div>' +
       "</div>";
   }
 
@@ -218,8 +225,11 @@
     // 4 -> 5: the translation is done: a blank result card slides up from the bottom, and the orb and "Translating"
     // rise with it so they stay in view above the card
     at("result", 15.0);
-    var up = { v: 0 }, UP = 56;
-    function lift() { var t = "translateY(" + (-up.v * UP) + "cqw)"; orbEl.style.transform = t; label.style.transform = t; }
+    var up = { v: 0 }, UPO = 53.6, UPL = 67.7;
+    function lift() { // the orb shrinks and the label closes in on it as they rise above the card
+      orbEl.style.transform = "translateY(" + (-up.v * UPO) + "cqw) scale(" + (1 - 0.38 * up.v) + ")";
+      label.style.transform = "translateY(" + (-up.v * UPL) + "cqw) scale(" + (1 - 0.18 * up.v) + ")";
+    }
     tl.to(up, { v: 1, duration: 0.85, ease: "power3.out", onUpdate: lift }, "result")
       .to(card, { yPercent: 0, duration: 0.85, ease: "power3.out" }, "result");
 

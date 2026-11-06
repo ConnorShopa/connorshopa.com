@@ -65,4 +65,22 @@
 @media (max-width: 900px) { .ntRow { grid-template-columns: minmax(0, 1fr); row-gap: 8cqw; } .ntRow .ntFrame { max-width: 460px; margin: 0 auto; } .ntRow .ntFrame .ntMount { width: 62%; } }
 
 /* the blank result card (based on Nanni's result screen): it slides up from the bottom of the phone */
-.ntCard { position: absolute; z-index: 4; left: 3.4cqw; right: 3.4cqw; bottom: 3.4cqw; height: 120cqw; border-radius: 9cqw; background: #F7F9FC; box-shadow: 0 -1.6cqw 5cqw rgba(0, 18, 36, 0.12), 0 2.4cqw 6cqw rgba(0, 18, 36, 0.16); }
+.ntCard { position: absolute; z-index: 4; left: 3.4cqw; right: 3.4cqw; bottom: 3.4cqw; height: 120cqw; overflow: hidden; box-sizing: border-box; padding: 6.2cqw; display: flex; flex-direction: column; border-radius: 9cqw; background: #EDF1F5; box-shadow: 0 -1.6cqw 5cqw rgba(0, 18, 36, 0.12), 0 2.4cqw 6cqw rgba(0, 18, 36, 0.16); }
+
+/* the skeleton inside the result card: grey placeholders in the shape of Nanni's result screen (cause, why, recommendations) */
+.ntSk { display: block; height: 3cqw; border-radius: 99cqw; background: linear-gradient(90deg, #DCE3EB 0%, #EBF0F5 50%, #DCE3EB 100%); background-size: 200% 100%; animation: ntSkel 1.8s ease-in-out infinite; flex: none; }
+.ntSk.h36 { height: 3.6cqw; } .ntSk.h38 { height: 3.8cqw; }
+.ntSk.w28 { width: 28cqw; } .ntSk.w30 { width: 30cqw; } .ntSk.w32 { width: 32cqw; } .ntSk.w33 { width: 33cqw; } .ntSk.w34 { width: 34cqw; }
+.ntSk.w52 { width: 52%; } .ntSk.w62 { width: 62%; } .ntSk.w88 { width: 88%; } .ntSk.w92 { width: 92%; }
+.ntSkTop { display: flex; align-items: flex-end; justify-content: space-between; margin: 3cqw 0; }
+.ntSk.pill { width: 36cqw; height: 11cqw; }
+.ntSkThumbs { display: flex; gap: 1.6cqw; } .ntSkThumbs .ntSk { width: 8.4cqw; height: 6cqw; }
+.ntSkBox { background: #fff; border-radius: 5.5cqw; padding: 4cqw; display: flex; flex-direction: column; gap: 2cqw; }
+.ntSkRule { display: block; height: 0.25cqw; background: #C9D1DB; margin: 4cqw 0; flex: none; }
+.ntSkSub { display: flex; flex-direction: column; gap: 2cqw; margin: 2cqw 0 3cqw; }
+.ntSkRow { background: #fff; border-radius: 6cqw; height: 11.5cqw; margin-bottom: 2cqw; padding: 0 4.4cqw; display: flex; align-items: center; gap: 3.4cqw; flex: none; }
+.ntSkRow.big { height: 18cqw; flex-wrap: wrap; align-content: center; row-gap: 2.4cqw; padding-top: 0.5cqw; }
+.ntSkDot { width: 5.6cqw; height: 5.6cqw; border-radius: 50%; background: #DCE3EB; flex: none; }
+.ntSkBtns { display: flex; gap: 2cqw; width: 100%; padding-left: 0; } .ntSkBtns .ntSk { width: 19cqw; height: 5.2cqw; }
+@keyframes ntSkel { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@media (prefers-reduced-motion: reduce) { .ntSk { animation: none; } }
