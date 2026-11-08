@@ -9,7 +9,7 @@
 (function () {
   var A = "assets/projectAssets/";
   // picture sizes for the justified Sketchbook grid (js/justified.js)
-  var SK = {"sketch01": [1601, 1096], "sketch04": [3000, 3000], "sketch03": [1494, 1458], "sketch02": [1200, 631], "sketch12": [1600, 1329], "sketch05": [1600, 780], "sketch07": [1600, 1163], "sketch06": [1600, 1600], "sketch08": [6116, 3836], "sketch09": [1600, 1601], "sketch10": [1600, 992], "sketch11": [1600, 583], "sketch14": [1600, 1600], "sketch13": [1601, 1600]};
+  var SK = {"sketch15": [2400, 2342], "sketch16": [2400, 1244], "sketch17": [2400, 1835], "sketch01": [1601, 1096], "sketch04": [3000, 3000], "sketch03": [1494, 1458], "sketch02": [1200, 631], "sketch12": [1600, 1329], "sketch05": [1600, 780], "sketch07": [1600, 1163], "sketch06": [1600, 1600], "sketch08": [6116, 3836], "sketch09": [1600, 1601], "sketch10": [1600, 992], "sketch11": [1600, 583], "sketch14": [1600, 1600], "sketch13": [1601, 1600]};
   var H = "assets/homeAssets/";
 
   function pg(layout, html) { return { layout: layout, html: html }; }
@@ -381,7 +381,7 @@
     sketchbook: {
       title: "Sketchbook",
       pages: [
-        pg("gallery", '<div class="pgGallery justified">' + ["assets/sketches/sketch01.png", "assets/sketches/sketch04.png", "assets/sketches/sketch03.png", "assets/sketches/sketch02.png", "assets/sketches/sketch12.png", "assets/sketches/sketch05.png", "assets/sketches/sketch07.png", "assets/sketches/sketch06.png", "assets/sketches/sketch08.png", "assets/sketches/sketch09.png", "assets/sketches/sketch10.png", "assets/sketches/sketch11.png", "assets/sketches/sketch14.png", "assets/sketches/sketch13.png"].map(function (src) { var d = SK[src.match(/sketch\d+/)[0]]; return "<img src=\"" + src + "\" width=\"" + d[0] + "\" height=\"" + d[1] + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
+        pg("gallery", '<div class="pgGallery justified">' + ["assets/sketches/sketch01.png", "assets/sketches/sketch04.png", "assets/sketches/sketch03.png", "assets/sketches/sketch02.png", "assets/sketches/sketch12.png", "assets/sketches/sketch05.png", "assets/sketches/sketch07.png", "assets/sketches/sketch06.png", "assets/sketches/sketch08.png", "assets/sketches/sketch09.png", "assets/sketches/sketch10.png", "assets/sketches/sketch11.png", "assets/sketches/sketch14.png", "assets/sketches/sketch13.png", "assets/sketches/sketch15.png", "assets/sketches/sketch16.jpg", "assets/sketches/sketch17.png"].map(function (src) { var d = SK[src.match(/sketch\d+/)[0]]; return "<img src=\"" + src + "\" width=\"" + d[0] + "\" height=\"" + d[1] + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
       ],
     },
 
