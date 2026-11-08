@@ -124,7 +124,9 @@
             '<div class="ixItem ixYellow"><h3 class="ixT">Average</h3><div class="ixPic"><div class="ixS"><div class="ixM"><div class="ixI"><div class="ixCard"><img src="' + A + 'nanniAssets/nanni_insight_average.png" alt="Average" decoding="async"></div></div></div></div></div><p class="ixCap">Understand key trends pertaining to your babies crying schedule and how it compares to other times</p></div>' +
             '<div class="ixItem ixGreen"><h3 class="ixT">Past translations</h3><div class="ixPic"><div class="ixS"><div class="ixM"><div class="ixI"><div class="ixCard"><img src="' + A + 'nanniAssets/nanni_insight_past.png" alt="Past translations" decoding="async"></div></div></div></div></div><p class="ixCap">Keep a historical log of causes, fixes and timelines</p></div>' +
             '<div class="ixItem ixPink"><h3 class="ixT">Timeline</h3><div class="ixPic"><div class="ixS"><div class="ixM"><div class="ixI"><div class="ixCard"><img src="' + A + 'nanniAssets/nanni_insight_timeline.png" alt="Timeline" decoding="async"></div></div></div></div></div><p class="ixCap">Automatically get notified of likely causes of crying, based on your child&rsquo;s individual habits</p></div>' +
-          '</section></div>'),
+          '</section>' +
+          // the close: Nanni's website, centred and cut off by the bottom edge of the view
+          '<div class="wsCrop"><img src="' + A + 'nanniAssets/nanni_website.png" alt="The Nanni website" decoding="async"></div></div>'),
       ],
     },
 
