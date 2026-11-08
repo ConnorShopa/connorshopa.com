@@ -546,3 +546,7 @@ body {
 /* the hero image sits at the very top, above everything */
 .content > .imageBox:first-child, .content > .imageBox { margin-top: 140px; }
 .content > .imageBox + .heroBox { margin-top: 48px; }
+
+/* "When there's nothing being played" and "In Context": the screen sits close under its title (72px gap - 48px = 24px) */
+.content > .textSection:has(+ .imageBox img[src*="spotify_img10"]) + .imageBox,
+.content > .iconTextBox + .imageBox { margin-top: -48px; }
