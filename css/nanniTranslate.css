@@ -59,7 +59,7 @@
 
 /* the Nanni page: the animation sits in a rounded soft-blue frame on the left, with its words on the right */
 .ntRow { display: grid; grid-template-columns: minmax(0, 42%) minmax(0, 1fr); column-gap: 10.5%; align-items: center; padding: 2cqw var(--nn-pad, 48px) max(8cqw, 40px); }
-.ntRow .ntFrame { width: 100%; aspect-ratio: 100 / 170; border-radius: clamp(20px, 3.2cqw, 48px); background: linear-gradient(180deg, #DCE7FA 0%, #CFDEF5 100%); }
+.ntRow .ntFrame { width: 100%; aspect-ratio: 100 / 170; border-radius: clamp(24px, 5.5cqw, 88px); background: linear-gradient(180deg, #DCE7FA 0%, #CFDEF5 100%); }
 .ntRow .ntFrame .ntMount { width: 62%; }
 #view-nanni .ntRow .nnHead { max-width: 12em; margin: 0 0 4.2cqw; } /* more room between the heading and the first point */
 @media (max-width: 900px) { .ntRow { grid-template-columns: minmax(0, 1fr); row-gap: 8cqw; } .ntRow .ntFrame { max-width: 460px; margin: 0 auto; } .ntRow .ntFrame .ntMount { width: 62%; } }
@@ -93,7 +93,7 @@
 
 /* the Journal row: words on the left, two screens on a warm yellow gradient on the right */
 .jrRow { display: grid; grid-template-columns: minmax(0, 30%) minmax(0, 62%); justify-content: space-between; align-items: center; padding: 2cqw var(--nn-pad, 48px) max(8cqw, 40px); }
-.jrFrame { position: relative; width: 100%; aspect-ratio: 100 / 110; overflow: hidden; border-radius: 9.4% / 8.5%; background: linear-gradient(180deg, #F8E8C7 0%, #F6DB98 52%, #F3CC78 100%); }
+.jrFrame { position: relative; width: 100%; aspect-ratio: 100 / 110; overflow: hidden; border-radius: clamp(24px, 5.5cqw, 88px); background: linear-gradient(180deg, #F8E8C7 0%, #F6DB98 52%, #F3CC78 100%); }
 .jrFrame img { position: absolute; top: 7.5%; width: 47.7%; height: auto; display: block; }
 .jrFrame .jrA { left: 1.95%; }
 .jrFrame .jrB { left: 50.65%; }

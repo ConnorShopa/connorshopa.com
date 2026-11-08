@@ -2587,7 +2587,7 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 
 /* the navigation menu animation in Nanni's view: centred, as big as the card comfortably allows */
 /* Nanni's page: About + logo, Goal + phone, the nav animation in a full-width lavender frame, then two columns of words */
-#view-nanni .nnFrame { position: relative; width: 100%; aspect-ratio: 100 / 60; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; background: linear-gradient(180deg, #E8E1FC 0%, #D9CDF0 100%); }
+#view-nanni .nnFrame { position: relative; width: auto; margin: 0 var(--nn-pad); border-radius: clamp(24px, 5.5cqw, 88px); aspect-ratio: 100 / 60; overflow: hidden; display: flex; justify-content: center; align-items: flex-start; background: linear-gradient(180deg, #E8E1FC 0%, #D9CDF0 100%); }
 #view-nanni .nnFrame .nnMount { width: 70%; max-width: none; flex: none; }
 #view-nanni .nnNav { max-width: none; }
 #view-nanni .nnCap { position: absolute; left: 0; right: 0; bottom: 4%; text-align: center; font-size: clamp(18px, 2.2cqw, 36px); font-weight: 500; letter-spacing: -0.015em; color: var(--ink); }
