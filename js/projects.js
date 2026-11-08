@@ -117,7 +117,14 @@
           '<section class="jrRow"><div class="jrText"><span class="nnLab">&middot; History &amp; Insights</span><p class="nnLead nnHead">Journal</p>' +
             '<p class="nnPt">A dedicated home for past cries, notes, communication between shared caregivers and solutions that worked</p>' +
             '<p class="nnPt">Insights that are useful, yet simple. Based on the unique characteristics of the child, instead of an average.</p></div>' +
-            '<div class="jrFrame"><img class="jrA" src="' + A + 'nanniAssets/nanni_journal_history.png" alt="Nanni Journal: History" decoding="async"><img class="jrB" src="' + A + 'nanniAssets/nanni_journal_insights.png" alt="Nanni Journal: Insights" decoding="async"></div></section></div>'),
+            '<div class="jrFrame"><img class="jrA" src="' + A + 'nanniAssets/nanni_journal_history.png" alt="Nanni Journal: History" decoding="async"><img class="jrB" src="' + A + 'nanniAssets/nanni_journal_insights.png" alt="Nanni Journal: Insights" decoding="async"></div></section>' +
+          // the four insights: each image sits on a white card inside rounded, tinted layers (built in CSS)
+          '<section class="ixGrid">' +
+            '<div class="ixItem ixBlue"><h3 class="ixT">Recommendations</h3><div class="ixPic"><div class="ixS"><div class="ixM"><div class="ixI"><div class="ixCard"><img src="' + A + 'nanniAssets/nanni_insight_recommendations.png" alt="Recommendations" decoding="async"></div></div></div></div></div><p class="ixCap">See which recommendations and step by step processes work best for your unique childcare needs</p></div>' +
+            '<div class="ixItem ixYellow"><h3 class="ixT">Average</h3><div class="ixPic"><div class="ixS"><div class="ixM"><div class="ixI"><div class="ixCard"><img src="' + A + 'nanniAssets/nanni_insight_average.png" alt="Average" decoding="async"></div></div></div></div></div><p class="ixCap">Understand key trends pertaining to your babies crying schedule and how it compares to other times</p></div>' +
+            '<div class="ixItem ixGreen"><h3 class="ixT">Past translations</h3><div class="ixPic"><div class="ixS"><div class="ixM"><div class="ixI"><div class="ixCard"><img src="' + A + 'nanniAssets/nanni_insight_past.png" alt="Past translations" decoding="async"></div></div></div></div></div><p class="ixCap">Keep a historical log of causes, fixes and timelines</p></div>' +
+            '<div class="ixItem ixPink"><h3 class="ixT">Timeline</h3><div class="ixPic"><div class="ixS"><div class="ixM"><div class="ixI"><div class="ixCard"><img src="' + A + 'nanniAssets/nanni_insight_timeline.png" alt="Timeline" decoding="async"></div></div></div></div></div><p class="ixCap">Automatically get notified of likely causes of crying, based on your child&rsquo;s individual habits</p></div>' +
+          '</section></div>'),
       ],
     },
 
