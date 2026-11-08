@@ -10,6 +10,7 @@
   var t = function (s) { return reduce ? 0 : s; };
   var LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.";
   var CARD_W = 340, INTENT = 90, EDGE = 14;
+  var PUSH_X = 64, PUSH_Y = 48, RIPPLE = 70; // how far clear of the card the links in its way are shoved, and how far the rest lean away
   var ICON = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
   var cur = null;      // { li, card }
@@ -89,12 +90,12 @@
       if (o === li) return;
       var r = restOf(o, z);
       var dx = r.x - ccx, dy = r.y - ccy;
-      var ox = W / 2 + r.w / 2 + 18 - Math.abs(dx), oy = H / 2 + r.h / 2 + 14 - Math.abs(dy);
+      var ox = W / 2 + r.w / 2 + PUSH_X - Math.abs(dx), oy = H / 2 + r.h / 2 + PUSH_Y - Math.abs(dy);
       var mx = 0, my = 0;
       if (ox > 0 && oy > 0) { // inside the card's box: shove along the way out that is shorter
         if (ox < oy * 1.4) mx = (dx < 0 ? -1 : 1) * ox; else my = (dy < 0 ? -1 : 1) * oy;
       } else { // a ripple: nearer links lean away a little
-        var len = Math.hypot(dx, dy) || 1, k = 18 * (1 - Math.min(len / 600, 1));
+        var len = Math.hypot(dx, dy) || 1, k = RIPPLE * (1 - Math.min(len / 900, 1));
         mx = (dx / len) * k; my = (dy / len) * k;
       }
       var d = Math.min(Math.hypot(dx, dy) / 700, 1);

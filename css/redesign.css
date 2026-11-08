@@ -2700,3 +2700,28 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 .hoverCard.dark .hcExpand:hover { background: rgba(255, 255, 255, 0.3); }
 .hoverCard .hcText { margin: 18px 0 0; font-size: 18.67px; line-height: 1.4; font-weight: 400; letter-spacing: -0.01em; opacity: 0.8; }
 @media (max-width: 700px), (hover: none) { .hoverCard { display: none !important; } }
+
+/* the centre console's links, 0.8x (wide screens) */
+@media (min-width: 901px) {
+  #projectList.inline.big { font-size: 32px; }
+  #projectList .logo { height: 45px; max-width: 112px; }
+  #projectList .logo.wide { max-width: 112px; }
+  #projectList .rowLogo .logo { height: 38px; }
+  #projectList .rowLogo .wordmark { height: 18px; }
+  #projectList .stackLogo.small .logo { height: 19px; }
+  #projectList .withCaption .logo { height: 26px; }
+  #projectList .withCaption .label { font-size: 21px; }
+  #projectList .logo.altq { height: 19px; }
+  #projectList .logo.pollin { height: 32px; }
+  #projectList .logo.sheep { height: 22px; }
+  #projectList .spotIcon { width: 20px; height: 22px; }
+}
+
+/* while a link's hover card is open, every other link goes monochrome and loses its drop shadow */
+@media (min-width: 701px) {
+  #projectList li > a, #projectList li .logo, #projectList li .wordmark, #projectList li img { transition: filter .3s ease; }
+  html.hovCard #projectList li:not(.hovering) { text-shadow: none !important; }
+  html.hovCard #projectList li:not(.hovering) > a { filter: none !important; opacity: 1; }
+  html.hovCard #projectList li:not(.hovering) .logo, html.hovCard #projectList li:not(.hovering) .wordmark, html.hovCard #projectList li:not(.hovering) img, html.hovCard #projectList li:not(.hovering) svg { filter: grayscale(1) !important; }
+  html.hovCard #projectList li:not(.hovering) .bubble, html.hovCard #projectList li:not(.hovering) .spotIcon, html.hovCard #projectList li:not(.hovering) .seedsIcon { filter: grayscale(1) !important; }
+}
