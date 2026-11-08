@@ -2608,9 +2608,9 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
 #view-nanni .nnRow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 6cqw; row-gap: 5cqw; padding: 0 var(--nn-pad); }
 #view-nanni .nnAbout { padding-top: max(9cqw, 40px); padding-bottom: 12cqw; }
 #view-nanni .nnAbout .nnLead { max-width: 22em; }
-#view-nanni .nnShots { display: flex; align-items: flex-end; gap: 0.6cqw; }
-#view-nanni .nnShots img { display: block; width: clamp(70px, 11.9cqw, 190px); height: auto; filter: drop-shadow(0 0.8cqw 1.6cqw rgba(11, 21, 48, 0.16)); }
-#view-nanni .nnShots img.mid { width: clamp(76px, 12.8cqw, 205px); }
+#view-nanni .nnShots { display: flex; align-items: flex-end; gap: 0.8cqw; }
+#view-nanni .nnShots img { display: block; width: clamp(90px, 15.5cqw, 250px); height: auto; filter: drop-shadow(0 0.8cqw 1.6cqw rgba(11, 21, 48, 0.16)); }
+#view-nanni .nnShots img.mid { width: clamp(98px, 16.6cqw, 268px); }
 #view-nanni .nnGoal { padding: 0 var(--nn-pad) 12cqw; }
 #view-nanni .nnGoal .nnLead { max-width: none; }
 #view-nanni .nnCols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 3cqw; row-gap: 5cqw; padding: 1.6cqw var(--nn-pad) max(8cqw, 40px); }
