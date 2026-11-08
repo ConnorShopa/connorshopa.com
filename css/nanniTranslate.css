@@ -110,9 +110,9 @@
 .ixS { padding: 5.8%; border-radius: 15cqi; background: var(--c1); box-shadow: 0 1.4cqi 3.4cqi rgba(11, 21, 48, 0.1); }
 .ixM { padding: 6.55%; border-radius: 12.4cqi; background: var(--c2); box-shadow: 0 0.6cqi 1.6cqi rgba(11, 21, 48, 0.06); }
 .ixI { padding: 7.55%; border-radius: 10cqi; background: var(--c3); box-shadow: 0 0.6cqi 1.6cqi rgba(11, 21, 48, 0.06); }
-.ixCard { overflow: hidden; border-radius: 7.8cqi; background: #fff; box-shadow: 0 1.2cqi 3cqi rgba(11, 21, 48, 0.16); }
+.ixCard { overflow: hidden; border-radius: 4.6cqi; background: #fff; box-shadow: 0 1.2cqi 3cqi rgba(11, 21, 48, 0.16); }
 .ixCard img { display: block; width: 100%; height: auto; }
-.ixCap { margin: 3.2cqw auto 7.4cqw; max-width: 27em; text-align: center; font-size: clamp(15px, 1.75cqw, 28px); line-height: 1.5; font-weight: 500; color: var(--ink, #0B1530); }
+#view-nanni .ixCap { margin: 5cqw auto 11cqw; max-width: 27em; text-align: center; font-size: clamp(15px, 1.75cqw, 28px); line-height: 1.5; font-weight: 500; color: var(--ink, #0B1530); }
 .ixBlue { --c1: #9AC0FA; --c2: #B0CFFB; --c3: #D3E3FC; }
 .ixYellow { --c1: #F2C46C; --c2: #F5D38D; --c3: #F8E4B8; }
 .ixGreen { --c1: #B9D5B8; --c2: #CCDDCB; --c3: #DCE8DB; }
