@@ -75,7 +75,7 @@
       var r0 = Math.min(H - 6, W);
       setSize(Math.max(7, r0 / 25), r0); measureAll();
       var lens = forEl.w + 90;
-      R = 0.94 * Math.min(r0, (W + lens / 2) / 2 - 2); // the circles nearly fill the card
+      R = 0.75 * Math.min(r0, (W + lens / 2) / 2 - 2); // the circles nearly fill the card
       fs = Math.max(7, R / 25); ax = R - lens / 2;
       setSize(fs, R); measureAll();
       lens = forEl.w + 90; ax = R - lens / 2; wallX = forEl.w / 2 + 30;
