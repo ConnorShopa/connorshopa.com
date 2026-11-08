@@ -2527,7 +2527,9 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 
 /* no project list while a project view is open (it stays in the page, so it can come back on close; the prev / next chevrons switch projects) */
-html.view-open #projectList { opacity: 0 !important; pointer-events: none !important; }
+@media (max-width: 700px) { html.view-open #projectList { opacity: 0 !important; pointer-events: none !important; } }
+/* desktop: the intro (name, tagline, tabs) gives way to the row of projects above the smaller card */
+@media (min-width: 701px) { html.view-open .hero > header { opacity: 0; pointer-events: none; } }
 
 /* Nanni's phones now float on the card (their backgrounds are cut out), so the captions that used to be inside the pictures are text under them */
 #view-nanni .pgMedia figcaption { margin-top: 1.2cqw; text-align: center; font-size: clamp(14px, 1.3cqw, 22px); font-weight: 500; color: var(--ink); }

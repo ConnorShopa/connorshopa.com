@@ -18,6 +18,7 @@
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
   var SCREEN_PAD = 24; // desktop: the card fills the screen, this far from every edge
+  var ROW_TOP = 84;    // desktop: the card starts this far from the top, so the row of all the projects fits above it
   var BOTTOM_ROOM = 32; // space kept under the card (the gallery row now sits above it, between the intro and the card)
 
   var open = null; // { view, trigger, link }
@@ -375,7 +376,7 @@
     // (the same shape), and centred above the gallery row, over the tabs
     if (!narrow) {
       // the card is the whole screen, SCREEN_PAD from every edge
-      var bigW = window.innerWidth - SCREEN_PAD * 2, bigH = window.innerHeight - SCREEN_PAD * 2;
+      var bigW = window.innerWidth - SCREEN_PAD * 2, bigH = window.innerHeight - ROW_TOP - SCREEN_PAD; // room left above the card for the row of every other project
       cardW = bigW; height = bigH;
     }
     var side = (window.innerWidth - cardW) / 2;
@@ -385,7 +386,7 @@
       var minTop = top;
       var maxTop = Math.max(minTop, window.innerHeight - PAD - height);
       top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
-    } else top = SCREEN_PAD;
+    } else top = ROW_TOP;
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height;
     showProjNav(view, top, height, side, narrow, tintBg);
