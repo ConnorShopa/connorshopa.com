@@ -671,9 +671,6 @@ html.view-open #mouse-circle {
   display: flex;
   flex-wrap: wrap; /* wider than the screen once shrunk: it wraps, each row centred */
   row-gap: 8px;
-  --rowW: calc((100vw - 48px) / var(--mini, 0.6)); /* the row is scaled down by --mini, so it is allowed 1/--mini of the screen's width */
-  width: var(--rowW);
-  margin-left: calc(50% - var(--rowW) / 2);
   justify-content: center;
   align-items: flex-end;
 }
@@ -2337,12 +2334,12 @@ html:has(.viewHead.floating:hover, .viewClose.floating:hover, .projNav:hover) #m
 
 
 /* desktop: the row under an open project wraps onto more lines when it won't fit as one.
-   It is shown shrunk to 40% (MINI in js/project.js), so it gets a layout width of 92vw / 0.4: that way it only
-   wraps once the shrunk row would actually run past the edges of the window */
+   It is shown shrunk by --mini (MINI in js/project.js, set on the page by the script), so it gets a layout width
+   of 92vw / --mini: that way it only wraps once the shrunk row would actually run past the edges of the window */
 @media (min-width: 701px) {
   #projectList.compact {
     flex-wrap: wrap;
-    width: calc(92vw / 0.4);
+    width: calc(92vw / var(--mini, 0.6));
     justify-self: center;
   }
 }
