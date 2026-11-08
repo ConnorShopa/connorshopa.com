@@ -2687,20 +2687,6 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 /* the project views: a big, heavy drop shadow so each card sits well off the page */
 .view, .view.scrollView, .view.stepView { box-shadow: 0 70px 200px 30px rgba(20, 14, 40, 0.34), 0 34px 90px 8px rgba(20, 14, 40, 0.24), 0 10px 30px 0 rgba(20, 14, 40, 0.14); } /* very wide and soft, so it is not harsh; the drop (y offset) keeps the lift off the page */
 
-/* hover card: a link in the centre console opens into a card in its project's colour (js/hoverCard.js) */
-#projectList li.hovering { position: relative; z-index: 40; }
-.hoverCard { position: absolute; z-index: 5; box-sizing: border-box; padding: 20px 22px 24px; border-radius: 30px; will-change: width, height, transform; overflow: hidden; cursor: pointer; text-align: left; white-space: normal; font-size: 26px; line-height: 1.2; color: #1B2430; text-shadow: none; box-shadow: 0 34px 90px -12px rgba(20, 14, 40, 0.36), 0 10px 28px rgba(20, 14, 40, 0.16); }
-.hoverCard.dark { color: #FAFAFA; }
-.hoverCard .hcTop { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.hoverCard .hcLogo { display: inline-flex; align-items: center; min-width: 0; pointer-events: none; }
-.hoverCard .hcLogo * { text-shadow: none !important; filter: none !important; }
-.hoverCard .hcExpand { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 50%; background: rgba(27, 36, 48, 0.09); color: inherit; transition: background .2s ease, transform .2s ease; }
-.hoverCard.dark .hcExpand { background: rgba(255, 255, 255, 0.18); }
-.hoverCard .hcExpand:hover { background: rgba(27, 36, 48, 0.18); transform: scale(1.08); }
-.hoverCard.dark .hcExpand:hover { background: rgba(255, 255, 255, 0.3); }
-.hoverCard .hcText { margin: 18px 0 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 18.67px; line-height: 1.4; font-weight: 400; letter-spacing: -0.01em; opacity: 0.8; }
-@media (max-width: 700px), (hover: none) { .hoverCard { display: none !important; } }
-
 /* the centre console's links, 0.8x (wide screens) */
 @media (min-width: 901px) {
   #projectList.inline.big { font-size: 32px; }
@@ -2715,13 +2701,4 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
   #projectList .logo.pollin { height: 32px; }
   #projectList .logo.sheep { height: 22px; }
   #projectList .spotIcon { width: 20px; height: 22px; }
-}
-
-/* while a link's hover card is open, every other link goes monochrome and loses its drop shadow */
-@media (min-width: 701px) {
-  #projectList li > a, #projectList li .logo, #projectList li .wordmark, #projectList li img { transition: filter .3s ease; }
-  html.hovCard #projectList li:not(.hovering) { text-shadow: none !important; }
-  html.hovCard #projectList li:not(.hovering) > a { filter: grayscale(1) !important; opacity: 1; }
-  html.hovCard #projectList li:not(.hovering) .logo, html.hovCard #projectList li:not(.hovering) .wordmark, html.hovCard #projectList li:not(.hovering) img, html.hovCard #projectList li:not(.hovering) svg { filter: grayscale(1) !important; }
-  html.hovCard #projectList li:not(.hovering) .bubble, html.hovCard #projectList li:not(.hovering) .spotIcon, html.hovCard #projectList li:not(.hovering) .seedsIcon { filter: grayscale(1) !important; }
 }
