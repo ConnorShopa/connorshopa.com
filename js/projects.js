@@ -102,17 +102,17 @@
               '<blockquote class="nnQuote">&ldquo;I often miss a babies cry because it takes multiple taps to get to the recording screen.&rdquo;<cite>&ndash; Nanni AI user</cite></blockquote>' +
               '<blockquote class="nnQuote">&ldquo;Routines is a confusing name. I forget where to go to see all my recordings.&rdquo;<cite>&ndash; Nanni AI user</cite></blockquote></div>' +
             '<div class="nnColR">' +
-              '<p class="nnPt"><b>Feedback</b> became a prompt linked with insights and translation. Simpler for the caregiver, more relevant for Ubenwa to sharper their tool</p>' +
-              '<p class="nnPt"><b>Translating</b> a cry is now one a one tap away for a faster &amp; easier process during moments where caregivers found translation stressful</p>' +
-              '<p class="nnPt"><b>Journal</b> is the new home for insights, past translations, &amp; notes</p>' +
-              '<p class="nnPt"><b>Routines</b> remains focused on Nanni&rsquo;s new LOREM IPSUM</p>' +
-              '<p class="nnPt"><b>Fun zone</b> is remains unchanged, keeping the fun that Ubenwa had envisioned for parts of the tool</p></div>' +
+              '<p class="nnPt"><b>Feedback</b> became a prompt linked with insights and translation. Simpler for the caregiver, more relevant for Ubenwa to sharper their tool.</p>' +
+              '<p class="nnPt"><b>Translating</b> a cry is now one a one tap away for a faster &amp; easier process during moments where caregivers found translation stressful.</p>' +
+              '<p class="nnPt"><b>Journal</b> is the new home for insights, past translations, &amp; notes.</p>' +
+              '<p class="nnPt"><b>Routines</b> remains focused on Nanni&rsquo;s new LOREM IPSUM.</p>' +
+              '<p class="nnPt"><b>Fun zone</b> is remains unchanged, keeping the fun that Ubenwa had envisioned for parts of the tool.</p></div>' +
           '</section>' +
           // the new-translation animation (js/nanniTranslate.js) in a soft frame on the left, its words on the right
           '<section class="ntRow"><div class="ntFrame"><div class="ntMount"></div></div>' +
             '<div class="ntText"><span class="nnLab">&middot; Translation</span><p class="nnLead nnHead">Speedier, hands free, to the point translation</p>' +
               '<p class="nnPt">No longer 4 buttons, Nanni&rsquo;s translation becomes a single tap that translates automatically leaving caregivers hands free to care.</p>' +
-              '<p class="nnPt">Translating becomes a branded and seamless animation that represents the products science based technology</p></div></section></div>'),
+              '<p class="nnPt">Translating becomes a branded and seamless animation that represents the products science based technology.</p></div></section></div>'),
       ],
     },
 
