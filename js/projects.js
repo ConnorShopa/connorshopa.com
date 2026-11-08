@@ -111,11 +111,8 @@
           // the new-translation animation (js/nanniTranslate.js) in a soft frame on the left, its words on the right
           '<section class="ntRow"><div class="ntFrame"><div class="ntMount"></div></div>' +
             '<div class="ntText"><span class="nnLab">&middot; Translation</span><p class="nnLead nnHead">Speedier, hands free, to the point translation</p>' +
-              '<p class="nnPt">&middot; <b>Lorem ipsum</b> dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>' +
-              '<p class="nnPt">&middot; <b>Ut enim</b> ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure</p>' +
-              '<p class="nnPt">&middot; <b>Duis aute</b> irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>' +
-              '<p class="nnPt">&middot; <b>Excepteur sint</b> occaecat cupidatat non proident</p>' +
-              '<p class="nnPt">&middot; <b>Sunt in culpa</b> qui officia deserunt mollit anim id est laborum, sed ut perspiciatis unde omnis iste natus</p></div></section></div>'),
+              '<p class="nnPt">No longer 4 buttons, Nanni&rsquo;s translation becomes a single tap that translates automatically leaving caregivers hands free to care.</p>' +
+              '<p class="nnPt">Translating becomes a branded and seamless animation that represents the products science based technology</p></div></section></div>'),
       ],
     },
 
