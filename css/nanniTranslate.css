@@ -120,6 +120,6 @@
 @media (max-width: 900px) { .ixGrid { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } .ixItem { display: block; grid-row: auto; } .ixPic { width: 88%; margin: 0 auto; } }
 
 /* the close: Nanni's website, centred, running off the bottom edge of the view */
-.wsCrop { width: 74%; margin: 5cqw auto 0; aspect-ratio: 2560 / 1270; overflow: hidden; }
-.wsCrop img { display: block; width: 100%; height: auto; }
+.wsCrop { width: 74%; margin: 5cqw auto 0; aspect-ratio: 2560 / 1740; clip-path: inset(-12cqw -12cqw 0 -12cqw); }
+.wsCrop img { display: block; width: 100%; height: auto; filter: drop-shadow(0 1.2cqw 3cqw rgba(0, 20, 50, .22)) drop-shadow(0 .3cqw .8cqw rgba(0, 20, 50, .12)); }
 @media (max-width: 900px) { .wsCrop { width: 88%; margin-top: 2cqw; } }
