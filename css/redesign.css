@@ -2702,3 +2702,8 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
   #projectList .logo.sheep { height: 22px; }
   #projectList .spotIcon { width: 20px; height: 22px; }
 }
+
+/* the little head beside the name, larger */
+.who .name img { height: 38px; width: auto; }
+.who .name { gap: 12px; }
+@media (max-width: 700px) { .who .name img { height: 30px; } }
