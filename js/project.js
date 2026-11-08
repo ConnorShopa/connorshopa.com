@@ -18,6 +18,7 @@
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
   var SCREEN_PAD = 24; // desktop: the card fills the screen, this far from every edge
+  var VIEW_SCALE = 0.8; // desktop: how much of the room under the row the card takes (width and height)
   var ROW_TOP = 116;   // desktop: the card starts this far from the top, so the row of all the projects fits above it
   var BOTTOM_ROOM = 32; // space kept under the card (the gallery row now sits above it, between the intro and the card)
 
@@ -386,7 +387,7 @@
       rowTop = Math.max(ROW_TOP, Math.ceil(rowHm * MINI + GAP + 24));
       // the card is the whole screen, SCREEN_PAD from every edge
       var bigW = window.innerWidth - SCREEN_PAD * 2, bigH = window.innerHeight - rowTop - SCREEN_PAD; // room left above the card for the row of every other project
-      cardW = bigW; height = bigH;
+      cardW = bigW * VIEW_SCALE; height = bigH * VIEW_SCALE; rowTop += (bigH - height) / 2; // smaller, centred in the room under the row
     }
     var side = (window.innerWidth - cardW) / 2;
     view.style.width = cardW + "px";
