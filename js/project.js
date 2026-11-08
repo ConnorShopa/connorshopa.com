@@ -18,7 +18,7 @@
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
   var SCREEN_PAD = 24; // desktop: the card fills the screen, this far from every edge
-  var VIEW_SCALE = 0.8; // desktop: how much of the room under the row the card takes (width and height)
+  var VIEW_SCALE = 0.88; // desktop: how much of the room under the row the card takes (width and height)
   var ROW_TOP = 116;   // desktop: the card starts this far from the top, so the row of all the projects fits above it
   var BOTTOM_ROOM = 32; // space kept under the card (the gallery row now sits above it, between the intro and the card)
 
