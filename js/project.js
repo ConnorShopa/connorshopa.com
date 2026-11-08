@@ -10,7 +10,7 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var t = function (s) { return reduce ? 0 : s; };
 
-  var MINI = 0.4;  // how small the gallery gets while a view is open
+  var MINI = 0.6;  // how small the gallery gets while a view is open
   var GAP = 28;    // space between the card and the minimised gallery
   var CARD_SCALE = 1.33; // how much bigger the card is than the space between the tabs and the gallery row
   var CARD_RATIO = 16 / 10; // the expanded card's width : height (a MacBook screen's shape)
@@ -18,7 +18,7 @@
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
   var SCREEN_PAD = 24; // desktop: the card fills the screen, this far from every edge
-  var ROW_TOP = 84;    // desktop: the card starts this far from the top, so the row of all the projects fits above it
+  var ROW_TOP = 116;   // desktop: the card starts this far from the top, so the row of all the projects fits above it
   var BOTTOM_ROOM = 32; // space kept under the card (the gallery row now sits above it, between the intro and the card)
 
   var open = null; // { view, trigger, link }
