@@ -18,6 +18,7 @@
   var lockY = null; // the scroll position the page is pinned at while a project is open
   var introState = null; // the intro's full size while a project is open (restored on close)
   var SCREEN_PAD = 24; // desktop: the card fills the screen, this far from every edge
+  var CARD_R = 48; // desktop: the card's corner radius (the hover bubble grows into it, and back)
   var VIEW_SCALE = 0.88; // desktop: how much of the room under the row the card takes (width and height)
   var ROW_TOP = 116;   // desktop: the card starts this far from the top, so the row of all the projects fits above it
   var BOTTOM_ROOM = 32; // space kept under the card (the gallery row now sits above it, between the intro and the card)
@@ -435,7 +436,7 @@
     gsap.set(view, { autoAlpha: 0, scale: 1, x: 0, y: 0, xPercent: -50, yPercent: -50 });
     gsap.set(view.children, { opacity: 0 });
     var cr = view.getBoundingClientRect();
-    var to = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: 32, fill: b.fill };
+    var to = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: window.innerWidth > 700 ? CARD_R : 32, fill: b.fill };
     var reveal = function () {
       if (!open || open.view !== view) return;
       gsap.set(view, { autoAlpha: 1 });
@@ -545,7 +546,7 @@
 
     gsap.killTweensOf(view);
     var cr = view.getBoundingClientRect();
-    var fromCard = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: 32, fill: b.fill, shadow: window.bubble && window.bubble.CARD_SHADOW };
+    var fromCard = { cx: cr.left + cr.width / 2, cy: cr.top + cr.height / 2, w: cr.width, h: cr.height, r: window.innerWidth > 700 ? CARD_R : 32, fill: b.fill, shadow: window.bubble && window.bubble.CARD_SHADOW };
     var finish = function () {
       view.hidden = true;
       document.documentElement.style.overflow = "";

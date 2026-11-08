@@ -2707,3 +2707,5 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 .who .name img { height: 38px; width: auto; }
 .who .name { gap: 12px; }
 @media (max-width: 700px) { .who .name img { height: 30px; } }
+
+@media (min-width: 701px) { .view, .view.scrollView, .view.stepView { border-radius: 48px; } } /* a little rounder on desktop (js/project.js CARD_R matches, for the bubble) */
