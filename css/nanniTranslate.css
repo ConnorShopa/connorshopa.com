@@ -90,3 +90,13 @@
 .ntRecBtns span { padding: 1.2cqw 2.4cqw; border: 0.2cqw solid #718093; border-radius: 99cqw; font-size: 2.7cqw; line-height: 1.2; font-weight: 400; }
 /* the Stop capturing button: it comes in under "Translating" once that has been pushed up above the card */
 .ntStop { position: absolute; z-index: 5; left: 50%; top: 70.5cqw; padding: 2.1cqw 4.6cqw; border-radius: 99cqw; background: #fff; color: #001428; white-space: nowrap; font-size: 3.7cqw; line-height: 1.2; font-weight: 600; letter-spacing: -0.005em; }
+
+/* the Journal row: words on the left, two screens on a warm yellow gradient on the right */
+.jrRow { display: grid; grid-template-columns: minmax(0, 30%) minmax(0, 62%); justify-content: space-between; align-items: center; padding: 2cqw var(--nn-pad, 48px) max(8cqw, 40px); }
+.jrFrame { position: relative; width: 100%; aspect-ratio: 100 / 110; overflow: hidden; border-radius: 9.4% / 8.5%; background: linear-gradient(180deg, #F8E8C7 0%, #F6DB98 52%, #F3CC78 100%); }
+.jrFrame img { position: absolute; top: 7.5%; width: 47.7%; height: auto; display: block; }
+.jrFrame .jrA { left: 1.95%; }
+.jrFrame .jrB { left: 50.65%; }
+#view-nanni .jrRow .nnHead { max-width: 12em; margin: 0 0 4.2cqw; }
+#view-nanni .jrRow .nnPt { margin: 0 0 1.4em; }
+@media (max-width: 900px) { .jrRow { grid-template-columns: minmax(0, 1fr); row-gap: 8cqw; } }

@@ -112,7 +112,12 @@
           '<section class="ntRow"><div class="ntFrame"><div class="ntMount"></div></div>' +
             '<div class="ntText"><span class="nnLab">&middot; Translation</span><p class="nnLead nnHead">Speedier, hands free, to the point translation</p>' +
               '<p class="nnPt">No longer 4 buttons, Nanni&rsquo;s translation becomes a single tap that translates automatically leaving caregivers hands free to care.</p>' +
-              '<p class="nnPt">Translating becomes a branded and seamless animation that represents the products science based technology.</p></div></section></div>'),
+              '<p class="nnPt">Translating becomes a branded and seamless animation that represents the products science based technology.</p></div></section>' +
+          // the Journal: its words on the left, the two screens on a warm yellow gradient on the right
+          '<section class="jrRow"><div class="jrText"><span class="nnLab">&middot; History &amp; Insights</span><p class="nnLead nnHead">Journal</p>' +
+            '<p class="nnPt">A dedicated home for past cries, notes, communication between shared caregivers and solutions that worked</p>' +
+            '<p class="nnPt">Insights that are useful, yet simple. Based on the unique characteristics of the child, instead of an average.</p></div>' +
+            '<div class="jrFrame"><img class="jrA" src="' + A + 'nanniAssets/nanni_journal_history.png" alt="Nanni Journal: History" decoding="async"><img class="jrB" src="' + A + 'nanniAssets/nanni_journal_insights.png" alt="Nanni Journal: Insights" decoding="async"></div></section></div>'),
       ],
     },
 
