@@ -72,10 +72,10 @@
   function layout() {
     var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2, ax, fs;
     if (window.innerWidth > 1100) { // normal screens: circles float in the middle of the card
-      var r0 = Math.min(H - 6, W * 0.62);
+      var r0 = Math.min(H - 6, W);
       setSize(Math.max(7, r0 / 25), r0); measureAll();
       var lens = forEl.w + 90;
-      R = 0.58 * Math.min(r0, (W + lens / 2) / 2 - 2);
+      R = 0.94 * Math.min(r0, (W + lens / 2) / 2 - 2); // the circles nearly fill the card
       fs = Math.max(7, R / 25); ax = R - lens / 2;
       setSize(fs, R); measureAll();
       lens = forEl.w + 90; ax = R - lens / 2; wallX = forEl.w / 2 + 30;
