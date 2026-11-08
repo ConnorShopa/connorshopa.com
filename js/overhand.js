@@ -61,7 +61,7 @@
     anchors.forEach(function (a) { a.w = a.el.offsetWidth; a.h = a.el.offsetHeight; });
     forEl.w = forEl.offsetWidth; forEl.h = forEl.offsetHeight;
   }
-  var MIN_FONT = 16; // 12pt: the words in the pills never get smaller than this, however small the screen
+  var MIN_FONT = 14 * 4 / 3; // 14pt (18.67px): the words in the pills never get smaller than this, however small the screen
   function setSize(fs, big) {
     bubs.forEach(function (b) { var f = Math.max(MIN_FONT, fs * b.scale); b.el.style.fontSize = f.toFixed(1) + "px"; b.el.style.padding = Math.round(f * 0.5) + "px " + Math.round(f * 1.25) + "px"; });
     anchors.forEach(function (a) { a.el.style.fontSize = Math.round(big * 0.2) + "px"; });

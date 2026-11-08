@@ -197,9 +197,32 @@
     } });
   }
 
+
+  // ---- text floor: nothing readable in a project view is smaller than 14pt (18.67px). Mock-ups of an app's own screens
+  // (the phones, the Nanni animations) are pictures of a product, so their small text stays as drawn ----
+  var MIN_TEXT = 14 * 4 / 3;
+  var MOCKUP = ".phone, .ntRoot, .nnPhone, .ntMount, .nnMount, .ohPit, .ohBub, svg, canvas, video, .lottieBox";
+  function enforceMinText(view) {
+    if (!view) return;
+    (view._minForced || []).forEach(function (el) { el.style.removeProperty("font-size"); });
+    var forced = [], all = view.querySelectorAll("*");
+    for (var i = 0; i < all.length; i++) {
+      var el = all[i];
+      if (el.closest(MOCKUP)) continue;
+      var own = false;
+      for (var c = el.firstChild; c; c = c.nextSibling) { if (c.nodeType === 3 && c.nodeValue.trim()) { own = true; break; } }
+      if (!own) continue;
+      var fs = parseFloat(getComputedStyle(el).fontSize);
+      if (fs && fs < MIN_TEXT - 0.01) { el.style.setProperty("font-size", MIN_TEXT + "px", "important"); forced.push(el); }
+    }
+    view._minForced = forced;
+  }
+  window.addEventListener("resize", function () { if (open && open.view) enforceMinText(open.view); });
+
   function setPage(view, n, animate, dir) {
     var pages = pagesOf(view);
     if (!pages.length) return;
+    requestAnimationFrame(function () { enforceMinText(view); });
     if (view.classList.contains("scrollView")) { // every page is on, one under the other: the card scrolls
       view._page = 0;
       pages.forEach(function (p) { p.classList.add("is-on"); startMedia(p); });
@@ -416,6 +439,7 @@
     var reveal = function () {
       if (!open || open.view !== view) return;
       gsap.set(view, { autoAlpha: 1 });
+      enforceMinText(view);
       document.documentElement.classList.toggle("view-dark", view.classList.contains("dark")); // a dark card gets a white mouse dot
       if (window.bubble) window.bubble.handoff();
       var soft = view.classList.contains("hasBgImage");

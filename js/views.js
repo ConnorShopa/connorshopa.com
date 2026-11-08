@@ -324,7 +324,20 @@
             window.dispatchEvent(new MouseEvent("mousemove", { clientX: e.clientX + r.left, clientY: e.clientY + r.top }));
           }, { passive: true });
         }
-        if (d && d.body && d.readyState !== "loading") { shown = true; f.classList.add("ready"); }
+        if (d && d.body && d.readyState !== "loading") {
+          shown = true; f.classList.add("ready");
+          // text floor: nothing in the framed page is smaller than 14pt (18.67px)
+          try {
+            var MINPX = 14 * 4 / 3, fix = function () {
+              Array.prototype.forEach.call(d.body.querySelectorAll("*"), function (el) {
+                if (el.closest("svg, canvas, video, .headerBox, .footerBox")) return;
+                var own = false; for (var c = el.firstChild; c; c = c.nextSibling) { if (c.nodeType === 3 && c.nodeValue.trim()) { own = true; break; } }
+                if (own && parseFloat(f.contentWindow.getComputedStyle(el).fontSize) < MINPX - 0.01) el.style.setProperty("font-size", MINPX + "px", "important");
+              });
+            };
+            fix(); f.contentWindow.addEventListener("load", fix); f.contentWindow.addEventListener("resize", function () { setTimeout(fix, 50); });
+          } catch (e) {}
+        }
         // phones: iOS won't scroll a page inside a frame reliably, so the frame grows to the page's full height and the card scrolls instead
         if (shown && !f._fit && window.matchMedia("(max-width: 900px)").matches && d.body) {
           f._fit = true;
