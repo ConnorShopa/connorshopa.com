@@ -8,7 +8,7 @@
   var mq = window.matchMedia("(min-width: 701px) and (hover: hover) and (pointer: fine)");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var t = function (s) { return reduce ? 0 : s; };
-  var LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.";
+  var LOREM = "Lorem ipsum dolor sit amet";
   var CARD_W = 340, INTENT = 90, EDGE = 14;
   var PUSH_X = 64, PUSH_Y = 48, RIPPLE = 70; // how far clear of the card the links in its way are shoved, and how far the rest lean away
   var ICON = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -82,25 +82,40 @@
     // the card grows out of the link's own box
     var startW = (lr.width + 30), startH = (lr.height + 14);
     gsap.set(card, { xPercent: -50, yPercent: -50, x: shiftX, y: shiftY, transformOrigin: "50% 50%" });
-    gsap.fromTo(card, { width: startW, height: startH, borderRadius: 999, opacity: 0 }, { width: W, height: H, borderRadius: 30, opacity: 1, duration: t(0.34), ease: "back.out(1.5)", clearProps: "height" });
+    gsap.fromTo(card, { width: startW, height: startH, opacity: 0 }, { width: W, height: H, opacity: 1, duration: t(0.34), ease: "back.out(1.5)", clearProps: "height" });
     gsap.fromTo(card.querySelectorAll(".hcTop, .hcText"), { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: t(0.22), delay: t(0.1), stagger: t(0.05), ease: "power2.out" });
-    // the others are shoved: out of the card's box if they sit in it, else a gentle push away from it
+    // the others are shoved: first a gentle lean away from the card, then a relaxation: links in the card's way (with air
+    // around it) are moved clear, and any two links that touch push each other apart, until nothing overlaps
     pushed = [];
-    visibleLis().forEach(function (o) {
-      if (o === li) return;
-      var r = restOf(o, z);
-      var dx = r.x - ccx, dy = r.y - ccy;
-      var ox = W / 2 + r.w / 2 + PUSH_X - Math.abs(dx), oy = H / 2 + r.h / 2 + PUSH_Y - Math.abs(dy);
-      var mx = 0, my = 0;
-      if (ox > 0 && oy > 0) { // inside the card's box: shove along the way out that is shorter
-        if (ox < oy * 1.4) mx = (dx < 0 ? -1 : 1) * ox; else my = (dy < 0 ? -1 : 1) * oy;
-      } else { // a ripple: nearer links lean away a little
-        var len = Math.hypot(dx, dy) || 1, k = RIPPLE * (1 - Math.min(len / 900, 1));
-        mx = (dx / len) * k; my = (dy / len) * k;
+    var others = visibleLis().filter(function (o) { return o !== li; }).map(function (o) { var r = restOf(o, z); return { el: o, rx: r.x, ry: r.y, w: r.w, h: r.h, x: r.x, y: r.y }; });
+    others.forEach(function (o) {
+      var dx = o.x - ccx, dy = o.y - ccy, len = Math.hypot(dx, dy) || 1, k = RIPPLE * (1 - Math.min(len / 900, 1));
+      o.x += (dx / len) * k; o.y += (dy / len) * k;
+    });
+    var halfW = W / 2 + PUSH_X, halfH = H / 2 + PUSH_Y, GX = 16, GY = 10, M = 8;
+    for (var it = 0; it < 60; it++) {
+      var moved = false;
+      others.forEach(function (o) { // out of the card's box, by the shorter way
+        var dx = o.x - ccx, dy = o.y - ccy, ox = halfW + o.w / 2 - Math.abs(dx), oy = halfH + o.h / 2 - Math.abs(dy);
+        if (ox > 0 && oy > 0) { moved = true; if (ox < oy * 1.4) o.x += (dx < 0 ? -1 : 1) * ox; else o.y += (dy < 0 ? -1 : 1) * oy; }
+      });
+      for (var i = 0; i < others.length; i++) {
+        for (var j = i + 1; j < others.length; j++) { // two links that touch push each other apart
+          var a1 = others[i], b1 = others[j], dx2 = b1.x - a1.x, dy2 = b1.y - a1.y;
+          var ox2 = (a1.w + b1.w) / 2 + GX - Math.abs(dx2), oy2 = (a1.h + b1.h) / 2 + GY - Math.abs(dy2);
+          if (ox2 > 0 && oy2 > 0) {
+            moved = true;
+            if (ox2 < oy2 * 1.4) { var sx = (dx2 < 0 ? -1 : 1) * ox2 / 2; a1.x -= sx; b1.x += sx; } else { var sy = (dy2 < 0 ? -1 : 1) * oy2 / 2; a1.y -= sy; b1.y += sy; }
+          }
+        }
       }
-      var d = Math.min(Math.hypot(dx, dy) / 700, 1);
-      gsap.to(o, { x: mx / z, y: my / z, duration: t(0.4), delay: t(0.03 * d * 4), ease: "back.out(1.2)", overwrite: "auto" });
-      pushed.push(o);
+      others.forEach(function (o) { o.x = Math.max(M + o.w / 2, Math.min(vw - M - o.w / 2, o.x)); o.y = Math.max(M + o.h / 2, Math.min(vh - M - o.h / 2, o.y)); }); // stay on screen
+      if (!moved) break;
+    }
+    others.forEach(function (o) {
+      var d = Math.min(Math.hypot(o.rx - ccx, o.ry - ccy) / 700, 1);
+      gsap.to(o.el, { x: (o.x - o.rx) / z, y: (o.y - o.ry) / z, duration: t(0.4), delay: t(0.12 * d), ease: "back.out(1.1)", overwrite: "auto" });
+      pushed.push(o.el);
     });
   }
 
