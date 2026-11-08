@@ -374,9 +374,18 @@
     var cardW = narrow ? fullW : Math.min(fullW, height * CARD_RATIO);
     // desktop: the card is CARD_SCALE times bigger than what fits between the tabs and the gallery row, as large as the window allows
     // (the same shape), and centred above the gallery row, over the tabs
+    var rowTop = ROW_TOP;
     if (!narrow) {
+      // the row of the other projects wraps (centred) when it is wider than the screen, so measure how tall it will be
+      // while compact (with this project left out) and keep the card below it
+      document.documentElement.style.setProperty("--mini", MINI);
+      var wasCompact = list.classList.contains("compact"), li0 = trigger && trigger.closest ? trigger.closest("li") : null, wasCur = li0 && li0.classList.contains("is-current");
+      list.classList.add("compact"); if (li0) li0.classList.add("is-current");
+      var rowHm = list.getBoundingClientRect().height;
+      if (!wasCompact) list.classList.remove("compact"); if (li0 && !wasCur) li0.classList.remove("is-current");
+      rowTop = Math.max(ROW_TOP, Math.ceil(rowHm * MINI + GAP + 24));
       // the card is the whole screen, SCREEN_PAD from every edge
-      var bigW = window.innerWidth - SCREEN_PAD * 2, bigH = window.innerHeight - ROW_TOP - SCREEN_PAD; // room left above the card for the row of every other project
+      var bigW = window.innerWidth - SCREEN_PAD * 2, bigH = window.innerHeight - rowTop - SCREEN_PAD; // room left above the card for the row of every other project
       cardW = bigW; height = bigH;
     }
     var side = (window.innerWidth - cardW) / 2;
@@ -386,7 +395,7 @@
       var minTop = top;
       var maxTop = Math.max(minTop, window.innerHeight - PAD - height);
       top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
-    } else top = ROW_TOP;
+    } else top = rowTop;
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height;
     showProjNav(view, top, height, side, narrow, tintBg);

@@ -669,7 +669,11 @@ html.view-open #mouse-circle {
 /* while a project view is open the gallery runs in one row beneath it (the open project is left out) */
 #projectList.compact {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap; /* wider than the screen once shrunk: it wraps, each row centred */
+  row-gap: 8px;
+  --rowW: calc((100vw - 48px) / var(--mini, 0.6)); /* the row is scaled down by --mini, so it is allowed 1/--mini of the screen's width */
+  width: var(--rowW);
+  margin-left: calc(50% - var(--rowW) / 2);
   justify-content: center;
   align-items: flex-end;
 }
