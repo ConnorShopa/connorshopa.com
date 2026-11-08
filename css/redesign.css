@@ -2622,6 +2622,8 @@ html.view-open #projectList { opacity: 0 !important; pointer-events: none !impor
   #view-nanni .nnShots img.mid { width: 28vw; }
 }
 @media (min-width: 901px) {
+  /* Goal and Navigation text sit in one column centred on the navigation frame's midline */
+  #view-nanni .nnGoal, #view-nanni .nnCols { box-sizing: border-box; width: 76cqw; max-width: calc(100% - 2 * var(--nn-pad)); margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; }
   #view-nanni .nnFrame { aspect-ratio: 100 / 29; }
   #view-nanni .nnFrame .nnMount { width: 35.3%; }
   #view-nanni.stepView .pg.one:has(> .nnDoc) { display: block; padding: 0; overflow-y: auto; overflow-x: hidden; }
