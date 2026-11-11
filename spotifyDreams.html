@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=7" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=8" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -151,26 +151,29 @@
                     function render() {
                         var W = panels[0].offsetWidth;
                         if (st.p !== last) { dir = st.p > last ? 1 : -1; last = st.p; }
+                        var f = st.p - Math.floor(st.p), lift = 4 * f * (1 - f);   // 0 at rest, 1 half way through a step: the panels rise off the page while they move
+                        stage.style.setProperty("--lift", lift.toFixed(3));
                         panels.forEach(function (el, i) {
-                            var s = i - st.p, a = Math.abs(s), k = Math.min(a, 1);
+                            var s = i - st.p, a = Math.abs(s), k = Math.min(a, 1), grow = 1 + 0.05 * lift;
                             gsap.set(el, {
                                 x: s * W,
                                 transformPerspective: PERSP * W,                        // each panel is seen in perspective from its hinge: the free edge comes toward you, so it reads taller than the hinged edge
                                 rotationY: (s >= 0 ? -1 : 1) * ANG * k,                  // right panels swing toward you on their left hinge, left ones on their right hinge
-                                scaleY: 1 - (1 - SIDE) * k,                              // the side panels are shorter than the main one
+                                scaleX: grow,
+                                scaleY: (1 - (1 - SIDE) * k) * grow,                     // the side panels are shorter than the main one
                                 transformOrigin: s >= 0 ? "0% 50%" : "100% 50%",
                                 zIndex: (s * dir > 0) ? 2 : 1,                           // the panel arriving at the front passes over the one leaving
-                                opacity: Math.max(0, Math.min(1, 2 - a))
+                                opacity: (1 - 0.45 * k) * Math.max(0, Math.min(1, 2 - a))   // the panels behind are fainter
                             });
                         });
                     }
                     render();
                     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-                    var tl = gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "power2.inOut" }, onUpdate: render });
-                    tl.to(st, { p: 1, duration: 0.42 }, 0.64)
-                      .to(st, { p: 2, duration: 0.48 }, 1.82)
-                      .to(st, { p: 1, duration: 0.44 }, 3.18)
-                      .to(st, { p: 0, duration: 0.64 }, 4.36)
+                    var tl = gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "back.out(1.25)" }, onUpdate: render });
+                    tl.to(st, { p: 1, duration: 0.62 }, 0.64)
+                      .to(st, { p: 2, duration: 0.62 }, 1.82)
+                      .to(st, { p: 1, duration: 0.62 }, 3.18)
+                      .to(st, { p: 0, duration: 0.7 }, 4.36)
                       .to({}, { duration: 0.01 }, 5.49);
                     window.addEventListener("resize", render);
                     if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { e[0].isIntersecting ? tl.play() : tl.pause(); }).observe(box);
