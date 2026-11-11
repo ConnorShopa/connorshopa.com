@@ -757,3 +757,7 @@ html.inFrame h5.sectionBreaker { font-family: "Satoshi", "Host Grotesk", system-
 /* "The final idea" in a pill, styled like the "Problem 1" label */
 html.inFrame h5.pillBreaker { display: flex; justify-content: center; width: 100%; margin: 0; font-size: inherit; }
 h5.pillBreaker .pLabel { display: inline-block; font-family: "Host Grotesk", system-ui, sans-serif; font-size: 22px; font-weight: 400; color: #002644; line-height: 1.2; letter-spacing: normal; padding: 6px 18px; border: 1px solid #6f7b86; border-radius: 999px; }
+
+/* the use-case titles at the size of "Making the view scalable" */
+html.inFrame .gifCol > .gifTitle { font-size: clamp(16px, 2.56vw, 48px); }
+@media (max-width: 900px) { html.inFrame .gifCol > .gifTitle { font-size: clamp(16px, 4.4vw, 26px); } }
