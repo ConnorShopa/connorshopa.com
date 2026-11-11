@@ -2715,7 +2715,7 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 @media (min-width: 701px) and (hover: hover) {
   .stack > .ghost { display: none; }
   #projectList.inline.big {
-    display: flex; flex-wrap: nowrap; justify-content: safe center; align-items: stretch; gap: 20px;
+    display: flex; flex-wrap: nowrap; justify-content: safe center; align-items: stretch; gap: 16px;
     width: 100%; box-sizing: border-box; padding: 30px max(24px, 4vw) 54px; /* room under the cards for their shadow */
     overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
     scrollbar-width: none; zoom: 1 !important; text-shadow: none;
@@ -2724,7 +2724,7 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
   #projectList li.row-break { display: none !important; }
   #projectList li:not(.row-break) {
     position: relative; flex: none; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
-    width: 240px; height: 160px; padding: 0; border-radius: 32px; scroll-snap-align: center;
+    width: 200px; height: 134px; padding: 0; border-radius: 28px; scroll-snap-align: start;
     background: var(--card, #F4F4F4); box-shadow: 0 14px 34px -14px rgba(47, 39, 37, 0.32), 0 2px 8px rgba(47, 39, 37, 0.08);
   }
   #projectList li::after { display: none !important; }
@@ -2737,4 +2737,10 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
   #projectList li.cardDark > a { color: #FAFAFA; }
   /* while a project is open the cards run in one row above it: one line, scrolling sideways */
   #projectList.compact.inline.big { flex-wrap: nowrap; overflow-x: auto; padding: 8px max(24px, 4vw) 14px; }
+}
+
+/* the card row runs the full width of the window and off its edges (no clipping at the right) */
+@media (min-width: 701px) and (hover: hover) {
+  #projectList.inline.big:not(.compact) { width: 100vw; max-width: none; margin-left: calc(50% - 50vw); justify-content: safe center; }
+  body { overflow-x: clip; }
 }
