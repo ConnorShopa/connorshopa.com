@@ -558,6 +558,9 @@ body {
 .flipDemo .fdStage { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
 .flipDemo .fdStage i { position: absolute; left: -21.6cqw; top: -21.6cqw; width: 43.2cqw; height: 43.2cqw; box-sizing: border-box; border: 1.2px dashed #474B4E; border-radius: 1.5cqw; background: #F7F7F7; box-shadow: 0 calc(2cqw + 2.5cqw * var(--lift, 0)) calc(5cqw + 4cqw * var(--lift, 0)) rgba(30, 35, 60, calc(0.12 + 0.08 * var(--lift, 0))); }
 
-/* the flip section: the copy sits centred below the animation, at every width */
-.imageTextSection:has(.flipDemo) { flex-direction: column; align-items: center; gap: 0; }
-.imageTextSection:has(.flipDemo) .textSection { align-items: center; text-align: center; margin: 0 auto; max-width: 90%; }
+/* the flip section: the copy sits to the right of the animation, left aligned, both centred on a row (wide screens; narrow ones keep the stacked layout) */
+@media (min-width: 901px) {
+  .imageTextSection:has(.flipDemo) { flex-direction: row; align-items: center; gap: 72px; }
+  .imageTextSection:has(.flipDemo) .textSection { align-items: flex-start; text-align: left; margin: 0; max-width: none; }
+  .imageTextSection:has(.flipDemo) .textSection .centerText { text-align: left; }
+}
