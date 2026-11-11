@@ -21,8 +21,8 @@
   // ---- tuning ----
   var PAD_X = 22;        // box padding around the link text
   var PAD_Y = 10;
-  var PROJ_PAD_K = 0.4;   // ...and the project links in the centre list: the gutter is this share of the link's smaller side...
-  var PROJ_PAD_MIN = 16;  // ...but never less than this (px)
+  var PROJ_PAD_X = 32;   // ...and the project links in the centre list: wider than the default, but snug
+  var PROJ_PAD_Y = 12;
   var MAGNET = 0.5;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
   var MAX_PULL_X = 32;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 16;
@@ -90,10 +90,8 @@
   function morphToBox() {
     if (locked) return;
     var inList = currentLink && currentLink.closest && currentLink.closest("#projectList"); // the project links in the middle get a roomier bubble
-    // project links vary a lot in shape (tall icons, wide wordmarks): the gutter is an even share of the link's own smaller side, so every bubble keeps its link's proportions
-    var pg = inList ? Math.max(PROJ_PAD_MIN, PROJ_PAD_K * Math.min(base.width, base.height)) : 0;
-    var w = inList ? base.width + pg * 2 : base.width + PAD_X * 2;
-    var h = inList ? base.height + pg * 2 : base.height + PAD_Y * 2;
+    var w = base.width + (inList ? PROJ_PAD_X : PAD_X) * 2;   // project links in the centre list: a wide, snug bubble
+    var h = base.height + (inList ? PROJ_PAD_Y : PAD_Y) * 2;
     var shape = Math.min(1, Math.max(0, (w / h - 1) / (WIDE_AT - 1))); // 0 = squarish, 1 = very wide
     var radius = (h / 2) * (1 - shape * (1 - ROUND_WIDE));
     // icon-only buttons (the view's close button and page chevrons) get a true circle around the icon instead of a pill

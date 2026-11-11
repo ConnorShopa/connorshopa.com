@@ -131,7 +131,7 @@
     var useDot = d && d.width > 40 && Math.abs(d.left + d.width / 2 - (r.left + r.width / 2)) < r.width && Math.abs(d.top + d.height / 2 - (r.top + r.height / 2)) < r.height;
     var b = useDot
       ? { w: d.width, h: d.height, cx: d.left + d.width / 2, cy: d.top + d.height / 2 }
-      : { w: r.width + 2 * Math.max(16, 0.4 * Math.min(r.width, r.height)), h: r.height + 2 * Math.max(16, 0.4 * Math.min(r.width, r.height)), cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
+      : { w: r.width + 64, h: r.height + 24, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
     b.fill = link.getAttribute("data-bubble") || null; // a project's own bubble / card colour
     b.r = useDot ? parseFloat(getComputedStyle(dotEl).borderTopLeftRadius) || b.h / 2 : b.h / 2;
     return b;
