@@ -918,3 +918,6 @@ html.inFrame .statsFrame + .forAllBox { padding: 88px 0 72px; }
 
 /* the words round the rolling numbers: same dark as the titles (size unchanged) */
 html.inFrame .minutesBig .mT, html.inFrame .forAllBox h3.centerText { color: #2D3A44; }
+
+/* even rhythm: 88px above and below "For all it's wonder" (64px padding + the 24px margin before the next section), same as between the stats */
+html.inFrame .statsFrame + .forAllBox { padding: 88px 0 64px; }
