@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=79" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=80" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -123,7 +123,7 @@
                 });
                 var STAGGER = 0.1, BUMP_AT = 1.9, BUMP_LEN = 0.7, BUMP = nd > 3 ? 0.5 : 0.22;   // seconds; the settle's size is in digit heights
                 function win(x) { x = Math.max(0, Math.min(1, (x - 0.9) / 0.1)); return x * x * (3 - 2 * x); }
-                var E = gsap.parseEase("power4.in"), DUR = 1.9;
+                var E = gsap.parseEase("power3.inOut"), DUR = 1.9;
                 function draw(T) {   // T: seconds on the roll clock; each wheel runs its own roll, a little later than the one to its left
                     cols.forEach(function (c, i) {
                         var v = S0 + (S1 - S0) * E(Math.max(0, Math.min(1, (T - i * STAGGER) / DUR))), x = v / c.p10, fl = Math.floor(x), lower = c.k ? (v % c.p10) / c.p10 : 0;
