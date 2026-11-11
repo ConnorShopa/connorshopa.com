@@ -1074,3 +1074,11 @@ h5.pillBreaker .pLabel::after {
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 18' preserveAspectRatio='none'%3E%3Cpath d='M0 0H36L22 14Q18 18.5 14 14Z' fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
 }
 html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -28px; }
+
+/* Thought bubble tooltip: wide flared top that melts into the pill, soft rounded point; fades in from the pill so there is no seam */
+h5.pillBreaker .pLabel::after {
+  width: 48px; height: 28px; bottom: -18px; left: 50%; transform: translateX(-50%); z-index: -1;
+  background: linear-gradient(180deg, rgba(16,136,59,0) 0%, #10883b 36%, #139443 100%);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2028'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0%200H48V10C40%2010%2036%2014%2032.5%2019C29%2024%2027%2027%2024%2027C21%2027%2019%2024%2015.5%2019C12%2014%208%2010%200%2010Z'%20fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2028'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0%200H48V10C40%2010%2036%2014%2032.5%2019C29%2024%2027%2027%2024%2027C21%2027%2019%2024%2015.5%2019C12%2014%208%2010%200%2010Z'%20fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
