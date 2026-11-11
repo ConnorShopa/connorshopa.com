@@ -836,3 +836,8 @@ html.inFrame .imageBox img[src*="spotify_gif07"] { width: 80%; }
 
 /* "Thought" pills sit as close to their title as the Problem pills do to their statement (12px; the .content gap is 72px) */
 html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -60px; }
+
+/* Sketching: centred column like the other sections: title, then the gif, then the subtitle below it */
+html.inFrame .content > .imageTextSection.sketchSection { flex-direction: column; align-items: center; justify-content: center; gap: 56px; }
+html.inFrame .sketchSection > .textSection, html.inFrame .sketchSection > .imageBox { width: 100%; }
+html.inFrame .sketchSection > .imageBox img { margin-left: auto; margin-right: auto; }
