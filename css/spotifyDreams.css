@@ -814,3 +814,6 @@ html.inFrame .annoBox > img { width: 100%; height: auto; display: block; margin:
 html.inFrame .annoBox .anno { position: absolute; margin: 0; white-space: nowrap; font-family: "Host Grotesk", "Satoshi", system-ui, sans-serif; font-weight: 400; color: #001428; letter-spacing: -0.04em; }
 html.inFrame .annoL .anno { text-align: right; font-size: 1.46cqw; line-height: 1.5cqw; }
 html.inFrame .annoR .anno { text-align: left; font-size: 2.3cqw; line-height: 2.38cqw; }
+
+/* annotation labels: same font as the Sketching subtitle (Satoshi 500, #2D3A44) */
+html.inFrame .annoBox .anno { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 500; color: #2D3A44; letter-spacing: 0; }
