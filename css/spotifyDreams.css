@@ -841,3 +841,21 @@ html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -60px; }
 html.inFrame .content > .imageTextSection.sketchSection { flex-direction: column; align-items: center; justify-content: center; gap: 56px; }
 html.inFrame .sketchSection > .textSection, html.inFrame .sketchSection > .imageBox { width: 100%; }
 html.inFrame .sketchSection > .imageBox img { margin-left: auto; margin-right: auto; }
+
+/* ---- dashed outlines moved: around the rolling numbers and the Problem headings; off the content frames ---- */
+/* rolling numbers in one rounded dashed outline */
+html.inFrame .statsFrame { display: flex; flex-direction: column; align-items: center; align-self: stretch; width: 100%; box-sizing: border-box; border: 1.2px dashed #474B4E; border-radius: 32px; padding: 56px 48px; }
+html.inFrame .content > .heroStage + .statsFrame { margin-top: 48px; }
+html.inFrame .statsFrame > .minutesBox { margin-top: 0; align-self: center; }
+html.inFrame .statsFrame > .minutesBox + .hoursBox { margin-top: 16px; }
+html.inFrame .statsFrame + .forAllBox { margin-top: 0; align-self: stretch; width: 100%; max-width: none; padding: 24px 0 72px; box-sizing: border-box; }
+html.inFrame .content > .statsFrame + .forAllBox + .heroBox { margin-top: 24px; }
+@media (max-width: 900px) { html.inFrame .statsFrame { border-radius: 24px; padding: 32px 20px; } }
+
+/* Problem 1 / Problem 2: the pill becomes a rounded dashed outline round the label and statement */
+html.inFrame h2.problemHead { border: 1.2px dashed #474B4E; border-radius: 32px; padding: 56px 48px; box-sizing: border-box; }
+h2.problemHead .pLabel { border: 0; padding: 0; border-radius: 0; }
+@media (max-width: 900px) { html.inFrame h2.problemHead { border-radius: 24px; padding: 32px 20px; } }
+
+/* the frames holding the content keep their layout but lose the dashed outline */
+html.inFrame .dashFrame, html.inFrame .imageTextSection:has(.flipDemo) { border: 0; }
