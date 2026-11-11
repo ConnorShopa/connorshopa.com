@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=80" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=81" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -119,15 +119,15 @@
                     col.className = "rd"; strip.className = "rs";
                     for (var d = 0; d <= 10; d++) h += "<span>" + ((10 - d) % 10) + "</span>";   // 0 at the bottom, 9 at the top: the wheel turns downward as the count rises
                     strip.innerHTML = h; col.appendChild(strip); el.appendChild(col);
-                    cols.push({ strip: strip, k: k, p10: Math.pow(10, k), last: null, blur: 0 });
+                    cols.push({ d: +toD.charAt(cols.length), strip: strip, k: k, p10: Math.pow(10, k), last: null, blur: 0 });
                 });
                 var STAGGER = 0.1, BUMP_AT = 1.9, BUMP_LEN = 0.7, BUMP = nd > 3 ? 0.5 : 0.22;   // seconds; the settle's size is in digit heights
                 function win(x) { x = Math.max(0, Math.min(1, (x - 0.9) / 0.1)); return x * x * (3 - 2 * x); }
                 var E = gsap.parseEase("power3.inOut"), DUR = 1.9;
                 function draw(T) {   // T: seconds on the roll clock; each wheel runs its own roll, a little later than the one to its left
                     cols.forEach(function (c, i) {
-                        var v = S0 + (S1 - S0) * E(Math.max(0, Math.min(1, (T - i * STAGGER) / DUR))), x = v / c.p10, fl = Math.floor(x), lower = c.k ? (v % c.p10) / c.p10 : 0;
-                        var pos = c.k ? fl + win(lower) : v;
+                        // slot-machine wheels: every wheel really turns, making full revolutions (more the further right) before it stops on its digit
+                        var e = E(Math.max(0, Math.min(1, (T - i * STAGGER) / DUR))), pos = e * (c.d + 10 * (1 + i));
                         var u = (T - BUMP_AT - i * STAGGER) / BUMP_LEN;
                         if (u > 0 && u < 1) pos += BUMP * Math.sin(u * 9.4248) * (1 - u) * (1 - u);
                         var m = ((pos % 10) + 10) % 10, sp = c.last === null ? 0 : Math.abs(pos - c.last);
