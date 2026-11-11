@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=23" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=24" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -172,7 +172,7 @@
                                 scaleX: grow,
                                 scaleY: (1 - (1 - SIDE) * k) * grow * (a > 1 ? Math.max(0.7, 1 - 0.05 * (a - 1)) : 1),                     // the side panels are shorter than the main one
                                 transformOrigin: s >= 0 ? "0% 50%" : "100% 50%",
-                                zIndex: Math.round(100 - a * 10) + ((s * dir > 0 && a < 1) ? 20 : 0),   // nearer panels sit over farther ones; the one arriving at the front passes over the one leaving
+                                zIndex: 1000 - Math.round(a * 100) + (s * dir > 0 ? 1 : 0),   // whichever record is nearer the centre is on top, all the way through a swap (so no record's edge pops over the one arriving); the arriving one wins a tie
                                 opacity: (1 - 0.45 * k) * (a > 1 ? Math.max(0.35, 1 - 0.22 * (a - 1)) : 1) * Math.max(0, Math.min(1, 4 - a))   // the panels behind are fainter, the farthest fade out
                             });
                         });
