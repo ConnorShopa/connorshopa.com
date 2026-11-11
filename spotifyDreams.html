@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=35" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=37" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -83,26 +83,26 @@
             </div>
 
         <div class="minutesBox">
-            <p class="minutesBig" aria-label="I spent 112,000 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-to="112000" aria-hidden="true">112,000</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
+            <p class="minutesBig" aria-label="I spent 112,000 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-from="100000" data-to="112000" aria-hidden="true">112,000</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
             <script>
-            // the number rolls up from 0 to 112,000 (digit wheels that spin and sharpen as they settle) when it scrolls into view
+            // the number rolls from 100,000 to 112,000, the wheels turning downward (digit wheels that spin and sharpen as they settle) when it scrolls into view
             (function () {
                 var el = document.currentScript.previousElementSibling.querySelector(".roll");
                 if (!el || !window.gsap) return;
                 var text = el.getAttribute("data-to").replace(/\B(?=(\d{3})+(?!\d))/g, ","), cols = [], i;
                 var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                 el.textContent = "";
-                var nDigits = text.replace(/,/g, "").length, d = 0;
+                var from = el.getAttribute("data-from").padStart(text.replace(/,/g, "").length, "0"), d = 0;   // the wheels start on 100,000, not 000,000
                 text.split("").forEach(function (ch) {
                     if (ch === ",") { var c = document.createElement("span"); c.className = "rc"; c.textContent = ","; el.appendChild(c); return; }
-                    /* three spare cells past the target are for the wheel to overshoot onto */ var col = document.createElement("span"), strip = document.createElement("span"), loops = d + 2, target = +ch, n = loops * 10 + target + 1, k;
+                    /* three spare cells past the target are for the wheel to overshoot onto */ var col = document.createElement("span"), strip = document.createElement("span"), loops = d + 1, target = +ch, sd = +from.charAt(d), n = loops * 10 + ((target - sd + 10) % 10) + 1, k;
                     col.className = "rd"; strip.className = "rdS";
-                    for (k = 0; k < n + 3; k++) { var cell = document.createElement("span"); cell.textContent = k % 10; strip.appendChild(cell); }
+                    for (k = 0; k < n + 3; k++) { var cell = document.createElement("span"); cell.textContent = (sd + n - 1 + 3 - k) % 10; strip.appendChild(cell); }
                     col.appendChild(strip); el.appendChild(col); cols.push({ strip: strip, n: n }); d++;
                 });
-                function place(p, b) { // p: 0 (all zeros) .. 1 (112,000); b: how many digits the wheels are past (+) or short of (-) the target; the blur is strongest while the wheels are fastest and gone when they stop
+                function place(p, b) { // p: 0 (100,000) .. 1 (112,000); b: how many digits the wheels are past (+) or short of (-) the target; the blur is strongest while the wheels are fastest and gone when they stop
                     var h = cols[0].strip.firstChild.getBoundingClientRect().height;   // the exact (fractional) cell height: a rounded one adds up to a visible miss over a long strip
-                    cols.forEach(function (c) { gsap.set(c.strip, { y: -(p * (c.n - 1) + b) * h, filter: "blur(" + (11 * Math.pow(Math.abs(1 - p), 2.2)).toFixed(2) + "px)" }); });
+                    cols.forEach(function (c) { gsap.set(c.strip, { y: -((1 - p) * (c.n - 1) - b + 3) * h, filter: "blur(" + (11 * Math.pow(Math.abs(1 - p), 2.2) * Math.min(1, p * 15)).toFixed(2) + "px)"   /* sharp while it waits, blurring up as the wheels start */ }); });
                 }
                 place(still ? 1 : 0, 0);
                 if (still) { cols.forEach(function (c) { c.strip.style.filter = "none"; }); return; }
