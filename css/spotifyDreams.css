@@ -952,3 +952,7 @@ h5.pillBreaker .pLabel::after { width: 10px; height: 10px; bottom: -19px; }
 /* dream bubble: trailing circles drift off to the left of centre, still overlapping, so the tail leans naturally */
 h5.pillBreaker .pLabel::before { left: calc(50% - 22px); transform: none; }
 h5.pillBreaker .pLabel::after { left: calc(50% - 29px); transform: none; bottom: -16px; }
+
+/* centring at narrow widths: the generic .textSection rule gives 24px side margins on top of width:100%, pushing every text block right of centre */
+html.inFrame .content .textSection { margin-left: 0; margin-right: 0; box-sizing: border-box; }
+html.inFrame .content .textSection > h2.problemHead { margin-left: auto; margin-right: auto; }
