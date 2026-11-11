@@ -948,3 +948,7 @@ h5.pillBreaker .pLabel { box-shadow: none; filter: drop-shadow(0 6px 10px rgba(1
 h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after { box-shadow: none; }
 h5.pillBreaker .pLabel::before { width: 15px; height: 15px; bottom: -11px; }
 h5.pillBreaker .pLabel::after { width: 10px; height: 10px; bottom: -19px; }
+
+/* dream bubble: trailing circles drift off to the left of centre, still overlapping, so the tail leans naturally */
+h5.pillBreaker .pLabel::before { left: calc(50% - 22px); transform: none; }
+h5.pillBreaker .pLabel::after { left: calc(50% - 29px); transform: none; bottom: -16px; }
