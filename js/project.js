@@ -132,7 +132,7 @@
     var b = useDot
       ? { w: d.width, h: d.height, cx: d.left + d.width / 2, cy: d.top + d.height / 2 }
       : { w: r.width + 64, h: r.height + 24, cx: r.left + r.width / 2, cy: r.top + r.height / 2 };
-    b.fill = link.getAttribute("data-bubble") || null; // a project's own bubble / card colour
+    b.fill = (window.bubbleColourOf ? window.bubbleColourOf(link) : link.getAttribute("data-bubble")) || null; // a project's own bubble / card colour
     b.r = useDot ? parseFloat(getComputedStyle(dotEl).borderTopLeftRadius) || b.h / 2 : b.h / 2;
     return b;
   }

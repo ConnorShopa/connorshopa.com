@@ -87,6 +87,22 @@
     moveY(y);
   }
 
+  // The hover bubble takes the colour of the card the link opens into (the project's own view), so the bubble and the card match.
+  // A link can keep a fixed colour (data-bubble-fixed, for framed legacy pages whose own page colour fills the card) or add transparency (data-bubble-alpha).
+  function bubbleColour(link) {
+    if (!link) return boxFill();
+    var v = link.getAttribute("data-view"), fixed = link.hasAttribute("data-bubble-fixed");
+    if (v && !fixed) {
+      var el = document.getElementById("view-" + v), c = el ? getComputedStyle(el).backgroundColor : "", n = c && c.match(/[\d.]+/g);
+      if (n && n.length >= 3 && (n.length < 4 || +n[3] > 0.5)) {
+        var al = parseFloat(link.getAttribute("data-bubble-alpha"));
+        return al >= 0 && al <= 1 ? "rgba(" + n[0] + ", " + n[1] + ", " + n[2] + ", " + al + ")" : c;
+      }
+    }
+    return link.getAttribute("data-bubble") || null;
+  }
+  window.bubbleColourOf = bubbleColour;
+
   function morphToBox() {
     if (locked) return;
     var inList = currentLink && currentLink.closest && currentLink.closest("#projectList"); // the project links in the middle get a roomier bubble
@@ -120,7 +136,7 @@
       width: w,
       height: h,
       borderRadius: radius,
-      backgroundColor: (currentLink && currentLink.getAttribute("data-bubble")) || boxFill(),
+      backgroundColor: bubbleColour(currentLink) || boxFill(),
       borderColor: boxBorder(),
       boxShadow: BOX_SHADOW,
       duration: t(MORPH_TIME),
