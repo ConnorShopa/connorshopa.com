@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=49" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=55" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -83,36 +83,51 @@
             </div>
 
         <div class="minutesBox">
-            <p class="minutesBig" aria-label="I spent 112,000 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-from="100000" data-to="112000" aria-hidden="true">112,000</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
+            <p class="minutesBig" aria-label="I spent 112,661 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-from="100000" data-to="112661" aria-hidden="true">112,661</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
             <script>
-            // the number rolls from 100,000 to 112,000, the wheels turning downward (digit wheels that spin and sharpen as they settle) when it scrolls into view
+            // iOS-style rolling numbers: the number counts up in quick steps, and a digit that changes slides up out of the way (fading and blurring) while the next one rises into its place.
+            // Digits that don't change stay still. The last step lands left to right, each digit springing in with a small bounce.
             window.spRoll = function (el) {   // works on any .roll with data-from / data-to ("112000", "5.1"...)
                 if (!el || !window.gsap) return;
-                var text = el.getAttribute("data-to").replace(/\B(?=(\d{3})+(?!\d))/g, ","), cols = [], i;
+                var text = el.getAttribute("data-to").replace(/\B(?=(\d{3})+(?!\d))/g, ","), cols = [];
                 var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                var toD = text.replace(/\D/g, ""), nd = toD.length, S1 = +toD, S0 = +el.getAttribute("data-from").replace(/\D/g, "");
+                var cur = String(S0).padStart(nd, "0");
                 el.textContent = "";
-                var from = el.getAttribute("data-from").replace(/\D/g, "").padStart(text.replace(/\D/g, "").length, "0"), d = 0;   // the wheels start on 100,000, not 000,000
                 text.split("").forEach(function (ch) {
                     if (!/\d/.test(ch)) { var c = document.createElement("span"); c.className = "rc"; c.textContent = ch; el.appendChild(c); return; }
-                    /* three spare cells past the target are for the wheel to overshoot onto */ var col = document.createElement("span"), strip = document.createElement("span"), loops = d + 1, target = +ch, sd = +from.charAt(d), n = loops * 10 + ((target - sd + 10) % 10) + 1, k;
-                    col.className = "rd"; strip.className = "rdS";
-                    for (k = 0; k < n + 3; k++) { var cell = document.createElement("span"); cell.textContent = (sd + n - 1 + 3 - k) % 10; strip.appendChild(cell); }
-                    col.appendChild(strip); el.appendChild(col); cols.push({ strip: strip, n: n }); d++;
+                    var col = document.createElement("span"), a = document.createElement("span"), b = document.createElement("span"), i = cols.length;
+                    col.className = "rd"; a.className = "rdA"; b.className = "rdB";
+                    b.textContent = cur.charAt(i); a.style.opacity = 0;
+                    col.appendChild(a); col.appendChild(b); el.appendChild(col);
+                    cols.push({ a: a, b: b, d: cur.charAt(i), f: 1, tw: null });
                 });
-                function place(p, b) { // p: 0 (100,000) .. 1 (112,000); b: how many digits the wheels are past (+) or short of (-) the target; the blur is strongest while the wheels are fastest and gone when they stop
-                    var h = cols[0].strip.firstChild.getBoundingClientRect().height;   // the exact (fractional) cell height: a rounded one adds up to a visible miss over a long strip
-                    cols.forEach(function (c) { gsap.set(c.strip, { y: -((1 - p) * (c.n - 1) - b + 3) * h, filter: "blur(" + (11 * Math.pow(Math.abs(1 - p), 2.2) * Math.min(1, p * 15)).toFixed(2) + "px)"   /* sharp while it waits, blurring up as the wheels start */ }); });
+                var SLIDE = 55, BLUR = 6;   // how far (% of the digit's height) a digit travels, and the most it blurs
+                function draw(c) {
+                    var f = Math.max(0, Math.min(1, c.f));
+                    gsap.set(c.a, { yPercent: -f * SLIDE, opacity: 1 - f, filter: f > 0.02 && f < 1 ? "blur(" + (f * BLUR).toFixed(2) + "px)" : "none" });
+                    gsap.set(c.b, { yPercent: (1 - c.f) * SLIDE, opacity: f, filter: f < 0.98 ? "blur(" + ((1 - f) * BLUR).toFixed(2) + "px)" : "none" });
                 }
-                place(still ? 1 : 0, 0);
-                if (still) { cols.forEach(function (c) { c.strip.style.filter = "none"; }); return; }
-                var o = { p: 0, b: 0 }, played = false;
-                function bump(p) { var u = (p - 0.9) / 0.1; return u <= 0 || u >= 1 ? 0 : 0.4 * Math.sin(Math.PI * u); }   // runs 0.4 of a digit past the number during the last tenth of the roll, and is back on it as the roll ends
+                function change(c, d, delay, bounce) {
+                    if (c.d === d) return;
+                    if (c.tw) c.tw.kill();
+                    c.a.textContent = c.d; c.b.textContent = d; c.d = d; c.f = 0; draw(c);   // the digit on its way in becomes the one on its way out if it is interrupted
+                    c.tw = gsap.to(c, { f: 1, duration: bounce ? 0.55 : 0.3, delay: delay || 0, ease: bounce ? "back.out(2.2)" : "power2.out", onUpdate: function () { draw(c); }, onComplete: function () { c.f = 1; draw(c); } });
+                }
+                function show(v, last) {
+                    var s = String(v).padStart(nd, "0");
+                    cols.forEach(function (c, i) { change(c, s.charAt(i), last ? i * 0.07 : 0, last); });
+                }
+                cols.forEach(draw);
+                if (still) { show(S1, false); cols.forEach(function (c) { if (c.tw) c.tw.progress(1); c.f = 1; draw(c); }); return; }
+                var o = { p: 0 }, played = false, lastV = S0, lastT = 0;
                 function play() {
                     if (played) return; played = true;
-                    // one continuous motion: the wheels spin up and slow down on a steep curve, and the last stretch carries them a touch past the number and back onto it
-                    gsap.to(o, { p: 1, duration: 3, ease: "power3.out", onUpdate: function () { place(o.p, bump(o.p)); }, onComplete: function () { place(1, 0); cols.forEach(function (c) { c.strip.style.filter = "none"; }); } });
+                    gsap.to(o, { p: 1, duration: 1.7, ease: "power3.out", onUpdate: function () {
+                        var v = Math.round(S0 + (S1 - S0) * o.p), now = performance.now();
+                        if (v !== lastV && v !== S1 && now - lastT >= 70) { lastV = v; lastT = now; show(v, false); }   // a step every 70 ms, so the digits are always mid-roll while it climbs
+                    }, onComplete: function () { show(S1, true); } });
                 }
-                window.addEventListener("resize", function () { place(o.p, bump(o.p)); });
                 if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
                 else play();
             };
@@ -150,12 +165,6 @@
 
 
             <div class="textSection">
-
-                <h3>
-                    – Oxymoronically, I also collect vinyl records, and it was this hobby that made me set out to design
-                    a solution that would solve two problems.
-                </h3>
-                <br><br>
 
 
 

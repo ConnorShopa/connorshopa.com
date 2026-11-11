@@ -583,9 +583,8 @@ html.inFrame .content > .imageBox:first-child img { width: 60%; }
 .minutesBox { display: flex; justify-content: center; align-self: stretch; text-align: center; }
 .minutesBig { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(40px, 6.4vw, 120px); line-height: 1.08; white-space: nowrap; letter-spacing: -0.04em; font-weight: 500; color: #03131f; }
 .minutesBig .roll { display: inline-block; vertical-align: top; height: 1.08em; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 1em; line-height: 1.08; }
-.minutesBig .rd { display: inline-block; height: 1.08em; clip-path: inset(0 -0.3em); vertical-align: top; width: 0.64em; text-align: center; }
-.minutesBig .rdS { display: flex; flex-direction: column; will-change: transform, filter; }
-.minutesBig .rdS > span { display: block; height: 1.08em; line-height: 1.08; }
+.minutesBig .rd { display: inline-block; position: relative; height: 1.08em; vertical-align: top; width: 0.64em; text-align: center; }
+.minutesBig .rdA, .minutesBig .rdB { position: absolute; left: 0; right: 0; top: 0; line-height: 1.08; will-change: transform, filter, opacity; }
 .minutesBig .rc { display: inline-block; vertical-align: top; width: 0.28em; text-align: center; }
 @media (max-width: 900px) { .minutesBig { font-size: clamp(26px, 6.4vw, 64px); } }
 
@@ -613,3 +612,7 @@ html.inFrame .content > .imageBox:first-child img { width: 60%; }
 .heroBox > .textSection:first-child { align-items: center; }
 html .heroBox h1, html.inFrame .heroBox h1 { text-align: center; width: 100%; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 700; color: #03131f; font-size: clamp(40px, 6.4vw, 120px); line-height: 1.08; letter-spacing: -0.04em; } /* the rolling numbers' size */
 @media (max-width: 900px) { html .heroBox h1, html.inFrame .heroBox h1 { font-size: clamp(26px, 6.4vw, 64px); } }
+
+/* "Fixing problems I have with Spotify": centred under the title */
+.heroBox .productDetails, .heroBox .productDetails .textSection { align-items: center; justify-content: center; text-align: center; width: 100%; }
+.heroBox .productDetails h4 { text-align: center; }
