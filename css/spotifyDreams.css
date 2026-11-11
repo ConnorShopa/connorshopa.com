@@ -576,3 +576,15 @@ html.inFrame h3 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif;
 /* the hero image at the top of the project view: 0.6x of its width, still centred */
 html.inFrame .content > .imageBox:first-child img { width: 60%; }
 
+
+/* "I spent 112,000 minutes with Spotify in 2024": very large, centred under the hero image; the number is a rolling counter */
+.content > .imageBox + .minutesBox { margin-top: 96px; }
+.content > .minutesBox + .heroBox { margin-top: 96px; }
+.minutesBox { display: flex; justify-content: center; align-self: stretch; text-align: center; }
+.minutesBig { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(40px, 6.4vw, 120px); line-height: 1.08; white-space: nowrap; letter-spacing: -0.04em; font-weight: 500; color: #03131f; }
+.minutesBig .roll { display: inline-block; vertical-align: top; height: 1.08em; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 1em; line-height: 1.08; }
+.minutesBig .rd { display: inline-block; height: 1.08em; clip-path: inset(0 -0.3em); vertical-align: top; width: 0.64em; text-align: center; }
+.minutesBig .rdS { display: flex; flex-direction: column; will-change: transform, filter; }
+.minutesBig .rdS > span { display: block; height: 1.08em; line-height: 1.08; }
+.minutesBig .rc { display: inline-block; vertical-align: top; width: 0.28em; text-align: center; }
+@media (max-width: 900px) { .minutesBig { font-size: clamp(26px, 6.4vw, 64px); } }

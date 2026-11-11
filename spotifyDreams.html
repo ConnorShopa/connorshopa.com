@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=29" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=31" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -81,6 +81,40 @@
             <div class="imageBox">
                 <img src="assets/projectAssets/spotifyAssets/spotify_img01.png" alt="" />
             </div>
+
+        <div class="minutesBox">
+            <p class="minutesBig" aria-label="I spent 112,000 minutes with Spotify in 2024">I spent <span class="roll" data-to="112000" aria-hidden="true">112,000</span> minutes<br>with Spotify in 2024</p>
+            <script>
+            // the number rolls up from 0 to 112,000 (digit wheels that spin and sharpen as they settle) when it scrolls into view
+            (function () {
+                var el = document.currentScript.previousElementSibling.querySelector(".roll");
+                if (!el || !window.gsap) return;
+                var text = el.getAttribute("data-to").replace(/\B(?=(\d{3})+(?!\d))/g, ","), cols = [], i;
+                var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                el.textContent = "";
+                var nDigits = text.replace(/,/g, "").length, d = 0;
+                text.split("").forEach(function (ch) {
+                    if (ch === ",") { var c = document.createElement("span"); c.className = "rc"; c.textContent = ","; el.appendChild(c); return; }
+                    var col = document.createElement("span"), strip = document.createElement("span"), loops = d + 2, target = +ch, n = loops * 10 + target + 1, k;
+                    col.className = "rd"; strip.className = "rdS";
+                    for (k = 0; k < n; k++) { var cell = document.createElement("span"); cell.textContent = k % 10; strip.appendChild(cell); }
+                    col.appendChild(strip); el.appendChild(col); cols.push({ strip: strip, n: n }); d++;
+                });
+                function place(p) { // p: 0 (all zeros) .. 1 (112,000); the blur is strongest while the wheels are fastest and gone when they stop
+                    var h = cols[0].strip.firstChild.getBoundingClientRect().height;   // the exact (fractional) cell height: a rounded one adds up to a visible miss over a long strip
+                    cols.forEach(function (c) { gsap.set(c.strip, { y: -p * (c.n - 1) * h, filter: "blur(" + (11 * Math.pow(1 - p, 2.2)).toFixed(2) + "px)" }); });
+                }
+                place(still ? 1 : 0);
+                if (still) { cols.forEach(function (c) { c.strip.style.filter = "none"; }); return; }
+                var o = { p: 0 }, played = false;
+                function play() { if (played) return; played = true; gsap.to(o, { p: 1, duration: 3.2, ease: "power3.out", onUpdate: function () { place(o.p); }, onComplete: function () { cols.forEach(function (c) { c.strip.style.filter = "none"; }); } }); }
+                window.addEventListener("resize", function () { place(o.p); });
+                if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
+                else play();
+            })();
+            </script>
+        </div>
+
 
         <div class="heroBox" id="nanni">
 
