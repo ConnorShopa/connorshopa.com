@@ -2679,7 +2679,7 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 #view-rubin .rbPage { display: flex; flex-direction: column; align-items: center; gap: min(3.4vh, 28px); text-align: center; }
 #view-rubin .rbMark { display: block; width: min(34vw, 40vh); height: auto; }
 #view-rubin .rbWord { display: block; width: min(30vw, 34vh); height: auto; }
-#view-rubin .rbSoon { margin: 0; font-size: clamp(16px, 1.7vw, 28px); font-weight: 500; letter-spacing: -0.01em; color: #0E360A; }
+#view-rubin .rbSoon { margin: 0; font-size: clamp(16px, 1.7vw, 28px); font-weight: 500; letter-spacing: -0.01em; color: #2B1A55; }
 
 /* the previous / next project chevrons are gone, everywhere (the page chevrons inside a project stay) */
 .projNav, .projNav[hidden] { display: none !important; }
