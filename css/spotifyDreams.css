@@ -611,4 +611,5 @@ html.inFrame .content > .imageBox:first-child img { width: 60%; }
 
 /* "Spotify Dreams": centred, in the rolling numbers' font (Satoshi, bold) and colour */
 .heroBox > .textSection:first-child { align-items: center; }
-html .heroBox h1, html.inFrame .heroBox h1 { text-align: center; width: 100%; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 700; color: #03131f; }
+html .heroBox h1, html.inFrame .heroBox h1 { text-align: center; width: 100%; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 700; color: #03131f; font-size: clamp(40px, 6.4vw, 120px); line-height: 1.08; letter-spacing: -0.04em; } /* the rolling numbers' size */
+@media (max-width: 900px) { html .heroBox h1, html.inFrame .heroBox h1 { font-size: clamp(26px, 6.4vw, 64px); } }
