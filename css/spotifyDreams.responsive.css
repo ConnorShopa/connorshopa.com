@@ -9,6 +9,12 @@
   html.inFrame .heroBox > .textSection h2.problemHead { margin-left: auto; margin-right: auto; text-align: center; }
   html.inFrame body { padding-top: 56px; }
 
+  /* the card grows this frame to the page's height on small screens, so anything sized in vh would grow with it, round and round.
+     On small screens the page therefore uses fixed lengths instead */
+  html.inFrame .heroStage { min-height: 0; padding: 40px 0 24px; }
+  html.inFrame .content > .minutesBox:first-child { margin-top: 56px; }
+  html.inFrame .gifCol > .imageBox img { max-height: 640px; }
+
   /* ---- hero ---- */
   html.inFrame .heroStage > .imageBox.heroImg img { width: 78%; }
   html .heroBox h1, html.inFrame .heroBox h1 { font-size: clamp(36px, 8vw, 56px); }
@@ -58,7 +64,7 @@
 /* ---- mobile ---- */
 @media (max-width: 600px) {
   html.inFrame .gifRow { gap: 48px; padding: 0; }
-  html.inFrame .gifCol > .imageBox img { max-height: 70vh; }
+  html.inFrame .gifCol > .imageBox img { max-height: 560px; }
   html.inFrame .gifRow .gifCol > .gifTitle { font-size: 22px; }
   html.inFrame .gifRow .gifCol > .gifText { font-size: 16px; }
 
