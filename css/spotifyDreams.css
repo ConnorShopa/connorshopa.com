@@ -623,3 +623,9 @@ h2.problemHead .pText { font-family: "Satoshi", "Host Grotesk", system-ui, sans-
 .heroBox .productDetails ~ .textSection .linesRule { margin: 0 auto; }
 .heroBox .productDetails ~ .textSection { gap: 0; }
 html.inFrame h2.problemHead { margin-top: 96px; }
+
+/* the hero image now sits between the stats intro and the Spotify Dreams title */
+html.inFrame .content > .imageBox.heroImg img { width: 60%; }
+.content > .imageBox.heroImg { margin-top: 0; }
+.content > .heroImg + .heroBox { margin-top: 48px; }
+.content > .minutesBox:first-child { margin-top: 140px; }
