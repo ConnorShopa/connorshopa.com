@@ -654,3 +654,5 @@ html.inFrame h2.problemHead { margin-bottom: 140px; }
 /* the animation now follows the Problem 1 statement directly, then the "Making digital more physical" copy */
 html.inFrame h2.problemHead { margin-bottom: 0; }
 html.inFrame .imageTextSection:has(.flipDemo) { gap: 72px; }
+
+html.inFrame h2.problemHead { margin-bottom: 72px; }
