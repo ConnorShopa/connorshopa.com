@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=59" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=60" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -83,7 +83,7 @@
             </div>
 
         <div class="minutesBox">
-            <p class="minutesBig" aria-label="I spent 112,661 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-from="100000" data-to="112661" aria-hidden="true">112,661</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
+            <p class="minutesBig" aria-label="I spent 112,661 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-from="0" data-to="112661" aria-hidden="true">112,661</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
             <script>
             // Rolling numbers: every digit is a vertical strip (0-9) that slides continuously, like a wheel. The number is driven by one value that eases up to the target;
             // the ones wheel spins with it and each higher wheel turns over only as the one beside it wraps past 9. Wheels blur with their own speed and fade at the top and bottom edges.
@@ -98,7 +98,7 @@
                     if (!/\d/.test(ch)) { var c = document.createElement("span"); c.className = "rc"; c.textContent = ch; el.appendChild(c); return; }
                     var col = document.createElement("span"), strip = document.createElement("span"), k = nd - 1 - cols.length, h = "";
                     col.className = "rd"; strip.className = "rs";
-                    for (var d = 0; d <= 10; d++) h += "<span>" + (d % 10) + "</span>";
+                    for (var d = 0; d <= 10; d++) h += "<span>" + ((10 - d) % 10) + "</span>";   // 0 at the bottom, 9 at the top: the wheel turns downward as the count rises
                     strip.innerHTML = h; col.appendChild(strip); el.appendChild(col);
                     cols.push({ strip: strip, k: k, p10: Math.pow(10, k), last: null, blur: 0 });
                 });
@@ -113,7 +113,7 @@
                         var m = ((pos % 10) + 10) % 10, sp = c.last === null ? 0 : Math.abs(pos - c.last);
                         c.last = pos;
                         c.blur += (Math.min(5, sp * 6) - c.blur) * 0.5;
-                        gsap.set(c.strip, { yPercent: -m * 100 / 11, filter: c.blur > 0.25 ? "blur(" + c.blur.toFixed(2) + "px)" : "none" });
+                        gsap.set(c.strip, { yPercent: -(10 - m) * 100 / 11, filter: c.blur > 0.25 ? "blur(" + c.blur.toFixed(2) + "px)" : "none" });
                     });
                 }
                 draw(still ? S1 : S0, 0);
@@ -135,7 +135,7 @@
 
 
         <div class="minutesBox hoursBox">
-            <p class="minutesBig" aria-label="5.1 hours a day"><span class="mL1"><span class="roll" data-from="3.6" data-to="5.1" aria-hidden="true">5.1</span></span><span class="mL2 mT">hours a day</span></p>
+            <p class="minutesBig" aria-label="5.1 hours a day"><span class="mL1"><span class="roll" data-from="0" data-to="5.1" aria-hidden="true">5.1</span></span><span class="mL2 mT">hours a day</span></p>
             <script>window.spRoll(document.currentScript.previousElementSibling.querySelector(".roll"));</script>
         </div>
 
