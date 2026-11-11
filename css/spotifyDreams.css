@@ -711,3 +711,12 @@ html.inFrame .dashFrame > h3 { margin: 0; text-align: center; max-width: 36em; }
 /* a wide image in a frame fills it; the phone image stays capped */
 html.inFrame .dashFrame > .imageBox img[src*="spotify_img03"] { width: 100%; max-width: 100%; }
 html.inFrame .dashFrame > h5 { margin: 0; text-align: center; width: 100%; }
+
+/* the phone image and the component sheet sit side by side in the frame (stacked on narrow screens) */
+html.inFrame .dashFrame > .frameRow { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 40px; width: 100%; }
+html.inFrame .frameRow > .imageBox { width: auto; margin: 0; }
+html.inFrame .frameRow > .imageBox:first-child { flex: 0 0 auto; }
+html.inFrame .frameRow > .imageBox:first-child img { width: 300px; max-width: 100%; }
+html.inFrame .frameRow > .sheetBox { flex: 1 1 0; min-width: 0; }
+html.inFrame .frameRow > .sheetBox img { width: 100%; max-width: 100%; height: auto; }
+@media (max-width: 900px) { html.inFrame .dashFrame > .frameRow { flex-direction: column; } html.inFrame .frameRow > .sheetBox { flex: 0 0 auto; width: 100%; } }
