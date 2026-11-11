@@ -662,3 +662,14 @@ html.inFrame h2.problemHead { margin-bottom: 72px; }
 .content > .heroImg + .heroBox { margin-top: calc(-0.55 * clamp(40px, 6.4vw, 120px)); position: relative; z-index: 2; }
 .content > .heroBox#nanni + .minutesBox { margin-top: 120px; }
 @media (max-width: 900px) { .content > .heroImg + .heroBox { margin-top: calc(-0.55 * clamp(26px, 6.4vw, 64px)); } }
+
+/* the rolling numbers a size smaller (the small words and the "For all it's wonder" line follow: 0.4 of the big size) */
+.minutesBig { font-size: clamp(28px, 4.5vw, 84px); }
+@media (max-width: 900px) { .minutesBig { font-size: clamp(20px, 4.5vw, 45px); } }
+.forAllBox h3.centerText { font-size: clamp(12px, 1.8vw, 34px); }
+@media (max-width: 900px) { .forAllBox h3.centerText { font-size: clamp(11px, 1.8vw, 18px); } }
+/* the hero (image + title) fills the first screen and sits in the middle of it */
+.heroStage { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; width: 100%; box-sizing: border-box; }
+.heroStage > .imageBox.heroImg { margin-top: 0; width: 100%; display: flex; justify-content: center; }
+.heroStage > .heroBox { width: 100%; }
+.content > .heroStage + .minutesBox { margin-top: 48px; }
