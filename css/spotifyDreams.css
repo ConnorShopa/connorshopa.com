@@ -693,3 +693,5 @@ html.inFrame h2.problemHead { margin-bottom: 40px; }
 html.inFrame .imageTextSection:has(.flipDemo) h2.problemHead { margin-bottom: 72px; }
 
 .inlineTitle { font-weight: 700; color: #03131f; }
+
+.inlineTitle { font: inherit; font-weight: inherit; color: inherit; letter-spacing: inherit; }
