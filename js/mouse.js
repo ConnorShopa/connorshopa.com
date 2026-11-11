@@ -92,6 +92,17 @@
     var inList = currentLink && currentLink.closest && currentLink.closest("#projectList"); // the project links in the middle get a roomier bubble
     var w = base.width + (inList ? PROJ_PAD_X : PAD_X) * 2;   // project links in the centre list: a wide, snug bubble
     var h = base.height + (inList ? PROJ_PAD_Y : PAD_Y) * 2;
+    // per-link overrides: a roomier bubble (data-pad-x / data-pad-y), or the same size as other links' bubbles (data-bubble-like: a selector list, averaged)
+    if (currentLink && inList) {
+      var px = parseFloat(currentLink.getAttribute("data-pad-x")), py = parseFloat(currentLink.getAttribute("data-pad-y")), like = currentLink.getAttribute("data-bubble-like");
+      if (px > 0) w = base.width + px * 2;
+      if (py > 0) h = base.height + py * 2;
+      if (like) {
+        var refs = document.querySelectorAll(like), sw = 0, sh = 0, k = 0;
+        Array.prototype.forEach.call(refs, function (rf) { var rr = rf.getBoundingClientRect(); if (rr.width) { sw += rr.width + PROJ_PAD_X * 2; sh += rr.height + PROJ_PAD_Y * 2; k++; } });
+        if (k) { w = sw / k; h = sh / k; }
+      }
+    }
     var shape = Math.min(1, Math.max(0, (w / h - 1) / (WIDE_AT - 1))); // 0 = squarish, 1 = very wide
     var radius = (h / 2) * (1 - shape * (1 - ROUND_WIDE));
     // icon-only buttons (the view's close button and page chevrons) get a true circle around the icon instead of a pill

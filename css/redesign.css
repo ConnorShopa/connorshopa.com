@@ -2715,3 +2715,13 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 .withCaption .bubble { grid-area: 1 / 1; }
 .withCaption .label { grid-area: 1 / 2; align-self: center; }
 .seedsIcon { background: linear-gradient(174deg, #43E7B0 24%, #4386F5 136%); }
+
+/* Seeds at the Plunk logo's size: Plunk's mark is ~33px tall (112px wide logo) with a wordmark whose capitals are ~19px, so the Seeds mark is 33px and "Seeds" is set at 26px (Sailec caps ~0.7em); the gap is Plunk's mark-to-word gap */
+#projectList .seedsIcon { height: 33px; }
+#projectList .withCaption .label { font-size: 26px; }
+#projectList .withCaption .bubble { margin-right: 9px; }
+@media (max-width: 900px) {
+  #projectList .seedsIcon { height: 42px; }
+  #projectList .withCaption .label { font-size: 33px; }
+  #projectList .withCaption .bubble { margin-right: 12px; }
+}
