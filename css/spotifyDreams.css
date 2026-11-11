@@ -603,3 +603,8 @@ html.inFrame .content > .imageBox:first-child img { width: 60%; }
 .content > .forAllBox + .heroBox { margin-top: 96px; }
 .forAllBox h3.centerText { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; } /* = the small words in the stats (.mT: 0.4 of their line's size) */
 @media (max-width: 900px) { .forAllBox h3.centerText { font-size: clamp(14px, 2.56vw, 26px); } }
+
+/* "for all its wonder": one line across the whole project width, with room above and below */
+.content > .hoursBox + .forAllBox { margin-top: 0; align-self: stretch; width: 100%; max-width: none; padding: 72px 0; box-sizing: border-box; }
+.content > .forAllBox + .heroBox { margin-top: 24px; }
+.forAllBox h3.centerText { max-width: none; width: 100%; }
