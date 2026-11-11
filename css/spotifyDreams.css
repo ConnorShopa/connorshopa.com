@@ -942,3 +942,9 @@ html.inFrame .forAllBox h3.centerText { text-align: center; margin-left: auto; m
 html.inFrame .iconTextBox { flex-direction: row; align-items: center; justify-content: center; gap: clamp(8px, 1vw, 16px); text-align: left; }
 html.inFrame .iconTextBox > img { height: clamp(11px, 1.375vw, 22px); width: auto; flex: 0 0 auto; }
 html.inFrame .iconTextBox > h1 { margin: 0; width: auto; white-space: nowrap; }
+
+/* dream bubble: the trailing circles overlap the pill and each other so it reads as one connected thought cloud */
+h5.pillBreaker .pLabel { box-shadow: none; filter: drop-shadow(0 6px 10px rgba(10, 66, 40, 0.10)); }
+h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after { box-shadow: none; }
+h5.pillBreaker .pLabel::before { width: 15px; height: 15px; bottom: -11px; }
+h5.pillBreaker .pLabel::after { width: 10px; height: 10px; bottom: -19px; }
