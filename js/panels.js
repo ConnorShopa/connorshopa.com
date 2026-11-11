@@ -84,7 +84,16 @@
 })();
 
 // Overhand's "Get early access" form is a placeholder for now: it doesn't send anywhere
-document.addEventListener("submit", function (e) { if (e.target.closest && e.target.closest(".earlyForm")) e.preventDefault(); });
+// once an address is submitted the form swaps to a confirmation: a thank-you line with the address underneath
+document.addEventListener("submit", function (e) {
+  var f = e.target.closest && e.target.closest(".earlyForm"); if (!f) return;
+  e.preventDefault();
+  var inp = f.querySelector(".earlyInput"); if (!inp || !inp.value.trim() || !inp.validity.valid || f.classList.contains("done")) return;
+  var line = document.createElement("p"); line.className = "earlyThanks"; line.textContent = "Thanks, you\u2019re on the list.";
+  var addr = document.createElement("p"); addr.className = "earlyAddr"; addr.textContent = inp.value.trim();
+  f.classList.add("done"); f.setAttribute("role", "status");
+  f.replaceChildren(line, addr);
+});
 // the early-access button stays disabled until the field holds a valid email address
 document.addEventListener("input", function (e) {
   var inp = e.target; if (!inp.classList || !inp.classList.contains("earlyInput")) return;

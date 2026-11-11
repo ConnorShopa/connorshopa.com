@@ -2725,3 +2725,8 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
   #projectList .withCaption .label { font-size: 33px; }
   #projectList .withCaption .bubble { margin-right: 12px; }
 }
+
+/* Overhand: the early-access form once an email has been submitted (thank-you line, the address under it) */
+.earlyForm.done { gap: 4px; }
+.earlyForm.done .earlyThanks { margin: 0; font-size: 16px; font-weight: 600; color: #1B2430; }
+.earlyForm.done .earlyAddr { margin: 0; font-size: 14px; color: #1B2430; opacity: 0.75; overflow-wrap: anywhere; }
