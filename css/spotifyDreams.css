@@ -903,3 +903,6 @@ h5.pillBreaker .pLabel { border-radius: 40px 54px 38px 56px / 24px 22px 24px 22p
 h5.pillBreaker .pLabel::before { width: 13px; height: 13px; left: 28px; bottom: -11px; }
 h5.pillBreaker .pLabel::after { width: 8px; height: 8px; left: 21px; bottom: -20px; }
 html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -44px; }
+
+/* thought bubbles: only a hint of organic */
+h5.pillBreaker .pLabel { border-radius: 46px 52px 44px 54px / 24px 23px 24px 23px; }
