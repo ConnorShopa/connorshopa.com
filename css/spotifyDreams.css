@@ -650,3 +650,7 @@ html.inFrame .imageTextSection:has(.flipDemo) > .textSection { width: 100%; max-
 html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h2, html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h3 { width: 100%; text-align: center; margin-left: 0; margin-right: 0; }
 html.inFrame .imageTextSection:has(.flipDemo) > .flipDemo { flex: 0 0 auto; align-self: center; margin: 0 auto; }
 html.inFrame h2.problemHead { margin-bottom: 140px; }
+
+/* the animation now follows the Problem 1 statement directly, then the "Making digital more physical" copy */
+html.inFrame h2.problemHead { margin-bottom: 0; }
+html.inFrame .imageTextSection:has(.flipDemo) { gap: 72px; }
