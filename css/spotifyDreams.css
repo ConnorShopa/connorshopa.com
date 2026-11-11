@@ -676,3 +676,9 @@ html.inFrame h2.problemHead { margin-bottom: 72px; }
 
 /* the hero image keeps its size (60% of the view) now that it sits in the hero stage rather than directly in .content */
 html.inFrame .heroStage > .imageBox.heroImg img { width: 60%; max-width: none; height: auto; display: block; margin: 0 auto; }
+
+/* inside the hero stage the title block lost the .content > rules: set its own margin (the old 140px top margin made the big gap) and the overlap */
+.heroStage > .heroBox { margin-top: calc(-0.55 * clamp(40px, 6.4vw, 120px)); margin-bottom: 0; position: relative; z-index: 2; align-items: center; }
+@media (max-width: 900px) { .heroStage > .heroBox { margin-top: calc(-0.55 * clamp(26px, 6.4vw, 64px)); } }
+.heroStage > .heroBox > .textSection { margin: 0; }
+.heroStage { padding: 0; }
