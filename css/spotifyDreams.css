@@ -777,3 +777,11 @@ html.inFrame .dashFrame.principles > .gifCol { flex: 0 0 auto; width: 100%; }
 /* the intro line sits between the two frames, in the type of the Problem statements (.pText) */
 html.inFrame .statementText h2 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; max-width: 22em; margin: 0 auto; }
 @media (max-width: 900px) { html.inFrame .statementText h2 { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* tighter vertical rhythm between the stats */
+.content > .minutesBox + .hoursBox { margin-top: 16px; }
+.content > .hoursBox + .forAllBox { padding: 24px 0 72px; }
+
+/* Sketching copy: same type as the problem statements */
+html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; max-width: 22em; margin-left: auto; margin-right: auto; }
+@media (max-width: 900px) { html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-size: clamp(16px, 4.4vw, 26px); } }
