@@ -785,3 +785,6 @@ html.inFrame .statementText h2 { font-family: "Satoshi", "Host Grotesk", system-
 /* Sketching copy: same type as the problem statements */
 html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; max-width: 22em; margin-left: auto; margin-right: auto; }
 @media (max-width: 900px) { html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* "Spotify Dreams" title: lighter weight */
+html .heroBox h1, html.inFrame .heroBox h1 { font-weight: 500; }
