@@ -725,3 +725,7 @@ html.inFrame .frameRow > .sheetBox img { width: 100%; max-width: 100%; height: a
 html.inFrame .frameRow > .imageBox { flex: 0 0 auto; }
 html.inFrame .frameRow > .imageBox img, html.inFrame .frameRow > .imageBox:first-child img, html.inFrame .frameRow > .sheetBox img { height: clamp(240px, 30vw, 480px); width: auto; max-width: 100%; }
 @media (max-width: 900px) { html.inFrame .frameRow > .imageBox img, html.inFrame .frameRow > .imageBox:first-child img, html.inFrame .frameRow > .sheetBox img { height: auto; } html.inFrame .frameRow > .imageBox:first-child img { width: 220px; } html.inFrame .frameRow > .sheetBox img { width: 100%; } }
+
+/* "Making the view scalable" in the same type as the Problem statements (.pText) */
+html.inFrame .scalableText h2, html.inFrame .scalableText h3 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; max-width: 22em; margin-left: auto; margin-right: auto; }
+@media (max-width: 900px) { html.inFrame .scalableText h2, html.inFrame .scalableText h3 { font-size: clamp(16px, 4.4vw, 26px); } }
