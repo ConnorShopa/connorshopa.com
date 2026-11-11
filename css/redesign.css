@@ -2744,3 +2744,9 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
   #projectList.inline.big:not(.compact) { width: 100vw; max-width: none; margin-left: calc(50% - 50vw); justify-content: safe center; }
   body { overflow-x: clip; }
 }
+
+/* the first card starts in the middle of the window (and the last can scroll to the middle too); the rest run off to the right */
+@media (min-width: 701px) and (hover: hover) {
+  #projectList.inline.big:not(.compact) { justify-content: flex-start; padding-left: calc(50vw - 100px); padding-right: calc(50vw - 100px); }
+  #projectList.inline.big:not(.compact) li:not(.row-break) { scroll-snap-align: center; }
+}
