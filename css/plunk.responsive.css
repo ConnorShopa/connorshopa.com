@@ -1,6 +1,8 @@
 /* Plunk project view: responsive pass for tablet and phone.
    Desktop (wider than 900px) is the reference and is not touched: every rule sits inside a max-width query. */
 @media (max-width: 900px) {
+  /* right-aligned intro copy sat 8px from the card's edge and read as cut off: give it the same side margin as the copy below */
+  html.inFrame h3.rightText { margin-right: 16px; }
   /* the card's logo and close button sit over the top of the page: start the content below them */
   html.inFrame body { padding-top: 64px; }
 

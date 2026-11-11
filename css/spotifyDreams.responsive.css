@@ -4,6 +4,17 @@
 
 @media (max-width: 900px) {
 
+  /* ---- centring: the problem heading and the flip demo block use the full column, so they sit on its centre line ---- */
+  html.inFrame .content .textSection, html.inFrame .heroBox > .textSection { max-width: 100%; margin-left: 0; margin-right: 0; width: 100%; box-sizing: border-box; }
+  html.inFrame .heroBox > .textSection h2.problemHead { margin-left: auto; margin-right: auto; text-align: center; }
+  html.inFrame body { padding-top: 56px; }
+
+  /* the card grows this frame to the page's height on small screens, so anything sized in vh would grow with it, round and round.
+     On small screens the page therefore uses fixed lengths instead */
+  html.inFrame .heroStage { min-height: 0; padding: 40px 0 24px; }
+  html.inFrame .content > .minutesBox:first-child { margin-top: 56px; }
+  html.inFrame .gifCol > .imageBox img { max-height: 640px; }
+
   /* ---- hero ---- */
   html.inFrame .heroStage > .imageBox.heroImg img { width: 78%; }
   html .heroBox h1, html.inFrame .heroBox h1 { font-size: clamp(36px, 8vw, 56px); }
@@ -32,13 +43,20 @@
   html.inFrame .iconTextBox > img { height: clamp(14px, 2.2vw, 18px); }
 
   /* ---- images that carry their own small text: use the full width ---- */
-  html.inFrame .imageBox img[src*="spotify_img08"], html.inFrame .imageBox img[src*="spotify_img09"],
-  html.inFrame .imageBox img[src*="spotify_img10"], html.inFrame .imageBox img[src*="spotify_gif06"],
-  html.inFrame .imageBox img[src*="spotify_gif07"] { width: 100%; }
+  html.inFrame .imageBox img[src*="spotify_img08"], html.inFrame .imageBox img[src*="spotify_img09"] { width: 100%; }
   html.inFrame .imageBox:has(img[src*="spotify_gif07"]) { min-height: 0; }
   html.inFrame .content > .iconTextBox + .imageBox { margin-top: 0; }
 
-  html.inFrame .dashFrame, html.inFrame .imageTextSection:has(.flipDemo) { padding: 32px 0; gap: 32px; }
+  /* image sections (flip demo, old fullscreen, sketching gif, library screens, fullscreen gif):
+     tighter gaps between the title, the picture and the subtitle, and a smaller picture so it has room on the left and right */
+  html.inFrame .content > .imageTextSection.sketchSection { gap: 28px; padding: 0; }
+  html.inFrame .sketchSection > .imageBox img[src*="spotify_gif06"], html.inFrame .imageBox img[src*="spotify_img10"],
+  html.inFrame .imageBox img[src*="spotify_gif07"], html.inFrame .dashFrame:not(.principles) > .imageBox img { width: 80%; }
+  html.inFrame .imageTextSection:has(.flipDemo) > .flipDemo { width: min(543px, 64%); }
+  html.inFrame .imageTextSection:has(.flipDemo) h2.problemHead, html.inFrame .heroBox > .textSection h2.problemHead { margin-bottom: 12px; }
+  html.inFrame .imageTextSection:has(.flipDemo) { margin-top: -36px; }
+  html.inFrame .heroBox > .textSection { margin-bottom: 0; }
+  html.inFrame .dashFrame, html.inFrame .imageTextSection:has(.flipDemo) { padding: 12px 0; gap: 20px; }
 }
 
 /* ---- tablet: the three gifs stay side by side (stacked they make a very long column) ---- */
@@ -52,8 +70,12 @@
 
 /* ---- mobile ---- */
 @media (max-width: 600px) {
+  html.inFrame .content > .imageTextSection.sketchSection { gap: 24px; }
+  html.inFrame .sketchSection > .imageBox img[src*="spotify_gif06"], html.inFrame .imageBox img[src*="spotify_img10"],
+  html.inFrame .imageBox img[src*="spotify_gif07"], html.inFrame .dashFrame:not(.principles) > .imageBox img { width: 90%; }
+  html.inFrame .imageTextSection:has(.flipDemo) > .flipDemo { width: min(543px, 78%); }
   html.inFrame .gifRow { gap: 48px; padding: 0; }
-  html.inFrame .gifCol > .imageBox img { max-height: 70vh; }
+  html.inFrame .gifCol > .imageBox img { max-height: 560px; }
   html.inFrame .gifRow .gifCol > .gifTitle { font-size: 22px; }
   html.inFrame .gifRow .gifCol > .gifText { font-size: 16px; }
 

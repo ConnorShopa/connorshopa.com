@@ -43,3 +43,14 @@
 @media (max-width: 700px) {
   #view-nanni.scrollView .pg.one { align-content: start; height: auto; max-height: none; overflow: visible; }
 }
+
+/* ---- Nanni hero (text + the three phones): centred in the card, below the logo and close button, at every width ---- */
+#view-nanni .viewBody { container-type: size; }
+#view-nanni .nnRow.nnAbout { box-sizing: border-box; min-height: 100cqh; align-content: center; }
+@media (min-width: 901px) {
+  #view-nanni .nnRow.nnAbout { padding-top: 104px; padding-bottom: 48px; }
+}
+@media (max-width: 900px) {
+  /* the card's scroll area already starts below the header here */
+  #view-nanni .nnRow.nnAbout { padding-top: 24px; padding-bottom: 40px; }
+}
