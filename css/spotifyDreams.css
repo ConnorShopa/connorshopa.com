@@ -737,3 +737,6 @@ html.inFrame .scalableText h2, html.inFrame .scalableText h3 { font-family: "Sat
 @media (max-width: 900px) { .forAllBox h3.centerText { font-size: clamp(10px, 1.36vw, 14px); } }
 
 h2.problemHead .pLabel { border-color: #6f7b86; }
+
+/* the animations (transparent WebP now) float on a dark-green drop shadow that follows their rounded shapes */
+html.inFrame img[src*="spotify_gif"] { filter: drop-shadow(0 18px 28px rgba(10, 66, 40, 0.42)); }
