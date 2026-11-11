@@ -691,3 +691,5 @@ html.inFrame .heroStage > .imageBox.heroImg img { width: 60%; max-width: none; h
 h2.problemHead .pLabel { display: inline-block; padding: 6px 18px; border: 1px solid #002644; border-radius: 999px; line-height: 1.2; }
 html.inFrame h2.problemHead { margin-bottom: 40px; }
 html.inFrame .imageTextSection:has(.flipDemo) h2.problemHead { margin-bottom: 72px; }
+
+.inlineTitle { font-weight: 700; color: #03131f; }
