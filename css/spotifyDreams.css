@@ -915,3 +915,6 @@ html.inFrame .minutesBig .roll { margin: 0 0.1em; }
 html.inFrame .minutesBig .mL2 { margin-top: 0.45em; }
 html.inFrame .statsFrame > .minutesBox + .hoursBox { margin-top: 88px; }
 html.inFrame .statsFrame + .forAllBox { padding: 88px 0 72px; }
+
+/* the words round the rolling numbers: same dark as the titles (size unchanged) */
+html.inFrame .minutesBig .mT, html.inFrame .forAllBox h3.centerText { color: #2D3A44; }
