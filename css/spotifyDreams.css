@@ -572,3 +572,6 @@ html.inFrame h3 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif;
 
 /* the framed page has no Satoshi of its own (css/satoshi.css isn't in the repo), so it loads the site's copy */
 @font-face { font-family: "Satoshi"; src: url("../fonts/Satoshi/Satoshi-Variable.ttf") format("truetype"); font-weight: 300 900; font-style: normal; font-display: swap; }
+
+/* the hero image at the top of the project view: 0.6x of its width, still centred */
+html.inFrame .content > .imageBox:first-child img { width: 60%; }
