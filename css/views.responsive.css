@@ -54,3 +54,19 @@
   /* the card's scroll area already starts below the header here */
   #view-nanni .nnRow.nnAbout { padding-top: 24px; padding-bottom: 40px; }
 }
+
+
+/* Seeds logo in the project list: the note box was centred on the wordmark's line, which sits it about 3px below the
+   centre of the capital letters. Lift it by 10% of its own height so the note and "Seeds" are level. */
+#projectList .seedsIcon { translate: 0 -10%; }
+
+/* TouchTunes (a dark card): the close button is moved out of the card to the page while the project is open, so the
+   "dark card" rules that sit under .view never reached it, and it turned dark on hover over the light bubble. It stays white. */
+.viewClose.floating.dark:hover, .viewClose.floating.dark:focus-visible { color: #fff !important; }
+
+/* TouchTunes in the project list: the wordmark turns white while its bubble is under it (wide screens; phones already show it white) */
+@media (min-width: 701px) {
+  #projectList a[data-view="touchtunes"] .wordmark { transition: filter 0.25s ease; }
+  #projectList a[data-view="touchtunes"]:hover .wordmark, #projectList a[data-view="touchtunes"]:focus-visible .wordmark {
+    filter: brightness(0) invert(1) drop-shadow(12px 20px 38px rgba(45, 30, 60, 0.34)); }
+}
