@@ -588,3 +588,7 @@ html.inFrame .content > .imageBox:first-child img { width: 60%; }
 .minutesBig .rdS > span { display: block; height: 1.08em; line-height: 1.08; }
 .minutesBig .rc { display: inline-block; vertical-align: top; width: 0.28em; text-align: center; }
 @media (max-width: 900px) { .minutesBig { font-size: clamp(26px, 6.4vw, 64px); } }
+
+/* the words round the number are quieter: smaller and lighter, sitting on the number's baseline */
+.minutesBig .mT { font-size: 0.4em; font-weight: 500; letter-spacing: -0.02em; color: #6f7b86; }
+.minutesBig .mL2 { display: block; margin-top: 0.1em; line-height: 1.2; }
