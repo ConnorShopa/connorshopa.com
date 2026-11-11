@@ -915,7 +915,3 @@ html.inFrame .minutesBig .roll { margin: 0 0.1em; }
 html.inFrame .minutesBig .mL2 { margin-top: 0.45em; }
 html.inFrame .statsFrame > .minutesBox + .hoursBox { margin-top: 88px; }
 html.inFrame .statsFrame + .forAllBox { padding: 88px 0 72px; }
-
-/* the words round the rolling numbers: same type as the section titles below */
-html.inFrame .minutesBig .mT, html.inFrame .forAllBox h3.centerText { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #2D3A44; }
-@media (max-width: 900px) { html.inFrame .minutesBig .mT, html.inFrame .forAllBox h3.centerText { font-size: clamp(16px, 4.4vw, 26px); } }
