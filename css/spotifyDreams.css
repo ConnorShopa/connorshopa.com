@@ -639,3 +639,7 @@ html.inFrame .content > .imageTextSection:has(.flipDemo) { flex-direction: colum
 html.inFrame .content > .imageTextSection:has(.flipDemo) .textSection { width: 100%; }
 html.inFrame .content > .imageBox img { margin-left: auto; margin-right: auto; display: block; }
 html.inFrame .content > .textSection:has(.problemHead) { margin-bottom: 96px; }
+
+/* the first stat (I spent ...) sits in the middle of the project view: half the view height, less half the block's own height (two lines of the big size) */
+.content > .minutesBox:first-child { margin-top: max(24px, calc(50vh - 1.15 * clamp(40px, 6.4vw, 120px))); }
+@media (max-width: 900px) { .content > .minutesBox:first-child { margin-top: max(24px, calc(50vh - 1.15 * clamp(26px, 6.4vw, 64px))); } }
