@@ -867,3 +867,6 @@ html.inFrame .minutesBig .roll { border: 1.2px dashed #474B4E; border-radius: 0.
 /* Problem 1 / 2: no big frame; the pill keeps its shape with a dashed border */
 html.inFrame h2.problemHead { border: 0; border-radius: 0; padding: 0; }
 h2.problemHead .pLabel { display: inline-block; padding: 6px 18px; border: 1.2px dashed #474B4E; border-radius: 999px; line-height: 1.2; }
+
+/* every pill label (Problem 1/2, Thought 1/2) uses the same dashed outline as the rolling numbers */
+h2.problemHead .pLabel, h5.pillBreaker .pLabel { border: 1.2px dashed #474B4E; border-radius: 999px; }
