@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=14" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=15" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -147,14 +147,14 @@
                     var box = document.currentScript.previousElementSibling;
                     var stage = box && box.querySelector(".fdStage");
                     if (!stage || !window.gsap) return;
-                    var panels = Array.prototype.slice.call(stage.children), ANG = 82, SIDE = 0.536, PERSP = 7.8, GAP = 0.14, st = { p: 0 }, last = 0, dir = 1;
+                    var panels = Array.prototype.slice.call(stage.children), ANG = 70, SIDE = 0.536, PERSP = 7.2, GAP = 0.1, st = { p: 0 }, last = 0, dir = 1;
                     function render() {
                         var W = panels[0].offsetWidth;
                         if (st.p !== last) { dir = st.p > last ? 1 : -1; last = st.p; }
                         var f = st.p - Math.floor(st.p), lift = 4 * f * (1 - f);   // 0 at rest, 1 half way through a step: the panels rise off the page while they move
                         stage.style.setProperty("--lift", lift.toFixed(3));
                         panels.forEach(function (el, i) {
-                            var s = i - st.p, a = Math.abs(s), k = Math.min(a, 1), grow = 1 + 0.05 * lift;
+                            var s = i - st.p, a = Math.abs(s), k = Math.min(a, 1), grow = 1 + 0.02 * lift;
                             gsap.set(el, {
                                 x: (a <= 1 ? s : (s > 0 ? 1 : -1) * (1 + (a - 1) * GAP)) * W,   // beyond the first panel, the rest of the records stand in a row, close together
                                 transformPerspective: PERSP * W,                        // each panel is seen in perspective from its hinge: the free edge comes toward you, so it reads taller than the hinged edge
@@ -169,14 +169,14 @@
                     }
                     render();
                     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-                    var tl = gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "back.out(1.25)" }, onUpdate: render });
-                    tl.to(st, { p: 1, duration: 0.62 }, 0.64)
-                      .to(st, { p: 2, duration: 0.62 }, 1.84)
-                      .to(st, { p: 3, duration: 0.62 }, 3.04)
-                      .to(st, { p: 2, duration: 0.62 }, 4.5)
-                      .to(st, { p: 1, duration: 0.62 }, 5.7)
-                      .to(st, { p: 0, duration: 0.7 }, 6.9)
-                      .to({}, { duration: 0.01 }, 8.4);
+                    var tl = gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "back.out(0.6)" }, onUpdate: render });
+                    tl.to(st, { p: 1, duration: 0.8 }, 0.6)
+                      .to(st, { p: 2, duration: 0.8 }, 1.9)
+                      .to(st, { p: 3, duration: 0.8 }, 3.2)
+                      .to(st, { p: 2, duration: 0.8 }, 4.8)
+                      .to(st, { p: 1, duration: 0.8 }, 6.1)
+                      .to(st, { p: 0, duration: 0.85 }, 7.4)
+                      .to({}, { duration: 0.01 }, 9.0);
                     window.addEventListener("resize", render);
                     if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { e[0].isIntersecting ? tl.play() : tl.pause(); }).observe(box);
                     else tl.play();
