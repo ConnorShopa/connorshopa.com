@@ -574,4 +574,37 @@ html.inFrame h3 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif;
 @font-face { font-family: "Satoshi"; src: url("../fonts/Satoshi/Satoshi-Variable.ttf") format("truetype"); font-weight: 300 900; font-style: normal; font-display: swap; }
 
 /* the hero image at the top of the project view: 0.6x of its width, still centred */
-html.inFrame .content > .imageBox:first-child img { width: 60%; }
+html.inFrame .content > .imageBox:first-child .heroWire { width: 60%; }
+
+/* ---- the hero wireframe (was spotify_img01.png), built in html + css. Everything is placed in a 1800 x 1047 grid; --u is one grid unit. ---- */
+.heroWire { width: 100%; aspect-ratio: 1800 / 1047; position: relative; container-type: inline-size; }
+.heroWire .hwStage { position: absolute; inset: 0; --u: calc(100cqw / 1800); --ink: #20232a; --grey: #8e9195; --soft: #a4a7ab; --paper: #F6F6F6; --dash: max(1px, calc(1.6 * var(--u))); font-family: "Host Grotesk", system-ui, sans-serif; color: var(--grey); }
+.heroWire .hwStage > *, .heroWire .hwPhone > * { position: absolute; left: calc(var(--x) * var(--u)); top: calc(var(--y) * var(--u)); width: calc(var(--w) * var(--u)); height: calc(var(--h) * var(--u)); box-sizing: border-box; }
+.heroWire .hwPhone > * { left: calc((var(--x) - 1411) * var(--u)); top: calc((var(--y) - 240) * var(--u)); }
+.heroWire .hwPhone { left: calc(1411 * var(--u)); top: calc(240 * var(--u)); width: calc(349 * var(--u)); height: calc(752 * var(--u)); overflow: hidden; border-radius: calc(46 * var(--u)); background: var(--paper); border: var(--dash) dashed var(--ink); box-shadow: 0 calc(14 * var(--u)) calc(34 * var(--u)) rgba(10, 12, 20, 0.32); }
+.heroWire .hwFrame { background: var(--paper); border-radius: calc(16 * var(--u)); box-shadow: 0 calc(8 * var(--u)) calc(28 * var(--u)) rgba(10, 12, 20, 0.3); }
+.heroWire .hwBox { background: var(--paper); border: var(--dash) dashed var(--ink); border-radius: calc(8 * var(--u)); }
+.heroWire .hwSq { border-radius: calc(3 * var(--u)); }
+.heroWire .hwArt { box-shadow: 0 calc(10 * var(--u)) calc(26 * var(--u)) rgba(0, 0, 0, 0.12); border-radius: calc(2 * var(--u)); }
+.heroWire .hwHdr { border-radius: 0; }
+.heroWire .hwCard { border-radius: calc(16 * var(--u)); }
+.heroWire .hwCirc { border: var(--dash) dashed var(--ink); border-radius: 50%; }
+.heroWire .hwAct { border-radius: 99px; display: flex; align-items: center; justify-content: center; font-size: calc(var(--s) * var(--u)); color: var(--grey); }
+.heroWire .hwDot { background: var(--grey); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--paper); font-size: calc(var(--s, 10) * var(--u)); }
+.heroWire .hwPill { border: max(1px, calc(1.5 * var(--u))) solid var(--grey); border-radius: 99px; display: flex; align-items: center; justify-content: center; font-size: calc(var(--s) * var(--u)); }
+.heroWire .hwBar { background: var(--grey); border-radius: calc(1.5 * var(--u)); }
+.heroWire .hwLine { background: #c9cbce; }
+.heroWire .hwTrack { background: #d3d5d8; border-radius: 99px; }
+.heroWire .hwTrack.on { background: var(--soft); }
+.heroWire .hwNav { background: var(--paper); border-top: max(1px, calc(1.5 * var(--u))) solid #dcdee0; }
+.heroWire .hwPause { background: var(--grey); border-radius: 50%; display: flex; align-items: center; justify-content: center; gap: calc(6 * var(--u)); }
+.heroWire .hwPause i { width: calc(6 * var(--u)); height: calc(20 * var(--u)); background: var(--paper); border-radius: calc(1.5 * var(--u)); }
+.heroWire .hwFlap { fill: none; stroke: var(--ink); stroke-width: max(1px, calc(1.5 * var(--u))); stroke-dasharray: 4 3; overflow: visible; }
+.heroWire .hwI { transform: translate(-50%, -50%); height: auto; aspect-ratio: 1; color: var(--grey); }
+.heroWire .t, .heroWire .tb { width: auto; height: auto; font-size: calc(var(--s) * var(--u)); line-height: 1.2; white-space: nowrap; transform: translateY(-50%); }
+.heroWire .tb { font-weight: 700; color: var(--grey); letter-spacing: -0.01em; }
+.heroWire .tc { transform: translate(-50%, -50%); text-align: center; }
+.heroWire .tr { transform: translate(-100%, -50%); }
+.heroWire .tl { color: var(--soft); }
+.heroWire .tv { color: var(--soft); font-weight: 300; }
+.heroWire .tm { white-space: normal; }
