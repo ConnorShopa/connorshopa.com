@@ -792,3 +792,7 @@ html .heroBox h1, html.inFrame .heroBox h1 { font-weight: 500; }
 /* Sketching copy: same type as the dashed-frame captions ("The old fullscreen, left behind…") */
 html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(18.67px, 1.3vw, 21px); font-weight: 500; line-height: 1.45; letter-spacing: 0; color: #2D3A44; text-align: center; max-width: 36em; margin: 0 auto; }
 @media (max-width: 900px) { html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-size: clamp(18.67px, 1.3vw, 21px); } }
+
+/* numbered principles (1. Beautiful, 2. Useful, 3. Understandable): same type as "Making the view scalable" */
+html.inFrame .dashFrame.principles > .gifCol > .gifTitle { font-size: clamp(16px, 2.56vw, 48px); max-width: 22em; margin-left: auto; margin-right: auto; }
+@media (max-width: 900px) { html.inFrame .dashFrame.principles > .gifCol > .gifTitle { font-size: clamp(16px, 4.4vw, 26px); } }
