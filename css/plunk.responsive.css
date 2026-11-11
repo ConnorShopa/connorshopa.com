@@ -10,3 +10,6 @@
   html.inFrame .imageBox img, html.inFrame .twoGifSpan img { max-width: 100%; height: auto; }
   html.inFrame .imageBox img[width] { width: auto; max-width: min(100%, var(--w, 100%)); }
 }
+
+/* mobile welcome experience gif: 0.6x of its previous size (800px tall), at every width, always in proportion */
+html.inFrame img[src*="plunk_gif_03"] { height: 480px; width: auto; max-width: none; }

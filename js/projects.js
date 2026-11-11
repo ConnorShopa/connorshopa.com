@@ -155,7 +155,7 @@
       title: "Plunk®",
       logo: H + "plunk_logo_horizontal.svg",
       logoOnly: true,
-      legacy: "plunk.html?v=3", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
+      legacy: "plunk.html?v=4", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
       pages: [
         pg("two",
           text(
@@ -252,7 +252,7 @@
       title: "Spotify dreams",
       logoOnly: true, // the corner shows just the Thoughtify lockup; the title stays for screen readers
       bg: "#CDEFD1", // a pale wash of Spotify green, so the green icon and name read on it
-      legacy: "spotifyDreams.html?v=5", // the original page, unchanged, in the card
+      legacy: "spotifyDreams.html?v=6", // the original page, unchanged, in the card
       legacyBg: "#E8F8EA", // the light green of the card (the pale Spotify green lifted toward white), behind the framed page
       logo: H + "spotifyDreams_projectImage.svg",
       headHtml: '<span class="viewSpot"><span class="spotIcon" aria-hidden="true"></span><span class="spot">Thoughtify</span></span>', // the same lockup as the gallery link

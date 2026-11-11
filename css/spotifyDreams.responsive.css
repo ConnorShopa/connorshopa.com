@@ -7,7 +7,7 @@
   /* ---- centring: the problem heading and the flip demo block use the full column, so they sit on its centre line ---- */
   html.inFrame .content .textSection, html.inFrame .heroBox > .textSection { max-width: 100%; margin-left: 0; margin-right: 0; width: 100%; box-sizing: border-box; }
   html.inFrame .heroBox > .textSection h2.problemHead { margin-left: auto; margin-right: auto; text-align: center; }
-  html.inFrame body { padding-top: 56px; }
+  html.inFrame body { padding-top: 56px; padding-bottom: 120px; } /* room under the last picture */
 
   /* the card grows this frame to the page's height on small screens, so anything sized in vh would grow with it, round and round.
      On small screens the page therefore uses fixed lengths instead */
