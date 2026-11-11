@@ -833,3 +833,6 @@ html.inFrame .imageBox img[src*="spotify_gif07"] { width: 60%; height: auto; dis
 /* "In Context" screen: larger (80%), and given a full-viewport box so it sits centred in the project view */
 html.inFrame .imageBox:has(img[src*="spotify_gif07"]) { min-height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
 html.inFrame .imageBox img[src*="spotify_gif07"] { width: 80%; }
+
+/* "Thought" pills sit as close to their title as the Problem pills do to their statement (12px; the .content gap is 72px) */
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -60px; }
