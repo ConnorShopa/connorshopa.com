@@ -700,3 +700,10 @@ html.inFrame .imageTextSection:has(.flipDemo) h2.problemHead { margin-bottom: 72
 html.inFrame .imageTextSection:has(.flipDemo) { border: 1.2px dashed #474B4E; border-radius: 32px; padding: 56px 48px; gap: 40px; box-sizing: border-box; }
 html.inFrame .imageTextSection:has(.flipDemo) > .textSection { max-width: 36em; }
 @media (max-width: 900px) { html.inFrame .imageTextSection:has(.flipDemo) { border-radius: 24px; padding: 32px 20px; } }
+
+/* a rounded dashed frame (the same as the one round the record animation) holding an image and the sentence under it */
+html.inFrame .dashFrame { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; align-self: stretch; width: 100%; box-sizing: border-box; border: 1.2px dashed #474B4E; border-radius: 32px; padding: 56px 48px; }
+html.inFrame .dashFrame > .imageBox { width: 100%; justify-content: center; margin: 0; }
+html.inFrame .dashFrame > .imageBox img { width: auto; max-width: min(100%, 360px); height: auto; display: block; margin: 0 auto; }
+html.inFrame .dashFrame > h3 { margin: 0; text-align: center; max-width: 36em; }
+@media (max-width: 900px) { html.inFrame .dashFrame { border-radius: 24px; padding: 32px 20px; } }
