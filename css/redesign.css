@@ -2709,3 +2709,32 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 @media (max-width: 700px) { .who .name img { height: 30px; } }
 
 @media (min-width: 701px) { .view, .view.scrollView, .view.stepView { border-radius: 48px; } } /* a little rounder on desktop (js/project.js CARD_R matches, for the bubble) */
+
+/* the centre console as a row of cards (desktop with a mouse): each link is a card in its project's colour, its logo centred,
+   and the row scrolls sideways. (Phones and touch screens keep the card deck, js/deck.js.) */
+@media (min-width: 701px) and (hover: hover) {
+  .stack > .ghost { display: none; }
+  #projectList.inline.big {
+    display: flex; flex-wrap: nowrap; justify-content: safe center; align-items: stretch; gap: 20px;
+    width: 100%; box-sizing: border-box; padding: 30px max(24px, 4vw) 54px; /* room under the cards for their shadow */
+    overflow-x: auto; overflow-y: hidden; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; zoom: 1 !important; text-shadow: none;
+  }
+  #projectList.inline.big::-webkit-scrollbar { display: none; }
+  #projectList li.row-break { display: none !important; }
+  #projectList li:not(.row-break) {
+    position: relative; flex: none; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+    width: 240px; height: 160px; padding: 0; border-radius: 32px; scroll-snap-align: center;
+    background: var(--card, #F4F4F4); box-shadow: 0 14px 34px -14px rgba(47, 39, 37, 0.32), 0 2px 8px rgba(47, 39, 37, 0.08);
+  }
+  #projectList li::after { display: none !important; }
+  /* the whole card is the link, its contents centred */
+  #projectList li > a { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; place-content: center; place-items: center; flex-direction: row; border-radius: inherit; }
+  #projectList li > a.stackLogo { flex-direction: column; }
+  #projectList li > a.withCaption { display: inline-grid; }
+  #projectList .logo, #projectList .wordmark { filter: none; }
+  #projectList li.cardDark .wordmark, #projectList li.cardDark .withCaption .label { filter: invert(1); }
+  #projectList li.cardDark > a { color: #FAFAFA; }
+  /* while a project is open the cards run in one row above it: one line, scrolling sideways */
+  #projectList.compact.inline.big { flex-wrap: nowrap; overflow-x: auto; padding: 8px max(24px, 4vw) 14px; }
+}

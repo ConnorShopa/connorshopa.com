@@ -28,7 +28,11 @@
     li.classList.add("deckCard");
     // the card in front is the colour of its project view's card (so the card opens out of and closes back into the same colour)
     var vw = document.getElementById("view-" + a.getAttribute("data-view"));
-    li.style.setProperty("--card", (vw && vw.style.getPropertyValue("--view-bg")) || a.getAttribute("data-bubble") || "#F4F4F4");
+    var cardCol = (vw && vw.style.getPropertyValue("--view-bg")) || a.getAttribute("data-bubble") || "#F4F4F4";
+    li.style.setProperty("--card", cardCol);
+    // a dark card (TouchTunes' near-black) gets light lettering (see "cardDark" in css/redesign.css)
+    var hx = cardCol.trim().replace("#", ""), rgb = /^[0-9a-f]{3}$/i.test(hx) ? hx.replace(/(.)/g, "$1$1") : hx;
+    if (/^[0-9a-f]{6}$/i.test(rgb) && (0.299 * parseInt(rgb.substr(0, 2), 16) + 0.587 * parseInt(rgb.substr(2, 2), 16) + 0.114 * parseInt(rgb.substr(4, 2), 16)) / 255 < 0.45) li.classList.add("cardDark");
     cards.push(li);
   });
   var N = cards.length;
