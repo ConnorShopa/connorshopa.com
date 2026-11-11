@@ -629,3 +629,13 @@ html.inFrame .content > .imageBox.heroImg img { width: 60%; }
 .content > .imageBox.heroImg { margin-top: 0; }
 .content > .heroImg + .heroBox { margin-top: 48px; }
 .content > .minutesBox:first-child { margin-top: 140px; }
+
+/* everything in the project view is centred */
+html.inFrame .content > .textSection, html.inFrame .content > .imageTextSection, html.inFrame .content > .imageBox { align-self: stretch; width: 100%; max-width: none; box-sizing: border-box; }
+html.inFrame .content .textSection { align-items: center; text-align: center; }
+html.inFrame .content .textSection > h1, html.inFrame .content .textSection > h2, html.inFrame .content .textSection > h3, html.inFrame .content .textSection > h4, html.inFrame .content .textSection > p { text-align: center; width: 100%; }
+html.inFrame .content > .imageTextSection { align-items: center; justify-content: center; }
+html.inFrame .content > .imageTextSection:has(.flipDemo) { flex-direction: column; gap: 56px; }
+html.inFrame .content > .imageTextSection:has(.flipDemo) .textSection { width: 100%; }
+html.inFrame .content > .imageBox img { margin-left: auto; margin-right: auto; display: block; }
+html.inFrame .content > .textSection:has(.problemHead) { margin-bottom: 96px; }
