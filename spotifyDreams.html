@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=65" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=66" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -99,9 +99,10 @@
                 });
                 var STAGGER = 0.07, BUMP_AT = 1.0, BUMP_LEN = 0.5, BUMP = nd > 3 ? 0.5 : 0.22;   // seconds; the settle's size is in digit heights
                 function win(x) { x = Math.max(0, Math.min(1, (x - 0.9) / 0.1)); return x * x * (3 - 2 * x); }
-                function draw(v, T) {
+                var E = gsap.parseEase("power4.in"), DUR = 1.0;
+                function draw(T) {   // T: seconds on the roll clock; each wheel runs its own roll, a little later than the one to its left
                     cols.forEach(function (c, i) {
-                        var x = v / c.p10, fl = Math.floor(x), lower = c.k ? (v % c.p10) / c.p10 : 0;
+                        var v = S0 + (S1 - S0) * E(Math.max(0, Math.min(1, (T - i * STAGGER) / DUR))), x = v / c.p10, fl = Math.floor(x), lower = c.k ? (v % c.p10) / c.p10 : 0;
                         var pos = c.k ? fl + win(lower) : v;
                         var u = (T - BUMP_AT - i * STAGGER) / BUMP_LEN;
                         if (u > 0 && u < 1) pos += BUMP * Math.sin(u * 9.4248) * (1 - u) * (1 - u);
@@ -111,18 +112,17 @@
                         gsap.set(c.strip, { yPercent: -(10 - m) * 100 / 11, filter: c.blur > 0.25 ? "blur(" + c.blur.toFixed(2) + "px)" : "none" });
                     });
                 }
-                draw(still ? S1 : S0, 0);
+                draw(still ? 99 : 0);
                 if (still) return;
                 var o = { p: 0, T: 0 }, played = false;
                 function play() {
                     if (played) return; played = true;
-                    gsap.to(o, { p: 1, delay: 0.8, duration: 1.0, ease: "power4.in", });
                     gsap.to(o, { T: 3, delay: 0.8, duration: 3, ease: "none", });
                 }
                 // one frame loop: the value and the settle clock together
-                function frame() { draw(S0 + (S1 - S0) * o.p, o.T); }
-                if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(S1, 99); }, 4200); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
-                else { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(S1, 99); }, 4200); }
+                function frame() { draw(o.T); }
+                if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(99); }, 4200); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
+                else { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(99); }, 4200); }
             };
             window.spRoll(document.currentScript.previousElementSibling.querySelector(".roll"));
             </script>
