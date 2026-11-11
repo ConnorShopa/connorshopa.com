@@ -893,3 +893,13 @@ h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after { content: ""; pos
 h5.pillBreaker .pLabel::before { width: 14px; height: 14px; left: 22px; bottom: -14px; }
 h5.pillBreaker .pLabel::after { width: 8px; height: 8px; left: 12px; bottom: -26px; }
 html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -36px; }
+
+/* Record Shelf / Fullscreen: smaller icons */
+html.inFrame .iconTextBox > img { height: 22px; width: auto; }
+html.inFrame .iconTextBox { gap: 16px; }
+
+/* thought bubbles: more organic body, trailing circles tucked closer */
+h5.pillBreaker .pLabel { border-radius: 40px 54px 38px 56px / 24px 22px 24px 22px; }
+h5.pillBreaker .pLabel::before { width: 13px; height: 13px; left: 28px; bottom: -11px; }
+h5.pillBreaker .pLabel::after { width: 8px; height: 8px; left: 21px; bottom: -20px; }
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -44px; }
