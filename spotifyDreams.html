@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=15" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=16" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -147,7 +147,7 @@
                     var box = document.currentScript.previousElementSibling;
                     var stage = box && box.querySelector(".fdStage");
                     if (!stage || !window.gsap) return;
-                    var panels = Array.prototype.slice.call(stage.children), ANG = 70, SIDE = 0.536, PERSP = 7.2, GAP = 0.1, st = { p: 0 }, last = 0, dir = 1;
+                    var panels = Array.prototype.slice.call(stage.children), ANG = 77, SIDE = 0.536, PERSP = 7.4, GAP = 0.06, TUCK = 0.02, st = { p: 0 }, last = 0, dir = 1;
                     function render() {
                         var W = panels[0].offsetWidth;
                         if (st.p !== last) { dir = st.p > last ? 1 : -1; last = st.p; }
@@ -156,7 +156,7 @@
                         panels.forEach(function (el, i) {
                             var s = i - st.p, a = Math.abs(s), k = Math.min(a, 1), grow = 1 + 0.02 * lift;
                             gsap.set(el, {
-                                x: (a <= 1 ? s : (s > 0 ? 1 : -1) * (1 + (a - 1) * GAP)) * W,   // beyond the first panel, the rest of the records stand in a row, close together
+                                x: ((a <= 1 ? s : (s > 0 ? 1 : -1) * (1 + (a - 1) * GAP)) - (s > 0 ? TUCK : -TUCK) * k) * W,   // beyond the first panel, the rest of the records stand in a row, close together
                                 transformPerspective: PERSP * W,                        // each panel is seen in perspective from its hinge: the free edge comes toward you, so it reads taller than the hinged edge
                                 rotationY: (s >= 0 ? -1 : 1) * ANG * k,                  // right panels swing toward you on their left hinge, left ones on their right hinge
                                 scaleX: grow,
