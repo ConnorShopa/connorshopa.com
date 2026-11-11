@@ -95,9 +95,9 @@
                 var nDigits = text.replace(/,/g, "").length, d = 0;
                 text.split("").forEach(function (ch) {
                     if (ch === ",") { var c = document.createElement("span"); c.className = "rc"; c.textContent = ","; el.appendChild(c); return; }
-                    var col = document.createElement("span"), strip = document.createElement("span"), loops = d + 2, target = +ch, n = loops * 10 + target + 1, k;
+                    /* three spare cells past the target are for the wheel to overshoot onto */ var col = document.createElement("span"), strip = document.createElement("span"), loops = d + 2, target = +ch, n = loops * 10 + target + 1, k;
                     col.className = "rd"; strip.className = "rdS";
-                    for (k = 0; k < n + 3; k++) {   // three spare cells past the target, for the wheel to overshoot onto var cell = document.createElement("span"); cell.textContent = k % 10; strip.appendChild(cell); }
+                    for (k = 0; k < n + 3; k++) { var cell = document.createElement("span"); cell.textContent = k % 10; strip.appendChild(cell); }
                     col.appendChild(strip); el.appendChild(col); cols.push({ strip: strip, n: n }); d++;
                 });
                 function place(p, b) { // p: 0 (all zeros) .. 1 (112,000); b: how many digits the wheels are past (+) or short of (-) the target; the blur is strongest while the wheels are fastest and gone when they stop
