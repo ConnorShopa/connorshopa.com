@@ -969,3 +969,23 @@ h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after {
   background: radial-gradient(circle at 34% 28%, #ffffff 0%, #f1f9f3 40%, #d6e9dc 100%);
   box-shadow: inset 0 -2px 3px rgba(92,160,120,0.25), inset 0 0 0 1px rgba(255,255,255,0.7);
 }
+
+/* thought bubbles, cartoon style: bold outline, hard-edged highlight, flat shade band, hard drop shadow; circles hang fully below the pill */
+h5.pillBreaker .pLabel {
+  border: 2px solid #2D3A44;
+  background:
+    radial-gradient(ellipse 9% 14% at 16% 28%, #ffffff 0 96%, transparent 100%),
+    linear-gradient(180deg, #f3fbf6 0 66%, #cfe9d9 66% 100%);
+  box-shadow: none;
+  filter: drop-shadow(0 4px 0 rgba(45, 58, 68, 0.22));
+}
+h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after {
+  border: 2px solid #2D3A44; box-sizing: border-box;
+  background:
+    radial-gradient(circle at 30% 28%, #ffffff 0 22%, transparent 24%),
+    linear-gradient(180deg, #f3fbf6 0 60%, #cfe9d9 60% 100%);
+  box-shadow: none;
+}
+h5.pillBreaker .pLabel::before { width: 17px; height: 17px; left: calc(50% - 24px); bottom: -21px; }
+h5.pillBreaker .pLabel::after { width: 11px; height: 11px; left: calc(50% - 31px); bottom: -31px; }
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -14px; }
