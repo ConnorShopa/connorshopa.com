@@ -823,3 +823,6 @@ html.inFrame .annoBox .anno { letter-spacing: -0.045em; word-spacing: -0.05em; }
 
 /* annotated fullscreen images back to the artwork with its own lettering, at 0.6x */
 html.inFrame .imageBox img[src*="spotify_img08"], html.inFrame .imageBox img[src*="spotify_img09"] { width: 60%; height: auto; display: block; margin-left: auto; margin-right: auto; }
+
+/* the "nothing being played" fullscreen screen: 0.6x */
+html.inFrame .imageBox img[src*="spotify_img10"] { width: 60%; height: auto; display: block; margin-left: auto; margin-right: auto; }
