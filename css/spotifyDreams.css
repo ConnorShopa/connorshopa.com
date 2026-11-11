@@ -577,8 +577,9 @@ html.inFrame .content > .imageBox:first-child img { width: 60%; }
 .minutesBox { display: flex; justify-content: center; align-self: stretch; text-align: center; }
 .minutesBig { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(40px, 6.4vw, 120px); line-height: 1.08; white-space: nowrap; letter-spacing: -0.04em; font-weight: 500; color: #03131f; }
 .minutesBig .roll { display: inline-block; vertical-align: top; height: 1.08em; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 1em; line-height: 1.08; }
-.minutesBig .rd { display: inline-block; position: relative; height: 1.08em; vertical-align: top; width: 0.64em; text-align: center; }
-.minutesBig .rdA, .minutesBig .rdB { position: absolute; left: 0; right: 0; top: 0; line-height: 1.08; will-change: transform, filter, opacity; }
+.minutesBig .rd { display: inline-block; position: relative; height: 1.08em; vertical-align: top; width: 0.64em; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); }
+.minutesBig .rs { position: absolute; left: 0; right: 0; top: 0; display: block; will-change: transform, filter; }
+.minutesBig .rs > span { display: block; height: 1.08em; line-height: 1.08; text-align: center; }
 .minutesBig .rc { display: inline-block; vertical-align: top; width: 0.28em; text-align: center; }
 @media (max-width: 900px) { .minutesBig { font-size: clamp(26px, 6.4vw, 64px); } }
 
@@ -619,3 +620,6 @@ h2.problemHead .pText { font-family: "Satoshi", "Host Grotesk", system-ui, sans-
 .imageTextSection:has(.flipDemo) .textSection { align-items: center; text-align: center; margin: 0; max-width: none; }
 .imageTextSection:has(.flipDemo) .textSection .centerText { text-align: center; }
 .imageTextSection:has(.flipDemo) .flipDemo { margin: 0 auto; }
+.heroBox .productDetails ~ .textSection .linesRule { margin: 0 auto; }
+.heroBox .productDetails ~ .textSection { gap: 0; }
+html.inFrame h2.problemHead { margin-top: 96px; }

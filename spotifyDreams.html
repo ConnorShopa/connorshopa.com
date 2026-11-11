@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=56" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=57" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -85,51 +85,49 @@
         <div class="minutesBox">
             <p class="minutesBig" aria-label="I spent 112,661 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-from="100000" data-to="112661" aria-hidden="true">112,661</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
             <script>
-            // iOS-style rolling numbers: the number counts up in quick steps, and a digit that changes slides up out of the way (fading and blurring) while the next one rises into its place.
-            // Digits that don't change stay still. The last step lands left to right, each digit springing in with a small bounce.
-            window.spRoll = function (el) {   // works on any .roll with data-from / data-to ("112000", "5.1"...)
+            // Rolling numbers: every digit is a vertical strip (0-9) that slides continuously, like a wheel. The number is driven by one value that eases up to the target;
+            // the ones wheel spins with it and each higher wheel turns over only as the one beside it wraps past 9. Wheels blur with their own speed and fade at the top and bottom edges.
+            // Near the end each digit gets a small springy settle, starting from the left and moving right.
+            window.spRoll = function (el) {   // works on any .roll with data-from / data-to ("112661", "5.1"...)
                 if (!el || !window.gsap) return;
                 var text = el.getAttribute("data-to").replace(/\B(?=(\d{3})+(?!\d))/g, ","), cols = [];
                 var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                 var toD = text.replace(/\D/g, ""), nd = toD.length, S1 = +toD, S0 = +el.getAttribute("data-from").replace(/\D/g, "");
-                var cur = String(S0).padStart(nd, "0");
                 el.textContent = "";
                 text.split("").forEach(function (ch) {
                     if (!/\d/.test(ch)) { var c = document.createElement("span"); c.className = "rc"; c.textContent = ch; el.appendChild(c); return; }
-                    var col = document.createElement("span"), a = document.createElement("span"), b = document.createElement("span"), i = cols.length;
-                    col.className = "rd"; a.className = "rdA"; b.className = "rdB";
-                    b.textContent = cur.charAt(i); a.style.opacity = 0;
-                    col.appendChild(a); col.appendChild(b); el.appendChild(col);
-                    cols.push({ a: a, b: b, d: cur.charAt(i), f: 1, tw: null });
+                    var col = document.createElement("span"), strip = document.createElement("span"), k = nd - 1 - cols.length, h = "";
+                    col.className = "rd"; strip.className = "rs";
+                    for (var d = 0; d <= 10; d++) h += "<span>" + (d % 10) + "</span>";
+                    strip.innerHTML = h; col.appendChild(strip); el.appendChild(col);
+                    cols.push({ strip: strip, k: k, p10: Math.pow(10, k), last: null, blur: 0 });
                 });
-                var SLIDE = 55, BLUR = 6;   // how far (% of the digit's height) a digit travels, and the most it blurs
-                function draw(c) {
-                    var f = Math.max(0, Math.min(1, c.f));
-                    gsap.set(c.a, { yPercent: -f * SLIDE, opacity: 1 - f, filter: f > 0.02 && f < 1 ? "blur(" + (f * BLUR).toFixed(2) + "px)" : "none" });
-                    gsap.set(c.b, { yPercent: (1 - c.f) * SLIDE, opacity: f, filter: f < 0.98 ? "blur(" + ((1 - f) * BLUR).toFixed(2) + "px)" : "none" });
+                var STAGGER = 0.07, BUMP_AT = 1.2, BUMP_LEN = 0.55, BUMP = 0.16;   // seconds; the settle's size is in digit heights
+                function win(x) { x = Math.max(0, Math.min(1, (x - 0.9) / 0.1)); return x * x * (3 - 2 * x); }
+                function draw(v, T) {
+                    cols.forEach(function (c, i) {
+                        var x = v / c.p10, fl = Math.floor(x), lower = c.k ? (v % c.p10) / c.p10 : 0;
+                        var pos = c.k ? fl + win(lower) : v;
+                        var u = (T - BUMP_AT - i * STAGGER) / BUMP_LEN;
+                        if (u > 0 && u < 1) pos += BUMP * Math.sin(u * 6.2832) * (1 - u);
+                        var m = ((pos % 10) + 10) % 10, sp = c.last === null ? 0 : Math.abs(pos - c.last);
+                        c.last = pos;
+                        c.blur += (Math.min(5, sp * 6) - c.blur) * 0.5;
+                        gsap.set(c.strip, { yPercent: -m * 100 / 11, filter: c.blur > 0.25 ? "blur(" + c.blur.toFixed(2) + "px)" : "none" });
+                    });
                 }
-                function change(c, d, delay, bounce) {
-                    if (c.d === d) return;
-                    if (c.tw) c.tw.kill();
-                    c.a.textContent = c.d; c.b.textContent = d; c.d = d; c.f = 0; draw(c);   // the digit on its way in becomes the one on its way out if it is interrupted
-                    c.tw = gsap.to(c, { f: 1, duration: bounce ? 0.55 : 0.3, delay: delay || 0, ease: bounce ? "back.out(2.2)" : "power2.out", onUpdate: function () { draw(c); }, onComplete: function () { c.f = 1; draw(c); } });
-                }
-                function show(v, last) {
-                    var s = String(v).padStart(nd, "0");
-                    cols.forEach(function (c, i) { change(c, s.charAt(i), last ? i * 0.07 : 0, last); });
-                }
-                cols.forEach(draw);
-                if (still) { show(S1, false); cols.forEach(function (c) { if (c.tw) c.tw.progress(1); c.f = 1; draw(c); }); return; }
-                var o = { p: 0 }, played = false, lastV = S0, lastT = 0;
+                draw(still ? S1 : S0, 0);
+                if (still) return;
+                var o = { p: 0, T: 0 }, played = false;
                 function play() {
                     if (played) return; played = true;
-                    gsap.to(o, { p: 1, duration: 1.7, ease: "power3.out", onUpdate: function () {
-                        var v = Math.round(S0 + (S1 - S0) * o.p), now = performance.now();
-                        if (v !== lastV && v !== S1 && now - lastT >= 70) { lastV = v; lastT = now; show(v, false); }   // a step every 70 ms, so the digits are always mid-roll while it climbs
-                    }, onComplete: function () { show(S1, true); } });
+                    gsap.to(o, { p: 1, duration: 1.8, ease: "power3.out", });
+                    gsap.to(o, { T: 3, duration: 3, ease: "none", });
                 }
-                if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
-                else play();
+                // one frame loop: the value and the settle clock together
+                function frame() { draw(S0 + (S1 - S0) * o.p, o.T); }
+                if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(S1, 99); }, 3200); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
+                else { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(S1, 99); }, 3200); }
             };
             window.spRoll(document.currentScript.previousElementSibling.querySelector(".roll"));
             </script>
@@ -177,11 +175,7 @@
 
 
 
-                </h2>
-                <br> <br>
                 <div class="linesRule"></div>
-                <br> <br>
-                <br> <br>
                 <h2 class="problemHead"><span class="pLabel">Problem 1</span><span class="pText">Organization and exploration of Spotify content is unweildy, as well as lacking in wonder</span></h2>
 
             </div>
