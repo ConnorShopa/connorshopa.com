@@ -829,3 +829,7 @@ html.inFrame .imageBox img[src*="spotify_img10"] { width: 60%; height: auto; dis
 
 /* "In Context" screen: 0.6x */
 html.inFrame .imageBox img[src*="spotify_gif07"] { width: 60%; height: auto; display: block; margin-left: auto; margin-right: auto; }
+
+/* "In Context" screen: larger (80%), and given a full-viewport box so it sits centred in the project view */
+html.inFrame .imageBox:has(img[src*="spotify_gif07"]) { min-height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+html.inFrame .imageBox img[src*="spotify_gif07"] { width: 80%; }
