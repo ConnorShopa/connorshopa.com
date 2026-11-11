@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=57" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=58" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -87,7 +87,7 @@
             <script>
             // Rolling numbers: every digit is a vertical strip (0-9) that slides continuously, like a wheel. The number is driven by one value that eases up to the target;
             // the ones wheel spins with it and each higher wheel turns over only as the one beside it wraps past 9. Wheels blur with their own speed and fade at the top and bottom edges.
-            // Near the end each digit gets a small springy settle, starting from the left and moving right.
+            // Near the end each digit gets a small springy settle, starting from the right and moving left.
             window.spRoll = function (el) {   // works on any .roll with data-from / data-to ("112661", "5.1"...)
                 if (!el || !window.gsap) return;
                 var text = el.getAttribute("data-to").replace(/\B(?=(\d{3})+(?!\d))/g, ","), cols = [];
@@ -102,13 +102,13 @@
                     strip.innerHTML = h; col.appendChild(strip); el.appendChild(col);
                     cols.push({ strip: strip, k: k, p10: Math.pow(10, k), last: null, blur: 0 });
                 });
-                var STAGGER = 0.07, BUMP_AT = 1.2, BUMP_LEN = 0.55, BUMP = 0.16;   // seconds; the settle's size is in digit heights
+                var STAGGER = 0.07, BUMP_AT = 1.85, BUMP_LEN = 0.55, BUMP = 0.16;   // seconds; the settle's size is in digit heights
                 function win(x) { x = Math.max(0, Math.min(1, (x - 0.9) / 0.1)); return x * x * (3 - 2 * x); }
                 function draw(v, T) {
                     cols.forEach(function (c, i) {
                         var x = v / c.p10, fl = Math.floor(x), lower = c.k ? (v % c.p10) / c.p10 : 0;
                         var pos = c.k ? fl + win(lower) : v;
-                        var u = (T - BUMP_AT - i * STAGGER) / BUMP_LEN;
+                        var u = (T - BUMP_AT - (cols.length - 1 - i) * STAGGER) / BUMP_LEN;
                         if (u > 0 && u < 1) pos += BUMP * Math.sin(u * 6.2832) * (1 - u);
                         var m = ((pos % 10) + 10) % 10, sp = c.last === null ? 0 : Math.abs(pos - c.last);
                         c.last = pos;
@@ -121,7 +121,7 @@
                 var o = { p: 0, T: 0 }, played = false;
                 function play() {
                     if (played) return; played = true;
-                    gsap.to(o, { p: 1, duration: 1.8, ease: "power3.out", });
+                    gsap.to(o, { p: 1, duration: 2.3, ease: "power4.inOut", });
                     gsap.to(o, { T: 3, duration: 3, ease: "none", });
                 }
                 // one frame loop: the value and the settle clock together
