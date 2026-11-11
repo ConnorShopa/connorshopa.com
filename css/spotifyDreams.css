@@ -682,3 +682,7 @@ html.inFrame .heroStage > .imageBox.heroImg img { width: 60%; max-width: none; h
 @media (max-width: 900px) { .heroStage > .heroBox { margin-top: calc(-0.55 * clamp(26px, 6.4vw, 64px)); } }
 .heroStage > .heroBox > .textSection { margin: 0; }
 .heroStage { padding: 0; }
+
+/* the title sits just below the image, no overlap */
+.heroStage > .heroBox { margin-top: 32px; }
+@media (max-width: 900px) { .heroStage > .heroBox { margin-top: 24px; } }
