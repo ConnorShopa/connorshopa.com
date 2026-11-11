@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=3" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=4" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -140,7 +140,39 @@
             <br><br>
 
             <div class="imageTextSection">
-                <img class="roundedBox" src="assets/projectAssets/spotifyAssets/spotify_gif01.gif" alt="">
+                <div class="flipDemo" role="img" aria-label="Skeleton of thumbing through records: panels fold past one at a time"><div class="fdPhone"><div class="fdStage"><i></i><i></i><i></i><i></i></div></div></div>
+                <script>
+                // the skeleton ideation, rebuilt in GSAP: four panels on a hinged track; the track steps 0 -> 1 -> 2 -> 1 -> 0 and loops
+                (function () {
+                    var box = document.currentScript.previousElementSibling;
+                    var stage = box && box.querySelector(".fdStage");
+                    if (!stage || !window.gsap) return;
+                    var panels = Array.prototype.slice.call(stage.children), ANG = 80, st = { p: 0 };
+                    function render() {
+                        var W = panels[0].offsetWidth;
+                        panels.forEach(function (el, i) {
+                            var s = i - st.p, a = Math.abs(s);
+                            gsap.set(el, {
+                                x: s * W,
+                                rotationY: (s >= 0 ? -1 : 1) * ANG * Math.min(a, 1),   // right panels swing toward you on their left hinge, left ones on their right hinge
+                                transformOrigin: s >= 0 ? "0% 50%" : "100% 50%",
+                                opacity: Math.max(0, Math.min(1, 2 - a))
+                            });
+                        });
+                    }
+                    render();
+                    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+                    var tl = gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "power2.inOut" }, onUpdate: render });
+                    tl.to(st, { p: 1, duration: 0.42 }, 0.64)
+                      .to(st, { p: 2, duration: 0.48 }, 1.82)
+                      .to(st, { p: 1, duration: 0.44 }, 3.18)
+                      .to(st, { p: 0, duration: 0.64 }, 4.36)
+                      .to({}, { duration: 0.01 }, 5.49);
+                    window.addEventListener("resize", render);
+                    if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { e[0].isIntersecting ? tl.play() : tl.pause(); }).observe(box);
+                    else tl.play();
+                })();
+                </script>
                 <div class="textSection">
                     <h2 class="centerText">Making digital more physical</h2>
                     <h3 class="centerText">I started with a skeleton ideation of how I would represent thumbing through
