@@ -720,3 +720,8 @@ html.inFrame .frameRow > .imageBox:first-child img { width: 300px; max-width: 10
 html.inFrame .frameRow > .sheetBox { flex: 1 1 0; min-width: 0; }
 html.inFrame .frameRow > .sheetBox img { width: 100%; max-width: 100%; height: auto; }
 @media (max-width: 900px) { html.inFrame .dashFrame > .frameRow { flex-direction: column; } html.inFrame .frameRow > .sheetBox { flex: 0 0 auto; width: 100%; } }
+
+/* both images in the frame share one height (widths follow their own proportions) */
+html.inFrame .frameRow > .imageBox { flex: 0 0 auto; }
+html.inFrame .frameRow > .imageBox img, html.inFrame .frameRow > .imageBox:first-child img, html.inFrame .frameRow > .sheetBox img { height: clamp(240px, 30vw, 480px); width: auto; max-width: 100%; }
+@media (max-width: 900px) { html.inFrame .frameRow > .imageBox img, html.inFrame .frameRow > .imageBox:first-child img, html.inFrame .frameRow > .sheetBox img { height: auto; } html.inFrame .frameRow > .imageBox:first-child img { width: 220px; } html.inFrame .frameRow > .sheetBox img { width: 100%; } }
