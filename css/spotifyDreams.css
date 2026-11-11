@@ -806,4 +806,11 @@ html.inFrame .sketchText h2 { font-size: clamp(16px, 2.56vw, 48px); line-height:
 html.inFrame .viewRow > .gifCol > .imageBox img { width: 100%; max-height: none; }
 
 /* the two annotated fullscreen images (Jam queue / Jam sidebar): 0.6x */
-html.inFrame .imageBox img[src*="spotify_img08"], html.inFrame .imageBox img[src*="spotify_img09"] { width: 60%; height: auto; display: block; margin-left: auto; margin-right: auto; }
+
+
+/* annotated fullscreen images: labels are live text laid over the artwork, scaling with it (0.6x) */
+html.inFrame .annoBox { position: relative; width: 60%; margin: 0 auto; container-type: inline-size; }
+html.inFrame .annoBox > img { width: 100%; height: auto; display: block; margin: 0; }
+html.inFrame .annoBox .anno { position: absolute; margin: 0; white-space: nowrap; font-family: "Host Grotesk", "Satoshi", system-ui, sans-serif; font-weight: 400; color: #001428; letter-spacing: -0.04em; }
+html.inFrame .annoL .anno { text-align: right; font-size: 1.46cqw; line-height: 1.5cqw; }
+html.inFrame .annoR .anno { text-align: left; font-size: 2.3cqw; line-height: 2.38cqw; }
