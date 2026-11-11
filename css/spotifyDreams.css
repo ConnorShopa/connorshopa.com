@@ -937,3 +937,8 @@ html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -22px; }
 /* "For all it's wonder": at narrow widths the generic .textSection rule (24px side margins + 100% width) pushed it right of centre */
 html.inFrame .statsFrame + .forAllBox { margin-left: 0; margin-right: 0; max-width: 100%; }
 html.inFrame .forAllBox h3.centerText { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* section icon always sits left of its title, scaling with the title's text size (h1 is clamp(20px, 2.5vw, 40px); icon = 0.55 of it) */
+html.inFrame .iconTextBox { flex-direction: row; align-items: center; justify-content: center; gap: clamp(8px, 1vw, 16px); text-align: left; }
+html.inFrame .iconTextBox > img { height: clamp(11px, 1.375vw, 22px); width: auto; flex: 0 0 auto; }
+html.inFrame .iconTextBox > h1 { margin: 0; width: auto; white-space: nowrap; }
