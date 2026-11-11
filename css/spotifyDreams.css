@@ -817,3 +817,6 @@ html.inFrame .annoR .anno { text-align: left; font-size: 2.3cqw; line-height: 2.
 
 /* annotation labels: same font as the Sketching subtitle (Satoshi 500, #2D3A44) */
 html.inFrame .annoBox .anno { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 500; color: #2D3A44; letter-spacing: 0; }
+
+/* annotation labels: tighter tracking, like the original artwork lettering */
+html.inFrame .annoBox .anno { letter-spacing: -0.045em; word-spacing: -0.05em; }
