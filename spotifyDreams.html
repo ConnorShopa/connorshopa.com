@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=19" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=20" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -147,7 +147,7 @@
                     var box = document.currentScript.previousElementSibling;
                     var stage = box && box.querySelector(".fdStage");
                     if (!stage || !window.gsap) return;
-                    var panels = Array.prototype.slice.call(stage.children), ANG = 76, ANG_STEP = 5, ANG_MAX = 86, SIDE = 0.536, PERSP = 7.4, GAP = 0.012, TUCK = 0.02, PF = 1.1, st = { p: 0 }, last = 0, dir = 1;
+                    var panels = Array.prototype.slice.call(stage.children), ANG = 76, ANG_STEP = 5, ANG_MAX = 86, SIDE = 0.536, PERSP = 7.4, GAP = 0, TUCK = 0.02, PF = 1.1, st = { p: 0 }, last = 0, dir = 1;
                     function angOf(a) { return Math.min(ANG_MAX, ANG + ANG_STEP * Math.max(0, a - 1)); }
                     // how far (in card widths) a record's hinge sits from the centre card's middle: the first stands on the card's edge, and each one after
                     // stands one record's seen width (plus a small even gap) beyond the one before, so the records in the row are evenly spaced
