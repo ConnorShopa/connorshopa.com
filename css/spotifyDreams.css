@@ -883,3 +883,6 @@ html.inFrame .sketchText h5,
 html.inFrame .gifCol > .gifText,
 html.inFrame .dashFrame > h3,
 html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h3 { color: #6f7b86; }
+
+/* pill labels: capitalised, subtitle size */
+h2.problemHead .pLabel, h5.pillBreaker .pLabel { text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(18.67px, 1.3vw, 21px); }
