@@ -766,3 +766,6 @@ html.inFrame .gifCol > .gifTitle { font-size: clamp(16px, 2.56vw, 48px); }
 html.inFrame .gifCol > .gifTitle { font-size: clamp(16px, 1.4vw, 28px); }
 html.inFrame .gifCol > .gifText { font-family: "Host Grotesk", system-ui, sans-serif; font-size: 22px; font-weight: 400; line-height: 1.3; letter-spacing: normal; color: #002644; }
 @media (max-width: 900px) { html.inFrame .gifCol > .gifTitle { font-size: clamp(16px, 4vw, 24px); } }
+
+/* the fullscreen pictures fill their frame */
+html.inFrame .dashFrame > .imageBox img[src*="spotify_img_05"] { width: 100%; max-width: 100%; height: auto; }
