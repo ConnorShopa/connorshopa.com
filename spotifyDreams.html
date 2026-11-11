@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=40" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=41" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -83,49 +83,37 @@
             </div>
 
         <div class="minutesBox">
-            <p class="minutesBig" aria-label="I spent 112,000 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-to="112000" aria-hidden="true">112,000</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
+            <p class="minutesBig" aria-label="I spent 112,000 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-from="100000" data-to="112000" aria-hidden="true">112,000</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
             <script>
-            // an odometer counting 0 -> 112,000: the ones wheel spins freely, and every wheel to its left only turns (a quick flick) as the wheel to its right
-            // passes 9 -> 0, so the wheels move from right to left. The wheels turn downward, and new digits appear at the left as the number gets bigger.
+            // the number rolls from 100,000 to 112,000, the wheels turning downward (digit wheels that spin and sharpen as they settle) when it scrolls into view
             (function () {
                 var el = document.currentScript.previousElementSibling.querySelector(".roll");
                 if (!el || !window.gsap) return;
-                var T = +el.getAttribute("data-to"), nd = String(T).length, wheels = [], k, i;
+                var text = el.getAttribute("data-to").replace(/\B(?=(\d{3})+(?!\d))/g, ","), cols = [], i;
                 var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                 el.textContent = "";
-                for (k = nd - 1; k >= 0; k--) {
-                    var col = document.createElement("span"), strip = document.createElement("span");
+                var from = el.getAttribute("data-from").padStart(text.replace(/,/g, "").length, "0"), d = 0;   // the wheels start on 100,000, not 000,000
+                text.split("").forEach(function (ch) {
+                    if (ch === ",") { var c = document.createElement("span"); c.className = "rc"; c.textContent = ","; el.appendChild(c); return; }
+                    /* three spare cells past the target are for the wheel to overshoot onto */ var col = document.createElement("span"), strip = document.createElement("span"), loops = d + 1, target = +ch, sd = +from.charAt(d), n = loops * 10 + ((target - sd + 10) % 10) + 1, k;
                     col.className = "rd"; strip.className = "rdS";
-                    for (i = 0; i <= 10; i++) { var cell = document.createElement("span"); cell.textContent = (10 - i) % 10; strip.appendChild(cell); }   // 0 9 8 ... 1 0: the first and last cells match, so the wheel wraps without a seam
-                    col.appendChild(strip); el.appendChild(col);
-                    var w = { k: k, col: col, strip: strip, comma: null };
-                    if (k % 3 === 0 && k > 0) { var cm = document.createElement("span"); cm.className = "rc"; cm.textContent = ","; el.appendChild(cm); w.comma = cm; }
-                    wheels.push(w);
+                    for (k = 0; k < n + 3; k++) { var cell = document.createElement("span"); cell.textContent = (sd + n - 1 + 3 - k) % 10; strip.appendChild(cell); }
+                    col.appendChild(strip); el.appendChild(col); cols.push({ strip: strip, n: n }); d++;
+                });
+                function place(p, b) { // p: 0 (100,000) .. 1 (112,000); b: how many digits the wheels are past (+) or short of (-) the target; the blur is strongest while the wheels are fastest and gone when they stop
+                    var h = cols[0].strip.firstChild.getBoundingClientRect().height;   // the exact (fractional) cell height: a rounded one adds up to a visible miss over a long strip
+                    cols.forEach(function (c) { gsap.set(c.strip, { y: -((1 - p) * (c.n - 1) - b + 3) * h, filter: "blur(" + (11 * Math.pow(Math.abs(1 - p), 2.2) * Math.min(1, p * 15)).toFixed(2) + "px)"   /* sharp while it waits, blurring up as the wheels start */ }); });
                 }
-                function stage(f) { var x = (f - 0.9) / 0.1; return x <= 0 ? 0 : (x >= 1 ? 1 : x * x * (3 - 2 * x)); }   // the flick: the last tenth of the wheel to the right's turn
-                var prev = 0;
-                function render(v) {
-                    var h = wheels[0].strip.firstChild.getBoundingClientRect().height, rate = Math.abs(v - prev); prev = v;   // the exact (fractional) cell height
-                    wheels.forEach(function (w) {
-                        var p10 = Math.pow(10, w.k), u = v / p10, fl = Math.floor(u), st = stage(u - fl), blur;
-                        var pos = w.k === 0 ? u : fl + st;
-                        var m = ((pos % 10) + 10) % 10;
-                        blur = w.k === 0 ? 9 * Math.min(1, rate * 0.25) : 7 * Math.sin(Math.PI * st);
-                        gsap.set(w.strip, { y: -(10 - m) * h, filter: blur > 0.15 ? "blur(" + blur.toFixed(2) + "px)" : "none" });
-                        // digits are added at the left as the number grows: a wheel opens out as the number reaches its place, turning 0 -> 1 while it does
-                        var o = w.k === 0 ? 1 : Math.max(0, Math.min(1, (v - p10 * 0.9) / (p10 * 0.1)));
-                        w.col.style.width = (0.64 * o) + "em"; w.col.style.opacity = o;
-                        if (w.comma) { w.comma.style.width = (0.28 * o) + "em"; w.comma.style.opacity = o; }
-                    });
-                }
-                render(still ? T : 0);
-                if (still) { wheels.forEach(function (w) { w.strip.style.filter = "none"; }); return; }
-                var o = { p: 0 }, played = false;
+                place(still ? 1 : 0, 0);
+                if (still) { cols.forEach(function (c) { c.strip.style.filter = "none"; }); return; }
+                var o = { p: 0, b: 0 }, played = false;
+                function bump(p) { var u = (p - 0.9) / 0.1; return u <= 0 || u >= 1 ? 0 : 0.4 * Math.sin(Math.PI * u); }   // runs 0.4 of a digit past the number during the last tenth of the roll, and is back on it as the roll ends
                 function play() {
                     if (played) return; played = true;
-                    gsap.to(o, { p: 1, duration: 3.6, ease: "power3.out", onUpdate: function () { render(T * o.p); }, onComplete: function () { render(T); wheels.forEach(function (w) { w.strip.style.filter = "none"; }); } });
+                    // one continuous motion: the wheels spin up and slow down on a steep curve, and the last stretch carries them a touch past the number and back onto it
+                    gsap.to(o, { p: 1, duration: 3, ease: "power3.out", onUpdate: function () { place(o.p, bump(o.p)); }, onComplete: function () { place(1, 0); cols.forEach(function (c) { c.strip.style.filter = "none"; }); } });
                 }
-                window.addEventListener("resize", function () { render(T * o.p); });
+                window.addEventListener("resize", function () { place(o.p, bump(o.p)); });
                 if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
                 else play();
             })();
