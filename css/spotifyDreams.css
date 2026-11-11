@@ -909,3 +909,9 @@ h5.pillBreaker .pLabel { border-radius: 46px 52px 44px 54px / 24px 23px 24px 23p
 
 /* thought bubbles: back to the plain pill */
 h5.pillBreaker .pLabel { border-radius: 999px; }
+
+/* stats read as a story: three beats with room between them */
+html.inFrame .minutesBig .roll { margin: 0 0.1em; }
+html.inFrame .minutesBig .mL2 { margin-top: 0.45em; }
+html.inFrame .statsFrame > .minutesBox + .hoursBox { margin-top: 88px; }
+html.inFrame .statsFrame + .forAllBox { padding: 88px 0 72px; }
