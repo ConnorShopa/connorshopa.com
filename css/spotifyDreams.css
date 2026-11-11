@@ -870,3 +870,16 @@ h2.problemHead .pLabel { display: inline-block; padding: 6px 18px; border: 1.2px
 
 /* every pill label (Problem 1/2, Thought 1/2) uses the same dashed outline as the rolling numbers */
 h2.problemHead .pLabel, h5.pillBreaker .pLabel { border: 1.2px dashed #474B4E; border-radius: 999px; }
+
+/* colours reversed project-wide: titles dark, subtitles / captions grey */
+html.inFrame .scalableText h2,
+html.inFrame .sketchText h2,
+html.inFrame .gifCol > .gifTitle,
+html.inFrame .dashFrame.principles > .gifCol > .gifTitle,
+html.inFrame .statementText h2,
+h2.problemHead .pText { color: #2D3A44; }
+html.inFrame .scalableText h3,
+html.inFrame .sketchText h5,
+html.inFrame .gifCol > .gifText,
+html.inFrame .dashFrame > h3,
+html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h3 { color: #6f7b86; }
