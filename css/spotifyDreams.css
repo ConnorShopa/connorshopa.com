@@ -740,3 +740,12 @@ h2.problemHead .pLabel { border-color: #6f7b86; }
 
 /* the animations (transparent WebP now) float on a dark-green drop shadow that follows their rounded shapes */
 html.inFrame img[src*="spotify_gif"] { filter: drop-shadow(0 18px 28px rgba(10, 66, 40, 0.42)); }
+
+/* the three use-case animations in a row, each with its title and text underneath (type matches the text sections above: Satoshi, grey) */
+html.inFrame .gifRow { display: flex; flex-direction: row; align-items: flex-start; justify-content: center; gap: 48px; width: 100%; align-self: stretch; box-sizing: border-box; padding: 0 24px; }
+html.inFrame .gifCol { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+html.inFrame .gifCol > .imageBox { width: 100%; margin: 0 0 16px; justify-content: center; }
+html.inFrame .gifCol > .imageBox img { width: auto; max-width: 100%; height: auto; max-height: 62vh; display: block; margin: 0 auto; }
+html.inFrame .gifCol > .gifTitle { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 1.9vw, 30px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; width: 100%; }
+html.inFrame .gifCol > .gifText { margin: 0; text-align: center; width: 100%; max-width: 26em; color: #002644; }
+@media (max-width: 900px) { html.inFrame .gifRow { flex-direction: column; align-items: center; gap: 56px; } html.inFrame .gifCol { width: 100%; } }
