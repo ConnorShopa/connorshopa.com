@@ -2725,7 +2725,7 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
   #projectList li:not(.row-break) {
     position: relative; flex: none; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
     width: 200px; height: 134px; padding: 0; border-radius: 28px; scroll-snap-align: start;
-    background: var(--card, #F4F4F4); box-shadow: 0 14px 34px -14px rgba(47, 39, 37, 0.32), 0 2px 8px rgba(47, 39, 37, 0.08);
+    background: none; box-shadow: none; /* (no card behind them now; the card-sized spacing stays) */
   }
   #projectList li::after { display: none !important; }
   /* the whole card is the link, its contents centred */
@@ -2733,8 +2733,6 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
   #projectList li > a.stackLogo { flex-direction: column; }
   #projectList li > a.withCaption { display: inline-grid; }
   #projectList .logo, #projectList .wordmark { filter: none; }
-  #projectList li.cardDark .wordmark, #projectList li.cardDark .withCaption .label { filter: invert(1); }
-  #projectList li.cardDark > a { color: #FAFAFA; }
   /* while a project is open the cards run in one row above it: one line, scrolling sideways */
   #projectList.compact.inline.big { flex-wrap: nowrap; overflow-x: auto; padding: 8px max(24px, 4vw) 14px; }
 }
