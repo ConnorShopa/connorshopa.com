@@ -886,3 +886,10 @@ html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h3 { color: #6f7b
 
 /* pill labels: capitalised, subtitle size */
 h2.problemHead .pLabel, h5.pillBreaker .pLabel { text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(18.67px, 1.3vw, 21px); }
+
+/* Thought pills: white thought bubbles (no dashes) with two little trailing bubbles */
+h5.pillBreaker .pLabel { position: relative; border: 0; background: #fff; box-shadow: 0 6px 18px rgba(10, 66, 40, 0.08); padding: 10px 28px; }
+h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after { content: ""; position: absolute; background: #fff; border-radius: 50%; box-shadow: 0 3px 8px rgba(10, 66, 40, 0.08); }
+h5.pillBreaker .pLabel::before { width: 14px; height: 14px; left: 22px; bottom: -14px; }
+h5.pillBreaker .pLabel::after { width: 8px; height: 8px; left: 12px; bottom: -26px; }
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -36px; }
