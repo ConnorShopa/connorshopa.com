@@ -309,25 +309,35 @@
     // hidden (the card has its own close button) and it shows as soon as its content is parsed, without waiting for every picture and script
     sec.querySelectorAll(".legacyFrame").forEach(function (f) {
       var started = false, shown = false;
-      function show() {
-        if (shown) return;
-        var d; try { d = f.contentDocument; } catch (e) { d = null; }
-        if (d && d.URL === "about:blank") return; // the frame's empty starting page, before the real one arrives
-        if (d && d.head && !d.getElementById("legacyHide")) {
+      // Hides the page's own header / footer / cursor and hands its mouse movement up to this page. A frame can get a NEW
+      // document after the first one (it loads again), and the new one has no handler, so this runs for every document the
+      // frame shows, not just the first: otherwise the follow-the-mouse bubble stops whenever the page loaded twice.
+      function bindDoc(d) {
+        if (!d || !d.head || d.URL === "about:blank" || f._boundDoc === d) return;
+        f._boundDoc = d;
+        if (!d.getElementById("legacyHide")) {
           var st = d.createElement("style");
           st.id = "legacyHide";
           st.textContent = ".headerBox, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; }" +
             (proj.legacyBg ? " html, body { background-color: " + proj.legacyBg + " !important; }" : ""); // a framed page that takes its project's own colour
-          if (proj.legacyBg) f.style.background = proj.legacyBg;
           d.head.appendChild(st);
-          // the mouse dot lives in this page, and a frame swallows the pointer, so the frame hands its movement up
-          d.addEventListener("mousemove", function (e) {
-            var r = f.getBoundingClientRect();
-            window.dispatchEvent(new MouseEvent("mousemove", { clientX: e.clientX + r.left, clientY: e.clientY + r.top }));
-          }, { passive: true });
         }
+        if (proj.legacyBg) f.style.background = proj.legacyBg;
+        // the mouse dot lives in this page, and a frame swallows the pointer, so the frame hands its movement up
+        d.addEventListener("mousemove", function (e) {
+          var r = f.getBoundingClientRect();
+          window.dispatchEvent(new MouseEvent("mousemove", { clientX: e.clientX + r.left, clientY: e.clientY + r.top }));
+        }, { passive: true });
+      }
+      function show() {
+        var d; try { d = f.contentDocument; } catch (e) { d = null; }
+        if (d && d.URL !== "about:blank") bindDoc(d);
+        // opening the project again loads the page again (the card empties and refills its frame): treat the new document as new
+        if (shown && d && f._shownFor && f._shownFor !== d && d.URL !== "about:blank") { shown = false; f._fit = false; }
+        if (shown) return;
+        if (d && d.URL === "about:blank") return; // the frame's empty starting page, before the real one arrives
         if (d && d.body && d.readyState !== "loading") {
-          shown = true; f.classList.add("ready");
+          shown = true; f._shownFor = d; f.classList.add("ready");
           // text floor: nothing in the framed page is smaller than 14pt (18.67px)
           try {
             var MINPX = 14 * 4 / 3, fix = function () {
@@ -358,7 +368,7 @@
       function start() {
         if (started) return;
         started = true;
-        f.addEventListener("load", show);
+        f.addEventListener("load", show); // also re-binds when the frame loads a second document
         f.src = f.getAttribute("data-src");
         var n = 0, iv = setInterval(function () { show(); if (shown || ++n > 150) clearInterval(iv); }, 100);
         setTimeout(function () { f.classList.add("ready"); }, 4000); // never leave it blank
