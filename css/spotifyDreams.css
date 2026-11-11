@@ -656,3 +656,9 @@ html.inFrame h2.problemHead { margin-bottom: 0; }
 html.inFrame .imageTextSection:has(.flipDemo) { gap: 72px; }
 
 html.inFrame h2.problemHead { margin-bottom: 72px; }
+
+/* the hero (image + Spotify Dreams title) opens the page; the title overlaps the foot of the image; the stats follow */
+.content > .imageBox.heroImg { margin-top: 72px; }
+.content > .heroImg + .heroBox { margin-top: calc(-0.55 * clamp(40px, 6.4vw, 120px)); position: relative; z-index: 2; }
+.content > .heroBox#nanni + .minutesBox { margin-top: 120px; }
+@media (max-width: 900px) { .content > .heroImg + .heroBox { margin-top: calc(-0.55 * clamp(26px, 6.4vw, 64px)); } }

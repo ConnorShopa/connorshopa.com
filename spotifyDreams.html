@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=74" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=75" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -77,6 +77,28 @@
 
     <div class="content">
 
+
+
+
+            <div class="imageBox heroImg">
+                <img src="assets/projectAssets/spotifyAssets/spotify_img01.png" alt="" />
+            </div>
+        <div class="heroBox" id="nanni">
+            <div class="textSection">
+                <h1>Spotify Dreams</h1>
+
+            </div>
+            <div class="productDetails">
+                <div class="textSection">
+
+                    <h4>Fixing problems I have with Spotify</h4>
+                </div>
+
+
+
+            </div>
+        </div>
+
         <div class="minutesBox">
             <p class="minutesBig" aria-label="I spent 112,661 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-from="0" data-to="112661" aria-hidden="true">112,661</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
             <script>
@@ -121,7 +143,7 @@
                 }
                 // one frame loop: the value and the settle clock together
                 function frame() { draw(o.T); }
-                if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(99); }, 4600); ob.disconnect(); } }, { threshold: 0.1 }).observe(el);
+                if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(99); }, 4600); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
                 else { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(99); }, 4600); }
             };
             window.spRoll(document.currentScript.previousElementSibling.querySelector(".roll"));
@@ -138,29 +160,8 @@
             <h3 class="centerText">For all it's wonder, I noticed some problems</h3>
         </div>
 
+        <div class="heroBox">
 
-
-            <div class="imageBox heroImg">
-                <img src="assets/projectAssets/spotifyAssets/spotify_img01.png" alt="" />
-            </div>
-
-        <div class="heroBox" id="nanni">
-
-            <div class="textSection">
-                <h1>Spotify Dreams</h1>
-
-            </div>
-
-
-            <div class="productDetails">
-                <div class="textSection">
-
-                    <h4>Fixing problems I have with Spotify</h4>
-                </div>
-
-
-
-            </div>
 
 
             <div class="textSection">
