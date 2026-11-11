@@ -643,3 +643,10 @@ html.inFrame .content > .textSection:has(.problemHead) { margin-bottom: 96px; }
 /* the first stat (I spent ...) sits in the middle of the project view: half the view height, less half the block's own height (two lines of the big size) */
 .content > .minutesBox:first-child { margin-top: max(24px, calc(50vh - 1.15 * clamp(40px, 6.4vw, 120px))); }
 @media (max-width: 900px) { .content > .minutesBox:first-child { margin-top: max(24px, calc(50vh - 1.15 * clamp(26px, 6.4vw, 64px))); } }
+
+/* the flip section and Problem 1 live inside the hero block, so they are reached by descendant, not child, selectors */
+html.inFrame .imageTextSection:has(.flipDemo) { display: flex; flex-direction: column; align-items: center; justify-content: center; align-self: stretch; width: 100%; max-width: none; gap: 56px; box-sizing: border-box; }
+html.inFrame .imageTextSection:has(.flipDemo) > .textSection { width: 100%; max-width: none; align-items: center; text-align: center; margin: 0; }
+html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h2, html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h3 { width: 100%; text-align: center; margin-left: 0; margin-right: 0; }
+html.inFrame .imageTextSection:has(.flipDemo) > .flipDemo { flex: 0 0 auto; align-self: center; margin: 0 auto; }
+html.inFrame h2.problemHead { margin-bottom: 140px; }
