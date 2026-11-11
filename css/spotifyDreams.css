@@ -695,3 +695,8 @@ html.inFrame .imageTextSection:has(.flipDemo) h2.problemHead { margin-bottom: 72
 .inlineTitle { font-weight: 700; color: #03131f; }
 
 .inlineTitle { font: inherit; font-weight: inherit; color: inherit; letter-spacing: inherit; }
+
+/* the record animation and its sentence sit in a rounded dashed frame (the dash matches the records') */
+html.inFrame .imageTextSection:has(.flipDemo) { border: 1.2px dashed #474B4E; border-radius: 32px; padding: 56px 48px; gap: 40px; box-sizing: border-box; }
+html.inFrame .imageTextSection:has(.flipDemo) > .textSection { max-width: 36em; }
+@media (max-width: 900px) { html.inFrame .imageTextSection:has(.flipDemo) { border-radius: 24px; padding: 32px 20px; } }
