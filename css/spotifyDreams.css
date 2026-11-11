@@ -673,3 +673,6 @@ html.inFrame h2.problemHead { margin-bottom: 72px; }
 .heroStage > .imageBox.heroImg { margin-top: 0; width: 100%; display: flex; justify-content: center; }
 .heroStage > .heroBox { width: 100%; }
 .content > .heroStage + .minutesBox { margin-top: 48px; }
+
+/* the hero image keeps its size (60% of the view) now that it sits in the hero stage rather than directly in .content */
+html.inFrame .heroStage > .imageBox.heroImg img { width: 60%; max-width: none; height: auto; display: block; margin: 0 auto; }
