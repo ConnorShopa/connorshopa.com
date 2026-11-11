@@ -788,3 +788,7 @@ html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-family: "Satoshi
 
 /* "Spotify Dreams" title: lighter weight */
 html .heroBox h1, html.inFrame .heroBox h1 { font-weight: 500; }
+
+/* Sketching copy: same type as the dashed-frame captions ("The old fullscreen, left behind…") */
+html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(18.67px, 1.3vw, 21px); font-weight: 500; line-height: 1.45; letter-spacing: 0; color: #2D3A44; text-align: center; max-width: 36em; margin: 0 auto; }
+@media (max-width: 900px) { html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-size: clamp(18.67px, 1.3vw, 21px); } }
