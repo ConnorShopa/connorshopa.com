@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=34" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=35" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -107,15 +107,13 @@
                 place(still ? 1 : 0, 0);
                 if (still) { cols.forEach(function (c) { c.strip.style.filter = "none"; }); return; }
                 var o = { p: 0, b: 0 }, played = false;
+                function bump(p) { var u = (p - 0.9) / 0.1; return u <= 0 || u >= 1 ? 0 : 0.4 * Math.sin(Math.PI * u); }   // runs 0.4 of a digit past the number during the last tenth of the roll, and is back on it as the roll ends
                 function play() {
                     if (played) return; played = true;
-                    // the wheels spin up fast and slow hard (a steep bezier), run a touch past the number, then ease back onto it: one clean settle, no wobble
-                    var tl = gsap.timeline({ onUpdate: function () { place(o.p, o.b); }, onComplete: function () { place(1, 0); cols.forEach(function (c) { c.strip.style.filter = "none"; }); } });
-                    tl.to(o, { p: 1, duration: 2.3, ease: "expo.out" }, 0)
-                      .to(o, { b: 0.3, duration: 0.45, ease: "power2.out" }, 1.6)
-                      .to(o, { b: 0, duration: 0.8, ease: "power2.inOut" }, 2.05);
+                    // one continuous motion: the wheels spin up and slow down on a steep curve, and the last stretch carries them a touch past the number and back onto it
+                    gsap.to(o, { p: 1, duration: 3, ease: "power3.out", onUpdate: function () { place(o.p, bump(o.p)); }, onComplete: function () { place(1, 0); cols.forEach(function (c) { c.strip.style.filter = "none"; }); } });
                 }
-                window.addEventListener("resize", function () { place(o.p, o.b); });
+                window.addEventListener("resize", function () { place(o.p, bump(o.p)); });
                 if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
                 else play();
             })();
