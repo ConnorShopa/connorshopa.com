@@ -558,12 +558,6 @@ body {
 .flipDemo .fdStage { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
 .flipDemo .fdStage i { position: absolute; left: -21.6cqw; top: -21.6cqw; width: 43.2cqw; height: 43.2cqw; box-sizing: border-box; border: 1.2px dashed #474B4E; border-radius: 1.5cqw; background: #F7F7F7; box-shadow: 0 calc(2cqw + 1.2cqw * var(--lift, 0)) calc(5cqw + 2cqw * var(--lift, 0)) rgba(30, 35, 60, calc(0.12 + 0.04 * var(--lift, 0))); }
 
-/* the flip section: the copy sits to the right of the animation, left aligned, both centred on a row (wide screens; narrow ones keep the stacked layout) */
-@media (min-width: 901px) {
-  .imageTextSection:has(.flipDemo) { flex-direction: row; align-items: center; gap: 72px; }
-  .imageTextSection:has(.flipDemo) .textSection { align-items: flex-start; text-align: left; margin: 0; max-width: none; }
-  .imageTextSection:has(.flipDemo) .textSection .centerText { text-align: left; }
-}
 
 /* inside the project view: titles and subtitles take Nanni's type (Satoshi; titles like Nanni's .nnLead, subtitles like its .nnPt, with the 14pt floor).
    vw here is the framed page's own width, which is the card's width, so it plays the part of Nanni's cqw. */
@@ -616,3 +610,12 @@ html .heroBox h1, html.inFrame .heroBox h1 { text-align: center; width: 100%; fo
 /* "Fixing problems I have with Spotify": centred under the title */
 .heroBox .productDetails, .heroBox .productDetails .textSection { align-items: center; justify-content: center; text-align: center; width: 100%; }
 .heroBox .productDetails h4 { text-align: center; }
+
+/* Problem 1: a centred column (label, statement, copy, then the animation below) */
+html.inFrame h2.problemHead { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; width: 100%; margin: 0; }
+h2.problemHead .pLabel { font-family: "Host Grotesk", system-ui, sans-serif; font-size: 22px; font-weight: 400; color: #002644; line-height: 1.3; letter-spacing: normal; }
+h2.problemHead .pText { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; max-width: 22em; }
+.imageTextSection:has(.flipDemo) { flex-direction: column; align-items: center; gap: 24px; }
+.imageTextSection:has(.flipDemo) .textSection { align-items: center; text-align: center; margin: 0; max-width: none; }
+.imageTextSection:has(.flipDemo) .textSection .centerText { text-align: center; }
+.imageTextSection:has(.flipDemo) .flipDemo { margin: 0 auto; }
