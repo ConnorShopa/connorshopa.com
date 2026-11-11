@@ -316,7 +316,9 @@
         if (d && d.head && !d.getElementById("legacyHide")) {
           var st = d.createElement("style");
           st.id = "legacyHide";
-          st.textContent = ".headerBox, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; }";
+          st.textContent = ".headerBox, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; }" +
+            (proj.legacyBg ? " html, body { background-color: " + proj.legacyBg + " !important; }" : ""); // a framed page that takes its project's own colour
+          if (proj.legacyBg) f.style.background = proj.legacyBg;
           d.head.appendChild(st);
           // the mouse dot lives in this page, and a frame swallows the pointer, so the frame hands its movement up
           d.addEventListener("mousemove", function (e) {
