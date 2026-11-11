@@ -933,3 +933,7 @@ h5.pillBreaker .pLabel { margin: 0 auto; }
 h5.pillBreaker .pLabel::before { left: 50%; transform: translateX(-50%); width: 13px; height: 13px; bottom: -13px; }
 h5.pillBreaker .pLabel::after { left: 50%; transform: translateX(-50%); width: 8px; height: 8px; bottom: -26px; }
 html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -22px; }
+
+/* "For all it's wonder": at narrow widths the generic .textSection rule (24px side margins + 100% width) pushed it right of centre */
+html.inFrame .statsFrame + .forAllBox { margin-left: 0; margin-right: 0; max-width: 100%; }
+html.inFrame .forAllBox h3.centerText { text-align: center; margin-left: auto; margin-right: auto; }
