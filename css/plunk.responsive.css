@@ -1,0 +1,10 @@
+/* Plunk project view: responsive pass for tablet and phone.
+   Desktop (wider than 900px) is the reference and is not touched: every rule sits inside a max-width query. */
+@media (max-width: 900px) {
+  /* the card's logo and close button sit over the top of the page: start the content below them */
+  html.inFrame body { padding-top: 64px; }
+
+  /* pictures only ever get smaller, in proportion: the width/height attributes in the markup are fixed pixel sizes */
+  html.inFrame .imageBox img, html.inFrame .twoGifSpan img { max-width: 100%; height: auto; }
+  html.inFrame .imageBox img[width] { width: auto; max-width: min(100%, var(--w, 100%)); }
+}

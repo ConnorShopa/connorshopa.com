@@ -1,0 +1,39 @@
+/* Project views: responsive pass for tablet and phone.
+   Desktop (wider than 900px) is the reference and is not touched: every rule sits inside a max-width query.
+   Loads after redesign.css, so it wins on source order. */
+
+/* ---- scrolling project cards: the page scrolls inside the card, below the floating logo and close button,
+        instead of running underneath them ---- */
+@media (min-width: 701px) and (max-width: 900px) {
+  .view.scrollView .viewBody { inset: 108px 0 0; padding: 0 48px 40px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16px); mask-image: linear-gradient(to bottom, transparent 0, #000 16px); }
+}
+@media (max-width: 700px) {
+  .view.scrollView .viewBody { inset: 76px 0 0; padding: 0 16px 28px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px); mask-image: linear-gradient(to bottom, transparent 0, #000 14px); }
+}
+
+/* ---- Nanni ---- */
+@media (max-width: 900px) {
+  /* the page supplies its own side margin (--nn-pad), so the card's padding steps aside */
+  #view-nanni.scrollView .viewBody { padding-left: 0; padding-right: 0; }
+  #view-nanni .nnDoc { --nn-pad: clamp(20px, 7vw, 56px); }
+  #view-nanni .nnRow, #view-nanni .nnGoal, #view-nanni .nnCols { padding-left: var(--nn-pad); padding-right: var(--nn-pad); }
+  #view-nanni .nnFrame { margin: 0 var(--nn-pad); }
+  #view-nanni .nnLead, #view-nanni .nnAbout .nnLead { max-width: none; }
+  /* the three screens share the column's width instead of each being a fraction of the window */
+  #view-nanni .nnShots { justify-self: stretch; width: 100%; gap: 2%; }
+  #view-nanni .nnShots img, #view-nanni .nnShots img.mid { width: auto; flex: 1 1 0; min-width: 0; height: auto; }
+  #view-nanni .nnShots img.mid { flex-grow: 1.07; }
+}
+
+/* ---- phones: forms that were wider than the card ---- */
+@media (max-width: 480px) {
+  /* TouchTunes password row: the field takes what is left, the buttons stay their size, nothing leaves the card */
+  #view-touchtunes .lockBox .lockForm { flex-wrap: wrap; max-width: 100%; padding: 0 16px; box-sizing: border-box; }
+  #view-touchtunes .lockBox .lockForm .lockInput { flex: 1 1 100%; }
+  #view-touchtunes .lockBox .lockForm .lockBtn { flex: 1 1 0; white-space: nowrap; }
+  /* Overhand early access: the field shrinks so the placeholder and button both fit */
+  .view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyInput { min-width: 0; flex: 1 1 0; padding-left: 12px; padding-right: 12px; }
+  .view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyBtn.lockBtn { flex: 0 0 auto; padding-left: 14px; padding-right: 14px; }
+}

@@ -1,12 +1,13 @@
-/* Satoshi was only ever resolved from a locally installed copy: css/satoshi.css (linked by the page) does not exist.
-   local() first keeps the look identical where it is installed; the bundled file covers everyone else. */
-@font-face { font-family: "Satoshi"; src: local("Satoshi"), local("Satoshi Variable"), url("../fonts/Satoshi/Satoshi-Variable.ttf") format("truetype"); font-weight: 300 900; font-style: normal; font-display: swap; }
-
 /* Thoughtify project view: responsive pass.
    The desktop layout (wider than 900px) is the reference and is not touched here: every rule below sits inside a max-width media query.
    Rules rely on source order (this file loads after spotifyDreams.css) rather than !important. */
 
 @media (max-width: 900px) {
+
+  /* ---- centring: the problem heading and the flip demo block use the full column, so they sit on its centre line ---- */
+  html.inFrame .content .textSection, html.inFrame .heroBox > .textSection { max-width: 100%; margin-left: 0; margin-right: 0; width: 100%; box-sizing: border-box; }
+  html.inFrame .heroBox > .textSection h2.problemHead { margin-left: auto; margin-right: auto; text-align: center; }
+  html.inFrame body { padding-top: 56px; }
 
   /* ---- hero ---- */
   html.inFrame .heroStage > .imageBox.heroImg img { width: 78%; }
