@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=6" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=7" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -147,7 +147,7 @@
                     var box = document.currentScript.previousElementSibling;
                     var stage = box && box.querySelector(".fdStage");
                     if (!stage || !window.gsap) return;
-                    var panels = Array.prototype.slice.call(stage.children), ANG = 80, SIDE = 0.55, PERSP = 7.8, st = { p: 0 }, last = 0, dir = 1;
+                    var panels = Array.prototype.slice.call(stage.children), ANG = 82, SIDE = 0.536, PERSP = 7.8, st = { p: 0 }, last = 0, dir = 1;
                     function render() {
                         var W = panels[0].offsetWidth;
                         if (st.p !== last) { dir = st.p > last ? 1 : -1; last = st.p; }
