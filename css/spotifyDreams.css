@@ -801,3 +801,6 @@ html.inFrame .dashFrame.principles > .gifCol > .gifTitle { font-size: clamp(16px
 html.inFrame .sketchText { align-items: center; text-align: center; }
 html.inFrame .sketchText h2 { font-size: clamp(16px, 2.56vw, 48px); line-height: 1.2; letter-spacing: -0.02em; color: #6f7b86; width: 100%; max-width: 22em; text-align: center; margin: 0 auto; }
 @media (max-width: 900px) { html.inFrame .sketchText h2 { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* Neutral / Modular views side by side: whole screenshots, not capped by height */
+html.inFrame .viewRow > .gifCol > .imageBox img { width: 100%; max-height: none; }
