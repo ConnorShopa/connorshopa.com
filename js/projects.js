@@ -88,7 +88,7 @@
       pages: [
         pg("one", '<div class="nnDoc">' +
           '<section class="nnRow nnAbout"><div><span class="nnLab">&middot; About</span>' +
-            '<p class="nnLead">Ubenwa health is putting science based tools in pockets of caregivers enabling them to care better.</p>' +
+            '<p class="nnLead">Ubenwa health puts science based tools in pockets of caregivers enabling them to care better.</p>' +
             '<p class="nnLead">Nanni translates baby cries into actionable insights for more than 500,000 parents and guardians.</p></div>' +
             '<div class="nnShots"><img src="' + A + 'nanniAssets/nanni_screen_02.png" alt="" decoding="async"><img class="mid" src="' + A + 'nanniAssets/nanni_screen_01.png" alt="" decoding="async"><img src="' + A + 'nanniAssets/nanni_screen_03.png" alt="" decoding="async"></div></section>' +
           '<section class="nnGoal"><span class="nnLab">&middot; Goal</span>' +
