@@ -735,3 +735,5 @@ html.inFrame .scalableText h2, html.inFrame .scalableText h3 { font-family: "Sat
 @media (max-width: 900px) { .minutesBig { font-size: clamp(17px, 3.4vw, 34px); } }
 .forAllBox h3.centerText { font-size: clamp(10px, 1.36vw, 26px); }
 @media (max-width: 900px) { .forAllBox h3.centerText { font-size: clamp(10px, 1.36vw, 14px); } }
+
+h2.problemHead .pLabel { border-color: #6f7b86; }
