@@ -826,3 +826,6 @@ html.inFrame .imageBox img[src*="spotify_img08"], html.inFrame .imageBox img[src
 
 /* the "nothing being played" fullscreen screen: 0.6x */
 html.inFrame .imageBox img[src*="spotify_img10"] { width: 60%; height: auto; display: block; margin-left: auto; margin-right: auto; }
+
+/* "In Context" screen: 0.6x */
+html.inFrame .imageBox img[src*="spotify_gif07"] { width: 60%; height: auto; display: block; margin-left: auto; margin-right: auto; }
