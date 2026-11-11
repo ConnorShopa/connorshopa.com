@@ -906,3 +906,6 @@ html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -44px; }
 
 /* thought bubbles: only a hint of organic */
 h5.pillBreaker .pLabel { border-radius: 46px 52px 44px 54px / 24px 23px 24px 23px; }
+
+/* thought bubbles: back to the plain pill */
+h5.pillBreaker .pLabel { border-radius: 999px; }
