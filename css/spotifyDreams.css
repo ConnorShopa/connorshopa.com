@@ -956,3 +956,16 @@ h5.pillBreaker .pLabel::after { left: calc(50% - 29px); transform: none; bottom:
 /* centring at narrow widths: the generic .textSection rule gives 24px side margins on top of width:100%, pushing every text block right of centre */
 html.inFrame .content .textSection { margin-left: 0; margin-right: 0; box-sizing: border-box; }
 html.inFrame .content .textSection > h2.problemHead { margin-left: auto; margin-right: auto; }
+
+/* thought bubbles: glossy 3D bubbles (soft highlight top-left, shaded rim, cool underside) instead of flat white */
+h5.pillBreaker .pLabel {
+  background:
+    radial-gradient(ellipse 55% 38% at 28% 20%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 100%),
+    linear-gradient(180deg, #ffffff 0%, #f3faf5 55%, #dcece1 100%);
+  box-shadow: inset 0 1px 1.5px rgba(255,255,255,1), inset 0 -7px 12px rgba(92,160,120,0.22), inset 0 0 0 1px rgba(255,255,255,0.7);
+  filter: drop-shadow(0 8px 12px rgba(10, 66, 40, 0.16));
+}
+h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after {
+  background: radial-gradient(circle at 34% 28%, #ffffff 0%, #f1f9f3 40%, #d6e9dc 100%);
+  box-shadow: inset 0 -2px 3px rgba(92,160,120,0.25), inset 0 0 0 1px rgba(255,255,255,0.7);
+}
