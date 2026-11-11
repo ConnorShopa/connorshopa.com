@@ -564,3 +564,8 @@ body {
   .imageTextSection:has(.flipDemo) .textSection { align-items: flex-start; text-align: left; margin: 0; max-width: none; }
   .imageTextSection:has(.flipDemo) .textSection .centerText { text-align: left; }
 }
+
+/* inside the project view: titles and subtitles take Nanni's type (Satoshi; titles like Nanni's .nnLead, subtitles like its .nnPt, with the 14pt floor).
+   vw here is the framed page's own width, which is the card's width, so it plays the part of Nanni's cqw. */
+html.inFrame h1, html.inFrame h2 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(20px, 2.5vw, 40px); line-height: 1.3; letter-spacing: -0.015em; font-weight: 500; }
+html.inFrame h3 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(18.67px, 1.3vw, 21px); line-height: 1.45; letter-spacing: 0; font-weight: 500; }

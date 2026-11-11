@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css?v=24" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=25" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -16,7 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <!-- when the page is shown inside a project card (redesign), only its content shows: no header, nav menu, footer or custom cursor -->
-    <script>try { if (window.self !== window.top) { var st = document.createElement("style"); st.textContent = ".headerBox, .logoBox, .navLinksContainer, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; } html { scrollbar-width: none; } ::-webkit-scrollbar { display: none; }"; document.head.appendChild(st); } } catch (e) {}</script>
+    <script>try { if (window.self !== window.top) { document.documentElement.classList.add("inFrame"); var st = document.createElement("style"); st.textContent = ".headerBox, .logoBox, .navLinksContainer, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; } html { scrollbar-width: none; } ::-webkit-scrollbar { display: none; }"; document.head.appendChild(st); } } catch (e) {}</script>
 
     <title>connorshopa : projects : spotify dreams</title>
 </head>
