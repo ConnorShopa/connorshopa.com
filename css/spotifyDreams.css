@@ -773,3 +773,7 @@ html.inFrame .dashFrame > .imageBox img[src*="spotify_img_05"] { width: 100%; ma
 /* the three principles in a dashed frame: the intro line, then each principle's title and line (same type as the use cases) */
 html.inFrame .dashFrame.principles { gap: 40px; }
 html.inFrame .dashFrame.principles > .gifCol { flex: 0 0 auto; width: 100%; }
+
+/* the intro line sits between the two frames, in the type of the Problem statements (.pText) */
+html.inFrame .statementText h2 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; max-width: 22em; margin: 0 auto; }
+@media (max-width: 900px) { html.inFrame .statementText h2 { font-size: clamp(16px, 4.4vw, 26px); } }
