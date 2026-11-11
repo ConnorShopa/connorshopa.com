@@ -859,3 +859,7 @@ h2.problemHead .pLabel { border: 0; padding: 0; border-radius: 0; }
 
 /* the frames holding the content keep their layout but lose the dashed outline */
 html.inFrame .dashFrame, html.inFrame .imageTextSection:has(.flipDemo) { border: 0; }
+
+/* dashed outline goes round the numbers themselves, not the whole stats block */
+html.inFrame .statsFrame { border: 0; padding: 0; border-radius: 0; }
+html.inFrame .minutesBig .roll { border: 1.2px dashed #474B4E; border-radius: 0.28em; padding: 0.04em 0.24em; box-sizing: content-box; }
