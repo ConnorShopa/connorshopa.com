@@ -921,3 +921,7 @@ html.inFrame .minutesBig .mT, html.inFrame .forAllBox h3.centerText { color: #2D
 
 /* even rhythm: 88px above and below "For all it's wonder" (64px padding + the 24px margin before the next section), same as between the stats */
 html.inFrame .statsFrame + .forAllBox { padding: 88px 0 64px; }
+
+/* "For all it's wonder…": same type as the section titles */
+html.inFrame .forAllBox h3.centerText { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #2D3A44; }
+@media (max-width: 900px) { html.inFrame .forAllBox h3.centerText { font-size: clamp(16px, 4.4vw, 26px); } }
