@@ -1063,3 +1063,14 @@ h5.pillBreaker .pLabel::after {
   box-shadow: inset 0 2px 2px rgba(255,255,255,0.45), inset 0 -4px 6px rgba(0,85,35,0.32);
 }
 html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -24px; }
+
+/* Thought bubbles: the tooltip is a triangle with a soft point, merged into the bottom of the pill, pointing down at the title */
+h5.pillBreaker .pLabel::after {
+  width: 36px; height: 18px; bottom: -16px; left: 50%; transform: translateX(-50%); border-radius: 0; box-shadow: none; z-index: -1;
+  background:
+    radial-gradient(circle at 40% 30%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, #13903f 0%, #159a44 100%);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 18' preserveAspectRatio='none'%3E%3Cpath d='M0 0H36L22 14Q18 18.5 14 14Z' fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 18' preserveAspectRatio='none'%3E%3Cpath d='M0 0H36L22 14Q18 18.5 14 14Z' fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -28px; }
