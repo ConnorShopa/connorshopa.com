@@ -769,3 +769,7 @@ html.inFrame .gifCol > .gifText { font-family: "Host Grotesk", system-ui, sans-s
 
 /* the fullscreen pictures fill their frame */
 html.inFrame .dashFrame > .imageBox img[src*="spotify_img_05"] { width: 100%; max-width: 100%; height: auto; }
+
+/* the three principles in a dashed frame: the intro line, then each principle's title and line (same type as the use cases) */
+html.inFrame .dashFrame.principles { gap: 40px; }
+html.inFrame .dashFrame.principles > .gifCol { flex: 0 0 auto; width: 100%; }
