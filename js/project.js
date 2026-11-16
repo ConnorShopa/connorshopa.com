@@ -453,7 +453,14 @@
       // the image layers fade in from the peach (a frame later, so the CSS transition has something to run from)
       requestAnimationFrame(function () { requestAnimationFrame(function () { if (open && open.view === view && (view._page === 0 || view.classList.contains("vertical"))) view.classList.add("imgIn"); }); });
     };
-    if (window.bubble) window.bubble.grow(to, b, 0.5, reveal); else if (narrow) phoneGrow(view, currentLi, reveal); else reveal();
+    if (window.bubble && !narrow) {
+      // desktop: a zoom. The card starts at the size and place of the project's link and scales up to full size (its contents
+      // come with it), so it feels like moving in to the project; closing is the same thing in reverse
+      var zs = Math.max(0.05, Math.min(0.6, b.w / cr.width));
+      gsap.set(view, { transformOrigin: "50% 50%", x: b.cx - to.cx, y: b.cy - to.cy, scale: zs });
+      reveal();
+      gsap.to(view, { x: 0, y: 0, scale: 1, duration: t(0.6), ease: "power3.out", clearProps: "scale,x,y" });
+    } else if (window.bubble) window.bubble.grow(to, b, 0.5, reveal); else if (narrow) phoneGrow(view, currentLi, reveal); else reveal();
     if (!narrow) popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
       // still be shrunk or have a stale item hidden, which would throw the measurements below off
@@ -573,6 +580,21 @@
       gsap.to(view.children, { opacity: 0, duration: t(0.18), ease: "none" });
       phoneShrink(view, (open_link || trigger).closest("li"), finish);
       return; // (no focus ring left on the deck card)
+    }
+    if (window.bubble && window.innerWidth > 700) {
+      // desktop: zoom back out, shrinking toward the project's link as the card fades
+      var zs2 = Math.max(0.05, Math.min(0.6, b.w / cr.width));
+      gsap.set(view, { transformOrigin: "50% 50%" });
+      gsap.to(view, { x: b.cx - fromCard.cx, y: b.cy - fromCard.cy, scale: zs2, duration: t(0.45), ease: "power3.in" });
+      gsap.to(view, { autoAlpha: 0, duration: t(0.18), delay: t(0.3), ease: "power1.in", onComplete: function () { gsap.set(view, { clearProps: "scale,x,y" }); finish(); } });
+      popGallery(function () {
+        list.classList.remove("compact");
+        list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
+        fixSlashes();
+        gsap.set(nav, { clearProps: "transform" });
+      }, { x: b.cx, y: b.cy }, true, (open_link || trigger).closest("li"));
+      trigger.focus({ preventScroll: true });
+      return;
     }
     // contents fade, then the card is swapped for the identical grey box, which shrinks into the bubble
     gsap.to(view.children, {
