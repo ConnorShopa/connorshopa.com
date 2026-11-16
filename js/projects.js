@@ -90,7 +90,7 @@
           '<section class="nnRow nnAbout"><div><span class="nnLab">&middot; About</span>' +
             '<p class="nnLead">Ubenwa health puts science based tools in pockets of caregivers enabling them to care better.</p>' +
             '<p class="nnLead">Nanni translates baby cries into actionable insights for more than 500,000 parents and guardians.</p></div>' +
-            '<div class="nnShots"><img src="' + A + 'nanniAssets/nanni_screen_02.png" alt="" decoding="async"><img class="mid" src="' + A + 'nanniAssets/nanni_screen_01.png" alt="" decoding="async"><img src="' + A + 'nanniAssets/nanni_screen_03.png" alt="" decoding="async"></div></section>' +
+            '<div class="nnShots"><img src="' + A + 'nanniAssets/nanni_screen_02.png?v=2" alt="" decoding="async"><img class="mid" src="' + A + 'nanniAssets/nanni_screen_01.png?v=2" alt="" decoding="async"><img src="' + A + 'nanniAssets/nanni_screen_03.png?v=2" alt="" decoding="async"></div></section>' +
           '<section class="nnGoal"><span class="nnLab">&middot; Goal</span>' +
             '<p class="nnLead">Nanni is 98% accurate, trained on millions of cries, backed by industry standard medical research, yet perceived as a novelty toy.</p>' +
             '<p class="nnLead">I defined a new product language that positioned Nanni as a healthcare tool.</p></section>' +
