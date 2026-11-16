@@ -178,6 +178,7 @@
 
   // The scale a hovered link shrinks to, keeping its text at or above MIN_PX.
   function shrinkScale(link) {
+    if (link.classList.contains("hl") && window.innerWidth > 700) return 1.06; // the project cards grow a little instead
     var fontSize = parseFloat(getComputedStyle(link).fontSize) || MIN_PX;
     return Math.min(1, Math.max(LINK_SCALE, MIN_PX / fontSize));
   }
