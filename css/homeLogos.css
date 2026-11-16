@@ -59,3 +59,4 @@ html:has(.panelText.sketch:not([hidden])), html:has(.panelText.sketch:not([hidde
 /* no subtitles, no card stroke on the home list */
 .inline.big a.hl:not(#_):not(#_) .hlSub:not(#_):not(#_){display:none}
 .inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){border-color:transparent}
+.panelText.sketch[hidden]:not(#_):not(#_){display:none !important}
