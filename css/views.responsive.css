@@ -74,9 +74,11 @@
 /* Seeds in the project list on phones: it was scaled up to 42px / 33px type at <=900, which is much larger than the
    other logos on a phone. At <=700 it goes back to the size set against Plunk's logo (33px mark, 26px "Seeds"). */
 @media (max-width: 700px) {
-  #projectList .seedsIcon { height: 33px; }
+  #projectList .seedsIcon { height: 26px; }
   #projectList .withCaption .label { font-size: 26px; }
   #projectList .withCaption .bubble { margin-right: 9px; }
+  /* a little more room in the rounded deck card around it (Habbot and Nanni get the same treatment) */
+  #projectList li:has(> a[data-view="seeds"]):not(.row-break) { padding: 22px 38px; }
 }
 
 /* Seeds on phones: the hero page (the three-stage seed strip, title and facts) sits in the vertical centre of the card,

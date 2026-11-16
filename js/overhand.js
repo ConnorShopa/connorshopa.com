@@ -61,15 +61,17 @@
     anchors.forEach(function (a) { a.w = a.el.offsetWidth; a.h = a.el.offsetHeight; });
     forEl.w = forEl.offsetWidth; forEl.h = forEl.offsetHeight;
   }
-  var MIN_FONT = 14 * 4 / 3; // 14pt (18.67px): the words in the pills never get smaller than this, however small the screen
+  function phone() { return window.innerWidth <= 700; }
+  function minFont() { return (window.innerWidth <= 700 ? 12 : 14) * 4 / 3; } // the words in the pills never get smaller than 14pt (12pt on phones), however small the screen
   function setSize(fs, big) {
-    bubs.forEach(function (b) { var f = Math.max(MIN_FONT, fs * b.scale); b.el.style.fontSize = f.toFixed(1) + "px"; b.el.style.padding = Math.round(f * 0.5) + "px " + Math.round(f * 1.25) + "px"; });
-    anchors.forEach(function (a) { a.el.style.fontSize = Math.round(big * 0.2) + "px"; });
+    bubs.forEach(function (b) { var f = phone() ? minFont() : Math.max(minFont(), fs * b.scale); b.el.style.fontSize = f.toFixed(1) + "px"; b.el.style.padding = (phone() ? Math.round(f * 0.28) + "px " + Math.round(f * 0.6) : Math.round(f * 0.5) + "px " + Math.round(f * 1.25)) + "px"; });
+    anchors.forEach(function (a) { a.el.style.fontSize = Math.round(big * (phone() ? 0.15 : 0.2)) + "px"; });
     forEl.style.fontSize = Math.round(big * 0.14) + "px";
   }
 
   // pack each circle with rows of words (as many as fit), "anything" in the middle of the middle row
   function layout() {
+    GAP = phone() ? 5 : 8;
     var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2, ax, fs;
     if (window.innerWidth > 1100) { // normal screens: circles float in the middle of the card
       var r0 = Math.min(H - 6, W);
@@ -88,7 +90,7 @@
       ax = W - R - 2;
       fs = Math.max(9, R / 25);
       setSize(fs, R); measureAll();
-      wallX = forEl.w / 2 + 30;
+      wallX = forEl.w / 2 + (phone() ? 12 : 30);
     }
     var maxH = 0; bubs.forEach(function (b) { maxH = Math.max(maxH, b.h); });
     var pitch = maxH + GAP * 0.55, half = Math.floor((R - maxH / 2) / pitch);
