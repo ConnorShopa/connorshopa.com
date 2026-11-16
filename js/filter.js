@@ -29,7 +29,7 @@
   // phones report a wider window when something overflows, so the screen width counts too
   var perRow = function () {
     var w = Math.min(window.innerWidth, window.screen && screen.width ? screen.width : Infinity);
-    return w <= 700 ? 1 : w > 1100 ? 5 : 3; // one on phones, three on tablets, five on wide screens
+    return w <= 700 ? 1 : w > 900 ? 4 : 3; // one on phones, three on narrow tablets, four from 901px up (the cards are wider than the old logos)
   };
   function layoutRows(listEl, lis) {
     listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
