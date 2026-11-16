@@ -24,6 +24,10 @@ nav .inline.big:not(#_):not(#_){width:min(1500px,94vw);margin-left:calc(50% - mi
 .tSpot{font-family:"Circular Std","Figtree",sans-serif;color:#58B460}
 .inline.big a.hl:hover .hlSub{color:inherit}
 }
+@media (min-width:701px){
+/* Sheep, Habbot and Drawl: app icons all 40px on screen, whatever each logo's own scale is */
+.inline.big a.hl[aria-label="Sheep"] .hlIcon,.inline.big a.hl[data-view="habbot"] .hlIcon,.inline.big a.hl[aria-label="Drawl"] .hlIcon{width:calc(40px / var(--z,1));height:calc(40px / var(--z,1));border-radius:calc(9px / var(--z,1))}
+}
 @media (max-width:700px){.hlSub{display:none}}
 
 /* while a project is open the list is just logos and wordmarks */
