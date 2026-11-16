@@ -326,6 +326,70 @@
   }
   // the deck card's corner radius as it is drawn (the card is scaled)
   function cardRadius(li) { var r = li.getBoundingClientRect(); return (parseFloat(getComputedStyle(li).borderTopLeftRadius) || 22) * (li.offsetHeight ? r.height / li.offsetHeight : 1); }
+  // ---- phones: a project is a sheet that slides up from the bottom (a strip of the page stays above it, dimmed) ----
+  var SHEET_TOP = 56;
+  var scrim = null;
+  function getScrim() {
+    if (scrim) return scrim;
+    scrim = document.createElement("div");
+    scrim.className = "sheetScrim";
+    scrim.setAttribute("aria-hidden", "true");
+    scrim.addEventListener("click", function () { if (open) hide(); });
+    document.body.appendChild(scrim);
+    gsap.set(scrim, { autoAlpha: 0 });
+    return scrim;
+  }
+  function sheetUp(view, reveal) {
+    var h = view.getBoundingClientRect().height;
+    gsap.set(view, { y: h + 24 });
+    if (view._head) gsap.set([view._head, view._close], { y: 0 });
+    var sc = getScrim();
+    gsap.killTweensOf(sc);
+    gsap.to(sc, { autoAlpha: 1, duration: t(0.3), ease: "power1.out" });
+    reveal();
+    gsap.to(view, { y: 0, duration: t(0.42), ease: "power3.out" });
+  }
+  function sheetDown(view, finish) {
+    var h = view.getBoundingClientRect().height;
+    gsap.killTweensOf(view);
+    gsap.to(view.children, { opacity: 0, duration: t(0.15), ease: "none" });
+    var sc = getScrim();
+    gsap.killTweensOf(sc);
+    gsap.to(sc, { autoAlpha: 0, duration: t(0.3), ease: "power1.in" });
+    gsap.to(view, { y: view._dragY ? Math.max(view._dragY, h + 24) : h + 24, duration: t(0.32), ease: "power3.in", onComplete: function () { gsap.set(view, { autoAlpha: 0, y: 0 }); view._dragY = 0; finish(); } });
+  }
+  // dragging the top strip of the sheet down closes it (and a short drag springs back)
+  (function () {
+    var startY = null, startT = 0, vw = null;
+    document.addEventListener("touchstart", function (e) {
+      if (!open || window.innerWidth > 700) return;
+      var v = open.view, r = v.getBoundingClientRect(), y = e.touches[0].clientY;
+      var inSheet = v.contains(e.target) || !!e.target.closest(".viewHead");
+      if (y < r.top || y > r.top + 56 || !inSheet || e.target.closest(".viewClose")) { startY = null; return; }
+      startY = y; startT = Date.now(); vw = v; v._dragY = 0;
+      gsap.killTweensOf(v);
+    }, { passive: true });
+    document.addEventListener("touchmove", function (e) {
+      if (startY === null || !vw) return;
+      var dy = Math.max(0, e.touches[0].clientY - startY);
+      vw._dragY = dy;
+      gsap.set(vw, { y: dy });
+      if (vw._head) gsap.set([vw._head, vw._close], { y: dy });
+      var sc = getScrim(); gsap.set(sc, { autoAlpha: Math.max(0, 1 - dy / 400) });
+    }, { passive: true });
+    document.addEventListener("touchend", function () {
+      if (startY === null || !vw) return;
+      var v = vw, dy = v._dragY || 0, fast = dy / Math.max(1, Date.now() - startT) > 0.6;
+      startY = null; vw = null;
+      if (dy > 110 || (fast && dy > 40)) { if (open) hide(); }
+      else {
+        gsap.to(v, { y: 0, duration: t(0.25), ease: "power3.out" });
+        if (v._head) gsap.to([v._head, v._close], { y: 0, duration: t(0.25), ease: "power3.out" });
+        gsap.to(getScrim(), { autoAlpha: 1, duration: t(0.25) });
+        v._dragY = 0;
+      }
+    }, { passive: true });
+  })();
   function phoneGrow(view, li, reveal) {
     if (!li) { reveal(); return; }
     var from = clipOf(view, li.getBoundingClientRect(), cardRadius(li));
@@ -418,14 +482,12 @@
       var bigW = window.innerWidth - SCREEN_PAD * 2, bigH = window.innerHeight - rowTop - SCREEN_PAD; // room left above the card for the row of every other project
       cardW = bigW * VIEW_SCALE; height = bigH * VIEW_SCALE; rowTop += (bigH - height) / 2; // smaller, centred in the room under the row
     }
+    if (narrow) { cardW = window.innerWidth; height = window.innerHeight - SHEET_TOP; } // phones: a sheet from the bottom, full width, a strip of the page above it
     var side = (window.innerWidth - cardW) / 2;
     view.style.width = cardW + "px";
     view.style.height = height + "px";
-    if (narrow) {
-      var minTop = top;
-      var maxTop = Math.max(minTop, window.innerHeight - PAD - height);
-      top = Math.min(maxTop, Math.max(minTop, (window.innerHeight - height) / 2));
-    } else top = rowTop;
+    if (narrow) top = SHEET_TOP;
+    else top = rowTop;
     view.style.top = top + height / 2 + "px"; // GSAP's yPercent -50 centres the card on this line
     var cardBottom = top + height;
     showProjNav(view, top, height, side, narrow, tintBg);
@@ -460,7 +522,7 @@
       gsap.set(view, { transformOrigin: "50% 50%", x: b.cx - to.cx, y: b.cy - to.cy, scale: zs });
       reveal();
       gsap.to(view, { x: 0, y: 0, scale: 1, duration: t(0.45), ease: "power3.out" }); // (no clearProps: it would drop the -50% centring too)
-    } else if (window.bubble) window.bubble.grow(to, b, 0.5, reveal); else if (narrow) phoneGrow(view, currentLi, reveal); else reveal();
+    } else if (window.bubble) window.bubble.grow(to, b, 0.5, reveal); else if (narrow) sheetUp(view, reveal); else reveal();
     if (!narrow) popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
       // still be shrunk or have a stale item hidden, which would throw the measurements below off
@@ -576,10 +638,9 @@
       gsap.set(view.children, { clearProps: "opacity" });
     };
     if (phoneMode) {
-      // the contents fade while the card closes back into its deck card
-      gsap.to(view.children, { opacity: 0, duration: t(0.18), ease: "none" });
-      phoneShrink(view, (open_link || trigger).closest("li"), finish);
-      return; // (no focus ring left on the deck card)
+      // the sheet slides back down
+      sheetDown(view, finish);
+      return;
     }
     if (window.bubble && window.innerWidth > 700) {
       // desktop: zoom back out, shrinking toward the project's link as the card fades

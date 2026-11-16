@@ -81,3 +81,14 @@ nav .inline.big:not(#_):not(#_){column-gap:16px}
   .hlSketch{font-size:26px}
   .peek,.deckMode,.deckView{display:none !important}
 }
+/* ---- phones: a project opens as a sheet from the bottom ---- */
+@media (max-width:700px){
+  .view:not(#_):not(#_){border-radius:26px 26px 0 0;box-shadow:0 -12px 40px rgba(20,20,20,.18)}
+  .view:not(#_):not(#_)::before{content:"";position:absolute;top:8px;left:50%;width:40px;height:5px;margin-left:-20px;border-radius:3px;background:rgba(0,0,0,.18);z-index:3;pointer-events:none}
+  .view.dark:not(#_)::before{background:rgba(255,255,255,.35)}
+  .sheetScrim{position:fixed;inset:0;z-index:10;background:rgba(20,20,20,.38);-webkit-tap-highlight-color:transparent}
+  /* the page stays visible behind the sheet (it was hidden while the card took the whole screen) */
+  html.view-open .hero > nav:not(#_):not(#_){visibility:visible}
+  html.view-open #projectList:not(#_):not(#_){opacity:1 !important;pointer-events:none !important}
+  html.view-open .hero > header:not(#_):not(#_){opacity:1;pointer-events:none}
+}
