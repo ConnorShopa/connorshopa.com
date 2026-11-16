@@ -21,8 +21,8 @@
   // ---- tuning ----
   var PAD_X = 22;        // box padding around the link text
   var PAD_Y = 10;
-  var PROJ_PAD_X = -6;   // ...and the project links in the centre list: wider than the default, but snug
-  var PROJ_PAD_Y = -12;
+  var PROJ_PAD_X = 0;    // ...and the project links in the centre list: wider than the default, but snug
+  var PROJ_PAD_Y = -7;
   var MAGNET = 0.5;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
   var MAX_PULL_X = 32;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 16;

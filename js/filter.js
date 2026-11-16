@@ -7,6 +7,21 @@
 
   var items = Array.prototype.slice.call(list.children);
 
+  // phones: each tile takes the colour of its hover bubble on desktop (the project view's own colour, a fixed data-bubble, or the default grey)
+  items.forEach(function (li) {
+    var a = li.querySelector && li.querySelector("a");
+    if (!a) return;
+    var v = a.getAttribute("data-view"), col = null;
+    if (v && !a.hasAttribute("data-bubble-fixed")) {
+      var el = document.getElementById("view-" + v), c = el ? getComputedStyle(el).backgroundColor : "", n = c && c.match(/[\d.]+/g);
+      if (n && n.length >= 3 && (n.length < 4 || +n[3] > 0.5)) {
+        var al = parseFloat(a.getAttribute("data-bubble-alpha"));
+        col = al >= 0 && al <= 1 ? "rgba(" + n[0] + ", " + n[1] + ", " + n[2] + ", " + al + ")" : c;
+      }
+    }
+    li.style.setProperty("--tile", col || a.getAttribute("data-bubble") || "#F4F4F4");
+  });
+
   // Reserve the full list's space: an invisible copy of the list sits in the same spot, so the block keeps its
   // height (at any screen width) and nothing around it shifts.
   var nav = list.parentElement;
