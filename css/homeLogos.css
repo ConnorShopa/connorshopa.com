@@ -56,3 +56,6 @@ html:has(.panelText.sketch:not([hidden])), html:has(.panelText.sketch:not([hidde
 .inline.big:has(a.hl:hover) li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){border-color:transparent}
 #projectList:has(a.hl:hover) li:not(.row-break) > a.hl:not(:hover):not(#_):not(#_){filter:grayscale(1)}
 }
+/* no subtitles, no card stroke on the home list */
+.inline.big a.hl:not(#_):not(#_) .hlSub:not(#_):not(#_){display:none}
+.inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){border-color:transparent}
