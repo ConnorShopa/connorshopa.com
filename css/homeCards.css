@@ -7,7 +7,7 @@
 @media (min-width: 701px) {
   /* one row of cards, starting at the middle of the screen and running off to the right (it scrolls sideways) */
   .inline.big { flex-wrap: nowrap; justify-content: flex-start; align-items: center; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; overscroll-behavior-x: contain;
-    padding: 20px 6vw 20px 50vw; box-sizing: border-box; width: 100vw; margin-left: calc(50% - 50vw); /* full screen width: the first card starts at the middle, the row runs off the right edge */ }
+    padding: 20px 6vw 20px 33vw; box-sizing: border-box; width: 100vw; margin-left: calc(50% - 50vw); /* full screen width: the first card starts 33% in from the left edge, the row runs off the right edge */ }
   .inline.big::-webkit-scrollbar { display: none; }
   .inline.big li { padding: 0; flex: none; }
   .inline.big li > a:not(#_):not(#_) {
