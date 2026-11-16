@@ -296,14 +296,16 @@
     // the bubble grows from `from` (where it is) to `to` (the card)
     grow: function (to, from, dur, done) {
       lock(10);
+      dot.style.willChange = "transform, width, height"; // its own layer, so the grow stays smooth
       snapTo(from);
       ctl = gsap.to(dot, {
         x: to.cx, y: to.cy, width: to.w, height: to.h, borderRadius: to.r, boxShadow: to.shadow || CARD_SHADOW, borderColor: DOT_BORDER, backgroundColor: to.fill || BOX_FILL,
-        duration: t(dur), ease: "power3.inOut", onComplete: done, // a soft start and a soft landing, no overshoot
+        duration: t(dur), ease: "power3.out", onComplete: done, // quick off the mark, a soft landing, no overshoot
       });
     },
     // the card is showing on top of the (now identical) grey box: the dot turns back into the pointer dot, unseen
     handoff: function () {
+      dot.style.willChange = "";
       gsap.set(dot, {
         x: mouse.x, y: mouse.y, width: DOT_SIZE, height: DOT_SIZE, borderRadius: DOT_SIZE / 2,
         boxShadow: DOT_SHADOW, backgroundColor: dotFill(), borderColor: DOT_BORDER, opacity: 0,
