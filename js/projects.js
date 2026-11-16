@@ -57,7 +57,18 @@
         '<li><a class="withLabel" href="https://www.linkedin.com/in/connorshopa/" target="_blank" rel="noopener"><span class="tinyLabel">LINKEDIN</span>LinkedIn &nearr;</a></li>' +
         '</ul>'
       ))]
-    }
+    },
+    // ---------------------------------------------------------------- Sketchbook (a tab: the sketches and the micro + motion pieces, all hung the same way)
+    sketchbook: {
+      title: "Sketchbook",
+      logoOnly: true,
+      pages: [
+        pg("gallery", '<div class="pgGallery justified skGallery">' + ["assets/sketches/sketch01.png", "assets/sketches/sketch04.png", "assets/sketches/sketch03.png", "assets/sketches/sketch02.png", "assets/sketches/sketch12.png", "assets/sketches/sketch05.png", "assets/sketches/sketch07.png", "assets/sketches/sketch06.png", "assets/sketches/sketch08.png", "assets/sketches/sketch09.png", "assets/sketches/sketch10.png", "assets/sketches/sketch11.png", "assets/sketches/sketch14.png", "assets/sketches/sketch13.png", "assets/sketches/sketch15.png", "assets/sketches/sketch16.jpg", "assets/sketches/sketch17.png"].map(function (src) { var d = SK[src.match(/sketch\d+/)[0]]; return "<img src=\"" + src + "\" width=\"" + d[0] + "\" height=\"" + d[1] + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") +
+          // the animations hang beside the sketches, framed the same way (the note numbers carry on from the last sketch)
+          '<div class="lottieBox" data-lottie="assets/micros/automationScan.json" data-w="800" data-h="500"></div><div class="lottieBox" data-lottie="assets/micros/emotionalStates.json" data-w="800" data-h="400"></div>' +
+          [["heroAnim01", 800, 800], ["heroAnim02", 800, 800], ["heroAnim03", 1600, 800], ["micro_gif01", 694, 754], ["micro_gif02", 1310, 460]].map(function (m) { return "<img src=\"assets/micros/" + m[0] + ".webp\" width=\"" + m[1] + "\" height=\"" + m[2] + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
+      ],
+    },
   };
 
   window.PROJECTS = {
@@ -375,23 +386,6 @@
           '<form class="earlyForm" novalidate><input class="earlyInput" type="email" pattern="[^@\\s]+@[^@\\s]+\\.[^@\\s]+" placeholder="Email address" autocomplete="email" aria-label="Email address">' +
           '<button type="submit" class="lockBtn earlyBtn" disabled>Get early access</button></form>'
         )),
-      ],
-    },
-
-    // ---------------------------------------------------------------- Sketchbook
-    sketchbook: {
-      title: "Sketchbook",
-      pages: [
-        pg("gallery", '<div class="pgGallery justified">' + ["assets/sketches/sketch01.png", "assets/sketches/sketch04.png", "assets/sketches/sketch03.png", "assets/sketches/sketch02.png", "assets/sketches/sketch12.png", "assets/sketches/sketch05.png", "assets/sketches/sketch07.png", "assets/sketches/sketch06.png", "assets/sketches/sketch08.png", "assets/sketches/sketch09.png", "assets/sketches/sketch10.png", "assets/sketches/sketch11.png", "assets/sketches/sketch14.png", "assets/sketches/sketch13.png", "assets/sketches/sketch15.png", "assets/sketches/sketch16.jpg", "assets/sketches/sketch17.png"].map(function (src) { var d = SK[src.match(/sketch\d+/)[0]]; return "<img src=\"" + src + "\" width=\"" + d[0] + "\" height=\"" + d[1] + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
-      ],
-    },
-
-    // ---------------------------------------------------------------- Micro + Motion
-    micro: {
-      title: "Micro + Motion",
-      bg: "#DAEAFD",
-      pages: [
-        pg("gallery", '<div class="pgGallery oneCol"><div class="lottieBox" data-lottie="assets/micros/automationScan.json"></div><hr class="mmRule"><div class="lottieBox" data-lottie="assets/micros/emotionalStates.json"></div>' + ["assets/micros/heroAnim01.webp", "assets/micros/heroAnim02.webp", "assets/micros/heroAnim03.webp", "assets/micros/micro_gif01.webp", "assets/micros/micro_gif02.webp"].map(function (src) { return "<hr class=\"mmRule\"><img src=\"" + src + "\" alt=\"\" loading=\"lazy\" decoding=\"async\">"; }).join("") + "</div>"),
       ],
     },
   };

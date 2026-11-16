@@ -41,12 +41,17 @@
       box.appendChild(row);
     });
   }
-  function init() {
-    document.querySelectorAll(".pgGallery.justified").forEach(function (box) {
-      box._imgs = Array.prototype.slice.call(box.querySelectorAll("img")).map(function (im) { im._a = +im.getAttribute("width") / +im.getAttribute("height");
-        // a little gallery note under each frame: the sketch's own number
-        var fig = document.createElement("figure"), cap = document.createElement("figcaption"), n = (im.getAttribute("src").match(/sketch(\d+)/) || [])[1];
-        fig.className = "jfig"; cap.className = "jnote"; cap.textContent = "No. " + (n || "");
+  function init(root) {
+    (root || document).querySelectorAll(".pgGallery.justified").forEach(function (box) {
+      if (box._imgs) return;
+      var extra = 0; // the animations carry on the note numbers after the last sketch
+      box._imgs = Array.prototype.slice.call(box.querySelectorAll("img, .lottieBox")).map(function (im) {
+        var w = +(im.getAttribute("width") || im.getAttribute("data-w")), h = +(im.getAttribute("height") || im.getAttribute("data-h"));
+        im._a = w / h;
+        // a little gallery note under each frame: the number
+        var fig = document.createElement("figure"), cap = document.createElement("figcaption"), n = (((im.getAttribute("src") || "").match(/sketch(\d+)/)) || [])[1];
+        if (!n) n = String(18 + extra++);
+        fig.className = "jfig"; cap.className = "jnote"; cap.textContent = "No. " + n;
         im.parentNode.insertBefore(fig, im); fig.appendChild(im); fig.appendChild(cap);
         im._fig = fig;
         return im; });
@@ -55,5 +60,6 @@
       if (window.ResizeObserver) new ResizeObserver(go).observe(box); else { window.addEventListener("resize", go); go(); }
     });
   }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+  window.initJustified = init;
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { init(); }); else init();
 })();

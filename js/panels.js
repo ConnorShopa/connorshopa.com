@@ -33,7 +33,9 @@
     var showPanel = function () {
       if (current !== name || !name) return;
       panel.innerHTML = window.PANELS[name].pages[0].html;
+      panel.classList.toggle("sketch", name === "sketchbook");
       panel.hidden = false;
+      if (name === "sketchbook") { if (window.initJustified) window.initJustified(panel); if (window.initLotties) window.initLotties(panel); }
       if (window.bindHover) window.bindHover(panel);
       // line by line from the top: a small rise and a fade, no bounce
       var lines = panel.querySelectorAll(".pgText > p, .aboutJobs li, .contactCol2 li");
@@ -104,11 +106,12 @@ document.addEventListener("input", function (e) {
 // Scrolling the main view loops through the tabs: Work, About, Contact, and round again (a project being open
 // takes the wheel for itself; phones keep their normal page scroll)
 (function () {
-  var order = [null, "about", "contact"];
+  var order = [null, "sketchbook", "about", "contact"];
   var busy = false;
   window.addEventListener("wheel", function (e) {
     if (document.documentElement.classList.contains("view-open")) return;
     if (window.innerWidth <= 700 || Math.abs(e.deltaY) < 12 || busy) return;
+    if (document.querySelector(".filters .pill[data-panel='sketchbook'][aria-pressed='true']")) return; // the sketchbook is a long page: the wheel scrolls it
     if (e.target.closest && e.target.closest(".panelText a")) { /* still counts */ }
     var chip = document.querySelector(".filters .pill[aria-pressed='true']");
     var now = chip && chip.hasAttribute("data-panel") ? chip.getAttribute("data-panel") : null;
