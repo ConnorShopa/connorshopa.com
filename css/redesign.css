@@ -2739,3 +2739,6 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 /* Micro + Motion: a thin rounded divider between the animations (12% black), 88% of the screen's width on phones */
 .pgGallery.oneCol .mmRule { display: block; width: 100%; height: 2px; margin: 0 0 24px; border: 0; border-radius: 999px; background: rgba(0, 0, 0, 0.12); }
 @media (max-width: 700px) { .pgGallery.oneCol .mmRule { width: 88vw; max-width: none; position: relative; left: 50%; transform: translateX(-50%); margin-bottom: 16px; } }
+
+/* phones: the "Open" button's text is white while TouchTunes (a dark card) is in focus */
+@media (max-width: 700px) { .deckView.ready.lightText { color: #fff; } }

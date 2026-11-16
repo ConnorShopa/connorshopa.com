@@ -160,6 +160,7 @@
     if (ready) {
       viewBtn.classList.add("shown");
       viewBtn.style.setProperty("--btn", focusCard().style.getPropertyValue("--card") || "#F4F4F4"); // the colour of its card
+      viewBtn.classList.toggle("lightText", !!focusCard().querySelector('a[data-view="touchtunes"]')); // TouchTunes' card is dark: white text
     }
     viewBtn.classList.toggle("ready", ready);
     viewBtn.disabled = !ready;
