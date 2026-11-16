@@ -1,6 +1,6 @@
 /* home: logos with a coloured tagline under each (desktop + tablet; phones keep the deck) */
 @media (min-width:701px){
-.inline.big li:not(.no-slash):not(.row-break):not(:last-child):not(#_)::after{content:"" !important;display:inline-block;width:3px;height:12px;margin:0 clamp(8px,1.2vw,22px);background:rgba(51,51,51,.8);border-radius:2px;vertical-align:middle;position:relative;top:10px}
+.inline.big li:not(.no-slash):not(.row-break):not(:last-child):not(#_)::after{content:"" !important;display:inline-block;width:2px;height:6px;margin:0 clamp(8px,1.2vw,22px);background:rgba(51,51,51,.4);border-radius:2px;vertical-align:middle;position:relative;top:10px}
 nav .inline.big:not(#_):not(#_){width:min(1500px,94vw);margin-left:calc(50% - min(750px,47vw));margin-right:0}
 .inline.big a.hl:not(#_):not(#_){display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:10px;padding:14px 22px;text-align:left}
 .inline.big a.hl:not(#_) .hlLogo{display:flex;align-items:center;gap:10px;height:auto;zoom:var(--z,1)}
