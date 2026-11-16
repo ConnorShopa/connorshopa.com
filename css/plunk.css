@@ -639,3 +639,10 @@ body {
 .heroBox .tripleGifSection { width: 100%; box-sizing: border-box; }
 .content > .tripleGifSection { margin-top: 140px; width: 100%; box-sizing: border-box; }
 .content > .tripleGifSection + .heroBox { margin-top: 48px; }
+
+/* hero: the title (and the credit under it) centred */
+.heroBox > .textSection { align-items: center; text-align: center; width: 100%; }
+.heroBox > .textSection h1 { text-align: center; width: 100%; }
+.heroBox > .textSection .linkWrap { align-items: center; text-align: center; justify-content: center; }
+.heroBox > .textSection h1 { white-space: nowrap; font-size: clamp(24px, 8.4vw, 120px); }
+.heroBox > .textSection h1 .mk { font-size: .4em; line-height: 0; vertical-align: 1.2em; margin-left: .06em; }
