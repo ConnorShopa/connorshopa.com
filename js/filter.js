@@ -29,7 +29,7 @@
   // phones report a wider window when something overflows, so the screen width counts too
   var perRow = function () {
     var w = Math.min(window.innerWidth, window.screen && screen.width ? screen.width : Infinity);
-    return w <= 700 ? 1 : w > 900 ? 4 : 3; // one on phones, three on narrow tablets, four from 901px up (the cards are wider than the old logos)
+    return w <= 700 ? 1 : 999; // one per row on phones (the deck); above that the cards run in a single row (css/homeCards.css)
   };
   function layoutRows(listEl, lis) {
     listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
@@ -69,8 +69,8 @@
     // a little so every row fits on one line (a row that wraps strands its last item on a line of its own)
     var per = perRow();
     var rows = apply(per);
-    listEl.style.zoom = "";
-    if (per > 1 && shown.length) {
+    listEl.style.zoom = ""; listEl.style.width = ""; // (width: see below, the block shrinks to its widest row)
+    if (per > 1 && per < 100 && shown.length) {
       var widest = 0, k = 0;
       rows.forEach(function (n) { // the width of each intended row (a row that wrapped by itself still counts as one)
         var w = 0;
@@ -79,6 +79,8 @@
       });
       var avail = listEl.clientWidth;
       if (widest > avail && avail > 0) listEl.style.zoom = String(Math.max(0.5, (avail / widest) * 0.97));
+      // the cards are left aligned within their rows (css/homeCards.css): the block is as wide as its widest row and sits centred on the page
+      else if (widest > 0 && !window.matchMedia("(max-width: 700px)").matches) listEl.style.width = Math.ceil(widest) + 2 + "px";
     }
   }
   window.layoutGalleryRows = function () { layoutRows(list, items); };
@@ -96,6 +98,13 @@
     plain(items).forEach(function (li) { li.classList.remove("no-slash"); });
     layoutRows(list, plain(items));
   };
+  // the cards run in one row that scrolls sideways: the wheel over them moves the row (instead of looping through the tabs)
+  list.addEventListener("wheel", function (e) {
+    if (window.matchMedia("(max-width: 700px)").matches || list.scrollWidth <= list.clientWidth) return;
+    var d = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    list.scrollLeft += d;
+    e.preventDefault(); e.stopPropagation();
+  }, { passive: false });
   var rt;
   window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(relayout, 80); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);

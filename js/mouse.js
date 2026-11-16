@@ -247,6 +247,13 @@
     link.addEventListener("focus", function () { if (link.matches(":focus-visible")) showFor(link); });
     link.addEventListener("blur", function () { unshrink(link); leave(); });
   }
+  // the home cards sit in a row that scrolls sideways: keep the bubble on its card while it moves
+  window.addEventListener("scroll", function () {
+    if (!boxShown || !currentLink || locked || !isCard(currentLink)) return;
+    var r = linkRect(currentLink), s = gsap.getProperty(currentLink, "scale") || 1;
+    base = fullSizeRect(currentLink, { left: r.left, top: r.top, width: r.width, height: r.height });
+    morphToBox();
+  }, true);
   window.bindHover();
 
   window.addEventListener("mousemove", function (e) {
