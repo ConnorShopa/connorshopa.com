@@ -657,3 +657,9 @@ body {
 .textSection.statement { align-items: center; text-align: center; width: 100%; margin: 72px 0 48px; }
 /* status pill under the title */
 .heroBox > .textSection .statusPill { font-family: "Host Grotesk", sans-serif; font-weight: 400; display: inline-block; padding: 7px 18px; border-radius: 999px; background: rgba(0, 38, 68, 0.08); border: 1px solid rgba(0, 38, 68, 0.2); color: #002644; font-size: 16px; line-height: 1.2; letter-spacing: -0.01em; white-space: nowrap; }
+/* the credit line wraps as one centred block (the name used to be pushed off the right edge on phones) */
+.heroBox > .textSection .linkWrap { flex-wrap: wrap; gap: 2px 6px; padding: 0 12px; box-sizing: border-box; max-width: 100%; }
+.heroBox > .textSection .linkWrap h5 { text-align: center; }
+.heroBox > .textSection .linkWrap a { white-space: nowrap; }
+/* centred blocks keep their padding inside their width (on phones they were pushed right by it) */
+.heroBox > .textSection, .textSection.statement { box-sizing: border-box; }

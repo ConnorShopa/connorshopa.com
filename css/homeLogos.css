@@ -92,3 +92,5 @@ nav .inline.big:not(#_):not(#_){column-gap:16px}
   html.view-open #projectList:not(#_):not(#_){opacity:1 !important;pointer-events:none !important}
   html.view-open .hero > header:not(#_):not(#_){opacity:1;pointer-events:none}
 }
+/* Overhand on phones: "Trade" clear of the top bubble */
+@media (max-width:700px){ .view.scrollView:not(#_) .pg.one:has(.ohPit) .ohHero:not(#_){bottom:calc(50% + var(--ohR,190px) + 10px)} }
