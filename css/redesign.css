@@ -2730,3 +2730,9 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 .earlyForm.done { gap: 4px; }
 .earlyForm.done .earlyThanks { margin: 0; font-size: 16px; font-weight: 600; color: #1B2430; }
 .earlyForm.done .earlyAddr { margin: 0; font-size: 14px; color: #1B2430; opacity: 0.75; overflow-wrap: anywhere; }
+
+/* Micro + Motion: the animations run down a single centred column instead of a grid */
+.pgGallery.oneCol, .view.scrollView .pgGallery.oneCol { column-count: 1; column-gap: 0; max-width: 720px; }
+.pgGallery.oneCol img { margin-bottom: 24px; }
+.pgGallery.oneCol .lottieBox { margin-bottom: 24px; }
+@media (max-width: 700px) { .pgGallery.oneCol img, .pgGallery.oneCol .lottieBox { margin-bottom: 16px; } }
