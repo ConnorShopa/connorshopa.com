@@ -146,7 +146,7 @@ body { overflow: auto; }
 .landIcon { position: relative; display: block; flex: none; width: calc(var(--lw) * 1.02); aspect-ratio: 1; top: calc(var(--lw) * -0.04); }
 .landIcon > * { position: absolute; inset: 0; display: none; }
 .landIcon img { width: 100%; height: 100%; filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.14)); }
-.landIcon .tile { place-items: center; border-radius: 26%; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.03); }
+.landIcon .tile { place-items: center; box-sizing: border-box; border-radius: 22.5%; /* the app icons' corner */ background: none; border: 2px solid #111; /* a 2px black stroke, like the wordmark's outline, instead of a fill */ }
 .landIcon .tile i { display: block; height: 62%; aspect-ratio: 91 / 135; background: #111; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
 .landIcon[data-skin="norm"] .tile { display: grid; }
 .landIcon[data-skin="drawl"] .i-drawl, .landIcon[data-skin="sheep"] .i-sheep, .landIcon[data-skin="habbot"] .i-habbot { display: block; }
