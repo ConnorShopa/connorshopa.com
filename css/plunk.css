@@ -663,3 +663,7 @@ body {
 .heroBox > .textSection .linkWrap a { white-space: nowrap; }
 /* centred blocks keep their padding inside their width (on phones they were pushed right by it) */
 .heroBox > .textSection, .textSection.statement { box-sizing: border-box; }
+/* stacked (tablet and phone): more air between each card + house pair */
+@media (max-width: 900px) {
+  .tripleGifSection { gap: 72px; }
+}
