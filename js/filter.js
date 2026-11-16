@@ -42,9 +42,12 @@
       listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
       var sizes = [], left = shown.length;
       var hlN = shown.filter(function (li) { return li.querySelector("a.hl"); }).length;
-      if (per > 1) {
-        // wide screens: every project in one row that scrolls sideways (see css/homeLogos.css)
-        sizes.push(shown.length);
+      if (per > 1 && hlN >= 6) {
+        // wide screens: three centred rows of cards (5 + 5 + 3); tablets take three to a row
+        var hn = hlN;
+        while (hn > 0) { sizes.push(Math.min(per, hn)); hn -= per; }
+        if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
+        if (shown.length - hlN > 0) sizes.push(shown.length - hlN);
       } else {
         while (left > 0) { sizes.push(Math.min(per, left)); left -= per; }
         if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
@@ -67,16 +70,17 @@
     // a little so every row fits on one line (a row that wraps strands its last item on a line of its own)
     var per = perRow();
     var rows = apply(per);
-    listEl.style.zoom = "";
-    if (false && per > 1 && shown.length) { // the one row scrolls instead of shrinking
-      var widest = 0, k = 0;
+    listEl.style.zoom = ""; listEl.style.removeProperty("--lz");
+    if (per > 1 && shown.length) {
+      var widest = 0, k = 0, gapPx = parseFloat(getComputedStyle(listEl).columnGap) || 0;
       rows.forEach(function (n) { // the width of each intended row (a row that wrapped by itself still counts as one)
         var w = 0;
         for (var m = 0; m < n; m++, k++) w += shown[k].offsetWidth;
+        w += gapPx * Math.max(0, n - 1);
         if (w > widest) widest = w;
       });
       var avail = listEl.clientWidth;
-      if (widest > avail && avail > 0) listEl.style.zoom = String(Math.max(0.5, (avail / widest) * 0.97));
+      if (widest > avail && avail > 0) { var zz = Math.max(0.5, (avail / widest) * 0.97); listEl.style.zoom = String(zz); listEl.style.setProperty("--lz", String(zz)); }
     }
   }
   window.layoutGalleryRows = function () { layoutRows(list, items); };
@@ -135,34 +139,3 @@
 })();
 
 
-// The one row of cards scrolls sideways (wide screens): the mouse wheel, a trackpad or a drag with the mouse
-(function () {
-  var list = document.getElementById("projectList");
-  if (!list) return;
-  var wide = function () { return window.innerWidth > 700 && !list.classList.contains("compact"); };
-  list.addEventListener("wheel", function (e) {
-    if (!wide() || list.scrollWidth <= list.clientWidth + 2) return;
-    var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    list.scrollLeft += d;
-    e.preventDefault();
-    e.stopPropagation(); // the wheel elsewhere loops the tabs; over the row it scrolls the row
-  }, { passive: false });
-  var down = null, moved = false;
-  list.addEventListener("pointerdown", function (e) {
-    if (e.pointerType !== "mouse" || e.button !== 0 || !wide()) return;
-    down = { x: e.clientX, left: list.scrollLeft }; moved = false;
-  });
-  window.addEventListener("pointermove", function (e) {
-    if (!down) return;
-    var dx = e.clientX - down.x;
-    if (!moved && Math.abs(dx) > 5) { moved = true; list.classList.add("dragging"); }
-    if (moved) list.scrollLeft = down.left - dx;
-  });
-  window.addEventListener("pointerup", function () {
-    if (!down) return;
-    down = null;
-    if (moved) setTimeout(function () { list.classList.remove("dragging"); moved = false; }, 0);
-  });
-  list.addEventListener("click", function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
-  list.addEventListener("dragstart", function (e) { e.preventDefault(); });
-})();

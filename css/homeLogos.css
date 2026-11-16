@@ -1,13 +1,9 @@
 /* home: logos with a coloured tagline under each (desktop + tablet; phones keep the deck) */
 @media (min-width:701px){
-.inline.big li:not(.no-slash):not(.row-break):not(:last-child):not(#_)::after{content:"" !important;display:inline-block;width:2px;height:6px;margin:0 clamp(8px,1.2vw,22px);background:rgba(51,51,51,.4);border-radius:2px;vertical-align:middle;position:relative;top:10px}
-nav .inline.big:not(#_):not(#_){width:100vw;margin-left:calc(50% - 50vw);margin-right:0;box-sizing:border-box;flex-wrap:nowrap;justify-content:flex-start;align-items:stretch;gap:40px;overflow-x:auto;padding:24px 24vw 32px 24vw;cursor:grab;scrollbar-width:none}
-nav .inline.big::-webkit-scrollbar{display:none}
+nav .inline.big:not(#_):not(#_){width:calc(min(1700px,96vw) / var(--lz,1));margin:0;position:relative;left:50%;transform:translateX(-50%);box-sizing:border-box;flex-wrap:wrap;justify-content:center;align-items:stretch;column-gap:22px;row-gap:8px;overflow:visible;padding:0}
 .inline.big li:not(.row-break):not(#_):not(#_){flex:none;display:flex;padding:0;margin:0}
 .inline.big li:not(.row-break):not(#_):not(#_){position:relative}
-.inline.big li:not(.row-break):not(.no-slash):not(#_):not(#_)::after{content:"" !important;position:absolute;left:100%;top:50%;margin:-3px 0 0 19px;width:2px;height:6px;border-radius:2px;background:rgba(51,51,51,.8);display:block}
-nav .inline.big.dragging{cursor:grabbing}
-nav .inline.big.dragging a{pointer-events:none}
+.inline.big li:not(.row-break):not(.no-slash):not(#_):not(#_)::after{content:"" !important;position:absolute;left:100%;top:50%;margin:-3px 0 0 10px;width:2px;height:6px;border-radius:2px;background:rgba(51,51,51,.8);display:block}
 .inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){box-sizing:border-box;flex:1;align-self:stretch;border:0;border-radius:22px;padding:24px 44px;justify-content:center;}
 .inline.big a.hl:not(#_):not(#_){display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:10px;padding:8px 10px;text-align:left}
 .inline.big a.hl:not(#_) .hlLogo{display:flex;align-items:center;gap:10px;height:auto;zoom:var(--z,1)}
