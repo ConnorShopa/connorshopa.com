@@ -94,5 +94,11 @@
 
 /* Rubin's sticker is a detailed drawing: on the home list it needs more height than the other logos to read (tablets and desktops) */
 @media (min-width: 701px) {
-  #projectList a[data-view="rubin"] .logo { height: 64px; max-width: none; width: auto; }
+  #projectList a[data-view="rubin"] .logo { height: 84px; max-width: none; width: auto; }
+  #projectList .logo.happly { height: 84px; max-width: none; width: auto; }
+}
+/* phones (the deck): the same two, larger */
+@media (max-width: 700px) {
+  #projectList a[data-view="rubin"] .logo { height: 76px; max-width: none; width: auto; }
+  #projectList .logo.happly { height: 76px; max-width: none; width: auto; }
 }
