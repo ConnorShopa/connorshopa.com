@@ -667,3 +667,7 @@ body {
 @media (max-width: 900px) {
   .tripleGifSection { gap: 72px; }
 }
+/* the cost calculator screen: it filled the whole column on tablet and phone; keep it phone-sized and centred */
+@media (max-width: 900px) {
+  .imageTextSection > img[src*="plunk_gif_02"] { width: min(100%, 300px); height: auto; align-self: center; }
+}

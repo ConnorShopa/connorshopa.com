@@ -157,7 +157,7 @@
       title: "Plunk®",
       logo: H + "plunk_logo_horizontal.svg",
       logoOnly: true,
-      legacy: "plunk.html?v=20", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
+      legacy: "plunk.html?v=21", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
       pages: [
         pg("two",
           text(
