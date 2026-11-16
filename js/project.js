@@ -413,7 +413,7 @@
       var rowW = vis.length ? vis[vis.length - 1].getBoundingClientRect().right - vis[0].getBoundingClientRect().left : list.scrollWidth;
       curMini = Math.min(MINI, (window.innerWidth - 48) / Math.max(1, rowW));
       if (!wasCompact) list.classList.remove("compact"); if (li0 && !wasCur) li0.classList.remove("is-current");
-      rowTop = Math.max(ROW_TOP, Math.ceil(rowHm * curMini + GAP + 24));
+      rowTop = SCREEN_PAD; // no row of other projects above the card any more: it fills the screen
       // the card is the whole screen, SCREEN_PAD from every edge
       var bigW = window.innerWidth - SCREEN_PAD * 2, bigH = window.innerHeight - rowTop - SCREEN_PAD; // room left above the card for the row of every other project
       cardW = bigW * VIEW_SCALE; height = bigH * VIEW_SCALE; rowTop += (bigH - height) / 2; // smaller, centred in the room under the row
