@@ -91,3 +91,8 @@
   #view-seeds .pg.two .pgMedia figure { overflow: hidden; display: block; }
   #view-seeds .pg.two .pgMedia img { display: block; width: 480%; max-width: none; margin: 0; position: relative; left: 50%; transform: translateX(-50%); }
 }
+
+/* Rubin's sticker is a detailed drawing: on the home list it needs more height than the other logos to read (tablets and desktops) */
+@media (min-width: 701px) {
+  #projectList a[data-view="rubin"] .logo { height: 64px; max-width: none; width: auto; }
+}

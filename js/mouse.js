@@ -78,7 +78,7 @@
       // the project list in the middle of the home screen has a much stronger magnet: the bubble leans further toward the cursor
       var strong = currentLink && currentLink.closest && currentLink.closest("#projectList");
       var g = typeof window.LIST_GRAVITY === "number" ? window.LIST_GRAVITY : LIST_GRAVITY;
-      var hold = isCard(currentLink) ? 0 : strong ? Math.max(0, 1 - g) : 1; // 1 = free to drift as far as before, 0 = held dead centre
+      var hold = strong ? Math.max(0, 1 - g) : 1; // 1 = free to drift as far as before, 0 = held dead centre
       var m = MAGNET * hold, px = MAX_PULL_X * hold, py = MAX_PULL_Y * hold;
       x = cx + clamp((mouse.x - cx) * m, -px, px);
       y = cy + clamp((mouse.y - cy) * m, -py, py);
@@ -121,11 +121,6 @@
     }
     var shape = Math.min(1, Math.max(0, (w / h - 1) / (WIDE_AT - 1))); // 0 = squarish, 1 = very wide
     var radius = (h / 2) * (1 - shape * (1 - ROUND_WIDE));
-    if (isCard(currentLink)) { // the bubble is the card, grown, with a margin all round, and takes the card's corner
-      w = base.width * CARD_GROW + CARD_MARGIN;
-      h = base.height * CARD_GROW + CARD_MARGIN;
-      radius = (parseFloat(getComputedStyle(currentLink).borderTopLeftRadius) || 34) * CARD_GROW + CARD_MARGIN / 2;
-    }
     // icon-only buttons (the view's close button and page chevrons) get a true circle around the icon instead of a pill
     if (currentLink && (currentLink.classList.contains("viewClose") || currentLink.classList.contains("viewNav") || currentLink.classList.contains("projNav"))) {
       w = h = Math.max(base.width, base.height) + 8;
@@ -186,14 +181,8 @@
     return Math.min(1, Math.max(LINK_SCALE, MIN_PX / fontSize));
   }
 
-  // tablets and desktops: the home list is a set of outlined cards (css/homeCards.css). The hovered card grows, and the bubble fills it,
-  // a little bigger than the card
-  var CARD_GROW = 1.07, CARD_MARGIN = 14;
-  var cardMQ = window.matchMedia ? window.matchMedia("(min-width: 701px)") : { matches: false };
-  function isCard(link) { return !!(link && cardMQ.matches && link.parentNode && link.parentNode.tagName === "LI" && link.closest && link.closest("#projectList")); }
-
   function shrink(link) {
-    gsap.to(link, { scale: isCard(link) ? CARD_GROW : shrinkScale(link), duration: t(0.4), ease: "power3.out", overwrite: "auto" });
+    gsap.to(link, { scale: shrinkScale(link), duration: t(0.4), ease: "power3.out", overwrite: "auto" });
   }
 
   function unshrink(link) {
@@ -247,13 +236,6 @@
     link.addEventListener("focus", function () { if (link.matches(":focus-visible")) showFor(link); });
     link.addEventListener("blur", function () { unshrink(link); leave(); });
   }
-  // the home cards sit in a row that scrolls sideways: keep the bubble on its card while it moves
-  window.addEventListener("scroll", function () {
-    if (!boxShown || !currentLink || locked || !isCard(currentLink)) return;
-    var r = linkRect(currentLink), s = gsap.getProperty(currentLink, "scale") || 1;
-    base = fullSizeRect(currentLink, { left: r.left, top: r.top, width: r.width, height: r.height });
-    morphToBox();
-  }, true);
   window.bindHover();
 
   window.addEventListener("mousemove", function (e) {
