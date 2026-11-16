@@ -78,3 +78,14 @@
   #projectList .withCaption .label { font-size: 26px; }
   #projectList .withCaption .bubble { margin-right: 9px; }
 }
+
+/* Seeds on phones: the hero page (the three-stage seed strip, title and facts) sits in the vertical centre of the card,
+   and the strip is larger: the artwork only fills ~13% of its file's width, so the image is scaled up and cropped to
+   its middle, which makes the three seeds about 60% of the page width instead of ~13%. */
+@media (max-width: 700px) {
+  #view-seeds .viewBody { container-type: size; }
+  #view-seeds .pg.two { box-sizing: border-box; min-height: 100cqh; align-content: center; }
+  #view-seeds .pg.two .pgMedia { overflow: hidden; padding: 0; position: relative; }
+  #view-seeds .pg.two .pgMedia figure { overflow: hidden; display: block; }
+  #view-seeds .pg.two .pgMedia img { display: block; width: 480%; max-width: none; margin: 0; position: relative; left: 50%; transform: translateX(-50%); }
+}

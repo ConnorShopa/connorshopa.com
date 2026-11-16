@@ -2736,3 +2736,6 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 .pgGallery.oneCol img { margin-bottom: 24px; }
 .pgGallery.oneCol .lottieBox { margin-bottom: 24px; }
 @media (max-width: 700px) { .pgGallery.oneCol img, .pgGallery.oneCol .lottieBox { margin-bottom: 16px; } }
+/* Micro + Motion: a thin rounded divider between the animations (12% black), 88% of the screen's width on phones */
+.pgGallery.oneCol .mmRule { display: block; width: 100%; height: 2px; margin: 0 0 24px; border: 0; border-radius: 999px; background: rgba(0, 0, 0, 0.12); }
+@media (max-width: 700px) { .pgGallery.oneCol .mmRule { width: 88vw; max-width: none; position: relative; left: 50%; transform: translateX(-50%); margin-bottom: 16px; } }
