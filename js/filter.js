@@ -42,12 +42,9 @@
       listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
       var sizes = [], left = shown.length;
       var hlN = shown.filter(function (li) { return li.querySelector("a.hl"); }).length;
-      if (per > 1 && hlN >= 6) {
-        // logo-and-tagline items first (5 + 5 + 3 on wide screens), then the others (Sketchbook, Micro + Motion) on a row of their own
-        var hn = hlN;
-        while (hn > 0) { sizes.push(Math.min(per, hn)); hn -= per; }
-        if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
-        if (shown.length - hlN > 0) sizes.push(shown.length - hlN);
+      if (per > 1) {
+        // wide screens: every project in one row that scrolls sideways (see css/homeLogos.css)
+        sizes.push(shown.length);
       } else {
         while (left > 0) { sizes.push(Math.min(per, left)); left -= per; }
         if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
@@ -71,7 +68,7 @@
     var per = perRow();
     var rows = apply(per);
     listEl.style.zoom = "";
-    if (per > 1 && shown.length) {
+    if (false && per > 1 && shown.length) { // the one row scrolls instead of shrinking
       var widest = 0, k = 0;
       rows.forEach(function (n) { // the width of each intended row (a row that wrapped by itself still counts as one)
         var w = 0;
