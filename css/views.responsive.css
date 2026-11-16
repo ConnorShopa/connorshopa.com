@@ -70,3 +70,11 @@
   #projectList a[data-view="touchtunes"]:hover .wordmark, #projectList a[data-view="touchtunes"]:focus-visible .wordmark {
     filter: brightness(0) invert(1) drop-shadow(12px 20px 38px rgba(45, 30, 60, 0.34)); }
 }
+
+/* Seeds in the project list on phones: it was scaled up to 42px / 33px type at <=900, which is much larger than the
+   other logos on a phone. At <=700 it goes back to the size set against Plunk's logo (33px mark, 26px "Seeds"). */
+@media (max-width: 700px) {
+  #projectList .seedsIcon { height: 33px; }
+  #projectList .withCaption .label { font-size: 26px; }
+  #projectList .withCaption .bubble { margin-right: 9px; }
+}
