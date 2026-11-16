@@ -157,7 +157,7 @@
       title: "Plunk®",
       logo: H + "plunk_logo_horizontal.svg",
       logoOnly: true,
-      legacy: "plunk.html?v=6", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
+      legacy: "plunk.html?v=7", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
       pages: [
         pg("two",
           text(
@@ -165,13 +165,10 @@
             '<div class="facts">' + fact("Audience", "Homeowners + Modern Real Estate agents") + fact("Team", "Startup : seed") + "</div>" +
             p("eyebrow", "About") +
             p("body", "Plunk aimed to revolutionize real estate data access.") +
-            p("body", "&ndash; As one of two designers, I was responsible for designing product, interfaces, and motion to help Plunk meet it&rsquo;s goal.") +
             p("body soft", '*All work shown was in collaboration with the outstanding <a href="https://www.aldredge.io/" rel="noopener" target="_blank">Vaughn Aldredge</a>')
           ) + media(fig(A + "plunkAssets/plunk_image_01.png"))),
         pg("two",
           text(
-            p("eyebrow", "Deliverables") +
-            '<ul class="list"><li>High fidelity prototyping of new products &amp; interfaces</li><li>Product handoff to the engineering team</li><li>Motion &amp; Visual design for data visualisation</li><li>Video and static site building for marketing design</li><li>Responsive web design from mobile to desktop</li></ul>' +
             p("body", "While cutting edge, Plunk&rsquo;s AI powered insights all were designed to follow the brand mantra: Empowering, Trustworthy, Approachable, &amp; Fun.")
           ) + media(fig(A + "plunkAssets/plunk_image_02.png"))),
         pg("two",
