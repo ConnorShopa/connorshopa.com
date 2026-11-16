@@ -26,3 +26,6 @@ nav .inline.big:not(#_):not(#_){width:min(1500px,94vw);margin-left:calc(50% - mi
 .inline.big a.hl:hover .hlSub{color:inherit}
 }
 @media (max-width:700px){.hlSub{display:none}}
+
+/* while a project is open the list is just logos and wordmarks */
+html.view-open .inline.big a.hl:not(#_) .hlSub{display:none}
