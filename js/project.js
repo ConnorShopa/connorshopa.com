@@ -459,7 +459,7 @@
       var zs = Math.max(0.05, Math.min(0.6, b.w / cr.width));
       gsap.set(view, { transformOrigin: "50% 50%", x: b.cx - to.cx, y: b.cy - to.cy, scale: zs });
       reveal();
-      gsap.to(view, { x: 0, y: 0, scale: 1, duration: t(0.6), ease: "power3.out", clearProps: "scale,x,y" });
+      gsap.to(view, { x: 0, y: 0, scale: 1, duration: t(0.6), ease: "power3.out" }); // (no clearProps: it would drop the -50% centring too)
     } else if (window.bubble) window.bubble.grow(to, b, 0.5, reveal); else if (narrow) phoneGrow(view, currentLi, reveal); else reveal();
     if (!narrow) popGallery(function () {
       // start from a clean slate: if an earlier open/close was interrupted halfway, the gallery may
@@ -586,7 +586,7 @@
       var zs2 = Math.max(0.05, Math.min(0.6, b.w / cr.width));
       gsap.set(view, { transformOrigin: "50% 50%" });
       gsap.to(view, { x: b.cx - fromCard.cx, y: b.cy - fromCard.cy, scale: zs2, duration: t(0.45), ease: "power3.in" });
-      gsap.to(view, { autoAlpha: 0, duration: t(0.18), delay: t(0.3), ease: "power1.in", onComplete: function () { gsap.set(view, { clearProps: "scale,x,y" }); finish(); } });
+      gsap.to(view, { autoAlpha: 0, duration: t(0.18), delay: t(0.3), ease: "power1.in", onComplete: function () { gsap.set(view, { x: 0, y: 0, scale: 1 }); finish(); } });
       popGallery(function () {
         list.classList.remove("compact");
         list.querySelectorAll("li.is-current").forEach(function (li) { li.classList.remove("is-current"); });
