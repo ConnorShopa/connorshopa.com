@@ -157,7 +157,7 @@
       title: "Plunk®",
       logo: H + "plunk_logo_horizontal.svg",
       logoOnly: true,
-      legacy: "plunk.html?v=16", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
+      legacy: "plunk.html?v=17", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
       pages: [
         pg("two",
           text(
@@ -185,7 +185,6 @@
           media(fig(A + "plunkAssets/plunk_gif_02.gif")) +
           text(
             p("sub", "Plunk&rsquo;s cost calculator") +
-            p("eyebrow", "prototype built in figma") +
             p("body", "Each new product or feature was designed with the purpose of removing the barrier of entry to quality real estate data.") +
             p("body", "The cost caluclator is an example of letting our audience customize data based on their unique homes.")
           )),
