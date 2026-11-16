@@ -27,7 +27,7 @@
 }
 
 html {
-  cursor: url("cursor_home.png"), pointer;
+  cursor: url("cursor_home.png") 8 8, pointer;
 }
 
 html,
@@ -114,7 +114,7 @@ a {
 }
 
 a:hover {
-  cursor: url("cursor_linkHover.png"), pointer;
+  cursor: url("cursor_linkHover.png") 6 6, pointer;
 }
 
 a:focus-visible {
@@ -448,7 +448,7 @@ a:focus-visible {
   background: transparent;
   border: 1px solid transparent; /* no stroke; kept so the chips stay the same size */
   border-radius: 999px;
-  cursor: url("cursor_linkHover.png"), pointer;
+  cursor: url("cursor_linkHover.png") 6 6, pointer;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
@@ -904,7 +904,7 @@ html.view-open #mouse-circle {
   border: 1px solid transparent; /* same box as the filter chips, so the stroke below lines up */
   border-radius: 999px;
   box-shadow: 0 6px 14px -4px rgba(47, 39, 37, 0.28), 0 2px 4px rgba(47, 39, 37, 0.12);
-  cursor: url("cursor_linkHover.png"), pointer;
+  cursor: url("cursor_linkHover.png") 6 6, pointer;
   transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -1301,7 +1301,7 @@ html.view-open .contactBlock {
   box-shadow: 0 8px 18px -4px rgba(0, 10, 4, 0.4), 0 2px 5px rgba(0, 10, 4, 0.25);
   display: grid;
   place-items: center;
-  cursor: url("cursor_linkHover.png"), pointer;
+  cursor: url("cursor_linkHover.png") 6 6, pointer;
   animation: cueBob 1.8s ease-in-out infinite;
 }
 
