@@ -6,6 +6,7 @@ nav .inline.big:not(#_):not(#_){width:calc(min(1700px,96vw) / var(--lz,1));margi
 .inline.big li:not(.row-break):not(.no-slash):not(#_):not(#_)::after{content:"" !important;position:absolute;left:100%;top:50%;margin:-3px 0 0 10px;width:2px;height:6px;border-radius:2px;background:rgba(51,51,51,.8);display:block}
 .inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){box-sizing:border-box;flex:1;align-self:stretch;border:1px solid rgba(51,51,51,.12);border-radius:22px;padding:24px 44px;justify-content:center;transition:filter .3s ease,border-color .25s ease}
 .inline.big a.hl:not(#_):not(#_){display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:10px;padding:8px 10px;text-align:left}
+}
 .inline.big a.hl:not(#_) .hlLogo{display:flex;align-items:center;gap:10px;height:auto;zoom:var(--z,1)}
 .inline.big a.hl:not(#_) .hlSub:not(#_){display:block;letter-spacing:-.016em;font:500 16px/1.25 "Host Grotesk","Figtree",system-ui,sans-serif;color:rgb(var(--c) / .8);white-space:nowrap;text-align:left;max-width:none;transition:color .2s}
 .inline.big a.hl img,.inline.big a.hl:not(#_) .hlMask{display:block;flex:none}
@@ -26,11 +27,8 @@ nav .inline.big:not(#_):not(#_){width:calc(min(1700px,96vw) / var(--lz,1));margi
 .tSeeds{font-family:"Sailec","Host Grotesk",sans-serif;color:#317492}
 .tSpot{font-family:"Circular Std","Figtree",sans-serif;color:#58B460}
 .inline.big a.hl:hover .hlSub{color:inherit}
-}
-@media (min-width:701px){
 /* Sheep, Habbot and Drawl: app icons all 40px on screen, whatever each logo's own scale is */
 .inline.big a.hl[aria-label="Sheep"] .hlIcon,.inline.big a.hl[aria-label="Habbot"] .hlIcon,.inline.big a.hl[aria-label="Drawl"] .hlIcon{width:calc(40px / var(--z,1));height:calc(40px / var(--z,1));border-radius:calc(9px / var(--z,1))}
-}
 @media (max-width:700px){.hlSub{display:none}}
 
 /* while a project is open the list is just logos and wordmarks */
@@ -70,3 +68,16 @@ nav .inline.big:not(#_):not(#_){column-gap:16px}
 .hlSketch .rn{display:inline-block}
 @media (max-width:700px){.hlSketch{font-size:30px}}
 .inline.big a.hl .tSeeds:not(#_){position:relative;top:5px}
+/* ---- phones: a plain two-column grid of tiles (no deck / carousel), the same logos as desktop at one consistent size ---- */
+@media (max-width:700px){
+  .hero > nav:not(#_):not(#_){overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+  .hero > nav > #projectList:not(#_):not(#_){position:static !important;display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:auto;max-width:none;left:auto;transform:none;box-sizing:border-box;padding:14px 14px 48px;margin:0;overflow:visible;perspective:none;touch-action:pan-y;user-select:auto;-webkit-user-select:auto;font-size:inherit;zoom:1 !important}
+  #projectList li:not(.row-break):not(#_):not(#_){position:static !important;display:flex !important;align-items:stretch;justify-content:center;width:auto;max-width:none;height:84px;margin:0;padding:0;background:rgba(51,51,51,.05);border-radius:18px;box-shadow:none;translate:none !important;scale:none !important;rotate:none !important;opacity:1 !important;transform:none !important;will-change:auto;transition:none}
+  #projectList li:not(.row-break):not(#_):not(#_)::after{display:none !important}
+  #projectList li:not(.row-break):not(#_):not(#_)>a{flex:1;display:flex;align-items:center;justify-content:center;width:100%;max-width:none;height:100%;box-sizing:border-box;padding:0 10px;margin:0;zoom:1;border:0;border-radius:inherit;filter:none !important;opacity:1 !important}
+  #projectList li > a:not(#_):not(#_) .hlLogo{zoom:calc(var(--z,1) * .8)}
+  .inline.big a.hl:not(#_):not(#_) .hlSub:not(#_):not(#_){display:none}
+  #projectList:not(#_):not(#_) li:not(#_):has(> a[data-view="touchtunes"]) .wordmark:not(#_){filter:none !important}
+  .hlSketch{font-size:26px}
+  .peek,.deckMode,.deckView{display:none !important}
+}
