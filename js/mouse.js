@@ -21,8 +21,8 @@
   // ---- tuning ----
   var PAD_X = 22;        // box padding around the link text
   var PAD_Y = 10;
-  var PROJ_PAD_X = 14;   // ...and the project links in the centre list: wider than the default, but snug
-  var PROJ_PAD_Y = 6; 
+  var PROJ_PAD_X = 22;   // ...and the project links in the centre list: wider than the default, but snug
+  var PROJ_PAD_Y = 10;
   var MAGNET = 0.5;      // how far the box leans toward the cursor (0 = locked to the link, 1 = fully follows)
   var MAX_PULL_X = 32;   // the most the box can drift away from the link, in px
   var MAX_PULL_Y = 16;
@@ -121,7 +121,7 @@
     }
     var shape = Math.min(1, Math.max(0, (w / h - 1) / (WIDE_AT - 1))); // 0 = squarish, 1 = very wide
     var radius = (h / 2) * (1 - shape * (1 - ROUND_WIDE));
-    if (inList) radius *= 0.6; // the project bubbles: a little less round
+    if (inList) radius *= 0.8; // the project bubbles: a little less round
     // icon-only buttons (the view's close button and page chevrons) get a true circle around the icon instead of a pill
     if (currentLink && (currentLink.classList.contains("viewClose") || currentLink.classList.contains("viewNav") || currentLink.classList.contains("projNav"))) {
       w = h = Math.max(base.width, base.height) + 8;
