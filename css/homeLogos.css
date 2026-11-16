@@ -69,3 +69,4 @@ nav .inline.big:not(#_):not(#_){column-gap:16px}
 .hlSketch{font-size:30px;letter-spacing:-.01em;white-space:nowrap;line-height:1}
 .hlSketch .rn{display:inline-block}
 @media (max-width:700px){.hlSketch{font-size:30px}}
+.inline.big a.hl .tSeeds:not(#_){position:relative;top:5px}
