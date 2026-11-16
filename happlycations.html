@@ -231,12 +231,13 @@
             function rowLeft() { page.removeAttribute("data-hover"); setSkin("norm"); }
             landRow.addEventListener("mouseleave", rowLeft);
             landRow.addEventListener("focusout", function (e) { if (!e.relatedTarget || !landRow.contains(e.relatedTarget)) rowLeft(); });
+            // an app's icon goes straight to the app (no nested page): Sheep to its TestFlight. Drawl and Habbot aren't out yet, so they
+            // have no link (add theirs to STORE when they are)
+            var STORE = { sheep: "https://testflight.apple.com/join/qkHb7CVH" };
             document.querySelectorAll(".landApp").forEach(function (b) {
+                if (!STORE[b.dataset.app]) b.style.cursor = "default";
                 b.addEventListener("click", function () {
-                    for (var k = 0; k < secs.length; k++) if (secs[k].dataset.app === b.dataset.app) go(k);
-                    page.removeAttribute("data-hover"); setSkin("norm");
-                    page.setAttribute("data-view", "app");
-                    window.scrollTo(0, 0);
+                    if (STORE[b.dataset.app]) window.open(STORE[b.dataset.app], "_blank", "noopener");
                 });
             });
             head.setAttribute("role", "button"); head.setAttribute("tabindex", "0"); head.setAttribute("aria-label", "Back to Happlycations");
