@@ -66,3 +66,6 @@ nav .inline.big:not(#_):not(#_){column-gap:16px}
 .inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){padding-left:30px;padding-right:30px}
 .inline.big li:not(.row-break):not(.no-slash):not(#_):not(#_)::after{margin-left:7px !important}
 }
+.hlSketch{font-size:30px;letter-spacing:-.01em;white-space:nowrap;line-height:1}
+.hlSketch .rn{display:inline-block}
+@media (max-width:700px){.hlSketch{font-size:30px}}

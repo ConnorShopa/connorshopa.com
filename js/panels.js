@@ -106,7 +106,7 @@ document.addEventListener("input", function (e) {
 // Scrolling the main view loops through the tabs: Work, About, Contact, and round again (a project being open
 // takes the wheel for itself; phones keep their normal page scroll)
 (function () {
-  var order = [null, "sketchbook", "about", "contact"];
+  var order = [null, "about", "contact"];
   var busy = false;
   window.addEventListener("wheel", function (e) {
     if (document.documentElement.classList.contains("view-open")) return;
