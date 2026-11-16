@@ -1,0 +1,26 @@
+/* home: logos with a coloured tagline under each (desktop + tablet; phones keep the deck) */
+@media (min-width:701px){
+.inline.big a.hl:not(#_):not(#_){display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:10px;padding:14px 22px;text-align:left}
+.inline.big a.hl:not(#_) .hlLogo{display:flex;align-items:center;gap:10px;height:64px}
+.inline.big a.hl:not(#_) .hlSub:not(#_){display:block;font:500 18px/1.25 "Host Grotesk","Figtree",system-ui,sans-serif;color:rgb(var(--c) / .8);white-space:nowrap;text-align:left;max-width:none;transition:color .2s}
+.inline.big a.hl img,.inline.big a.hl:not(#_) .hlMask{display:block;flex:none}
+.hlIcon{height:52px;width:52px;border-radius:12px}
+.hlMark{height:46px;width:auto;transition:filter .2s}
+.inline.big a.hl:hover .hlMark{filter:invert(1)}
+.hlSticker{height:64px;width:auto}
+.hlWord{height:34px;width:auto}
+.hlWord.rubin{height:40px}
+.hlPlunk{height:40px;width:auto}
+.hlChip{height:44px;width:auto}
+.hlAltq{height:36px;width:auto}
+.hlHappy{height:64px;width:auto}
+.hlPollin{height:40px;width:auto}
+.hlMask{width:48px;height:48px;background:var(--bg);-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.hlT{font-size:34px;line-height:1;font-weight:700;letter-spacing:-.01em}
+.tSheep{font-family:"Crimson Pro",serif;font-weight:600;color:#2F4AA3}
+.tDrawl{font-family:"Pally","Nunito","Host Grotesk",sans-serif;color:#0C1E44}
+.tSeeds{font-family:"Sailec","Host Grotesk",sans-serif;color:#317492}
+.tSpot{font-family:"Circular Std","Figtree",sans-serif;color:#58B460}
+.inline.big a.hl:hover .hlSub{color:inherit}
+}
+@media (max-width:700px){.hlSub{display:none}}

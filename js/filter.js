@@ -41,12 +41,13 @@
     var apply = function (per) {
       listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
       var sizes = [], left = shown.length;
-      if (per === 5 && shown.length >= 10) {
-        // wide screens: the last two links (Micro + Motion, Overhand) sit on a row of their own under the rest, and
-        // the others are shared out evenly over as many rows as they need (5 + 4 + 4, then 2)
-        var rest = shown.length - 2, rowsN = Math.ceil(rest / per), base = Math.floor(rest / rowsN), extra = rest % rowsN;
-        for (var q = 0; q < rowsN; q++) sizes.push(base + (q < extra ? 1 : 0));
-        sizes.push(2);
+      var hlN = shown.filter(function (li) { return li.querySelector("a.hl"); }).length;
+      if (per > 1 && hlN >= 6) {
+        // logo-and-tagline items first (5 + 5 + 3 on wide screens), then the others (Sketchbook, Micro + Motion) on a row of their own
+        var hn = hlN;
+        while (hn > 0) { sizes.push(Math.min(per, hn)); hn -= per; }
+        if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
+        if (shown.length - hlN > 0) sizes.push(shown.length - hlN);
       } else {
         while (left > 0) { sizes.push(Math.min(per, left)); left -= per; }
         if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
