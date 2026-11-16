@@ -337,7 +337,7 @@
       bg: "#C9B5F0", // Rubin's light purple behind the card
       // no corner logo: the card is the logo (the mark from rubin_logo.svg, its wordmark below, then "Coming soon")
       pages: [
-        pg("one", '<div class="rbPage"><img class="rbMark" src="' + H + 'rubin_mark.svg" alt=""><img class="rbWord" src="' + H + 'rubin_wordmark.svg" alt="Rubin"><p class="rbSoon">Coming soon</p></div>'),
+        pg("one", '<div class="rbPage"><img class="rbMark" src="' + H + 'rubin_sticker.svg" alt=""><img class="rbWord" src="' + H + 'rubin_wordmark.svg" alt="Rubin"><p class="rbSoon">Coming soon</p></div>'),
       ],
     },
 
