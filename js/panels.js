@@ -45,7 +45,7 @@
       if (current) return;
       panel.hidden = true;
       list.style.visibility = "";
-      gsap.fromTo(links(), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: t(0.3), ease: "back.out(1.2)", stagger: t(0.03), clearProps: "transform,opacity" });
+      gsap.fromTo(links(), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: t(0.3), ease: "power2.out", stagger: t(0.03), clearProps: "transform,opacity" });
     };
     var hidePanel = function (done) {
       if (panel.hidden) { done(); return; }

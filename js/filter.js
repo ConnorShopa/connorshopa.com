@@ -128,7 +128,7 @@
       scale: 1,
       opacity: 1,
       duration: t(0.3),
-      ease: "back.out(1.2)",
+      ease: "power2.out",
       stagger: t(0.06), // the list is in reading order, so this runs left to right, row by row
       delay: t(0.1),
       onComplete: function () { gsap.set(links, { clearProps: "transform,opacity" }); },
