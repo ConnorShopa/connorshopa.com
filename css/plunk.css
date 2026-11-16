@@ -646,3 +646,10 @@ body {
 .heroBox > .textSection .linkWrap { align-items: center; text-align: center; justify-content: center; }
 .heroBox > .textSection h1 { white-space: nowrap; font-size: clamp(24px, 8.4vw, 120px); }
 .heroBox > .textSection h1 .mk { font-size: .4em; line-height: 0; vertical-align: 1.2em; margin-left: .06em; }
+
+/* the insight cards sit the same distance above each house's roof: each card's box is as tall as the card itself
+   (they were 300px squares with the card centred in them), and the animation keeps its own square size on the card's centre */
+.animContainer { height: auto; align-items: center; margin-bottom: 16px; }
+.animContainer img { display: block; }
+.valueDriversAnim, .homeValueAnim, .plunkValueAnim { height: auto; aspect-ratio: 1 / 1; }
+.animationBox:nth-child(3) .animContainer { margin-bottom: 19px; } /* its card file has less empty space under the pointer, so lift it to match the other two */

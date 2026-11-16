@@ -157,13 +157,12 @@
       title: "Plunk®",
       logo: H + "plunk_logo_horizontal.svg",
       logoOnly: true,
-      legacy: "plunk.html?v=7", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
+      legacy: "plunk.html?v=10", // the original page, unchanged, in the card (the pages below are the redesign's own version, kept for later)
       pages: [
         pg("two",
           text(
             p("lead", "Plunk&reg; &amp; PlunkPro&trade;") +
             '<div class="facts">' + fact("Audience", "Homeowners + Modern Real Estate agents") + fact("Team", "Startup : seed") + "</div>" +
-            p("eyebrow", "About") +
             p("body", "Plunk aimed to revolutionize real estate data access.") +
             p("body soft", '*All work shown was in collaboration with the outstanding <a href="https://www.aldredge.io/" rel="noopener" target="_blank">Vaughn Aldredge</a>')
           ) + media(fig(A + "plunkAssets/plunk_image_01.png"))),
