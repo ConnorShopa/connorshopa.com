@@ -28,4 +28,5 @@ nav .inline.big:not(#_):not(#_){width:min(1500px,94vw);margin-left:calc(50% - mi
 @media (max-width:700px){.hlSub{display:none}}
 
 /* while a project is open the list is just logos and wordmarks */
-html.view-open .inline.big a.hl:not(#_) .hlSub{display:none}
+html.view-open .inline.big a.hl:not(#_):not(#_) .hlSub:not(#_):not(#_){display:none}
+html.view-open #projectList.compact:not(#_){flex-wrap:nowrap}

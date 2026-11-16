@@ -10,7 +10,8 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var t = function (s) { return reduce ? 0 : s; };
 
-  var MINI = 0.6;  // how small the gallery gets while a view is open
+  var MINI = 0.6;  // how small the gallery gets while a view is open (at most; it shrinks further to stay on one line)
+  var curMini = MINI;
   var GAP = 28;    // space between the card and the minimised gallery
   var CARD_SCALE = 1.33; // how much bigger the card is than the space between the tabs and the gallery row
   var CARD_RATIO = 16 / 10; // the expanded card's width : height (a MacBook screen's shape)
@@ -407,8 +408,12 @@
       var wasCompact = list.classList.contains("compact"), li0 = trigger && trigger.closest ? trigger.closest("li") : null, wasCur = li0 && li0.classList.contains("is-current");
       list.classList.add("compact"); if (li0) li0.classList.add("is-current");
       var rowHm = list.getBoundingClientRect().height;
+      // one line that never wraps: shrink it just enough to fit the window
+      var vis = Array.prototype.filter.call(list.children, function (li) { return li.offsetParent !== null && li.getBoundingClientRect().width > 0; });
+      var rowW = vis.length ? vis[vis.length - 1].getBoundingClientRect().right - vis[0].getBoundingClientRect().left : list.scrollWidth;
+      curMini = Math.min(MINI, (window.innerWidth - 48) / Math.max(1, rowW));
       if (!wasCompact) list.classList.remove("compact"); if (li0 && !wasCur) li0.classList.remove("is-current");
-      rowTop = Math.max(ROW_TOP, Math.ceil(rowHm * MINI + GAP + 24));
+      rowTop = Math.max(ROW_TOP, Math.ceil(rowHm * curMini + GAP + 24));
       // the card is the whole screen, SCREEN_PAD from every edge
       var bigW = window.innerWidth - SCREEN_PAD * 2, bigH = window.innerHeight - rowTop - SCREEN_PAD; // room left above the card for the row of every other project
       cardW = bigW * VIEW_SCALE; height = bigH * VIEW_SCALE; rowTop += (bigH - height) / 2; // smaller, centred in the room under the row
@@ -462,9 +467,9 @@
       var n = nav.getBoundingClientRect();
       var rowH = list.getBoundingClientRect().height;
       // the row sits just above the card, under the intro
-      var rowCentre = top - GAP - (rowH * MINI) / 2;
+      var rowCentre = top - GAP - (rowH * curMini) / 2;
       var drop = rowCentre - (n.top + n.height / 2);
-      gsap.set(nav, { scale: MINI, y: drop, transformOrigin: "50% 50%" });
+      gsap.set(nav, { scale: curMini, y: drop, transformOrigin: "50% 50%" });
     }, { x: b.cx, y: b.cy });
 
     var close = view._close || view.querySelector(".viewClose");
