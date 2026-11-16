@@ -8,7 +8,6 @@ nav .inline.big:not(#_):not(#_){width:min(1500px,94vw);margin-left:calc(50% - mi
 .inline.big a.hl img,.inline.big a.hl:not(#_) .hlMask{display:block;flex:none}
 .hlIcon{height:52px;width:52px;border-radius:12px}
 .hlMark{height:46px;width:auto;transition:filter .2s}
-.inline.big a.hl:hover .hlMark{filter:invert(1)}
 .hlSticker{height:64px;width:auto}
 .hlWord{height:34px;width:auto}
 .hlWord.rubin{height:40px}
