@@ -133,3 +133,36 @@
   if (phone) return;
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(play); else play();
 })();
+
+
+// The one row of cards scrolls sideways (wide screens): the mouse wheel, a trackpad or a drag with the mouse
+(function () {
+  var list = document.getElementById("projectList");
+  if (!list) return;
+  var wide = function () { return window.innerWidth > 700 && !list.classList.contains("compact"); };
+  list.addEventListener("wheel", function (e) {
+    if (!wide() || list.scrollWidth <= list.clientWidth + 2) return;
+    var d = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    list.scrollLeft += d;
+    e.preventDefault();
+    e.stopPropagation(); // the wheel elsewhere loops the tabs; over the row it scrolls the row
+  }, { passive: false });
+  var down = null, moved = false;
+  list.addEventListener("pointerdown", function (e) {
+    if (e.pointerType !== "mouse" || e.button !== 0 || !wide()) return;
+    down = { x: e.clientX, left: list.scrollLeft }; moved = false;
+  });
+  window.addEventListener("pointermove", function (e) {
+    if (!down) return;
+    var dx = e.clientX - down.x;
+    if (!moved && Math.abs(dx) > 5) { moved = true; list.classList.add("dragging"); }
+    if (moved) list.scrollLeft = down.left - dx;
+  });
+  window.addEventListener("pointerup", function () {
+    if (!down) return;
+    down = null;
+    if (moved) setTimeout(function () { list.classList.remove("dragging"); moved = false; }, 0);
+  });
+  list.addEventListener("click", function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); } }, true);
+  list.addEventListener("dragstart", function (e) { e.preventDefault(); });
+})();
