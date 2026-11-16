@@ -98,6 +98,8 @@
       // the rest of the copy, pictures and layout are in git (commit 26c2461)
       pages: [
         pg("one", '<div class="nnDoc">' +
+          // the spinning dots from the translation animation, running forever above the hero, with the tagline under them
+          '<section class="nnLoad"><div class="nnOrbMount"></div><p class="nnLead nnLoadText">Translate baby cries</p></section>' +
           '<section class="nnRow nnAbout"><div><span class="nnLab">&middot; About</span>' +
             '<p class="nnLead">Ubenwa health puts science based tools in pockets of caregivers enabling them to care better.</p>' +
             '<p class="nnLead">Nanni translates baby cries into actionable insights for more than 500,000 parents and guardians.</p></div>' +

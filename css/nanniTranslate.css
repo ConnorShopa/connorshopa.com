@@ -123,3 +123,10 @@
 .wsCrop { width: 74%; margin: 5cqw auto 0; aspect-ratio: 2560 / 1740; clip-path: inset(-12cqw -12cqw 0 -12cqw); }
 .wsCrop img { display: block; width: 100%; height: auto; filter: drop-shadow(0 1.2cqw 3cqw rgba(0, 20, 50, .22)) drop-shadow(0 .3cqw .8cqw rgba(0, 20, 50, .12)); }
 @media (max-width: 900px) { .wsCrop { width: 88%; margin-top: 2cqw; } }
+
+/* Nanni's hero: the orb of dots from the translating step, spinning forever, with the tagline under it */
+.nnLoad { display: flex; flex-direction: column; align-items: center; gap: 1.6cqw; padding: max(5cqw, 28px) 0 0; text-align: center; }
+.nnOrb { position: relative; width: clamp(96px, 10cqw, 150px); height: clamp(96px, 10cqw, 150px); flex: none; }
+.nnOrbDot { position: absolute; left: 50%; top: 50%; width: clamp(4px, 0.46cqw, 7px); height: clamp(4px, 0.46cqw, 7px); margin: calc(clamp(4px, 0.46cqw, 7px) / -2) 0 0 calc(clamp(4px, 0.46cqw, 7px) / -2); border-radius: 50%; will-change: transform; }
+#view-nanni .nnLoad .nnLoadText { max-width: none; text-align: center; margin: 0; }
+#view-nanni .nnLoad + .nnAbout { padding-top: max(6cqw, 32px); }

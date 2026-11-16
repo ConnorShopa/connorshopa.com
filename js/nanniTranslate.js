@@ -296,5 +296,43 @@
     return api;
   }
 
+  // The spinning orb of dots from the translating step, on its own: a loader that runs forever (Nanni's hero).
+  // NanniOrb.mount(el): el's size sets the orb's size (it fills el).
+  function mountOrb(el) {
+    var BRAND = ["#80BAFD", "#99CA9C", "#FBC157", "#F28C8C"], N = 88, pts = [], dots = [], delay = [];
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.classList.add("nnOrb"); el.setAttribute("role", "img"); el.setAttribute("aria-label", "Translating");
+    for (var i = 0; i < N; i++) {
+      var y = 1 - 2 * (i + 0.5) / N, r = Math.sqrt(1 - y * y), th = i * 2.399963; // an even spread of points over a sphere
+      pts.push([Math.cos(th) * r, y, Math.sin(th) * r]);
+      var d = document.createElement("i"); d.className = "nnOrbDot"; d.style.background = BRAND[Math.floor(Math.random() * BRAND.length)];
+      el.appendChild(d); dots.push(d); delay.push(Math.random()); // each dot appears at its own random moment
+    }
+    var ease = function (x) { x = Math.max(0, Math.min(1, x)); return 1 - Math.pow(1 - x, 3); };
+    var a = 0, grow = reduce ? 1 : 0, last = 0, running = false, raf = 0;
+    function render() {
+      var R = el.clientWidth / 2 * 0.86, ca = Math.cos(a), sa = Math.sin(a), ct = Math.cos(0.42), st = Math.sin(0.42);
+      for (var i = 0; i < N; i++) {
+        var P = pts[i], x = P[0] * ca + P[2] * sa, z = -P[0] * sa + P[2] * ca, yy = P[1] * ct - z * st, z2 = P[1] * st + z * ct;
+        var depth = (z2 + 1) / 2, e = ease(grow * 1.75 - delay[i] * 0.75), sc = (0.45 + 0.75 * depth) * e;
+        dots[i].style.transform = "translate(" + (x * R * e) + "px," + (yy * R * e) + "px) scale(" + sc + ")";
+        dots[i].style.opacity = Math.min(1, e * 1.6) * (0.3 + 0.7 * depth);
+      }
+    }
+    function frame(t) {
+      if (!running) return;
+      var dt = last ? Math.min(64, t - last) : 16; last = t;
+      a += dt / 1000 * Math.PI * 2 / 3.6;      // one turn every 3.6 seconds, forever
+      if (grow < 1) grow = Math.min(1, grow + dt / 1400);
+      render();
+      raf = requestAnimationFrame(frame);
+    }
+    function start() { if (running || reduce) return; running = true; last = 0; raf = requestAnimationFrame(frame); }
+    function stop() { running = false; cancelAnimationFrame(raf); }
+    render();
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { es[0].isIntersecting ? start() : stop(); }).observe(el); else start();
+  }
+  window.NanniOrb = { mount: mountOrb };
+
   window.NanniTranslate = { mount: mount };
 })();

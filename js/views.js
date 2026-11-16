@@ -304,6 +304,7 @@
     if (locked) wireLock(slug, sec);
     // the hand-built navigation menu animation (Nanni) mounts into its box
     if (window.NanniNav) sec.querySelectorAll(".nnMount").forEach(function (m) { window.NanniNav.mount(m); });
+    if (window.NanniOrb) sec.querySelectorAll(".nnOrbMount").forEach(function (m) { window.NanniOrb.mount(m); });
     if (window.NanniTranslate) sec.querySelectorAll(".ntMount").forEach(function (m) { window.NanniTranslate.mount(m); });
     // the original page inside its frame. It loads the first time the card opens (not at page load). Its own header, footer and cursor are
     // hidden (the card has its own close button) and it shows as soon as its content is parsed, without waiting for every picture and script
