@@ -133,7 +133,7 @@
     // ---------------------------------------------------------------- Seeds
     seeds: {
       title: "Seeds",
-      bg: "#3BAA78",
+      bg: "#CEE1D6",
       logo: H + "seeds_projectImage.svg",
       pages: [
         pg("two",
