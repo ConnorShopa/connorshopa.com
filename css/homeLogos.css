@@ -8,7 +8,7 @@ nav .inline.big::-webkit-scrollbar{display:none}
 .inline.big li:not(.row-break):not(.no-slash):not(#_):not(#_)::after{content:"" !important;position:absolute;left:100%;top:50%;margin:-3px 0 0 19px;width:2px;height:6px;border-radius:2px;background:rgba(51,51,51,.4);display:block}
 nav .inline.big.dragging{cursor:grabbing}
 nav .inline.big.dragging a{pointer-events:none}
-.inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){box-sizing:border-box;flex:1;align-self:stretch;border:1px solid rgba(51,51,51,.12);border-radius:22px;padding:24px 30px;transition:border-color .25s ease,transform .25s ease}
+.inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){box-sizing:border-box;flex:1;align-self:stretch;border:1px solid rgba(51,51,51,.12);border-radius:22px;padding:24px 44px;justify-content:center;transition:border-color .25s ease,transform .25s ease}
 .inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_):hover{border-color:transparent;transform:scale(1.06)}
 .inline.big a.hl:not(#_):not(#_){display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:10px;padding:8px 10px;text-align:left}
 .inline.big a.hl:not(#_) .hlLogo{display:flex;align-items:center;gap:10px;height:auto;zoom:var(--z,1)}
