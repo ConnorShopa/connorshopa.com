@@ -1,0 +1,61 @@
+/* About and Contact live under Work on the main page. The page scrolls; the tabs stay on screen and jump to them. */
+
+/* the page scrolls again (redesign.css locks it for the old one-screen layout); a project being open still locks it */
+html:not(.view-open):not(#_),
+html:not(.view-open):not(#_) body:not(#_) {
+  height: auto;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: auto;
+}
+
+.page > .below:not(#_) { max-width: min(100%, 960px); gap: 0; }
+
+.homeSec:not(#_) {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+}
+.homeSec .pgText:not(#_) { width: 100%; max-width: none; max-height: none; overflow: visible; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.homeSec .lead { font-size: 34px; font-weight: 500; line-height: 1.2; margin: 0; max-width: 760px; }
+.homeSec .body { font-size: 26px; font-weight: 300; margin: 0; }
+.homeSec .eyebrow { font-size: 12px; letter-spacing: 0.08em; font-weight: 500; text-transform: uppercase; margin: 18px 0 0; color: var(--ink-soft); }
+.homeSec .aboutJobs { gap: 14px; align-items: center; text-align: center; width: fit-content; }
+.homeSec .aboutJobs li { flex-direction: row; justify-content: center; align-items: baseline; gap: 18px; text-align: center; }
+.homeSec .aboutJobs .company { font-size: 22px; }
+.homeSec .aboutJobs .role, .homeSec .aboutJobs .dates { font-size: 18px; }
+
+@media (max-width: 900px) {
+  .homeSec .lead { font-size: 28px; }
+  .homeSec .body { font-size: 22px; }
+}
+@media (max-width: 700px) {
+  .homeSec:not(#_) { padding: 24px 12px 32px; }
+  .homeSec .lead { font-size: 22px; }
+  .homeSec .body { font-size: 17px; }
+  .homeSec .aboutJobs .company { font-size: 17px; }
+  .homeSec .aboutJobs .role, .homeSec .aboutJobs .dates { font-size: 14px; }
+  .homeSec .aboutJobs { width: 100%; }
+  .homeSec .aboutJobs li { flex-direction: column; align-items: center; gap: 2px; width: 100%; }
+  .homeSec .aboutJobs span { display: block; text-align: center; }
+}
+
+/* the tabs stay on screen once the page has scrolled past them */
+.filters.stuck:not(#_) {
+  position: fixed;
+  top: 34px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  margin: 0;
+}
+.filtersSpacer { visibility: hidden; flex: none; }
+
+/* less empty screen between the gallery and the sections under it */
+@media (min-width: 701px) { .page > .below:not(#_) { margin-top: -150px; } }

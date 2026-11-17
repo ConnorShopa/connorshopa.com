@@ -1,79 +1,126 @@
-// About and Contact: no card, the text takes the gallery's place in the page. The links pop out, the text pops in;
-// Work brings the links back.
+// About and Contact are sections under Work on the main page. The tabs stay on screen (they stick to the top once the
+// page has scrolled past them), jump to their section on click, and light up for whichever section is in view.
 (function () {
-  if (typeof gsap === "undefined" || !window.PANELS) return;
-  var list = document.getElementById("projectList");
-  var nav = list && list.parentElement;
-  if (!nav) return;
-  var chips = document.querySelectorAll(".filters .pill");
+  if (!window.PANELS) return;
+  var below = document.querySelector(".below");
+  var nav = document.querySelector(".hero > nav");
+  // phones keep the fixed header and the tile grid in a scrolling area of its own: the sections go inside that
+  var phone = function () { return window.innerWidth <= 700; };
+  var scroller = function () { return phone() ? nav : null; };
+  var chips = Array.prototype.slice.call(document.querySelectorAll(".filters .pill"));
+  var filters = document.querySelector(".filters");
+  if (!below || !filters || !chips.length) return;
+  var root = document.documentElement;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var t = function (s) { return reduce ? 0 : s; };
 
-  var panel = document.createElement("div");
-  panel.className = "panelText";
-  panel.hidden = true;
-  nav.appendChild(panel);
+  var secs = {};
+  ["about", "contact"].forEach(function (name) {
+    var sec = document.createElement("section");
+    sec.className = "homeSec";
+    sec.id = name;
+    sec.setAttribute("aria-label", window.PANELS[name].title);
+    sec.innerHTML = window.PANELS[name].pages[0].html;
+    (phone() && nav ? nav : below).appendChild(sec);
+    if (window.bindHover) window.bindHover(sec);
+    secs[name] = sec;
+    // line by line as the section scrolls into view: a small rise and a fade, once
+    if (!reduce && window.IntersectionObserver && typeof gsap !== "undefined") {
+      var lines = sec.querySelectorAll(".pgText > p, .aboutJobs li, .contactCol2 li");
+      gsap.set(lines, { y: 12, opacity: 0 });
+      var io = new IntersectionObserver(function (es) {
+        if (!es[0].isIntersecting) return;
+        io.disconnect();
+        gsap.to(lines, { y: 0, opacity: 1, duration: 0.4, ease: "power2.out", stagger: 0.07, clearProps: "transform,opacity" });
+      }, { threshold: 0.2 });
+      io.observe(sec);
+    }
+  });
 
-  var current = null; // "about", "contact" or null (Work)
-  function links() { return Array.prototype.filter.call(list.children, function (li) { return !li.classList.contains("row-break"); }); }
   function press(name) {
     chips.forEach(function (c) {
       var on = name ? c.getAttribute("data-panel") === name : c.hasAttribute("data-work");
       c.setAttribute("aria-pressed", on ? "true" : "false");
     });
   }
+  function current() { var c = chips.filter(function (c) { return c.getAttribute("aria-pressed") === "true"; })[0]; return c && c.hasAttribute("data-panel") ? c.getAttribute("data-panel") : null; }
+
+  // ---- the tabs stay on screen: once the page has scrolled past them they pin to the top ----
+  var spacer = null, naturalTop = 0;
+  function measure() { naturalTop = (spacer || filters).getBoundingClientRect().top + window.pageYOffset; }
+  function stick() {
+    if (phone()) { if (spacer) { filters.classList.remove("stuck"); spacer.remove(); spacer = null; } return; }
+    var should = window.pageYOffset > naturalTop - 34 && !root.classList.contains("view-open");
+    if (should && !spacer) {
+      measure();
+      var cs = getComputedStyle(filters), r = filters.getBoundingClientRect();
+      spacer = document.createElement("div");
+      spacer.className = "filtersSpacer";
+      spacer.style.height = r.height + "px";
+      spacer.style.marginTop = cs.marginTop;
+      filters.parentNode.insertBefore(spacer, filters);
+      filters.classList.add("stuck");
+    } else if (!should && spacer && window.pageYOffset <= naturalTop - 34) {
+      filters.classList.remove("stuck");
+      spacer.remove(); spacer = null;
+    }
+  }
+  measure();
+  window.addEventListener("resize", function () {
+    var home = phone() && nav ? nav : below;
+    Object.keys(secs).forEach(function (n) { if (secs[n].parentNode !== home) home.appendChild(secs[n]); });
+    if (!spacer) measure(); else { var s = spacer; filters.classList.remove("stuck"); s.remove(); spacer = null; measure(); stick(); } });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (!spacer) measure(); });
+
+  // ---- which section is in view lights up its tab (not while a tab click is still scrolling) ----
+  var steering = false, steerTimer = 0, lastY = -1;
+  function spy() {
+    stick();
+    if (steering || root.classList.contains("view-open")) return;
+    var sc = scroller(), base = sc ? sc.getBoundingClientRect().top : 0;
+    var probe = base + (sc ? sc.clientHeight : window.innerHeight) * 0.45, name = null;
+    ["about", "contact"].forEach(function (n) { if (secs[n].getBoundingClientRect().top <= probe) name = n; });
+    // at the very bottom the last section is the one in view, even when it is too short to reach the probe line
+    if (!sc && window.pageYOffset > 0 && window.pageYOffset + window.innerHeight >= document.documentElement.scrollHeight - 2) name = "contact";
+    if (sc && sc.scrollTop > 0 && sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 2) name = "contact";
+    if (name !== current()) press(name);
+  }
+  var tick = false;
+  var onScroll = function () {
+    if (steering) { clearTimeout(steerTimer); steerTimer = setTimeout(function () { steering = false; spy(); }, 140); }
+    if (!tick) { tick = true; requestAnimationFrame(function () { tick = false; spy(); }); }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  if (nav) nav.addEventListener("scroll", onScroll, { passive: true });
+  // the wheel or a touch takes the steering back from a scroll the tabs started
+  ["wheel", "touchstart"].forEach(function (ev) { window.addEventListener(ev, function () { steering = false; }, { passive: true }); });
 
   function go(name) {
-    if (name === current) return;
-    var from = current;
-    current = name;
     press(name);
-    gsap.killTweensOf(panel);
-    gsap.killTweensOf(panel.children);
-    gsap.killTweensOf(panel.querySelectorAll(".pgText > p, .aboutJobs li, .contactCol2 li"));
-    gsap.killTweensOf(links());
-    var showPanel = function () {
-      if (current !== name || !name) return;
-      panel.innerHTML = window.PANELS[name].pages[0].html;
-      panel.classList.toggle("sketch", name === "sketchbook");
-      panel.hidden = false;
-      if (name === "sketchbook") { if (window.initJustified) window.initJustified(panel); if (window.initLotties) window.initLotties(panel); }
-      if (window.bindHover) window.bindHover(panel);
-      // line by line from the top: a small rise and a fade, no bounce
-      var lines = panel.querySelectorAll(".pgText > p, .aboutJobs li, .contactCol2 li");
-      gsap.fromTo(lines, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: t(0.3), ease: "power2.out", stagger: t(0.05), clearProps: "transform,opacity" });
-    };
-    var showLinks = function () {
-      if (current) return;
-      panel.hidden = true;
-      list.style.visibility = "";
-      gsap.fromTo(links(), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: t(0.25), ease: "power2.out", stagger: t(0.02), clearProps: "transform,opacity" });
-    };
-    var hidePanel = function (done) {
-      if (panel.hidden) { done(); return; }
-      gsap.to(panel.children, { opacity: 0, y: -6, duration: t(0.12), ease: "power2.in", onComplete: function () { panel.hidden = true; gsap.set(panel.children, { clearProps: "transform,opacity" }); done(); } });
-    };
-    if (!from) { // gallery -> panel
-      gsap.to(links(), { scale: 0, opacity: 0, duration: t(0.14), ease: "power2.in", stagger: t(0.008), onComplete: function () { list.style.visibility = "hidden"; showPanel(); } });
-    } else {
-      hidePanel(name ? showPanel : showLinks);
-    }
+    var sc = scroller();
+    var clear = sc ? 8 : 100; // room above the section for the pinned tabs
+    var y = !name ? 0 : sc ? sc.scrollTop + secs[name].getBoundingClientRect().top - sc.getBoundingClientRect().top : secs[name].getBoundingClientRect().top + window.pageYOffset;
+    if (name) y = Math.max(0, y - clear);
+    steering = true;
+    clearTimeout(steerTimer);
+    steerTimer = setTimeout(function () { steering = false; spy(); }, 900); // in case the page is already there and no scroll event follows
+    (sc || window).scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
   }
 
   chips.forEach(function (c) {
     c.addEventListener("click", function () {
       var target = c.hasAttribute("data-work") ? null : c.getAttribute("data-panel");
-      var openView = document.documentElement.classList.contains("view-open") && document.querySelector(".viewClose.floating:not([hidden]), .view:not([hidden]) .viewClose");
-      if (!openView || !target) { go(target); return; }
+      var openView = root.classList.contains("view-open") && document.querySelector(".viewClose.floating:not([hidden]), .view:not([hidden]) .viewClose");
+      if (!openView) { go(target); return; }
       // a project is open: close it first, then move to the new tab once it has finished closing
       openView.click();
       var tries = 0;
       (function wait() {
-        if (!document.documentElement.classList.contains("view-open") || ++tries > 150) go(target);
+        if (!root.classList.contains("view-open") || ++tries > 150) go(target);
         else requestAnimationFrame(wait);
       })();
     });
   });
+  spy();
 })();
 
 // AltQ opens in a background tab: the page keeps focus. Browsers decide this themselves, so it is done the way a
@@ -104,32 +151,6 @@ document.addEventListener("input", function (e) {
   var btn = inp.form && inp.form.querySelector(".earlyBtn");
   if (btn) btn.disabled = !(inp.value.trim() && inp.validity.valid);
 });
-
-// Scrolling the main view loops through the tabs: Work, About, Contact, and round again (a project being open
-// takes the wheel for itself; phones keep their normal page scroll)
-(function () {
-  var order = [null, "about", "contact"];
-  var lastStep = 0, lastEvt = 0, lastAbs = 0;
-  window.addEventListener("wheel", function (e) {
-    if (document.documentElement.classList.contains("view-open")) return;
-    if (window.innerWidth <= 700 || Math.abs(e.deltaY) < 12) return;
-    // trackpad momentum keeps sending decaying events after a flick: those are ignored, but a new flick (a pause, or a
-    // stronger push than the last event) goes through straight away, even while the last change is still animating
-    var nowT = performance.now(), abs = Math.abs(e.deltaY);
-    var fresh = nowT - lastEvt > 140 || abs > lastAbs + 6;
-    lastEvt = nowT; lastAbs = abs;
-    if (!fresh || nowT - lastStep < 250) return;
-    lastStep = nowT;
-    if (document.querySelector(".filters .pill[data-panel='sketchbook'][aria-pressed='true']")) return; // the sketchbook is a long page: the wheel scrolls it
-    if (e.target.closest && e.target.closest(".panelText a")) { /* still counts */ }
-    var chip = document.querySelector(".filters .pill[aria-pressed='true']");
-    var now = chip && chip.hasAttribute("data-panel") ? chip.getAttribute("data-panel") : null;
-    var i = order.indexOf(now);
-    var next = order[(i + (e.deltaY > 0 ? 1 : -1) + order.length) % order.length];
-    var target = next ? document.querySelector('.filters .pill[data-panel="' + next + '"]') : document.querySelector(".filters .pill[data-work]");
-    if (target) target.click();
-  }, { passive: true });
-})();
 
 // The dark highlight behind the active tab pops in softly on whichever tab becomes active (click, scroll or
 // closing a project)
