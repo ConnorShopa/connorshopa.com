@@ -29,6 +29,8 @@
     current = name;
     press(name);
     gsap.killTweensOf(panel);
+    gsap.killTweensOf(panel.children);
+    gsap.killTweensOf(panel.querySelectorAll(".pgText > p, .aboutJobs li, .contactCol2 li"));
     gsap.killTweensOf(links());
     var showPanel = function () {
       if (current !== name || !name) return;
@@ -39,20 +41,20 @@
       if (window.bindHover) window.bindHover(panel);
       // line by line from the top: a small rise and a fade, no bounce
       var lines = panel.querySelectorAll(".pgText > p, .aboutJobs li, .contactCol2 li");
-      gsap.fromTo(lines, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: t(0.45), ease: "power2.out", stagger: t(0.09), clearProps: "transform,opacity" });
+      gsap.fromTo(lines, { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: t(0.3), ease: "power2.out", stagger: t(0.05), clearProps: "transform,opacity" });
     };
     var showLinks = function () {
       if (current) return;
       panel.hidden = true;
       list.style.visibility = "";
-      gsap.fromTo(links(), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: t(0.3), ease: "power2.out", stagger: t(0.03), clearProps: "transform,opacity" });
+      gsap.fromTo(links(), { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: t(0.25), ease: "power2.out", stagger: t(0.02), clearProps: "transform,opacity" });
     };
     var hidePanel = function (done) {
       if (panel.hidden) { done(); return; }
-      gsap.to(panel.children, { opacity: 0, y: -6, duration: t(0.2), ease: "power2.in", onComplete: function () { panel.hidden = true; gsap.set(panel.children, { clearProps: "transform,opacity" }); done(); } });
+      gsap.to(panel.children, { opacity: 0, y: -6, duration: t(0.12), ease: "power2.in", onComplete: function () { panel.hidden = true; gsap.set(panel.children, { clearProps: "transform,opacity" }); done(); } });
     };
     if (!from) { // gallery -> panel
-      gsap.to(links(), { scale: 0, opacity: 0, duration: t(0.2), ease: "power2.in", stagger: t(0.015), onComplete: function () { list.style.visibility = "hidden"; showPanel(); } });
+      gsap.to(links(), { scale: 0, opacity: 0, duration: t(0.14), ease: "power2.in", stagger: t(0.008), onComplete: function () { list.style.visibility = "hidden"; showPanel(); } });
     } else {
       hidePanel(name ? showPanel : showLinks);
     }
@@ -107,20 +109,25 @@ document.addEventListener("input", function (e) {
 // takes the wheel for itself; phones keep their normal page scroll)
 (function () {
   var order = [null, "about", "contact"];
-  var busy = false;
+  var lastStep = 0, lastEvt = 0, lastAbs = 0;
   window.addEventListener("wheel", function (e) {
     if (document.documentElement.classList.contains("view-open")) return;
-    if (window.innerWidth <= 700 || Math.abs(e.deltaY) < 12 || busy) return;
+    if (window.innerWidth <= 700 || Math.abs(e.deltaY) < 12) return;
+    // trackpad momentum keeps sending decaying events after a flick: those are ignored, but a new flick (a pause, or a
+    // stronger push than the last event) goes through straight away, even while the last change is still animating
+    var nowT = performance.now(), abs = Math.abs(e.deltaY);
+    var fresh = nowT - lastEvt > 140 || abs > lastAbs + 6;
+    lastEvt = nowT; lastAbs = abs;
+    if (!fresh || nowT - lastStep < 250) return;
+    lastStep = nowT;
     if (document.querySelector(".filters .pill[data-panel='sketchbook'][aria-pressed='true']")) return; // the sketchbook is a long page: the wheel scrolls it
     if (e.target.closest && e.target.closest(".panelText a")) { /* still counts */ }
     var chip = document.querySelector(".filters .pill[aria-pressed='true']");
     var now = chip && chip.hasAttribute("data-panel") ? chip.getAttribute("data-panel") : null;
     var i = order.indexOf(now);
     var next = order[(i + (e.deltaY > 0 ? 1 : -1) + order.length) % order.length];
-    busy = true;
     var target = next ? document.querySelector('.filters .pill[data-panel="' + next + '"]') : document.querySelector(".filters .pill[data-work]");
     if (target) target.click();
-    setTimeout(function () { busy = false; }, 1100); // one step per flick: trackpad momentum keeps sending events
   }, { passive: true });
 })();
 
@@ -147,11 +154,11 @@ document.addEventListener("input", function (e) {
         var ghost = bg.cloneNode(true);
         group.insertBefore(ghost, bg);
         gsap.set(ghost, { x: gsap.getProperty(bg, "x"), y: gsap.getProperty(bg, "y"), width: gsap.getProperty(bg, "width"), height: gsap.getProperty(bg, "height"), scale: gsap.getProperty(bg, "scale"), autoAlpha: gsap.getProperty(bg, "opacity"), transformOrigin: "50% 50%" });
-        gsap.to(ghost, { scale: 0.6, autoAlpha: 0, duration: 0.25, ease: "power2.in", onComplete: function () { ghost.remove(); } });
+        gsap.to(ghost, { scale: 0.6, autoAlpha: 0, duration: 0.18, ease: "power2.in", onComplete: function () { ghost.remove(); } });
       }
       gsap.killTweensOf(bg);
       gsap.set(bg, to);
-      gsap.fromTo(bg, { scale: 0.6, autoAlpha: 0, transformOrigin: "50% 50%" }, { scale: 1, autoAlpha: 1, duration: 0.4, ease: "back.out(1.7)" });
+      gsap.fromTo(bg, { scale: 0.6, autoAlpha: 0, transformOrigin: "50% 50%" }, { scale: 1, autoAlpha: 1, duration: 0.28, ease: "back.out(1.7)" });
     }
   }
   new MutationObserver(function () { place(true); }).observe(group, { attributes: true, attributeFilter: ["aria-pressed"], subtree: true });
