@@ -64,14 +64,14 @@ html:not(.view-open):not(#_) body:not(#_) {
 #contact.homeSec:not(#_) { margin-top: 88px; }
 @media (max-width: 700px) { #contact.homeSec:not(#_) { margin-top: 56px; } }
 
-/* About sits on a soft grey card whose top edge peeks in from the bottom of the first screen */
+/* About sits on a soft grey card whose top edge peeks in from the bottom of the first screen. On desktop the grey is its own
+   layer (.aboutBack, kept the size of the section by js/panels.js) so the hover bubble can show above it; phones paint it on the section */
 #about.homeSec:not(#_) {
   width: min(100%, 1100px);
   box-sizing: border-box;
-  background: #F4F4F4;
-  border-radius: 40px;
-  padding: 56px 40px 64px;
+  padding: 56px 80px 64px;
 }
+.aboutBack { position: absolute; z-index: -1; background: #F9F9F9; border-radius: 40px; pointer-events: none; display: none; }
 @media (max-width: 700px) {
-  #about.homeSec:not(#_) { width: calc(100% - 24px); border-radius: 28px; padding: 36px 16px 44px; }
+  #about.homeSec:not(#_) { width: calc(100% - 24px); margin-left: auto; margin-right: auto; background: #F9F9F9; border-radius: 28px; padding: 36px 32px 44px; }
 }

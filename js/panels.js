@@ -36,6 +36,28 @@
     }
   });
 
+  // The grey behind About is drawn on its own layer UNDER the hover bubble (the bubble sits under the page, so a grey painted
+  // by the section itself would hide it). It follows the section's box; phones (no hover bubble) keep the grey on the section.
+  var back = document.createElement("div");
+  back.className = "aboutBack";
+  back.setAttribute("aria-hidden", "true");
+  document.body.appendChild(back);
+  function syncBack() {
+    var sec = secs.about;
+    if (!sec || phone()) { back.style.display = "none"; return; }
+    var r = sec.getBoundingClientRect();
+    back.style.display = "block";
+    back.style.left = (r.left + window.pageXOffset) + "px";
+    back.style.top = (r.top + window.pageYOffset) + "px";
+    back.style.width = r.width + "px";
+    back.style.height = r.height + "px";
+  }
+  if (window.ResizeObserver) { var bro = new ResizeObserver(syncBack); bro.observe(secs.about); bro.observe(document.body); }
+  window.addEventListener("resize", syncBack);
+  window.addEventListener("load", syncBack);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncBack);
+  syncBack();
+
   function press(name) {
     chips.forEach(function (c) {
       var on = name ? c.getAttribute("data-panel") === name : c.hasAttribute("data-work");
