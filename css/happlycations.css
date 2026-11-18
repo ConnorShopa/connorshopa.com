@@ -193,12 +193,34 @@ body { overflow: auto; }
   background: conic-gradient(from var(--landA), transparent 0 40%, color-mix(in srgb, var(--ac) 55%, transparent) 70%, var(--ac) 98%, transparent 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   filter: drop-shadow(0 0 7px var(--ac)) drop-shadow(0 0 16px color-mix(in srgb, var(--ac) 60%, transparent)); }
-.landApps li:hover .landRing, .landApps li:focus-within .landRing { opacity: 1; animation: landSpin 1.05s infinite; }
-/* a quick whip round two corners, then it eases off and crawls over the opposite one before whipping again */
+.landApps li:hover .landRing, .landApps li:focus-within .landRing { opacity: 1; animation: landSpin 1.25s linear infinite; }
+/* one smooth speed curve: it swings quickly round one side, eases right down on the opposite one, and builds back up with no jolts (linear timing between close-packed stops) */
 @keyframes landSpin {
-  0%   { --landA: 0deg;   animation-timing-function: cubic-bezier(.6, 0, .25, 1); }
-  38%  { --landA: 215deg; animation-timing-function: cubic-bezier(.3, .2, .6, 1); }
-  100% { --landA: 360deg; }
+  0% { --landA: 0.0deg; }
+  4% { --landA: 5.8deg; }
+  8% { --landA: 12.2deg; }
+  12% { --landA: 19.9deg; }
+  17% { --landA: 29.2deg; }
+  21% { --landA: 40.7deg; }
+  25% { --landA: 54.5deg; }
+  29% { --landA: 70.7deg; }
+  33% { --landA: 89.2deg; }
+  38% { --landA: 109.9deg; }
+  42% { --landA: 132.2deg; }
+  46% { --landA: 155.8deg; }
+  50% { --landA: 180.0deg; }
+  54% { --landA: 204.2deg; }
+  58% { --landA: 227.8deg; }
+  62% { --landA: 250.1deg; }
+  67% { --landA: 270.8deg; }
+  71% { --landA: 289.3deg; }
+  75% { --landA: 305.5deg; }
+  79% { --landA: 319.3deg; }
+  83% { --landA: 330.8deg; }
+  88% { --landA: 340.1deg; }
+  92% { --landA: 347.8deg; }
+  96% { --landA: 354.2deg; }
+  100% { --landA: 360.0deg; }
 }
 .landApps li:hover .landApp img, .landApps li:focus-within .landApp img { filter: drop-shadow(0 8px 22px color-mix(in srgb, var(--ac) 45%, transparent)); }
 .landDl { position: absolute; top: 100%; left: 50%; transform: translate(-50%, -10px); opacity: 0; pointer-events: none; white-space: nowrap; box-sizing: border-box;
