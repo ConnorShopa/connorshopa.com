@@ -95,6 +95,23 @@
 
   // ---- which section is in view lights up its tab (not while a tab click is still scrolling) ----
   var steering = false, steerTimer = 0, lastY = -1;
+  // ---- phones: the name and tagline scroll up and away with the page, the tabs stay pinned at the top ----
+  var hdr = document.querySelector(".hero > header"), introTop = document.querySelector(".introTop");
+  var STUCK_TOP = 12; // where the tabs rest at the top of a phone screen
+  function slideHeader() {
+    if (!hdr || !introTop) return;
+    if (!phone() || !nav) { introTop.style.transform = introTop.style.opacity = filters.style.transform = ""; root.classList.remove("navScrolled"); return; }
+    var travel = Math.max(1, filters.offsetTop - STUCK_TOP);
+    var d = Math.min(Math.max(nav.scrollTop, 0), travel);
+    introTop.style.transform = "translateY(" + (-d) + "px)";
+    introTop.style.opacity = String(Math.max(0, 1 - d / (travel * 0.7)));
+    filters.style.transform = "translateY(" + (-d) + "px)";
+    root.classList.toggle("navScrolled", nav.scrollTop > 4);
+  }
+  if (nav) nav.addEventListener("scroll", function () { requestAnimationFrame(slideHeader); }, { passive: true });
+  window.addEventListener("resize", slideHeader);
+  slideHeader();
+
   function spy() {
     stick();
     if (steering || root.classList.contains("view-open")) return;
@@ -119,7 +136,7 @@
   function go(name) {
     press(name);
     var sc = scroller();
-    var clear = sc ? 8 : 100; // room above the section for the pinned tabs
+    var clear = sc ? 64 : 100; // room above the section for the pinned tabs
     var y = !name ? 0 : sc ? sc.scrollTop + secs[name].getBoundingClientRect().top - sc.getBoundingClientRect().top : secs[name].getBoundingClientRect().top + window.pageYOffset;
     if (name) y = Math.max(0, y - clear);
     steering = true;

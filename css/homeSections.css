@@ -75,3 +75,13 @@ html:not(.view-open):not(#_) body:not(#_) {
 @media (max-width: 700px) {
   #about.homeSec:not(#_) { width: calc(100% - 24px); margin-left: auto; margin-right: auto; background: #F9F9F9; border-radius: 28px; padding: 36px 32px 44px; }
 }
+
+/* phones: the page scrolls under the header; the name and tagline slide up and away (js/panels.js), the tabs stay pinned at the top */
+@media (max-width: 700px) {
+  .hero > nav:not(#_):not(#_) { top: 0; padding-top: var(--hdrH, 190px); box-sizing: border-box; }
+  .hero > header:not(#_):not(#_) { background: none; pointer-events: none; }
+  .hero > header .filters .pill { pointer-events: auto; }
+  .hero > header::before { content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: -18px; z-index: -1; opacity: 0; transition: opacity .2s ease;
+    background: linear-gradient(var(--bg) 66%, rgba(255, 255, 255, 0)); pointer-events: none; }
+  html.navScrolled .hero > header::before { opacity: 1; }
+}
