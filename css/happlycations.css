@@ -149,6 +149,7 @@ body { overflow: auto; }
 .landIcon .tile { place-items: center; background: none; border: 0; box-shadow: none; } /* no box: just the hand */
 .landIcon .tile i { display: block; height: 62%; aspect-ratio: 91 / 135; background: #111; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
 .landIcon[data-skin="norm"] .tile { display: grid; }
+.landIcon .tile i { transform: translateX(calc(var(--lw) * 0.3)); } /* the hand sits closer to the wordmark (the app icons still fill the whole box) */
 .landIcon[data-skin="drawl"] .i-drawl, .landIcon[data-skin="sheep"] .i-sheep, .landIcon[data-skin="habbot"] .i-habbot { display: block; }
 .landWordBox { position: relative; display: block; flex: none; width: calc(var(--lw) * 7.85); aspect-ratio: 418 / 70; }
 .landLtrs { position: absolute; inset: 0; display: block; }
