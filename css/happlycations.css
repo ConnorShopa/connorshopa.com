@@ -193,8 +193,13 @@ body { overflow: auto; }
   background: conic-gradient(from var(--landA), transparent 0 40%, color-mix(in srgb, var(--ac) 55%, transparent) 70%, var(--ac) 98%, transparent 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
   filter: drop-shadow(0 0 7px var(--ac)) drop-shadow(0 0 16px color-mix(in srgb, var(--ac) 60%, transparent)); }
-.landApps li:hover .landRing, .landApps li:focus-within .landRing { opacity: 1; animation: landSpin 1.5s linear infinite; }
-@keyframes landSpin { to { --landA: 360deg; } }
+.landApps li:hover .landRing, .landApps li:focus-within .landRing { opacity: 1; animation: landSpin 1.05s infinite; }
+/* a quick whip round two corners, then it eases off and crawls over the opposite one before whipping again */
+@keyframes landSpin {
+  0%   { --landA: 0deg;   animation-timing-function: cubic-bezier(.6, 0, .25, 1); }
+  38%  { --landA: 215deg; animation-timing-function: cubic-bezier(.3, .2, .6, 1); }
+  100% { --landA: 360deg; }
+}
 .landApps li:hover .landApp img, .landApps li:focus-within .landApp img { filter: drop-shadow(0 8px 22px color-mix(in srgb, var(--ac) 45%, transparent)); }
 .landDl { position: absolute; top: 100%; left: 50%; transform: translate(-50%, -10px); opacity: 0; pointer-events: none; white-space: nowrap; box-sizing: border-box;
   border-top: 12px solid transparent; background-clip: padding-box; /* the transparent strip keeps the hover unbroken between the name and the button */
