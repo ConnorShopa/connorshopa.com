@@ -183,3 +183,26 @@ body { overflow: auto; }
   .landApps { gap: 22px; }
   .landNav { font-size: 16px; gap: 11px; }
 }
+
+/* hovering an app: a glowing arc circles its icon (in the app's colour) and a download button slides down under its name */
+@property --landA { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.landApps li { position: relative; }
+.landTile { position: relative; display: block; width: clamp(64px, 6.4vw, 128px); aspect-ratio: 1; flex: none; }
+.landTile img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.landRing { position: absolute; inset: -9px; border-radius: 30%; padding: 3px; pointer-events: none; opacity: 0; transition: opacity .3s ease;
+  background: conic-gradient(from var(--landA), transparent 0 40%, color-mix(in srgb, var(--ac) 55%, transparent) 70%, var(--ac) 98%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  filter: drop-shadow(0 0 7px var(--ac)) drop-shadow(0 0 16px color-mix(in srgb, var(--ac) 60%, transparent)); }
+.landApps li:hover .landRing, .landApps li:focus-within .landRing { opacity: 1; animation: landSpin 1.5s linear infinite; }
+@keyframes landSpin { to { --landA: 360deg; } }
+.landApps li:hover .landApp img, .landApps li:focus-within .landApp img { filter: drop-shadow(0 8px 22px color-mix(in srgb, var(--ac) 45%, transparent)); }
+.landDl { position: absolute; top: 100%; left: 50%; transform: translate(-50%, -10px); opacity: 0; pointer-events: none; white-space: nowrap; box-sizing: border-box;
+  border-top: 12px solid transparent; background-clip: padding-box; /* the transparent strip keeps the hover unbroken between the name and the button */
+  padding: 9px 20px; border-radius: 999px; background-color: var(--ac); color: var(--on, #fff); font: 500 clamp(13px, 1vw, 16px)/1 "Host Grotesk", sans-serif; text-decoration: none;
+  transition: opacity .25s ease, transform .35s cubic-bezier(.22, 1, .36, 1); }
+.landDl::before { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.landApps li:hover .landDl, .landApps li:focus-within .landDl { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.landDl.soon { opacity: 0; background-color: transparent; color: var(--ac); box-shadow: inset 0 0 0 1.5px var(--ac); cursor: default; }
+.landApps li:hover .landDl.soon, .landApps li:focus-within .landDl.soon { opacity: .85; }
+a.landDl:hover { filter: brightness(1.08); }
+@media (prefers-reduced-motion: reduce) { .landApps li:hover .landRing, .landApps li:focus-within .landRing { animation: none; } .landDl { transition: opacity .2s ease; transform: translate(-50%, 0); } }
