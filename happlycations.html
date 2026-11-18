@@ -99,7 +99,7 @@
                 </div>
                 <div class="happlyApps happlyCtaStack">
                     <div class="happlyCtaSet on" data-app="drawl"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download drawl</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
-                    <div class="happlyCtaSet" data-app="sheep"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="https://testflight.apple.com/join/qkHb7CVH" target="_blank" rel="noopener">Download sheep</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
+                    <div class="happlyCtaSet" data-app="sheep"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="https://apps.apple.com/us/app/sheep-counting-words/id6832144088" target="_blank" rel="noopener">Download sheep</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
                     <div class="happlyCtaSet" data-app="habbot"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download habbot</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
                 </div>
             </div>
@@ -231,9 +231,9 @@
             function rowLeft() { page.removeAttribute("data-hover"); setSkin("norm"); }
             landRow.addEventListener("mouseleave", rowLeft);
             landRow.addEventListener("focusout", function (e) { if (!e.relatedTarget || !landRow.contains(e.relatedTarget)) rowLeft(); });
-            // an app's icon goes straight to the app (no nested page): Sheep to its TestFlight. Drawl and Habbot aren't out yet, so they
+            // an app's icon goes straight to the app (no nested page): Sheep to the App Store. Drawl and Habbot aren't out yet, so they
             // have no link (add theirs to STORE when they are)
-            var STORE = { sheep: "https://testflight.apple.com/join/qkHb7CVH" };
+            var STORE = { sheep: "https://apps.apple.com/us/app/sheep-counting-words/id6832144088" };
             document.querySelectorAll(".landApp").forEach(function (b) {
                 if (!STORE[b.dataset.app]) b.style.cursor = "default";
                 b.addEventListener("click", function () {
