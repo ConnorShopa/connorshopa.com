@@ -57,6 +57,14 @@ html:not(.view-open):not(#_) body:not(#_) {
 }
 .filtersSpacer { visibility: hidden; flex: none; }
 
+/* once the tabs are pinned (desktop: .stuck, phones: .pinned) they sit on a white pill with a soft shadow, so they read above whatever scrolls under them */
+.filters { transition: background-color .2s ease, box-shadow .2s ease; }
+.filters.stuck:not(#_), .filters.pinned:not(#_) {
+  background-color: #fff;
+  border-radius: 999px;
+  box-shadow: 0 0 0 7px #fff, 0 8px 26px rgba(47, 39, 37, 0.18), 0 2px 6px rgba(47, 39, 37, 0.1);
+}
+
 /* less empty screen between the gallery and the sections under it */
 @media (min-width: 701px) { .page > .below:not(#_) { margin-top: -180px; } }
 
@@ -81,7 +89,4 @@ html:not(.view-open):not(#_) body:not(#_) {
   .hero > nav:not(#_):not(#_) { top: 0; padding-top: var(--hdrH, 190px); box-sizing: border-box; }
   .hero > header:not(#_):not(#_) { background: none; pointer-events: none; }
   .hero > header .filters .pill { pointer-events: auto; }
-  .hero > header::before { content: ""; position: absolute; left: 0; right: 0; top: 0; bottom: -18px; z-index: -1; opacity: 0; transition: opacity .2s ease;
-    background: linear-gradient(var(--bg) 66%, rgba(255, 255, 255, 0)); pointer-events: none; }
-  html.navScrolled .hero > header::before { opacity: 1; }
 }

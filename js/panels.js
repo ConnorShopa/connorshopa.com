@@ -100,13 +100,14 @@
   var STUCK_TOP = 12; // where the tabs rest at the top of a phone screen
   function slideHeader() {
     if (!hdr || !introTop) return;
-    if (!phone() || !nav) { introTop.style.transform = introTop.style.opacity = filters.style.transform = ""; root.classList.remove("navScrolled"); return; }
+    if (!phone() || !nav) { introTop.style.transform = introTop.style.opacity = filters.style.transform = ""; root.classList.remove("navScrolled"); filters.classList.remove("pinned"); return; }
     var travel = Math.max(1, filters.offsetTop - STUCK_TOP);
     var d = Math.min(Math.max(nav.scrollTop, 0), travel);
     introTop.style.transform = "translateY(" + (-d) + "px)";
     introTop.style.opacity = String(Math.max(0, 1 - d / (travel * 0.7)));
     filters.style.transform = "translateY(" + (-d) + "px)";
     root.classList.toggle("navScrolled", nav.scrollTop > 4);
+    filters.classList.toggle("pinned", d >= travel - 0.5);
   }
   if (nav) nav.addEventListener("scroll", function () { requestAnimationFrame(slideHeader); }, { passive: true });
   window.addEventListener("resize", slideHeader);
