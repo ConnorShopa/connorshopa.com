@@ -1,11 +1,16 @@
 /* About and Contact live under Work on the main page. The page scrolls; the tabs stay on screen and jump to them. */
 
 /* the page scrolls again (redesign.css locks it for the old one-screen layout); a project being open still locks it */
-html:not(.view-open):not(#_),
-html:not(.view-open):not(#_) body:not(#_) {
+/* only the root scrolls (an overflow value on html AND body makes two scroll containers, which Safari handles badly) */
+html:not(.view-open):not(#_) {
   height: auto;
   overflow-y: auto !important;
   overflow-x: hidden !important;
+  overscroll-behavior: auto;
+}
+html:not(.view-open):not(#_) body:not(#_) {
+  height: auto;
+  overflow: visible !important;
   overscroll-behavior: auto;
 }
 
@@ -91,3 +96,6 @@ html:not(.view-open):not(#_) body:not(#_) {
   .hero > header:not(#_):not(#_) { background: none; pointer-events: none; }
   .hero > header .filters .pill { pointer-events: auto; }
 }
+
+/* each logo's shadow is painted once on its own layer, so scrolling doesn't re-draw 14 filtered elements */
+#projectList li > a:not(#_):not(#_) .hlLogo { will-change: transform; }

@@ -108,10 +108,25 @@
   // ---- phones: the name and tagline scroll up and away with the page, the tabs stay pinned at the top ----
   var hdr = document.querySelector(".hero > header"), introTop = document.querySelector(".introTop");
   var STUCK_TOP = 12; // where the tabs rest at the top of a phone screen
+  // Layout numbers are worked out once (and again when the layout changes), not on every scroll event: reading them mid-scroll
+  // forces a layout each frame, which is what makes scrolling stutter in Safari.
+  var tops = { about: 0, contact: 0 }, travelC = 1;
+  function cacheLayout() {
+    var sc = scroller();
+    ["about", "contact"].forEach(function (n) {
+      var r = secs[n].getBoundingClientRect();
+      tops[n] = sc ? sc.scrollTop + r.top - sc.getBoundingClientRect().top : r.top + window.pageYOffset;
+    });
+    travelC = Math.max(1, filters.offsetTop - (parseFloat(filters.style.top) || 0) - STUCK_TOP); // (offsetTop includes the shift already applied)
+  }
+  window.addEventListener("resize", function () { cacheLayout(); });
+  window.addEventListener("load", cacheLayout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(cacheLayout);
+  if (window.ResizeObserver) { var cro = new ResizeObserver(cacheLayout); cro.observe(document.body); cro.observe(secs.about); cro.observe(secs.contact); }
   function slideHeader() {
     if (!hdr || !introTop) return;
     if (!phone() || !nav) { introTop.style.transform = introTop.style.opacity = filters.style.top = ""; root.classList.remove("navScrolled"); filters.classList.remove("pinned"); return; }
-    var travel = Math.max(1, filters.offsetTop - (parseFloat(filters.style.top) || 0) - STUCK_TOP); // (offsetTop includes the shift already applied)
+    var travel = travelC;
     var d = Math.min(Math.max(nav.scrollTop, 0), travel);
     introTop.style.transform = "translateY(" + (-d) + "px)";
     introTop.style.opacity = String(Math.max(0, 1 - d / (travel * 0.7)));
@@ -120,16 +135,18 @@
     filters.classList.toggle("pinned", d >= travel - 0.5);
     if (d < travel - 0.5) bubbleHome();
   }
-  if (nav) nav.addEventListener("scroll", function () { requestAnimationFrame(slideHeader); }, { passive: true });
+  var slideTick = false;
+  if (nav) nav.addEventListener("scroll", function () { if (slideTick) return; slideTick = true; requestAnimationFrame(function () { slideTick = false; slideHeader(); }); }, { passive: true });
   window.addEventListener("resize", slideHeader);
+  cacheLayout();
   slideHeader();
 
   function spy() {
     stick();
     if (steering || root.classList.contains("view-open")) return;
-    var sc = scroller(), base = sc ? sc.getBoundingClientRect().top : 0;
-    var probe = base + (sc ? sc.clientHeight : window.innerHeight) * 0.45, name = null;
-    ["about", "contact"].forEach(function (n) { if (secs[n].getBoundingClientRect().top <= probe) name = n; });
+    var sc = scroller(), pos = sc ? sc.scrollTop : window.pageYOffset;
+    var probe = pos + (sc ? sc.clientHeight : window.innerHeight) * 0.45, name = null;
+    ["about", "contact"].forEach(function (n) { if (tops[n] <= probe) name = n; });
     // at the very bottom the last section is the one in view, even when it is too short to reach the probe line
     if (!sc && window.pageYOffset > 0 && window.pageYOffset + window.innerHeight >= document.documentElement.scrollHeight - 2) name = "contact";
     if (sc && sc.scrollTop > 0 && sc.scrollTop + sc.clientHeight >= sc.scrollHeight - 2) name = "contact";
