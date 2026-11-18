@@ -50,10 +50,11 @@ html:not(.view-open):not(#_) body:not(#_) {
 .filters.stuck:not(#_) {
   position: fixed;
   top: 34px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: max-content;
   z-index: 40;
-  margin: 0;
 }
 .filtersSpacer { visibility: hidden; flex: none; }
 
@@ -89,13 +90,4 @@ html:not(.view-open):not(#_) body:not(#_) {
   .hero > nav:not(#_):not(#_) { top: 0; padding-top: var(--hdrH, 190px); box-sizing: border-box; }
   .hero > header:not(#_):not(#_) { background: none; pointer-events: none; }
   .hero > header .filters .pill { pointer-events: auto; }
-}
-
-/* the global hover bubble sits under the page, so on the white pill it would be hidden: the pinned tabs draw the same bubble themselves (same grey, hairline and soft shadow) */
-.filters.stuck .pill, .filters.pinned .pill { transition: color .3s ease, background-color .18s ease, box-shadow .18s ease; }
-.filters.stuck .pill:not([aria-pressed="true"]):hover, .filters.pinned .pill:not([aria-pressed="true"]):hover,
-.filters.stuck .pill:not([aria-pressed="true"]):focus-visible, .filters.pinned .pill:not([aria-pressed="true"]):focus-visible {
-  background-color: #F4F4F4;
-  box-shadow: 0 0 0 1px rgba(47, 39, 37, 0.12), 0 3px 10px rgba(47, 39, 37, 0.12);
-  outline: none;
 }

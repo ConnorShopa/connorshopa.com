@@ -58,6 +58,15 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncBack);
   syncBack();
 
+  // The hover bubble (#mouse-circle) sits under the page, so the white pill would hide it. While a pinned tab is hovered
+  // the bubble itself moves into the pinned bar: above the pill's white, under the labels. It goes back to the body after.
+  var dot = document.getElementById("mouse-circle");
+  function bubbleHome() { if (dot && dot.parentNode !== document.body) document.body.insertBefore(dot, document.body.firstChild); }
+  function pinned() { return filters.classList.contains("stuck") || filters.classList.contains("pinned"); }
+  if (dot) {
+    chips.forEach(function (c) { c.addEventListener("pointerenter", function (e) { if (e.pointerType === "touch") return; if (pinned() && dot.parentNode !== filters) filters.insertBefore(dot, filters.firstChild); }); });
+    filters.addEventListener("pointerleave", function () { bubbleHome(); });
+  }
   function press(name) {
     chips.forEach(function (c) {
       var on = name ? c.getAttribute("data-panel") === name : c.hasAttribute("data-work");
@@ -84,6 +93,7 @@
     } else if (!should && spacer && window.pageYOffset <= naturalTop - 34) {
       filters.classList.remove("stuck");
       spacer.remove(); spacer = null;
+      bubbleHome();
     }
   }
   measure();
@@ -100,14 +110,15 @@
   var STUCK_TOP = 12; // where the tabs rest at the top of a phone screen
   function slideHeader() {
     if (!hdr || !introTop) return;
-    if (!phone() || !nav) { introTop.style.transform = introTop.style.opacity = filters.style.transform = ""; root.classList.remove("navScrolled"); filters.classList.remove("pinned"); return; }
-    var travel = Math.max(1, filters.offsetTop - STUCK_TOP);
+    if (!phone() || !nav) { introTop.style.transform = introTop.style.opacity = filters.style.top = ""; root.classList.remove("navScrolled"); filters.classList.remove("pinned"); return; }
+    var travel = Math.max(1, filters.offsetTop - (parseFloat(filters.style.top) || 0) - STUCK_TOP); // (offsetTop includes the shift already applied)
     var d = Math.min(Math.max(nav.scrollTop, 0), travel);
     introTop.style.transform = "translateY(" + (-d) + "px)";
     introTop.style.opacity = String(Math.max(0, 1 - d / (travel * 0.7)));
-    filters.style.transform = "translateY(" + (-d) + "px)";
+    filters.style.top = (-d) + "px";
     root.classList.toggle("navScrolled", nav.scrollTop > 4);
     filters.classList.toggle("pinned", d >= travel - 0.5);
+    if (d < travel - 0.5) bubbleHome();
   }
   if (nav) nav.addEventListener("scroll", function () { requestAnimationFrame(slideHeader); }, { passive: true });
   window.addEventListener("resize", slideHeader);
