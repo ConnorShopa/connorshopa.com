@@ -249,3 +249,5 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 
 /* the app icons are hidden for now (markup kept; delete this line to bring them back) */
 .landApps { display: none !important; }
+
+.landTag { color: #2E4A87; } /* deep blue from the theme, ~6:1 on the background */
