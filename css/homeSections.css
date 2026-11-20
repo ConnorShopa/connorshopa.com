@@ -377,3 +377,10 @@ body:not(#_) { background-color: #F4F4F4; }
 /* the colour frame is the wash behind each section (js/panels.js); the old About card layer is no longer drawn */
 .aboutBack:not(#_):not(#_):not(#_) { background: transparent; }
 @media (min-width: 701px) { .secTint:not(#_) { opacity: 1; } }
+
+/* the face is exactly as tall as the name's line of text, with 2px of air around it */
+.who .whoLogo:not(#_) { box-sizing: border-box; height: 1.2em; width: 1.2em; padding: 2px; margin: 0; }
+@media (max-width: 700px) { .who .whoLogo:not(#_) { height: 1.2em; width: 1.2em; } }
+
+/* no dividers between the sections */
+.hero > header.intro:not(#_)::after, .page > .below:not(#_)::before, #about.homeSec:not(#_)::after { display: none; content: none; }
