@@ -440,3 +440,19 @@ body::after { display: block !important; }
 
 /* tab menu back under the wordmark */
 .landMid > .landNav { display: flex !important; }
+
+/* tab menu: a dock pinned to the bottom of the screen, above everything. No buttons, just the labels on a blurred blue glass frame. */
+.landMid > .landNav {
+  position: fixed; left: 50%; bottom: max(22px, calc(env(safe-area-inset-bottom) + 12px)); transform: translateX(-50%); z-index: 200; margin: 0;
+  padding: 13px 26px; gap: clamp(20px, 2.4vw, 36px); border-radius: 20px; white-space: nowrap;
+  background: rgba(104, 138, 214, 0.26);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: 0 12px 32px rgba(47, 74, 163, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+.landNav > a::before, .landNav > .landSoon::before, .landNav > a::after, .landNav > .landSoon::after { display: none !important; }
+.landNav > a, .landNav > .landSoon { padding-left: 0; }
+.landNav > a { color: #14234F; text-decoration: none; }
+.landNav > a.on { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 6px; }
+.landNav > .landSoon { color: #2B3F73; transition: color .2s ease; }
+.landNav > .landSoon:hover { color: #14234F; }
