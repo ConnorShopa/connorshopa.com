@@ -81,7 +81,7 @@ nav .inline.big:not(#_):not(#_){column-gap:16px}
   #projectList li > a:not(#_):not(#_) .hlLogo{zoom:calc(var(--z,1) * .8)}
   .inline.big a.hl:not(#_):not(#_) .hlSub:not(#_):not(#_){display:none}
   /* on phones Sketchbook moves up beside Happlycations, so the last rows are pairs instead of two lone tiles */
-  #projectList li:not(.row-break):not(#_):not(#_):has(> a[data-view="spotify"]), #projectList li:not(.row-break):not(#_):not(#_):has(> a[href="https://poll.in"]){order:1}
+  #projectList li:not(.row-break):not(#_):not(#_):has(> a[data-view="spotify"]), #projectList li:not(.row-break):not(#_):not(#_):has(> a.hlOff){order:1}
   #projectList:not(#_):not(#_) li:not(#_):has(> a[data-view="touchtunes"]) .wordmark:not(#_){filter:none !important}
   .hlSketch{font-size:26px}
   .peek,.deckMode,.deckView{display:none !important}

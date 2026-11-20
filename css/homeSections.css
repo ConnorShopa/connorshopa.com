@@ -469,3 +469,6 @@ body:not(#_) { background-color: #F4F4F4; }
 
 /* "Connor Shopa" is one step lighter (600 -> 500) */
 .who .name:not(#_):not(#_) { font-weight: 500; }
+
+/* Poll.in keeps its logo but has no link for now: no hover bubble, no click, no pointer cursor */
+.hl.hlOff:not(#_):not(#_) { pointer-events: none; cursor: default; }
