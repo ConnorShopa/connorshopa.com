@@ -454,3 +454,7 @@ body:not(#_) { background-color: #F4F4F4; }
 }
 .secTintPulse:not(#_) { transform-origin: 50% 100%; animation: tintPulse 2.4s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .secTintPulse:not(#_) { animation: none; } }
+
+/* the tagline and the "Over 3 million people..." line share one size: 20px, 15px on phones */
+.workNote:not(#_):not(#_), .intro .tagline:not(#_):not(#_), .tagline:not(#_):not(#_) { font-size: 20px; }
+@media (max-width: 700px) { .workNote:not(#_):not(#_), .intro .tagline:not(#_):not(#_), .tagline:not(#_):not(#_) { font-size: 15px; } }
