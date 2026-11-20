@@ -458,3 +458,8 @@ body:not(#_) { background-color: #F4F4F4; }
 /* the tagline and the "Over 3 million people..." line share one size: 20px, 15px on phones */
 .workNote:not(#_):not(#_), .intro .tagline:not(#_):not(#_), .tagline:not(#_):not(#_) { font-size: 20px; }
 @media (max-width: 700px) { .workNote:not(#_):not(#_), .intro .tagline:not(#_):not(#_), .tagline:not(#_):not(#_) { font-size: 15px; } }
+
+/* "Connor Shopa" is the same size as the About heading ("Designing products @ ..."): 34px, 28px under 900, 22px on phones */
+.who .name:not(#_):not(#_) { font-size: 34px; line-height: 1.2; }
+@media (max-width: 900px) { .who .name:not(#_):not(#_) { font-size: 28px; } }
+@media (max-width: 700px) { .who .name:not(#_):not(#_) { font-size: 22px; } }
