@@ -16,7 +16,7 @@
 
 
   var GAP = 8, REACH = 120, PUSH = 2.6;
-  var pit = null, bubs = [], anchors = [], circles = [], active = [], mouse = { x: -9999, y: -9999 }, raf = 0, ready = false, visible = false, forEl = null, R = 0, wallX = 0;
+  var vert = false, ay = 0, wallY = 0, pit = null, bubs = [], anchors = [], circles = [], active = [], mouse = { x: -9999, y: -9999 }, raf = 0, ready = false, visible = false, forEl = null, R = 0, wallX = 0;
 
   function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   // the bubbles are see-through, so the circle's colour shows through them
@@ -54,6 +54,7 @@
     }, { passive: true });
     document.addEventListener("pointerleave", function () { mouse.x = mouse.y = -9999; });
     window.addEventListener("resize", function () { ready = false; });
+    if (window.ResizeObserver) { var lastW = 0, lastH = 0; new ResizeObserver(function () { if (pit.offsetWidth !== lastW || pit.offsetHeight !== lastH) { lastW = pit.offsetWidth; lastH = pit.offsetHeight; ready = false; } }).observe(pit); } // the card grows open: lay out again at its real size
   }
 
   function measureAll() {
@@ -73,7 +74,16 @@
   function layout() {
     GAP = phone() ? 5 : 8;
     var W = pit.offsetWidth / 2, H = pit.offsetHeight / 2, ax, fs;
-    if (window.innerWidth > 1100) { // normal screens: circles float in the middle of the card
+    vert = phone();
+    ay = 0; wallY = 0;
+    if (vert) { // phones: the circles are stacked, one above the other, so they can be as wide as the screen and hold many more words
+      var R0 = Math.min(W - 3, H * 0.6);
+      setSize(9, R0); measureAll();
+      var lensH = forEl.h + 30;
+      R = Math.min(W - 3, (2 * H - 6 + lensH) / 4);
+      fs = Math.max(9, R / 25); setSize(fs, R); measureAll();
+      lensH = forEl.h + 30; ay = R - lensH / 2; ax = 0; wallX = 0; wallY = forEl.h / 2 + 6;
+    } else if (window.innerWidth > 1100) { // normal screens: circles float in the middle of the card
       var r0 = Math.min(H - 6, W);
       setSize(Math.max(7, r0 / 25), r0); measureAll();
       var lens = forEl.w + 90;
@@ -108,16 +118,17 @@
         var extra = got.length ? Math.min((room - (used - GAP * (got.length - 1) + GAP * (got.length - 1))) / (got.length + 1), GAP * 3) : 0, x;
         var total = got.reduce(function (t, b) { return t + b.w; }, 0), gp = got.length > 1 ? Math.min((room - total) / (got.length + 1), GAP * 3) : 0;
         x = (lo + hi) / 2 - (total + gp * (got.length - 1)) / 2;
-        got.forEach(function (b) { b.sx = side * ax + x + b.w / 2; b.sy = y; x += b.w + gp; active.push(b); });
+        got.forEach(function (b) { b.sx = side * ax + x + b.w / 2; b.sy = y + (vert ? side * ay : 0); x += b.w + gp; active.push(b); });
       }
       for (var k = -half; k <= half; k++) {
         var y = k * pitch, d = R - 8, c = Math.sqrt(Math.max(0, d * d - Math.pow(Math.abs(y) + maxH / 2, 2)));
         var lo = -c, hi = c, inner = ax - wallX - 4; // "for" and the overlap are kept clear
-        if (side < 0) hi = Math.min(hi, inner); else lo = Math.max(lo, -inner);
+        if (vert) { var ya = side * ay + y; if (side < 0 ? ya + maxH / 2 > -wallY : ya - maxH / 2 < wallY) continue; }
+        else if (side < 0) hi = Math.min(hi, inner); else lo = Math.max(lo, -inner);
         if (Math.abs(y) < any.h / 2 + maxH / 2 + 6) { var aw = any.w + 2 * GAP + 8; // rows beside the big word leave room for it
            fill(lo, -aw / 2, y); fill(aw / 2, hi, y); } else fill(lo, hi, y);
       }
-      any.x = side * ax; any.y = 0;
+      any.x = side * ax; any.y = vert ? side * ay : 0;
     });
     bubs.forEach(function (b) { b.off = active.indexOf(b) < 0; b.el.style.display = b.off ? "none" : ""; });
     active.forEach(function (b) { if (!ready || b.sx === undefined) return; });
@@ -126,9 +137,15 @@
     // the Venn circles, like the logo: indigo, red, and pink where they overlap
     var L = circles[0], Rt = circles[1], Ln = circles[2], d2 = R * 2;
     [L, Rt, Ln].forEach(function (c) { c.style.width = c.style.height = d2 + "px"; c.style.top = (H - R) + "px"; });
-    L.style.left = (W - ax - R) + "px"; Rt.style.left = (W + ax - R) + "px"; Ln.style.left = (W + ax - R) + "px";
-    Ln.style.clipPath = "circle(" + R + "px at " + (R - 2 * ax) + "px " + R + "px)";
-    pit.parentNode.style.setProperty("--ohR", R + "px"); // so "Trade" can sit just above the circles
+    if (vert) {
+      L.style.left = Rt.style.left = Ln.style.left = (W - R) + "px";
+      L.style.top = (H - ay - R) + "px"; Rt.style.top = Ln.style.top = (H + ay - R) + "px";
+      Ln.style.clipPath = "circle(" + R + "px at " + R + "px " + (R - 2 * ay) + "px)";
+    } else {
+      L.style.left = (W - ax - R) + "px"; Rt.style.left = (W + ax - R) + "px"; Ln.style.left = (W + ax - R) + "px";
+      Ln.style.clipPath = "circle(" + R + "px at " + (R - 2 * ax) + "px " + R + "px)";
+    }
+    pit.parentNode.style.setProperty("--ohR", (vert ? R + ay : R) + "px"); // so "Trade" can sit just above the circles
     ready = true;
   }
 
@@ -166,13 +183,14 @@
     }
     for (i = 0; i < n; i++) {
       b = active[i];
-      var m = wallX + b.hw + b.r; // "for" is a wall: neither circle's bubbles cross the middle
-      if (b.side < 0 && b.x > -m) b.x = -m; if (b.side > 0 && b.x < m) b.x = m;
+      if (vert) { var my = wallY + b.r; if (b.side < 0 && b.y > -my) b.y = -my; if (b.side > 0 && b.y < my) b.y = my; }
+      else { var m = wallX + b.hw + b.r; // "for" is a wall: neither circle's bubbles cross the middle
+      if (b.side < 0 && b.x > -m) b.x = -m; if (b.side > 0 && b.x < m) b.x = m; }
       var ex = W - b.hw - b.r, ey = H - b.r; // and nothing leaves the pit
       if (b.x > ex) b.x = ex; if (b.x < -ex) b.x = -ex; if (b.y > ey) b.y = ey; if (b.y < -ey) b.y = -ey;
       b.el.style.transform = "translate(" + (W + b.x - b.w / 2).toFixed(1) + "px," + (H + b.y - b.h / 2).toFixed(1) + "px)";
     }
-    anchors.forEach(function (a) { a.el.style.transform = "translate(" + (W + a.x - a.w / 2).toFixed(1) + "px," + (H - a.h / 2).toFixed(1) + "px)"; });
+    anchors.forEach(function (a) { a.el.style.transform = "translate(" + (W + a.x - a.w / 2).toFixed(1) + "px," + (H + a.y - a.h / 2).toFixed(1) + "px)"; });
     forEl.style.transform = "translate(" + (W - forEl.w / 2).toFixed(1) + "px," + (H - forEl.h / 2).toFixed(1) + "px)";
   }
 

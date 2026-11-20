@@ -192,8 +192,10 @@
       y = Math.max(sc ? 0 : 41, homeEdge + workH / 2 - (sc ? sc.clientHeight : window.innerHeight) / 2);
       setHome(false);
     } else {
-      y = sc ? sc.scrollTop + secs[name].getBoundingClientRect().top - sc.getBoundingClientRect().top : secs[name].getBoundingClientRect().top + window.pageYOffset;
-      y = Math.max(0, y - clear);
+      // the section lands in the middle of the screen
+      var sr = secs[name].getBoundingClientRect(), vh = sc ? sc.clientHeight : window.innerHeight;
+      y = sc ? sc.scrollTop + sr.top - sc.getBoundingClientRect().top : sr.top + window.pageYOffset;
+      y = Math.max(0, y + sr.height / 2 - vh / 2);
       setHome(false);
     }
     steering = true;
@@ -342,7 +344,7 @@ document.addEventListener("input", function (e) {
       var centre = g.top + g.h / 2 - pos;
       var e = Math.min(1, Math.abs(centre - vh / 2) / (vh * 0.6));
       e = Math.max(0, (e - 0.25) / 0.75);
-      var s = 1 - 0.18 * e, o = 1 - 0.75 * e;
+      var s = 1 - 0.26 * e, o = 1 - 0.85 * e;
       if (Math.abs(s - g.s) < 0.0005 && Math.abs(o - g.o) < 0.002) return;
       g.s = s; g.o = o; setAll(g, s, o);
     });

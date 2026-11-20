@@ -299,3 +299,39 @@ html:not(.view-open):not(#_) body:not(#_) {
   .workNote:not(#_) { margin-bottom: 96px; }
   #contact.homeSec:not(#_) { margin-top: 128px; }
 }
+
+/* Overhand on phones: the circles are stacked and fill the card down to the bottom edge; the email bar floats over everything at the bottom */
+@media (max-width: 700px) {
+  .view.scrollView .pg.one:has(.ohPit) .ohPit:not(#_) { left: 8px; right: 8px; top: 130px; bottom: -80px; } /* runs past the bottom edge, under the email bar, so the circles can be the full width of the screen */
+  .view.scrollView .pg.one:has(.ohPit) .ohHero:not(#_) { top: 78px; bottom: auto; }
+  .view.scrollView .pg.one:has(.ohPit) .earlyForm:not(#_) {
+    z-index: 60; left: 50%; right: auto; bottom: 20px; width: calc(100% - 32px); max-width: 420px; box-sizing: border-box; transform: translateX(-50%);
+    gap: 8px; padding: 8px; background: #fff; border-radius: 18px; box-shadow: 0 10px 30px rgba(11, 22, 32, 0.22), 0 2px 8px rgba(11, 22, 32, 0.12);
+  }
+  #view-overhand .earlyForm:not(#_) { box-shadow: 0 10px 30px rgba(11, 22, 32, 0.22), 0 2px 8px rgba(11, 22, 32, 0.12); }
+  #view-overhand .earlyInput:not(#_) { font-size: 16px; min-width: 0; flex: 1; }
+  #view-overhand .earlyBtn.lockBtn:not(#_) { font-size: 15px; white-space: nowrap; }
+}
+
+/* "Over 3 million..." now sits above the work items */
+.workNote:not(#_) { margin: 0 0 56px; }
+@media (max-width: 700px) { .workNote:not(#_) { margin: 0 0 24px; padding: 0 24px; } }
+
+/* room under Contact so it can be centred on screen too */
+@media (min-width: 701px) { #contact.homeSec:not(#_) { margin-bottom: max(0px, calc(50vh - 129px)); } }
+@media (max-width: 700px) { #contact.homeSec:not(#_) { margin-bottom: max(96px, calc(50vh - 120px)); } }
+
+/* Overhand on phones: "Trade" sits closer to the logo row, the circles start right under it */
+@media (max-width: 700px) {
+  .view.scrollView .pg.one:has(.ohPit) .ohPit:not(#_):not(#_) { top: 60px; bottom: -10px; }
+  .view.scrollView .pg.one:has(.ohPit) .ohHero:not(#_):not(#_) { top: 4px; }
+}
+@media (min-width: 701px) {
+  .hero > nav > .workNote:not(#_):not(#_) { grid-area: 1 / 1; }
+  .hero > nav > ul:not(#_):not(#_) { grid-area: 2 / 1; }
+}
+
+/* About: a wider card on a light green taken from the About tab (#2FA05A, mostly white) */
+.aboutBack:not(#_) { background: #E6F4EB; }
+@media (max-width: 700px) { #about.homeSec:not(#_) { background: #E6F4EB; } }
+@media (min-width: 701px) { #about.homeSec:not(#_) { width: min(1160px, calc(100vw - 64px)); max-width: none; align-self: center; box-sizing: border-box; } }
