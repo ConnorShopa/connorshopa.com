@@ -311,3 +311,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .ltr[data-skin="norm"] .skin > span, .landIcon[data-skin="norm"] .tile i { background: linear-gradient(180deg, #DFE9FB 0%, #D7E3F7 52%, #CFDEF3 100%) fixed; }
 .ltr[data-skin="norm"] .skin { filter: drop-shadow(calc(var(--lw) * -0.022) calc(var(--lw) * -0.022) calc(var(--lw) * 0.026) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.026) calc(var(--lw) * 0.036) calc(var(--lw) * 0.036) rgba(90, 118, 172, 0.38)); }
 .landIcon[data-skin="norm"] .tile { filter: drop-shadow(calc(var(--lw) * -0.016) calc(var(--lw) * -0.016) calc(var(--lw) * 0.018) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.018) calc(var(--lw) * 0.026) calc(var(--lw) * 0.026) rgba(90, 118, 172, 0.42)); }
+
+/* the tab menu is hidden for now (markup kept; delete this line to bring it back) */
+.landMid > .landNav { display: none !important; }
