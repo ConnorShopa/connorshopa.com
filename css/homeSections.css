@@ -274,3 +274,21 @@ html:not(.view-open):not(#_) body:not(#_) {
 .who .whoLogo:not(#_) { margin-bottom: 0; flex: none; }
 @media (max-width: 700px) { .who .name:not(#_) { gap: 10px; } .who .whoLogo:not(#_) { margin-bottom: 0; } }
 @media (max-width: 700px) { :root:not(#_) { --hdrH: 278px; } }
+
+/* even air between the four sections on desktop, all 180px (the gap under Connor Shopa to the logos is the reference): Connor Shopa -> Work, Work note -> About card, About card -> Contact */
+@media (min-width: 701px) {
+  .page > .below:not(#_) { margin-top: -371px; }
+  #contact.homeSec:not(#_) { margin-top: 156px; }
+}
+@media (min-width: 701px) and (max-width: 900px) { .page > .below:not(#_) { margin-top: -363px; } }
+
+/* phones: the tab menu lives at the bottom of the screen, 24px up from the edge, always on its white pill with the shadow */
+@media (max-width: 700px) {
+  .intro > .filters:not(#_):not(#_) {
+    position: fixed; top: auto !important; bottom: 24px; left: 0; right: 0; margin: 0 auto; width: max-content; z-index: 40;
+    background-color: #fff; border-radius: 999px;
+    box-shadow: 0 0 0 7px #fff, 0 10px 28px color-mix(in srgb, var(--tabC, #2f2725) 30%, transparent), 0 3px 10px color-mix(in srgb, var(--tabC, #2f2725) 24%, transparent);
+  }
+  .introTop:not(#_) { padding-top: 114px; } /* the name stays where it was, now that the tabs are not above it */
+  #contact.homeSec:not(#_) { margin-bottom: 96px; }
+}

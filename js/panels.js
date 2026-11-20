@@ -342,7 +342,7 @@ document.addEventListener("input", function (e) {
       var centre = g.top + g.h / 2 - pos;
       var e = Math.min(1, Math.abs(centre - vh / 2) / (vh * 0.6));
       e = Math.max(0, (e - 0.25) / 0.75);
-      var s = 1 - 0.12 * e, o = 1 - 0.65 * e;
+      var s = 1 - 0.18 * e, o = 1 - 0.75 * e;
       if (Math.abs(s - g.s) < 0.0005 && Math.abs(o - g.o) < 0.002) return;
       g.s = s; g.o = o; setAll(g, s, o);
     });
