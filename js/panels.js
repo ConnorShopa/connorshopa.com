@@ -315,9 +315,9 @@ document.addEventListener("input", function (e) {
   function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
   var groups = [
     { ref: ".who", els: function () { return $(".who"); }, dz: 0.45 },
-    { ref: "#projectList", els: function () { return $(".hero > nav"); }, tint: "rgba(47, 91, 234, 0.12)", box: ".hero > nav", pad: 72 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
-    { ref: "#about", els: function () { return $("#about > *"); }, tint: "rgba(47, 160, 90, 0.14)", box: "#about", pad: 72 },
-    { ref: "#contact", els: function () { return $("#contact > *"); }, tint: "rgba(255, 201, 40, 0.26)", box: "#contact", pad: 72 }
+    { ref: "#projectList", els: function () { return $(".hero > nav"); }, tint: "rgba(47, 91, 234, 0.07)", box: ".hero > nav", pad: 72 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
+    { ref: "#about", els: function () { return $("#about > *"); }, tint: "rgba(47, 160, 90, 0.08)", box: "#about", pad: 72 },
+    { ref: "#contact", els: function () { return $("#contact > *"); }, tint: "rgba(255, 201, 40, 0.15)", box: "#contact", pad: 72 }
   ];
   // each section sits on a soft wash of its tab's colour; it is strongest when the section is off to the side and fades away as the section comes into focus
   groups.forEach(function (g) {
@@ -339,11 +339,11 @@ document.addEventListener("input", function (e) {
     var e = Math.max(0, Math.min(1.08, g.ce)), q = e * e * (3 - 2 * Math.min(1, e)); // eased, so it starts gently
     var s = 1 - 0.5 * q, o = Math.max(0, 1 - 0.97 * q), rot = 0, dy = (g.dir || 1) * -14 * q;
     if (g.wash && g.ww) { // the frame is fullest when the section is in focus; scrolling away it grows wider and goes paler
-      var gw = Math.min(g.ww * (1 + 0.12 * q), document.documentElement.clientWidth);
-      var gh = g.wh + 2 * 18 * q; // the padding grows on every side as it leaves, while the tint thins out into the page colour
+      var gw = Math.min(g.ww * (1 + 0.05 * q), document.documentElement.clientWidth);
+      var gh = g.wh + 2 * 8 * q; // the padding grows on every side as it leaves, while the tint thins out into the page colour
       g.wash.style.opacity = Math.max(0, 1 - q).toFixed(3);
       g.wash.style.width = gw.toFixed(1) + "px"; g.wash.style.left = (g.cx - gw / 2).toFixed(1) + "px";
-      g.wash.style.height = gh.toFixed(1) + "px"; g.wash.style.top = (g.wt - 18 * q).toFixed(1) + "px";
+      g.wash.style.height = gh.toFixed(1) + "px"; g.wash.style.top = (g.wt - 8 * q).toFixed(1) + "px";
     }
     setAll(g, s, o, rot, dy);
   }
