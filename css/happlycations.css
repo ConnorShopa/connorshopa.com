@@ -531,3 +531,11 @@ body::after { display: block !important; }
   .landMid > .landNav { padding: 8px 18px 8px 8px; border-radius: 32px; }
   .landNav .landTile, .landNav .landApp img { width: 52px; height: 52px; border-radius: 24px; }
 }
+
+/* dock motion: every scale uses a springy bezier (a touch of overshoot, then settling) instead of a plain ease, so it reads as organic */
+.landNav { --spring: cubic-bezier(.34, 1.45, .64, 1); --glide: cubic-bezier(.22, 1, .36, 1); }
+.landNav .landTile, .landNav .landApps li:not(:hover) .landTile { transition: transform .55s var(--spring); }
+.landNav > a, .landNav > .landSoon, .landDockSep { transition: transform .55s var(--spring), color .2s ease; }
+.landMid > .landNav::before { transition: transform .6s var(--glide); }
+.landNav .landName { transition: opacity .3s cubic-bezier(.22, 1, .36, 1), transform .5s var(--spring); }
+@media (prefers-reduced-motion: reduce) { .landMid > .landNav::before, .landNav .landTile, .landNav .landApps li:not(:hover) .landTile, .landNav > a, .landNav > .landSoon, .landDockSep, .landNav .landName { transition: none; } }
