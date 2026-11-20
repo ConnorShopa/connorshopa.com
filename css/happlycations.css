@@ -409,3 +409,6 @@ html, body, .happlyPage { background: #D7E3F7; }
 .ltr, .ltr:first-child, .ltr:last-child { inset: 0 auto 0 var(--l); width: calc(var(--r) - var(--l)); transform-origin: 50% 50%; }
 .ltr .skin > span { position: absolute; top: 0; height: 100%; width: 100cqw; left: calc(var(--lp) * -100cqw); }
 .ltr[data-skin="sheep"] .skin, .ltr[data-skin="sheep"]:first-child .skin, .ltr[data-skin="sheep"]:last-child .skin { clip-path: inset(-60% 0 -60% 0); }
+
+/* grain overlay off (kept above for later) */
+body::after { display: none !important; }
