@@ -332,7 +332,48 @@ html:not(.view-open):not(#_) body:not(#_) {
 }
 
 /* About: a wider card on a light green taken from the About tab (#2FA05A, mostly white) */
-.aboutBack:not(#_) { background: #F1F8F4; }
-@media (max-width: 700px) { #about.homeSec:not(#_) { background: #F1F8F4; } }
+.aboutBack:not(#_) { background: #FFFFFF; }
+@media (max-width: 700px) { #about.homeSec:not(#_) { background: #FFFFFF; } }
 @media (min-width: 701px) { #about.homeSec:not(#_) { width: min(1160px, calc(100vw - 64px)); max-width: none; align-self: center; box-sizing: border-box; } }
 .workNote:not(#_) { color: #333333; }
+
+/* the site background is a light grey */
+:root:not(#_) { --bg: #F4F4F4; }
+body:not(#_) { background-color: #F4F4F4; }
+
+/* professional history is centred again */
+.homeSec .eyebrow:not(#_):not(#_) { align-self: center; text-align: center; }
+.homeSec .aboutJobs:not(#_):not(#_) { align-self: center; align-items: center; text-align: center; width: fit-content; }
+.homeSec .aboutJobs li:not(#_):not(#_) { justify-content: center; text-align: center; }
+@media (max-width: 700px) {
+  .homeSec .aboutJobs:not(#_):not(#_) { width: 100%; }
+  .homeSec .aboutJobs li:not(#_):not(#_) { align-items: center; }
+  .homeSec .aboutJobs span:not(#_):not(#_) { text-align: center; }
+}
+
+/* a thin divider (#333333 at 12%) in the middle of each 180px gap between the sections (desktop) */
+@media (min-width: 701px) {
+  .hero > header.intro:not(#_), .page > .below:not(#_), #about.homeSec:not(#_) { position: relative; }
+  .hero > header.intro::after, .page > .below::before, #about.homeSec::after {
+    content: ""; position: absolute; left: 50%; transform: translateX(-50%); width: 160px; height: 2px; border-radius: 999px; background: rgba(51, 51, 51, 0.12); pointer-events: none;
+  }
+  .hero > header.intro::after { bottom: -90px; }
+  .page > .below::before { top: -90px; }
+  #about.homeSec::after { bottom: -90px; }
+}
+
+
+/* the colour wash behind each section (Work blue, About green, Contact yellow); js/panels.js sets its strength from how far the section is from the middle of the screen */
+.secTint:not(#_) { position: absolute; z-index: -2; border-radius: 56px; pointer-events: none; opacity: 0; }
+@media (max-width: 700px) { .secTint:not(#_) { display: none; } }
+
+/* narrower sections: the About card is a slim card, sitting on its (also narrower) colour wash */
+@media (min-width: 701px) { #about.homeSec:not(#_):not(#_) { width: min(680px, calc(100vw - 64px)); padding-left: 32px; padding-right: 32px; } }
+
+/* the About card is the same green wash as the tab colour, not white */
+.aboutBack:not(#_):not(#_) { background: rgba(47, 160, 90, 0.14); }
+@media (max-width: 700px) { #about.homeSec:not(#_):not(#_) { background: rgba(47, 160, 90, 0.14); } }
+
+/* the colour frame is the wash behind each section (js/panels.js); the old About card layer is no longer drawn */
+.aboutBack:not(#_):not(#_):not(#_) { background: transparent; }
+@media (min-width: 701px) { .secTint:not(#_) { opacity: 1; } }

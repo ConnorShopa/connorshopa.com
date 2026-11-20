@@ -52,7 +52,7 @@
       pages: [pg("one", text(
         '<ul class="contactCol2">' +
         '<li><a class="withLabel" href="mailto:connorshopa@gmail.com"><span class="tinyLabel">EMAIL ME</span>connorshopa@gmail.com</a></li>' +
-        '<li><a class="withLabel" href="tel:+13432095337"><span class="tinyLabel">CALL ME</span>343.209.5337</a></li>' +
+        '<li><a class="withLabel" href="tel:+12063056525"><span class="tinyLabel">CALL ME</span>206.305.6525</a></li>' +
         '<li><a class="withLabel" href="https://www.linkedin.com/in/connorshopa/" target="_blank" rel="noopener"><span class="tinyLabel">LINKEDIN</span>LinkedIn &nearr;</a></li>' +
         '</ul>'
       ))]

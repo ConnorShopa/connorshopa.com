@@ -121,7 +121,7 @@
     }
     var shape = Math.min(1, Math.max(0, (w / h - 1) / (WIDE_AT - 1))); // 0 = squarish, 1 = very wide
     var radius = (h / 2) * (1 - shape * (1 - ROUND_WIDE));
-    if (inList) radius *= 0.8; // the project bubbles: a little less round
+    if (inList) radius = radius * 0.8 + 4; // the project bubbles: a little less round, then 4px rounder
     // icon-only buttons (the view's close button and page chevrons) get a true circle around the icon instead of a pill
     if (currentLink && (currentLink.classList.contains("viewClose") || currentLink.classList.contains("viewNav") || currentLink.classList.contains("projNav"))) {
       w = h = Math.max(base.width, base.height) + 8;

@@ -408,6 +408,7 @@
 
   function show(trigger, view, link) {
     if (open) return;
+    var startY = window.pageYOffset || document.documentElement.scrollTop || 0; // where the page is scrolled to, read before anything below can move it
     noteRestSpots();
     open = { view: view, trigger: trigger, link: link || trigger };
     setPage(view, 0, false);
@@ -421,7 +422,7 @@
     document.documentElement.classList.add("view-open");
     // pin the page where it is: a fixed body can't be scrolled by anything (wheel, touch, keys, drags, momentum)
     if (lockY === null) {
-      lockY = window.pageYOffset || document.documentElement.scrollTop || 0;
+      lockY = startY;
       var bs = document.body.style;
       bs.position = "fixed"; bs.top = -lockY + "px"; bs.left = "0"; bs.right = "0"; bs.width = "100%";
     }
@@ -624,13 +625,14 @@
     var finish = function () {
       view.hidden = true;
       document.documentElement.style.overflow = "";
+      document.documentElement.classList.remove("view-open"); // first: while it is on, the page is only one screen tall and a scroll position would be clamped to the top
       if (lockY !== null) { // let the page scroll again, exactly where it was
         var y = lockY; lockY = null;
         var bs = document.body.style;
         bs.position = ""; bs.top = ""; bs.left = ""; bs.right = ""; bs.width = "";
         window.scrollTo(0, y);
+        requestAnimationFrame(function () { if (Math.abs(window.pageYOffset - y) > 1) window.scrollTo(0, y); });
       }
-      document.documentElement.classList.remove("view-open");
       // the page scrollbar is back, so the gallery is a little narrower than when its rows were last worked out
       // (while the card was closing, the page had no scrollbar): lay the rows out again so the last link can't wrap
       if (window.layoutGalleryRows && !list.classList.contains("compact")) window.layoutGalleryRows();
@@ -785,6 +787,20 @@
 
   document.querySelectorAll(".viewClose").forEach(function (b) { b.addEventListener("click", hide); });
   // vertical views (Habbot): scroll or click the chevron under the first page's button to move between pages
+  // a scrolling project closes when you are at the bottom and scroll down again (a fresh scroll after a pause, so the momentum
+  // that carried you to the bottom doesn't close it)
+  var lastWheel = 0, bottomSince = 0;
+  function scrollBody() { return open && open.view.classList.contains("scrollView") ? open.view.querySelector(".viewBody") : null; }
+  function atBottom(vb) { return vb && vb.scrollHeight > vb.clientHeight + 24 && vb.scrollTop + vb.clientHeight >= vb.scrollHeight - 3; }
+  function closeOpen() { var cb = open && (open.view._close || open.view.querySelector(".viewClose")); if (cb) cb.click(); }
+  function closeAtBottomWheel(e) {
+    var vb = scrollBody(), now = Date.now(), gap = now - lastWheel;
+    lastWheel = now;
+    if (!vb || !atBottom(vb) || e.deltaY <= 0) { if (!vb || !atBottom(vb)) bottomSince = 0; return false; }
+    if (!bottomSince) { bottomSince = now; return false; }
+    if (gap > 150 && now - bottomSince > 250) { bottomSince = 0; closeOpen(); return true; }
+    return false;
+  }
   var wheelLock = 0;
   // while a view is open nothing outside it may scroll: wheel, touch and the scrolling keys are all stopped (except
   // inside a text block that genuinely needs to scroll)
@@ -794,6 +810,7 @@
     if (!insideScroller(e)) e.preventDefault(); // stops page scrolling and the elastic bounce
     if (e.__habbotSeen) return; // registered on two targets below; act once per event
     e.__habbotSeen = true;
+    if (closeAtBottomWheel(e)) return;
     if (!open.view.classList.contains("vertical")) return;
     var now = Date.now();
     if (Math.abs(e.deltaY) < 12 || now - wheelLock < 750) return; // one page per scroll gesture
@@ -807,12 +824,13 @@
   var swipe = null;
   document.addEventListener("touchstart", function (e) {
     if (!open || !e.touches[0] || !e.target.closest(".view")) { swipe = null; return; }
-    swipe = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    swipe = { x: e.touches[0].clientX, y: e.touches[0].clientY, bottom: atBottom(scrollBody()) };
   }, { passive: true });
   document.addEventListener("touchend", function (e) {
     if (!swipe || !open || !e.changedTouches[0]) return;
     var dx = e.changedTouches[0].clientX - swipe.x, dy = e.changedTouches[0].clientY - swipe.y;
-    swipe = null;
+    var wasBottom = swipe.bottom; swipe = null;
+    if (wasBottom && dy < -70 && Math.abs(dy) > Math.abs(dx) * 1.5 && atBottom(scrollBody())) { closeOpen(); return; } // swiped up while already at the bottom
     var vertical = open.view.classList.contains("vertical");
     var d = vertical ? dy : dx, o = vertical ? dx : dy;
     if (Math.abs(d) > 60 && Math.abs(d) > Math.abs(o) * 1.5) step(d < 0 ? 1 : -1);

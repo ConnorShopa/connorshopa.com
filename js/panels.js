@@ -314,15 +314,50 @@ document.addEventListener("input", function (e) {
   var root = document.documentElement;
   function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
   var groups = [
-    { ref: ".who", els: function () { return $(".who"); } },
-    { ref: "#projectList", els: function () { return $(".hero > nav"); } }, // the whole Work block (its box is centred on the page, so it scales about the middle)
-    { ref: "#about", els: function () { return $("#about > *").concat($(".aboutBack")); } },
-    { ref: "#contact", els: function () { return $("#contact > *"); } }
+    { ref: ".who", els: function () { return $(".who"); }, dz: 0.45 },
+    { ref: "#projectList", els: function () { return $(".hero > nav"); }, tint: "rgba(47, 91, 234, 0.12)", box: ".hero > nav", pad: 40 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
+    { ref: "#about", els: function () { return $("#about > *"); }, tint: "rgba(47, 160, 90, 0.14)", box: "#about", pad: 40 },
+    { ref: "#contact", els: function () { return $("#contact > *"); }, tint: "rgba(255, 201, 40, 0.26)", box: "#contact", pad: 40 }
   ];
+  // each section sits on a soft wash of its tab's colour; it is strongest when the section is off to the side and fades away as the section comes into focus
+  groups.forEach(function (g) {
+    if (!g.tint) return;
+    g.wash = document.createElement("div");
+    g.wash.className = "secTint"; g.wash.setAttribute("aria-hidden", "true"); g.wash.style.background = g.tint;
+    document.body.appendChild(g.wash);
+  });
   var on = false;
   function enabled() { return window.innerWidth > 700 && !root.classList.contains("view-open"); }
-  function setAll(g, s, o) {
-    g.items.forEach(function (el) { el.style.transform = s === 1 ? "" : "scale(" + s.toFixed(4) + ")"; el.style.opacity = o >= 0.999 ? "" : o.toFixed(3); });
+  // drawn by hand, not by a formula: each section leans a little (a different way and amount each), drifts, and follows the scroll
+  // on a loose spring, so it lags, overshoots and settles instead of tracking the wheel exactly
+  var TILT = [1.6, -1.1, 1.9, -1.4];
+  function setAll(g, s, o, rot, dy) {
+    var tf = s === 1 && !rot && !dy ? "" : "translateY(" + (dy || 0).toFixed(2) + "px) rotate(" + (rot || 0).toFixed(3) + "deg) scale(" + s.toFixed(4) + ")";
+    g.items.forEach(function (el) { el.style.transform = tf; el.style.opacity = o >= 0.999 ? "" : o.toFixed(3); });
+  }
+  function render(g, gi) {
+    var e = Math.max(0, Math.min(1.08, g.ce)), q = e * e * (3 - 2 * Math.min(1, e)); // eased, so it starts gently
+    var s = 1 - 0.5 * q, o = Math.max(0, 1 - 0.97 * q), rot = TILT[gi % TILT.length] * q * (g.dir || 1), dy = (g.dir || 1) * -14 * q;
+    if (g.wash && g.ww) { // the frame is fullest when the section is in focus; scrolling away it grows wider and goes paler
+      var gw = Math.min(g.ww * (1 + 0.9 * q), document.documentElement.clientWidth);
+      g.wash.style.opacity = Math.max(0, 1 - q).toFixed(3);
+      g.wash.style.width = gw.toFixed(1) + "px"; g.wash.style.left = (g.cx - gw / 2).toFixed(1) + "px";
+    }
+    setAll(g, s, o, rot, dy);
+  }
+  var raf = 0;
+  function spring() {
+    raf = 0;
+    var moving = false;
+    groups.forEach(function (g, gi) {
+      if (!g.items || !g.items.length) return;
+      var f = (g.te - g.ce) * 0.055;
+      g.cv = ((g.cv || 0) + f) * 0.8;
+      g.ce += g.cv;
+      if (Math.abs(g.te - g.ce) > 0.0008 || Math.abs(g.cv) > 0.0008) moving = true; else { g.ce = g.te; g.cv = 0; }
+      render(g, gi);
+    });
+    if (moving) raf = requestAnimationFrame(spring);
   }
   function measure() {
     groups.forEach(function (g) {
@@ -331,23 +366,31 @@ document.addEventListener("input", function (e) {
       var ref = document.querySelector(g.ref);
       if (!ref) { g.top = g.h = 0; return; }
       var r = ref.getBoundingClientRect();
-      g.top = r.top + window.pageYOffset; g.h = r.height; g.s = 1; g.o = 1;
+      g.top = r.top + window.pageYOffset; g.h = r.height;
+      var bx = g.box && document.querySelector(g.box);
+      if (g.wash && bx) {
+        var br = bx.getBoundingClientRect(), pd = g.pad || 0;
+        var ww = Math.min(br.width + 2 * pd, 800, window.innerWidth - 64), cx = br.left + window.pageXOffset + br.width / 2;
+        g.cx = cx; g.ww = ww;
+        g.wash.style.left = (cx - ww / 2) + "px"; g.wash.style.top = (br.top + window.pageYOffset - pd) + "px";
+        g.wash.style.width = ww + "px"; g.wash.style.height = (br.height + 2 * pd) + "px";
+      }
     });
     apply();
   }
   function apply() {
-    if (!enabled()) { if (on) { on = false; groups.forEach(function (g) { setAll(g, 1, 1); g.s = 1; g.o = 1; }); } return; }
+    if (!enabled()) { if (on) { on = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } groups.forEach(function (g) { g.ce = g.te = g.cv = 0; if (g.items) setAll(g, 1, 1, 0, 0); if (g.wash) g.wash.style.opacity = "1"; }); } return; }
     on = true;
     var vh = window.innerHeight, pos = window.pageYOffset;
     groups.forEach(function (g) {
       if (!g.items || !g.items.length) return;
-      var centre = g.top + g.h / 2 - pos;
-      var e = Math.min(1, Math.abs(centre - vh / 2) / (vh * 0.6));
-      e = Math.max(0, (e - 0.25) / 0.75);
-      var s = 1 - 0.26 * e, o = 1 - 0.85 * e;
-      if (Math.abs(s - g.s) < 0.0005 && Math.abs(o - g.o) < 0.002) return;
-      g.s = s; g.o = o; setAll(g, s, o);
+      var centre = g.top + g.h / 2 - pos, off = centre - vh / 2;
+      var e = Math.min(1, Math.abs(off) / (vh * 0.5));
+      var dz = g.dz || 0.12; g.te = Math.max(0, (e - dz) / (1 - dz));
+      g.dir = off < 0 ? -1 : 1; // which way it is leaving
+      if (g.ce === undefined) { g.ce = g.te; g.cv = 0; render(g, groups.indexOf(g)); }
     });
+    if (!raf) raf = requestAnimationFrame(spring);
   }
   var tick = false;
   window.addEventListener("scroll", function () { if (tick) return; tick = true; requestAnimationFrame(function () { tick = false; apply(); }); }, { passive: true });
