@@ -268,3 +268,9 @@ html:not(.view-open):not(#_) body:not(#_) {
 /* the face above the name */
 .who .whoLogo:not(#_) { display: block; width: 104px; height: 104px; margin-bottom: 12px; }
 @media (max-width: 700px) { .who .whoLogo:not(#_) { width: 76px; height: 76px; margin-bottom: 4px; } :root:not(#_) { --hdrH: 322px; } }
+
+/* the face sits in the same row as the name */
+.who .name:not(#_) { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.who .whoLogo:not(#_) { margin-bottom: 0; flex: none; }
+@media (max-width: 700px) { .who .name:not(#_) { gap: 10px; } .who .whoLogo:not(#_) { margin-bottom: 0; } }
+@media (max-width: 700px) { :root:not(#_) { --hdrH: 278px; } }
