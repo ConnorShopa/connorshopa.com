@@ -603,7 +603,7 @@ body::after { opacity: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns
 @media (max-width: 700px) {
   .happlyLanding:not(#_) { --lwv: calc((100vw - 40px) / 5.45); }
   .landWord .landIcon:not(#_) { align-self: center; top: calc(var(--lw) * -0.08); left: calc(var(--lw) * 0.04); width: calc(var(--lw) * 1.02); }
-  .landWord .landIcon[data-skin="norm"] .hs:not(#_), .landWord .landIcon .tile i:not(#_) { height: 120%; transform: translateX(calc(var(--lw) * 0.3)) translateY(calc(var(--lw) * 0.02)); } /* the hand is almost as tall as "happly" */
+  .landWord .landIcon[data-skin="norm"] .hs:not(#_), .landWord .landIcon .tile i:not(#_) { height: 100%; transform: translateX(calc(var(--lw) * 0.3)) translateY(calc(var(--lw) * 0.02)); } /* the hand is almost as tall as "happly" */
   .landWord .landWordBox:not(#_) { aspect-ratio: auto; height: calc(var(--lw) * 2.5); margin-right: calc(var(--lw) * -3.95); margin-left: calc(var(--lw) * 0.35); }
   /* c a t i o n s: one line down, and a little larger so the line runs from the hand's left edge to the end of "happly" (each letter scales about its own centre, then moves to where the larger line puts it) */
   .landWordBox .ltr:nth-child(n + 7):not(#_) { scale: 1.255; translate: calc(var(--lw) * (-5.0 + var(--o) * 0.255 * 0.01878)) calc(var(--lw) * 1.33); }
