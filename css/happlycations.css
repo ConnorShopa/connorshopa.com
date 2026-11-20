@@ -141,7 +141,7 @@ body { overflow: auto; }
 .landDot { width: 0.28em; height: 0.28em; border-radius: 50%; background: #777; }
 
 .landMid { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(10px, 2dvh, 24px); padding-bottom: 4dvh; }
-.landWord { --lw: min(8.4vw, 13.5dvh); /* the wordmark's size: about three quarters of the page wide, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: calc(var(--lw) * 0.3); }
+.landWord { --lw: min(6.8vw, 11dvh); /* the wordmark's size: about three quarters of the page wide, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: calc(var(--lw) * 0.3); }
 /* the app shape beside the wordmark: the white Happlycations tile (as in the top left) that rolls into the hovered app's icon */
 .landIcon { position: relative; display: block; flex: none; width: calc(var(--lw) * 1.02); aspect-ratio: 1; top: calc(var(--lw) * -0.04); }
 .landIcon > * { position: absolute; inset: 0; display: none; }
@@ -182,7 +182,7 @@ body { overflow: auto; }
 @media (prefers-reduced-motion: reduce) { .landApp, .happlyPage[data-view] .happlyDetail, .happlyPage[data-view] .happlyLanding { transition: none; animation: none; } }
 @media (max-width: 800px) {
   .happlyLanding { min-height: calc(100dvh - 48px); }
-  .landWord { --lw: calc((100vw - 32px) / 9.4); }
+  .landWord { --lw: calc((100vw - 32px) / 11.4); }
   .landApps { gap: 22px; }
   .landNav { font-size: 16px; gap: 11px; }
 }
@@ -245,3 +245,7 @@ a.landDl:hover { filter: brightness(1.08); }
 
 /* cotton-like grain over the whole page */
 body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0.5; mix-blend-mode: multiply; background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix values=%220 0 0 0 0.42  0 0 0 0 0.5  0 0 0 0 0.68  0 0 0 0.16 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E"); }
+.landIcon[data-skin="norm"] .tile i { -webkit-mask-image: url("../assets/homeAssets/happlycations_hand_mask.svg"); mask-image: url("../assets/homeAssets/happlycations_hand_mask.svg"); } /* the filled hand silhouette, not just the lines */
+
+/* the app icons are hidden for now (markup kept; delete this line to bring them back) */
+.landApps { display: none !important; }
