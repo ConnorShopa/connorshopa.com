@@ -320,9 +320,9 @@ document.addEventListener("input", function (e) {
   function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
   var groups = [
     { ref: ".who", els: function () { return isPhone() ? [] : $(".who"); }, dz: 0.45 },
-    { ref: "#projectList", els: function () { return isPhone() ? $(".workNote, #projectList") : $(".hero > nav"); }, omin: 0.55, tint: "47, 91, 234", ta: 0.2, box: ".hero > nav", pad: 72 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
-    { ref: "#about", els: function () { return $("#about > *"); }, omin: 0.5, tint: "47, 160, 90", ta: 0.22, box: "#about", pad: 72 },
-    { ref: "#contact", els: function () { return $("#contact > *"); }, omin: 0.5, tint: "255, 201, 40", ta: 0.4, box: "#contact", pad: 72 }
+    { ref: "#projectList", els: function () { return isPhone() ? $(".workNote, #projectList") : $(".hero > nav"); }, omin: 0.65, tint: "47, 91, 234", ta: 0.2, box: ".hero > nav", pad: 72 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
+    { ref: "#about", els: function () { return $("#about > *"); }, omin: 0.65, tint: "47, 160, 90", ta: 0.22, box: "#about", pad: 72 },
+    { ref: "#contact", els: function () { return $("#contact > *"); }, omin: 0.65, tint: "255, 201, 40", ta: 0.4, box: "#contact", pad: 72 }
   ];
   // each section sits on a soft wash of its tab's colour; it is strongest when the section is off to the side and fades away as the section comes into focus
   groups.forEach(function (g) {
@@ -344,7 +344,7 @@ document.addEventListener("input", function (e) {
   }
   function render(g, gi) {
     var e = Math.max(0, Math.min(1.08, g.ce)), q = e * e * (3 - 2 * Math.min(1, e)); // eased, so it starts gently
-    var s = 1 - 0.5 * q, o = Math.max(g.omin || 0, 1 - 0.97 * q), rot = 0, dy = (g.dir || 1) * -14 * q;
+    var s = 1 - 0.25 * q, o = Math.max(g.omin || 0, 1 - 0.97 * q), rot = 0, dy = (g.dir || 1) * -14 * q;
     if (g.wash) {
       var vw = document.documentElement.clientWidth, vh = window.innerHeight;
       var below = (g.off || 0) > 0 ? Math.max(0, Math.min(1, 1 - ((g.off || 0) - vh * 0.5) / (vh * 0.7))) : 0; // only once the section is coming up from below the screen

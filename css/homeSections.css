@@ -417,5 +417,11 @@ body:not(#_) { background-color: #F4F4F4; }
 @media (min-width: 701px) {
   .hero > nav:not(#_):not(#_) { margin-top: max(80px, calc(50dvh - 239px)); }
   #about.homeSec:not(#_):not(#_) { margin-top: -150px; }
-  #contact.homeSec:not(#_):not(#_) { margin-top: 40px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: -40px; }
+}
+
+/* phone: same peek, the next section shows above the tab bar while the current one is centred */
+@media (max-width: 700px) {
+  #about.homeSec:not(#_):not(#_):not(#_) { margin-top: -120px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: -50px; }
 }
