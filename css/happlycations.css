@@ -383,3 +383,6 @@ html, body, .happlyPage { background: #D7E3F7; }
 /* no download button and no ring / glow when an app icon is hovered (markup kept; delete these rules to bring them back) */
 .landDl, .landRing { display: none !important; }
 .landApps li:hover .landApp img, .landApps li:focus-within .landApp img { filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.14)); }
+
+/* the peeking frame is removed for now (markup kept; delete this line to bring it back) */
+.landFrame { display: none !important; }
