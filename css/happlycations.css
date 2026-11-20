@@ -598,7 +598,11 @@ body::after { opacity: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns
 /* dock pinned 72px up from the bottom edge of the screen */
 .landMid > .landNav { top: auto; bottom: 72px; }
 
-/* top tabs: no frame, just the labels */
-.landTabs { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; }
-.landTabs .landSoon { font-weight: 700; }
-.landTabs { top: 72px; }
+/* small screens: the big wordmark breaks as happly / cations, with the hand beside "happly" on the top row.
+   Each letter is its own layer (cut at the artwork's own letter edges), so "cations" is just those layers moved left and down. */
+@media (max-width: 700px) {
+  .happlyLanding:not(#_) { --lwv: calc((100vw - 32px) / 6.6); }
+  .landWord .landIcon:not(#_) { align-self: center; top: calc(var(--lw) * -0.6); }
+  .landWord .landWordBox:not(#_) { aspect-ratio: auto; height: calc(var(--lw) * 2.5); margin-right: calc(var(--lw) * -3.95); }
+  .landWordBox .ltr:nth-child(n + 7):not(#_) { translate: calc(var(--lw) * -3.8366) calc(var(--lw) * 1.25); } /* c a t i o n s: back to the start of the word, one line down */
+}
