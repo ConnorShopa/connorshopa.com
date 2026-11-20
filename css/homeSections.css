@@ -137,3 +137,12 @@ html:not(.view-open):not(#_) body:not(#_) {
 .filters.stuck:not(#_), .filters.pinned:not(#_) {
   box-shadow: 0 0 0 7px #fff, 0 14px 38px color-mix(in srgb, var(--tabC, #2f2725) 62%, transparent), 0 4px 12px color-mix(in srgb, var(--tabC, #2f2725) 55%, transparent);
 }
+
+/* more air between the tab menu and the name; the light blue bubble also shows when the logo is keyboard-focused */
+.intro > .filters:not(#_) { margin-bottom: 140px; }
+@media (max-width: 700px) { .intro > .filters:not(#_) { margin-bottom: 32px; } }
+.filtersLogo:focus-visible { background: #D9E7FC; outline: none; }
+.filters .pill[data-work]:focus-visible { background: rgba(229, 53, 43, 0.28); outline: none; }
+.filters .pill[data-panel="about"]:focus-visible { background: rgba(255, 201, 40, 0.5); outline: none; }
+.filters .pill[data-panel="contact"]:focus-visible { background: rgba(47, 91, 234, 0.28); outline: none; }
+.filters .pill[aria-pressed="true"]:focus-visible { background: transparent; }
