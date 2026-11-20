@@ -352,3 +352,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .ltr:last-child .rc { clip-path: inset(-60% -4% -60% var(--l)); }
 .ltr .rc > span { display: block; width: 100%; height: 100%; background: #000; -webkit-mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat; }
 @media (max-width: 700px) { .ltr .rc { filter: url(#landOutlineThin); } }
+
+/* the wordmark stroke is off for now (kept above; delete this line to bring it back). The hand keeps its stroke. */
+.ltr .ring { display: none !important; }
