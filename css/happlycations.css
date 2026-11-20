@@ -412,3 +412,6 @@ html, body, .happlyPage { background: #D7E3F7; }
 
 /* grain overlay off (kept above for later) */
 body::after { display: none !important; }
+
+/* grain overlay back on */
+body::after { display: block !important; }
