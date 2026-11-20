@@ -422,3 +422,8 @@ body::after { display: block !important; }
 .ltr[data-skin="sheep"] .skin { clip-path: inset(-60% -1px -60% -1px); }
 .ltr[data-skin="sheep"]:first-child .skin { clip-path: inset(-60% -1px -60% -10%); }
 .ltr[data-skin="sheep"]:last-child .skin { clip-path: inset(-60% -10% -60% -1px); }
+
+/* centred: the logo + wordmark group sits exactly in the middle of the page; the apps hang lower down the screen (shifted, so the wordmark doesn't move) */
+.landWord { left: 0; }
+.landApps { position: relative; top: 14dvh; }
+@media (max-width: 700px) { .landApps { top: 9dvh; } }
