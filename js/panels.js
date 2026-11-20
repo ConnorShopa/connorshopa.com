@@ -361,7 +361,22 @@ document.addEventListener("input", function (e) {
         g.wash.style.height = (vh * 0.16 * sc).toFixed(1) + "px";
       }
     }
+    g.f = 1 - q; // how strongly this section is in focus
     setAll(g, s, o, rot, dy);
+    paintBg();
+  }
+  // the page background takes a very, very light tint of the section in focus (the top section, with no tint of its own, keeps the plain background)
+  var BG = [244, 244, 244], BG_MIX = 0.04;
+  function paintBg() {
+    var rgb = BG.slice();
+    if (on) groups.forEach(function (g) {
+      if (!g.tint || g.f === undefined) return;
+      var t = g.tint.split(",").map(Number), x = Math.max(0, Math.min(1, (g.f - 0.35) / 0.65)), w = x * x * (3 - 2 * x) * BG_MIX; // only once the section is mostly in focus
+      for (var i = 0; i < 3; i++) rgb[i] += (t[i] - BG[i]) * w;
+    });
+    var c = "rgb(" + rgb.map(function (v) { return Math.round(v); }).join(",") + ")";
+    document.body.style.backgroundColor = on ? c : "";
+    document.documentElement.style.backgroundColor = on ? c : "";
   }
   var raf = 0;
   function spring() {
@@ -391,7 +406,7 @@ document.addEventListener("input", function (e) {
     if (on) groups.forEach(function (g, gi) { if (g.items && g.items.length && g.ce !== undefined) render(g, gi); });
   }
   function apply() {
-    if (!enabled()) { if (on) { on = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } groups.forEach(function (g) { g.ce = g.te = g.cv = 0; if (g.items) setAll(g, 1, 1, 0, 0); if (g.wash) g.wash.style.opacity = "0"; }); } return; }
+    if (!enabled()) { if (on) { on = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } groups.forEach(function (g) { g.ce = g.te = g.cv = 0; if (g.items) setAll(g, 1, 1, 0, 0); if (g.wash) g.wash.style.opacity = "0"; }); paintBg(); } return; }
     on = true;
     var vh = scrH(), pos = scrPos();
     groups.forEach(function (g) {
