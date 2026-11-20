@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=210" />
+    <link rel="stylesheet" href="css/happlycations.css?v=211" />
 </head>
 
 <body>
@@ -186,36 +186,38 @@
                 el.innerHTML = '<span class="skin"><span></span></span><span class="ring"><span class="rc"><span></span></span></span>';
                 ltrWrap.appendChild(el); ltrs.push(el);
             }
+            // Each letter rolls on its own: up and out, then the new treatment rolls in. A letter that is already part way through a roll is
+            // never cancelled (that is what made the wordmark jump when going from one app to another): it finishes the roll it is in, and then
+            // carries on to the latest target, so a change of app just redirects the letters smoothly.
+            function rollLetter(l, k) {
+                if (l._busy || l.dataset.skin === l._target) return;
+                l._busy = true;
+                var dir = l._target === "norm" ? -1 : 1; // the original wordmark always drops in from the top; the app wordmarks rise in from below
+                var out = l.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(" + (-dir * 55) + "%) scale(.7)", opacity: 0 }], { duration: 120 * k, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
+                out.onfinish = function () {
+                    l.dataset.skin = l._target; // the latest target, even if it changed while this letter was rolling out
+                    var d2 = l._target === "norm" ? -1 : 1;
+                    out.cancel();
+                    var inn = l.animate([{ transform: "translateY(" + (d2 * 55) + "%) scale(.7)", opacity: 0 }, { transform: "translateY(0) scale(1)", opacity: 1 }], { duration: 210 * k, easing: "cubic-bezier(.16, 1, .3, 1)" });
+                    inn.onfinish = function () { l._busy = false; if (l.dataset.skin !== l._target) rollLetter(l, k); };
+                };
+            }
             function setSkin(skin) {
                 if (skin === skinNow) return;
                 skinNow = skin;
-                var me = ++swapToken;
                 swapTimers.forEach(clearTimeout); swapTimers = [];
-                // whatever was half way is cancelled first, so no letter is left faded out or on the wrong treatment: every letter is
-                // then either already right (and fully shown) or is swapped, in order
-                ltrs.forEach(function (l) { l.getAnimations().forEach(function (a) { a.cancel(); }); });
-                if (still.matches || !ltrWrap.animate) { ltrs.forEach(function (l) { l.dataset.skin = skin; }); return; }
+                if (still.matches || !ltrWrap.animate) { ltrs.forEach(function (l) { l._target = skin; l.dataset.skin = skin; }); return; }
                 // the swap speeds up as it travels left to right: each gap between letters is shorter than the last, and each letter's own
-                // out / in gets quicker too
-                var dir = skin === "norm" ? -1 : 1; // the original wordmark always drops in from the top; the app wordmarks rise in from below
-                // the hand logo stays as it is: only the letters change
+                // out / in gets quicker too (the hand logo stays as it is: only the letters change)
                 var at = 0;
                 ltrs.forEach(function (l, i) {
                     var t = Math.max(0, (i - 6) / 6), // 0 for the first half of the word, then ramps 0 -> 1 over the second half
                         gap = 34 * (1 + 0.5 * t * t),  // steady 34ms between letters, then widening gently to ~51ms: the wave slows from about halfway
                         k = 1 + 0.25 * t;              // each letter's own roll also slows a touch, to 1.25x at the end
                     var when = at; at += gap;
-                    if (l.dataset.skin === skin) return;
-                    swapTimers.push(setTimeout(function () {
-                        if (me !== swapToken) return;
-                        var out = l.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(" + (-dir * 55) + "%) scale(.7)", opacity: 0 }], { duration: 120 * k, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
-                        out.onfinish = function () {
-                            if (me !== swapToken) return;
-                            l.dataset.skin = skin;
-                            out.cancel();
-                            l.animate([{ transform: "translateY(" + (dir * 55) + "%) scale(.7)", opacity: 0 }, { transform: "translateY(0) scale(1)", opacity: 1 }], { duration: 210 * k, easing: "cubic-bezier(.16, 1, .3, 1)" });
-                        };
-                    }, when));
+                    l._target = skin;
+                    if (l.dataset.skin === skin && !l._busy) return;
+                    swapTimers.push(setTimeout(function () { rollLetter(l, k); }, when));
                 });
             }
             // the letters tick at random between the versions (plain, sheep outline, drawl scribble, habbot grass), a letter at a time.
@@ -235,7 +237,7 @@
                             // like the iOS number roll: the old letter lifts up and blurs out, the new one rises in from below, in focus
                             var out = l.animate([{ transform: "translateY(0) scale(1)", opacity: 1, filter: "blur(0)" }, { transform: "translateY(-55%) scale(.75)", opacity: 0, filter: "blur(7px)" }], { duration: 160, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
                             out.onfinish = function () {
-                                l.dataset.skin = next;
+                                l.dataset.skin = next; l._target = next;
                                 out.cancel();
                                 var inn = l.animate([{ transform: "translateY(55%) scale(.75)", opacity: 0, filter: "blur(7px)" }, { transform: "translateY(0) scale(1)", opacity: 1, filter: "blur(0)" }], { duration: 300, easing: "cubic-bezier(.16, 1, .3, 1)" });
                                 inn.onfinish = function () { l.busy = false; };
