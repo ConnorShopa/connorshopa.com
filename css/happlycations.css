@@ -437,3 +437,6 @@ body::after { display: block !important; }
 .landApps li:hover .landName, .landApp:focus-visible .landName { opacity: 1; transform: translate(-50%, 0); }
 @media (hover: none) { .landName { opacity: 0; } }
 .landName { top: calc(100% + 14px); }
+
+/* tab menu back under the wordmark */
+.landMid > .landNav { display: flex !important; }
