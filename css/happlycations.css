@@ -373,3 +373,9 @@ html, body, .happlyPage { background: #D7E3F7; }
 
 /* the frame: a flat, soft white a little lighter than the blue background (no emboss) */
 .landFrame { background: #EAF0FB; box-shadow: none; }
+
+/* the tagline, embossed like the wordmark: the page colour itself, raised by a soft light edge top-left and a soft shadow bottom-right */
+.landMid > .landTag {
+  margin: 4px 0 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 700; font-size: clamp(17px, 1.6vw, 28px); letter-spacing: 0.005em; text-align: center;
+  color: #D7E3F7; text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.95), 1px 1.5px 1.5px rgba(77, 105, 161, 0.5);
+}
