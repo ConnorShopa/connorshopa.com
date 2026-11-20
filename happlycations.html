@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=185" />
+    <link rel="stylesheet" href="css/happlycations.css?v=187" />
 </head>
 
 <body>
@@ -19,9 +19,15 @@
             <feComposite in="ink" in2="ring" operator="in" />
         </filter>
         <filter id="landOutline" x="-3%" y="-10%" width="106%" height="120%" color-interpolation-filters="sRGB">
-            <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="grown" />
+            <feMorphology in="SourceAlpha" operator="dilate" radius="1.6" result="grown" />
             <feComposite in="grown" in2="SourceAlpha" operator="out" result="ring" />
-            <feFlood flood-color="#111" result="ink" />
+            <feFlood flood-color="#4A68A6" result="ink" />
+            <feComposite in="ink" in2="ring" operator="in" />
+        </filter>
+        <filter id="landOutlineThin" x="-3%" y="-10%" width="106%" height="120%" color-interpolation-filters="sRGB">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="0.7" result="grown" />
+            <feComposite in="grown" in2="SourceAlpha" operator="out" result="ring" />
+            <feFlood flood-color="#4A68A6" result="ink" />
             <feComposite in="ink" in2="ring" operator="in" />
         </filter>
     </svg>
@@ -176,7 +182,7 @@
                 el.className = "ltr"; el.dataset.skin = "norm";
                 el.style.setProperty("--l", (CUTS[li] / 418 * 100).toFixed(3) + "%");
                 el.style.setProperty("--r", (CUTS[li + 1] / 418 * 100).toFixed(3) + "%");
-                el.innerHTML = '<span class="skin"><span></span></span>';
+                el.innerHTML = '<span class="skin"><span></span></span><span class="ring"><span class="rc"><span></span></span></span>';
                 ltrWrap.appendChild(el); ltrs.push(el);
             }
             function setSkin(skin) {
