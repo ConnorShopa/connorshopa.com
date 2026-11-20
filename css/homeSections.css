@@ -154,3 +154,8 @@ html:not(.view-open):not(#_) body:not(#_) {
 .who .name:not(#_) { font-size: 34px; line-height: 1.3; }
 @media (max-width: 900px) { .who .name:not(#_) { font-size: 28px; } }
 @media (max-width: 700px) { .who .name:not(#_) { font-size: 22px; } }
+
+/* subtitle 4px smaller than the name */
+.tagline:not(#_) { font-size: 30px; }
+@media (max-width: 900px) { .tagline:not(#_) { font-size: 24px; } }
+@media (max-width: 700px) { .tagline:not(#_) { font-size: 18px; } }
