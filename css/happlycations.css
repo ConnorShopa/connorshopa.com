@@ -386,3 +386,7 @@ html, body, .happlyPage { background: #D7E3F7; }
 
 /* the peeking frame is removed for now (markup kept; delete this line to bring it back) */
 .landFrame { display: none !important; }
+
+/* a card round each app: flat soft white, a little lighter than the blue background */
+.landApps li { background: #EAF0FB; border-radius: 26px; padding: clamp(14px, 1.3vw, 22px) clamp(18px, 1.8vw, 30px) clamp(12px, 1.1vw, 18px); }
+@media (max-width: 700px) { .landApps li { border-radius: 20px; padding: 12px 14px 10px; } .landApps { gap: 12px; } }
