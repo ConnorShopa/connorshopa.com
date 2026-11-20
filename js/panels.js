@@ -343,8 +343,7 @@ document.addEventListener("input", function (e) {
   var TILT = [1.6, -1.1, 1.9, -1.4];
   function setAll(g, s, o, rot, dy) {
     var tf = s === 1 && !rot && !dy ? "" : "translateY(" + (dy || 0).toFixed(2) + "px) rotate(" + (rot || 0).toFixed(3) + "deg) scale(" + s.toFixed(4) + ")";
-    // the whole section scales about its top edge while it is still below the screen and about its bottom edge once it has gone above, so it reads as the scroll doing the scaling
-    g.items.forEach(function (el) { el.style.transform = tf; el.style.opacity = o >= 0.999 ? "" : o.toFixed(3); if (tf && el._ot !== undefined) el.style.transformOrigin = "50% " + ((g.dir || 1) > 0 ? el._ot : el._ob).toFixed(1) + "px"; });
+    g.items.forEach(function (el) { el.style.transform = tf; el.style.opacity = o >= 0.999 ? "" : o.toFixed(3); });
   }
   function render(g, gi) {
     var e = Math.max(0, Math.min(1.08, g.ce)), q = e * e * (3 - 2 * Math.min(1, e)); // eased, so it starts gently
@@ -381,10 +380,6 @@ document.addEventListener("input", function (e) {
     groups.forEach(function (g) {
       g.items = g.els();
       g.items.forEach(function (el) { el.style.transform = ""; el.style.opacity = ""; el.style.willChange = "transform, opacity"; });
-      var sc1 = scr(), pt = function (e) { var r = e.getBoundingClientRect(); return sc1 ? sc1.scrollTop + r.top - sc1.getBoundingClientRect().top : r.top + window.pageYOffset; };
-      var gt = Infinity, gb = -Infinity;
-      g.items.forEach(function (el) { var t = pt(el), b = t + el.getBoundingClientRect().height; if (t < gt) gt = t; if (b > gb) gb = b; el._t = t; });
-      g.items.forEach(function (el) { el._ot = gt - el._t; el._ob = gb - el._t; }); // the section's top and bottom edges, measured from each piece's own top
       var ref = document.querySelector(g.ref);
       if (!ref) { g.top = g.h = 0; return; }
       var r = ref.getBoundingClientRect();
