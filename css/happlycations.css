@@ -251,3 +251,9 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .landApps { display: none !important; }
 
 .landTag { color: #2E4A87; } /* deep blue from the theme, ~6:1 on the background */
+
+/* each letter's ink is cut at its own cut points, but its shadow / outline / emboss (the filter on .skin) is NOT, so neighbouring letters no longer slice each other's edges */
+.ltr, .ltr:first-child, .ltr:last-child { clip-path: none; }
+.ltr .skin > span { clip-path: inset(-60% calc(100% - var(--r)) -60% var(--l)); }
+.ltr:first-child .skin > span { clip-path: inset(-60% calc(100% - var(--r)) -60% -4%); }
+.ltr:last-child .skin > span { clip-path: inset(-60% -4% -60% var(--l)); }
