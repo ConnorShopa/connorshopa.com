@@ -65,6 +65,8 @@
   function pinned() { return filters.classList.contains("stuck") || filters.classList.contains("pinned"); }
   if (dot) {
     chips.concat(Array.prototype.slice.call(document.querySelectorAll(".filtersLogo"))).forEach(function (c) { c.addEventListener("pointerenter", function (e) { if (e.pointerType === "touch") return; if (dot.parentNode !== filters) filters.insertBefore(dot, filters.firstChild); }); });
+    // the pointer dot comes up into the bar as soon as the pointer is anywhere over it (not only over a tab), so it is never hidden under the white
+    filters.addEventListener("pointerenter", function (e) { if (e.pointerType === "touch") return; if (dot.parentNode !== filters) filters.insertBefore(dot, filters.firstChild); });
     filters.addEventListener("pointerleave", function () { bubbleHome(); });
   }
   function press(name) {
@@ -309,7 +311,7 @@ document.addEventListener("input", function (e) {
   function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
   var groups = [
     { ref: ".who", els: function () { return $(".who"); } },
-    { ref: "#projectList", els: function () { return $("#projectList").concat($(".workNote")); } },
+    { ref: "#projectList", els: function () { return $(".hero > nav"); } }, // the whole Work block (its box is centred on the page, so it scales about the middle)
     { ref: "#about", els: function () { return $("#about > *").concat($(".aboutBack")); } },
     { ref: "#contact", els: function () { return $("#contact > *"); } }
   ];
@@ -337,7 +339,7 @@ document.addEventListener("input", function (e) {
       if (!g.items || !g.items.length) return;
       var centre = g.top + g.h / 2 - pos;
       var e = Math.min(1, Math.abs(centre - vh / 2) / (vh * 0.75));
-      e = Math.max(0, (e - 0.45) / 0.55);
+      e = Math.max(0, (e - 0.6) / 0.4);
       var s = 1 - 0.12 * e, o = 1 - 0.65 * e;
       if (Math.abs(s - g.s) < 0.0005 && Math.abs(o - g.o) < 0.002) return;
       g.s = s; g.o = o; setAll(g, s, o);
