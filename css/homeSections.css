@@ -364,7 +364,7 @@ body:not(#_) { background-color: #F4F4F4; }
 
 
 /* the colour wash behind each section (Work blue, About green, Contact yellow); js/panels.js sets its strength from how far the section is from the middle of the screen */
-.secTint:not(#_) { position: absolute; z-index: -2; border-radius: 56px; pointer-events: none; opacity: 0; }
+.secTint:not(#_) { position: absolute; z-index: -2; border-radius: 96px; pointer-events: none; opacity: 0; }
 @media (max-width: 700px) { .secTint:not(#_) { display: none; } }
 
 /* narrower sections: the About card is a slim card, sitting on its (also narrower) colour wash */
