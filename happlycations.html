@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=197" />
+    <link rel="stylesheet" href="css/happlycations.css?v=199" />
 </head>
 
 <body>
@@ -193,22 +193,11 @@
                 // whatever was half way is cancelled first, so no letter is left faded out or on the wrong treatment: every letter is
                 // then either already right (and fully shown) or is swapped, in order
                 ltrs.forEach(function (l) { l.getAnimations().forEach(function (a) { a.cancel(); }); });
-                ico.getAnimations().forEach(function (a) { a.cancel(); });
-                if (still.matches || !ltrWrap.animate) { ico.dataset.skin = skin; ltrs.forEach(function (l) { l.dataset.skin = skin; }); return; }
+                if (still.matches || !ltrWrap.animate) { ltrs.forEach(function (l) { l.dataset.skin = skin; }); return; }
                 // the swap speeds up as it travels left to right: each gap between letters is shorter than the last, and each letter's own
                 // out / in gets quicker too
                 var dir = skin === "norm" ? -1 : 1; // the original wordmark always drops in from the top; the app wordmarks rise in from below
-                // the app shape rolls the same way, as the wave begins
-                swapTimers.push(setTimeout(function () {
-                    if (me !== swapToken) return;
-                    var o = ico.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(" + (-dir * 40) + "%) scale(.7)", opacity: 0 }], { duration: 120, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
-                    o.onfinish = function () {
-                        if (me !== swapToken) return;
-                        ico.dataset.skin = skin;
-                        o.cancel();
-                        ico.animate([{ transform: "translateY(" + (dir * 40) + "%) scale(.7)", opacity: 0 }, { transform: "translateY(0) scale(1)", opacity: 1 }], { duration: 260, easing: "cubic-bezier(.16, 1, .3, 1)" });
-                    };
-                }, 0));
+                // the hand logo stays as it is: only the letters change
                 var at = 0;
                 ltrs.forEach(function (l, i) {
                     var t = Math.max(0, (i - 6) / 6), // 0 for the first half of the word, then ramps 0 -> 1 over the second half
