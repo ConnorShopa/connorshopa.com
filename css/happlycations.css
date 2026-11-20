@@ -457,8 +457,8 @@ body::after { display: block !important; }
 .landNav > .landSoon { color: #2B3F73; transition: color .2s ease; }
 .landNav > .landSoon:hover { color: #14234F; }
 
-/* logo + wordmark: as wide as the screen, 48px of padding each side (the visible group, hand art to the end of the wordmark, is about 8.573 x --lw wide) */
-.landWord { --lw: calc((100vw - 96px) / 8.573); }
+/* logo + wordmark: as wide as the screen minus the side padding (8vw, at least 32px) (the visible group, hand art to the end of the wordmark, is about 8.573 x --lw wide) */
+.landWord { --lw: calc((100vw - 2 * max(32px, 8vw)) / 8.573); }
 
 /* the word group spans the whole window width so its 48px side padding is real, whatever the page padding is */
 .landWord { width: 100vw; margin-inline: calc(50% - 50vw); left: 0; transform: none; }
@@ -490,3 +490,6 @@ body::after { display: block !important; }
 /* dock: rounder and lighter */
 .landMid > .landNav { border-radius: 42px; background: rgba(236, 243, 255, 0.55); border-color: rgba(255, 255, 255, 0.7); box-shadow: 0 12px 32px rgba(47, 74, 163, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8); }
 @media (max-width: 700px) { .landMid > .landNav { border-radius: 32px; } }
+
+/* logo + wordmark sit lower, closer to the dock */
+.landWord { top: 10dvh; }
