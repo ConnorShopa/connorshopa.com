@@ -225,7 +225,7 @@
             // It pauses while an app is hovered (that swap is in charge then), when the tab is hidden, and for reduced motion.
             var SKINS = ["norm", "sheep", "drawl", "habbot"];
             if (!still.matches && ltrWrap.animate) {
-                setInterval(function () {
+                function swapOne() {
                     if (document.hidden || skinNow !== "norm" || page.getAttribute("data-hover")) return;
                     var n = 1;
                     for (var k = 0; k < n; k++) {
@@ -244,7 +244,9 @@
                             };
                         })(ltrs[Math.floor(Math.random() * ltrs.length)]);
                     }
-                }, 1100);
+                }
+                // the gap between swaps is random too (0.5s to 2s)
+                (function tick() { swapOne(); setTimeout(tick, 500 + Math.random() * 1500); })();
             }
             // hovering an app also dresses the hand in the app's colour (CSS, from data-hover)
             var landRow = document.querySelector(".landApps");
