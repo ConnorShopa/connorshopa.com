@@ -224,7 +224,8 @@
             // the letters tick at random between the versions (plain, sheep outline, drawl scribble, habbot grass), a letter at a time.
             // It pauses while an app is hovered (that swap is in charge then), when the tab is hidden, and for reduced motion.
             var SKINS = ["norm", "sheep", "drawl", "habbot"];
-            if (!still.matches && ltrWrap.animate) {
+            var TICK = false; // set to true to bring the random letter ticking back (kept for a later ideation session)
+            if (TICK && !still.matches && ltrWrap.animate) {
                 function swapOne() {
                     if (document.hidden || skinNow !== "norm" || page.getAttribute("data-hover")) return;
                     var n = 1;
