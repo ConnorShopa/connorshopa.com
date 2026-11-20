@@ -370,3 +370,6 @@ html, body, .happlyPage { background: #D7E3F7; }
 
 /* the frame has no emboss now (no light / shadow edges); with no fill either it is invisible until given a flat fill or outline */
 .landFrame { box-shadow: none; }
+
+/* the frame: a flat, soft white a little lighter than the blue background (no emboss) */
+.landFrame { background: #EAF0FB; box-shadow: none; }
