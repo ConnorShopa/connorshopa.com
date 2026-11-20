@@ -314,3 +314,29 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 
 /* the tab menu is hidden for now (markup kept; delete this line to bring it back) */
 .landMid > .landNav { display: none !important; }
+
+/* a stroke on the hand: the line drawing sits on top of the filled hand */
+.landIcon .tile i { grid-area: 1 / 1; }
+.landIcon[data-skin="norm"] .tile::after {
+  content: ""; grid-area: 1 / 1; display: block; height: 62%; aspect-ratio: 91 / 135; transform: translateX(calc(var(--lw) * 0.3)); place-self: center;
+  background: #6C87BC;
+  -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
+}
+
+/* the frame: a raised panel made from the same surface as the page, peeking up from the bottom edge, with the same light / shadow edges as the letters */
+.landFrame {
+  position: fixed; left: 50%; bottom: 0; z-index: 0; pointer-events: none;
+  width: min(1100px, calc(100% - 64px)); height: 60dvh; transform: translate(-50%, calc(60dvh - clamp(84px, 12dvh, 132px)));
+  border-radius: 40px; background: linear-gradient(180deg, #DFE9FB 0%, #D7E3F7 52%, #CFDEF3 100%) fixed;
+  box-shadow: -8px -8px 18px rgba(255, 255, 255, 0.95), 9px 6px 22px rgba(90, 118, 172, 0.34), 0 -3px 8px rgba(90, 118, 172, 0.12);
+}
+@media (max-width: 700px) { .landFrame { width: calc(100% - 32px); border-radius: 28px; } }
+
+/* the stroke is embossed too: a ridge in the same surface, lit from the top-left, sitting on the (already embossed) hand */
+.landIcon[data-skin="norm"] .tile::after { display: none; }
+.landIcon .hs { display: none; }
+.landIcon[data-skin="norm"] .hs {
+  display: block; grid-area: 1 / 1; place-self: center; height: 62%; aspect-ratio: 91 / 135; transform: translateX(calc(var(--lw) * 0.3));
+  filter: drop-shadow(calc(var(--lw) * -0.005) calc(var(--lw) * -0.005) calc(var(--lw) * 0.004) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.007) calc(var(--lw) * 0.01) calc(var(--lw) * 0.008) rgba(80, 108, 165, 0.55));
+}
+.landIcon .hs b { display: block; width: 100%; height: 100%; background: linear-gradient(180deg, #DFE9FB 0%, #D7E3F7 52%, #CFDEF3 100%) fixed; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
