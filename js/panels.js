@@ -350,7 +350,7 @@ document.addEventListener("input", function (e) {
       var below = (g.off || 0) > 0 ? Math.max(0, Math.min(1, 1 - ((g.off || 0) - vh * 0.5) / (vh * 0.7))) : 0; // only once the section is coming up from below the screen
       var sc = 0.55 + 0.45 * q; // smaller as it nears focus
       g.wash.style.opacity = (q * below).toFixed(3);
-      if (isPhone()) { // phones: the glow spans the whole width of the device and sits lower
+      if (isPhone() || vw < 1000 || vh > vw) { // phones and narrow / portrait windows: the glow spans the whole width of the device and sits lower
         g.wash.style.width = (vw * 1.2).toFixed(1) + "px"; g.wash.style.left = (-vw * 0.1).toFixed(1) + "px";
         g.wash.style.height = (vh * 0.3 * sc).toFixed(1) + "px";
       } else {

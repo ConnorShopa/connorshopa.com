@@ -425,3 +425,19 @@ body:not(#_) { background-color: #F4F4F4; }
 @media (max-width: 700px) {
   #projectList li:not(.row-break):not(#_):not(#_):not(#_) { background: transparent !important; }
 }
+
+/* phone: with no tile backgrounds the links sit in an even two-column grid */
+@media (max-width: 700px) {
+  .hero > nav > #projectList:not(#_):not(#_):not(#_) { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px 8px; justify-items: stretch; }
+  #projectList li.row-break:not(#_):not(#_):not(#_) { display: none !important; }
+  #projectList li:not(.row-break):not(#_):not(#_):not(#_) { flex: none; width: auto; min-width: 0; }
+}
+
+/* phone: the small divider between the two links in each row, like on desktop (li:nth-child counts the hidden row-breaks, so every 4th li starting at the 1st is a left tile, plus the 12th link, which the deck order moves; Poll.in is the odd one out) */
+@media (max-width: 700px) {
+  #projectList li:not(.row-break):nth-child(4n + 1):not(:nth-child(25)):not(#_):not(#_):not(#_):not(#_)::after,
+  #projectList li:not(.row-break):nth-child(23):not(#_):not(#_):not(#_):not(#_)::after {
+    display: block !important; content: "" !important; position: absolute; left: 100%; top: 50%; margin: -3px 0 0 -4px; width: 2px; height: 6px; border-radius: 2px; background: rgba(51, 51, 51, 0.8); opacity: 1 !important; inset: auto auto auto 100%;
+  }
+  #projectList li:not(.row-break):not(#_):not(#_):not(#_) { position: relative !important; }
+}
