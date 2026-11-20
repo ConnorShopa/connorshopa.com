@@ -493,3 +493,6 @@ body::after { display: block !important; }
 
 /* logo + wordmark sit lower, closer to the dock */
 .landWord { top: 10dvh; }
+
+/* logo + wordmark: always dead centre of the screen, both ways (a full-screen layer that centres the group; clicks pass through it) */
+.landWord { position: fixed; inset: 0; top: 0; left: 0; width: auto; height: auto; margin: 0; transform: none; z-index: 1; pointer-events: none; display: flex; align-items: center; justify-content: center; }
