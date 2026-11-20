@@ -594,3 +594,9 @@ body::after { opacity: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns
 /* more room between the app icons */
 .landNav > .landApps { gap: clamp(22px, 2.4vw, 36px); }
 @media (max-width: 700px) { .landNav > .landApps { gap: 16px; } }
+
+/* dock pinned 72px up from the bottom edge of the screen */
+.landMid > .landNav { top: auto; bottom: 72px; }
+
+/* top tabs: no frame, just the labels */
+.landTabs { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; }
