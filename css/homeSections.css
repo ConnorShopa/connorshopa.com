@@ -400,3 +400,7 @@ body:not(#_) { background-color: #F4F4F4; }
   .hlSplit .hs1 { width: calc(var(--w) * 0.559); background-position: left center; }
   .hlSplit .hs2 { width: calc(var(--w) * 0.47); margin-left: calc(var(--w) * 0.13); clip-path: inset(0 0 0 calc(var(--h) * 0.3)); background-position: right center; margin-top: calc(var(--h) * -0.12); }
 }
+
+/* Connor Shopa sits dead centre of the screen (both ways) when the page is at the top */
+@media (min-width: 701px) { .intro > .filters:not(#_):not(#_) { margin-bottom: max(120px, calc(50dvh - 141px)); } }
+@media (max-width: 700px) { .introTop:not(#_):not(#_) { padding-top: max(100px, calc(50dvh - 62px)); } }
