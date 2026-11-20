@@ -146,3 +146,6 @@ html:not(.view-open):not(#_) body:not(#_) {
 .filters .pill[data-panel="about"]:focus-visible { background: rgba(255, 201, 40, 0.5); outline: none; }
 .filters .pill[data-panel="contact"]:focus-visible { background: rgba(47, 91, 234, 0.28); outline: none; }
 .filters .pill[aria-pressed="true"]:focus-visible { background: transparent; }
+
+/* tagline: one weight lighter than the About lead, at 80% */
+.tagline:not(#_), .tagline .tl:not(#_) { font-weight: 400; color: rgba(47, 39, 37, 0.8); }
