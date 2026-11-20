@@ -340,3 +340,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   filter: drop-shadow(calc(var(--lw) * -0.005) calc(var(--lw) * -0.005) calc(var(--lw) * 0.004) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.007) calc(var(--lw) * 0.01) calc(var(--lw) * 0.008) rgba(80, 108, 165, 0.55));
 }
 .landIcon .hs b { display: block; width: 100%; height: 100%; background: linear-gradient(180deg, #DFE9FB 0%, #D7E3F7 52%, #CFDEF3 100%) fixed; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
+
+/* the hand's stroke is dark (still raised, with its light and shadow edges) so the lines read clearly */
+.landIcon .hs b { background: linear-gradient(180deg, #5F7CB5 0%, #4A68A6 100%); }
