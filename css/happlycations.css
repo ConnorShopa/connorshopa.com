@@ -600,3 +600,4 @@ body::after { opacity: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns
 
 /* top tabs: no frame, just the labels */
 .landTabs { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; }
+.landTabs .landSoon { font-weight: 700; }
