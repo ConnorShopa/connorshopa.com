@@ -561,3 +561,24 @@ body::after { display: block !important; }
   .landNav .landTile, .landNav .landApp img { width: 46px; height: 46px; border-radius: 21px; }
   .landNav .landApp:hover .landTile, .landNav .landApp:focus-visible .landTile { transform: scale(1.1); }
 }
+
+/* You + Us / About: their own tab bar, pinned to the top of the screen above everything */
+.landTabs {
+  position: fixed; top: max(22px, calc(env(safe-area-inset-top) + 12px)); left: 50%; transform: translateX(-50%); z-index: 200;
+  display: flex; align-items: center; gap: clamp(8px, 1.2vw, 16px); padding: 8px; border-radius: 28px; white-space: nowrap;
+  font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: 17px;
+  background: rgba(236, 243, 255, 0.55); border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 12px 32px rgba(47, 74, 163, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+}
+.landTabs .landSoon { padding: 9px 20px; border-radius: 20px; color: #2B3F73; cursor: pointer; transition: background .25s ease, color .25s ease; }
+.landTabs .landSoon:hover { background: rgba(255, 255, 255, 0.55); color: #14234F; }
+.landTabs .landSoon.pressed { background: rgba(255, 255, 255, 0.8); }
+.landTabs .landSoon::before, .landTabs .landSoon::after { display: none !important; }
+/* the dock is just the app icons now */
+.landDockSep { display: none; }
+.landMid > .landNav { padding: 14px; }
+@media (max-width: 700px) { .landTabs { font-size: 15px; border-radius: 22px; padding: 6px; } .landTabs .landSoon { padding: 8px 16px; } .landMid > .landNav { padding: 11px; } }
+
+/* the landing's entrance animation must not keep running after it ends: a lingering transform animation turns the page into the containing block for the fixed word / dock / tabs, which offset them from the real screen edges */
+.happlyPage[data-view="landing"] .happlyLanding { animation-fill-mode: backwards; }
