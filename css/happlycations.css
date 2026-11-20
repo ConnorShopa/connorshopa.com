@@ -512,3 +512,6 @@ body::after { display: block !important; }
 .landNav .landApp:hover .landTile, .landNav .landApp:focus-visible .landTile { transform: scale(1.3); }
 .landNav .landApps li:hover .landName, .landNav .landApp:focus-visible .landName { transform: translate(-50%, -10px); }
 @media (prefers-reduced-motion: reduce) { .landMid > .landNav::before, .landNav .landTile { transition: none; } }
+
+/* the frame only shrinks after the icon has finished growing, and only half as much */
+.landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transform: scale(.97, .94); transition-delay: .4s; }
