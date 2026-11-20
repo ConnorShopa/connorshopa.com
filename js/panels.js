@@ -255,6 +255,13 @@ document.addEventListener("input", function (e) {
     }
   }
   new MutationObserver(function () { place(true); }).observe(group, { attributes: true, attributeFilter: ["aria-pressed"], subtree: true });
+
+  // the pinned bar changes size (see homeSections.css): keep the active tab's highlight on its tab while that animates
+  function reflow() {
+    var on = chips.filter(function (c) { return c.getAttribute("aria-pressed") === "true"; })[0];
+    if (on && !group.classList.contains("atTop")) gsap.set(bg, { x: on.offsetLeft, y: on.offsetTop, width: on.offsetWidth, height: on.offsetHeight });
+  }
+  new MutationObserver(function () { var t0 = performance.now(); (function tick() { reflow(); if (performance.now() - t0 < 750) requestAnimationFrame(tick); })(); }).observe(group, { attributes: true, attributeFilter: ["class"] });
   var wasTop = null;
   function topCheck() {
     var t = (window.pageYOffset || 0) <= 20;

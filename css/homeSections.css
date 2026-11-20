@@ -179,8 +179,7 @@ html:not(.view-open):not(#_) body:not(#_) {
 .filters.stuck:not(#_), .filters.pinned:not(#_) { background-color: #fff; }
 
 /* pinned on desktop: the whole tab menu grows to 1.6x, with a soft bounce, from the top centre so it stays put */
-.filters { transform-origin: 50% 0; transition: background-color .5s ease, box-shadow .6s cubic-bezier(.34, 1.4, .64, 1), transform .55s cubic-bezier(.34, 1.56, .64, 1); }
-.filters.stuck:not(#_) { animation: none; transform: scale(1.3); }
+.filters { transition: background-color .5s ease, box-shadow .6s cubic-bezier(.34, 1.4, .64, 1); }
 
 /* the "3 million" line sits under the subtitle; the gaps between name, subtitle and this line are doubled (6px → 12px) */
 .who:not(#_) { display: flex; flex-direction: column; align-items: center; gap: 12px; }
@@ -201,3 +200,24 @@ html:not(.view-open):not(#_) body:not(#_) {
 /* at the very top of the page the face is the active tab: light blue bubble */
 .filtersLogo.atTop:not(#_) { background: #D9E7FC; }
 .filters.atTop .pill[aria-pressed="true"]:not(#_) { color: var(--ink); }
+
+/* pinned on desktop: the tab menu is really 1.15x bigger (sizes, not a transform, so the hover bubble inside it keeps lining up), with a soft bounce */
+.filters .pill, .filtersLogo, .filtersLogo img, .filters { transition-property: background-color, color, box-shadow, font-size, padding, height, gap; transition-duration: .3s, .3s, .6s, .5s, .5s, .5s, .5s; transition-timing-function: ease, ease, cubic-bezier(.34, 1.4, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1); }
+.filters.stuck:not(#_) { gap: 9.2px; }
+.filters.stuck .pill:not(#_) { font-size: 16.1px; padding: 9.2px 18.4px; }
+.filters.stuck .filtersLogo:not(#_) { padding: 8.05px 18.4px; }
+.filters.stuck .filtersLogo img:not(#_) { height: 20.7px; }
+
+/* the name is larger than the subtitle */
+.who .name:not(#_) { font-size: 46px; line-height: 1.2; }
+@media (max-width: 900px) { .who .name:not(#_) { font-size: 38px; } }
+@media (max-width: 700px) { .who .name:not(#_) { font-size: 30px; } }
+
+/* at the top of the page the face is the active tab: a deeper blue with the same shadow as the other active tabs */
+.filtersLogo.atTop:not(#_) { background: #A9C8F7; box-shadow: 0 6px 14px -4px rgba(47, 39, 37, 0.28), 0 2px 4px rgba(47, 39, 37, 0.12); }
+
+/* the "3 million" line now sits at the bottom of the Work section, under the logos */
+.workNote:not(#_) { margin: 64px 0 0; text-align: center; font-size: 20px; font-weight: 400; line-height: 1.3; color: rgba(47, 39, 37, 0.6); }
+@media (max-width: 700px) { .workNote:not(#_) { font-size: 15px; margin-top: 28px; padding: 0 24px; } }
+@media (min-width: 701px) { .page > .below:not(#_) { margin-top: -162px; } }
+@media (max-width: 700px) { .workNote:not(#_) { margin-bottom: 48px; } }
