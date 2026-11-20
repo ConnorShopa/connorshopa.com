@@ -120,3 +120,20 @@ html:not(.view-open):not(#_) body:not(#_) {
 .tagline:not(#_) { font-size: 34px; line-height: 1.3; }
 @media (max-width: 900px) { .tagline:not(#_) { font-size: 28px; } }
 @media (max-width: 700px) { .tagline:not(#_) { font-size: 22px; line-height: 1.3; } }
+
+/* tagline: same weight and colour as the About lead */
+.tagline:not(#_), .tagline .tl:not(#_) { font-weight: 500; color: rgb(47, 39, 37); }
+
+/* tab colours: Work red, About yellow, Contact blue (hover bubble is a light tint, the active tab is the full colour) */
+.filters .pill[data-work][aria-pressed="true"], .filters .pill[data-panel="contact"][aria-pressed="true"] { color: #fff; }
+.filters .pill[data-panel="about"][aria-pressed="true"] { color: var(--ink); }
+
+/* spacing: tab menu → name, then the header and the three sections sit 180px apart */
+.intro > .filters:not(#_) { margin-bottom: 90px; }
+@media (min-width: 701px) { .page > .below:not(#_) { margin-top: -93px; } }
+@media (min-width: 701px) { .hero > nav:not(#_) { margin-top: 180px; } }
+
+/* the pinned tab menu's shadow takes the active tab's colour (set by js/panels.js as --tabC), stronger so it reads over the content */
+.filters.stuck:not(#_), .filters.pinned:not(#_) {
+  box-shadow: 0 0 0 7px #fff, 0 14px 38px color-mix(in srgb, var(--tabC, #2f2725) 62%, transparent), 0 4px 12px color-mix(in srgb, var(--tabC, #2f2725) 55%, transparent);
+}
