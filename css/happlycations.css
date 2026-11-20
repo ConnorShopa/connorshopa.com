@@ -436,3 +436,4 @@ body::after { display: block !important; }
 .landName { width: auto; height: auto; overflow: visible; clip-path: none; left: 50%; top: calc(100% + 4px); transform: translate(-50%, -4px); opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
 .landApps li:hover .landName, .landApp:focus-visible .landName { opacity: 1; transform: translate(-50%, 0); }
 @media (hover: none) { .landName { opacity: 0; } }
+.landName { top: calc(100% + 14px); }
