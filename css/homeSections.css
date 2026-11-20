@@ -221,3 +221,8 @@ html:not(.view-open):not(#_) body:not(#_) {
 @media (max-width: 700px) { .workNote:not(#_) { font-size: 15px; margin-top: 28px; padding: 0 24px; } }
 @media (min-width: 701px) { .page > .below:not(#_) { margin-top: -162px; } }
 @media (max-width: 700px) { .workNote:not(#_) { margin-bottom: 48px; } }
+
+/* About: wider side padding inside its card */
+#about.homeSec:not(#_) { padding-left: 128px; padding-right: 128px; }
+@media (max-width: 900px) { #about.homeSec:not(#_) { padding-left: 56px; padding-right: 56px; } }
+@media (max-width: 700px) { #about.homeSec:not(#_) { padding-left: 24px; padding-right: 24px; } }

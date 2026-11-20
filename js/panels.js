@@ -91,6 +91,8 @@
       filters.parentNode.insertBefore(spacer, filters);
       filters.style.top = naturalTop + "px"; // pinned exactly where it sits, so it never jumps
       filters.classList.add("stuck");
+      // the pointer may already be resting on the tabs when they pin (they stay where they are): bring the bubble up into the bar now, above its white
+      if (dot && filters.matches(":hover") && dot.parentNode !== filters) filters.insertBefore(dot, filters.firstChild);
     } else if (!should && spacer && window.pageYOffset <= 0) {
       filters.classList.remove("stuck"); filters.style.top = "";
       spacer.remove(); spacer = null;
@@ -111,13 +113,15 @@
   var STUCK_TOP = 12; // where the tabs rest at the top of a phone screen
   // Layout numbers are worked out once (and again when the layout changes), not on every scroll event: reading them mid-scroll
   // forces a layout each frame, which is what makes scrolling stutter in Safari.
-  var tops = { about: 0, contact: 0 }, travelC = 1;
+  var tops = { about: 0, contact: 0 }, travelC = 1, homeEdge = 0, workH = 0;
   function cacheLayout() {
     var sc = scroller();
     ["about", "contact"].forEach(function (n) {
       var r = secs[n].getBoundingClientRect();
       tops[n] = sc ? sc.scrollTop + r.top - sc.getBoundingClientRect().top : r.top + window.pageYOffset;
     });
+    var list = document.getElementById("projectList");
+    if (list) { var lr = list.getBoundingClientRect(); homeEdge = sc ? sc.scrollTop + lr.top - sc.getBoundingClientRect().top : lr.top + window.pageYOffset; workH = lr.height; }
     travelC = Math.max(1, filters.offsetTop - (parseFloat(filters.style.top) || 0) - STUCK_TOP); // (offsetTop includes the shift already applied)
   }
   window.addEventListener("resize", function () { cacheLayout(); });
@@ -142,8 +146,19 @@
   cacheLayout();
   slideHeader();
 
+  // "Home" (the face) is the active tab while the name and tagline are what is on screen; "Work" takes over once the logos reach the middle of the screen
+  var logoEl = document.querySelector(".filtersLogo");
+  function setHome(on) { filters.classList.toggle("atTop", on); if (logoEl) logoEl.classList.toggle("atTop", on); }
+  function homeActive() {
+    var sc = scroller();
+    if (sc) return sc.scrollTop <= 20;
+    if (phone() && nav) return nav.scrollTop <= 20;
+    // Work takes over once the logos are centred on screen (the spot the Work tab scrolls to); never before 40px of scroll
+    return window.pageYOffset < Math.max(40, homeEdge + workH / 2 - window.innerHeight / 2 - 10);
+  }
   function spy() {
     stick();
+    if (!steering && !root.classList.contains("view-open")) setHome(homeActive());
     if (steering || root.classList.contains("view-open")) return;
     var sc = scroller(), pos = sc ? sc.scrollTop : window.pageYOffset;
     var probe = pos + (sc ? sc.clientHeight : window.innerHeight) * 0.45, name = null;
@@ -167,8 +182,16 @@
     press(name);
     var sc = scroller();
     var clear = sc ? 64 : 100; // room above the section for the pinned tabs
-    var y = !name ? 0 : sc ? sc.scrollTop + secs[name].getBoundingClientRect().top - sc.getBoundingClientRect().top : secs[name].getBoundingClientRect().top + window.pageYOffset;
-    if (name) y = Math.max(0, y - clear);
+    var y;
+    if (!name) { // Work: scroll so the logos sit in the middle of the screen
+      cacheLayout();
+      y = Math.max(sc ? 0 : 41, homeEdge + workH / 2 - (sc ? sc.clientHeight : window.innerHeight) / 2);
+      setHome(false);
+    } else {
+      y = sc ? sc.scrollTop + secs[name].getBoundingClientRect().top - sc.getBoundingClientRect().top : secs[name].getBoundingClientRect().top + window.pageYOffset;
+      y = Math.max(0, y - clear);
+      setHome(false);
+    }
     steering = true;
     clearTimeout(steerTimer);
     steerTimer = setTimeout(function () { steering = false; spy(); }, 900); // in case the page is already there and no scroll event follows
@@ -264,25 +287,16 @@ document.addEventListener("input", function (e) {
   new MutationObserver(function () { var t0 = performance.now(); (function tick() { reflow(); if (performance.now() - t0 < 750) requestAnimationFrame(tick); })(); }).observe(group, { attributes: true, attributeFilter: ["class"] });
   var wasTop = null;
   function topCheck() {
-    var t = (window.pageYOffset || 0) <= 20;
+    var t = group.classList.contains("atTop");
     if (t === wasTop) return;
     wasTop = t;
-    group.classList.toggle("atTop", t);
     if (t) { gsap.killTweensOf(bg); gsap.to(bg, { scale: 0.6, autoAlpha: 0, duration: 0.2, ease: "power2.in", transformOrigin: "50% 50%" }); }
     else place(true);
   }
-  window.addEventListener("scroll", topCheck, { passive: true });
+  new MutationObserver(topCheck).observe(group, { attributes: true, attributeFilter: ["class"] });
   topCheck();
   window.addEventListener("resize", function () { place(false); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { first = true; place(false); }); else place(false);
 })();
 
-// the face in the tab menu is the "active" tab while the page is at the very top: it keeps its light blue bubble there
-(function () {
-  var logo = document.querySelector(".filtersLogo");
-  if (!logo) return;
-  function mark() { logo.classList.toggle("atTop", (window.pageYOffset || 0) <= 20); }
-  window.addEventListener("scroll", mark, { passive: true });
-  window.addEventListener("resize", mark);
-  mark();
-})();
+
