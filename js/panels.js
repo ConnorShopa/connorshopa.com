@@ -315,9 +315,9 @@ document.addEventListener("input", function (e) {
   function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
   var groups = [
     { ref: ".who", els: function () { return $(".who"); }, dz: 0.45 },
-    { ref: "#projectList", els: function () { return $(".hero > nav"); }, tint: "rgba(47, 91, 234, 0.12)", box: ".hero > nav", pad: 40 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
-    { ref: "#about", els: function () { return $("#about > *"); }, tint: "rgba(47, 160, 90, 0.14)", box: "#about", pad: 40 },
-    { ref: "#contact", els: function () { return $("#contact > *"); }, tint: "rgba(255, 201, 40, 0.26)", box: "#contact", pad: 40 }
+    { ref: "#projectList", els: function () { return $(".hero > nav"); }, tint: "rgba(47, 91, 234, 0.12)", box: ".hero > nav", pad: 72 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
+    { ref: "#about", els: function () { return $("#about > *"); }, tint: "rgba(47, 160, 90, 0.14)", box: "#about", pad: 72 },
+    { ref: "#contact", els: function () { return $("#contact > *"); }, tint: "rgba(255, 201, 40, 0.26)", box: "#contact", pad: 72 }
   ];
   // each section sits on a soft wash of its tab's colour; it is strongest when the section is off to the side and fades away as the section comes into focus
   groups.forEach(function (g) {
@@ -380,6 +380,8 @@ document.addEventListener("input", function (e) {
       }
     });
     apply();
+    // a re-measure clears the transforms and resets the frame; redraw both at their current spring position straight away so nothing snaps
+    if (on) groups.forEach(function (g, gi) { if (g.items && g.items.length && g.ce !== undefined) render(g, gi); });
   }
   function apply() {
     if (!enabled()) { if (on) { on = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } groups.forEach(function (g) { g.ce = g.te = g.cv = 0; if (g.items) setAll(g, 1, 1, 0, 0); if (g.wash) g.wash.style.opacity = "1"; }); } return; }
