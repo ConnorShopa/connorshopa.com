@@ -539,3 +539,11 @@ body::after { display: block !important; }
 .landMid > .landNav::before { transition: transform .6s var(--glide); }
 .landNav .landName { transition: opacity .3s cubic-bezier(.22, 1, .36, 1), transform .5s var(--spring); }
 @media (prefers-reduced-motion: reduce) { .landMid > .landNav::before, .landNav .landTile, .landNav .landApps li:not(:hover) .landTile, .landNav > a, .landNav > .landSoon, .landDockSep, .landNav .landName { transition: none; } }
+
+/* logo + wordmark at 0.8x; the dock sits just below them (they stay dead centre) */
+.happlyLanding { --lwv: calc(0.8 * (100vw - 2 * max(32px, 8vw)) / 8.573); }
+.landWord { --lw: var(--lwv); }
+.landMid > .landNav { bottom: auto; top: min(calc(50dvh + var(--lwv) * 0.66 + 56px), calc(100dvh - 122px)); }
+
+/* the dock frame no longer scales on hover (the icons still do) */
+.landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transform: none; }
