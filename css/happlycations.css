@@ -257,3 +257,23 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .ltr .skin > span { clip-path: inset(-60% calc(100% - var(--r)) -60% var(--l)); }
 .ltr:first-child .skin > span { clip-path: inset(-60% calc(100% - var(--r)) -60% -4%); }
 .ltr:last-child .skin > span { clip-path: inset(-60% -4% -60% var(--l)); }
+
+/* physical push-buttons on the nav tabs (after the Dieter Rams palette): each tab has a raised dome, and the current tab's button is pushed in */
+.landNav { gap: clamp(14px, 1.6vw, 30px); }
+.landNav .landDot { display: none; }
+.landNav > a, .landNav > .landSoon { --bc: #ED8008; position: relative; padding-left: 24px; }
+.landNav > .landSoon:nth-of-type(2) { --bc: #ED3F1C; }
+.landNav > .landSoon:nth-of-type(4) { --bc: #736B1E; }
+.landNav > a::before, .landNav > .landSoon::before {
+  content: ""; position: absolute; left: 0; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 35% 28%, color-mix(in srgb, var(--bc) 62%, #fff) 0%, var(--bc) 52%, color-mix(in srgb, var(--bc) 80%, #000) 100%);
+  box-shadow: 0 0 0 1.5px #1d1a19, 0 3px 3px 1px rgba(29, 26, 25, 0.3), inset 0 -1px 1.5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1.5px);
+  transition: transform .14s cubic-bezier(.3, 1.6, .5, 1), box-shadow .14s ease, filter .14s ease;
+}
+.landNav > .landSoon { cursor: pointer; }
+.landNav > .landSoon:hover::before { transform: translateY(-2.5px); }
+.landNav > a.on::before, .landNav > .landSoon.pressed::before, .landNav > .landSoon:active::before, .landNav > a:active::before {
+  transform: translateY(1.5px) scale(.93); filter: brightness(.9);
+  box-shadow: 0 0 0 1.5px #1d1a19, 0 0 0 0 rgba(0, 0, 0, 0), inset 0 2px 3px rgba(0, 0, 0, 0.5);
+}

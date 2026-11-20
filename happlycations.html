@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=174" />
+    <link rel="stylesheet" href="css/happlycations.css?v=176" />
 </head>
 
 <body>
@@ -249,6 +249,10 @@
                 // the gap between swaps is random too (0.5s to 2s)
                 (function tick() { swapOne(); setTimeout(tick, 500 + Math.random() * 1500); })();
             }
+            // the "You + Us" / "About" tabs aren't open yet, but their buttons still click down and spring back like real push-buttons
+            document.querySelectorAll(".landSoon").forEach(function (t) {
+                t.addEventListener("click", function () { t.classList.add("pressed"); setTimeout(function () { t.classList.remove("pressed"); }, 260); });
+            });
             // hovering an app also dresses the hand in the app's colour (CSS, from data-hover)
             var landRow = document.querySelector(".landApps");
             document.querySelectorAll(".landApp").forEach(function (b) {
