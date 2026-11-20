@@ -243,3 +243,15 @@ html:not(.view-open):not(#_) body:not(#_) {
 
 /* the white halo around the pinned bar counts as part of the bar for hovering, so the pointer dot rises into the bar there too */
 .filters.stuck::after, .filters.pinned::after { content: ""; position: absolute; inset: -8px; border-radius: 999px; pointer-events: auto; z-index: -1; }
+
+/* even more air between the tab menu and the name */
+.intro > .filters:not(#_) { margin-bottom: 300px; }
+@media (max-width: 700px) { .intro > .filters:not(#_) { margin-bottom: 80px; } }
+@media (max-width: 700px) { :root:not(#_) { --hdrH: 238px; } }
+
+/* tapping the face: the pinned look (white, shadow, bigger size) lets go right away while the page scrolls up, instead of waiting for the scroll to land */
+.filters.stuck.returning:not(#_) { background-color: rgba(255,255,255,0); box-shadow: 0 0 0 7px rgba(255,255,255,0), 0 10px 28px rgba(47,39,37,0), 0 3px 10px rgba(47,39,37,0); gap: 8px; animation: none; }
+.filters.stuck.returning .pill:not(#_) { font-size: 14px; padding: 8px 16px; }
+.filters.stuck.returning .filtersLogo:not(#_) { padding: 7px 16px; }
+.filters.stuck.returning .filtersLogo img:not(#_) { height: 18px; }
+.filters.stuck.returning:not(#_), .filters.stuck.returning .pill:not(#_), .filters.stuck.returning .filtersLogo:not(#_), .filters.stuck.returning .filtersLogo img:not(#_) { transition-duration: .16s, .16s, .2s, .18s, .18s, .18s, .18s; transition-timing-function: ease-out; }

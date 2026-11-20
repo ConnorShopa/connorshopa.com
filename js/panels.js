@@ -96,7 +96,7 @@
       // the pointer may already be resting on the tabs when they pin (they stay where they are): bring the bubble up into the bar now, above its white
       if (dot && filters.matches(":hover") && dot.parentNode !== filters) filters.insertBefore(dot, filters.firstChild);
     } else if (!should && spacer && window.pageYOffset <= 0) {
-      filters.classList.remove("stuck"); filters.style.top = "";
+      filters.classList.remove("stuck", "returning"); filters.style.top = "";
       spacer.remove(); spacer = null;
       bubbleHome();
     }
@@ -151,6 +151,8 @@
   // "Home" (the face) is the active tab while the name and tagline are what is on screen; "Work" takes over once the logos reach the middle of the screen
   var logoEl = document.querySelector(".filtersLogo");
   function setHome(on) { filters.classList.toggle("atTop", on); if (logoEl) logoEl.classList.toggle("atTop", on); }
+  filters.addEventListener("tabs:return", function () { if (filters.classList.contains("stuck")) { filters.classList.add("returning"); setHome(true); } });
+  filters.addEventListener("tabs:returned", function () { filters.classList.remove("returning"); });
   function homeActive() {
     var sc = scroller();
     if (sc) return sc.scrollTop <= 20;
@@ -160,7 +162,7 @@
   }
   function spy() {
     stick();
-    if (!steering && !root.classList.contains("view-open")) setHome(homeActive());
+    if (!steering && !filters.classList.contains("returning") && !root.classList.contains("view-open")) setHome(homeActive());
     if (steering || root.classList.contains("view-open")) return;
     var sc = scroller(), pos = sc ? sc.scrollTop : window.pageYOffset;
     var probe = pos + (sc ? sc.clientHeight : window.innerHeight) * 0.45, name = null;
@@ -338,8 +340,8 @@ document.addEventListener("input", function (e) {
     groups.forEach(function (g) {
       if (!g.items || !g.items.length) return;
       var centre = g.top + g.h / 2 - pos;
-      var e = Math.min(1, Math.abs(centre - vh / 2) / (vh * 0.75));
-      e = Math.max(0, (e - 0.6) / 0.4);
+      var e = Math.min(1, Math.abs(centre - vh / 2) / (vh * 0.6));
+      e = Math.max(0, (e - 0.25) / 0.75);
       var s = 1 - 0.12 * e, o = 1 - 0.65 * e;
       if (Math.abs(s - g.s) < 0.0005 && Math.abs(o - g.o) < 0.002) return;
       g.s = s; g.o = o; setAll(g, s, o);
