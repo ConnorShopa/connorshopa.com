@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=196" />
+    <link rel="stylesheet" href="css/happlycations.css?v=197" />
 </head>
 
 <body>
@@ -263,7 +263,8 @@
             // on scroll the hand + wordmark shrinks and travels up to the top of the window, where it stays (scroll-linked, no layout reads while scrolling)
             (function () {
                 var w = document.querySelector(".landWord"), startY = 0, h = 0, endS = 0.3, RANGE = 320, TOP = 48, queued = false;
-                if (!w) return;
+                var SCROLL_SHRINK = false; // set to true to bring the shrink-and-stick-on-scroll back
+                if (!w || !SCROLL_SHRINK) return;
                 function measure() {
                     if (!w.offsetParent && getComputedStyle(w).position !== "fixed") return;
                     w.style.transform = "";

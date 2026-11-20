@@ -247,8 +247,6 @@ a.landDl:hover { filter: brightness(1.08); }
 body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0.5; mix-blend-mode: multiply; background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix values=%220 0 0 0 0.42  0 0 0 0 0.5  0 0 0 0 0.68  0 0 0 0.16 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E"); }
 .landIcon[data-skin="norm"] .tile i { -webkit-mask-image: url("../assets/homeAssets/happlycations_hand_mask.svg"); mask-image: url("../assets/homeAssets/happlycations_hand_mask.svg"); } /* the filled hand silhouette, not just the lines */
 
-/* the app icons are hidden for now (markup kept; delete this line to bring them back) */
-.landApps { display: none !important; }
 
 .landTag { color: #2E4A87; } /* deep blue from the theme, ~6:1 on the background */
 
