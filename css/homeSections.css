@@ -384,3 +384,9 @@ body:not(#_) { background-color: #F4F4F4; }
 
 /* no dividers between the sections */
 .hero > header.intro:not(#_)::after, .page > .below:not(#_)::before, #about.homeSec:not(#_)::after { display: none; content: none; }
+
+/* the tinted frames reach 72px past each section, so desktop gaps leave room for two of them without touching */
+@media (min-width: 701px) {
+  #about.homeSec:not(#_) { margin-top: 70px; }
+  #contact.homeSec:not(#_) { margin-top: 240px; }
+}

@@ -353,10 +353,9 @@ document.addEventListener("input", function (e) {
     var moving = false;
     groups.forEach(function (g, gi) {
       if (!g.items || !g.items.length) return;
-      var f = (g.te - g.ce) * 0.055;
-      g.cv = ((g.cv || 0) + f) * 0.8;
-      g.ce += g.cv;
-      if (Math.abs(g.te - g.ce) > 0.0008 || Math.abs(g.cv) > 0.0008) moving = true; else { g.ce = g.te; g.cv = 0; }
+      // plain easing toward the scroll position: it follows the wheel smoothly and never overshoots or bounces
+      g.ce += (g.te - g.ce) * 0.22; g.cv = 0;
+      if (Math.abs(g.te - g.ce) > 0.0008) moving = true; else g.ce = g.te;
       render(g, gi);
     });
     if (moving) raf = requestAnimationFrame(spring);
