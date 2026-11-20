@@ -258,3 +258,9 @@ html:not(.view-open):not(#_) body:not(#_) {
 
 /* no transform on the pinned bar, ever: a transform makes it the containing block of the fixed hover bubble inside it, which threw the bubble off to the right while the bar pinned */
 .filters.stuck:not(#_) { animation: none; transform: none; }
+
+/* the pinned bar grows from its centre, not from its top edge: it is ~4.8px taller, so lift it by half of that (the sides already grow evenly) */
+.filters.stuck:not(#_) { margin-top: -2.4px; }
+.filters.stuck.returning:not(#_) { margin-top: 0; }
+.filters:not(#_) { transition-property: background-color, color, box-shadow, font-size, padding, height, gap, margin-top; transition-duration: .3s, .3s, .6s, .5s, .5s, .5s, .5s, .5s; transition-timing-function: ease, ease, cubic-bezier(.34, 1.4, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1); }
+.filters:not(.stuck):not(#_), .filters.stuck.returning:not(#_) { transition-duration: .18s, .18s, .25s, .2s, .2s, .2s, .2s, .2s; transition-timing-function: ease, ease, ease-out, ease-out, ease-out, ease-out, ease-out, ease-out; }
