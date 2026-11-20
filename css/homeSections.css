@@ -277,10 +277,9 @@ html:not(.view-open):not(#_) body:not(#_) {
 
 /* even air between the four sections on desktop, all 180px (the gap under Connor Shopa to the logos is the reference): Connor Shopa -> Work, Work note -> About card, About card -> Contact */
 @media (min-width: 701px) {
-  .page > .below:not(#_) { margin-top: -371px; }
+  .page > .below:not(#_) { margin-top: calc(79px - 50dvh); } /* tracks the viewport height so Work -> About stays the same distance on any screen */
   #contact.homeSec:not(#_) { margin-top: 156px; }
 }
-@media (min-width: 701px) and (max-width: 900px) { .page > .below:not(#_) { margin-top: -363px; } }
 
 /* phones: the tab menu lives at the bottom of the screen, 24px up from the edge, always on its white pill with the shadow */
 @media (max-width: 700px) {
@@ -411,14 +410,14 @@ body:not(#_) { background-color: #F4F4F4; }
 /* the next section peeks up from the bottom of the screen while the current one is centred (desktop): the gap is whatever leaves a sliver of the next one showing */
 @media (min-width: 701px) {
   .hero > nav:not(#_):not(#_) { margin-top: max(80px, calc(50dvh - 359px)); }
-  #about.homeSec:not(#_):not(#_) { margin-top: -150px; }
-  #contact.homeSec:not(#_):not(#_) { margin-top: -5px; }
+  #about.homeSec:not(#_):not(#_) { margin-top: -67px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: 72px; }
 }
 
 /* phone: same peek, the next section shows above the tab bar while the current one is centred */
 @media (max-width: 700px) {
-  #about.homeSec:not(#_):not(#_):not(#_) { margin-top: -120px; }
-  #contact.homeSec:not(#_):not(#_) { margin-top: -50px; }
+  #about.homeSec:not(#_):not(#_):not(#_) { margin-top: 1px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: 32px; }
 }
 
 /* phone: the project links have no tile backgrounds */
@@ -441,3 +440,17 @@ body:not(#_) { background-color: #F4F4F4; }
   }
   #projectList li:not(.row-break):not(#_):not(#_):not(#_) { position: relative !important; }
 }
+
+/* 701-900px wide: About sits 18px lower so Work -> About matches About -> Contact here too */
+@media (min-width: 701px) and (max-width: 900px) { #about.homeSec:not(#_):not(#_):not(#_) { margin-top: -49px; } }
+
+/* smaller screens: the "Over 3 million..." line balances its lines, so it never wraps a single word onto its own line */
+@media (max-width: 900px) { .workNote:not(#_):not(#_) { text-wrap: balance; } }
+
+/* Work's glow pulses (it rises and brightens, then settles) as a nudge to scroll; it only shows while Work is below the screen */
+@keyframes tintPulse {
+  0%, 100% { scale: 1 1; filter: saturate(1) brightness(1); }
+  50% { scale: 1.08 1.35; filter: saturate(1.7) brightness(0.96); }
+}
+.secTintPulse:not(#_) { transform-origin: 50% 100%; animation: tintPulse 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .secTintPulse:not(#_) { animation: none; } }

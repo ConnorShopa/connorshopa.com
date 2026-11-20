@@ -329,6 +329,7 @@ document.addEventListener("input", function (e) {
     if (!g.tint) return;
     g.wash = document.createElement("div");
     g.wash.className = "secTint"; g.wash.setAttribute("aria-hidden", "true");
+    if (g.tint === "47, 91, 234") g.wash.classList.add("secTintPulse"); // Work's glow breathes, nudging people to scroll
     // a glow pinned to the bottom of the screen: strong while the section is still below, shrinking and fading to nothing as it scrolls into focus
     g.wash.style.cssText = "position:fixed;left:0;bottom:0;pointer-events:none;z-index:-2;opacity:0;background:radial-gradient(ellipse 50% 100% at 50% 100%, rgba(" + g.tint + "," + g.ta + ") 0%, rgba(" + g.tint + "," + (g.ta * 0.8).toFixed(3) + ") 45%, rgba(" + g.tint + ",0) 85%)";
     document.body.appendChild(g.wash);
