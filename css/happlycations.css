@@ -456,3 +456,30 @@ body::after { display: block !important; }
 .landNav > a.on { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 6px; }
 .landNav > .landSoon { color: #2B3F73; transition: color .2s ease; }
 .landNav > .landSoon:hover { color: #14234F; }
+
+/* logo + wordmark: as wide as the screen, 48px of padding each side (the group is about 9.17 x --lw wide) */
+.landWord { --lw: calc((100vw - 96px) / 9.17); }
+
+/* the word group spans the whole window width so its 48px side padding is real, whatever the page padding is */
+.landWord { width: 100vw; margin-inline: calc(50% - 50vw); left: 0; transform: none; }
+
+/* the apps live in the dock: icons first, a thin divider, then the tab labels */
+.landNav > .landApps { position: static; top: auto; margin: 0; gap: clamp(10px, 1.2vw, 18px); align-items: center; }
+.landNav .landApps li { padding: 0; border-radius: 0; }
+.landNav .landApp { position: relative; }
+.landNav .landTile, .landNav .landApp img { width: 52px; height: 52px; }
+.landNav .landName { top: auto; bottom: calc(100% + 14px); transform: translate(-50%, 4px); }
+.landNav .landApps li:hover .landName, .landNav .landApp:focus-visible .landName { transform: translate(-50%, 0); }
+.landDockSep { width: 1px; align-self: stretch; margin: 4px 2px; background: rgba(255, 255, 255, 0.5); box-shadow: 1px 0 0 rgba(47, 74, 163, 0.14); }
+.landMid > .landNav { padding: 12px 22px; gap: clamp(16px, 2vw, 28px); }
+
+/* a bigger dock */
+.landNav .landTile, .landNav .landApp img { width: 68px; height: 68px; }
+.landMid > .landNav { padding: 16px 28px; gap: clamp(20px, 2.2vw, 34px); border-radius: 26px; font-size: 19px; }
+.landNav .landName { font-size: 17px; }
+.landDockSep { margin: 6px 2px; }
+@media (max-width: 700px) {
+  .landNav .landTile, .landNav .landApp img { width: 46px; height: 46px; }
+  .landMid > .landNav { padding: 12px 16px; gap: 14px; border-radius: 22px; font-size: 15px; }
+  .landNav > .landApps { gap: 10px; }
+}
