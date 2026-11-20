@@ -159,3 +159,41 @@ html:not(.view-open):not(#_) body:not(#_) {
 .tagline:not(#_) { font-size: 30px; }
 @media (max-width: 900px) { .tagline:not(#_) { font-size: 24px; } }
 @media (max-width: 700px) { .tagline:not(#_) { font-size: 18px; } }
+
+/* pinning the tab menu: same spot (top set by js/panels.js), the white pill and its shadow fade in with a small bounce, no hard edges */
+.filters { transition: background-color .5s ease, box-shadow .6s cubic-bezier(.34, 1.4, .64, 1); }
+.filters.stuck:not(#_) { top: 48px; animation: tabPin .55s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes tabPin { 0% { transform: scale(.97); } 100% { transform: scale(1); } }
+.filters.stuck:not(#_), .filters.pinned:not(#_) {
+  box-shadow: 0 0 0 7px #fff, 0 10px 28px color-mix(in srgb, var(--tabC, #2f2725) 30%, transparent), 0 3px 10px color-mix(in srgb, var(--tabC, #2f2725) 24%, transparent);
+}
+
+/* the face in the tab menu always gets its light blue bubble itself (hover, focus), a deeper one while pressed, whatever the page bubble is doing */
+.filtersLogo { transition: background-color .2s ease, transform .2s ease; }
+@media (hover: hover) { .filtersLogo:hover { background: #D9E7FC; } }
+.filtersLogo:focus-visible { background: #D9E7FC; }
+.filtersLogo:active { background: #BFD6F8; }
+
+/* the pill shape is always there (only the white and shadow fade), so the fade never shows square corners */
+.filters:not(#_) { border-radius: 999px; background-color: rgba(255, 255, 255, 0); box-shadow: 0 0 0 7px rgba(255, 255, 255, 0), 0 10px 28px rgba(47, 39, 37, 0), 0 3px 10px rgba(47, 39, 37, 0); }
+.filters.stuck:not(#_), .filters.pinned:not(#_) { background-color: #fff; }
+
+/* pinned on desktop: the whole tab menu grows to 1.6x, with a soft bounce, from the top centre so it stays put */
+.filters { transform-origin: 50% 0; transition: background-color .5s ease, box-shadow .6s cubic-bezier(.34, 1.4, .64, 1), transform .55s cubic-bezier(.34, 1.56, .64, 1); }
+.filters.stuck:not(#_) { animation: none; transform: scale(1.6); }
+
+/* the "3 million" line sits under the subtitle; the gaps between name, subtitle and this line are doubled (6px → 12px) */
+.who:not(#_) { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.tagline.taglineSub:not(#_) { font-size: 20px; font-weight: 400; color: rgba(47, 39, 37, 0.6); line-height: 1.3; }
+.tagline.taglineSub .tl:not(#_) { font-size: inherit; font-weight: inherit; color: inherit; }
+@media (max-width: 700px) { .tagline.taglineSub:not(#_) { font-size: 15px; } }
+
+/* Professional history: left aligned (heading, then each row) */
+.homeSec .eyebrow:not(#_) { align-self: flex-start; text-align: left; }
+.homeSec .aboutJobs:not(#_) { align-self: flex-start; align-items: flex-start; text-align: left; width: fit-content; }
+.homeSec .aboutJobs li:not(#_) { justify-content: flex-start; text-align: left; }
+@media (max-width: 700px) {
+  .homeSec .aboutJobs:not(#_) { width: 100%; }
+  .homeSec .aboutJobs li:not(#_) { align-items: flex-start; }
+  .homeSec .aboutJobs span:not(#_) { text-align: left; }
+}

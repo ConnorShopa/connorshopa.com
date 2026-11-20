@@ -41,7 +41,6 @@
       logoOnly: true,
       pages: [pg("one", text(
         p("lead", "Designing products @ <a href=\"https://apps.apple.com/us/app/id378351144\" target=\"_blank\" rel=\"noopener\"><img class=\"ttPin\" src=\"assets/homeAssets/touchtunes_icon.png\" alt=\"\">TouchTunes</a> &amp; making homemade jam") +
-        p("body", "Over 3 million people interact with my work each month") +
         p("eyebrow", "Professional history") +
         '<ul class="jobs aboutJobs"><li><span class="company">TouchTunes</span><span class="role">Product Designer</span><span class="dates">04/2025 &ndash; current</span></li><li><span class="company">AltQ</span><span class="role">Product &amp; Design Lead</span><span class="dates">04/2024 &ndash; 04/2025</span></li><li><span class="company">Ubenwa Health</span><span class="role">Product Designer</span><span class="dates">Consultant</span></li><li><span class="company">Plunk&reg;</span><span class="role">Product Designer</span><span class="dates">05/2020 &ndash; 12/2023</span></li><li><span class="company">Albedo Informatics</span><span class="role">AR/VR Designer</span><span class="dates">02/2020 &ndash; 05/2020</span></li><li><span class="company">OCAD University</span><span class="role">Industrial Design &middot; Human Computer Interaction</span></li></ul>'
       ))]

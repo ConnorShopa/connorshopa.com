@@ -80,18 +80,19 @@
   function measure() { naturalTop = (spacer || filters).getBoundingClientRect().top + window.pageYOffset; }
   function stick() {
     if (phone()) { if (spacer) { filters.classList.remove("stuck"); spacer.remove(); spacer = null; } return; }
-    var should = window.pageYOffset > naturalTop - 34 && !root.classList.contains("view-open");
+    var should = window.pageYOffset > 0 && !root.classList.contains("view-open");
     if (should && !spacer) {
       measure();
       var cs = getComputedStyle(filters), r = filters.getBoundingClientRect();
       spacer = document.createElement("div");
       spacer.className = "filtersSpacer";
       spacer.style.height = r.height + "px";
-      spacer.style.marginTop = cs.marginTop;
+      spacer.style.marginTop = cs.marginTop; spacer.style.marginBottom = cs.marginBottom; // keep the gap under the tabs, so the name below never jumps
       filters.parentNode.insertBefore(spacer, filters);
+      filters.style.top = naturalTop + "px"; // pinned exactly where it sits, so it never jumps
       filters.classList.add("stuck");
-    } else if (!should && spacer && window.pageYOffset <= naturalTop - 34) {
-      filters.classList.remove("stuck");
+    } else if (!should && spacer && window.pageYOffset <= 0) {
+      filters.classList.remove("stuck"); filters.style.top = "";
       spacer.remove(); spacer = null;
       bubbleHome();
     }
