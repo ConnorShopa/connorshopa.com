@@ -415,3 +415,10 @@ body::after { display: none !important; }
 
 /* grain overlay back on */
 body::after { display: block !important; }
+
+/* sheep: the outline is a pre-drawn ring (no live SVG filter, which was the heavy part). Drawn 3.35% larger to leave room for the stroke at the edges; each letter overlaps its neighbour by 1px so there is no seam */
+.ltr[data-skin="sheep"] .skin, .ltr[data-skin="sheep"]:first-child .skin, .ltr[data-skin="sheep"]:last-child .skin { filter: none; }
+.ltr[data-skin="sheep"] .skin > span { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/happlycations_wordmark_outline.svg") center / 100% 100% no-repeat; width: 103.35cqw; height: 103.35%; top: -1.675%; left: calc(var(--lp) * -100cqw - 1.675cqw); }
+.ltr[data-skin="sheep"] .skin { clip-path: inset(-60% -1px -60% -1px); }
+.ltr[data-skin="sheep"]:first-child .skin { clip-path: inset(-60% -1px -60% -10%); }
+.ltr[data-skin="sheep"]:last-child .skin { clip-path: inset(-60% -10% -60% -1px); }
