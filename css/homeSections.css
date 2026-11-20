@@ -410,9 +410,9 @@ body:not(#_) { background-color: #F4F4F4; }
 
 /* the next section peeks up from the bottom of the screen while the current one is centred (desktop): the gap is whatever leaves a sliver of the next one showing */
 @media (min-width: 701px) {
-  .hero > nav:not(#_):not(#_) { margin-top: max(80px, calc(50dvh - 239px)); }
+  .hero > nav:not(#_):not(#_) { margin-top: max(80px, calc(50dvh - 359px)); }
   #about.homeSec:not(#_):not(#_) { margin-top: -150px; }
-  #contact.homeSec:not(#_):not(#_) { margin-top: -40px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: -5px; }
 }
 
 /* phone: same peek, the next section shows above the tab bar while the current one is centred */
