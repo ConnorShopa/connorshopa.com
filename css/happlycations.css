@@ -601,8 +601,8 @@ body::after { opacity: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns
 /* small screens: the big wordmark breaks as happly / cations, with the hand beside "happly" on the top row.
    Each letter is its own layer (cut at the artwork's own letter edges), so "cations" is just those layers moved left and down. */
 @media (max-width: 700px) {
-  .happlyLanding:not(#_) { --lwv: calc((100vw - 32px) / 6.6); }
-  .landWord .landIcon:not(#_) { align-self: center; top: calc(var(--lw) * -0.6); }
+  .happlyLanding:not(#_) { --lwv: calc((100vw - 40px) / 5.45); }
+  .landWord .landIcon:not(#_) { align-self: center; top: calc(var(--lw) * -0.08); left: calc(var(--lw) * 0.04); }
   .landWord .landWordBox:not(#_) { aspect-ratio: auto; height: calc(var(--lw) * 2.5); margin-right: calc(var(--lw) * -3.95); }
   .landWordBox .ltr:nth-child(n + 7):not(#_) { translate: calc(var(--lw) * -3.8366) calc(var(--lw) * 1.25); } /* c a t i o n s: back to the start of the word, one line down */
 }
