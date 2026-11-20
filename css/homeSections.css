@@ -102,3 +102,17 @@ html:not(.view-open):not(#_) body:not(#_) {
 
 /* the name in the header: bolder */
 .who .name:not(#_) { font-weight: 600; }
+
+/* the face logo sits first in the tab menu and links back to the top. Same box as the word tabs (same padding, same pill shape), with a light blue bubble on hover and a deeper one while pressed. */
+.filtersLogo { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; padding: 7px 16px; border: 1px solid transparent; border-radius: 999px; background: transparent; cursor: url("cursor_linkHover.png") 6 6, pointer; transition: background-color .25s ease, transform .3s cubic-bezier(.34, 1.45, .64, 1); }
+.filtersLogo img { display: block; height: 18px; width: auto; }
+.filtersLogo:hover { background: #DCE8FB; }
+.filtersLogo:active, .filtersLogo.on { background: #C6D9F7; transform: scale(.97); }
+.filtersLogo:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+@media (max-width: 700px) { .filtersLogo { padding: 7px 14px; } .filtersLogo img { height: 17px; } }
+
+/* the tab menu now sits above the name and tagline */
+.intro > .filters:not(#_) { margin-top: 0; margin-bottom: 40px; }
+@media (max-width: 700px) { .intro > .filters:not(#_) { margin-bottom: 14px; } }
+/* on phones the header ignores pointer events so the page scrolls under it; the logo is a button like the pills */
+.hero > header .filters .filtersLogo { pointer-events: auto; }
