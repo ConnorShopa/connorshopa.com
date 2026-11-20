@@ -277,3 +277,17 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   transform: translateY(1.5px) scale(.93); filter: brightness(.9);
   box-shadow: 0 0 0 1.5px #1d1a19, 0 0 0 0 rgba(0, 0, 0, 0), inset 0 2px 3px rgba(0, 0, 0, 0.5);
 }
+
+/* the push-buttons, closer to the Rams buttons: a glossy round cap sitting in a thin black bezel, with a soft shadow on the surface */
+.landNav > a, .landNav > .landSoon { padding-left: 34px; }
+.landNav > a::before, .landNav > .landSoon::before {
+  width: 22px; height: 22px; margin-top: -11px; box-sizing: border-box; border: 2.4px solid #151312; border-radius: 50%;
+  background: radial-gradient(circle at 36% 28%, color-mix(in srgb, var(--bc) 55%, #fff) 0%, color-mix(in srgb, var(--bc) 92%, #fff) 26%, var(--bc) 55%, color-mix(in srgb, var(--bc) 82%, #000) 100%) padding-box;
+  box-shadow: inset 1px 1.5px 2px rgba(255, 255, 255, 0.35), inset -1px -2px 3px rgba(0, 0, 0, 0.22), 2px 5px 8px -1px rgba(52, 44, 36, 0.36), 0 1px 1.5px rgba(52, 44, 36, 0.3);
+  transform: none;
+}
+.landNav > .landSoon:hover::before { transform: translateY(-1px); }
+.landNav > a.on::before, .landNav > .landSoon.pressed::before, .landNav > .landSoon:active::before, .landNav > a:active::before {
+  transform: translateY(1.5px) scale(.95); filter: brightness(.93);
+  box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.35), inset -1px -1px 2px rgba(255, 255, 255, 0.12), 0 0 1px rgba(52, 44, 36, 0.3);
+}
