@@ -323,7 +323,7 @@ document.addEventListener("input", function (e) {
   groups.forEach(function (g) {
     if (!g.tint) return;
     g.wash = document.createElement("div");
-    g.wash.className = "secTint"; g.wash.setAttribute("aria-hidden", "true"); g.wash.style.background = "radial-gradient(ellipse 50% 62% at 50% 62%, rgba(" + g.tint + "," + g.ta + ") 0%, rgba(" + g.tint + "," + (g.ta * 0.45).toFixed(3) + ") 45%, rgba(" + g.tint + ",0) 100%)"; g.wash.style.webkitMaskImage = g.wash.style.maskImage = "linear-gradient(to bottom, #000 62%, transparent 100%)"; // a soft glow under the section that rises toward its content
+    g.wash.className = "secTint"; g.wash.setAttribute("aria-hidden", "true"); g.wash.style.background = "radial-gradient(ellipse 50% 62% at 50% 62%, rgba(" + g.tint + "," + g.ta + ") 0%, rgba(" + g.tint + "," + (g.ta * 0.8).toFixed(3) + ") 52%, rgba(" + g.tint + ",0) 82%)"; g.wash.style.webkitMaskImage = g.wash.style.maskImage = "linear-gradient(to bottom, #000 70%, transparent 100%)"; // a soft glow under the section that rises toward its content
     document.body.appendChild(g.wash);
   });
   var on = false;
@@ -376,8 +376,8 @@ document.addEventListener("input", function (e) {
         if (R < L) { L = br.left; R = br.right; }
         var ww = Math.min(R - L + 2 * pd, window.innerWidth - 32), cx = (L + R) / 2 + window.pageXOffset;
         g.cx = cx; g.ww = ww;
-        g.wash.style.left = (cx - ww / 2) + "px"; g.wash.style.top = (br.top + window.pageYOffset + br.height * 0.3) + "px";
-        g.wh = br.height * 0.7 + pd * 1.5; g.wt = br.top + window.pageYOffset + br.height * 0.3;
+        g.wash.style.left = (cx - ww / 2) + "px"; g.wash.style.top = (br.top + window.pageYOffset + br.height * 0.3 + 110) + "px";
+        g.wh = br.height * 0.7 + pd * 1.5; g.wt = br.top + window.pageYOffset + br.height * 0.3 + 110;
         g.wash.style.width = ww + "px"; g.wash.style.height = g.wh + "px";
       }
     });
