@@ -306,3 +306,8 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 /* the hand + wordmark centred on the page (the hand is nudged right inside its box, so the box alone sat left of centre), and the tabs further below them */
 .landWord { position: relative; left: calc(var(--lw) * -0.3); }
 .landMid > .landNav { margin-top: clamp(40px, 7dvh, 72px); }
+
+/* embossed from the page itself: the letters and the hand are the same surface as the background (same gradient), shaped only by a soft light edge top-left and a soft shadow bottom-right */
+.ltr[data-skin="norm"] .skin > span, .landIcon[data-skin="norm"] .tile i { background: linear-gradient(180deg, #DFE9FB 0%, #D7E3F7 52%, #CFDEF3 100%) fixed; }
+.ltr[data-skin="norm"] .skin { filter: drop-shadow(calc(var(--lw) * -0.022) calc(var(--lw) * -0.022) calc(var(--lw) * 0.026) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.026) calc(var(--lw) * 0.036) calc(var(--lw) * 0.036) rgba(90, 118, 172, 0.38)); }
+.landIcon[data-skin="norm"] .tile { filter: drop-shadow(calc(var(--lw) * -0.016) calc(var(--lw) * -0.016) calc(var(--lw) * 0.018) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.018) calc(var(--lw) * 0.026) calc(var(--lw) * 0.026) rgba(90, 118, 172, 0.42)); }
