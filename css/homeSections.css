@@ -466,3 +466,6 @@ body:not(#_) { background-color: #F4F4F4; }
 
 /* phone: the "Over 3 million..." line sits closer to the project links under it */
 @media (max-width: 700px) { .workNote:not(#_):not(#_):not(#_) { margin-bottom: -32px; } }
+
+/* "Connor Shopa" is one step lighter (600 -> 500) */
+.who .name:not(#_):not(#_) { font-weight: 500; }
