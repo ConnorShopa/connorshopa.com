@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=211" />
+    <link rel="stylesheet" href="css/happlycations.css?v=213" />
 </head>
 
 <body>
@@ -186,21 +186,35 @@
                 el.innerHTML = '<span class="skin"><span></span></span><span class="ring"><span class="rc"><span></span></span></span>';
                 ltrWrap.appendChild(el); ltrs.push(el);
             }
-            // Each letter rolls on its own: up and out, then the new treatment rolls in. A letter that is already part way through a roll is
-            // never cancelled (that is what made the wordmark jump when going from one app to another): it finishes the roll it is in, and then
-            // carries on to the latest target, so a change of app just redirects the letters smoothly.
-            function rollLetter(l, k) {
-                if (l._busy || l.dataset.skin === l._target) return;
-                l._busy = true;
+            // Each letter rolls on its own: up and out, then the new treatment rolls in. Changing app never cancels a roll with a snap: when the
+            // wave reaches a letter (in order, first to last) that is still part way through a roll, it carries on from exactly where it is
+            // (same position, same fade) and heads out to the new target. A letter already on its way out just lands on the latest target.
+            function startOut(l, k, from) {
+                l._phase = "out";
                 var dir = l._target === "norm" ? -1 : 1; // the original wordmark always drops in from the top; the app wordmarks rise in from below
-                var out = l.animate([{ transform: "translateY(0) scale(1)", opacity: 1 }, { transform: "translateY(" + (-dir * 55) + "%) scale(.7)", opacity: 0 }], { duration: 120 * k, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
+                var out = l.animate([from, { transform: "translateY(" + (-dir * 55) + "%) scale(.7)", opacity: 0 }], { duration: 120 * k, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
+                l._cur = out;
                 out.onfinish = function () {
                     l.dataset.skin = l._target; // the latest target, even if it changed while this letter was rolling out
                     var d2 = l._target === "norm" ? -1 : 1;
                     out.cancel();
+                    l._phase = "in";
                     var inn = l.animate([{ transform: "translateY(" + (d2 * 55) + "%) scale(.7)", opacity: 0 }, { transform: "translateY(0) scale(1)", opacity: 1 }], { duration: 210 * k, easing: "cubic-bezier(.16, 1, .3, 1)" });
-                    inn.onfinish = function () { l._busy = false; if (l.dataset.skin !== l._target) rollLetter(l, k); };
+                    l._cur = inn;
+                    inn.onfinish = function () { l._phase = null; l._cur = null; if (l.dataset.skin !== l._target) rollLetter(l, k); };
                 };
+            }
+            function rollLetter(l, k) {
+                if (l._phase === "out") return;
+                if (l._phase === "in") {
+                    if (l.dataset.skin === l._target) return; // already rolling in as the new look: leave it be
+                    var cs = getComputedStyle(l), from = { transform: cs.transform, opacity: cs.opacity };
+                    l._cur.cancel();
+                    startOut(l, k, from);
+                    return;
+                }
+                if (l.dataset.skin === l._target) return;
+                startOut(l, k, { transform: "translateY(0) scale(1)", opacity: 1 });
             }
             function setSkin(skin) {
                 if (skin === skinNow) return;
@@ -216,7 +230,7 @@
                         k = 1 + 0.25 * t;              // each letter's own roll also slows a touch, to 1.25x at the end
                     var when = at; at += gap;
                     l._target = skin;
-                    if (l.dataset.skin === skin && !l._busy) return;
+                    if (l.dataset.skin === skin && !l._phase) return;
                     swapTimers.push(setTimeout(function () { rollLetter(l, k); }, when));
                 });
             }
