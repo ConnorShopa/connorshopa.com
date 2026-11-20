@@ -375,8 +375,9 @@ document.addEventListener("input", function (e) {
       for (var i = 0; i < 3; i++) rgb[i] += (t[i] - BG[i]) * w;
     });
     var c = "rgb(" + rgb.map(function (v) { return Math.round(v); }).join(",") + ")";
-    document.body.style.backgroundColor = on ? c : "";
+    // the colour goes on the page (html) and the body is left clear, so the glows (behind the content, in front of the page) stay visible
     document.documentElement.style.backgroundColor = on ? c : "";
+    document.body.style.backgroundColor = on ? "transparent" : "";
   }
   var raf = 0;
   function spring() {
