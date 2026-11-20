@@ -302,3 +302,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 }
 
 .landMid > .landNav { margin-top: 10px; }
+
+/* the hand + wordmark centred on the page (the hand is nudged right inside its box, so the box alone sat left of centre), and the tabs further below them */
+.landWord { position: relative; left: calc(var(--lw) * -0.3); }
+.landMid > .landNav { margin-top: clamp(40px, 7dvh, 72px); }
