@@ -390,3 +390,6 @@ html, body, .happlyPage { background: #D7E3F7; }
 /* a card round each app: flat soft white, a little lighter than the blue background */
 .landApps li { background: #EAF0FB; border-radius: 26px; padding: clamp(14px, 1.3vw, 22px) clamp(18px, 1.8vw, 30px) clamp(12px, 1.1vw, 18px); }
 @media (max-width: 700px) { .landApps li { border-radius: 20px; padding: 12px 14px 10px; } .landApps { gap: 12px; } }
+
+/* the cards are off (no fill) but their spacing stays; set a background on .landApps li to bring them back */
+.landApps li { background: none; }
