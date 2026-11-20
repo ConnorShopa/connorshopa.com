@@ -547,3 +547,17 @@ body::after { display: block !important; }
 
 /* the dock frame no longer scales on hover (the icons still do) */
 .landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transform: none; }
+
+/* gentler hover: icons rest a little smaller (more padding in the dock) and only grow a touch, so even with the spring overshoot they stay inside the frame */
+.landMid > .landNav { padding: 14px 32px 14px 14px; }
+.landNav .landTile, .landNav .landApp img { width: 72px; height: 72px; border-radius: 28px; }
+.landNav .landApp:hover .landTile, .landNav .landApp:focus-visible .landTile { transform: scale(1.12); }
+.landNav:has(.landApp:hover) .landApps li:not(:hover) .landTile { transform: scale(.95); }
+.landNav:has(.landApp:hover) > a, .landNav:has(.landApp:hover) > .landSoon { transform: scale(.96); }
+.landNav:has(.landApp:hover) .landDockSep { transform: scaleY(.94); }
+.landNav .landApps li:hover .landName, .landNav .landApp:focus-visible .landName { transform: translate(-50%, -4px); }
+@media (max-width: 700px) {
+  .landMid > .landNav { padding: 11px 20px 11px 11px; }
+  .landNav .landTile, .landNav .landApp img { width: 46px; height: 46px; border-radius: 21px; }
+  .landNav .landApp:hover .landTile, .landNav .landApp:focus-visible .landTile { transform: scale(1.1); }
+}
