@@ -337,7 +337,7 @@ document.addEventListener("input", function (e) {
   }
   function render(g, gi) {
     var e = Math.max(0, Math.min(1.08, g.ce)), q = e * e * (3 - 2 * Math.min(1, e)); // eased, so it starts gently
-    var s = 1 - 0.5 * q, o = Math.max(0, 1 - 0.97 * q), rot = TILT[gi % TILT.length] * q * (g.dir || 1), dy = (g.dir || 1) * -14 * q;
+    var s = 1 - 0.5 * q, o = Math.max(0, 1 - 0.97 * q), rot = 0, dy = (g.dir || 1) * -14 * q;
     if (g.wash && g.ww) { // the frame is fullest when the section is in focus; scrolling away it grows wider and goes paler
       var gw = Math.min(g.ww * (1 + 0.9 * q), document.documentElement.clientWidth);
       g.wash.style.opacity = Math.max(0, 1 - q).toFixed(3);
@@ -370,7 +370,10 @@ document.addEventListener("input", function (e) {
       var bx = g.box && document.querySelector(g.box);
       if (g.wash && bx) {
         var br = bx.getBoundingClientRect(), pd = g.pad || 0;
-        var ww = Math.min(br.width + 2 * pd, 800, window.innerWidth - 64), cx = br.left + window.pageXOffset + br.width / 2;
+        var L = 1e9, R = -1e9; // the frame must hold everything inside the block, even rows wider than the block itself
+        if (g.ref === "#projectList") bx.querySelectorAll("a, img").forEach(function (c) { var cr = c.getBoundingClientRect(); if (cr.width && cr.height) { L = Math.min(L, cr.left); R = Math.max(R, cr.right); } });
+        if (R < L) { L = br.left; R = br.right; }
+        var ww = Math.min(R - L + 2 * pd, window.innerWidth - 32), cx = (L + R) / 2 + window.pageXOffset;
         g.cx = cx; g.ww = ww;
         g.wash.style.left = (cx - ww / 2) + "px"; g.wash.style.top = (br.top + window.pageYOffset - pd) + "px";
         g.wash.style.width = ww + "px"; g.wash.style.height = (br.height + 2 * pd) + "px";
