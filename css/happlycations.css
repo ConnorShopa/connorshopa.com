@@ -515,3 +515,4 @@ body::after { display: block !important; }
 
 /* the frame only shrinks after the icon has finished growing, and only half as much */
 .landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transform: scale(.97, .94); transition-delay: .4s; }
+.landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transition-delay: .1s; }
