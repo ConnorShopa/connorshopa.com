@@ -320,9 +320,9 @@ document.addEventListener("input", function (e) {
   function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
   var groups = [
     { ref: ".who", els: function () { return isPhone() ? [] : $(".who"); }, dz: 0.45 },
-    { ref: "#projectList", els: function () { return isPhone() ? $(".workNote, #projectList") : $(".hero > nav"); }, omin: 0.65, tint: "47, 91, 234", ta: 0.2, box: ".hero > nav", pad: 72 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
-    { ref: "#about", els: function () { return $("#about > *"); }, omin: 0.65, tint: "47, 160, 90", ta: 0.22, box: "#about", pad: 72 },
-    { ref: "#contact", els: function () { return $("#contact > *"); }, omin: 0.65, tint: "255, 201, 40", ta: 0.4, box: "#contact", pad: 72 }
+    { ref: "#projectList", els: function () { return isPhone() ? $(".workNote, #projectList") : $(".hero > nav"); }, omin: 0.65, tint: "47, 91, 234", tint2: "150, 90, 235", ta: 0.2, box: ".hero > nav", pad: 72 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
+    { ref: "#about", els: function () { return $("#about > *"); }, omin: 0.65, tint: "47, 160, 90", tint2: "40, 185, 200", ta: 0.22, box: "#about", pad: 72 },
+    { ref: "#contact", els: function () { return $("#contact > *"); }, omin: 0.65, tint: "255, 201, 40", tint2: "255, 130, 60", ta: 0.4, box: "#contact", pad: 72 }
   ];
   // each section sits on a soft wash of its tab's colour; it is strongest when the section is off to the side and fades away as the section comes into focus
   groups.forEach(function (g) {
@@ -331,7 +331,10 @@ document.addEventListener("input", function (e) {
     g.wash.className = "secTint"; g.wash.setAttribute("aria-hidden", "true");
     if (g.tint === "47, 91, 234") g.wash.classList.add("secTintPulse"); // Work's glow breathes, nudging people to scroll
     // a glow pinned to the bottom of the screen: strong while the section is still below, shrinking and fading to nothing as it scrolls into focus
-    g.wash.style.cssText = "position:fixed;left:0;bottom:0;pointer-events:none;z-index:-2;opacity:0;background:radial-gradient(ellipse 50% 100% at 50% 100%, rgba(" + g.tint + "," + g.ta + ") 0%, rgba(" + g.tint + "," + (g.ta * 0.8).toFixed(3) + ") 45%, rgba(" + g.tint + ",0) 85%)";
+    var t2 = g.tint2 || g.tint, a2 = g.ta * 0.9;
+    function rg(at, c, a, w) { return "radial-gradient(ellipse " + w + "% 100% at " + at + "% 100%, rgba(" + c + "," + a.toFixed(3) + ") 0%, rgba(" + c + "," + (a * 0.8).toFixed(3) + ") 40%, rgba(" + c + ",0) 85%)"; }
+    // two tones: the tab's colour on one side and a neighbouring hue on the other, overlapping in the middle
+    g.wash.style.cssText = "position:fixed;left:0;bottom:0;pointer-events:none;z-index:-2;opacity:0;background:" + rg(66, t2, a2, 34) + "," + rg(34, g.tint, g.ta, 34);
     document.body.appendChild(g.wash);
   });
   var on = false;
@@ -353,10 +356,10 @@ document.addEventListener("input", function (e) {
       g.wash.style.opacity = (q * below).toFixed(3);
       if (isPhone() || vw < 1000 || vh > vw) { // phones and narrow / portrait windows: the glow spans the whole width of the device and sits lower
         g.wash.style.width = (vw * 1.2).toFixed(1) + "px"; g.wash.style.left = (-vw * 0.1).toFixed(1) + "px";
-        g.wash.style.height = (vh * 0.3 * sc).toFixed(1) + "px";
+        g.wash.style.height = (vh * 0.2 * sc).toFixed(1) + "px";
       } else {
         g.wash.style.width = (vw * 0.9 * sc).toFixed(1) + "px"; g.wash.style.left = (vw * 0.05 + vw * 0.9 * (1 - sc) / 2).toFixed(1) + "px";
-        g.wash.style.height = (vh * 0.5 * sc).toFixed(1) + "px";
+        g.wash.style.height = (vh * 0.32 * sc).toFixed(1) + "px";
       }
     }
     setAll(g, s, o, rot, dy);
