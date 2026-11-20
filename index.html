@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/redesign.css?v=94" />
     <link rel="stylesheet" href="css/views.responsive.css?v=10" />
     <link rel="stylesheet" href="css/homeLogos.css?v=42" />
-    <link rel="stylesheet" href="css/homeSections.css?v=47" />
+    <link rel="stylesheet" href="css/homeSections.css?v=49" />
     <link rel="stylesheet" href="css/nanniNav.css?v=6" />
     <link rel="stylesheet" href="css/nanniTranslate.css?v=43" />
     <link rel="stylesheet" href="css/hostgrotesk.css">
@@ -88,12 +88,24 @@
         // the face logo in the tab menu: back to the top of the page
         document.querySelector(".filtersLogo").addEventListener("click", function (e) {
             e.preventDefault();
-            window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+            // a quick scroll to the top (about a third of a second however far down you are), not the browser's slow smooth scroll
+            var nav = document.querySelector(".hero > nav");
+            var phoneNav = window.innerWidth <= 700 && nav && nav.scrollHeight > nav.clientHeight;
+            var from = phoneNav ? nav.scrollTop : window.pageYOffset;
+            function set(y) { if (phoneNav) nav.scrollTop = y; else window.scrollTo(0, y); }
+            if (!from) return;
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { set(0); return; }
+            var t0 = performance.now(), D = 320;
+            (function step(now) {
+                var k = Math.min(1, (now - t0) / D), ease = 1 - Math.pow(1 - k, 3);
+                set(from * (1 - ease));
+                if (k < 1) requestAnimationFrame(step);
+            })(t0);
         });
     </script>
     <script src="js/nanniNav.js?v=9"></script>
     <script src="js/nanniTranslate.js?v=31"></script>
-    <script src="js/projects.js?v=66"></script>
+    <script src="js/projects.js?v=68"></script>
     <script src="js/views.js?v=15"></script>
     <script src="js/dots.js"></script>
     <script src="js/mouse.js?v=27"></script>
