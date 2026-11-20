@@ -402,3 +402,10 @@ html, body, .happlyPage { background: #D7E3F7; }
 .ltr[data-skin="sheep"] .skin { clip-path: inset(-60% calc(100% - var(--r)) -60% var(--l)); }
 .ltr[data-skin="sheep"]:first-child .skin { clip-path: inset(-60% calc(100% - var(--r)) -60% -4%); }
 .ltr[data-skin="sheep"]:last-child .skin { clip-path: inset(-60% -4% -60% var(--l)); }
+
+/* performance: each letter layer is now only as wide as its own letter (it used to be the whole word x 13), so the browser has far less to paint
+   and filter on every roll. The word artwork inside is still full size and shifted back so it lines up; the cut is the layer's own edge. */
+.landLtrs { container-type: inline-size; }
+.ltr, .ltr:first-child, .ltr:last-child { inset: 0 auto 0 var(--l); width: calc(var(--r) - var(--l)); transform-origin: 50% 50%; }
+.ltr .skin > span { position: absolute; top: 0; height: 100%; width: 100cqw; left: calc(var(--lp) * -100cqw); }
+.ltr[data-skin="sheep"] .skin, .ltr[data-skin="sheep"]:first-child .skin, .ltr[data-skin="sheep"]:last-child .skin { clip-path: inset(-60% 0 -60% 0); }
