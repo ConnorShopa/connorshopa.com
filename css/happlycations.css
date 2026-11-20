@@ -360,7 +360,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 /* one continuous background colour (no gradient, so no line where a gradient ends when the page scrolls) */
 html, body, .happlyPage { background: #D7E3F7; }
 
-.landWord { z-index: 5; will-change: transform; transform-origin: 50% 50%; }
+/* (the wordmark no longer needs a raised layer: the scroll shrink is off) */
 
 /* smaller app icons and names (about three quarters of before) */
 .landApp img, .landTile { width: clamp(48px, 4.8vw, 96px); }
