@@ -396,3 +396,9 @@ html, body, .happlyPage { background: #D7E3F7; }
 
 /* smoother letter rolls: each letter is its own layer, so its blurred shadows are drawn once and only moved / faded while it rolls */
 .ltr { will-change: transform, opacity; backface-visibility: hidden; }
+
+/* sheep: outline the whole word first, then cut the letter out of it, so the cut never draws an outline through a serif (the y) */
+.ltr[data-skin="sheep"] .skin > span { clip-path: none; }
+.ltr[data-skin="sheep"] .skin { clip-path: inset(-60% calc(100% - var(--r)) -60% var(--l)); }
+.ltr[data-skin="sheep"]:first-child .skin { clip-path: inset(-60% calc(100% - var(--r)) -60% -4%); }
+.ltr[data-skin="sheep"]:last-child .skin { clip-path: inset(-60% -4% -60% var(--l)); }

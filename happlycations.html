@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happlycations</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
-    <link rel="stylesheet" href="css/happlycations.css?v=213" />
+    <link rel="stylesheet" href="css/happlycations.css?v=215" />
 </head>
 
 <body>
@@ -189,7 +189,9 @@
             // Each letter rolls on its own: up and out, then the new treatment rolls in. Changing app never cancels a roll with a snap: when the
             // wave reaches a letter (in order, first to last) that is still part way through a roll, it carries on from exactly where it is
             // (same position, same fade) and heads out to the new target. A letter already on its way out just lands on the latest target.
-            function startOut(l, k, from) {
+            // warm the skin artwork up front so the first swap to drawl/habbot doesn't hitch while the image decodes
+["assets/homeAssets/drawl_wordmark_sketchy.svg", "assets/projectAssets/habbotAssets/grass.jpg"].forEach(function (u) { var im = new Image(); im.src = u; if (im.decode) im.decode().catch(function () {}); });
+function startOut(l, k, from) {
                 l._phase = "out";
                 var dir = l._target === "norm" ? -1 : 1; // the original wordmark always drops in from the top; the app wordmarks rise in from below
                 var out = l.animate([from, { transform: "translateY(" + (-dir * 55) + "%) scale(.7)", opacity: 0 }], { duration: 120 * k, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
