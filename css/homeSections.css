@@ -255,3 +255,6 @@ html:not(.view-open):not(#_) body:not(#_) {
 .filters.stuck.returning .filtersLogo:not(#_) { padding: 7px 16px; }
 .filters.stuck.returning .filtersLogo img:not(#_) { height: 18px; }
 .filters.stuck.returning:not(#_), .filters.stuck.returning .pill:not(#_), .filters.stuck.returning .filtersLogo:not(#_), .filters.stuck.returning .filtersLogo img:not(#_) { transition-duration: .16s, .16s, .2s, .18s, .18s, .18s, .18s; transition-timing-function: ease-out; }
+
+/* no transform on the pinned bar, ever: a transform makes it the containing block of the fixed hover bubble inside it, which threw the bubble off to the right while the bar pinned */
+.filters.stuck:not(#_) { animation: none; transform: none; }
