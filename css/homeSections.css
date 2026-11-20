@@ -410,14 +410,14 @@ body:not(#_) { background-color: #F4F4F4; }
 /* the next section peeks up from the bottom of the screen while the current one is centred (desktop): the gap is whatever leaves a sliver of the next one showing */
 @media (min-width: 701px) {
   .hero > nav:not(#_):not(#_) { margin-top: max(80px, calc(50dvh - 359px)); }
-  #about.homeSec:not(#_):not(#_) { margin-top: -67px; }
-  #contact.homeSec:not(#_):not(#_) { margin-top: 72px; }
+  #about.homeSec:not(#_):not(#_) { margin-top: 120px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: 232px; }
 }
 
 /* phone: same peek, the next section shows above the tab bar while the current one is centred */
 @media (max-width: 700px) {
-  #about.homeSec:not(#_):not(#_):not(#_) { margin-top: 1px; }
-  #contact.homeSec:not(#_):not(#_) { margin-top: 32px; }
+  #about.homeSec:not(#_):not(#_):not(#_) { margin-top: 127px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: 132px; }
 }
 
 /* phone: the project links have no tile backgrounds */
@@ -442,7 +442,7 @@ body:not(#_) { background-color: #F4F4F4; }
 }
 
 /* 701-900px wide: About sits 18px lower so Work -> About matches About -> Contact here too */
-@media (min-width: 701px) and (max-width: 900px) { #about.homeSec:not(#_):not(#_):not(#_) { margin-top: -49px; } }
+@media (min-width: 701px) and (max-width: 900px) { #about.homeSec:not(#_):not(#_):not(#_) { margin-top: 129px; } }
 
 /* smaller screens: the "Over 3 million..." line balances its lines, so it never wraps a single word onto its own line */
 @media (max-width: 900px) { .workNote:not(#_):not(#_) { text-wrap: balance; } }
