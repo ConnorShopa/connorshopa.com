@@ -312,12 +312,17 @@ document.addEventListener("input", function (e) {
 (function () {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var root = document.documentElement;
+  var isPhone = function () { return window.innerWidth <= 700; };
+  var navEl = document.querySelector(".hero > nav");
+  function scr() { return isPhone() ? navEl : null; } // on phones the sections scroll inside the list area, not the window
+  function scrPos() { var sc = scr(); return sc ? sc.scrollTop : window.pageYOffset; }
+  function scrH() { var sc = scr(); return sc ? sc.clientHeight : window.innerHeight; }
   function $(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
   var groups = [
-    { ref: ".who", els: function () { return $(".who"); }, dz: 0.45 },
-    { ref: "#projectList", els: function () { return $(".hero > nav"); }, tint: "47, 91, 234", ta: 0.2, box: ".hero > nav", pad: 72 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
-    { ref: "#about", els: function () { return $("#about > *"); }, tint: "47, 160, 90", ta: 0.22, box: "#about", pad: 72 },
-    { ref: "#contact", els: function () { return $("#contact > *"); }, tint: "255, 201, 40", ta: 0.4, box: "#contact", pad: 72 }
+    { ref: ".who", els: function () { return isPhone() ? [] : $(".who"); }, dz: 0.45 },
+    { ref: "#projectList", els: function () { return isPhone() ? $(".workNote, #projectList") : $(".hero > nav"); }, omin: 0.55, tint: "47, 91, 234", ta: 0.2, box: ".hero > nav", pad: 72 }, // the whole Work block (its box is centred on the page, so it scales about the middle)
+    { ref: "#about", els: function () { return $("#about > *"); }, omin: 0.5, tint: "47, 160, 90", ta: 0.22, box: "#about", pad: 72 },
+    { ref: "#contact", els: function () { return $("#contact > *"); }, omin: 0.5, tint: "255, 201, 40", ta: 0.4, box: "#contact", pad: 72 }
   ];
   // each section sits on a soft wash of its tab's colour; it is strongest when the section is off to the side and fades away as the section comes into focus
   groups.forEach(function (g) {
@@ -329,7 +334,7 @@ document.addEventListener("input", function (e) {
     document.body.appendChild(g.wash);
   });
   var on = false;
-  function enabled() { return window.innerWidth > 700 && !root.classList.contains("view-open"); }
+  function enabled() { return !root.classList.contains("view-open"); }
   // drawn by hand, not by a formula: each section leans a little (a different way and amount each), drifts, and follows the scroll
   // on a loose spring, so it lags, overshoots and settles instead of tracking the wheel exactly
   var TILT = [1.6, -1.1, 1.9, -1.4];
@@ -339,7 +344,7 @@ document.addEventListener("input", function (e) {
   }
   function render(g, gi) {
     var e = Math.max(0, Math.min(1.08, g.ce)), q = e * e * (3 - 2 * Math.min(1, e)); // eased, so it starts gently
-    var s = 1 - 0.5 * q, o = Math.max(0, 1 - 0.97 * q), rot = 0, dy = (g.dir || 1) * -14 * q;
+    var s = 1 - 0.5 * q, o = Math.max(g.omin || 0, 1 - 0.97 * q), rot = 0, dy = (g.dir || 1) * -14 * q;
     if (g.wash) {
       var vw = document.documentElement.clientWidth, vh = window.innerHeight;
       var below = (g.off || 0) > 0 ? Math.max(0, Math.min(1, 1 - ((g.off || 0) - vh * 0.5) / (vh * 0.7))) : 0; // only once the section is coming up from below the screen
@@ -370,7 +375,7 @@ document.addEventListener("input", function (e) {
       var ref = document.querySelector(g.ref);
       if (!ref) { g.top = g.h = 0; return; }
       var r = ref.getBoundingClientRect();
-      g.top = r.top + window.pageYOffset; g.h = r.height;
+      var sc0 = scr(); g.top = sc0 ? sc0.scrollTop + r.top - sc0.getBoundingClientRect().top : r.top + window.pageYOffset; g.h = r.height;
       var bx = g.box && document.querySelector(g.box);
         });
     apply();
@@ -380,7 +385,7 @@ document.addEventListener("input", function (e) {
   function apply() {
     if (!enabled()) { if (on) { on = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } groups.forEach(function (g) { g.ce = g.te = g.cv = 0; if (g.items) setAll(g, 1, 1, 0, 0); if (g.wash) g.wash.style.opacity = "0"; }); } return; }
     on = true;
-    var vh = window.innerHeight, pos = window.pageYOffset;
+    var vh = scrH(), pos = scrPos();
     groups.forEach(function (g) {
       if (!g.items || !g.items.length) return;
       var centre = g.top + g.h / 2 - pos, off = centre - vh / 2;
@@ -393,6 +398,7 @@ document.addEventListener("input", function (e) {
   }
   var tick = false;
   window.addEventListener("scroll", function () { if (tick) return; tick = true; requestAnimationFrame(function () { tick = false; apply(); }); }, { passive: true });
+  if (navEl) navEl.addEventListener("scroll", function () { if (tick) return; tick = true; requestAnimationFrame(function () { tick = false; apply(); }); }, { passive: true });
   window.addEventListener("resize", measure);
   window.addEventListener("load", function () { setTimeout(measure, 50); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
