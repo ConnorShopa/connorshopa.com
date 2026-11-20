@@ -516,3 +516,10 @@ body::after { display: block !important; }
 /* the frame only shrinks after the icon has finished growing, and only half as much */
 .landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transform: scale(.97, .94); transition-delay: .4s; }
 .landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transition-delay: .1s; }
+
+/* while one app is hovered, everything else in the dock eases down a little (same timing as the frame) */
+.landNav .landApps li:not(:hover) .landTile, .landNav > a, .landNav > .landSoon, .landDockSep { transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
+.landNav:has(.landApp:hover) .landApps li:not(:hover) .landTile { transform: scale(.9); transition-delay: .1s; }
+.landNav:has(.landApp:hover) > a, .landNav:has(.landApp:hover) > .landSoon { transform: scale(.92); transition-delay: .1s; }
+.landNav:has(.landApp:hover) .landDockSep { transform: scaleY(.9); transition-delay: .1s; }
+@media (prefers-reduced-motion: reduce) { .landNav .landApps li:not(:hover) .landTile, .landNav > a, .landNav > .landSoon, .landDockSep { transition: none; } }
