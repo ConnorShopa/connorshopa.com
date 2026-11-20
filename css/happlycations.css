@@ -430,3 +430,9 @@ body::after { display: block !important; }
 
 /* app names under the icons: hidden (kept in the page for screen readers and easy to bring back) */
 .landName { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ...and they fade in under the icon on hover / keyboard focus (positioned, so nothing shifts) */
+.landApp { position: relative; }
+.landName { width: auto; height: auto; overflow: visible; clip-path: none; left: 50%; top: calc(100% + 4px); transform: translate(-50%, -4px); opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+.landApps li:hover .landName, .landApp:focus-visible .landName { opacity: 1; transform: translate(-50%, 0); }
+@media (hover: none) { .landName { opacity: 0; } }
