@@ -332,6 +332,7 @@ html:not(.view-open):not(#_) body:not(#_) {
 }
 
 /* About: a wider card on a light green taken from the About tab (#2FA05A, mostly white) */
-.aboutBack:not(#_) { background: #E6F4EB; }
-@media (max-width: 700px) { #about.homeSec:not(#_) { background: #E6F4EB; } }
+.aboutBack:not(#_) { background: #F1F8F4; }
+@media (max-width: 700px) { #about.homeSec:not(#_) { background: #F1F8F4; } }
 @media (min-width: 701px) { #about.homeSec:not(#_) { width: min(1160px, calc(100vw - 64px)); max-width: none; align-self: center; box-sizing: border-box; } }
+.workNote:not(#_) { color: #333333; }
