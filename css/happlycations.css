@@ -13,7 +13,7 @@ html, body { margin: 0; height: 100%; background: #D7E3F7; color: #111; }
 body { overflow: auto; }
 
 .happlyPage {
-  box-sizing: border-box; min-height: 100vh; min-height: 100dvh; padding: 28px clamp(22px, 5vw, 80px) 36px; background: linear-gradient(180deg, #DFE9FB 0%, #D7E3F7 52%, #CFDEF3 100%);
+  box-sizing: border-box; min-height: 100vh; min-height: 100dvh; padding: 28px clamp(22px, 5vw, 80px) 36px; background: #D7E3F7;
   display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr);
 }
 .happlyDetail { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; row-gap: 12px; }
@@ -308,7 +308,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .landMid > .landNav { margin-top: clamp(40px, 7dvh, 72px); }
 
 /* embossed from the page itself: the letters and the hand are the same surface as the background (same gradient), shaped only by a soft light edge top-left and a soft shadow bottom-right */
-.ltr[data-skin="norm"] .skin > span, .landIcon[data-skin="norm"] .tile i { background: linear-gradient(180deg, #DFE9FB 0%, #D7E3F7 52%, #CFDEF3 100%) fixed; }
+.ltr[data-skin="norm"] .skin > span, .landIcon[data-skin="norm"] .tile i { background: #D7E3F7; }
 .ltr[data-skin="norm"] .skin { filter: drop-shadow(calc(var(--lw) * -0.022) calc(var(--lw) * -0.022) calc(var(--lw) * 0.026) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.026) calc(var(--lw) * 0.036) calc(var(--lw) * 0.036) rgba(77, 105, 161, 0.48)); }
 .landIcon[data-skin="norm"] .tile { filter: drop-shadow(calc(var(--lw) * -0.016) calc(var(--lw) * -0.016) calc(var(--lw) * 0.018) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.018) calc(var(--lw) * 0.026) calc(var(--lw) * 0.026) rgba(77, 105, 161, 0.51)); }
 
@@ -327,7 +327,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 .landFrame {
   position: fixed; left: 50%; bottom: 0; z-index: 0; pointer-events: none;
   width: min(1100px, calc(100% - 64px)); height: 60dvh; transform: translate(-50%, calc(60dvh - clamp(84px, 12dvh, 132px)));
-  border-radius: 40px; background: linear-gradient(180deg, #DFE9FB 0%, #D7E3F7 52%, #CFDEF3 100%) fixed;
+  border-radius: 40px; background: #D7E3F7;
   box-shadow: -8px -8px 18px rgba(255, 255, 255, 0.95), 9px 6px 22px rgba(90, 118, 172, 0.34), 0 -3px 8px rgba(90, 118, 172, 0.12);
 }
 @media (max-width: 700px) { .landFrame { width: calc(100% - 32px); border-radius: 28px; } }
@@ -339,7 +339,7 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
   display: block; grid-area: 1 / 1; place-self: center; height: 62%; aspect-ratio: 91 / 135; transform: translateX(calc(var(--lw) * 0.3));
   filter: drop-shadow(calc(var(--lw) * -0.005) calc(var(--lw) * -0.005) calc(var(--lw) * 0.004) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.007) calc(var(--lw) * 0.01) calc(var(--lw) * 0.008) rgba(80, 108, 165, 0.55));
 }
-.landIcon .hs b { display: block; width: 100%; height: 100%; background: linear-gradient(180deg, #DFE9FB 0%, #D7E3F7 52%, #CFDEF3 100%) fixed; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
+.landIcon .hs b { display: block; width: 100%; height: 100%; background: #D7E3F7; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
 
 /* the hand's stroke is dark (still raised, with its light and shadow edges) so the lines read clearly */
 .landIcon .hs b { background: linear-gradient(180deg, #5F7CB5 0%, #4A68A6 100%); }
@@ -358,3 +358,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 
 /* the frame has no fill of its own: it is the page background, outlined only by its light / shadow edges */
 .landFrame { background: none; }
+
+/* one continuous background colour (no gradient, so no line where a gradient ends when the page scrolls) */
+html, body, .happlyPage { background: #D7E3F7; }
