@@ -590,3 +590,7 @@ body::after { opacity: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns
 .landMid > .landNav { top: min(calc(50dvh + var(--lwv) * 0.66 + 80px), calc(100dvh - 122px)); }
 .landNav .landName { bottom: calc(100% + 30px); font-size: 21px; }
 @media (max-width: 700px) { .landNav .landName { bottom: calc(100% + 22px); font-size: 18px; } }
+
+/* more room between the app icons */
+.landNav > .landApps { gap: clamp(22px, 2.4vw, 36px); }
+@media (max-width: 700px) { .landNav > .landApps { gap: 16px; } }
