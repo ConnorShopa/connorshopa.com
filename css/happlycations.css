@@ -585,3 +585,8 @@ body::after { display: block !important; }
 
 /* grain: stronger so it reads as texture (same noise, more visible) */
 body::after { opacity: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix values=%220 0 0 0 0.36  0 0 0 0 0.45  0 0 0 0 0.64  0 0 0 0.3 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E"); }
+
+/* dock a bit lower; the app name floats further above its icon and a little larger */
+.landMid > .landNav { top: min(calc(50dvh + var(--lwv) * 0.66 + 80px), calc(100dvh - 122px)); }
+.landNav .landName { bottom: calc(100% + 30px); font-size: 21px; }
+@media (max-width: 700px) { .landNav .landName { bottom: calc(100% + 22px); font-size: 18px; } }
