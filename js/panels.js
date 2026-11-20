@@ -339,11 +339,11 @@ document.addEventListener("input", function (e) {
     var e = Math.max(0, Math.min(1.08, g.ce)), q = e * e * (3 - 2 * Math.min(1, e)); // eased, so it starts gently
     var s = 1 - 0.5 * q, o = Math.max(0, 1 - 0.97 * q), rot = 0, dy = (g.dir || 1) * -14 * q;
     if (g.wash && g.ww) { // the frame is fullest when the section is in focus; scrolling away it grows wider and goes paler
-      var gw = Math.min(g.ww * (1 + 0.9 * q), document.documentElement.clientWidth);
-      var gh = g.wh + 2 * 110 * q; // the padding grows on every side as it leaves, while the tint thins out into the page colour
-      g.wash.style.opacity = Math.max(0, 1 - 1.15 * q).toFixed(3);
+      var gw = Math.min(g.ww * (1 + 0.12 * q), document.documentElement.clientWidth);
+      var gh = g.wh + 2 * 18 * q; // the padding grows on every side as it leaves, while the tint thins out into the page colour
+      g.wash.style.opacity = Math.max(0, 1 - q).toFixed(3);
       g.wash.style.width = gw.toFixed(1) + "px"; g.wash.style.left = (g.cx - gw / 2).toFixed(1) + "px";
-      g.wash.style.height = gh.toFixed(1) + "px"; g.wash.style.top = (g.wt - 110 * q).toFixed(1) + "px";
+      g.wash.style.height = gh.toFixed(1) + "px"; g.wash.style.top = (g.wt - 18 * q).toFixed(1) + "px";
     }
     setAll(g, s, o, rot, dy);
   }
