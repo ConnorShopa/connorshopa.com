@@ -350,8 +350,13 @@ document.addEventListener("input", function (e) {
       var below = (g.off || 0) > 0 ? Math.max(0, Math.min(1, 1 - ((g.off || 0) - vh * 0.5) / (vh * 0.7))) : 0; // only once the section is coming up from below the screen
       var sc = 0.55 + 0.45 * q; // smaller as it nears focus
       g.wash.style.opacity = (q * below).toFixed(3);
-      g.wash.style.width = (vw * 0.9 * sc).toFixed(1) + "px"; g.wash.style.left = (vw * 0.05 + vw * 0.9 * (1 - sc) / 2).toFixed(1) + "px";
-      g.wash.style.height = (vh * 0.5 * sc).toFixed(1) + "px";
+      if (isPhone()) { // phones: the glow spans the whole width of the device and sits lower
+        g.wash.style.width = (vw * 1.2).toFixed(1) + "px"; g.wash.style.left = (-vw * 0.1).toFixed(1) + "px";
+        g.wash.style.height = (vh * 0.3 * sc).toFixed(1) + "px";
+      } else {
+        g.wash.style.width = (vw * 0.9 * sc).toFixed(1) + "px"; g.wash.style.left = (vw * 0.05 + vw * 0.9 * (1 - sc) / 2).toFixed(1) + "px";
+        g.wash.style.height = (vh * 0.5 * sc).toFixed(1) + "px";
+      }
     }
     setAll(g, s, o, rot, dy);
   }

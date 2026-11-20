@@ -394,11 +394,6 @@ body:not(#_) { background-color: #F4F4F4; }
 /* small screens: "happlycations" breaks as happly / cations, with the hand beside "happly" on the top row (clipped from the one lockup artwork) */
 .hlSplit:not(#_) { display: none; }
 @media (max-width: 700px) {
-  .inline.big a.hl .hlLogo:has(.hlHappy):not(#_):not(#_):not(#_) { display: none; }
-  a.hl .hlSplit:not(#_) { --h: 30px; --w: calc(var(--h) * 6.68); display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
-  .hlSplit .hs1, .hlSplit .hs2 { display: block; height: var(--h); background: url("../assets/homeAssets/happlycations_lockup.svg?v=3") no-repeat; background-size: auto 100%; }
-  .hlSplit .hs1 { width: calc(var(--w) * 0.559); background-position: left center; }
-  .hlSplit .hs2 { width: calc(var(--w) * 0.47); margin-left: calc(var(--w) * 0.13); clip-path: inset(0 0 0 calc(var(--h) * 0.3)); background-position: right center; margin-top: calc(var(--h) * -0.12); }
 }
 
 /* Connor Shopa sits dead centre of the screen (both ways) when the page is at the top */
@@ -424,4 +419,9 @@ body:not(#_) { background-color: #F4F4F4; }
 @media (max-width: 700px) {
   #about.homeSec:not(#_):not(#_):not(#_) { margin-top: -120px; }
   #contact.homeSec:not(#_):not(#_) { margin-top: -50px; }
+}
+
+/* phone: the project links have no tile backgrounds */
+@media (max-width: 700px) {
+  #projectList li:not(.row-break):not(#_):not(#_):not(#_) { background: transparent !important; }
 }
