@@ -427,3 +427,6 @@ body::after { display: block !important; }
 .landWord { left: 0; }
 .landApps { position: relative; top: 14dvh; }
 @media (max-width: 700px) { .landApps { top: 9dvh; } }
+
+/* app names under the icons: hidden (kept in the page for screen readers and easy to bring back) */
+.landName { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
