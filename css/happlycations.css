@@ -523,3 +523,11 @@ body::after { display: block !important; }
 .landNav:has(.landApp:hover) > a, .landNav:has(.landApp:hover) > .landSoon { transform: scale(.92); transition-delay: .1s; }
 .landNav:has(.landApp:hover) .landDockSep { transform: scaleY(.9); transition-delay: .1s; }
 @media (prefers-reduced-motion: reduce) { .landNav .landApps li:not(:hover) .landTile, .landNav > a, .landNav > .landSoon, .landDockSep { transition: none; } }
+
+/* dock icons: filling the dock's height, with corners nested inside the dock's own curve (dock radius 42 - 10 padding = 32) */
+.landMid > .landNav { padding: 10px 30px 10px 10px; border-radius: 42px; }
+.landNav .landTile, .landNav .landApp img { width: 80px; height: 80px; border-radius: 32px; }
+@media (max-width: 700px) {
+  .landMid > .landNav { padding: 8px 18px 8px 8px; border-radius: 32px; }
+  .landNav .landTile, .landNav .landApp img { width: 52px; height: 52px; border-radius: 24px; }
+}
