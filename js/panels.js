@@ -64,7 +64,7 @@
   function bubbleHome() { if (dot && dot.parentNode !== document.body) document.body.insertBefore(dot, document.body.firstChild); }
   function pinned() { return filters.classList.contains("stuck") || filters.classList.contains("pinned"); }
   if (dot) {
-    chips.forEach(function (c) { c.addEventListener("pointerenter", function (e) { if (e.pointerType === "touch") return; if (pinned() && dot.parentNode !== filters) filters.insertBefore(dot, filters.firstChild); }); });
+    chips.concat(Array.prototype.slice.call(document.querySelectorAll(".filtersLogo"))).forEach(function (c) { c.addEventListener("pointerenter", function (e) { if (e.pointerType === "touch") return; if (pinned() && dot.parentNode !== filters) filters.insertBefore(dot, filters.firstChild); }); });
     filters.addEventListener("pointerleave", function () { bubbleHome(); });
   }
   function press(name) {

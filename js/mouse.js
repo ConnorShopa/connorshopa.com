@@ -128,7 +128,7 @@
       radius = w / 2;
     }
     // filter chips: the bubble is exactly the chip (what the active button would wrap), no extra padding
-    if (currentLink && (currentLink.classList.contains("pill") || currentLink.classList.contains("viewHead"))) {
+    if (currentLink && (currentLink.classList.contains("pill") || currentLink.classList.contains("viewHead") || currentLink.classList.contains("filtersLogo"))) {
       w = base.width;
       h = base.height;
       radius = h / 2;
