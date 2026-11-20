@@ -355,3 +355,6 @@ body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-event
 
 /* the wordmark stroke is off for now (kept above; delete this line to bring it back). The hand keeps its stroke. */
 .ltr .ring { display: none !important; }
+
+/* the frame has no fill of its own: it is the page background, outlined only by its light / shadow edges */
+.landFrame { background: none; }
