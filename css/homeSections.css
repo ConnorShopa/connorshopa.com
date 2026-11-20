@@ -240,3 +240,6 @@ html:not(.view-open):not(#_) body:not(#_) {
 
 /* coming back down to the normal size (unpinning) is quick */
 .filters:not(.stuck):not(#_), .filters:not(.stuck) .pill:not(#_), .filters:not(.stuck) .filtersLogo:not(#_), .filters:not(.stuck) .filtersLogo img:not(#_) { transition-duration: .18s, .18s, .25s, .2s, .2s, .2s, .2s; transition-timing-function: ease, ease, ease-out, ease-out, ease-out, ease-out, ease-out; }
+
+/* the white halo around the pinned bar counts as part of the bar for hovering, so the pointer dot rises into the bar there too */
+.filters.stuck::after, .filters.pinned::after { content: ""; position: absolute; inset: -8px; border-radius: 999px; pointer-events: auto; z-index: -1; }
