@@ -239,6 +239,7 @@ document.addEventListener("input", function (e) {
     bg.style.background = on.getAttribute("data-active") || "";
     group.style.setProperty("--tabC", on.getAttribute("data-active") || "#2f2725");
     var to = { x: on.offsetLeft, y: on.offsetTop, width: on.offsetWidth, height: on.offsetHeight };
+    if (group.classList.contains("atTop")) { gsap.killTweensOf(bg); gsap.set(bg, to); gsap.set(bg, { autoAlpha: 0 }); first = false; return; } // at the very top the face is the active tab, not Work
     if (!animate || first || reduce) { gsap.set(bg, to); first = false; gsap.set(bg, { autoAlpha: 1 }); }
     else { // no sliding: the highlight appears on the new tab with a small, soft pop
       // the old tab's highlight pops out as the new one pops in
@@ -254,6 +255,27 @@ document.addEventListener("input", function (e) {
     }
   }
   new MutationObserver(function () { place(true); }).observe(group, { attributes: true, attributeFilter: ["aria-pressed"], subtree: true });
+  var wasTop = null;
+  function topCheck() {
+    var t = (window.pageYOffset || 0) <= 20;
+    if (t === wasTop) return;
+    wasTop = t;
+    group.classList.toggle("atTop", t);
+    if (t) { gsap.killTweensOf(bg); gsap.to(bg, { scale: 0.6, autoAlpha: 0, duration: 0.2, ease: "power2.in", transformOrigin: "50% 50%" }); }
+    else place(true);
+  }
+  window.addEventListener("scroll", topCheck, { passive: true });
+  topCheck();
   window.addEventListener("resize", function () { place(false); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { first = true; place(false); }); else place(false);
+})();
+
+// the face in the tab menu is the "active" tab while the page is at the very top: it keeps its light blue bubble there
+(function () {
+  var logo = document.querySelector(".filtersLogo");
+  if (!logo) return;
+  function mark() { logo.classList.toggle("atTop", (window.pageYOffset || 0) <= 20); }
+  window.addEventListener("scroll", mark, { passive: true });
+  window.addEventListener("resize", mark);
+  mark();
 })();
