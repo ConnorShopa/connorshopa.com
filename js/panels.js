@@ -148,7 +148,7 @@
   cacheLayout();
   slideHeader();
 
-  // "Home" (the face) is the active tab while the name and tagline are what is on screen; "Work" takes over once the logos reach the middle of the screen
+  // "Home" (the face) is the active tab while the name and tagline are what is on screen; "Work" takes over as soon as the Work block is well into the screen (about two-thirds down)
   var logoEl = document.querySelector(".filtersLogo");
   function setHome(on) { filters.classList.toggle("atTop", on); if (logoEl) logoEl.classList.toggle("atTop", on); }
   filters.addEventListener("tabs:return", function () { if (filters.classList.contains("stuck")) { filters.classList.add("returning"); setHome(true); } });
@@ -158,7 +158,7 @@
     if (sc) return sc.scrollTop <= 20;
     if (phone() && nav) return nav.scrollTop <= 20;
     // Work takes over once the logos are centred on screen (the spot the Work tab scrolls to); never before 40px of scroll
-    return window.pageYOffset < Math.max(40, homeEdge + workH / 2 - window.innerHeight / 2 - 10);
+    return window.pageYOffset < Math.max(40, homeEdge + workH / 2 - window.innerHeight * 0.68);
   }
   function spy() {
     stick();
@@ -340,8 +340,10 @@ document.addEventListener("input", function (e) {
     var s = 1 - 0.5 * q, o = Math.max(0, 1 - 0.97 * q), rot = 0, dy = (g.dir || 1) * -14 * q;
     if (g.wash && g.ww) { // the frame is fullest when the section is in focus; scrolling away it grows wider and goes paler
       var gw = Math.min(g.ww * (1 + 0.9 * q), document.documentElement.clientWidth);
-      g.wash.style.opacity = Math.max(0, 1 - q).toFixed(3);
+      var gh = g.wh + 2 * 110 * q; // the padding grows on every side as it leaves, while the tint thins out into the page colour
+      g.wash.style.opacity = Math.max(0, 1 - 1.15 * q).toFixed(3);
       g.wash.style.width = gw.toFixed(1) + "px"; g.wash.style.left = (g.cx - gw / 2).toFixed(1) + "px";
+      g.wash.style.height = gh.toFixed(1) + "px"; g.wash.style.top = (g.wt - 110 * q).toFixed(1) + "px";
     }
     setAll(g, s, o, rot, dy);
   }
@@ -377,6 +379,7 @@ document.addEventListener("input", function (e) {
         g.cx = cx; g.ww = ww;
         g.wash.style.left = (cx - ww / 2) + "px"; g.wash.style.top = (br.top + window.pageYOffset - pd) + "px";
         g.wash.style.width = ww + "px"; g.wash.style.height = (br.height + 2 * pd) + "px";
+        g.wt = br.top + window.pageYOffset - pd; g.wh = br.height + 2 * pd;
       }
     });
     apply();
