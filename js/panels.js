@@ -323,7 +323,9 @@ document.addEventListener("input", function (e) {
   groups.forEach(function (g) {
     if (!g.tint) return;
     g.wash = document.createElement("div");
-    g.wash.className = "secTint"; g.wash.setAttribute("aria-hidden", "true"); g.wash.style.background = "radial-gradient(ellipse 50% 62% at 50% 62%, rgba(" + g.tint + "," + g.ta + ") 0%, rgba(" + g.tint + "," + (g.ta * 0.8).toFixed(3) + ") 52%, rgba(" + g.tint + ",0) 82%)"; g.wash.style.webkitMaskImage = g.wash.style.maskImage = "linear-gradient(to bottom, #000 70%, transparent 100%)"; // a soft glow under the section that rises toward its content
+    g.wash.className = "secTint"; g.wash.setAttribute("aria-hidden", "true");
+    // a glow pinned to the bottom of the screen: strong while the section is still below, shrinking and fading to nothing as it scrolls into focus
+    g.wash.style.cssText = "position:fixed;left:0;bottom:0;pointer-events:none;z-index:-2;opacity:0;background:radial-gradient(ellipse 50% 100% at 50% 100%, rgba(" + g.tint + "," + g.ta + ") 0%, rgba(" + g.tint + "," + (g.ta * 0.8).toFixed(3) + ") 45%, rgba(" + g.tint + ",0) 85%)";
     document.body.appendChild(g.wash);
   });
   var on = false;
@@ -338,12 +340,13 @@ document.addEventListener("input", function (e) {
   function render(g, gi) {
     var e = Math.max(0, Math.min(1.08, g.ce)), q = e * e * (3 - 2 * Math.min(1, e)); // eased, so it starts gently
     var s = 1 - 0.5 * q, o = Math.max(0, 1 - 0.97 * q), rot = 0, dy = (g.dir || 1) * -14 * q;
-    if (g.wash && g.ww) { // the frame is fullest when the section is in focus; scrolling away it grows wider and goes paler
-      var gw = Math.min(g.ww * (1 + 0.9 * q), document.documentElement.clientWidth);
-      var gh = g.wh + 8 * q; // the padding grows on every side as it leaves, while the tint thins out into the page colour
-      g.wash.style.opacity = Math.max(0, 1 - q).toFixed(3);
-      g.wash.style.width = gw.toFixed(1) + "px"; g.wash.style.left = (g.cx - gw / 2).toFixed(1) + "px";
-      g.wash.style.height = gh.toFixed(1) + "px"; g.wash.style.top = g.wt.toFixed(1) + "px";
+    if (g.wash) {
+      var vw = document.documentElement.clientWidth, vh = window.innerHeight;
+      var below = (g.off || 0) > 0 ? Math.max(0, Math.min(1, 1 - ((g.off || 0) - vh * 0.5) / (vh * 0.7))) : 0; // only once the section is coming up from below the screen
+      var sc = 0.55 + 0.45 * q; // smaller as it nears focus
+      g.wash.style.opacity = (q * below).toFixed(3);
+      g.wash.style.width = (vw * 0.9 * sc).toFixed(1) + "px"; g.wash.style.left = (vw * 0.05 + vw * 0.9 * (1 - sc) / 2).toFixed(1) + "px";
+      g.wash.style.height = (vh * 0.5 * sc).toFixed(1) + "px";
     }
     setAll(g, s, o, rot, dy);
   }
@@ -369,24 +372,13 @@ document.addEventListener("input", function (e) {
       var r = ref.getBoundingClientRect();
       g.top = r.top + window.pageYOffset; g.h = r.height;
       var bx = g.box && document.querySelector(g.box);
-      if (g.wash && bx) {
-        var br = bx.getBoundingClientRect(), pd = g.pad || 0;
-        var L = 1e9, R = -1e9; // the frame must hold everything inside the block, even rows wider than the block itself
-        if (g.ref === "#projectList") bx.querySelectorAll("a, img").forEach(function (c) { var cr = c.getBoundingClientRect(); if (cr.width && cr.height) { L = Math.min(L, cr.left); R = Math.max(R, cr.right); } });
-        if (R < L) { L = br.left; R = br.right; }
-        var ww = Math.min(R - L + 2 * pd, window.innerWidth - 32), cx = (L + R) / 2 + window.pageXOffset;
-        g.cx = cx; g.ww = ww;
-        g.wash.style.left = (cx - ww / 2) + "px"; g.wash.style.top = (br.top + window.pageYOffset + br.height * 0.3 + 110) + "px";
-        g.wh = br.height * 0.7 + pd * 1.5; g.wt = br.top + window.pageYOffset + br.height * 0.3 + 110;
-        g.wash.style.width = ww + "px"; g.wash.style.height = g.wh + "px";
-      }
-    });
+        });
     apply();
     // a re-measure clears the transforms and resets the frame; redraw both at their current spring position straight away so nothing snaps
     if (on) groups.forEach(function (g, gi) { if (g.items && g.items.length && g.ce !== undefined) render(g, gi); });
   }
   function apply() {
-    if (!enabled()) { if (on) { on = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } groups.forEach(function (g) { g.ce = g.te = g.cv = 0; if (g.items) setAll(g, 1, 1, 0, 0); if (g.wash) g.wash.style.opacity = "1"; }); } return; }
+    if (!enabled()) { if (on) { on = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } groups.forEach(function (g) { g.ce = g.te = g.cv = 0; if (g.items) setAll(g, 1, 1, 0, 0); if (g.wash) g.wash.style.opacity = "0"; }); } return; }
     on = true;
     var vh = window.innerHeight, pos = window.pageYOffset;
     groups.forEach(function (g) {
@@ -394,7 +386,7 @@ document.addEventListener("input", function (e) {
       var centre = g.top + g.h / 2 - pos, off = centre - vh / 2;
       var e = Math.min(1, Math.abs(off) / (vh * 0.5));
       var dz = g.dz || 0.12; g.te = Math.max(0, (e - dz) / (1 - dz));
-      g.dir = off < 0 ? -1 : 1; // which way it is leaving
+      g.off = off; g.dir = off < 0 ? -1 : 1; // which way it is leaving
       if (g.ce === undefined) { g.ce = g.te; g.cv = 0; render(g, groups.indexOf(g)); }
     });
     if (!raf) raf = requestAnimationFrame(spring);
