@@ -292,3 +292,10 @@ html:not(.view-open):not(#_) body:not(#_) {
   .introTop:not(#_) { padding-top: 114px; } /* the name stays where it was, now that the tabs are not above it */
   #contact.homeSec:not(#_) { margin-bottom: 96px; }
 }
+
+/* phones: a smaller face by the name, and more air between the sections */
+@media (max-width: 700px) {
+  .who .whoLogo:not(#_) { width: 54px; height: 54px; }
+  .workNote:not(#_) { margin-bottom: 96px; }
+  #contact.homeSec:not(#_) { margin-top: 128px; }
+}
