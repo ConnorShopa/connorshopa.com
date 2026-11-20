@@ -75,7 +75,7 @@ html:not(.view-open):not(#_) body:not(#_) {
 @media (min-width: 701px) { .page > .below:not(#_) { margin-top: -180px; } }
 
 /* more air between About and Contact */
-#contact.homeSec:not(#_) { margin-top: 88px; }
+#contact.homeSec:not(#_) { margin-top: 127px; } /* the same gap as Work to About */
 @media (max-width: 700px) { #contact.homeSec:not(#_) { margin-top: 56px; } }
 
 /* About sits on a soft grey card whose top edge peeks in from the bottom of the first screen. On desktop the grey is its own
@@ -99,3 +99,6 @@ html:not(.view-open):not(#_) body:not(#_) {
 
 /* each logo's shadow is painted once on its own layer, so scrolling doesn't re-draw 14 filtered elements */
 #projectList li > a:not(#_):not(#_) .hlLogo { will-change: transform; }
+
+/* the name in the header: bolder */
+.who .name:not(#_) { font-weight: 600; }
