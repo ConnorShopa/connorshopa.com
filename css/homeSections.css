@@ -234,3 +234,7 @@ html:not(.view-open):not(#_) body:not(#_) {
 /* the face's active bubble (Home): pops in with a small bounce and scales out when another tab takes over */
 .filtersLogo::before { content: ""; position: absolute; inset: -1px; z-index: -1; border-radius: inherit; background: #A9C8F7; box-shadow: 0 6px 14px -4px rgba(47, 39, 37, 0.28), 0 2px 4px rgba(47, 39, 37, 0.12); opacity: 0; transform: scale(.6); pointer-events: none; transition: transform .18s cubic-bezier(.5, 0, .75, 0), opacity .18s ease-in; }
 .filtersLogo.atTop::before { opacity: 1; transform: scale(1); transition: transform .28s cubic-bezier(.34, 1.56, .64, 1), opacity .2s ease-out; }
+
+/* company names in Professional history that link out */
+.homeSec .aboutJobs .company a { color: inherit; text-decoration: underline; text-decoration-color: rgba(47, 39, 37, 0.3); text-underline-offset: 4px; text-decoration-thickness: 1px; transition: text-decoration-color .2s ease; }
+.homeSec .aboutJobs .company a:hover { text-decoration-color: currentColor; }
