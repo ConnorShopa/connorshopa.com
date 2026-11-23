@@ -472,3 +472,9 @@ body:not(#_) { background-color: #F4F4F4; }
 
 /* Poll.in keeps its logo but has no link for now: no hover bubble, no click, no pointer cursor */
 .hl.hlOff:not(#_):not(#_) { pointer-events: none; cursor: default; }
+
+/* phones: no visible scroll bar */
+@media (max-width: 700px) {
+  html, body, .hero > nav, .view, .view.scrollView, .cardFrame, * { scrollbar-width: none; -ms-overflow-style: none; }
+  html::-webkit-scrollbar, body::-webkit-scrollbar, .hero > nav::-webkit-scrollbar, .view::-webkit-scrollbar, .view.scrollView::-webkit-scrollbar, *::-webkit-scrollbar { display: none; width: 0; height: 0; }
+}

@@ -679,3 +679,11 @@ body {
   .textSection.statement:not(#_):not(#_) { margin-bottom: -24px; }
   .productDetails:not(#_):not(#_) { margin-bottom: 48px; }
 }
+
+/* shared type scale with Seeds/Plunk: one light weight, fewer sizes */
+h4, a, .heroBox > .textSection .statusPill { font-weight: 300; }
+h4 { font-size: 18px; }
+@media (min-width: 901px) {
+  .heroBox > .textSection h1, h1 { font-size: 120px; }
+}
+@media (max-width: 900px) { h4 { font-size: 14px; } }

@@ -2743,3 +2743,6 @@ html.view-open.view-dark #mouse-circle { mix-blend-mode: normal; }
 
 /* phones: the "Open" button's text is white while TouchTunes (a dark card) is in focus */
 @media (max-width: 700px) { .deckView.ready.lightText { color: #fff; } }
+
+/* Seeds: the pictures run at half size, centred */
+#view-seeds .pgMedia figure { width: 50%; align-self: center; }
