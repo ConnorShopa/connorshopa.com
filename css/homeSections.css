@@ -465,7 +465,7 @@ body:not(#_) { background-color: #F4F4F4; }
 @media (max-width: 700px) { .who .name:not(#_):not(#_) { font-size: 22px; } }
 
 /* phone: the "Over 3 million..." line sits closer to the project links under it */
-@media (max-width: 700px) { .workNote:not(#_):not(#_):not(#_) { margin-bottom: -24px; } }
+@media (max-width: 700px) { .workNote:not(#_):not(#_):not(#_) { margin-bottom: 3px; } }
 
 /* "Connor Shopa" is one step lighter (600 -> 500) */
 .who .name:not(#_):not(#_) { font-weight: 500; }
