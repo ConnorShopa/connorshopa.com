@@ -542,3 +542,552 @@ body {
 
   
 }
+
+/* the hero image sits at the very top, above everything */
+.content > .imageBox:first-child, .content > .imageBox { margin-top: 140px; }
+.content > .imageBox + .heroBox { margin-top: 48px; }
+
+/* "When there's nothing being played" and "In Context": the screen sits close under its title (72px gap - 48px = 24px) */
+.content > .textSection:has(+ .imageBox img[src*="spotify_img10"]) + .imageBox,
+.content > .iconTextBox + .imageBox { margin-top: -48px; }
+
+
+/* the "making digital more physical" skeleton animation (was spotify_gif01.gif), rebuilt as html/css/gsap */
+.flipDemo { flex: 0 0 auto; width: 543px; max-width: 100%; aspect-ratio: 543 / 300; position: relative; container-type: inline-size; }
+.flipDemo .fdPhone { position: absolute; left: 16.76%; top: 0; width: 65.6%; height: 100%; box-sizing: border-box; } /* no phone frame: it only positions the squares */
+.flipDemo .fdStage { position: absolute; left: 50%; top: 50%; width: 0; height: 0; }
+.flipDemo .fdStage i { position: absolute; left: -21.6cqw; top: -21.6cqw; width: 43.2cqw; height: 43.2cqw; box-sizing: border-box; border: 1.2px dashed #474B4E; border-radius: 1.5cqw; background: #F7F7F7; box-shadow: 0 calc(2cqw + 1.2cqw * var(--lift, 0)) calc(5cqw + 2cqw * var(--lift, 0)) rgba(30, 35, 60, calc(0.12 + 0.04 * var(--lift, 0))); }
+
+
+/* inside the project view: titles and subtitles take Nanni's type (Satoshi; titles like Nanni's .nnLead, subtitles like its .nnPt, with the 14pt floor).
+   vw here is the framed page's own width, which is the card's width, so it plays the part of Nanni's cqw. */
+html.inFrame h1, html.inFrame h2 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(20px, 2.5vw, 40px); line-height: 1.3; letter-spacing: -0.015em; font-weight: 500; }
+html.inFrame h3 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(18.67px, 1.3vw, 21px); line-height: 1.45; letter-spacing: 0; font-weight: 500; }
+
+/* the framed page has no Satoshi of its own (css/satoshi.css isn't in the repo), so it loads the site's copy */
+@font-face { font-family: "Satoshi"; src: url("../fonts/Satoshi/Satoshi-Variable.ttf") format("truetype"); font-weight: 300 900; font-style: normal; font-display: swap; }
+
+/* the hero image at the top of the project view: 0.6x of its width, still centred */
+html.inFrame .content > .imageBox:first-child img { width: 60%; }
+
+
+/* "I spent 112,000 minutes with Spotify in 2024": very large, centred under the hero image; the number is a rolling counter */
+.content > .imageBox + .minutesBox { margin-top: 96px; }
+.content > .minutesBox + .heroBox { margin-top: 96px; }
+.minutesBox { display: flex; justify-content: center; align-self: stretch; text-align: center; }
+.minutesBig { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(40px, 6.4vw, 120px); line-height: 1.08; white-space: nowrap; letter-spacing: -0.04em; font-weight: 500; color: #03131f; }
+.minutesBig .roll { display: inline-block; vertical-align: top; height: 1.08em; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; font-size: 1em; line-height: 1.08; }
+.minutesBig .rd { display: inline-block; position: relative; height: 1.08em; vertical-align: top; width: 0.64em; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); }
+.minutesBig .rs { position: absolute; left: 0; right: 0; top: 0; display: block; will-change: transform, filter; }
+.minutesBig .rs > span { display: block; height: 1.08em; line-height: 1.08; text-align: center; }
+.minutesBig .rc { display: inline-block; vertical-align: top; width: 0.28em; text-align: center; }
+@media (max-width: 900px) { .minutesBig { font-size: clamp(26px, 6.4vw, 64px); } }
+
+/* the words round the number are quieter: smaller and lighter, sitting on the number's baseline */
+.minutesBig .mT { font-size: 0.4em; font-weight: 500; letter-spacing: -0.02em; color: #6f7b86; }
+.minutesBig .mL2 { display: block; margin-top: 0.1em; line-height: 1.2; }
+
+/* "5.1 / hours a day" under the minutes line: same type, the number big and bold */
+.content > .minutesBox + .hoursBox { margin-top: 56px; }
+.content > .hoursBox + .heroBox { margin-top: 96px; }
+.minutesBig .bigNum { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* the "for all its wonder" sentence now sits centred under the stats */
+.content > .hoursBox + .forAllBox { margin-top: 56px; align-self: center; align-items: center; text-align: center; max-width: 34em; width: auto; }
+.content > .forAllBox + .heroBox { margin-top: 96px; }
+.forAllBox h3.centerText { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; } /* = the small words in the stats (.mT: 0.4 of their line's size) */
+@media (max-width: 900px) { .forAllBox h3.centerText { font-size: clamp(14px, 2.56vw, 26px); } }
+
+/* "for all its wonder": one line across the whole project width, with room above and below */
+.content > .hoursBox + .forAllBox { margin-top: 0; align-self: stretch; width: 100%; max-width: none; padding: 72px 0; box-sizing: border-box; }
+.content > .forAllBox + .heroBox { margin-top: 24px; }
+.forAllBox h3.centerText { max-width: none; width: 100%; }
+
+/* "Spotify Dreams": centred, in the rolling numbers' font (Satoshi, bold) and colour */
+.heroBox > .textSection:first-child { align-items: center; }
+html .heroBox h1, html.inFrame .heroBox h1 { text-align: center; width: 100%; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 700; color: #03131f; font-size: clamp(40px, 6.4vw, 120px); line-height: 1.08; letter-spacing: -0.04em; } /* the rolling numbers' size */
+@media (max-width: 900px) { html .heroBox h1, html.inFrame .heroBox h1 { font-size: clamp(26px, 6.4vw, 64px); } }
+
+/* "Fixing problems I have with Spotify": centred under the title */
+.heroBox .productDetails, .heroBox .productDetails .textSection { align-items: center; justify-content: center; text-align: center; width: 100%; }
+.heroBox .productDetails h4 { text-align: center; }
+
+/* Problem 1: a centred column (label, statement, copy, then the animation below) */
+html.inFrame h2.problemHead { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; width: 100%; margin: 0; }
+h2.problemHead .pLabel { font-family: "Host Grotesk", system-ui, sans-serif; font-size: 22px; font-weight: 400; color: #002644; line-height: 1.3; letter-spacing: normal; }
+h2.problemHead .pText { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; max-width: 22em; }
+.imageTextSection:has(.flipDemo) { flex-direction: column; align-items: center; gap: 24px; }
+.imageTextSection:has(.flipDemo) .textSection { align-items: center; text-align: center; margin: 0; max-width: none; }
+.imageTextSection:has(.flipDemo) .textSection .centerText { text-align: center; }
+.imageTextSection:has(.flipDemo) .flipDemo { margin: 0 auto; }
+.heroBox .productDetails ~ .textSection .linesRule { margin: 0 auto; }
+.heroBox .productDetails ~ .textSection { gap: 0; }
+html.inFrame h2.problemHead { margin-top: 96px; }
+
+/* the hero image now sits between the stats intro and the Spotify Dreams title */
+html.inFrame .content > .imageBox.heroImg img { width: 60%; }
+.content > .imageBox.heroImg { margin-top: 0; }
+.content > .heroImg + .heroBox { margin-top: 48px; }
+.content > .minutesBox:first-child { margin-top: 140px; }
+
+/* everything in the project view is centred */
+html.inFrame .content > .textSection, html.inFrame .content > .imageTextSection, html.inFrame .content > .imageBox { align-self: stretch; width: 100%; max-width: none; box-sizing: border-box; }
+html.inFrame .content .textSection { align-items: center; text-align: center; }
+html.inFrame .content .textSection > h1, html.inFrame .content .textSection > h2, html.inFrame .content .textSection > h3, html.inFrame .content .textSection > h4, html.inFrame .content .textSection > p { text-align: center; width: 100%; }
+html.inFrame .content > .imageTextSection { align-items: center; justify-content: center; }
+html.inFrame .content > .imageTextSection:has(.flipDemo) { flex-direction: column; gap: 56px; }
+html.inFrame .content > .imageTextSection:has(.flipDemo) .textSection { width: 100%; }
+html.inFrame .content > .imageBox img { margin-left: auto; margin-right: auto; display: block; }
+html.inFrame .content > .textSection:has(.problemHead) { margin-bottom: 96px; }
+
+/* the first stat (I spent ...) sits in the middle of the project view: half the view height, less half the block's own height (two lines of the big size) */
+.content > .minutesBox:first-child { margin-top: max(24px, calc(50vh - 1.15 * clamp(40px, 6.4vw, 120px))); }
+@media (max-width: 900px) { .content > .minutesBox:first-child { margin-top: max(24px, calc(50vh - 1.15 * clamp(26px, 6.4vw, 64px))); } }
+
+/* the flip section and Problem 1 live inside the hero block, so they are reached by descendant, not child, selectors */
+html.inFrame .imageTextSection:has(.flipDemo) { display: flex; flex-direction: column; align-items: center; justify-content: center; align-self: stretch; width: 100%; max-width: none; gap: 56px; box-sizing: border-box; }
+html.inFrame .imageTextSection:has(.flipDemo) > .textSection { width: 100%; max-width: none; align-items: center; text-align: center; margin: 0; }
+html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h2, html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h3 { width: 100%; text-align: center; margin-left: 0; margin-right: 0; }
+html.inFrame .imageTextSection:has(.flipDemo) > .flipDemo { flex: 0 0 auto; align-self: center; margin: 0 auto; }
+html.inFrame h2.problemHead { margin-bottom: 140px; }
+
+/* the animation now follows the Problem 1 statement directly, then the "Making digital more physical" copy */
+html.inFrame h2.problemHead { margin-bottom: 0; }
+html.inFrame .imageTextSection:has(.flipDemo) { gap: 72px; }
+
+html.inFrame h2.problemHead { margin-bottom: 72px; }
+
+/* the hero (image + Spotify Dreams title) opens the page; the title overlaps the foot of the image; the stats follow */
+.content > .imageBox.heroImg { margin-top: 72px; }
+.content > .heroImg + .heroBox { margin-top: calc(-0.55 * clamp(40px, 6.4vw, 120px)); position: relative; z-index: 2; }
+.content > .heroBox#nanni + .minutesBox { margin-top: 120px; }
+@media (max-width: 900px) { .content > .heroImg + .heroBox { margin-top: calc(-0.55 * clamp(26px, 6.4vw, 64px)); } }
+
+/* the rolling numbers a size smaller (the small words and the "For all it's wonder" line follow: 0.4 of the big size) */
+.minutesBig { font-size: clamp(28px, 4.5vw, 84px); }
+@media (max-width: 900px) { .minutesBig { font-size: clamp(20px, 4.5vw, 45px); } }
+.forAllBox h3.centerText { font-size: clamp(12px, 1.8vw, 34px); }
+@media (max-width: 900px) { .forAllBox h3.centerText { font-size: clamp(11px, 1.8vw, 18px); } }
+/* the hero (image + title) fills the first screen and sits in the middle of it */
+.heroStage { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; width: 100%; box-sizing: border-box; }
+.heroStage > .imageBox.heroImg { margin-top: 0; width: 100%; display: flex; justify-content: center; }
+.heroStage > .heroBox { width: 100%; }
+.content > .heroStage + .minutesBox { margin-top: 48px; }
+
+/* the hero image keeps its size (60% of the view) now that it sits in the hero stage rather than directly in .content */
+html.inFrame .heroStage > .imageBox.heroImg img { width: 60%; max-width: none; height: auto; display: block; margin: 0 auto; }
+
+/* inside the hero stage the title block lost the .content > rules: set its own margin (the old 140px top margin made the big gap) and the overlap */
+.heroStage > .heroBox { margin-top: calc(-0.55 * clamp(40px, 6.4vw, 120px)); margin-bottom: 0; position: relative; z-index: 2; align-items: center; }
+@media (max-width: 900px) { .heroStage > .heroBox { margin-top: calc(-0.55 * clamp(26px, 6.4vw, 64px)); } }
+.heroStage > .heroBox > .textSection { margin: 0; }
+.heroStage { padding: 0; }
+
+/* the title sits just below the image, no overlap */
+.heroStage > .heroBox { margin-top: 32px; }
+@media (max-width: 900px) { .heroStage > .heroBox { margin-top: 24px; } }
+
+/* "Problem 1" / "Problem 2" sit in a pill */
+h2.problemHead .pLabel { display: inline-block; padding: 6px 18px; border: 1px solid #002644; border-radius: 999px; line-height: 1.2; }
+html.inFrame h2.problemHead { margin-bottom: 40px; }
+html.inFrame .imageTextSection:has(.flipDemo) h2.problemHead { margin-bottom: 72px; }
+
+.inlineTitle { font-weight: 700; color: #03131f; }
+
+.inlineTitle { font: inherit; font-weight: inherit; color: inherit; letter-spacing: inherit; }
+
+/* the record animation and its sentence sit in a rounded dashed frame (the dash matches the records') */
+html.inFrame .imageTextSection:has(.flipDemo) { border: 1.2px dashed #474B4E; border-radius: 32px; padding: 56px 48px; gap: 40px; box-sizing: border-box; }
+html.inFrame .imageTextSection:has(.flipDemo) > .textSection { max-width: 36em; }
+@media (max-width: 900px) { html.inFrame .imageTextSection:has(.flipDemo) { border-radius: 24px; padding: 32px 20px; } }
+
+/* a rounded dashed frame (the same as the one round the record animation) holding an image and the sentence under it */
+html.inFrame .dashFrame { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; align-self: stretch; width: 100%; box-sizing: border-box; border: 1.2px dashed #474B4E; border-radius: 32px; padding: 56px 48px; }
+html.inFrame .dashFrame > .imageBox { width: 100%; justify-content: center; margin: 0; }
+html.inFrame .dashFrame > .imageBox img { width: auto; max-width: min(100%, 360px); height: auto; display: block; margin: 0 auto; }
+html.inFrame .dashFrame > h3 { margin: 0; text-align: center; max-width: 36em; }
+@media (max-width: 900px) { html.inFrame .dashFrame { border-radius: 24px; padding: 32px 20px; } }
+
+/* a wide image in a frame fills it; the phone image stays capped */
+html.inFrame .dashFrame > .imageBox img[src*="spotify_img03"] { width: 100%; max-width: 100%; }
+html.inFrame .dashFrame > h5 { margin: 0; text-align: center; width: 100%; }
+
+/* the phone image and the component sheet sit side by side in the frame (stacked on narrow screens) */
+html.inFrame .dashFrame > .frameRow { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 40px; width: 100%; }
+html.inFrame .frameRow > .imageBox { width: auto; margin: 0; }
+html.inFrame .frameRow > .imageBox:first-child { flex: 0 0 auto; }
+html.inFrame .frameRow > .imageBox:first-child img { width: 300px; max-width: 100%; }
+html.inFrame .frameRow > .sheetBox { flex: 1 1 0; min-width: 0; }
+html.inFrame .frameRow > .sheetBox img { width: 100%; max-width: 100%; height: auto; }
+@media (max-width: 900px) { html.inFrame .dashFrame > .frameRow { flex-direction: column; } html.inFrame .frameRow > .sheetBox { flex: 0 0 auto; width: 100%; } }
+
+/* both images in the frame share one height (widths follow their own proportions) */
+html.inFrame .frameRow > .imageBox { flex: 0 0 auto; }
+html.inFrame .frameRow > .imageBox img, html.inFrame .frameRow > .imageBox:first-child img, html.inFrame .frameRow > .sheetBox img { height: clamp(240px, 30vw, 480px); width: auto; max-width: 100%; }
+@media (max-width: 900px) { html.inFrame .frameRow > .imageBox img, html.inFrame .frameRow > .imageBox:first-child img, html.inFrame .frameRow > .sheetBox img { height: auto; } html.inFrame .frameRow > .imageBox:first-child img { width: 220px; } html.inFrame .frameRow > .sheetBox img { width: 100%; } }
+
+/* "Making the view scalable" in the same type as the Problem statements (.pText) */
+html.inFrame .scalableText h2, html.inFrame .scalableText h3 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; max-width: 22em; margin-left: auto; margin-right: auto; }
+@media (max-width: 900px) { html.inFrame .scalableText h2, html.inFrame .scalableText h3 { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* rolling numbers smaller again (about 25%); the "For all it's wonder" line keeps its 0.4 ratio */
+.minutesBig { font-size: clamp(22px, 3.4vw, 64px); }
+@media (max-width: 900px) { .minutesBig { font-size: clamp(17px, 3.4vw, 34px); } }
+.forAllBox h3.centerText { font-size: clamp(10px, 1.36vw, 26px); }
+@media (max-width: 900px) { .forAllBox h3.centerText { font-size: clamp(10px, 1.36vw, 14px); } }
+
+h2.problemHead .pLabel { border-color: #6f7b86; }
+
+/* the animations (transparent WebP now) float on a dark-green drop shadow that follows their rounded shapes */
+html.inFrame img[src*="spotify_gif"] { filter: drop-shadow(0 18px 28px rgba(10, 66, 40, 0.42)); }
+
+/* the three use-case animations in a row, each with its title and text underneath (type matches the text sections above: Satoshi, grey) */
+html.inFrame .gifRow { display: flex; flex-direction: row; align-items: flex-start; justify-content: center; gap: 48px; width: 100%; align-self: stretch; box-sizing: border-box; padding: 0 24px; }
+html.inFrame .gifCol { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+html.inFrame .gifCol > .imageBox { width: 100%; margin: 0 0 16px; justify-content: center; }
+html.inFrame .gifCol > .imageBox img { width: auto; max-width: 100%; height: auto; max-height: 62vh; display: block; margin: 0 auto; }
+html.inFrame .gifCol > .gifTitle { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 1.9vw, 30px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; width: 100%; }
+html.inFrame .gifCol > .gifText { margin: 0; text-align: center; width: 100%; max-width: 26em; color: #002644; }
+@media (max-width: 900px) { html.inFrame .gifRow { flex-direction: column; align-items: center; gap: 56px; } html.inFrame .gifCol { width: 100%; } }
+
+/* "The final idea" is a section breaker, in the same type and size as "Making the view scalable" */
+html.inFrame h5.sectionBreaker { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; width: 100%; margin: 0; }
+@media (max-width: 900px) { html.inFrame h5.sectionBreaker { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* "The final idea" in a pill, styled like the "Problem 1" label */
+html.inFrame h5.pillBreaker { display: flex; justify-content: center; width: 100%; margin: 0; font-size: inherit; }
+h5.pillBreaker .pLabel { display: inline-block; font-family: "Host Grotesk", system-ui, sans-serif; font-size: 22px; font-weight: 400; color: #002644; line-height: 1.2; letter-spacing: normal; padding: 6px 18px; border: 1px solid #6f7b86; border-radius: 999px; }
+
+/* the use-case titles at the size of "Making the view scalable" */
+html.inFrame .gifCol > .gifTitle { font-size: clamp(16px, 2.56vw, 48px); }
+@media (max-width: 900px) { html.inFrame .gifCol > .gifTitle { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* use-case titles smaller (28px on wide screens); their text matches the pill copy ("Thought 1": Host Grotesk 22px / 400 / navy) */
+html.inFrame .gifCol > .gifTitle { font-size: clamp(16px, 1.4vw, 28px); }
+html.inFrame .gifCol > .gifText { font-family: "Host Grotesk", system-ui, sans-serif; font-size: 22px; font-weight: 400; line-height: 1.3; letter-spacing: normal; color: #002644; }
+@media (max-width: 900px) { html.inFrame .gifCol > .gifTitle { font-size: clamp(16px, 4vw, 24px); } }
+
+/* the fullscreen pictures fill their frame */
+html.inFrame .dashFrame > .imageBox img[src*="spotify_img_05"] { width: 100%; max-width: 100%; height: auto; }
+
+/* the three principles in a dashed frame: the intro line, then each principle's title and line (same type as the use cases) */
+html.inFrame .dashFrame.principles { gap: 40px; }
+html.inFrame .dashFrame.principles > .gifCol { flex: 0 0 auto; width: 100%; }
+
+/* the intro line sits between the two frames, in the type of the Problem statements (.pText) */
+html.inFrame .statementText h2 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; max-width: 22em; margin: 0 auto; }
+@media (max-width: 900px) { html.inFrame .statementText h2 { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* tighter vertical rhythm between the stats */
+.content > .minutesBox + .hoursBox { margin-top: 16px; }
+.content > .hoursBox + .forAllBox { padding: 24px 0 72px; }
+
+/* Sketching copy: same type as the problem statements */
+html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #6f7b86; text-align: center; max-width: 22em; margin-left: auto; margin-right: auto; }
+@media (max-width: 900px) { html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* "Spotify Dreams" title: lighter weight */
+html .heroBox h1, html.inFrame .heroBox h1 { font-weight: 500; }
+
+/* Sketching copy: same type as the dashed-frame captions ("The old fullscreen, left behind…") */
+html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(18.67px, 1.3vw, 21px); font-weight: 500; line-height: 1.45; letter-spacing: 0; color: #2D3A44; text-align: center; max-width: 36em; margin: 0 auto; }
+@media (max-width: 900px) { html.inFrame .sketchText h2, html.inFrame .sketchText h5 { font-size: clamp(18.67px, 1.3vw, 21px); } }
+
+/* numbered principles (1. Beautiful, 2. Useful, 3. Understandable): same type as "Making the view scalable" */
+html.inFrame .dashFrame.principles > .gifCol > .gifTitle { font-size: clamp(16px, 2.56vw, 48px); max-width: 22em; margin-left: auto; margin-right: auto; }
+@media (max-width: 900px) { html.inFrame .dashFrame.principles > .gifCol > .gifTitle { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* "Sketching" title: same type as the other section titles, centred */
+html.inFrame .sketchText { align-items: center; text-align: center; }
+html.inFrame .sketchText h2 { font-size: clamp(16px, 2.56vw, 48px); line-height: 1.2; letter-spacing: -0.02em; color: #6f7b86; width: 100%; max-width: 22em; text-align: center; margin: 0 auto; }
+@media (max-width: 900px) { html.inFrame .sketchText h2 { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* Neutral / Modular views side by side: whole screenshots, not capped by height */
+html.inFrame .viewRow > .gifCol > .imageBox img { width: 100%; max-height: none; }
+
+/* the two annotated fullscreen images (Jam queue / Jam sidebar): 0.6x */
+
+
+/* annotated fullscreen images: labels are live text laid over the artwork, scaling with it (0.6x) */
+html.inFrame .annoBox { position: relative; width: 60%; margin: 0 auto; container-type: inline-size; }
+html.inFrame .annoBox > img { width: 100%; height: auto; display: block; margin: 0; }
+html.inFrame .annoBox .anno { position: absolute; margin: 0; white-space: nowrap; font-family: "Host Grotesk", "Satoshi", system-ui, sans-serif; font-weight: 400; color: #001428; letter-spacing: -0.04em; }
+html.inFrame .annoL .anno { text-align: right; font-size: 1.46cqw; line-height: 1.5cqw; }
+html.inFrame .annoR .anno { text-align: left; font-size: 2.3cqw; line-height: 2.38cqw; }
+
+/* annotation labels: same font as the Sketching subtitle (Satoshi 500, #2D3A44) */
+html.inFrame .annoBox .anno { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 500; color: #2D3A44; letter-spacing: 0; }
+
+/* annotation labels: tighter tracking, like the original artwork lettering */
+html.inFrame .annoBox .anno { letter-spacing: -0.045em; word-spacing: -0.05em; }
+
+/* annotated fullscreen images back to the artwork with its own lettering, at 0.6x */
+html.inFrame .imageBox img[src*="spotify_img08"], html.inFrame .imageBox img[src*="spotify_img09"] { width: 60%; height: auto; display: block; margin-left: auto; margin-right: auto; }
+
+/* the "nothing being played" fullscreen screen: 0.6x */
+html.inFrame .imageBox img[src*="spotify_img10"] { width: 60%; height: auto; display: block; margin-left: auto; margin-right: auto; }
+
+/* "In Context" screen: 0.6x */
+html.inFrame .imageBox img[src*="spotify_gif07"] { width: 60%; height: auto; display: block; margin-left: auto; margin-right: auto; }
+
+/* "In Context" screen: larger (80%), and given a full-viewport box so it sits centred in the project view */
+html.inFrame .imageBox:has(img[src*="spotify_gif07"]) { min-height: 100vh; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+html.inFrame .imageBox img[src*="spotify_gif07"] { width: 80%; }
+
+/* "Thought" pills sit as close to their title as the Problem pills do to their statement (12px; the .content gap is 72px) */
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -60px; }
+
+/* Sketching: centred column like the other sections: title, then the gif, then the subtitle below it */
+html.inFrame .content > .imageTextSection.sketchSection { flex-direction: column; align-items: center; justify-content: center; gap: 56px; }
+html.inFrame .sketchSection > .textSection, html.inFrame .sketchSection > .imageBox { width: 100%; }
+html.inFrame .sketchSection > .imageBox img { margin-left: auto; margin-right: auto; }
+
+/* ---- dashed outlines moved: around the rolling numbers and the Problem headings; off the content frames ---- */
+/* rolling numbers in one rounded dashed outline */
+html.inFrame .statsFrame { display: flex; flex-direction: column; align-items: center; align-self: stretch; width: 100%; box-sizing: border-box; border: 1.2px dashed #474B4E; border-radius: 32px; padding: 56px 48px; }
+html.inFrame .content > .heroStage + .statsFrame { margin-top: 48px; }
+html.inFrame .statsFrame > .minutesBox { margin-top: 0; align-self: center; }
+html.inFrame .statsFrame > .minutesBox + .hoursBox { margin-top: 16px; }
+html.inFrame .statsFrame + .forAllBox { margin-top: 0; align-self: stretch; width: 100%; max-width: none; padding: 24px 0 72px; box-sizing: border-box; }
+html.inFrame .content > .statsFrame + .forAllBox + .heroBox { margin-top: 24px; }
+@media (max-width: 900px) { html.inFrame .statsFrame { border-radius: 24px; padding: 32px 20px; } }
+
+/* Problem 1 / Problem 2: the pill becomes a rounded dashed outline round the label and statement */
+html.inFrame h2.problemHead { border: 1.2px dashed #474B4E; border-radius: 32px; padding: 56px 48px; box-sizing: border-box; }
+h2.problemHead .pLabel { border: 0; padding: 0; border-radius: 0; }
+@media (max-width: 900px) { html.inFrame h2.problemHead { border-radius: 24px; padding: 32px 20px; } }
+
+/* the frames holding the content keep their layout but lose the dashed outline */
+html.inFrame .dashFrame, html.inFrame .imageTextSection:has(.flipDemo) { border: 0; }
+
+/* dashed outline goes round the numbers themselves, not the whole stats block */
+html.inFrame .statsFrame { border: 0; padding: 0; border-radius: 0; }
+html.inFrame .minutesBig .roll { border: 1.2px dashed #474B4E; border-radius: 0.28em; padding: 0.04em 0.24em; box-sizing: content-box; }
+
+/* Problem 1 / 2: no big frame; the pill keeps its shape with a dashed border */
+html.inFrame h2.problemHead { border: 0; border-radius: 0; padding: 0; }
+h2.problemHead .pLabel { display: inline-block; padding: 6px 18px; border: 1.2px dashed #474B4E; border-radius: 999px; line-height: 1.2; }
+
+/* every pill label (Problem 1/2, Thought 1/2) uses the same dashed outline as the rolling numbers */
+h2.problemHead .pLabel, h5.pillBreaker .pLabel { border: 1.2px dashed #474B4E; border-radius: 999px; }
+
+/* colours reversed project-wide: titles dark, subtitles / captions grey */
+html.inFrame .scalableText h2,
+html.inFrame .sketchText h2,
+html.inFrame .gifCol > .gifTitle,
+html.inFrame .dashFrame.principles > .gifCol > .gifTitle,
+html.inFrame .statementText h2,
+h2.problemHead .pText { color: #2D3A44; }
+html.inFrame .scalableText h3,
+html.inFrame .sketchText h5,
+html.inFrame .gifCol > .gifText,
+html.inFrame .dashFrame > h3,
+html.inFrame .imageTextSection:has(.flipDemo) > .textSection > h3 { color: #6f7b86; }
+
+/* pill labels: capitalised, subtitle size */
+h2.problemHead .pLabel, h5.pillBreaker .pLabel { text-transform: uppercase; letter-spacing: 0.04em; font-size: clamp(18.67px, 1.3vw, 21px); }
+
+/* Thought pills: white thought bubbles (no dashes) with two little trailing bubbles */
+h5.pillBreaker .pLabel { position: relative; border: 0; background: #fff; box-shadow: 0 6px 18px rgba(10, 66, 40, 0.08); padding: 10px 28px; }
+h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after { content: ""; position: absolute; background: #fff; border-radius: 50%; box-shadow: 0 3px 8px rgba(10, 66, 40, 0.08); }
+h5.pillBreaker .pLabel::before { width: 14px; height: 14px; left: 22px; bottom: -14px; }
+h5.pillBreaker .pLabel::after { width: 8px; height: 8px; left: 12px; bottom: -26px; }
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -36px; }
+
+/* Record Shelf / Fullscreen: smaller icons */
+html.inFrame .iconTextBox > img { height: 22px; width: auto; }
+html.inFrame .iconTextBox { gap: 16px; }
+
+/* thought bubbles: more organic body, trailing circles tucked closer */
+h5.pillBreaker .pLabel { border-radius: 40px 54px 38px 56px / 24px 22px 24px 22px; }
+h5.pillBreaker .pLabel::before { width: 13px; height: 13px; left: 28px; bottom: -11px; }
+h5.pillBreaker .pLabel::after { width: 8px; height: 8px; left: 21px; bottom: -20px; }
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -44px; }
+
+/* thought bubbles: only a hint of organic */
+h5.pillBreaker .pLabel { border-radius: 46px 52px 44px 54px / 24px 23px 24px 23px; }
+
+/* thought bubbles: back to the plain pill */
+h5.pillBreaker .pLabel { border-radius: 999px; }
+
+/* stats read as a story: three beats with room between them */
+html.inFrame .minutesBig .roll { margin: 0 0.1em; }
+html.inFrame .minutesBig .mL2 { margin-top: 0.45em; }
+html.inFrame .statsFrame > .minutesBox + .hoursBox { margin-top: 88px; }
+html.inFrame .statsFrame + .forAllBox { padding: 88px 0 72px; }
+
+/* the words round the rolling numbers: same dark as the titles (size unchanged) */
+html.inFrame .minutesBig .mT, html.inFrame .forAllBox h3.centerText { color: #2D3A44; }
+
+/* even rhythm: 88px above and below "For all it's wonder" (64px padding + the 24px margin before the next section), same as between the stats */
+html.inFrame .statsFrame + .forAllBox { padding: 88px 0 64px; }
+
+/* "For all it's wonder…": same type as the section titles */
+html.inFrame .forAllBox h3.centerText { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: clamp(16px, 2.56vw, 48px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; color: #2D3A44; }
+@media (max-width: 900px) { html.inFrame .forAllBox h3.centerText { font-size: clamp(16px, 4.4vw, 26px); } }
+
+/* Thought bubbles centred at every width: the pill is centred in its row and the two trailing bubbles hang from its centre,
+   so nothing depends on the pill's width; room for them is reserved below the pill */
+html.inFrame h5.pillBreaker { display: flex; justify-content: center; align-items: flex-start; width: 100%; text-align: center; }
+h5.pillBreaker .pLabel { margin: 0 auto; }
+h5.pillBreaker .pLabel::before { left: 50%; transform: translateX(-50%); width: 13px; height: 13px; bottom: -13px; }
+h5.pillBreaker .pLabel::after { left: 50%; transform: translateX(-50%); width: 8px; height: 8px; bottom: -26px; }
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -22px; }
+
+/* "For all it's wonder": at narrow widths the generic .textSection rule (24px side margins + 100% width) pushed it right of centre */
+html.inFrame .statsFrame + .forAllBox { margin-left: 0; margin-right: 0; max-width: 100%; }
+html.inFrame .forAllBox h3.centerText { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* section icon always sits left of its title, scaling with the title's text size (h1 is clamp(20px, 2.5vw, 40px); icon = 0.55 of it) */
+html.inFrame .iconTextBox { flex-direction: row; align-items: center; justify-content: center; gap: clamp(8px, 1vw, 16px); text-align: left; }
+html.inFrame .iconTextBox > img { height: clamp(11px, 1.375vw, 22px); width: auto; flex: 0 0 auto; }
+html.inFrame .iconTextBox > h1 { margin: 0; width: auto; white-space: nowrap; }
+
+/* dream bubble: the trailing circles overlap the pill and each other so it reads as one connected thought cloud */
+h5.pillBreaker .pLabel { box-shadow: none; filter: drop-shadow(0 6px 10px rgba(10, 66, 40, 0.10)); }
+h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after { box-shadow: none; }
+h5.pillBreaker .pLabel::before { width: 15px; height: 15px; bottom: -11px; }
+h5.pillBreaker .pLabel::after { width: 10px; height: 10px; bottom: -19px; }
+
+/* dream bubble: trailing circles drift off to the left of centre, still overlapping, so the tail leans naturally */
+h5.pillBreaker .pLabel::before { left: calc(50% - 22px); transform: none; }
+h5.pillBreaker .pLabel::after { left: calc(50% - 29px); transform: none; bottom: -16px; }
+
+/* centring at narrow widths: the generic .textSection rule gives 24px side margins on top of width:100%, pushing every text block right of centre */
+html.inFrame .content .textSection { margin-left: 0; margin-right: 0; box-sizing: border-box; }
+html.inFrame .content .textSection > h2.problemHead { margin-left: auto; margin-right: auto; }
+
+/* thought bubbles: glossy 3D bubbles (soft highlight top-left, shaded rim, cool underside) instead of flat white */
+h5.pillBreaker .pLabel {
+  background:
+    radial-gradient(ellipse 55% 38% at 28% 20%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 100%),
+    linear-gradient(180deg, #ffffff 0%, #f3faf5 55%, #dcece1 100%);
+  box-shadow: inset 0 1px 1.5px rgba(255,255,255,1), inset 0 -7px 12px rgba(92,160,120,0.22), inset 0 0 0 1px rgba(255,255,255,0.7);
+  filter: drop-shadow(0 8px 12px rgba(10, 66, 40, 0.16));
+}
+h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after {
+  background: radial-gradient(circle at 34% 28%, #ffffff 0%, #f1f9f3 40%, #d6e9dc 100%);
+  box-shadow: inset 0 -2px 3px rgba(92,160,120,0.25), inset 0 0 0 1px rgba(255,255,255,0.7);
+}
+
+/* thought bubbles, cartoon style: bold outline, hard-edged highlight, flat shade band, hard drop shadow; circles hang fully below the pill */
+h5.pillBreaker .pLabel {
+  border: 2px solid #2D3A44;
+  background:
+    radial-gradient(ellipse 9% 14% at 16% 28%, #ffffff 0 96%, transparent 100%),
+    linear-gradient(180deg, #f3fbf6 0 66%, #cfe9d9 66% 100%);
+  box-shadow: none;
+  filter: drop-shadow(0 4px 0 rgba(45, 58, 68, 0.22));
+}
+h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after {
+  border: 2px solid #2D3A44; box-sizing: border-box;
+  background:
+    radial-gradient(circle at 30% 28%, #ffffff 0 22%, transparent 24%),
+    linear-gradient(180deg, #f3fbf6 0 60%, #cfe9d9 60% 100%);
+  box-shadow: none;
+}
+h5.pillBreaker .pLabel::before { width: 17px; height: 17px; left: calc(50% - 24px); bottom: -21px; }
+h5.pillBreaker .pLabel::after { width: 11px; height: 11px; left: calc(50% - 31px); bottom: -31px; }
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -14px; }
+
+/* thought bubbles: back to flat white, circles overlapping and leaning left (the version before the 3D / cartoon attempts) */
+h5.pillBreaker .pLabel { border: 0; background: #fff; box-shadow: none; filter: drop-shadow(0 6px 10px rgba(10, 66, 40, 0.10)); }
+h5.pillBreaker .pLabel::before, h5.pillBreaker .pLabel::after { border: 0; background: #fff; box-shadow: none; box-sizing: content-box; }
+h5.pillBreaker .pLabel::before { width: 15px; height: 15px; left: calc(50% - 22px); bottom: -11px; }
+h5.pillBreaker .pLabel::after { width: 10px; height: 10px; left: calc(50% - 29px); bottom: -16px; }
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -22px; }
+
+/* Thought pills: no trailing circles; taller, slightly less round, with a very round tooltip tail; lit and shaded like a 3D object */
+h5.pillBreaker .pLabel {
+  padding: 18px 36px;
+  border: 0;
+  border-radius: 28px;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 14%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 100%),
+    linear-gradient(180deg, #ffffff 0%, #f6fbf7 42%, #e2f0e7 100%);
+  box-shadow:
+    inset 0 2px 2px rgba(255,255,255,1),
+    inset 3px 0 6px rgba(255,255,255,0.55),
+    inset -3px 0 7px rgba(92,160,120,0.14),
+    inset 0 -9px 14px rgba(92,160,120,0.26);
+  filter: drop-shadow(0 9px 12px rgba(10, 66, 40, 0.16));
+}
+h5.pillBreaker .pLabel::before { content: none; }
+h5.pillBreaker .pLabel::after {
+  content: ""; position: absolute; left: 50%; bottom: -8px; width: 22px; height: 22px; z-index: -1;
+  transform: translateX(-50%) rotate(45deg);
+  border: 0; border-radius: 8px; box-sizing: border-box;
+  background: #e4f1e9;
+  box-shadow: inset -2px -2px 4px rgba(92,160,120,0.30), inset 2px 2px 3px rgba(255,255,255,0.9);
+}
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -30px; }
+
+/* Thought bubbles in the Thoughtify logo green (#1DB954); one continuous tooltip shape (the tail flares out of the body, round tip), lit from the top-left */
+h5.pillBreaker .pLabel {
+  color: #002644;
+  background:
+    radial-gradient(ellipse 58% 36% at 28% 14%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 100%),
+    linear-gradient(180deg, #3bd873 0%, #1DB954 46%, #159a44 100%);
+  box-shadow:
+    inset 0 2px 2px rgba(255,255,255,0.55),
+    inset 3px 0 6px rgba(255,255,255,0.22),
+    inset -3px 0 7px rgba(0,80,30,0.18),
+    inset 0 -9px 14px rgba(0,85,35,0.32);
+  filter: drop-shadow(0 9px 12px rgba(0, 70, 30, 0.25));
+}
+h5.pillBreaker .pLabel::after {
+  content: ""; position: absolute; left: 50%; bottom: -20px; width: 46px; height: 24px; z-index: -1;
+  transform: translateX(-50%); border: 0; border-radius: 0; box-shadow: none; box-sizing: border-box;
+  background:
+    radial-gradient(circle at 40% 55%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0) 45%),
+    linear-gradient(180deg, #13903f 0%, #159a44 100%);
+  /* two concave flares meeting in a round tip: the tail grows out of the body */
+  -webkit-mask:
+    radial-gradient(circle at 0 100%, transparent 23px, #000 24px) left / 50% 100% no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 23px, #000 24px) right / 50% 100% no-repeat,
+    radial-gradient(circle 9px at 50% calc(100% - 9px), #000 98%, transparent 100%) center / 100% 100% no-repeat;
+  mask:
+    radial-gradient(circle at 0 100%, transparent 23px, #000 24px) left / 50% 100% no-repeat,
+    radial-gradient(circle at 100% 100%, transparent 23px, #000 24px) right / 50% 100% no-repeat,
+    radial-gradient(circle 9px at 50% calc(100% - 9px), #000 98%, transparent 100%) center / 100% 100% no-repeat;
+}
+
+/* Thought bubbles: bold label; the tooltip is a separate round dot hanging below the bubble with a gap */
+h5.pillBreaker .pLabel { font-weight: 700; }
+h5.pillBreaker .pLabel::after {
+  width: 18px; height: 18px; bottom: -28px; border-radius: 50%;
+  -webkit-mask: none; mask: none;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 45%),
+    linear-gradient(180deg, #2fcf68 0%, #159a44 100%);
+  box-shadow: inset 0 2px 2px rgba(255,255,255,0.45), inset 0 -4px 6px rgba(0,85,35,0.32);
+}
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -24px; }
+
+/* Thought bubbles: the tooltip is a triangle with a soft point, merged into the bottom of the pill, pointing down at the title */
+h5.pillBreaker .pLabel::after {
+  width: 36px; height: 18px; bottom: -16px; left: 50%; transform: translateX(-50%); border-radius: 0; box-shadow: none; z-index: -1;
+  background:
+    radial-gradient(circle at 40% 30%, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, #13903f 0%, #159a44 100%);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 18' preserveAspectRatio='none'%3E%3Cpath d='M0 0H36L22 14Q18 18.5 14 14Z' fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 18' preserveAspectRatio='none'%3E%3Cpath d='M0 0H36L22 14Q18 18.5 14 14Z' fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -28px; }
+
+/* Thought bubble tooltip: wide flared top that melts into the pill, soft rounded point; fades in from the pill so there is no seam */
+h5.pillBreaker .pLabel::after {
+  width: 48px; height: 28px; bottom: -18px; left: 50%; transform: translateX(-50%); z-index: -1;
+  background: linear-gradient(180deg, rgba(16,136,59,0) 0%, #10883b 36%, #139443 100%);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2028'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0%200H48V10C40%2010%2036%2014%2032.5%2019C29%2024%2027%2027%2024%2027C21%2027%2019%2024%2015.5%2019C12%2014%208%2010%200%2010Z'%20fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2028'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0%200H48V10C40%2010%2036%2014%2032.5%2019C29%2024%2027%2027%2024%2027C21%2027%2019%2024%2015.5%2019C12%2014%208%2010%200%2010Z'%20fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+/* Thought bubble tooltip: half as tall (9px below the pill, was 18px) */
+h5.pillBreaker .pLabel::after {
+  height: 19px; bottom: -9px;
+  background: linear-gradient(180deg, rgba(16,136,59,0) 0%, #10883b 53%, #139443 100%);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2019'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0%200H48V10C42%2010%2038%2012%2034%2014.5C30%2017%2027.5%2018.5%2024%2018.5C20.5%2018.5%2018%2017%2014%2014.5C10%2012%206%2010%200%2010Z'%20fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2048%2019'%20preserveAspectRatio='none'%3E%3Cpath%20d='M0%200H48V10C42%2010%2038%2012%2034%2014.5C30%2017%2027.5%2018.5%2024%2018.5C20.5%2018.5%2018%2017%2014%2014.5C10%2012%206%2010%200%2010Z'%20fill='%23000'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+html.inFrame .content > h5.pillBreaker + .iconTextBox { margin-top: -36px; }

@@ -1,0 +1,133 @@
+/* Nanni's "new translation" flow (js/nanniTranslate.js): a whole phone screen. Sized in cqw, a percent of the phone's width.
+   It borrows the navigation menu's pieces (css/nanniNav.css): the pill, the tabs and the mic button. */
+.ntFrame { position: relative; width: 100%; aspect-ratio: 100 / 62; overflow: hidden; display: flex; justify-content: center; align-items: center; background: linear-gradient(180deg, #E8E1FC 0%, #D9CDF0 100%); }
+.ntFrame .ntMount { width: 25%; flex: none; }
+@media (max-width: 900px) { .ntFrame { aspect-ratio: 100 / 178; } .ntFrame .ntMount { width: 56%; } }
+
+.ntRoot { --nn-ink: #001224; --nn-gray: #718093; --nn-purple: #821AAF; --nn-screen: #F9F8F2; --nn-band: #E0DAE1; container-type: inline-size; position: relative; width: 100%; aspect-ratio: 100 / 217; font-family: "Satoshi", system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #001428; }
+.ntRoot svg { overflow: visible; }
+.ntPhone { position: absolute; inset: 0; box-sizing: border-box; border: 0.8cqw solid #001428; border-radius: 12.5cqw; background: #FDF4E9; overflow: hidden; filter: drop-shadow(0 3cqw 6cqw rgba(0, 20, 40, 0.2)) drop-shadow(0 0.8cqw 1.6cqw rgba(0, 20, 40, 0.12)); }
+
+/* 1: Journal, the floating pill, the mic button */
+.ntHome { position: absolute; inset: 0; }
+.ntHome .ntPill { left: 4.5cqw; right: 4.5cqw; bottom: 8.5cqw; height: 19cqw; background: #FAF8F3; opacity: 1; }
+.ntHome .ntTabs { bottom: 11cqw; height: 14cqw; }
+.ntHome .nnSp { flex-grow: 0.25; }
+.ntHome .nnTab { color: #718093; }
+.ntHome .nnLbl { font-size: 3cqw; }
+.ntHome .ntFab { right: 9.3cqw; bottom: 35cqw; width: 18.3cqw; height: 18.3cqw; opacity: 1; border: 0.6cqw solid #FDFDFD; box-sizing: border-box; box-shadow: 0 1.6cqw 3.6cqw rgba(0, 18, 36, 0.32), 0 0.4cqw 1cqw rgba(0, 18, 36, 0.2); }
+.ntHome .ntFab svg { width: 8cqw; height: 8cqw; fill: #FDFDFD; }
+
+/* 2-4: New translation */
+.ntRec { position: absolute; inset: 0; background: #EDF1F5; }
+.ntBack { position: absolute; left: 5.8cqw; top: 16.7cqw; width: 10.6cqw; height: 10.6cqw; border-radius: 50%; background: #F6F8FA; display: grid; place-items: center; }
+.ntBack svg { width: 5cqw; height: 5cqw; fill: none; stroke: #001428; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ntTitle { position: absolute; left: 0; right: 0; top: 19cqw; text-align: center; font-size: 4.3cqw; line-height: 6cqw; font-weight: 500; letter-spacing: -0.005em; }
+.ntRing { position: absolute; left: 50%; top: 112.5cqw; width: 70cqw; height: 28cqw; margin: -14cqw 0 0 -35cqw; }
+.ntBars { position: absolute; left: 0; right: 0; top: 0; height: 19cqw; display: flex; align-items: center; justify-content: center; gap: 2.4cqw; }
+.ntBar { display: block; width: 3.2cqw; height: 2.4cqw; border-radius: 99cqw; background: #80BAFD; }
+.ntTime { position: absolute; left: 0; right: 0; top: 21cqw; text-align: center; font-size: 4.4cqw; line-height: 6cqw; font-variant-numeric: tabular-nums; font-weight: 500; color: #718093; }
+.ntLabel { position: absolute; left: 0; right: 0; top: 127.1cqw; height: 11.8cqw; overflow: hidden; font-size: 4.6cqw; font-weight: 700; letter-spacing: -0.005em; } /* plain bold text, each state rolls up into the next */
+.ntLabel span { position: absolute; left: 0; right: 0; top: 0; line-height: 11.2cqw; text-align: center; white-space: nowrap; }
+.ntHint { position: absolute; left: 10cqw; right: 10cqw; top: 198cqw; margin: 0; text-align: center; font-size: 3.5cqw; line-height: 4.8cqw; font-weight: 600; }
+
+/* the finger: a soft round marker where the screen is tapped */
+.ntTouch { position: absolute; left: 0; top: 0; width: 11cqw; height: 11cqw; margin: -5.5cqw 0 0 -5.5cqw; border-radius: 50%; background: rgba(125, 135, 155, 0.5); box-shadow: 0 0 0 0.6cqw rgba(255, 255, 255, 0.45); pointer-events: none; opacity: 0; z-index: 5; }
+
+/* the dots after "Translating" take no room, so the word stays centred in its pill */
+.ntDots { display: inline-block; width: 0; overflow: visible; white-space: nowrap; font-style: normal; }
+.ntDots b { font-weight: inherit; }
+
+/* "Translating" and the blob shimmer: a slow, smooth drift through the blue, yellow and green of Nanni's app icon. */
+/* the loader: an orb of dots, placed by js/nanniTranslate.js; each dot is one brand colour */
+.ntOrb { position: absolute; left: 50%; top: 108cqw; width: 0; height: 0; }
+.ntOrbDot { position: absolute; left: -0.65cqw; top: -0.65cqw; width: 1.3cqw; height: 1.3cqw; border-radius: 50%; will-change: transform; }
+/* the word: one very wide, gentle blue, yellow, green cycle slides through it; it is exactly one phone wide, so it loops with no seam */
+.ntLabel .c { background-image: linear-gradient(90deg in oklab, #6CB0FC 0%, #FBC157 33.3%, #8FCB94 66.6%, #6CB0FC 100%); background-size: 100cqw 100%; background-repeat: repeat-x; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; animation: ntSlide 5s linear infinite; }
+.ntLabel .c .ntDots { -webkit-text-fill-color: #8FCB94; }
+@keyframes ntSlide { from { background-position: 0 0; } to { background-position: 100cqw 0; } }
+@media (prefers-reduced-motion: reduce) { .ntLabel .c { animation: none; } }
+
+
+/* the step buttons (manual mode): the flow waits on each screen until one is pressed */
+.ntCtl { position: absolute; right: 4%; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; align-items: stretch; z-index: 3; }
+.ntCtl button { font: inherit; font-size: 15px; font-weight: 600; padding: 10px 18px; border: 0; border-radius: 999px; background: rgba(0, 18, 36, 0.08); color: #001428; cursor: pointer; text-align: left; transition: background 0.2s ease, color 0.2s ease; }
+.ntCtl button:hover { background: rgba(0, 18, 36, 0.16); }
+.ntCtl button.on { background: #001428; color: #fff; }
+.ntCtl .re { background: transparent; box-shadow: inset 0 0 0 1.5px rgba(0, 18, 36, 0.25); text-align: center; }
+@media (max-width: 900px) { .ntCtl { right: auto; left: 50%; top: auto; bottom: 14px; transform: translateX(-50%); flex-direction: row; flex-wrap: wrap; justify-content: center; width: 92%; } .ntCtl button { font-size: 13px; padding: 8px 13px; } }
+
+/* the Nanni page: the animation sits in a rounded soft-blue frame on the left, with its words on the right */
+.ntRow { display: grid; grid-template-columns: minmax(0, 42%) minmax(0, 1fr); column-gap: 10.5%; align-items: center; padding: 2cqw var(--nn-pad, 48px) max(8cqw, 40px); }
+.ntRow .ntFrame { width: 100%; aspect-ratio: 100 / 170; border-radius: clamp(24px, 5.5cqw, 88px); background: linear-gradient(180deg, #DCE7FA 0%, #CFDEF5 100%); }
+.ntRow .ntFrame .ntMount { width: 62%; }
+#view-nanni .ntRow .nnHead { max-width: 12em; margin: 0 0 4.2cqw; } /* more room between the heading and the first point */
+@media (max-width: 900px) { .ntRow { grid-template-columns: minmax(0, 1fr); row-gap: 8cqw; } .ntRow .ntFrame { max-width: 460px; margin: 0 auto; } .ntRow .ntFrame .ntMount { width: 62%; } }
+
+/* the blank result card (based on Nanni's result screen): it slides up from the bottom of the phone */
+.ntCard { position: absolute; z-index: 4; left: 3.4cqw; right: 3.4cqw; bottom: 3.4cqw; height: 120cqw; overflow: hidden; box-sizing: border-box; padding: 6.2cqw; display: flex; flex-direction: column; border-radius: 9cqw; background: #EDF1F5; box-shadow: 0 -1.6cqw 5cqw rgba(0, 18, 36, 0.12), 0 2.4cqw 6cqw rgba(0, 18, 36, 0.16); }
+
+/* the result card's content, mocked up from Nanni's result screen */
+.ntCard { color: #001428; font-weight: 500; }
+.ntCLab { font-size: 3.9cqw; line-height: 5cqw; flex: none; }
+.ntCTop { display: flex; align-items: flex-end; justify-content: space-between; margin: 2.4cqw 0 2.6cqw; flex: none; }
+.ntCause { display: block; padding: 1.4cqw 4.6cqw 1.8cqw; border-radius: 99cqw; background: #FBC157; color: #fff; font-size: 7.4cqw; line-height: 9cqw; letter-spacing: -0.02em; box-shadow: 0 0.9cqw 1.8cqw rgba(160, 110, 20, 0.28); }
+.ntThumbs { display: flex; gap: 1.6cqw; margin-bottom: 0.6cqw; }
+.ntThumbs i { display: grid; place-items: center; width: 8.4cqw; height: 6.2cqw; border-radius: 99cqw; background: #fff; }
+.ntThumbs svg { width: 3.4cqw; height: 3.4cqw; fill: none; stroke: #001428; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.ntWhy { background: #fff; border-radius: 5.2cqw; padding: 3.1cqw 2.9cqw 3.2cqw; margin-right: 2.4cqw; font-size: 3cqw; line-height: 5cqw; font-weight: 400; color: #7C8796; flex: none; }
+.ntRule { display: block; height: 0.25cqw; background: #C9D1DB; margin: 3.2cqw 0 3.2cqw; flex: none; }
+.ntCSub { margin: 1.6cqw 0 2.4cqw; font-size: 3cqw; line-height: 4.4cqw; font-weight: 400; flex: none; }
+.ntRec1, .ntRec2 { background: #fff; border-radius: 6.4cqw; flex: none; margin-bottom: 1.5cqw; font-size: 3.5cqw; }
+.ntRec1 { padding: 3.3cqw 3.3cqw 3.4cqw; }
+.ntRecRow, .ntRec2 { display: flex; align-items: center; gap: 2.7cqw; }
+.ntRec2 { height: 11.6cqw; padding: 0 3.8cqw; }
+.ntTick { display: grid; place-items: center; flex: none; width: 5.7cqw; height: 5.7cqw; border-radius: 50%; box-sizing: border-box; border: 0.2cqw solid #718093; }
+.ntTick svg { width: 3.1cqw; height: 3.1cqw; fill: none; stroke: #718093; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.ntTick.on { background: #2B4AA0; border-color: #2B4AA0; }
+.ntTick.on svg { stroke: #fff; }
+.ntRecBtns { display: flex; gap: 1.8cqw; margin-top: 2.6cqw; }
+.ntRecBtns span { padding: 1.2cqw 2.4cqw; border: 0.2cqw solid #718093; border-radius: 99cqw; font-size: 2.7cqw; line-height: 1.2; font-weight: 400; }
+/* the Stop capturing button: it comes in under "Translating" once that has been pushed up above the card */
+.ntStop { position: absolute; z-index: 5; left: 50%; top: 70.5cqw; padding: 2.1cqw 4.6cqw; border-radius: 99cqw; background: #fff; color: #001428; white-space: nowrap; font-size: 3.7cqw; line-height: 1.2; font-weight: 600; letter-spacing: -0.005em; }
+
+/* the Journal row: words on the left, two screens on a warm yellow gradient on the right */
+.jrRow { display: grid; grid-template-columns: minmax(0, 30%) minmax(0, 62%); justify-content: space-between; align-items: center; padding: 2cqw var(--nn-pad, 48px) max(8cqw, 40px); }
+.jrFrame { position: relative; width: 100%; aspect-ratio: 100 / 110; overflow: hidden; border-radius: clamp(24px, 5.5cqw, 88px); background: linear-gradient(180deg, #F8E8C7 0%, #F6DB98 52%, #F3CC78 100%); }
+.jrFrame img { position: absolute; top: 7.5%; width: 47.7%; height: auto; display: block; }
+.jrFrame .jrA { left: 1.95%; }
+.jrFrame .jrB { left: 50.65%; }
+#view-nanni .jrRow .nnHead { max-width: 12em; margin: 0 0 4.2cqw; }
+#view-nanni .jrRow .nnPt { margin: 0 0 1.4em; }
+@media (max-width: 900px) { .jrRow { grid-template-columns: minmax(0, 1fr); row-gap: 8cqw; } }
+
+/* the four insights: each image sits on a white card inside three rounded, tinted layers; all sized from the width of the shape (cqi) */
+.ixGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(6, auto); column-gap: 3cqw; padding: 2cqw var(--nn-pad, 48px) 0; }
+.ixItem { display: grid; grid-template-rows: subgrid; grid-row: span 3; justify-items: center; }
+.ixT { margin: 0 0 3.4cqw; font-size: clamp(22px, 2.6cqw, 42px); line-height: 1.2; font-weight: 500; letter-spacing: -0.015em; text-align: center; color: var(--ink, #0B1530); }
+.ixPic { align-self: center; width: 76%; container-type: inline-size; }
+.ixS, .ixM, .ixI { box-sizing: border-box; }
+.ixS { padding: 5.8%; border-radius: 15cqi; background: var(--c1); box-shadow: 0 1.4cqi 3.4cqi rgba(11, 21, 48, 0.1); }
+.ixM { padding: 6.55%; border-radius: 12.4cqi; background: var(--c2); box-shadow: 0 0.6cqi 1.6cqi rgba(11, 21, 48, 0.06); }
+.ixI { padding: 7.55%; border-radius: 10cqi; background: var(--c3); box-shadow: 0 0.6cqi 1.6cqi rgba(11, 21, 48, 0.06); }
+.ixCard { overflow: hidden; border-radius: 4.6cqi; background: #fff; box-shadow: 0 1.2cqi 3cqi rgba(11, 21, 48, 0.16); }
+.ixCard img { display: block; width: 100%; height: auto; }
+#view-nanni .nnDoc .ixCap { margin: 5cqw auto 11cqw; max-width: 27em; text-align: center; font-size: clamp(15px, 1.75cqw, 28px); line-height: 1.5; font-weight: 500; color: var(--ink, #0B1530); }
+.ixBlue { --c1: #9AC0FA; --c2: #B0CFFB; --c3: #D3E3FC; }
+.ixYellow { --c1: #F2C46C; --c2: #F5D38D; --c3: #F8E4B8; }
+.ixGreen { --c1: #B9D5B8; --c2: #CCDDCB; --c3: #DCE8DB; }
+.ixPink { --c1: #EAABAA; --c2: #F2D8D8; --c3: #F7E4E4; }
+@media (max-width: 900px) { .ixGrid { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } .ixItem { display: block; grid-row: auto; } .ixPic { width: 88%; margin: 0 auto; } }
+
+/* the close: Nanni's website, centred, running off the bottom edge of the view */
+.wsCrop { width: 74%; margin: 5cqw auto 0; aspect-ratio: 2560 / 1740; clip-path: inset(-12cqw -12cqw 0 -12cqw); }
+.wsCrop img { display: block; width: 100%; height: auto; filter: drop-shadow(0 1.2cqw 3cqw rgba(0, 20, 50, .22)) drop-shadow(0 .3cqw .8cqw rgba(0, 20, 50, .12)); }
+@media (max-width: 900px) { .wsCrop { width: 88%; margin-top: 2cqw; } }
+
+/* Nanni's hero: the orb of dots from the translating step, spinning forever, with the tagline under it */
+.nnLoad { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; margin: 0 auto; gap: 2.4cqw; padding: 0; box-sizing: border-box; min-height: calc(100cqh - clamp(96px, 16cqh, 180px)); text-align: center; } /* nearly a screen of its own: the orb and the line centred across and down the view, with the next section peeking in from the bottom */
+.nnOrb { position: relative; width: clamp(96px, 10cqw, 150px); height: clamp(96px, 10cqw, 150px); flex: none; }
+.nnOrbDot { position: absolute; left: 50%; top: 50%; width: clamp(4px, 0.46cqw, 7px); height: clamp(4px, 0.46cqw, 7px); margin: calc(clamp(4px, 0.46cqw, 7px) / -2) 0 0 calc(clamp(4px, 0.46cqw, 7px) / -2); border-radius: 50%; will-change: transform; }
+#view-nanni .nnLoad .nnLoadText { max-width: none; width: 100%; text-align: center; margin: 0 auto; font-size: clamp(40px, 6.4vw, 120px); font-weight: 500; line-height: 1.08; letter-spacing: -0.04em; }
+@media (max-width: 900px) { #view-nanni .nnLoad .nnLoadText { font-size: clamp(26px, 6.4vw, 64px); } }
+#view-nanni .nnLoad + .nnRow.nnAbout { padding-top: clamp(20px, 4cqh, 48px); padding-bottom: clamp(40px, 8cqh, 96px); min-height: 0; align-content: start; } /* starts right under the hero so it shows at the bottom edge */

@@ -1,0 +1,156 @@
+// The centre list: three links to a row, an invisible copy that reserves the list's space, and the pop-in on load.
+(function () {
+  if (typeof gsap === "undefined") return;
+
+  var list = document.getElementById("projectList");
+  if (!list) return;
+
+  var items = Array.prototype.slice.call(list.children);
+
+  // phones: each tile takes the colour of its hover bubble on desktop (the project view's own colour, a fixed data-bubble, or the default grey)
+  items.forEach(function (li) {
+    var a = li.querySelector && li.querySelector("a");
+    if (!a) return;
+    var v = a.getAttribute("data-view"), col = null;
+    if (v && !a.hasAttribute("data-bubble-fixed")) {
+      var el = document.getElementById("view-" + v), c = el ? getComputedStyle(el).backgroundColor : "", n = c && c.match(/[\d.]+/g);
+      if (n && n.length >= 3 && (n.length < 4 || +n[3] > 0.5)) {
+        var al = parseFloat(a.getAttribute("data-bubble-alpha"));
+        col = al >= 0 && al <= 1 ? "rgba(" + n[0] + ", " + n[1] + ", " + n[2] + ", " + al + ")" : c;
+      }
+    }
+    li.style.setProperty("--tile", col || a.getAttribute("data-bubble") || "#F4F4F4");
+  });
+
+  // Reserve the full list's space: an invisible copy of the list sits in the same spot, so the block keeps its
+  // height (at any screen width) and nothing around it shifts.
+  var nav = list.parentElement;
+  var ghost = list.cloneNode(true);
+  ghost.removeAttribute("id");
+  ghost.classList.add("ghost");
+  ghost.setAttribute("aria-hidden", "true");
+  ghost.setAttribute("inert", "");
+  ghost.querySelectorAll("a").forEach(function (a) { a.setAttribute("tabindex", "-1"); });
+  nav.insertBefore(ghost, list);
+  nav.classList.add("stack");
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var t = function (seconds) { return reduce ? 0 : seconds; };
+
+  // items scale from their own centre
+  gsap.set(items, { transformOrigin: "50% 50%" });
+
+  // a few items per row (see perRow): a zero-height break after every third visible item, and no interpunct at the
+  // end of a row; each row then centres on its own
+  // phones report a wider window when something overflows, so the screen width counts too
+  var perRow = function () {
+    var w = Math.min(window.innerWidth, window.screen && screen.width ? screen.width : Infinity);
+    return w <= 700 ? 1 : w > 1100 ? 5 : 3; // one on phones, three on tablets, five on wide screens
+  };
+  function layoutRows(listEl, lis) {
+    listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
+    var shown = lis.filter(function (li) {
+      return !li.classList.contains("is-hidden") && !li.classList.contains("is-current");
+    });
+    // lay the rows out with `per` items each; a wide screen never leaves a lonely last item (it borrows one from the
+    // row above)
+    var apply = function (per) {
+      listEl.querySelectorAll(".row-break").forEach(function (b) { b.remove(); });
+      var sizes = [], left = shown.length;
+      var hlN = shown.filter(function (li) { return li.querySelector("a.hl"); }).length;
+      if (per > 1 && hlN >= 6) {
+        // wide screens: three centred rows of cards (5 + 5 + 3); tablets take three to a row
+        var hn = hlN;
+        while (hn > 0) { sizes.push(Math.min(per, hn)); hn -= per; }
+        if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
+        if (shown.length - hlN > 0) sizes.push(shown.length - hlN);
+      } else {
+        while (left > 0) { sizes.push(Math.min(per, left)); left -= per; }
+        if (per > 2 && sizes.length > 1 && sizes[sizes.length - 1] === 1) { sizes[sizes.length - 2] -= 1; sizes[sizes.length - 1] = 2; }
+      }
+      var ends = {}, run = 0;
+      sizes.forEach(function (n) { run += n; ends[run - 1] = true; });
+      shown.forEach(function (li, i) {
+        var rowEnd = !!ends[i];
+        li.classList.toggle("no-slash", rowEnd || i === shown.length - 1);
+        if (rowEnd && i < shown.length - 1) {
+          var br = document.createElement("li");
+          br.className = "row-break";
+          br.setAttribute("aria-hidden", "true");
+          listEl.insertBefore(br, li.nextSibling);
+        }
+      });
+      return sizes;
+    };
+    // ...and the rows keep their length: if the widest row is wider than the screen, the whole list is scaled down
+    // a little so every row fits on one line (a row that wraps strands its last item on a line of its own)
+    var per = perRow();
+    var rows = apply(per);
+    listEl.style.zoom = ""; listEl.style.removeProperty("--lz");
+    if (per > 1 && shown.length) {
+      var widest = 0, k = 0, gapPx = parseFloat(getComputedStyle(listEl).columnGap) || 0;
+      rows.forEach(function (n) { // the width of each intended row (a row that wrapped by itself still counts as one)
+        var w = 0;
+        for (var m = 0; m < n; m++, k++) w += shown[k].offsetWidth;
+        w += gapPx * Math.max(0, n - 1);
+        if (w > widest) widest = w;
+      });
+      var avail = listEl.clientWidth;
+      if (widest > avail && avail > 0) { var zz = Math.max(0.5, (avail / widest) * 0.97); listEl.style.zoom = String(zz); listEl.style.setProperty("--lz", String(zz)); }
+    }
+  }
+  window.layoutGalleryRows = function () { layoutRows(list, items); };
+  layoutRows(ghost, Array.prototype.slice.call(ghost.children));
+  items.forEach(function (li) { li.classList.remove("no-slash"); });
+  layoutRows(list, items);
+  // re-flow the rows whenever the window changes size (and once the fonts are in, which changes the widths)
+  var relayout = function () {
+    // phones: the list is the deck / gallery (js/deck.js), laid out by its own script; the rows and the shrink-to-fit
+    // zoom below are for wider screens (they were re-running on every resize, which phones fire as the address bar slides away)
+    if (window.matchMedia("(max-width: 700px)").matches) { list.style.zoom = ""; return; }
+    if (list.classList.contains("compact")) return;
+    var plain = function (arr) { return arr.filter(function (li) { return !li.classList.contains("row-break"); }); };
+    layoutRows(ghost, plain(Array.prototype.slice.call(ghost.children)));
+    plain(items).forEach(function (li) { li.classList.remove("no-slash"); });
+    layoutRows(list, plain(items));
+  };
+  var rt;
+  window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(relayout, 80); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout);
+  // the rows are worked out from the links' widths, and those change as the logos and fonts arrive: lay the rows out
+  // again whenever the widths are different from the ones the current rows were made with (otherwise the last link
+  // can sit wrapped on a row of its own until something else re-flows the list)
+  var widthsNow = function () { return items.filter(function (li) { return !li.classList.contains("row-break"); }).map(function (li) { return li.offsetWidth; }).join(","); };
+  var widthsAtLayout = widthsNow();
+  var recheck = function () {
+    if (list.classList.contains("compact")) return;
+    var w = widthsNow();
+    if (w !== widthsAtLayout) { widthsAtLayout = w; relayout(); }
+  };
+  var rc;
+  var later = function () { clearTimeout(rc); rc = setTimeout(recheck, 60); };
+  list.querySelectorAll("img").forEach(function (img) { if (!img.complete) img.addEventListener("load", later); });
+  window.addEventListener("load", later);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(later);
+  if (window.ResizeObserver) { var ro = new ResizeObserver(later); items.forEach(function (li) { ro.observe(li); }); }
+
+  // ---- on load: the links pop in one after another, from the top left to the bottom right ----
+  var links = items.filter(function (li) { return !li.classList.contains("row-break"); });
+  // (phones show the deck of cards instead, which sets its own transforms: no pop-in there)
+  var phone = window.matchMedia("(max-width: 700px)").matches;
+  if (!phone) gsap.set(links, { scale: 0, opacity: 0 });
+  var play = function () {
+    gsap.to(links, {
+      scale: 1,
+      opacity: 1,
+      duration: t(0.3),
+      ease: "power2.out",
+      stagger: t(0.06), // the list is in reading order, so this runs left to right, row by row
+      delay: t(0.1),
+      onComplete: function () { gsap.set(links, { clearProps: "transform,opacity" }); },
+    });
+  };
+  if (phone) return;
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(play); else play();
+})();
+
+

@@ -3,121 +3,333 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="css/happlycations.css" />
-    <link rel="stylesheet" href="css/hostgrotesk.css" />
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-
-    <title>connorshopa : projects : happlycations</title>
+    <title>Happlycations</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@600&display=swap" />
+    <link rel="stylesheet" href="css/happlycations.css?v=256" />
 </head>
 
 <body>
-    <!-- MOUSE FOLLOW CIRCLE -->
-    <div id="mouse-circle"></div>
+    <!-- sheep's wordmark outline: grow the letters by 2px, keep only that ring (the letters themselves go clear), colour it the sheep icon's blue -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <filter id="happlyOutline" x="-25%" y="-10%" width="150%" height="120%" color-interpolation-filters="sRGB">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="2" result="grown" />
+            <feComposite in="grown" in2="SourceAlpha" operator="out" result="ring" />
+            <feFlood flood-color="#2F4AA3" result="ink" />
+            <feComposite in="ink" in2="ring" operator="in" />
+        </filter>
+        <filter id="landOutline" x="-3%" y="-10%" width="106%" height="120%" color-interpolation-filters="sRGB">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="1.6" result="grown" />
+            <feComposite in="grown" in2="SourceAlpha" operator="out" result="ring" />
+            <feFlood flood-color="#4A68A6" result="ink" />
+            <feComposite in="ink" in2="ring" operator="in" />
+        </filter>
+        <filter id="landOutlineThin" x="-3%" y="-10%" width="106%" height="120%" color-interpolation-filters="sRGB">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="0.7" result="grown" />
+            <feComposite in="grown" in2="SourceAlpha" operator="out" result="ring" />
+            <feFlood flood-color="#4A68A6" result="ink" />
+            <feComposite in="ink" in2="ring" operator="in" />
+        </filter>
+    </svg>
 
-    <!-- HEADER + LOGO CONTAINER -->
-    <div class="headerBox">
-        <!--LOGO-->
-        <div class="logoBox" onClick="etGoHome()">
-            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="20px">
+    <main class="happlyPage" data-app="drawl" data-view="landing">
 
-        </div>
-
-        <div class="navLinksContainer">
-            <a class="navLink" href="./index.html"> HOME</a>
-
-            <h5 class="currentNavLink">WORK</h5>
-
-
-
-            <a class="navLink" href="./sketchbook.html">SKETCHBOOK</a>
-
-            <a class="navLink" href="./micro.html">MICRO + MOTION</a>
-
-        </div>
-
-        <div class="mobileMenuButton">
-            <div id="menuButtonAnim"></div>
-        </div>
-
-        <div class="mobileMenuScreen">
-            <div class="mobileLinks">
-
-
-                <a class="navLink" href="./index.html">HOME</a>
-
-                <h5 class="currentNavLink">WORK</h5>
-
-
-                <a class="navLink" href="./sketchbook.html">SKETCHBOOK</a>
-
-
-                <a class="navLink" href="./micro.html">MICRO + MOTION</a>
-
-
+        <!-- the landing page: logo, nav, the big outlined wordmark, and the three apps. An app opens its own view (below); the small logo there comes back here. -->
+        <section class="happlyLanding" aria-label="Happlycations">
+            <header class="landBar">
+                <span aria-hidden="true"></span><!-- (the hand logo is off for now; this empty cell keeps the nav where it was) -->
+                <span aria-hidden="true"></span><!-- (the tab menu now sits under the wordmark) -->
+                <span></span>
+            </header>
+            <div class="landMid">
+                <h1 class="landWord">
+                    <span class="landIcon" data-skin="norm" aria-hidden="true">
+                        <span class="tile"><i></i><span class="hs"><b></b></span></span>
+                        <img class="i-drawl" src="assets/homeAssets/drawl_app_icon.svg" alt="" />
+                        <img class="i-sheep" src="assets/homeAssets/sheep_app_icon.svg" alt="" />
+                        <img class="i-habbot" src="assets/homeAssets/habbot_app_icon.svg" alt="" />
+                    </span>
+                    <span class="landWordBox" role="img" aria-label="Happlycations"><span class="landLtrs" aria-hidden="true"></span></span>
+                </h1>
+                <nav class="landNav" aria-label="Happlycations">
+                <ul class="landApps">
+                    <li style="--ac:#0C1E44;--on:#fff"><button type="button" class="landApp" data-app="drawl"><span class="landTile"><i class="landRing" aria-hidden="true"></i><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /></span><span class="landName drawl">drawl</span></button><span class="landDl soon hand" aria-disabled="true">Coming soon</span></li>
+                    <li style="--ac:#2F4AA3;--on:#fff"><button type="button" class="landApp" data-app="sheep"><span class="landTile"><i class="landRing" aria-hidden="true"></i><img src="assets/homeAssets/sheep_app_icon.svg" alt="" /></span><span class="landName sheep">sheep</span></button><a class="landDl" href="https://apps.apple.com/us/app/sheep-counting-words/id6832144088" target="_blank" rel="noopener">Download</a></li>
+                    <li style="--ac:#DD8D32;--on:#1b1200"><button type="button" class="landApp" data-app="habbot"><span class="landTile"><i class="landRing" aria-hidden="true"></i><img src="assets/homeAssets/habbot_app_icon.svg" alt="" /></span><span class="landName habbot">habbot</span></button><span class="landDl soon" aria-disabled="true">Coming soon</span></li>
+                </ul>
+                </nav>
+                <nav class="landTabs" aria-label="Pages">
+                    <span class="landSoon">You + Us</span>
+                    <span class="landSoon">About</span>
+                </nav>
+                <!-- tagline "Where happy apps are born" removed for now (restore: <p class="landTag">Where happy apps are born</p>; its embossed style is still in happlycations.css) -->
             </div>
+            <div class="landFrame" aria-hidden="true"></div><!-- a frame peeking up from the bottom, embossed like the wordmark -->
+        </section>
 
+        <div class="happlyDetail">
 
+        <header class="happlyTop">
+            <h1 class="happlyHead">
+                <span class="happlyHand" aria-hidden="true"></span>
+                <span class="happlyWordWrap"><span class="happlyWord" role="img" aria-label="Happlycations"></span></span>
+            </h1>
+        </header>
 
-        </div>
-
-    </div>
-
-
-
-    <div class="content">
-
-
-        <div class="heroBox" id="happlycations">
-
-            <div class="textSection">
-                <h1>Happlycations</h1>
-
-            </div>
-
-
-            <div class="productDetails">
-                <div class="textSection">
-                    <h5></h5>
-                    <h4></h4>
+        <div class="happlyMain">
+            <div class="happlyCopy">
+                <div class="happlyTabs" role="tablist" aria-label="Apps">
+                    <button class="happlyTab on" type="button" role="tab" aria-selected="true" aria-label="drawl" data-app="drawl"><img src="assets/homeAssets/drawl_app_icon.svg" alt="" /></button>
+                    <button class="happlyTab" type="button" role="tab" aria-selected="false" aria-label="sheep" data-app="sheep"><img src="assets/homeAssets/sheep_app_icon.svg" alt="" /></button>
+                    <button class="happlyTab" type="button" role="tab" aria-selected="false" aria-label="habbot" data-app="habbot"><img src="assets/homeAssets/habbot_app_icon.svg" alt="" /></button>
                 </div>
-                <div class="textSection">
-                    <h5></h5>
-                    <h4></h4>
+                <div class="happlyApps">
+                    <section class="happlySec on" data-app="drawl">
+                        <h2 class="happlyTitle">drawl</h2>
+                        <p class="happlySub">Draw the prompt, vote your favorites</p>
+                    </section>
+                    <section class="happlySec" data-app="sheep">
+                        <h2 class="happlyTitle">sheep</h2>
+                        <p class="happlySub">How many words do you know?</p>
+                    </section>
+                    <section class="happlySec" data-app="habbot">
+                        <h2 class="happlyTitle">habbot</h2>
+                        <p class="happlySub">Collect yourself</p>
+                    </section>
                 </div>
-
-
             </div>
 
-            <div class="imageBox">
-                <!-- <img src="assets/projectAssets/happlycationsAssets/" alt="" /> -->
-            </div>
-
-
-        </div>
-
-
-        <div class=" footerBox">
-            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="24px" onclick="etGoHome()" />
-
-            <div class="footerLinkBox">
-                <a href="./index.html">home</a>
-
-
+            <div class="happlyStage">
+                <div class="happlyPhoneStage">
+                <div class="happlyFloor" aria-hidden="true"></div>
+                <div class="happlyPhone" data-app="drawl"><div class="happlyScreen"><img src="assets/projectAssets/habbotAssets/app_screen01.png" alt="" /></div> <!-- test: the habbot screenshot on every app for now --></div>
+                </div>
+                <div class="happlyApps happlyCtaStack">
+                    <div class="happlyCtaSet on" data-app="drawl"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download drawl</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
+                    <div class="happlyCtaSet" data-app="sheep"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="https://apps.apple.com/us/app/sheep-counting-words/id6832144088" target="_blank" rel="noopener">Download sheep</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
+                    <div class="happlyCtaSet" data-app="habbot"><div class="happlyCtas"><span class="happlyCtaWrap"><a class="happlyCta" href="#">Download habbot</a></span><a class="happlyCta2" href="#">Learn more</a></div></div>
+                </div>
             </div>
         </div>
-    </div>
+        </div>
+    </main>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-    <script src="js/home.js"></script>
+    <script>
+        (function () {
+            var page = document.querySelector(".happlyPage"), head = document.querySelector(".happlyHead"), phone = document.querySelector(".happlyPhone");
+            var secs = document.querySelectorAll(".happlySec"), tabBtns = document.querySelectorAll(".happlyTab");
+            var token = 0, want = "drawl", cur = 0;
+            // the phone's thickness: slices of the rim stacked behind the face
+            for (var z = 0; z < 14; z++) { var sl = document.createElement("span"); sl.className = "happlySlice"; sl.style.transform = "translateZ(calc(var(--d) * " + (-(z + 1) / 14).toFixed(3) + "))"; phone.insertBefore(sl, phone.firstChild); }
+            var still = window.matchMedia("(prefers-reduced-motion: reduce)");
+            // the small logo + wordmark: a subtle scale about their centre with a fade, out then in, dressed in the chosen app's fill
+            function pick(app) {
+                if (app === want) return;
+                want = app;
+                var me = ++token;
+                function swap() { page.setAttribute("data-app", app); }
+                if (still.matches || !head.animate) { swap(); return; }
+                head.getAnimations().forEach(function (a) { a.cancel(); });
+                head.animate([{ transform: "scale(1)", opacity: 1 }, { transform: "scale(0.96)", opacity: 0 }], { duration: 140, easing: "ease-in", fill: "forwards" }).onfinish = function () {
+                    if (me !== token) return;
+                    swap();
+                    head.animate([{ transform: "scale(0.96)", opacity: 0 }, { transform: "scale(1)", opacity: 1 }], { duration: 200, easing: "ease-out" }).onfinish = function () { head.getAnimations().forEach(function (x) { x.cancel(); }); };
+                };
+            }
+            // the phone spins once round; its screen changes while it's edge-on
+            var spinTimer;
+            var REST = -16; // the phone's resting angle (matches the CSS)
+            function spin(app) {
+                clearTimeout(spinTimer);
+                if (still.matches || !phone.animate) { phone.dataset.app = app; return; }
+                phone.getAnimations().forEach(function (a) { a.cancel(); });
+                // one smooth turn: a critically damped curve (fast whip round, then a long soft ease into place), with no overshoot, sway or lift, so nothing wobbles at the end
+                var s = REST, e = REST, WN = 9, N = 48, frames = [];
+                for (var i = 0; i <= N; i++) {
+                    var t = i / N;
+                    var x = 1 - (1 + WN * t) * Math.exp(-WN * t);
+                    var q = Math.max(0, (t - 0.85) / 0.15); x += (1 - x) * q * q * (3 - 2 * q); // ease the last hair of residual to exactly 1
+                    frames.push({ offset: t, easing: "linear", transform: "rotateY(" + (s + (e + 360 - s) * x).toFixed(3) + "deg)" });
+                }
+                phone.animate(frames, { duration: 950 });
+                spinTimer = setTimeout(function () { phone.dataset.app = app; }, 200);
+            }
+            function go(i) {
+                i = Math.max(0, Math.min(secs.length - 1, i));
+                if (i === cur) return;
+                cur = i;
+                var app = secs[i].dataset.app;
+                document.querySelectorAll(".happlyCtaSet").forEach(function (c) {
+                    if (c.dataset.app === app) { c.classList.remove("leaving"); c.classList.add("on"); }
+                    else if (c.classList.contains("on")) { c.classList.remove("on"); c.classList.add("leaving"); setTimeout(function () { c.classList.remove("leaving"); }, 650); }
+                });
+                secs.forEach(function (s, k) {
+                    if (k === i) { s.classList.remove("leaving"); s.classList.add("on"); }
+                    else if (s.classList.contains("on")) { s.classList.remove("on"); s.classList.add("leaving"); setTimeout(function () { s.classList.remove("leaving"); }, 650); }
+                    s.setAttribute("aria-hidden", k !== i);
+                });
+                tabBtns.forEach(function (t, k) { t.classList.toggle("on", k === i); t.setAttribute("aria-selected", k === i); });
+                pick(app);
+                spin(app);
+            }
+            // landing: an app tile opens that app's view; the small logo + wordmark there comes back
+            // the big wordmark is cut into its 13 letters (the cut points are in the artwork's own 418-wide units). Hovering an app swaps
+            // the letters to that app's treatment one after another, left to right: each goes up and out, and the new one drops in.
+            var CUTS = [0, 39.9, 70.7, 109.3, 149.1, 170.6, 204.3, 236, 267.8, 291, 312.1, 349.6, 391.6, 418];
+            var ico = document.querySelector(".landIcon"), ltrWrap = document.querySelector(".landLtrs"), ltrs = [], skinNow = "norm", swapToken = 0, swapTimers = [];
+            for (var li = 0; li < CUTS.length - 1; li++) {
+                var el = document.createElement("span");
+                el.className = "ltr"; el.dataset.skin = "norm";
+                el.style.setProperty("--l", (CUTS[li] / 418 * 100).toFixed(3) + "%");
+                el.style.setProperty("--r", (CUTS[li + 1] / 418 * 100).toFixed(3) + "%");
+                el.style.setProperty("--lp", (CUTS[li] / 418).toFixed(5));
+                el.innerHTML = '<span class="skin"><span></span></span><span class="ring"><span class="rc"><span></span></span></span>';
+                ltrWrap.appendChild(el); ltrs.push(el);
+            }
+            // Each letter rolls on its own: up and out, then the new treatment rolls in. Changing app never cancels a roll with a snap: when the
+            // wave reaches a letter (in order, first to last) that is still part way through a roll, it carries on from exactly where it is
+            // (same position, same fade) and heads out to the new target. A letter already on its way out just lands on the latest target.
+            // warm the skin artwork up front so the first swap to drawl/habbot doesn't hitch while the image decodes
+["assets/homeAssets/drawl_wordmark_sketchy.svg", "assets/projectAssets/habbotAssets/grass.jpg"].forEach(function (u) { var im = new Image(); im.src = u; if (im.decode) im.decode().catch(function () {}); });
+function startOut(l, k, from) {
+                l._phase = "out";
+                var dir = l._target === "norm" ? -1 : 1; // the original wordmark always drops in from the top; the app wordmarks rise in from below
+                var out = l.animate([from, { transform: "translateY(" + (-dir * 55) + "%) scale(.7)", opacity: 0 }], { duration: 120 * k, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
+                l._cur = out;
+                out.onfinish = function () {
+                    l.dataset.skin = l._target; // the latest target, even if it changed while this letter was rolling out
+                    var d2 = l._target === "norm" ? -1 : 1;
+                    out.cancel();
+                    l._phase = "in";
+                    var inn = l.animate([{ transform: "translateY(" + (d2 * 55) + "%) scale(.7)", opacity: 0 }, { transform: "translateY(0) scale(1)", opacity: 1 }], { duration: 210 * k, easing: "cubic-bezier(.16, 1, .3, 1)" });
+                    l._cur = inn;
+                    inn.onfinish = function () { l._phase = null; l._cur = null; if (l.dataset.skin !== l._target) rollLetter(l, k); };
+                };
+            }
+            function rollLetter(l, k) {
+                if (l._phase === "out") return;
+                if (l._phase === "in") {
+                    if (l.dataset.skin === l._target) return; // already rolling in as the new look: leave it be
+                    var cs = getComputedStyle(l), from = { transform: cs.transform, opacity: cs.opacity };
+                    l._cur.cancel();
+                    startOut(l, k, from);
+                    return;
+                }
+                if (l.dataset.skin === l._target) return;
+                startOut(l, k, { transform: "translateY(0) scale(1)", opacity: 1 });
+            }
+            function setSkin(skin) {
+                if (skin === skinNow) return;
+                skinNow = skin;
+                swapTimers.forEach(clearTimeout); swapTimers = [];
+                if (still.matches || !ltrWrap.animate) { ltrs.forEach(function (l) { l._target = skin; l.dataset.skin = skin; }); return; }
+                // the swap speeds up as it travels left to right: each gap between letters is shorter than the last, and each letter's own
+                // out / in gets quicker too (the hand logo stays as it is: only the letters change)
+                var at = 0;
+                ltrs.forEach(function (l, i) {
+                    var t = Math.max(0, (i - 6) / 6), // 0 for the first half of the word, then ramps 0 -> 1 over the second half
+                        gap = 34 * (1 + 0.5 * t * t),  // steady 34ms between letters, then widening gently to ~51ms: the wave slows from about halfway
+                        k = 1 + 0.25 * t;              // each letter's own roll also slows a touch, to 1.25x at the end
+                    var when = at; at += gap;
+                    l._target = skin;
+                    if (l.dataset.skin === skin && !l._phase) return;
+                    swapTimers.push(setTimeout(function () { rollLetter(l, k); }, when));
+                });
+            }
+            // the letters tick at random between the versions (plain, sheep outline, drawl scribble, habbot grass), a letter at a time.
+            // It pauses while an app is hovered (that swap is in charge then), when the tab is hidden, and for reduced motion.
+            var SKINS = ["norm", "sheep", "drawl", "habbot"];
+            var TICK = false; // set to true to bring the random letter ticking back (kept for a later ideation session)
+            if (TICK && !still.matches && ltrWrap.animate) {
+                function swapOne() {
+                    if (document.hidden || skinNow !== "norm" || page.getAttribute("data-hover")) return;
+                    var n = 1;
+                    for (var k = 0; k < n; k++) {
+                        (function (l) {
+                            if (l.busy) return;
+                            l.busy = true;
+                            var opts = SKINS.filter(function (x) { return x !== l.dataset.skin; });
+                            var next = opts[Math.floor(Math.random() * opts.length)];
+                            // like the iOS number roll: the old letter lifts up and blurs out, the new one rises in from below, in focus
+                            var out = l.animate([{ transform: "translateY(0) scale(1)", opacity: 1, filter: "blur(0)" }, { transform: "translateY(-55%) scale(.75)", opacity: 0, filter: "blur(7px)" }], { duration: 160, easing: "cubic-bezier(.4, 0, 1, 1)", fill: "forwards" });
+                            out.onfinish = function () {
+                                l.dataset.skin = next; l._target = next;
+                                out.cancel();
+                                var inn = l.animate([{ transform: "translateY(55%) scale(.75)", opacity: 0, filter: "blur(7px)" }, { transform: "translateY(0) scale(1)", opacity: 1, filter: "blur(0)" }], { duration: 300, easing: "cubic-bezier(.16, 1, .3, 1)" });
+                                inn.onfinish = function () { l.busy = false; };
+                            };
+                        })(ltrs[Math.floor(Math.random() * ltrs.length)]);
+                    }
+                }
+                // the gap between swaps is random too (0.5s to 2s)
+                (function tick() { swapOne(); setTimeout(tick, 500 + Math.random() * 1500); })();
+            }
+            // the "You + Us" / "About" tabs aren't open yet, but their buttons still click down and spring back like real push-buttons
+            document.querySelectorAll(".landSoon").forEach(function (t) {
+                t.addEventListener("click", function () { t.classList.add("pressed"); setTimeout(function () { t.classList.remove("pressed"); }, 260); });
+            });
+            // on scroll the hand + wordmark shrinks and travels up to the top of the window, where it stays (scroll-linked, no layout reads while scrolling)
+            (function () {
+                var w = document.querySelector(".landWord"), startY = 0, h = 0, endS = 0.3, RANGE = 320, TOP = 48, queued = false;
+                var SCROLL_SHRINK = false; // set to true to bring the shrink-and-stick-on-scroll back
+                if (!w || !SCROLL_SHRINK) return;
+                function measure() {
+                    if (!w.offsetParent && getComputedStyle(w).position !== "fixed") return;
+                    w.style.transform = "";
+                    var r = w.getBoundingClientRect();
+                    startY = r.top + window.scrollY + r.height / 2; h = r.height;
+                    endS = window.innerWidth <= 700 ? 0.62 : 0.3;
+                    apply();
+                }
+                function apply() {
+                    queued = false;
+                    var y = window.scrollY, p = Math.min(1, Math.max(0, y / RANGE)), e = p * p * (3 - 2 * p),
+                        s = 1 + (endS - 1) * e, topC = TOP + h * endS / 2, ty = y - (startY - topC) * e;
+                    w.style.transform = e === 0 && y === 0 ? "" : "translateY(" + ty.toFixed(2) + "px) scale(" + s.toFixed(4) + ")";
+                }
+                window.addEventListener("scroll", function () { if (!queued) { queued = true; requestAnimationFrame(apply); } }, { passive: true });
+                window.addEventListener("resize", measure);
+                if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+                window.addEventListener("load", measure);
+                // the landing page slides in on load, so measure again once that has finished
+                var landing = document.querySelector(".happlyLanding");
+                if (landing) landing.addEventListener("animationend", measure);
+                setTimeout(measure, 900);
+                measure();
+            })();
+            // hovering an app also dresses the hand in the app's colour (CSS, from data-hover)
+            var landRow = document.querySelector(".landApps");
+            document.querySelectorAll(".landApp").forEach(function (b) {
+                var on = function () { page.setAttribute("data-hover", b.dataset.app); setSkin(b.dataset.app); };
+                b.addEventListener("mouseenter", on); b.addEventListener("focus", on);
+            });
+            // back to the normal wordmark only when the pointer (or focus) leaves the whole row of apps, not when it passes between two of them
+            function rowLeft() { page.removeAttribute("data-hover"); setSkin("norm"); }
+            landRow.addEventListener("mouseleave", rowLeft);
+            landRow.addEventListener("focusout", function (e) { if (!e.relatedTarget || !landRow.contains(e.relatedTarget)) rowLeft(); });
+            // an app's icon goes straight to the app (no nested page): Sheep to the App Store. Drawl and Habbot aren't out yet, so they
+            // have no link (add theirs to STORE when they are)
+            var STORE = { sheep: "https://apps.apple.com/us/app/sheep-counting-words/id6832144088" };
+            document.querySelectorAll(".landApp").forEach(function (b) {
+                if (!STORE[b.dataset.app]) b.style.cursor = "default";
+                b.addEventListener("click", function () {
+                    if (STORE[b.dataset.app]) window.open(STORE[b.dataset.app], "_blank", "noopener");
+                });
+            });
+            head.setAttribute("role", "button"); head.setAttribute("tabindex", "0"); head.setAttribute("aria-label", "Back to Happlycations");
+            function home() { page.setAttribute("data-view", "landing"); window.scrollTo(0, 0); }
+            head.addEventListener("click", home);
+            head.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); home(); } });
+            document.querySelectorAll(".landLogo").forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); }); });
+            tabBtns.forEach(function (t, k) {
+                t.addEventListener("click", function () { go(k); });
+                t.addEventListener("keydown", function (e) {
+                    if (e.key === "ArrowRight") { go(cur + 1); tabBtns[cur].focus(); e.preventDefault(); }
+                    if (e.key === "ArrowLeft") { go(cur - 1); tabBtns[cur].focus(); e.preventDefault(); }
+                });
+            });
+        })();
+    </script>
 </body>
 
 </html>

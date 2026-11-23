@@ -1,0 +1,99 @@
+/* Project views: responsive pass for tablet and phone.
+   Desktop (wider than 900px) is the reference and is not touched: every rule sits inside a max-width query.
+   Loads after redesign.css, so it wins on source order. */
+
+/* ---- scrolling project cards: the page scrolls inside the card, below the floating logo and close button,
+        instead of running underneath them ---- */
+@media (min-width: 701px) and (max-width: 900px) {
+  .view.scrollView .viewBody { inset: 108px 0 0; padding: 0 48px 40px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 16px); mask-image: linear-gradient(to bottom, transparent 0, #000 16px); }
+}
+@media (max-width: 700px) {
+  .view.scrollView .viewBody { inset: 76px 0 0; padding: 0 16px 28px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14px); mask-image: linear-gradient(to bottom, transparent 0, #000 14px); }
+}
+
+/* ---- Nanni ---- */
+@media (max-width: 900px) {
+  /* the page supplies its own side margin (--nn-pad), so the card's padding steps aside */
+  #view-nanni.scrollView .viewBody { padding-left: 0; padding-right: 0; }
+  #view-nanni .nnDoc { --nn-pad: clamp(20px, 7vw, 56px); }
+  #view-nanni .nnRow, #view-nanni .nnGoal, #view-nanni .nnCols { padding-left: var(--nn-pad); padding-right: var(--nn-pad); }
+  #view-nanni .nnFrame { margin: 0 var(--nn-pad); }
+  #view-nanni .nnLead, #view-nanni .nnAbout .nnLead { max-width: none; }
+  /* the three screens share the column's width instead of each being a fraction of the window */
+  #view-nanni .nnShots { justify-self: stretch; width: 100%; gap: 2%; }
+  #view-nanni .nnShots img, #view-nanni .nnShots img.mid { width: auto; flex: 1 1 0; min-width: 0; height: auto; }
+  #view-nanni .nnShots img.mid { flex-grow: 1.07; }
+}
+
+/* ---- phones: forms that were wider than the card ---- */
+@media (max-width: 480px) {
+  /* TouchTunes password row: the field takes what is left, the buttons stay their size, nothing leaves the card */
+  #view-touchtunes .lockBox .lockForm { flex-wrap: wrap; max-width: 100%; padding: 0 16px; box-sizing: border-box; }
+  #view-touchtunes .lockBox .lockForm .lockInput { flex: 1 1 100%; }
+  #view-touchtunes .lockBox .lockForm .lockBtn { flex: 1 1 0; white-space: nowrap; }
+  /* Overhand early access: the field shrinks so the placeholder and button both fit */
+  .view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyInput { min-width: 0; flex: 1 1 0; padding-left: 12px; padding-right: 12px; }
+  .view.scrollView .pg.one:has(.ohPit) .earlyForm .earlyBtn.lockBtn { flex: 0 0 auto; padding-left: 14px; padding-right: 14px; }
+}
+
+/* ---- Nanni on phones: the long page was centred inside a box shorter than itself, so its top (About, Goal,
+        Navigation, Quotes) hung above the start of the scroll and could not be reached ---- */
+@media (max-width: 700px) {
+  #view-nanni.scrollView .pg.one { align-content: start; height: auto; max-height: none; overflow: visible; }
+}
+
+/* ---- Nanni hero (text + the three phones): centred in the card, below the logo and close button, at every width ---- */
+#view-nanni .viewBody { container-type: size; }
+#view-nanni .nnRow.nnAbout { box-sizing: border-box; min-height: 100cqh; align-content: center; }
+@media (min-width: 901px) {
+  #view-nanni .nnRow.nnAbout { padding-top: 104px; padding-bottom: 48px; }
+}
+@media (max-width: 900px) {
+  /* the card's scroll area already starts below the header here */
+  #view-nanni .nnRow.nnAbout { padding-top: 24px; padding-bottom: 40px; }
+}
+
+
+/* Seeds logo in the project list: the note box was centred on the wordmark's line, which sits it about 3px below the
+   centre of the capital letters. Lift it by 10% of its own height so the note and "Seeds" are level. */
+#projectList .seedsIcon { translate: 0 -10%; }
+
+/* TouchTunes (a dark card): the close button is moved out of the card to the page while the project is open, so the
+   "dark card" rules that sit under .view never reached it, and it turned dark on hover over the light bubble. It stays white. */
+.viewClose.floating.dark:hover, .viewClose.floating.dark:focus-visible { color: #fff !important; }
+
+/* TouchTunes in the project list: the wordmark and mark stay black on hover (phones show the wordmark white) */
+
+/* Seeds in the project list on phones: it was scaled up to 42px / 33px type at <=900, which is much larger than the
+   other logos on a phone. At <=700 it goes back to the size set against Plunk's logo (33px mark, 26px "Seeds"). */
+@media (max-width: 700px) {
+  #projectList .seedsIcon { height: 26px; }
+  #projectList .withCaption .label { font-size: 26px; }
+  #projectList .withCaption .bubble { margin-right: 9px; }
+  /* a little more room in the rounded deck card around it (Habbot and Nanni get the same treatment) */
+  #projectList li:has(> a[data-view="seeds"]):not(.row-break) { padding: 22px 38px; }
+}
+
+/* Seeds on phones: the hero page (the three-stage seed strip, title and facts) sits in the vertical centre of the card,
+   and the strip is larger: the artwork only fills ~13% of its file's width, so the image is scaled up and cropped to
+   its middle, which makes the three seeds about 60% of the page width instead of ~13%. */
+@media (max-width: 700px) {
+  #view-seeds .viewBody { container-type: size; }
+  #view-seeds .pg.two { box-sizing: border-box; min-height: 100cqh; align-content: center; }
+  #view-seeds .pg.two .pgMedia { overflow: hidden; padding: 0; position: relative; }
+  #view-seeds .pg.two .pgMedia figure { overflow: hidden; display: block; }
+  #view-seeds .pg.two .pgMedia img { display: block; width: 480%; max-width: none; margin: 0; position: relative; left: 50%; transform: translateX(-50%); }
+}
+
+/* Rubin's sticker is a detailed drawing: on the home list it needs more height than the other logos to read (tablets and desktops) */
+@media (min-width: 701px) {
+  #projectList a[data-view="rubin"] .logo { height: 84px; max-width: none; width: auto; }
+  #projectList .logo.happly { height: 84px; max-width: none; width: auto; }
+}
+/* phones (the deck): the same two, larger */
+@media (max-width: 700px) {
+  #projectList a[data-view="rubin"] .logo { height: 76px; max-width: none; width: auto; }
+  #projectList .logo.happly { height: 76px; max-width: none; width: auto; }
+}

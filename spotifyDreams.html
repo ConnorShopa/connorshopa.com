@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/spotifyDreams.css" />
+    <link rel="stylesheet" href="css/spotifyDreams.css?v=184" />
+    <link rel="stylesheet" href="css/spotifyDreams.responsive.css?v=6" />
     <link rel="stylesheet" href="css/hostgrotesk.css" />
     <link rel="stylesheet" href="css/satoshi.css">
 
@@ -14,6 +15,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- when the page is shown inside a project card (redesign), only its content shows: no header, nav menu, footer or custom cursor -->
+    <script>try { if (window.self !== window.top) { document.documentElement.classList.add("inFrame"); var st = document.createElement("style"); st.textContent = ".headerBox, .logoBox, .navLinksContainer, .mobileMenuScreen, .mobileMenuButton, #mouse-circle, .footerBox { display: none !important; } body { cursor: auto !important; } html { scrollbar-width: none; } ::-webkit-scrollbar { display: none; }"; document.head.appendChild(st); } } catch (e) {}</script>
 
     <title>connorshopa : projects : spotify dreams</title>
 </head>
@@ -75,14 +79,17 @@
     <div class="content">
 
 
-        <div class="heroBox" id="nanni">
 
+
+        <div class="heroStage">
+            <div class="imageBox heroImg">
+                <img src="assets/projectAssets/spotifyAssets/spotify_img01.png" alt="" />
+            </div>
+        <div class="heroBox" id="nanni">
             <div class="textSection">
                 <h1>Spotify Dreams</h1>
 
             </div>
-
-
             <div class="productDetails">
                 <div class="textSection">
 
@@ -92,24 +99,78 @@
 
 
             </div>
+        </div>
+        </div>
 
-            <div class="imageBox">
-                <img src="assets/projectAssets/spotifyAssets/spotify_img01.png" alt="" />
-            </div>
+        <div class="statsFrame">
+        <div class="minutesBox">
+            <p class="minutesBig" aria-label="I spent 112,661 minutes with Spotify in 2024"><span class="mL1"><span class="mT">I spent</span> <span class="roll" data-from="0" data-to="112661" aria-hidden="true">112,661</span> <span class="mT">minutes</span></span><span class="mL2 mT">with Spotify in 2024</span></p>
+            <script>
+            // Rolling numbers: every digit is a vertical strip (0-9) that slides continuously, like a wheel. The number is driven by one value that eases up to the target;
+            // the ones wheel spins with it and each higher wheel turns over only as the one beside it wraps past 9. Wheels blur with their own speed and fade at the top and bottom edges.
+            // Near the end each digit gets a small springy settle, starting from the left and moving right.
+            window.spRoll = function (el) {   // works on any .roll with data-from / data-to ("112661", "5.1"...)
+                if (!el || !window.gsap) return;
+                var text = el.getAttribute("data-to").replace(/\B(?=(\d{3})+(?!\d))/g, ","), cols = [];
+                var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+                var toD = text.replace(/\D/g, ""), nd = toD.length, S1 = +toD, S0 = +el.getAttribute("data-from").replace(/\D/g, "");
+                el.textContent = "";
+                text.split("").forEach(function (ch) {
+                    if (!/\d/.test(ch)) { var c = document.createElement("span"); c.className = "rc"; c.textContent = ch; el.appendChild(c); return; }
+                    var col = document.createElement("span"), strip = document.createElement("span"), k = nd - 1 - cols.length, h = "";
+                    col.className = "rd"; strip.className = "rs";
+                    for (var d = 0; d <= 10; d++) h += "<span>" + ((10 - d) % 10) + "</span>";   // 0 at the bottom, 9 at the top: the wheel turns downward as the count rises
+                    strip.innerHTML = h; col.appendChild(strip); el.appendChild(col);
+                    cols.push({ d: +toD.charAt(cols.length), strip: strip, k: k, p10: Math.pow(10, k), last: null, blur: 0 });
+                });
+                var STAGGER = 0.1, BUMP_AT = 1.9, BUMP_LEN = 0.7, BUMP = nd > 3 ? 0.5 : 0.22;   // seconds; the settle's size is in digit heights
+                function win(x) { x = Math.max(0, Math.min(1, (x - 0.9) / 0.1)); return x * x * (3 - 2 * x); }
+                var E = gsap.parseEase("power3.inOut"), DUR = 1.9;
+                function draw(T) {   // T: seconds on the roll clock; each wheel runs its own roll, a little later than the one to its left
+                    cols.forEach(function (c, i) {
+                        // slot-machine wheels: every wheel really turns, making full revolutions (more the further right) before it stops on its digit
+                        var e = E(Math.max(0, Math.min(1, (T - i * STAGGER) / DUR))), pos = e * (c.d + 10 * (1 + i));
+                        var u = (T - BUMP_AT - i * STAGGER) / BUMP_LEN;
+                        if (false && u > 0 && u < 1) pos += BUMP * Math.sin(u * 9.4248) * (1 - u) * (1 - u);
+                        var m = ((pos % 10) + 10) % 10, sp = c.last === null ? 0 : Math.abs(pos - c.last);
+                        c.last = pos;
+                        c.blur += (Math.min(5, sp * 6) - c.blur) * 0.5;
+                        gsap.set(c.strip, { yPercent: -(10 - m) * 100 / 11, filter: c.blur > 0.25 ? "blur(" + c.blur.toFixed(2) + "px)" : "none" });
+                    });
+                }
+                draw(still ? 99 : 0);
+                if (still) return;
+                var o = { p: 0, T: 0 }, played = false;
+                function play() {
+                    if (played) return; played = true;
+                    gsap.to(o, { T: 4, delay: 0.2, duration: 4, ease: "none", });
+                }
+                // one frame loop: the value and the settle clock together
+                function frame() { draw(o.T); }
+                if ("IntersectionObserver" in window) new IntersectionObserver(function (e, ob) { if (e[0].isIntersecting) { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(99); }, 4600); ob.disconnect(); } }, { threshold: 0.6 }).observe(el);
+                else { play(); gsap.ticker.add(frame); setTimeout(function () { gsap.ticker.remove(frame); draw(99); }, 4600); }
+            };
+            window.spRoll(document.currentScript.previousElementSibling.querySelector(".roll"));
+            </script>
+        </div>
+
+
+        <div class="minutesBox hoursBox">
+            <p class="minutesBig" aria-label="5.1 hours a day"><span class="mL1"><span class="roll" data-from="0" data-to="5.1" aria-hidden="true">5.1</span></span><span class="mL2 mT">hours a day</span></p>
+            <script>window.spRoll(document.currentScript.previousElementSibling.querySelector(".roll"));</script>
+        </div>
+        </div>
+
+        <div class="textSection forAllBox">
+            <h3 class="centerText">For all it's wonder, I noticed some problems</h3>
+        </div>
+
+        <div class="heroBox">
+
+
 
             <div class="textSection">
 
-                <h3>
-                    I spent 112,000 minutes with spotify during 2024. 5.1 hours a day. For all it's wonder, spending
-                    that much time with a product, you notice some problems.
-                </h3>
-                <br><br>
-
-                <h3>
-                    – Oxymoronically, I also collect vinyl records, and it was this hobby that made me set out to design
-                    a solution that would solve two problems.
-                </h3>
-                <br><br>
 
 
 
@@ -121,26 +182,66 @@
 
 
 
-
-                </h2>
-                <br> <br>
-                <div class="linesRule"></div>
-                <br> <br>
-                <br> <br>
-                <h2>
-                    Problem 1: Organization and exploration of Spotify content is unweildy, as well as lacking in
-                    wonder.
-                </h2>
+                <h2 class="problemHead"><span class="pLabel">Problem 1</span><span class="pText">Exploration is unwieldy, and lacks in wonder</span></h2>
 
             </div>
             <br><br>
 
             <div class="imageTextSection">
-                <img class="roundedBox" src="assets/projectAssets/spotifyAssets/spotify_gif01.gif" alt="">
+                <div class="flipDemo" role="img" aria-label="Skeleton of thumbing through records: panels fold past one at a time"><div class="fdPhone"><div class="fdStage"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div>
+                <script>
+                // the skeleton ideation, rebuilt in GSAP: seven records on a hinged track; the track steps 0 -> 1 -> 2 -> 3 -> 2 -> 1 -> 0 and loops
+                (function () {
+                    var box = document.currentScript.previousElementSibling;
+                    var stage = box && box.querySelector(".fdStage");
+                    if (!stage || !window.gsap) return;
+                    var panels = Array.prototype.slice.call(stage.children), ANG = 76, ANG_STEP = 5, ANG_MAX = 86, SIDE = 0.536, PERSP = 7.4, GAP = -0.1, TUCK = 0.1, st = { p: 0 }, last = 0, dir = 1;
+                    function angOf(a) { return Math.min(ANG_MAX, ANG + ANG_STEP * Math.max(0, a - 1)); }
+                    // how far (in card widths) a record's hinge sits from the centre card's middle: the first stands on the card's edge, and each one after
+                    // stands one record's seen width (plus GAP: negative = overlap, as a share of the card width) beyond the one before
+                    function seen(n) { var r = angOf(n) * Math.PI / 180; return Math.cos(r) * PERSP / (PERSP - Math.sin(r)); }   // a record's true seen width, in card widths, perspective included
+                    function hinge(a) {
+                        if (a <= 1) return a - TUCK * a;
+                        var x = 1 - TUCK, n = 1;
+                        for (; n + 1 <= a; n++) x += seen(n) + GAP;
+                        return x + (seen(n) + GAP) * (a - n);
+                    }
+                    function render() {
+                        var W = panels[0].offsetWidth;
+                        if (st.p !== last) { dir = st.p > last ? 1 : -1; last = st.p; }
+                        var f = st.p - Math.floor(st.p), lift = 4 * f * (1 - f);   // 0 at rest, 1 half way through a step: the panels rise off the page while they move
+                        stage.style.setProperty("--lift", lift.toFixed(3));
+                        panels.forEach(function (el, i) {
+                            var s = i - st.p, a = Math.abs(s), k = Math.min(a, 1), grow = 1 + 0.02 * lift;
+                            gsap.set(el, {
+                                x: (s >= 0 ? 1 : -1) * hinge(a) * W,
+                                transformPerspective: PERSP * W,                        // each panel is seen in perspective from its hinge: the free edge comes toward you, so it reads taller than the hinged edge
+                                rotationY: (s >= 0 ? -1 : 1) * (a <= 1 ? ANG * a : angOf(a)),   // the further a record is from the centre, the more steeply it stands                  // right panels swing toward you on their left hinge, left ones on their right hinge
+                                scaleX: grow,
+                                scaleY: (1 - (1 - SIDE) * k) * grow * (a > 1 ? Math.max(0.7, 1 - 0.05 * (a - 1)) : 1),                     // the side panels are shorter than the main one
+                                transformOrigin: s >= 0 ? "0% 50%" : "100% 50%",
+                                zIndex: 1000 - Math.round(a * 100) + (s * dir > 0 ? 1 : 0),   // whichever record is nearer the centre is on top, all the way through a swap (so no record's edge pops over the one arriving); the arriving one wins a tie
+                                opacity: (1 - 0.45 * k) * (a > 1 ? Math.max(0.35, 1 - 0.22 * (a - 1)) : 1) * Math.max(0, Math.min(1, 4 - a))   // the panels behind are fainter, the farthest fade out
+                            });
+                        });
+                    }
+                    render();
+                    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+                    var tl = gsap.timeline({ repeat: -1, paused: true, defaults: { ease: "back.out(0.6)" }, onUpdate: render });
+                    tl.to(st, { p: 1, duration: 0.8 }, 0.6)
+                      .to(st, { p: 2, duration: 0.8 }, 1.9)
+                      .to(st, { p: 3, duration: 0.8 }, 3.2)
+                      .to(st, { p: 2, duration: 0.8 }, 4.8)
+                      .to(st, { p: 1, duration: 0.8 }, 6.1)
+                      .to(st, { p: 0, duration: 0.85 }, 7.4)
+                      .to({}, { duration: 0.01 }, 9.0);
+                    window.addEventListener("resize", render);
+                    if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { e[0].isIntersecting ? tl.play() : tl.pause(); }).observe(box);
+                    else tl.play();
+                })();
+                </script>
                 <div class="textSection">
-                    <h2 class="centerText">Making digital more physical</h2>
-                    <h3 class="centerText">I started with a skeleton ideation of how I would represent thumbing through
-                        physical records.</h3>
+                    <h3 class="centerText">Inspired by an oxymoronic habit of collecting vinyl, I sketched out a physical representation of digital records</h3>
 
 
                 </div>
@@ -149,29 +250,24 @@
             <br><br>
 
         </div>
-
-        <div class="textSection">
+        <div class="textSection scalableText">
             <h2 class="centerText">Making the view scalable</h2>
-            <h3 class="centerText">Spotify hosts a variety of different content <br> as well as a variety of methods to
-                organize this content.</h3>
-
+        </div>
+        <div class="dashFrame">
+            <div class="frameRow">
+            <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img02.png?v=2" alt="">
 
         </div>
-        <div class="imageBox">
-            <img src="assets/projectAssets/spotifyAssets/spotify_img02.png" alt="">
-
+            <div class="imageBox sheetBox">
+                <img src="assets/projectAssets/spotifyAssets/spotify_img03.png?v=2" alt="">
+            </div>
+            </div>
+            <h3 class="centerText">I created a set of components and layouts that adapt to the view</h3>
         </div>
 
-        <h3 class="centerText">I created a set of components and layouts that would adapt to this variety.</h3>
 
-
-        <div class="imageBox">
-            <img src="assets/projectAssets/spotifyAssets/spotify_img03.png" alt="">
-        </div>
-
-        <h5 class="centerText">
-            the final idea
-        </h5>
+        <h5 class="centerText pillBreaker"><span class="pLabel">Thought 1</span></h5>
         <div class="iconTextBox">
 
             <img src="assets/projectAssets/spotifyAssets/spotify_icon_recordShelf.svg" alt="" height="32px">
@@ -179,165 +275,91 @@
         </div>
 
         <div class="gifBox">
-            <img src="assets/projectAssets/spotifyAssets/spotify_gif02.gif" alt="" width="300px">
+            <img src="assets/projectAssets/spotifyAssets/spotify_gif02.webp" alt="" width="300px">
 
         </div>
-
-
-        <div class="textSection">
-
-            <h2>Discovered use cases</h2>
-            <h3>Through my exploration, I found new ways to display content I hadn't thought about before</h3>
+        <div class="gifRow">
+            <div class="gifCol">
+                <div class="imageBox">
+                    <img src="assets/projectAssets/spotifyAssets/spotify_gif03.webp" alt="">
+                </div>
+                <h2 class="gifTitle">Friend Activity</h2>
+                <h3 class="gifText">A dynamic, social view of what your friends are listening to</h3>
+            </div>
+            <div class="gifCol">
+                <div class="imageBox">
+                    <img src="assets/projectAssets/spotifyAssets/spotify_gif04.webp" alt="">
+                </div>
+                <h2 class="gifTitle">Curated Collections</h2>
+                <h3 class="gifText">Thumb through what's top of mind for the world</h3>
+            </div>
+            <div class="gifCol">
+                <div class="imageBox">
+                    <img src="assets/projectAssets/spotifyAssets/spotify_gif05.webp" alt="">
+                </div>
+                <h2 class="gifTitle">A Visual Library</h2>
+                <h3 class="gifText">Playlists, recommendations, collections<br> Your library, in a new light</h3>
+            </div>
         </div>
-        <div class="imageTextSection">
-            <div class="textSection">
-                <h2 class="centerText">Friend Activity</h2>
-                <h5 class="centerText">Record shelf allows for a dynamic and social view <br> of the content
-                    friends are listening to.</h5>
-                <br><br>
-                <h5 class="centerText">Understand similarities in taste, <br> explore tags your friends
-                    are into</h5>
-            </div>
-
-            <div class="imageBox">
-                <img src="assets/projectAssets/spotifyAssets/spotify_gif03.gif" alt="">
-            </div>
-
-        </div>
-
-        <div class="imageTextSection">
-            <div class="imageBox">
-                <img src="assets/projectAssets/spotifyAssets/spotify_gif04.gif" alt="">
-            </div>
-            <div class="textSection">
-                <h2 class="centerText">Curated Collections</h2>
-
-
-                <h5 class="centerText">Thumb through grammy nominees, podcast collections, <br> top charts or other
-                    curated
-                    digital crates</h5>
-                <br><br>
-                <h5 class="centerText">See what's top of mind for the world</h5>
-            </div>
-
-
-
-        </div>
-        <div class="imageTextSection">
-
-            <div class="textSection">
-                <h2 class="centerText">A Visual Library</h2>
-
-                <h5 class="centerText">Display your perfectly created playlists, find deep cuts from your favorites,
-                    <br> get suggestions based on your unique taste
-                </h5>
-                <br><br>
-                <h5 class="centerText">Your library, in a new light</h5>
-            </div>
-
-            <div class="imageBox">
-                <img src="assets/projectAssets/spotifyAssets/spotify_gif05.gif" alt="">
-            </div>
-
-        </div>
-
-
         <div class="linesRule"></div>
 
         <div class="textSection">
 
-            <h2>
-                Problem 2: Spotify's fullscreen design is behind the times.
-            </h2>
-
-            <h3>When Spotify went through a redesign in 2022, the fullscreen view was left behind: </h3>
+            <h2 class="problemHead"><span class="pLabel">Problem 2</span><span class="pText">Spotify's fullscreen design is behind the times</span></h2>
         </div>
 
 
-        <div class="imageBox">
-            <img src="assets/projectAssets/spotifyAssets/spotify_img_05.png" alt="">
-        </div>
-        <h5 class="centerText">While receiving new icons, fonts and ui elements, <br> I believe there is a lot to be
-            desired in terms of functionality and new features
-        </h5>
-
-
-
-        <div class="textSection">
-
-            <h3 class="centerText">I often see Spotify open on a television at parties, dinners or gatherings,
-                fullscreen should be:</h3>
+        <div class="dashFrame">
+            <div class="imageBox">
+                <img src="assets/projectAssets/spotifyAssets/spotify_img_05.png" alt="">
+            </div>
+            <h3 class="centerText">The old fullscreen, left behind after the 2022 redesign</h3>
         </div>
 
 
-        <div class="textSection">
 
-            <h2 class="centerText">1. Beautiful</h2>
-            <h5 class="centerText">The fullscreen view should be a center piece that reflects what's being played
-            </h5>
+        <div class="textSection statementText">
+            <h2 class="centerText">Fullscreen is at parties, dinners &amp; gatherings. It should be:</h2>
         </div>
-        <div class="textSection">
-
-            <h2 class="centerText">2. Useful</h2>
-            <h5 class="centerText">The fullscreen view shouldn't limit functionality
-            </h5>
+        <div class="dashFrame principles">
+            <div class="gifCol">
+                <h2 class="gifTitle">1. Beautiful</h2>
+                <h3 class="gifText">Fullscreen is a center piece</h3>
+            </div>
+            <div class="gifCol">
+                <h2 class="gifTitle">2. Useful</h2>
+                <h3 class="gifText">Full screen doesn't limit functionality</h3>
+            </div>
+            <div class="gifCol">
+                <h2 class="gifTitle">3. Understandable</h2>
+                <h3 class="gifText">Fullscreen isn't cluttered or overbearing</h3>
+            </div>
         </div>
-
-        <div class="textSection">
-
-            <h2 class="centerText">3. Understandable </h2>
-            <h5 class="centerText">The fullscreen view shouldn't feel cluttered or overvearing
-            </h5>
-        </div>
-
-
-        <div class="imageTextSection">
-            <div class="textSection">
-
+        <div class="imageTextSection sketchSection">
+            <div class="textSection sketchText">
                 <h2>Sketching</h2>
-                <h5>Staying in ine with Spotify's brand and identity I explored different ways to make the fullscreen
-                    view
-                    more in line with my goals</h5>
             </div>
             <div class="imageBox">
-                <img src="assets/projectAssets/spotifyAssets/spotify_gif06.gif" alt="">
+                <img src="assets/projectAssets/spotifyAssets/spotify_gif06.webp" alt="">
+            </div>
+            <div class="textSection sketchText">
+                <h5>An exploration of what fullscreen should be</h5>
             </div>
         </div>
 
 
-        <div class="imageBox">
-            <img src="assets/projectAssets/spotifyAssets/spotify_img06.png" alt="">
-        </div>
-        <div class="textSection">
-            <h5>Neutral View</h5>
-            <h2>I landed on a view that would blend into the background of a gathering, added key functionality, and
-                interesting information about the content being played</h2>
+                <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img08.png?v=4" alt="">
         </div>
 
-        <div class="imageBox">
-            <img src="assets/projectAssets/spotifyAssets/spotify_img07.png" alt="">
+                <div class="imageBox">
+            <img src="assets/projectAssets/spotifyAssets/spotify_img09.png?v=4" alt="">
         </div>
 
-        <div class="textSection">
-            <h5>Modular View</h5>
-            <h2>Borrowing from the main desktop applications use of modular cards that take up the left or right hand
-                side of the screen, all necessary functinality is a click away, or a click to hide</h2>
-        </div>
-
-        <div class="imageBox">
-            <img src="assets/projectAssets/spotifyAssets/spotify_img08.png" alt="">
-        </div>
-
-        <div class="imageBox">
-            <img src="assets/projectAssets/spotifyAssets/spotify_img09.png" alt="">
-        </div>
-
-        <div class="textSection">
+        <div class="textSection sketchText">
 
             <h2 class="centerText">When there's nothing being played</h2>
-            <h5 class="centerText">To maintain functionality, teh fullscreen view allows for listeners to <br> quickly
-                browse
-                their library, friend activity, or recommendations</h5>
+            <h5 class="centerText">Fullscreen let&rsquo;s listeners quickly browse their music, friends &amp; recommendations</h5>
         </div>
 
 
@@ -346,14 +368,15 @@
         </div>
 
 
+        <h5 class="centerText pillBreaker"><span class="pLabel">Thought 2</span></h5>
         <div class="iconTextBox">
 
             <img src="assets/projectAssets/spotifyAssets/spotify_icon_fullScreen.svg" alt="" height="32px">
-            <h1>In Context</h1>
+            <h1>Fullscreen</h1>
         </div>
 
         <div class="imageBox">
-            <img src="assets/projectAssets/spotifyAssets/spotify_gif07.gif" alt="">
+            <img src="assets/projectAssets/spotifyAssets/spotify_gif07.webp" alt="">
         </div>
 
 

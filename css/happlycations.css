@@ -1,547 +1,612 @@
-@import url(satoshi.css);
-@import url(hostgrotesk.css);
+/* The Happlycations page: a full window of its own. */
+@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-SemiBold.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cooper"; src: url("../fonts/Cooper/Cooper-Black.woff2") format("woff2"); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Host Grotesk"; src: url("../fonts/HostGrotesk/HostGrotesk-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Host Grotesk"; src: url("../fonts/HostGrotesk/HostGrotesk-Medium.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Host Grotesk"; src: url("../fonts/HostGrotesk/HostGrotesk-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Satoshi"; src: url("../fonts/Satoshi/Satoshi-Variable.ttf") format("truetype"); font-weight: 300 900; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pally"; src: url("../fonts/Pally/Pally-Variable.woff2") format("woff2"), url("../fonts/Pally/Pally-Variable.ttf") format("truetype"); font-weight: 400 700; font-style: normal; font-display: swap; }
 
-html {
-  display: flex;
+html, body { margin: 0; height: 100%; background: #D7E3F7; color: #111; }
+body { overflow: auto; }
 
-  background-color: #FFFAF6;
+.happlyPage {
+  box-sizing: border-box; min-height: 100vh; min-height: 100dvh; padding: 28px clamp(22px, 5vw, 80px) 36px; background: #D7E3F7;
+  display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr);
+}
+.happlyDetail { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; row-gap: 12px; }
+.happlyHead { cursor: pointer; }
 
-  cursor: url("cursor_home.png"), pointer;
-  justify-content: center;
-  align-items: center;
-  margin: 24px;
+/* the logo + wordmark, small, top left */
+.happlyHead { --w: min(calc((100vw - 10vw) / 24), 6.5dvh); /* the wordmark's height: as big as fits across the page, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: flex-start; gap: 10px; font-weight: 500; }
+.happlyHand {
+  display: block; flex: none; height: calc(var(--w) * 0.72); aspect-ratio: 91 / 135; transform: translateY(calc(var(--w) * -0.1)); /* sits on the middle of the capital letters, not of the line box (the wordmark's descenders hang below) */
+  -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
+  mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
+}
+/* the wordmark is a mask: whatever is painted behind it shows through the letters. Each app has its own treatment below. */
+.happlyHand, .happlyWord { background: #111 center / cover no-repeat; }
+.happlyWordWrap { display: block; flex: none; }
+.happlyWord {
+  display: block; height: var(--w); aspect-ratio: 418 / 70; flex: none;
+  -webkit-mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
+  mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat;
+}
+.happlyPage[data-app="drawl"] .happlyHand { background: #0C1E44; } /* the hand is just the line drawing (no fill), in each app's colour */
+.happlyPage[data-app="drawl"] .happlyWord { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; } /* drawl's wordmark is the hand-scribbled artwork itself, not a mask */
+.happlyPage[data-app="sheep"] .happlyWordWrap { filter: url(#happlyOutline); } /* sheep: the wordmark is a 2px outline in the sheep icon's blue, no fill (see the SVG filter in the page) */
+.happlyPage[data-app="sheep"] .happlyHand { background: #2F4AA3; }
+.happlyPage[data-app="habbot"] :is(.happlyWord, .happlyHand) { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); }
+
+
+.happlyTop { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.happlyTagline { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 500; font-size: clamp(12px, 0.95vw, 15px); letter-spacing: -0.005em; color: #111; }
+
+/* two columns: the chosen app's big title + buttons (with the app tabs above) on the left, its phone on the right */
+.happlyMain { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: clamp(24px, 4vw, 72px); }
+.happlyCopy { text-align: center; display: flex; flex-direction: column; align-items: center; gap: clamp(24px, 4dvh, 44px); min-width: 0; }
+.happlyTabs { display: flex; align-items: center; gap: clamp(18px, 2.2vw, 34px); }
+.happlyTab { padding: 8px; border: 0; border-radius: 26px; background: transparent; cursor: pointer; opacity: 0.5; transition: opacity .25s ease, background .25s ease, box-shadow .25s ease, scale .45s cubic-bezier(.34, 1.56, .64, 1); }
+.happlyTab img { display: block; height: clamp(52px, 4.6vw, 72px); width: clamp(52px, 4.6vw, 72px); }
+.happlyTab:hover, .happlyTab.on { opacity: 1; }
+.happlyTab.on { scale: 1.32; background: #ececec; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16), 0 1px 4px rgba(0, 0, 0, 0.1); }
+.happlyTab:focus-visible { outline: 2px solid #111; outline-offset: 3px; }
+
+/* the three apps share one cell; only the chosen one shows, and switching slides it up/down */
+.happlyApps { display: grid; width: 100%; }
+:is(.happlySec, .happlyCtaSet) { grid-area: 1 / 1; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(8px, 1.5dvh, 16px); opacity: 0; translate: 0 -36px; visibility: hidden; pointer-events: none; transition: opacity .35s ease, translate .45s cubic-bezier(.215, .61, .355, 1), visibility 0s .45s; }
+:is(.happlySec, .happlyCtaSet).leaving { translate: 0 36px; } /* whichever app is leaving always exits downward, and the next always drops in from above, whichever way round the tabs go */
+:is(.happlySec, .happlyCtaSet).on { opacity: 1; translate: 0 0; visibility: visible; pointer-events: auto; transition: opacity .4s ease .12s, translate .5s cubic-bezier(.215, .61, .355, 1) .12s, visibility 0s; }
+
+/* the app name: Cooper Bold, solid black, the same for every app */
+.happlyTitle { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 700; font-size: clamp(48px, 6vw, 96px); line-height: 1; letter-spacing: -0.02em; padding: 0 0.04em 0.1em 0; color: #000; }
+.happlySub { margin: 0; font-family: "Cooper", Georgia, serif; font-weight: 600; font-size: clamp(20px, 2.1vw, 34px); line-height: 1.2; letter-spacing: -0.01em; color: #555; text-wrap: balance; max-width: 22ch; }
+
+.happlyCtas { margin-top: clamp(16px, 3dvh, 28px); justify-content: center; display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.happlyCta {
+  display: block; padding: 12px 22px; border-radius: 999px; background: #111; color: #fff; text-decoration: none;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; font-weight: 600; transition: background .2s ease;
+}
+.happlyCta:hover { background: #333; }
+.happlyCta2 { padding: 12px 22px; border-radius: 999px; border: 1.5px solid rgba(17, 17, 17, 0.35); color: #111; text-decoration: none; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px; font-weight: 600; transition: background .2s ease, border-color .2s ease; }
+.happlyCta2:hover { background: rgba(17, 17, 17, 0.06); border-color: #111; }
+
+/* the phone floats; its shadow lies on the "floor" below it and doesn't spin with it */
+.happlyStage { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.happlyPhoneStage { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; perspective: 1400px; padding-bottom: 56px; }
+.happlyCtaStack { width: auto; }
+.happlyFloor { position: absolute; left: 50%; bottom: 14px; width: calc(var(--h) * 0.42); height: 26px; translate: -50% 0; border-radius: 50%; background: radial-gradient(ellipse at center, rgba(40, 28, 60, 0.42) 0%, rgba(40, 28, 60, 0.18) 45%, rgba(40, 28, 60, 0) 72%); filter: blur(6px); }
+.happlyStage { --h: clamp(260px, 52dvh, 560px); }
+.happlyPhone {
+  --u: calc(var(--h) * 0.00489); /* 1% of the phone's width */
+  --d: calc(var(--u) * 11); /* the phone's thickness */
+  position: relative; aspect-ratio: 689 / 1406; height: var(--h); margin-bottom: 28px;
+  transform-origin: 50% 100%; transform-style: preserve-3d; transform: rotateY(-16deg); /* resting at a slight angle, so its thickness shows */
+  box-sizing: border-box; padding: calc(var(--u) * 2.6);
+  border-radius: calc(var(--u) * 15);
+  background: linear-gradient(135deg, #3b3b3f 0%, #17171a 38%, #2e2e32 62%, #0d0d0f 100%); /* the near-black metal rim */
+}
+/* the phone's thickness: a stack of rim-coloured slices behind the face, so the rounded edge has depth */
+.happlySlice { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(135deg, #2a2a2e 0%, #0e0e10 50%, #202024 100%); pointer-events: none; }
+.happlyScreen { position: relative; width: 100%; height: 100%; overflow: hidden; background: #999; border-radius: calc(var(--u) * 12.4); box-shadow: 0 0 0 calc(var(--u) * 1.7) #000; transition: background .2s ease; }
+.happlyScreen img, .happlyScreen video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.happlyPhone[data-app="drawl"] .happlyScreen { background: hsl(0 0% 64%); }
+.happlyPhone[data-app="sheep"] .happlyScreen { background: hsl(0 0% 76%); }
+.happlyPhone[data-app="habbot"] .happlyScreen { background: hsl(0 0% 56%); }
+
+/* hovering a section: its download button gets a ring in the app's colour that slowly spins,  */
+:is(.happlySec, .happlyCtaSet)[data-app="drawl"] { --glow: 12, 30, 68; }
+:is(.happlySec, .happlyCtaSet)[data-app="sheep"] { --glow: 47, 74, 163; }
+:is(.happlySec, .happlyCtaSet)[data-app="habbot"] { --glow: 250, 152, 58; }
+@property --ringA { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+/* the button sits in a wrapper that does the hover effects: it pops up with a little overshoot, and carries the ring + glow, so the glow can sit behind the button without bleeding through it */
+.happlyCtaWrap { position: relative; isolation: isolate; display: block; border-radius: 999px; transition: transform .5s cubic-bezier(.34, 1.56, .64, 1); }
+.happlyCtaWrap .happlyCta { display: block; margin-top: 0; }
+:is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap { transform: scale(1.07); }
+/* the ring (1px off the button) and a soft glow behind it: both are a gradient in the app's colour that travels round the button */
+.happlyCtaWrap::before, .happlyCtaWrap::after {
+  content: ""; position: absolute; inset: -3px; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s ease;
+  background: conic-gradient(from var(--ringA), rgba(var(--glow), 0.15) 0%, rgba(var(--glow), 1) 30%, rgba(var(--glow), 0.15) 65%, rgba(var(--glow), 0.15) 100%);
+}
+.happlyCtaWrap::before { padding: 2px; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.happlyCtaWrap::after { z-index: -1; filter: blur(10px); }
+:is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap::before { opacity: 1; animation: happlyRing 3.2s linear infinite; }
+:is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap::after { opacity: 0.9; animation: happlyRing 3.2s linear infinite; }
+@keyframes happlyRing { to { --ringA: 360deg; } }
+@media (prefers-reduced-motion: reduce) { .happlyCtaWrap, :is(.happlySec, .happlyCtaSet) { transition: none; } :is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap::before, :is(.happlySec, .happlyCtaSet):hover .happlyCtaWrap::after { animation: none; } }
+
+@media (max-width: 800px) {
+  .happlyPage { padding: 20px 16px 28px; }
+  .happlyHead { --w: calc((100vw - 32px) / 9); }
+  .happlyMain { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .happlyStage { --h: 320px; }
+  .happlyTitle { font-size: clamp(44px, 14vw, 72px); }
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
-  width: 100%;
-  max-width: 1200px;
+
+/* ---- the landing page ---- */
+.happlyPage[data-view="landing"] .happlyDetail, .happlyPage[data-view="app"] .happlyLanding { display: none; }
+.happlyPage[data-view="app"] .happlyDetail, .happlyPage[data-view="landing"] .happlyLanding { animation: happlyIn .5s cubic-bezier(.215, .61, .355, 1) both; }
+@keyframes happlyIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+.happlyLanding { display: grid; grid-template-rows: auto 1fr; min-height: calc(100dvh - 64px); }
+.landBar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.landLogo { justify-self: start; display: grid; place-items: center; width: clamp(44px, 3.5vw, 70px); aspect-ratio: 1; border-radius: 26%; background: #fff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.03); }
+.landLogoHand { display: block; height: 62%; aspect-ratio: 91 / 135; background: #111; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
+.landNav { display: flex; align-items: center; gap: clamp(12px, 1.4vw, 28px); font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: 16px; color: #333; }
+.landNav a { color: #111; font-weight: 600; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
+.landSoon { cursor: default; }
+.landDot { width: 0.28em; height: 0.28em; border-radius: 50%; background: #777; }
+
+.landMid { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(10px, 2dvh, 24px); padding-bottom: 4dvh; }
+.landWord { --lw: min(6.8vw, 11dvh); /* the wordmark's size: about three quarters of the page wide, and not too tall for the window */ margin: 0; display: flex; align-items: center; justify-content: center; gap: calc(var(--lw) * 0.3); }
+/* the app shape beside the wordmark: the white Happlycations tile (as in the top left) that rolls into the hovered app's icon */
+.landIcon { position: relative; display: block; flex: none; width: calc(var(--lw) * 1.02); aspect-ratio: 1; top: calc(var(--lw) * -0.04); }
+.landIcon > * { position: absolute; inset: 0; display: none; }
+.landIcon img { width: 100%; height: 100%; filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.14)); }
+.landIcon .tile { place-items: center; background: none; border: 0; box-shadow: none; } /* no box: just the hand */
+.landIcon .tile i { display: block; height: 62%; aspect-ratio: 91 / 135; background: #111; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
+.landIcon[data-skin="norm"] .tile { display: grid; }
+.landIcon .tile i { transform: translateX(calc(var(--lw) * 0.3)); } /* the hand sits closer to the wordmark (the app icons still fill the whole box) */
+.landIcon[data-skin="drawl"] .i-drawl, .landIcon[data-skin="sheep"] .i-sheep, .landIcon[data-skin="habbot"] .i-habbot { display: block; }
+.landWordBox { position: relative; display: block; flex: none; width: calc(var(--lw) * 7.85); aspect-ratio: 418 / 70; }
+.landLtrs { position: absolute; inset: 0; display: block; }
+/* each letter is the whole wordmark, clipped to that letter's slice (up and down are not clipped, so descenders stay) */
+.ltr { position: absolute; inset: 0; transform-origin: calc((var(--l) + var(--r)) / 2) 50%; /* scale around the letter itself, not the whole word */ clip-path: inset(-60% calc(100% - var(--r)) -60% var(--l)); }
+/* the first and last letters are clipped at the wordmark's own edge, which cut the outline (2px beyond the artwork) and the h's serif: let them run past it */
+.ltr:first-child { clip-path: inset(-60% calc(100% - var(--r)) -60% -4%); }
+.ltr:last-child { clip-path: inset(-60% -4% -60% var(--l)); }
+.skin { position: absolute; inset: 0; display: block; }
+.skin > span { display: block; width: 100%; height: 100%; background: #111; -webkit-mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat; }
+/* the four treatments: normal = embossed (below), drawl = its scribbled artwork, sheep = a 2px outline in its blue, habbot = grass */
+/* normal = embossed: the letters are a shade deeper than the page and raised, lit from the top left (a soft white edge up there, a soft blue shadow down and right) */
+.ltr[data-skin="norm"] .skin { filter: drop-shadow(calc(var(--lw) * -0.016) calc(var(--lw) * -0.016) calc(var(--lw) * 0.014) rgba(255, 255, 255, 0.85)) drop-shadow(calc(var(--lw) * 0.02) calc(var(--lw) * 0.03) calc(var(--lw) * 0.03) rgba(86, 114, 168, 0.4)); }
+.ltr[data-skin="norm"] .skin > span { background: linear-gradient(160deg, #C9D8F0 0%, #BCCDEA 100%); }
+.ltr[data-skin="sheep"] .skin { filter: url(#happlyOutline); }
+.ltr[data-skin="drawl"] .skin > span { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/drawl_wordmark_sketchy.svg") center / contain no-repeat; }
+.ltr[data-skin="habbot"] .skin > span { background-color: #1f4a22; background-image: url("../assets/projectAssets/habbotAssets/grass.jpg"); background-size: cover; }
+/* drawl: the hand-scribbled artwork itself; sheep: a 2px outline in the sheep blue; habbot: filled with grass */
+.landTag { margin: 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 500; font-size: 16px; letter-spacing: -0.01em; color: #111; text-align: center; }
+
+.landApps { list-style: none; margin: clamp(28px, 6dvh, 72px) 0 0; padding: 0; display: flex; gap: clamp(28px, 4.6vw, 92px); }
+.landApp { display: flex; flex-direction: column; align-items: center; gap: clamp(8px, 1vw, 18px); padding: 0; border: 0; background: none; cursor: pointer; transition: transform .45s cubic-bezier(.34, 1.56, .64, 1); }
+.landApp img { display: block; width: clamp(64px, 6.4vw, 128px); height: auto; filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.14)); }
+.landApp:hover { transform: translateY(-5px) scale(1.04); }
+.landApp:focus-visible { outline: 2px solid #111; outline-offset: 8px; border-radius: 22px; }
+.landName { font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 700; font-size: clamp(18px, 1.9vw, 38px); line-height: 1; }
+.landName.drawl { color: #0C1E44; }
+.landName.sheep { font-family: "Crimson Pro", Georgia, serif; color: #2F4AA3; }
+.landName.habbot { color: #FA983A; }
+@media (prefers-reduced-motion: reduce) { .landApp, .happlyPage[data-view] .happlyDetail, .happlyPage[data-view] .happlyLanding { transition: none; animation: none; } }
+@media (max-width: 800px) {
+  .happlyLanding { min-height: calc(100dvh - 48px); }
+  .landWord { --lw: calc((100vw - 32px) / 11.4); }
+  .landApps { gap: 22px; }
+  .landNav { font-size: 16px; gap: 11px; }
 }
 
-.content{
-  display: flex;
-  flex-direction: column;
-  gap: 72px;
+/* hovering an app: a glowing arc circles its icon (in the app's colour) and a download button slides down under its name */
+@property --landA { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.landApps li { position: relative; }
+.landTile { position: relative; display: block; width: clamp(64px, 6.4vw, 128px); aspect-ratio: 1; flex: none; }
+.landTile img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.landRing { position: absolute; inset: -9px; border-radius: 30%; padding: 3px; pointer-events: none; opacity: 0; transition: opacity .3s ease;
+  background: conic-gradient(from var(--landA), transparent 0 40%, color-mix(in srgb, var(--ac) 55%, transparent) 70%, var(--ac) 98%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  filter: drop-shadow(0 0 7px var(--ac)) drop-shadow(0 0 16px color-mix(in srgb, var(--ac) 60%, transparent)); }
+.landApps li:hover .landRing, .landApps li:focus-within .landRing { opacity: 1; animation: landSpin 1.25s linear infinite; }
+/* one smooth speed curve: it swings quickly round one side, eases right down on the opposite one, and builds back up with no jolts (linear timing between close-packed stops) */
+@keyframes landSpin {
+  0% { --landA: 0.0deg; }
+  4% { --landA: 5.8deg; }
+  8% { --landA: 12.2deg; }
+  12% { --landA: 19.9deg; }
+  17% { --landA: 29.2deg; }
+  21% { --landA: 40.7deg; }
+  25% { --landA: 54.5deg; }
+  29% { --landA: 70.7deg; }
+  33% { --landA: 89.2deg; }
+  38% { --landA: 109.9deg; }
+  42% { --landA: 132.2deg; }
+  46% { --landA: 155.8deg; }
+  50% { --landA: 180.0deg; }
+  54% { --landA: 204.2deg; }
+  58% { --landA: 227.8deg; }
+  62% { --landA: 250.1deg; }
+  67% { --landA: 270.8deg; }
+  71% { --landA: 289.3deg; }
+  75% { --landA: 305.5deg; }
+  79% { --landA: 319.3deg; }
+  83% { --landA: 330.8deg; }
+  88% { --landA: 340.1deg; }
+  92% { --landA: 347.8deg; }
+  96% { --landA: 354.2deg; }
+  100% { --landA: 360.0deg; }
+}
+.landApps li:hover .landApp img, .landApps li:focus-within .landApp img { filter: drop-shadow(0 8px 22px color-mix(in srgb, var(--ac) 45%, transparent)); }
+.landDl { position: absolute; top: calc(100% + 12px); left: 50%; transform: translate(-50%, -10px); opacity: 0; pointer-events: none; white-space: nowrap; box-sizing: border-box;
+  padding: 9px 20px; border-radius: 999px; background-color: var(--ac); color: var(--on, #fff); font: 500 clamp(13px, 1vw, 16px)/1 "Host Grotesk", sans-serif; text-decoration: none;
+  transition: opacity .25s ease, transform .35s cubic-bezier(.22, 1, .36, 1); }
+.landDl::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; } /* an invisible bridge keeps the hover unbroken between the name and the button */
+.landApps li:hover .landDl, .landApps li:focus-within .landDl { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.landDl.soon { cursor: default; } /* not out yet: the same pill, with no link */
+.landApps li:hover .landDl.soon, .landApps li:focus-within .landDl.soon { opacity: 1; }
+/* drawl's button is drawn by hand: a wobbly, doubled-up pen outline round a white patch */
+.landDl.hand { background: none; color: #0C1E44; padding: 10px 24px; border-radius: 0; }
+.landDl.hand::after { content: ""; position: absolute; inset: -3px -2px; z-index: -1; background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 40%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M9 4 C30 2 70 5 92 3 C98 3 99.5 10 98.5 20 C98 31 97 36 91 37 C68 39 30 36 9 38.5 C3 38.5 1.5 31 1.8 20 C2 10 3 5.5 9 4 Z%22 fill=%22%23fff%22/%3E%3Cg fill=%22none%22 stroke=%22%230C1E44%22 stroke-width=%222.4%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22 vector-effect=%22non-scaling-stroke%22%3E%3Cpath vector-effect=%22non-scaling-stroke%22 d=%22M10 4.5 C30 2.5 70 5.5 91 3.5 C97 3.5 98.5 10 98 20 C97.5 30 97 35.5 90 36.5 C68 38.5 30 35.5 10 38 C4 38 2.5 31 2.8 20 C3 11 4 6.5 10 4.5%22/%3E%3Cpath vector-effect=%22non-scaling-stroke%22 d=%22M6 7.5 C28 5.5 72 8.5 95 6.5 M5.5 33.5 C30 31.5 70 34.5 94 32.5 M92 2.5 C96 4 99 8 99.5 14%22/%3E%3C/g%3E%3C/svg%3E") center / 100% 100% no-repeat; filter: drop-shadow(0 2px 3px rgba(12, 30, 68, 0.18)); }
+a.landDl:hover { filter: brightness(1.08); }
+@media (prefers-reduced-motion: reduce) { .landApps li:hover .landRing, .landApps li:focus-within .landRing { animation: none; } .landDl { transition: opacity .2s ease; transform: translate(-50%, 0); } }
+
+/* the hand gets the same embossed treatment as the wordmark (filter on the wrapper, since the mask on the <i> would clip a shadow) */
+.landIcon[data-skin="norm"] .tile { filter: drop-shadow(calc(var(--lw) * -0.012) calc(var(--lw) * -0.012) calc(var(--lw) * 0.01) rgba(255, 255, 255, 0.9)) drop-shadow(calc(var(--lw) * 0.014) calc(var(--lw) * 0.02) calc(var(--lw) * 0.02) rgba(86, 114, 168, 0.45)); }
+.landIcon[data-skin="norm"] .tile i { background: linear-gradient(160deg, #C9D8F0 0%, #BCCDEA 100%); }
+
+/* cotton-like grain over the whole page */
+body::after { content: ""; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0.5; transform: translateZ(0); background: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix values=%220 0 0 0 0.42  0 0 0 0 0.5  0 0 0 0 0.68  0 0 0 0.16 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E"); }
+.landIcon[data-skin="norm"] .tile i { -webkit-mask-image: url("../assets/homeAssets/happlycations_hand_mask.svg"); mask-image: url("../assets/homeAssets/happlycations_hand_mask.svg"); } /* the filled hand silhouette, not just the lines */
+
+
+.landTag { color: #2E4A87; } /* deep blue from the theme, ~6:1 on the background */
+
+/* each letter's ink is cut at its own cut points, but its shadow / outline / emboss (the filter on .skin) is NOT, so neighbouring letters no longer slice each other's edges */
+.ltr, .ltr:first-child, .ltr:last-child { clip-path: none; }
+.ltr .skin > span { clip-path: inset(-60% calc(100% - var(--r)) -60% var(--l)); }
+.ltr:first-child .skin > span { clip-path: inset(-60% calc(100% - var(--r)) -60% -4%); }
+.ltr:last-child .skin > span { clip-path: inset(-60% -4% -60% var(--l)); }
+
+/* physical push-buttons on the nav tabs (after the Dieter Rams palette): each tab has a raised dome, and the current tab's button is pushed in */
+.landNav { gap: clamp(14px, 1.6vw, 30px); }
+.landNav .landDot { display: none; }
+.landNav > a, .landNav > .landSoon { --bc: #ED8008; position: relative; padding-left: 24px; }
+.landNav > .landSoon:nth-of-type(2) { --bc: #ED3F1C; }
+.landNav > .landSoon:nth-of-type(4) { --bc: #736B1E; }
+.landNav > a::before, .landNav > .landSoon::before {
+  content: ""; position: absolute; left: 0; top: 50%; width: 14px; height: 14px; margin-top: -7px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 35% 28%, color-mix(in srgb, var(--bc) 62%, #fff) 0%, var(--bc) 52%, color-mix(in srgb, var(--bc) 80%, #000) 100%);
+  box-shadow: 0 0 0 1.5px #1d1a19, 0 3px 3px 1px rgba(29, 26, 25, 0.3), inset 0 -1px 1.5px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1.5px);
+  transition: transform .14s cubic-bezier(.3, 1.6, .5, 1), box-shadow .14s ease, filter .14s ease;
+}
+.landNav > .landSoon { cursor: pointer; }
+.landNav > .landSoon:hover::before { transform: translateY(-2.5px); }
+.landNav > a.on::before, .landNav > .landSoon.pressed::before, .landNav > .landSoon:active::before, .landNav > a:active::before {
+  transform: translateY(1.5px) scale(.93); filter: brightness(.9);
+  box-shadow: 0 0 0 1.5px #1d1a19, 0 0 0 0 rgba(0, 0, 0, 0), inset 0 2px 3px rgba(0, 0, 0, 0.5);
 }
 
-.mobileMenuButton {
-  display: none;
+/* the push-buttons, closer to the Rams buttons: a glossy round cap sitting in a thin black bezel, with a soft shadow on the surface */
+.landNav > a, .landNav > .landSoon { padding-left: 34px; }
+.landNav > a::before, .landNav > .landSoon::before {
+  width: 22px; height: 22px; margin-top: -11px; box-sizing: border-box; border: 2.4px solid #151312; border-radius: 50%;
+  background: radial-gradient(circle at 36% 28%, color-mix(in srgb, var(--bc) 55%, #fff) 0%, color-mix(in srgb, var(--bc) 92%, #fff) 26%, var(--bc) 55%, color-mix(in srgb, var(--bc) 82%, #000) 100%) padding-box;
+  box-shadow: inset 1px 1.5px 2px rgba(255, 255, 255, 0.35), inset -1px -2px 3px rgba(0, 0, 0, 0.22), 2px 5px 8px -1px rgba(52, 44, 36, 0.36), 0 1px 1.5px rgba(52, 44, 36, 0.3);
+  transform: none;
+}
+.landNav > .landSoon:hover::before { transform: translateY(-1px); }
+.landNav > a.on::before, .landNav > .landSoon.pressed::before, .landNav > .landSoon:active::before, .landNav > a:active::before {
+  transform: translateY(1.5px) scale(.95); filter: brightness(.93);
+  box-shadow: inset 1px 2px 3px rgba(0, 0, 0, 0.35), inset -1px -1px 2px rgba(255, 255, 255, 0.12), 0 0 1px rgba(52, 44, 36, 0.3);
 }
 
-.mobileMenuScreen {
-  display: none;
+/* each button slots into a recess cut into the surface */
+.landNav > a, .landNav > .landSoon { padding-left: 42px; isolation: isolate; }
+.landNav > a::before, .landNav > .landSoon::before { left: 4px; z-index: 1; }
+.landNav > a::after, .landNav > .landSoon::after {
+  content: ""; position: absolute; left: 0; top: 50%; width: 30px; height: 30px; margin-top: -15px; border-radius: 50%; pointer-events: none; z-index: 0;
+  background: linear-gradient(160deg, #C5D4EC 0%, #D3DFF3 100%);
+  box-shadow: inset 2px 3px 4px rgba(58, 82, 132, 0.42), inset -1px -1px 2px rgba(255, 255, 255, 0.5), 1px 1.5px 0 rgba(255, 255, 255, 0.85), -0.5px -0.5px 0 rgba(120, 145, 190, 0.25);
 }
 
+.landMid > .landNav { margin-top: 10px; }
 
-#mouse-circle {
-  z-index: 2;
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  margin: -13px 0 0 -13px;
-  background: rgba(5, 29, 47, 0.10);
-  border-radius: 50%;
-  pointer-events: none;
-  transition: width 0.2s, height 0.2s;
+/* the hand + wordmark centred on the page (the hand is nudged right inside its box, so the box alone sat left of centre), and the tabs further below them */
+.landWord { position: relative; left: calc(var(--lw) * -0.3); }
+.landMid > .landNav { margin-top: clamp(40px, 7dvh, 72px); }
+
+/* embossed from the page itself: the letters and the hand are the same surface as the background (same gradient), shaped only by a soft light edge top-left and a soft shadow bottom-right */
+.ltr[data-skin="norm"] .skin > span, .landIcon[data-skin="norm"] .tile i { background: #D7E3F7; }
+.ltr[data-skin="norm"] .skin { filter: drop-shadow(calc(var(--lw) * -0.022) calc(var(--lw) * -0.022) calc(var(--lw) * 0.026) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.026) calc(var(--lw) * 0.036) calc(var(--lw) * 0.036) rgba(77, 105, 161, 0.48)); }
+.landIcon[data-skin="norm"] .tile { filter: drop-shadow(calc(var(--lw) * -0.016) calc(var(--lw) * -0.016) calc(var(--lw) * 0.018) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.018) calc(var(--lw) * 0.026) calc(var(--lw) * 0.026) rgba(77, 105, 161, 0.51)); }
+
+/* the tab menu is hidden for now (markup kept; delete this line to bring it back) */
+.landMid > .landNav { display: none !important; }
+
+/* a stroke on the hand: the line drawing sits on top of the filled hand */
+.landIcon .tile i { grid-area: 1 / 1; }
+.landIcon[data-skin="norm"] .tile::after {
+  content: ""; grid-area: 1 / 1; display: block; height: 62%; aspect-ratio: 91 / 135; transform: translateX(calc(var(--lw) * 0.3)); place-self: center;
+  background: #6C87BC;
+  -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat;
 }
 
-.headerBox {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: 100%;
-  transition: top 0.3s;
+/* the frame: a raised panel made from the same surface as the page, peeking up from the bottom edge, with the same light / shadow edges as the letters */
+.landFrame {
+  position: fixed; left: 50%; bottom: 0; z-index: 0; pointer-events: none;
+  width: min(1100px, calc(100% - 64px)); height: 60dvh; transform: translate(-50%, calc(60dvh - clamp(84px, 12dvh, 132px)));
+  border-radius: 40px; background: #D7E3F7;
+  box-shadow: -8px -8px 18px rgba(255, 255, 255, 0.95), 9px 6px 22px rgba(90, 118, 172, 0.34), 0 -3px 8px rgba(90, 118, 172, 0.12);
+}
+@media (max-width: 700px) { .landFrame { width: calc(100% - 32px); border-radius: 28px; } }
+
+/* the stroke is embossed too: a ridge in the same surface, lit from the top-left, sitting on the (already embossed) hand */
+.landIcon[data-skin="norm"] .tile::after { display: none; }
+.landIcon .hs { display: none; }
+.landIcon[data-skin="norm"] .hs {
+  display: block; grid-area: 1 / 1; place-self: center; height: 62%; aspect-ratio: 91 / 135; transform: translateX(calc(var(--lw) * 0.3));
+  filter: drop-shadow(calc(var(--lw) * -0.005) calc(var(--lw) * -0.005) calc(var(--lw) * 0.004) rgba(255, 255, 255, 0.95)) drop-shadow(calc(var(--lw) * 0.007) calc(var(--lw) * 0.01) calc(var(--lw) * 0.008) rgba(80, 108, 165, 0.55));
+}
+.landIcon .hs b { display: block; width: 100%; height: 100%; background: #D7E3F7; -webkit-mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_hand_lines.svg") center / contain no-repeat; }
+
+/* the hand's stroke is dark (still raised, with its light and shadow edges) so the lines read clearly */
+.landIcon .hs b { background: linear-gradient(180deg, #5F7CB5 0%, #4A68A6 100%); }
+
+/* the wordmark gets the same dark stroke as the hand: a raised ridge round each letter (a ring made by the #landOutline filter on the whole word, then cut per letter so the ring runs on unbroken between letters) */
+.ltr .ring { position: absolute; inset: 0; display: none; pointer-events: none; }
+.ltr[data-skin="norm"] .ring { display: block; filter: drop-shadow(calc(var(--lw) * -0.006) calc(var(--lw) * -0.006) calc(var(--lw) * 0.005) rgba(255, 255, 255, 0.9)) drop-shadow(calc(var(--lw) * 0.008) calc(var(--lw) * 0.011) calc(var(--lw) * 0.009) rgba(80, 108, 165, 0.5)); }
+.ltr .rc { position: absolute; inset: 0; filter: url(#landOutline); clip-path: inset(-60% calc(100% - var(--r)) -60% var(--l)); }
+.ltr:first-child .rc { clip-path: inset(-60% calc(100% - var(--r)) -60% -4%); }
+.ltr:last-child .rc { clip-path: inset(-60% -4% -60% var(--l)); }
+.ltr .rc > span { display: block; width: 100%; height: 100%; background: #000; -webkit-mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat; mask: url("../assets/homeAssets/happlycations_wordmark.svg") center / contain no-repeat; }
+@media (max-width: 700px) { .ltr .rc { filter: url(#landOutlineThin); } }
+
+/* the wordmark stroke is off for now (kept above; delete this line to bring it back). The hand keeps its stroke. */
+.ltr .ring { display: none !important; }
+
+/* the frame has no fill of its own: it is the page background, outlined only by its light / shadow edges */
+.landFrame { background: none; }
+
+/* one continuous background colour (no gradient, so no line where a gradient ends when the page scrolls) */
+html, body, .happlyPage { background: #D7E3F7; }
+
+/* (the wordmark no longer needs a raised layer: the scroll shrink is off) */
+
+/* smaller app icons and names (about three quarters of before) */
+.landApp img, .landTile { width: clamp(48px, 4.8vw, 96px); }
+.landName { font-size: clamp(14px, 1.4vw, 28px); }
+.landApp { gap: clamp(6px, 0.8vw, 14px); }
+.landApps { gap: clamp(24px, 3.6vw, 72px); }
+
+/* the frame has no emboss now (no light / shadow edges); with no fill either it is invisible until given a flat fill or outline */
+.landFrame { box-shadow: none; }
+
+/* the frame: a flat, soft white a little lighter than the blue background (no emboss) */
+.landFrame { background: #EAF0FB; box-shadow: none; }
+
+/* the tagline, embossed like the wordmark: the page colour itself, raised by a soft light edge top-left and a soft shadow bottom-right */
+.landMid > .landTag {
+  margin: 4px 0 0; font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-weight: 700; font-size: clamp(17px, 1.6vw, 28px); letter-spacing: 0.005em; text-align: center;
+  color: #D7E3F7; text-shadow: -1px -1px 1px rgba(255, 255, 255, 0.95), 1px 1.5px 1.5px rgba(77, 105, 161, 0.5);
 }
 
+/* no download button and no ring / glow when an app icon is hovered (markup kept; delete these rules to bring them back) */
+.landDl, .landRing { display: none !important; }
+.landApps li:hover .landApp img, .landApps li:focus-within .landApp img { filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.14)); }
 
-.logoBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: fit-content;
-  padding: 14px 24px 12px 24px;
-  border-radius: 18px;
-  background-color: white;
-  
-  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
-  max-width: 120px;
-  gap: 12px;
-  
-  height: 24px;
+/* the peeking frame is removed for now (markup kept; delete this line to bring it back) */
+.landFrame { display: none !important; }
 
-  border: 1px solid #03131f;
+/* a card round each app: flat soft white, a little lighter than the blue background */
+.landApps li { background: #EAF0FB; border-radius: 26px; padding: clamp(14px, 1.3vw, 22px) clamp(18px, 1.8vw, 30px) clamp(12px, 1.1vw, 18px); }
+@media (max-width: 700px) { .landApps li { border-radius: 20px; padding: 12px 14px 10px; } .landApps { gap: 12px; } }
+
+/* the cards are off (no fill) but their spacing stays; set a background on .landApps li to bring them back */
+.landApps li { background: none; }
+
+/* smoother letter rolls: each letter is its own layer, so its blurred shadows are drawn once and only moved / faded while it rolls */
+.ltr { will-change: transform, opacity; backface-visibility: hidden; }
+
+/* sheep: outline the whole word first, then cut the letter out of it, so the cut never draws an outline through a serif (the y) */
+.ltr[data-skin="sheep"] .skin > span { clip-path: none; }
+.ltr[data-skin="sheep"] .skin { clip-path: inset(-60% calc(100% - var(--r)) -60% var(--l)); }
+.ltr[data-skin="sheep"]:first-child .skin { clip-path: inset(-60% calc(100% - var(--r)) -60% -4%); }
+.ltr[data-skin="sheep"]:last-child .skin { clip-path: inset(-60% -4% -60% var(--l)); }
+
+/* performance: each letter layer is now only as wide as its own letter (it used to be the whole word x 13), so the browser has far less to paint
+   and filter on every roll. The word artwork inside is still full size and shifted back so it lines up; the cut is the layer's own edge. */
+.landLtrs { container-type: inline-size; }
+.ltr, .ltr:first-child, .ltr:last-child { inset: 0 auto 0 var(--l); width: calc(var(--r) - var(--l)); transform-origin: 50% 50%; }
+.ltr .skin > span { position: absolute; top: 0; height: 100%; width: 100cqw; left: calc(var(--lp) * -100cqw); }
+.ltr[data-skin="sheep"] .skin, .ltr[data-skin="sheep"]:first-child .skin, .ltr[data-skin="sheep"]:last-child .skin { clip-path: inset(-60% 0 -60% 0); }
+
+/* grain overlay off (kept above for later) */
+body::after { display: none !important; }
+
+/* grain overlay back on */
+body::after { display: block !important; }
+
+/* sheep: the outline is a pre-drawn ring (no live SVG filter, which was the heavy part). Drawn 3.35% larger to leave room for the stroke at the edges; each letter overlaps its neighbour by 1px so there is no seam */
+.ltr[data-skin="sheep"] .skin, .ltr[data-skin="sheep"]:first-child .skin, .ltr[data-skin="sheep"]:last-child .skin { filter: none; }
+.ltr[data-skin="sheep"] .skin > span { -webkit-mask: none; mask: none; background: url("../assets/homeAssets/happlycations_wordmark_outline.svg") center / 100% 100% no-repeat; width: 103.35cqw; height: 103.35%; top: -1.675%; left: calc(var(--lp) * -100cqw - 1.675cqw); }
+.ltr[data-skin="sheep"] .skin { clip-path: inset(-60% -1px -60% -1px); }
+.ltr[data-skin="sheep"]:first-child .skin { clip-path: inset(-60% -1px -60% -10%); }
+.ltr[data-skin="sheep"]:last-child .skin { clip-path: inset(-60% -10% -60% -1px); }
+
+/* centred: the logo + wordmark group sits exactly in the middle of the page; the apps hang lower down the screen (shifted, so the wordmark doesn't move) */
+.landWord { left: 0; }
+.landApps { position: relative; top: 14dvh; }
+@media (max-width: 700px) { .landApps { top: 9dvh; } }
+
+/* app names under the icons: hidden (kept in the page for screen readers and easy to bring back) */
+.landName { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ...and they fade in under the icon on hover / keyboard focus (positioned, so nothing shifts) */
+.landApp { position: relative; }
+.landName { width: auto; height: auto; overflow: visible; clip-path: none; left: 50%; top: calc(100% + 4px); transform: translate(-50%, -4px); opacity: 0; pointer-events: none; transition: opacity .25s ease, transform .25s ease; }
+.landApps li:hover .landName, .landApp:focus-visible .landName { opacity: 1; transform: translate(-50%, 0); }
+@media (hover: none) { .landName { opacity: 0; } }
+.landName { top: calc(100% + 14px); }
+
+/* tab menu back under the wordmark */
+.landMid > .landNav { display: flex !important; }
+
+/* tab menu: a dock pinned to the bottom of the screen, above everything. No buttons, just the labels on a blurred blue glass frame. */
+.landMid > .landNav {
+  position: fixed; left: 50%; bottom: max(22px, calc(env(safe-area-inset-bottom) + 12px)); transform: translateX(-50%); z-index: 200; margin: 0;
+  padding: 13px 26px; gap: clamp(20px, 2.4vw, 36px); border-radius: 20px; white-space: nowrap;
+  background: rgba(104, 138, 214, 0.26);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: 0 12px 32px rgba(47, 74, 163, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+.landNav > a::before, .landNav > .landSoon::before, .landNav > a::after, .landNav > .landSoon::after { display: none !important; }
+.landNav > a, .landNav > .landSoon { padding-left: 0; }
+.landNav > a { color: #14234F; text-decoration: none; }
+.landNav > a.on { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 6px; }
+.landNav > .landSoon { color: #2B3F73; transition: color .2s ease; }
+.landNav > .landSoon:hover { color: #14234F; }
+
+/* logo + wordmark: as wide as the screen minus the side padding (8vw, at least 32px) (the visible group, hand art to the end of the wordmark, is about 8.573 x --lw wide) */
+.landWord { --lw: calc((100vw - 2 * max(32px, 8vw)) / 8.573); }
+
+/* the word group spans the whole window width so its 48px side padding is real, whatever the page padding is */
+.landWord { width: 100vw; margin-inline: calc(50% - 50vw); left: 0; transform: none; }
+
+/* the apps live in the dock: icons first, a thin divider, then the tab labels */
+.landNav > .landApps { position: static; top: auto; margin: 0; gap: clamp(10px, 1.2vw, 18px); align-items: center; }
+.landNav .landApps li { padding: 0; border-radius: 0; }
+.landNav .landApp { position: relative; }
+.landNav .landTile, .landNav .landApp img { width: 52px; height: 52px; }
+.landNav .landName { top: auto; bottom: calc(100% + 14px); transform: translate(-50%, 4px); }
+.landNav .landApps li:hover .landName, .landNav .landApp:focus-visible .landName { transform: translate(-50%, 0); }
+.landDockSep { width: 1px; align-self: stretch; margin: 4px 2px; background: rgba(255, 255, 255, 0.5); box-shadow: 1px 0 0 rgba(47, 74, 163, 0.14); }
+.landMid > .landNav { padding: 12px 22px; gap: clamp(16px, 2vw, 28px); }
+
+/* a bigger dock */
+.landNav .landTile, .landNav .landApp img { width: 68px; height: 68px; }
+.landMid > .landNav { padding: 16px 28px; gap: clamp(20px, 2.2vw, 34px); border-radius: 26px; font-size: 19px; }
+.landNav .landName { font-size: 17px; }
+.landDockSep { margin: 6px 2px; }
+@media (max-width: 700px) {
+  .landNav .landTile, .landNav .landApp img { width: 46px; height: 46px; }
+  .landMid > .landNav { padding: 12px 16px; gap: 14px; border-radius: 22px; font-size: 15px; }
+  .landNav > .landApps { gap: 10px; }
 }
 
-.logoAnim {
-  height: 16px;
-  margin: 0;
+/* the hand's box has empty space on its left (the art sits at its right edge); pull that in so the *visible* group is what gets centred */
+.landIcon { margin-left: calc(var(--lw) * -0.597); }
+
+/* dock: rounder and lighter */
+.landMid > .landNav { border-radius: 42px; background: rgba(236, 243, 255, 0.55); border-color: rgba(255, 255, 255, 0.7); box-shadow: 0 12px 32px rgba(47, 74, 163, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8); }
+@media (max-width: 700px) { .landMid > .landNav { border-radius: 32px; } }
+
+/* logo + wordmark sit lower, closer to the dock */
+.landWord { top: 10dvh; }
+
+/* logo + wordmark: always dead centre of the screen, both ways (a full-screen layer that centres the group; clicks pass through it) */
+.landWord { position: fixed; inset: 0; top: 0; left: 0; width: auto; height: auto; margin: 0; transform: none; z-index: 1; pointer-events: none; display: flex; align-items: center; justify-content: center; }
+
+/* dock hover: the icon grows from its centre while the dock frame shrinks a little. The frame is its own layer so it can scale on its own. */
+.landMid > .landNav { isolation: isolate; background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.landMid > .landNav::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: rgba(236, 243, 255, 0.55); border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 12px 32px rgba(47, 74, 163, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  transform-origin: 50% 50%; transition: transform .4s cubic-bezier(.2, .8, .2, 1);
+}
+.landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transform: scale(.94, .88); }
+.landNav .landApp:hover, .landNav .landApp:focus-visible { transform: none; }
+.landNav .landTile { transform-origin: 50% 50%; transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
+.landNav .landApp:hover .landTile, .landNav .landApp:focus-visible .landTile { transform: scale(1.3); }
+.landNav .landApps li:hover .landName, .landNav .landApp:focus-visible .landName { transform: translate(-50%, -10px); }
+@media (prefers-reduced-motion: reduce) { .landMid > .landNav::before, .landNav .landTile { transition: none; } }
+
+/* the frame only shrinks after the icon has finished growing, and only half as much */
+.landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transform: scale(.97, .94); transition-delay: .4s; }
+.landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transition-delay: .1s; }
+
+/* while one app is hovered, everything else in the dock eases down a little (same timing as the frame) */
+.landNav .landApps li:not(:hover) .landTile, .landNav > a, .landNav > .landSoon, .landDockSep { transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
+.landNav:has(.landApp:hover) .landApps li:not(:hover) .landTile { transform: scale(.9); transition-delay: .1s; }
+.landNav:has(.landApp:hover) > a, .landNav:has(.landApp:hover) > .landSoon { transform: scale(.92); transition-delay: .1s; }
+.landNav:has(.landApp:hover) .landDockSep { transform: scaleY(.9); transition-delay: .1s; }
+@media (prefers-reduced-motion: reduce) { .landNav .landApps li:not(:hover) .landTile, .landNav > a, .landNav > .landSoon, .landDockSep { transition: none; } }
+
+/* dock icons: filling the dock's height, with corners nested inside the dock's own curve (dock radius 42 - 10 padding = 32) */
+.landMid > .landNav { padding: 10px 30px 10px 10px; border-radius: 42px; }
+.landNav .landTile, .landNav .landApp img { width: 80px; height: 80px; border-radius: 32px; }
+@media (max-width: 700px) {
+  .landMid > .landNav { padding: 8px 18px 8px 8px; border-radius: 32px; }
+  .landNav .landTile, .landNav .landApp img { width: 52px; height: 52px; border-radius: 24px; }
 }
 
-.navLinksContainer {
-  z-index: 1;
-  display: flex;
-  flex-wrap: wrap;
-  
-  justify-content: center;
-  align-items: center;
-  gap: 36px;
-  background-color: white;
+/* dock motion: every scale uses a springy bezier (a touch of overshoot, then settling) instead of a plain ease, so it reads as organic */
+.landNav { --spring: cubic-bezier(.34, 1.45, .64, 1); --glide: cubic-bezier(.22, 1, .36, 1); }
+.landNav .landTile, .landNav .landApps li:not(:hover) .landTile { transition: transform .55s var(--spring); }
+.landNav > a, .landNav > .landSoon, .landDockSep { transition: transform .55s var(--spring), color .2s ease; }
+.landMid > .landNav::before { transition: transform .6s var(--glide); }
+.landNav .landName { transition: opacity .3s cubic-bezier(.22, 1, .36, 1), transform .5s var(--spring); }
+@media (prefers-reduced-motion: reduce) { .landMid > .landNav::before, .landNav .landTile, .landNav .landApps li:not(:hover) .landTile, .landNav > a, .landNav > .landSoon, .landDockSep, .landNav .landName { transition: none; } }
 
-  border-radius: 18px;
-  box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
+/* logo + wordmark at 0.8x; the dock sits just below them (they stay dead centre) */
+.happlyLanding { --lwv: calc(0.8 * (100vw - 2 * max(32px, 8vw)) / 8.573); }
+.landWord { --lw: var(--lwv); }
+.landMid > .landNav { bottom: auto; top: min(calc(50dvh + var(--lwv) * 0.66 + 56px), calc(100dvh - 122px)); }
 
-  padding: 14px 36px 12px 36px;
-  border-radius: 18px;
+/* the dock frame no longer scales on hover (the icons still do) */
+.landMid > .landNav:has(.landApp:hover)::before, .landMid > .landNav:has(.landApp:focus-visible)::before { transform: none; }
 
-  height: 24px;
-
-  border: 1px solid #03131f;
-
+/* gentler hover: icons rest a little smaller (more padding in the dock) and only grow a touch, so even with the spring overshoot they stay inside the frame */
+.landMid > .landNav { padding: 14px 32px 14px 14px; }
+.landNav .landTile, .landNav .landApp img { width: 72px; height: 72px; border-radius: 28px; }
+.landNav .landApp:hover .landTile, .landNav .landApp:focus-visible .landTile { transform: scale(1.12); }
+.landNav:has(.landApp:hover) .landApps li:not(:hover) .landTile { transform: scale(.95); }
+.landNav:has(.landApp:hover) > a, .landNav:has(.landApp:hover) > .landSoon { transform: scale(.96); }
+.landNav:has(.landApp:hover) .landDockSep { transform: scaleY(.94); }
+.landNav .landApps li:hover .landName, .landNav .landApp:focus-visible .landName { transform: translate(-50%, -4px); }
+@media (max-width: 700px) {
+  .landMid > .landNav { padding: 11px 20px 11px 11px; }
+  .landNav .landTile, .landNav .landApp img { width: 46px; height: 46px; border-radius: 21px; }
+  .landNav .landApp:hover .landTile, .landNav .landApp:focus-visible .landTile { transform: scale(1.1); }
 }
 
-.currentNavLink {
-  font-family: "Host Grotesk";
-  color: #03131f;
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0;
-  text-decoration: underline;
+/* You + Us / About: their own tab bar, pinned to the top of the screen above everything */
+.landTabs {
+  position: fixed; top: max(22px, calc(env(safe-area-inset-top) + 12px)); left: 50%; transform: translateX(-50%); z-index: 200;
+  display: flex; align-items: center; gap: clamp(8px, 1.2vw, 16px); padding: 8px; border-radius: 28px; white-space: nowrap;
+  font-family: "Satoshi", "Host Grotesk", system-ui, sans-serif; font-size: 17px;
+  background: rgba(236, 243, 255, 0.55); border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 12px 32px rgba(47, 74, 163, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
 }
-
-
-
-
-
-  .heroBox{
-    margin-top: 140px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: flex-start;
-    justify-content: flex-start;
-    gap: 12px;
-
-  }
-
-  .productDetails{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-  }
-
-  
-
-  .imageBox{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-self: stretch;
-    max-width: 1600px;
-  }
-
-  .imageBox img {
-    width: 100%;
-    
-  }
-
-
-  #fullGif img {
-    max-height: 780px;
-  }
-
-
-
-  .buttonRack{
-    margin-top: 72px;
-    margin-bottom: 72px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
-
-
-  .button{
-    background-color: white;
-    border: 1px solid #03131f;
-    padding: 12px 48px;
-    border-radius: 24px;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
-    
-
-  }
-
-  .textSection{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .imageTextSection{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    gap: 72px;
-    justify-content: center;
-    align-items: center;
-
-  }
-
-
-
-
-
-  .rightText{
-    align-self: flex-end;
-    text-align: right;
-    width: 60%;
-  }
-
-  .leftText{
-    align-self: flex-start;
-    width: 60%;
-  }
-
-  #leftText{
-    width: 80%;
-  }
-
-  .centerText{
-    text-align: center;
-    width: 100%;
-  }
-
- .linesRule{
-  width: 100%;
-  height: 1px;
-  background-color: #002644;
-
- }
-
-  
-
-  h1{
-    font-family: "Host Grotesk";
-    font-size: 120px;
-    font-weight: 300;
-    color: #03131f;
-    margin: 0;
-    letter-spacing: -3.2px;
-    line-height: 150%;
-    margin-bottom: 72px;
-  }
-
-  h2{
-    font-family: "Host Grotesk";
-    font-weight: 300;
-    font-size: 48px;
-    color: #03131f;
-    margin: 0;
-    letter-spacing: -1.6px;
-  }
-
-  h3{
-    font-family: "Host Grotesk";
-    font-size: 26px;
-    font-weight: 300;
-    margin: 0;
-
-    color: #2D3A44;
-  
-    
-  }
-
-  h4{ 
-    font-family: "Host Grotesk";
-    font-size: 22px;
-    font-weight: 400;
-    margin: 0;
-
-    color: #002644;
-  
-
-
-  }
-
-
-  h5{
-    font-family: "Host Grotesk";
-    font-size: 18px;
-    font-weight: 300;
-    margin: 0;
-
-    color: #2D3A44;
-  
-    
-  }
-  
-  a {
-    z-index: 3;
-    color: #03131f;
-    font-family: "Host Grotesk";
-    font-weight: 400;
-  
-    font-size: 18px;
-    margin: 0px;
-    letter-spacing: -0.4px;
-    line-height: 110%;
-    text-decoration: none;
-  }
-  
-  .navLinksContainer a{
-    font-size: 14px;
-    font-weight: 300;
-  }
-
-  .buttonText{
-    font-family: "Host Grotesk";
-    font-weight: 400;
-    color: #03131f;
-    text-align: center;
-
-  }
-
-  
-  
-  a:visited {
-    text-decoration: none;
-    color: #03131f;
-  }
-  
-  .logoBox:hover,
-  a:hover {
-    cursor: url("cursor_linkHover.png"), pointer;
-  }
-  
-
-  .footerBox {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20vh;
-    width: 100%;
-    align-self: stretch;
-    background-color: white;
-    border-radius: 18px;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
- 
-    border-radius: 18px;
-
-    border: 1px solid #03131f;
-    margin-top: 72px;
-   
-  }
-
-  .footerBox img{
-   
-    margin: 24px;
-
-  }
-
-  .footerLinkBox{
-    display: flex;
-    gap: 24px;
-    margin: 24px;
-    z-index: 1;
-
-  }
-  
-
-
-
-
- 
-
-@media (max-width: 900px) {
-  html {
-    display: flex;
-
-    cursor: url("cursor_home.png"), pointer;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 8px;
-    margin-top: 24px;
-    
-    
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin: 0px;
-    padding: 0px;
-    
-  }
-
-
-
-  .logoBox {
-    padding: 8px 12px;
-    border-radius: 18px;
-    gap: 8px;
-    z-index: 3;
-    position: fixed;
-    
-  }
-
-  .logoAnim {
-    max-height: 16px;
-  }
-
-  .headerBox{
-    min-height: fit-content;
-    width: 100%;
-  
-    min-height: 42px;
-  }
-
-  .navLinksContainer {
-    display: none;
-  }
-
-  .content {
-    border-radius: 18px;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: fit-content;
-
-    
-    gap: 24px;
-    flex: 1 0 0;
-    
-  }
-
-
-  .imageTextSection{
-    flex-direction: column-reverse;
-  }
-
-
-
-  .heroBox{
-    gap: 4px;
-  }
-
-  .textSection{
-    padding: 24px;
-  }
-
-  
-
-  
-
-  h1{
-    font-size: 80px;
-    line-height: 100%;
-    margin-bottom: 0px;
-  }
-
-  h2{
-    font-size: 18px;
-    letter-spacing: -0.8px;
-  }
-
-  h3{
-    font-size: 14px;
-  }
-
-  h4{
-    font-size: 12px;
-  }
-  h5{
-    font-size: 14px;
-  }
-
-  a{
-    font-size: 14px;
-  }
-  .productDetails{
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    
-  }
-
-  
-  .imageBox img {
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
-  }
-
- 
-  .mobileMenuButton {
-    display: flex;
-    z-index: 3;
-    flex-direction: column;
-    transition: top 0.3s;
-    width: 24px;
-    height: 24px;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 18px;
-    border: 1px solid #03131f;
-    background-color: white;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
-    position: fixed;
-    right: 18px;
-    
-  }
-
-  .mobileMenuScreen {
-    z-index: 2;
-    display: none;
-    flex-direction: column;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    bottom: 4vh;
-    transition: top 0.3s;
- 
-    padding: 8px;
-    border-radius: 100%;
-    background: white;
-    box-shadow: 0px 7.2px 8px 0px rgba(7, 66, 47, 0.1);
-    height: 100vh;
-    
-  }
-
-  .mobileLinks {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    
-    font-family: "Satoshi-Medium";
-  }
-
-  .mobileLinks a {
-   
-    font-size: 14px;
-    text-align: center;
-    text-decoration: none;
-  }
-
-  .menuButtonAnim {
-   
-    height: 22px;
-  }
-
-  
+.landTabs .landSoon { padding: 9px 20px; border-radius: 20px; color: #2B3F73; cursor: pointer; transition: background .25s ease, color .25s ease; }
+.landTabs .landSoon:hover { background: rgba(255, 255, 255, 0.55); color: #14234F; }
+.landTabs .landSoon.pressed { background: rgba(255, 255, 255, 0.8); }
+.landTabs .landSoon::before, .landTabs .landSoon::after { display: none !important; }
+/* the dock is just the app icons now */
+.landDockSep { display: none; }
+.landMid > .landNav { padding: 14px; }
+@media (max-width: 700px) { .landTabs { font-size: 15px; border-radius: 22px; padding: 6px; } .landTabs .landSoon { padding: 8px 16px; } .landMid > .landNav { padding: 11px; } }
+
+/* the landing's entrance animation must not keep running after it ends: a lingering transform animation turns the page into the containing block for the fixed word / dock / tabs, which offset them from the real screen edges */
+.happlyPage[data-view="landing"] .happlyLanding { animation-fill-mode: backwards; }
+
+/* grain: stronger so it reads as texture (same noise, more visible) */
+body::after { opacity: 1; background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%22220%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3CfeColorMatrix values=%220 0 0 0 0.36  0 0 0 0 0.45  0 0 0 0 0.64  0 0 0 0.3 0%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E"); }
+
+/* dock a bit lower; the app name floats further above its icon and a little larger */
+.landMid > .landNav { top: min(calc(50dvh + var(--lwv) * 0.66 + 80px), calc(100dvh - 122px)); }
+.landNav .landName { bottom: calc(100% + 30px); font-size: 21px; }
+@media (max-width: 700px) { .landNav .landName { bottom: calc(100% + 22px); font-size: 18px; } }
+
+/* more room between the app icons */
+.landNav > .landApps { gap: clamp(22px, 2.4vw, 36px); }
+@media (max-width: 700px) { .landNav > .landApps { gap: 16px; } }
+
+/* dock pinned 72px up from the bottom edge of the screen */
+.landMid > .landNav { top: auto; bottom: 72px; }
+
+/* small screens: the big wordmark becomes a centred column: the hand on top, then "happly", then "cations".
+   Each letter is its own layer (cut at the artwork's own letter edges), so "cations" is just those layers moved left and down. */
+@media (max-width: 700px) {
+  .happlyLanding:not(#_) { --lwv: calc((100vw - 40px) / 4.35); }
+  .landWord:not(#_) { flex-direction: column; gap: 0; }
+  .landWord .landIcon:not(#_) { top: 0; left: 0; width: calc(var(--lw) * 1.5); margin: 0 0 calc(var(--lw) * -0.3); }
+  .landWord .landIcon[data-skin="norm"] .hs:not(#_), .landWord .landIcon .tile i:not(#_) { height: 80%; transform: none; }
+  /* the box keeps the full wordmark's width (the letters are cut from it) but only takes up the width of "happly" in the layout, so it centres on that */
+  .landWord .landWordBox:not(#_) { aspect-ratio: auto; height: calc(var(--lw) * 2.5); margin-right: calc(var(--lw) * -3.95); margin-left: calc(var(--lw) * 0.1); }
+  /* c a t i o n s: one line down and centred under "happly" (each is moved by the same amount) */
+  .landWordBox .ltr:nth-child(n + 7):not(#_) { translate: calc(var(--lw) * -3.945) calc(var(--lw) * 1.25); }
 }

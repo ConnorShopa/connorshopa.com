@@ -1,0 +1,101 @@
+/* home: logos with a coloured tagline under each (desktop + tablet; phones keep the deck) */
+@media (min-width:701px){
+nav .inline.big:not(#_):not(#_){width:calc(min(1700px,96vw) / var(--lz,1));margin:0;position:relative;left:50%;transform:translateX(-50%);box-sizing:border-box;flex-wrap:wrap;justify-content:center;align-items:stretch;column-gap:22px;row-gap:8px;overflow:visible;padding:0}
+.inline.big li:not(.row-break):not(#_):not(#_){flex:none;display:flex;padding:0;margin:0}
+.inline.big li:not(.row-break):not(#_):not(#_){position:relative}
+.inline.big li:not(.row-break):not(.no-slash):not(#_):not(#_)::after{content:"" !important;position:absolute;left:100%;top:50%;margin:-3px 0 0 10px;width:2px;height:6px;border-radius:2px;background:rgba(51,51,51,.8);display:block}
+.inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){box-sizing:border-box;flex:1;align-self:stretch;border:1px solid rgba(51,51,51,.12);border-radius:22px;padding:24px 44px;justify-content:center;transition:filter .3s ease,border-color .25s ease}
+.inline.big a.hl:not(#_):not(#_){display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:10px;padding:8px 10px;text-align:left}
+}
+.inline.big a.hl:not(#_) .hlLogo{display:flex;align-items:center;gap:10px;height:auto;zoom:var(--z,1)}
+#projectList li > a:not(#_):not(#_) .hlLogo{filter:drop-shadow(0 5px 12px rgb(var(--c,45 30 60) / .26))} /* each logo's shadow is tinted with its own colour */
+#projectList:not(#_) .logo, #projectList:not(#_) .wordmark, #projectList li > a:not(#_):not(#_) .hlLogo img{filter:none} /* the old shared purple shadow gives way to it */
+#projectList:not(#_){text-shadow:none}
+.inline.big a.hl:not(#_) .hlSub:not(#_){display:block;letter-spacing:-.016em;font:500 16px/1.25 "Host Grotesk","Figtree",system-ui,sans-serif;color:rgb(var(--c) / .8);white-space:nowrap;text-align:left;max-width:none;transition:color .2s}
+.inline.big a.hl img,.inline.big a.hl:not(#_) .hlMask{display:block;flex:none}
+.hlIcon{height:52px;width:52px;border-radius:12px}
+.hlMark{height:46px;width:auto;transition:filter .2s}
+.hlSticker{height:64px;width:auto}
+.hlWord{height:34px;width:auto}
+.hlWord.rubin{height:40px}
+.hlPlunk{height:40px;width:auto}
+.hlChip{height:44px;width:auto}
+.hlAltq{height:36px;width:auto}
+.hlHappy{height:64px;width:auto}
+.hlPollin{height:40px;width:auto}
+.hlMask{width:48px;height:48px;background:var(--bg);-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.hlT{font-size:34px;line-height:1;font-weight:700;letter-spacing:-.01em}
+.tSheep{font-family:"Crimson Pro",serif;font-weight:600;color:#2F4AA3}
+.tDrawl{font-family:"Pally","Nunito","Host Grotesk",sans-serif;color:#0C1E44}
+.tSeeds{font-family:"Sailec","Host Grotesk",sans-serif;color:#317492}
+.tSpot{font-family:"Circular Std","Figtree",sans-serif;color:#58B460}
+.inline.big a.hl:hover .hlSub{color:inherit}
+/* Sheep, Habbot and Drawl: app icons all 40px on screen, whatever each logo's own scale is */
+.inline.big a.hl[aria-label="Sheep"] .hlIcon,.inline.big a.hl[aria-label="Habbot"] .hlIcon,.inline.big a.hl[aria-label="Drawl"] .hlIcon{width:calc(40px / var(--z,1));height:calc(40px / var(--z,1));border-radius:calc(9px / var(--z,1))}
+@media (max-width:700px){.hlSub{display:none}}
+
+/* while a project is open the list is just logos and wordmarks */
+html.view-open .inline.big a.hl:not(#_):not(#_) .hlSub:not(#_):not(#_){display:none}
+html.view-open #projectList.compact:not(#_){flex-wrap:nowrap}
+@media (min-width:701px){html.view-open #projectList,html.view-open nav .inline.big{opacity:0 !important;visibility:hidden;pointer-events:none !important}}
+
+/* the Sketchbook tab: the gallery takes the list's place, and the page grows to hold it */
+.panelText.sketch{position:relative;inset:auto;display:block;width:100%;text-align:left;padding-bottom:64px}
+nav.stack:has(.panelText.sketch:not([hidden])) > ul{display:none}
+/* the animations hang in the same frame as the sketches */
+.pgGallery.justified .lottieBox{box-sizing:border-box;padding:clamp(8px,1.6vw,18px);background:#FFFFFF;border:4px solid #2A2522;border-radius:2px;box-shadow:0 10px 24px -10px rgba(42,37,34,.45),0 2px 5px rgba(42,37,34,.18);margin:0;display:block;flex:none;overflow:hidden}
+.pgGallery.justified .lottieBox svg{width:100%;height:100%;display:block}
+.jfig .lottieBox{width:100%}
+@media (max-width:700px){.pgGallery.justified .lottieBox{border-width:3px}}
+/* the page is normally a fixed screen; on the Sketchbook tab it scrolls */
+html:has(.panelText.sketch:not([hidden])), html:has(.panelText.sketch:not([hidden])) body{height:auto !important;overflow-y:auto !important;overflow-x:hidden !important;overscroll-behavior:auto !important}
+.panelText.sketch{margin-top:44px}
+
+/* hovering a project: the others go grey */
+@media (min-width:701px){
+.inline.big li:not(.row-break) > a.hl:not(#_):not(#_){transition:filter .3s ease,border-color .25s ease}
+.inline.big:has(a.hl:hover) li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){border-color:transparent}
+#projectList:has(a.hl:hover) li:not(.row-break) > a.hl:not(:hover):not(#_):not(#_){filter:grayscale(1)}
+}
+/* no subtitles, no card stroke on the home list */
+.inline.big a.hl:not(#_):not(#_) .hlSub:not(#_):not(#_){display:none}
+.inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){border-color:transparent}
+.panelText.sketch[hidden]:not(#_):not(#_){display:none !important}
+/* tighter horizontal spacing between projects */
+@media (min-width:701px){
+nav .inline.big:not(#_):not(#_){column-gap:16px}
+.inline.big li:not(.row-break):not(#_):not(#_)>a:not(#_):not(#_){padding-left:30px;padding-right:30px}
+.inline.big li:not(.row-break):not(.no-slash):not(#_):not(#_)::after{margin-left:7px !important}
+}
+.hlSketch{font-size:30px;letter-spacing:-.01em;white-space:nowrap;line-height:1}
+.hlSketch .rn{display:inline-block}
+@media (max-width:700px){.hlSketch{font-size:30px}}
+.inline.big a.hl .tSeeds:not(#_){position:relative;top:5px}
+/* ---- phones: a plain two-column grid of tiles (no deck / carousel), the same logos as desktop at one consistent size ---- */
+@media (max-width:700px){
+  .hero > nav:not(#_):not(#_){overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+  .hero > nav > #projectList:not(#_):not(#_){position:static !important;display:flex !important;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;width:auto;max-width:none;left:auto;transform:none;box-sizing:border-box;padding:14px 14px 48px;margin:0;overflow:visible;perspective:none;touch-action:pan-y;user-select:auto;-webkit-user-select:auto;font-size:inherit;zoom:1 !important}
+  #projectList li:not(.row-break):not(#_):not(#_){position:static !important;display:flex !important;align-items:stretch;justify-content:center;flex:1 1 auto;width:auto;max-width:100%;height:auto;min-height:58px;margin:0;padding:0;background:var(--tile,#F4F4F4);border-radius:22px;box-shadow:none;translate:none !important;scale:none !important;rotate:none !important;opacity:1 !important;transform:none !important;will-change:auto;transition:none}
+  #projectList li:not(.row-break):not(#_):not(#_)::after{display:none !important}
+  #projectList li:not(.row-break):not(#_):not(#_)>a{flex:1;display:flex;align-items:center;justify-content:center;width:auto;max-width:none;height:auto;box-sizing:border-box;padding:12px 14px;margin:0;zoom:1;border:0;border-radius:inherit;filter:none !important;opacity:1 !important}
+  #projectList li > a:not(#_):not(#_) .hlLogo{zoom:calc(var(--z,1) * .8)}
+  .inline.big a.hl:not(#_):not(#_) .hlSub:not(#_):not(#_){display:none}
+  /* on phones Sketchbook moves up beside Happlycations, so the last rows are pairs instead of two lone tiles */
+  #projectList li:not(.row-break):not(#_):not(#_):has(> a[data-view="spotify"]), #projectList li:not(.row-break):not(#_):not(#_):has(> a.hlOff){order:1}
+  #projectList:not(#_):not(#_) li:not(#_):has(> a[data-view="touchtunes"]) .wordmark:not(#_){filter:none !important}
+  .hlSketch{font-size:26px}
+  .peek,.deckMode,.deckView{display:none !important}
+}
+/* ---- phones: a project opens as a sheet from the bottom ---- */
+@media (max-width:700px){
+  .view:not(#_):not(#_){border-radius:26px 26px 0 0;box-shadow:0 -12px 40px rgba(20,20,20,.18)}
+  .view:not(#_):not(#_)::before{content:"";position:absolute;top:8px;left:50%;width:40px;height:5px;margin-left:-20px;border-radius:3px;background:rgba(0,0,0,.18);z-index:3;pointer-events:none}
+  .view.dark:not(#_)::before{background:rgba(255,255,255,.35)}
+  .sheetScrim{position:fixed;inset:0;z-index:10;background:rgba(20,20,20,.38);-webkit-tap-highlight-color:transparent}
+  /* the page stays visible behind the sheet (it was hidden while the card took the whole screen) */
+  html.view-open .hero > nav:not(#_):not(#_){visibility:visible}
+  html.view-open #projectList:not(#_):not(#_){opacity:1 !important;pointer-events:none !important}
+  html.view-open .hero > header:not(#_):not(#_){opacity:1;pointer-events:none}
+}
+/* Overhand on phones: "Trade" clear of the top bubble */
+@media (max-width:700px){ .view.scrollView:not(#_) .pg.one:has(.ohPit) .ohHero:not(#_){bottom:calc(50% + var(--ohR,190px) + 10px)} }

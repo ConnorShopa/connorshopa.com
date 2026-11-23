@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nanni navigation menu</title>
+<link rel="stylesheet" href="css/nanniNav.css?v=6">
+<style>
+  body { margin: 0; min-height: 100dvh; display: grid; place-content: center; gap: 28px; padding: 24px; background: #EDF1F5; font-family: "Satoshi", system-ui, sans-serif; color: #0B1530; justify-items: center; }
+  .demo { width: min(92vw, 560px); }
+  .steps { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .steps button { font: inherit; font-size: 14px; padding: 8px 14px; border: 0; border-radius: 999px; background: rgba(11,21,48,.08); color: #0B1530; cursor: pointer; }
+  .steps button:hover { background: rgba(11,21,48,.16); }
+</style>
+</head>
+<body>
+  <div class="demo" id="nav"></div>
+  <div class="steps" id="steps">
+    <button data-n="0">Play</button>
+    <button data-n="1">1</button><button data-n="2">2</button><button data-n="3">3</button><button data-n="4">4</button><button data-n="5">5</button><button data-n="6">6</button><button data-n="7">7</button><button data-n="8">8</button><button data-n="9">9</button><button data-n="10">10</button>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="js/nanniNav.js?v=8"></script>
+  <script>
+    var nav = NanniNav.mount(document.getElementById("nav"));
+    document.getElementById("steps").addEventListener("click", function (e) {
+      var b = e.target.closest("button"); if (!b) return;
+      var n = +b.dataset.n; if (n) nav.goto(n); else nav.play();
+    });
+  </script>
+</body>
+</html>

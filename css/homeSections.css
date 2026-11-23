@@ -1,0 +1,494 @@
+/* About and Contact live under Work on the main page. The page scrolls; the tabs stay on screen and jump to them. */
+
+/* the page scrolls again (redesign.css locks it for the old one-screen layout); a project being open still locks it */
+/* only the root scrolls (an overflow value on html AND body makes two scroll containers, which Safari handles badly) */
+html:not(.view-open):not(#_) {
+  height: auto;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior: auto;
+}
+html:not(.view-open):not(#_) body:not(#_) {
+  height: auto;
+  overflow: visible !important;
+  overscroll-behavior: auto;
+}
+
+.page > .below:not(#_) { max-width: min(100%, 960px); gap: 0; }
+
+.homeSec:not(#_) {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+}
+.homeSec .pgText:not(#_) { width: 100%; max-width: none; max-height: none; overflow: visible; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.homeSec .lead { font-size: 34px; font-weight: 500; line-height: 1.2; margin: 0; max-width: 760px; }
+.homeSec .body { font-size: 26px; font-weight: 300; margin: 0; }
+.homeSec .eyebrow { font-size: 12px; letter-spacing: 0.08em; font-weight: 500; text-transform: uppercase; margin: 18px 0 0; color: var(--ink-soft); }
+.homeSec .aboutJobs { gap: 14px; align-items: center; text-align: center; width: fit-content; }
+.homeSec .aboutJobs li { flex-direction: row; justify-content: center; align-items: baseline; gap: 18px; text-align: center; }
+.homeSec .aboutJobs .company { font-size: 22px; }
+.homeSec .aboutJobs .role, .homeSec .aboutJobs .dates { font-size: 18px; }
+
+@media (max-width: 900px) {
+  .homeSec .lead { font-size: 28px; }
+  .homeSec .body { font-size: 22px; }
+}
+@media (max-width: 700px) {
+  .homeSec:not(#_) { padding: 24px 12px 32px; }
+  .homeSec .lead { font-size: 22px; }
+  .homeSec .body { font-size: 17px; }
+  .homeSec .aboutJobs .company { font-size: 17px; }
+  .homeSec .aboutJobs .role, .homeSec .aboutJobs .dates { font-size: 14px; }
+  .homeSec .aboutJobs { width: 100%; }
+  .homeSec .aboutJobs li { flex-direction: column; align-items: center; gap: 2px; width: 100%; }
+  .homeSec .aboutJobs span { display: block; text-align: center; }
+}
+
+/* the tabs stay on screen once the page has scrolled past them */
+.filters.stuck:not(#_) {
+  position: fixed;
+  top: 34px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: max-content;
+  z-index: 40;
+}
+.filtersSpacer { visibility: hidden; flex: none; }
+
+/* once the tabs are pinned (desktop: .stuck, phones: .pinned) they sit on a white pill with a soft shadow, so they read above whatever scrolls under them */
+.filters { transition: background-color .2s ease, box-shadow .2s ease; }
+.filters.stuck:not(#_), .filters.pinned:not(#_) {
+  background-color: #fff;
+  border-radius: 999px;
+  box-shadow: 0 0 0 7px #fff, 0 8px 26px rgba(47, 39, 37, 0.18), 0 2px 6px rgba(47, 39, 37, 0.1);
+}
+
+/* less empty screen between the gallery and the sections under it */
+@media (min-width: 701px) { .page > .below:not(#_) { margin-top: -127px; } }
+
+/* more air between About and Contact */
+#contact.homeSec:not(#_) { margin-top: 180px; } /* the same gap as Work to About */
+@media (max-width: 700px) { #contact.homeSec:not(#_) { margin-top: 80px; } .page > .below:not(#_) { margin-top: 32px; } }
+
+/* About sits on a soft grey card whose top edge peeks in from the bottom of the first screen. On desktop the grey is its own
+   layer (.aboutBack, kept the size of the section by js/panels.js) so the hover bubble can show above it; phones paint it on the section */
+#about.homeSec:not(#_) {
+  width: min(100%, 1100px);
+  box-sizing: border-box;
+  padding: 56px 80px 64px;
+}
+.aboutBack { position: absolute; z-index: -1; background: #F9F9F9; border-radius: 40px; pointer-events: none; display: none; }
+@media (max-width: 700px) {
+  #about.homeSec:not(#_) { width: calc(100% - 24px); margin-left: auto; margin-right: auto; background: #F9F9F9; border-radius: 28px; padding: 36px 32px 44px; }
+}
+
+/* phones: the page scrolls under the header; the name and tagline slide up and away (js/panels.js), the tabs stay pinned at the top */
+@media (max-width: 700px) {
+  .hero > nav:not(#_):not(#_) { top: 0; padding-top: var(--hdrH, 190px); box-sizing: border-box; }
+  .hero > header:not(#_):not(#_) { background: none; pointer-events: none; }
+  .hero > header .filters .pill { pointer-events: auto; }
+}
+
+/* each logo's shadow is painted once on its own layer, so scrolling doesn't re-draw 14 filtered elements */
+#projectList li > a:not(#_):not(#_) .hlLogo { will-change: transform; }
+
+/* the name in the header: bolder */
+.who .name:not(#_) { font-weight: 600; }
+
+/* the face logo sits first in the tab menu and links back to the top. Same box as the word tabs (same padding, same pill shape), with a light blue bubble on hover and a deeper one while pressed. */
+.filtersLogo { position: relative; z-index: 1; display: inline-flex; align-items: center; justify-content: center; padding: 7px 16px; border: 1px solid transparent; border-radius: 999px; background: transparent; cursor: url("cursor_linkHover.png") 6 6, pointer; transition: background-color .25s ease, transform .3s cubic-bezier(.34, 1.45, .64, 1); }
+.filtersLogo img { display: block; height: 18px; width: auto; }
+.filtersLogo:active { transform: scale(.97); }
+.filtersLogo:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+@media (max-width: 700px) { .filtersLogo { padding: 7px 14px; } .filtersLogo img { height: 17px; } }
+
+/* the tab menu now sits above the name and tagline */
+.intro > .filters:not(#_) { margin-top: 0; margin-bottom: 40px; }
+@media (max-width: 700px) { .intro > .filters:not(#_) { margin-bottom: 14px; } }
+/* on phones the header ignores pointer events so the page scrolls under it; the logo is a button like the pills */
+.hero > header .filters .filtersLogo { pointer-events: auto; }
+
+/* the subtitle under the name is the same size as the About heading ("Designing products @ TouchTunes ...") */
+.tagline:not(#_) { font-size: 34px; line-height: 1.3; }
+@media (max-width: 900px) { .tagline:not(#_) { font-size: 28px; } }
+@media (max-width: 700px) { .tagline:not(#_) { font-size: 22px; line-height: 1.3; } }
+
+/* tagline: same weight and colour as the About lead */
+.tagline:not(#_), .tagline .tl:not(#_) { font-weight: 500; color: rgb(47, 39, 37); }
+
+/* tab colours: Work red, About yellow, Contact blue (hover bubble is a light tint, the active tab is the full colour) */
+.filters .pill[data-work][aria-pressed="true"], .filters .pill[data-panel="about"][aria-pressed="true"] { color: #fff; }
+.filters .pill[data-panel="contact"][aria-pressed="true"] { color: var(--ink); }
+
+/* spacing: tab menu → name, then the header and the three sections sit 180px apart */
+.intro > .filters:not(#_) { margin-bottom: 90px; }
+@media (min-width: 701px) { .page > .below:not(#_) { margin-top: -93px; } }
+@media (min-width: 701px) { .hero > nav:not(#_) { margin-top: 180px; } }
+
+/* the pinned tab menu's shadow takes the active tab's colour (set by js/panels.js as --tabC), stronger so it reads over the content */
+.filters.stuck:not(#_), .filters.pinned:not(#_) {
+  box-shadow: 0 0 0 7px #fff, 0 14px 38px color-mix(in srgb, var(--tabC, #2f2725) 62%, transparent), 0 4px 12px color-mix(in srgb, var(--tabC, #2f2725) 55%, transparent);
+}
+
+/* more air between the tab menu and the name; the light blue bubble also shows when the logo is keyboard-focused */
+.intro > .filters:not(#_) { margin-bottom: 140px; }
+@media (max-width: 700px) { .intro > .filters:not(#_) { margin-bottom: 32px; } }
+.filtersLogo:focus-visible { background: #D9E7FC; outline: none; }
+.filters .pill[data-work]:focus-visible { background: rgba(47, 91, 234, 0.28); outline: none; }
+.filters .pill[data-panel="about"]:focus-visible { background: rgba(47, 160, 90, 0.28); outline: none; }
+.filters .pill[data-panel="contact"]:focus-visible { background: rgba(255, 201, 40, 0.5); outline: none; }
+.filters .pill[aria-pressed="true"]:focus-visible { background: transparent; }
+
+/* tagline: one weight lighter than the About lead, at 80% */
+.tagline:not(#_), .tagline .tl:not(#_) { font-weight: 400; color: rgba(47, 39, 37, 0.8); }
+
+/* the name is the same size as the subtitle under it */
+.who .name:not(#_) { font-size: 34px; line-height: 1.3; }
+@media (max-width: 900px) { .who .name:not(#_) { font-size: 28px; } }
+@media (max-width: 700px) { .who .name:not(#_) { font-size: 22px; } }
+
+/* subtitle 4px smaller than the name */
+.tagline:not(#_) { font-size: 30px; }
+@media (max-width: 900px) { .tagline:not(#_) { font-size: 24px; } }
+@media (max-width: 700px) { .tagline:not(#_) { font-size: 18px; } }
+
+/* pinning the tab menu: same spot (top set by js/panels.js), the white pill and its shadow fade in with a small bounce, no hard edges */
+.filters { transition: background-color .5s ease, box-shadow .6s cubic-bezier(.34, 1.4, .64, 1); }
+.filters.stuck:not(#_) { top: 48px; animation: tabPin .55s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes tabPin { 0% { transform: scale(.97); } 100% { transform: scale(1); } }
+.filters.stuck:not(#_), .filters.pinned:not(#_) {
+  box-shadow: 0 0 0 7px #fff, 0 10px 28px color-mix(in srgb, var(--tabC, #2f2725) 30%, transparent), 0 3px 10px color-mix(in srgb, var(--tabC, #2f2725) 24%, transparent);
+}
+
+/* the face in the tab menu always gets its light blue bubble itself (hover, focus), a deeper one while pressed, whatever the page bubble is doing */
+.filtersLogo { transition: background-color .2s ease, transform .2s ease; }
+@media (hover: hover) { .filtersLogo:hover { background: #D9E7FC; } }
+.filtersLogo:focus-visible { background: #D9E7FC; }
+.filtersLogo:active { background: #BFD6F8; }
+
+/* the pill shape is always there (only the white and shadow fade), so the fade never shows square corners */
+.filters:not(#_) { border-radius: 999px; background-color: rgba(255, 255, 255, 0); box-shadow: 0 0 0 7px rgba(255, 255, 255, 0), 0 10px 28px rgba(47, 39, 37, 0), 0 3px 10px rgba(47, 39, 37, 0); }
+.filters.stuck:not(#_), .filters.pinned:not(#_) { background-color: #fff; }
+
+/* pinned on desktop: the whole tab menu grows to 1.6x, with a soft bounce, from the top centre so it stays put */
+.filters { transition: background-color .5s ease, box-shadow .6s cubic-bezier(.34, 1.4, .64, 1); }
+
+/* the "3 million" line sits under the subtitle; the gaps between name, subtitle and this line are doubled (6px → 12px) */
+.who:not(#_) { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.tagline.taglineSub:not(#_) { font-size: 20px; font-weight: 400; color: rgba(47, 39, 37, 0.6); line-height: 1.3; }
+.tagline.taglineSub .tl:not(#_) { font-size: inherit; font-weight: inherit; color: inherit; }
+@media (max-width: 700px) { .tagline.taglineSub:not(#_) { font-size: 15px; } }
+
+/* Professional history: left aligned (heading, then each row) */
+.homeSec .eyebrow:not(#_) { align-self: flex-start; text-align: left; }
+.homeSec .aboutJobs:not(#_) { align-self: flex-start; align-items: flex-start; text-align: left; width: fit-content; }
+.homeSec .aboutJobs li:not(#_) { justify-content: flex-start; text-align: left; }
+@media (max-width: 700px) {
+  .homeSec .aboutJobs:not(#_) { width: 100%; }
+  .homeSec .aboutJobs li:not(#_) { align-items: flex-start; }
+  .homeSec .aboutJobs span:not(#_) { text-align: left; }
+}
+
+/* at the very top of the page the face is the active tab: light blue bubble */
+.filtersLogo.atTop:not(#_) { background: #D9E7FC; }
+.filters.atTop .pill[aria-pressed="true"]:not(#_) { color: var(--ink); }
+
+/* pinned on desktop: the tab menu is really 1.15x bigger (sizes, not a transform, so the hover bubble inside it keeps lining up), with a soft bounce */
+.filters .pill, .filtersLogo, .filtersLogo img, .filters { transition-property: background-color, color, box-shadow, font-size, padding, height, gap; transition-duration: .3s, .3s, .6s, .5s, .5s, .5s, .5s; transition-timing-function: ease, ease, cubic-bezier(.34, 1.4, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1); }
+.filters.stuck:not(#_) { gap: 9.2px; }
+.filters.stuck .pill:not(#_) { font-size: 16.1px; padding: 9.2px 18.4px; }
+.filters.stuck .filtersLogo:not(#_) { padding: 8.05px 18.4px; }
+.filters.stuck .filtersLogo img:not(#_) { height: 20.7px; }
+
+/* the name is larger than the subtitle */
+.who .name:not(#_) { font-size: 46px; line-height: 1.2; }
+@media (max-width: 900px) { .who .name:not(#_) { font-size: 38px; } }
+@media (max-width: 700px) { .who .name:not(#_) { font-size: 30px; } }
+
+/* at the top of the page the face is the active tab: a deeper blue with the same shadow as the other active tabs */
+
+
+/* the "3 million" line now sits at the bottom of the Work section, under the logos */
+.workNote:not(#_) { margin: 64px 0 0; text-align: center; font-size: 20px; font-weight: 400; line-height: 1.3; color: rgba(47, 39, 37, 0.6); }
+@media (max-width: 700px) { .workNote:not(#_) { font-size: 15px; margin-top: 28px; padding: 0 24px; } }
+@media (min-width: 701px) { .page > .below:not(#_) { margin-top: -162px; } }
+@media (max-width: 700px) { .workNote:not(#_) { margin-bottom: 48px; } }
+
+/* About: wider side padding inside its card */
+#about.homeSec:not(#_) { padding-left: 128px; padding-right: 128px; }
+@media (max-width: 900px) { #about.homeSec:not(#_) { padding-left: 56px; padding-right: 56px; } }
+@media (max-width: 700px) { #about.homeSec:not(#_) { padding-left: 24px; padding-right: 24px; } }
+
+/* more air between the tab menu and the name */
+.intro > .filters:not(#_) { margin-bottom: 220px; }
+@media (max-width: 700px) { .intro > .filters:not(#_) { margin-bottom: 56px; } }
+
+/* the face's active bubble (Home): pops in with a small bounce and scales out when another tab takes over */
+.filtersLogo::before { content: ""; position: absolute; inset: -1px; z-index: -1; border-radius: inherit; background: #A9C8F7; box-shadow: 0 6px 14px -4px rgba(47, 39, 37, 0.28), 0 2px 4px rgba(47, 39, 37, 0.12); opacity: 0; transform: scale(.6); pointer-events: none; transition: transform .18s cubic-bezier(.5, 0, .75, 0), opacity .18s ease-in; }
+.filtersLogo.atTop::before { opacity: 1; transform: scale(1); transition: transform .28s cubic-bezier(.34, 1.56, .64, 1), opacity .2s ease-out; }
+
+/* company names in Professional history that link out: no underline */
+.homeSec .aboutJobs .company a { color: inherit; text-decoration: none; }
+
+/* coming back down to the normal size (unpinning) is quick */
+.filters:not(.stuck):not(#_), .filters:not(.stuck) .pill:not(#_), .filters:not(.stuck) .filtersLogo:not(#_), .filters:not(.stuck) .filtersLogo img:not(#_) { transition-duration: .18s, .18s, .25s, .2s, .2s, .2s, .2s; transition-timing-function: ease, ease, ease-out, ease-out, ease-out, ease-out, ease-out; }
+
+/* the white halo around the pinned bar counts as part of the bar for hovering, so the pointer dot rises into the bar there too */
+.filters.stuck::after, .filters.pinned::after { content: ""; position: absolute; inset: -8px; border-radius: 999px; pointer-events: auto; z-index: -1; }
+
+/* even more air between the tab menu and the name */
+.intro > .filters:not(#_) { margin-bottom: 300px; }
+@media (max-width: 700px) { .intro > .filters:not(#_) { margin-bottom: 80px; } }
+@media (max-width: 700px) { :root:not(#_) { --hdrH: 238px; } }
+
+/* tapping the face: the pinned look (white, shadow, bigger size) lets go right away while the page scrolls up, instead of waiting for the scroll to land */
+.filters.stuck.returning:not(#_) { background-color: rgba(255,255,255,0); box-shadow: 0 0 0 7px rgba(255,255,255,0), 0 10px 28px rgba(47,39,37,0), 0 3px 10px rgba(47,39,37,0); gap: 8px; animation: none; }
+.filters.stuck.returning .pill:not(#_) { font-size: 14px; padding: 8px 16px; }
+.filters.stuck.returning .filtersLogo:not(#_) { padding: 7px 16px; }
+.filters.stuck.returning .filtersLogo img:not(#_) { height: 18px; }
+.filters.stuck.returning:not(#_), .filters.stuck.returning .pill:not(#_), .filters.stuck.returning .filtersLogo:not(#_), .filters.stuck.returning .filtersLogo img:not(#_) { transition-duration: .16s, .16s, .2s, .18s, .18s, .18s, .18s; transition-timing-function: ease-out; }
+
+/* no transform on the pinned bar, ever: a transform makes it the containing block of the fixed hover bubble inside it, which threw the bubble off to the right while the bar pinned */
+.filters.stuck:not(#_) { animation: none; transform: none; }
+
+/* the pinned bar grows from its centre, not from its top edge: it is ~4.8px taller, so lift it by half of that (the sides already grow evenly) */
+.filters.stuck:not(#_) { margin-top: -2.4px; }
+.filters.stuck.returning:not(#_) { margin-top: 0; }
+.filters:not(#_) { transition-property: background-color, color, box-shadow, font-size, padding, height, gap, margin-top; transition-duration: .3s, .3s, .6s, .5s, .5s, .5s, .5s, .5s; transition-timing-function: ease, ease, cubic-bezier(.34, 1.4, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1), cubic-bezier(.34, 1.56, .64, 1); }
+.filters:not(.stuck):not(#_), .filters.stuck.returning:not(#_) { transition-duration: .18s, .18s, .25s, .2s, .2s, .2s, .2s, .2s; transition-timing-function: ease, ease, ease-out, ease-out, ease-out, ease-out, ease-out, ease-out; }
+
+/* the face above the name */
+.who .whoLogo:not(#_) { display: block; width: 104px; height: 104px; margin-bottom: 12px; }
+@media (max-width: 700px) { .who .whoLogo:not(#_) { width: 76px; height: 76px; margin-bottom: 4px; } :root:not(#_) { --hdrH: 322px; } }
+
+/* the face sits in the same row as the name */
+.who .name:not(#_) { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.who .whoLogo:not(#_) { margin-bottom: 0; flex: none; }
+@media (max-width: 700px) { .who .name:not(#_) { gap: 10px; } .who .whoLogo:not(#_) { margin-bottom: 0; } }
+@media (max-width: 700px) { :root:not(#_) { --hdrH: 278px; } }
+
+/* even air between the four sections on desktop, all 180px (the gap under Connor Shopa to the logos is the reference): Connor Shopa -> Work, Work note -> About card, About card -> Contact */
+@media (min-width: 701px) {
+  .page > .below:not(#_) { margin-top: calc(79px - 50dvh); } /* tracks the viewport height so Work -> About stays the same distance on any screen */
+  #contact.homeSec:not(#_) { margin-top: 156px; }
+}
+
+/* phones: the tab menu lives at the bottom of the screen, 24px up from the edge, always on its white pill with the shadow */
+@media (max-width: 700px) {
+  .intro > .filters:not(#_):not(#_) {
+    position: fixed; top: auto !important; bottom: 24px; left: 0; right: 0; margin: 0 auto; width: max-content; z-index: 40;
+    background-color: #fff; border-radius: 999px;
+    box-shadow: 0 0 0 7px #fff, 0 10px 28px color-mix(in srgb, var(--tabC, #2f2725) 30%, transparent), 0 3px 10px color-mix(in srgb, var(--tabC, #2f2725) 24%, transparent);
+  }
+  .introTop:not(#_) { padding-top: 114px; } /* the name stays where it was, now that the tabs are not above it */
+  #contact.homeSec:not(#_) { margin-bottom: 96px; }
+}
+
+/* phones: a smaller face by the name, and more air between the sections */
+@media (max-width: 700px) {
+  .who .whoLogo:not(#_) { width: 54px; height: 54px; }
+  .workNote:not(#_) { margin-bottom: 96px; }
+  #contact.homeSec:not(#_) { margin-top: 128px; }
+}
+
+/* Overhand on phones: the circles are stacked and fill the card down to the bottom edge; the email bar floats over everything at the bottom */
+@media (max-width: 700px) {
+  .view.scrollView .pg.one:has(.ohPit) .ohPit:not(#_) { left: 8px; right: 8px; top: 130px; bottom: -80px; } /* runs past the bottom edge, under the email bar, so the circles can be the full width of the screen */
+  .view.scrollView .pg.one:has(.ohPit) .ohHero:not(#_) { top: 78px; bottom: auto; }
+  .view.scrollView .pg.one:has(.ohPit) .earlyForm:not(#_) {
+    z-index: 60; left: 50%; right: auto; bottom: 20px; width: calc(100% - 32px); max-width: 420px; box-sizing: border-box; transform: translateX(-50%);
+    gap: 8px; padding: 8px; background: #fff; border-radius: 18px; box-shadow: 0 10px 30px rgba(11, 22, 32, 0.22), 0 2px 8px rgba(11, 22, 32, 0.12);
+  }
+  #view-overhand .earlyForm:not(#_) { box-shadow: 0 10px 30px rgba(11, 22, 32, 0.22), 0 2px 8px rgba(11, 22, 32, 0.12); }
+  #view-overhand .earlyInput:not(#_) { font-size: 16px; min-width: 0; flex: 1; }
+  #view-overhand .earlyBtn.lockBtn:not(#_) { font-size: 15px; white-space: nowrap; }
+}
+
+/* "Over 3 million..." now sits above the work items */
+.workNote:not(#_) { margin: 0 0 56px; }
+@media (max-width: 700px) { .workNote:not(#_) { margin: 0 0 24px; padding: 0 24px; } }
+
+/* room under Contact so it can be centred on screen too */
+@media (min-width: 701px) { #contact.homeSec:not(#_) { margin-bottom: max(0px, calc(50vh - 129px)); } }
+@media (max-width: 700px) { #contact.homeSec:not(#_) { margin-bottom: max(96px, calc(50vh - 120px)); } }
+
+/* Overhand on phones: "Trade" sits closer to the logo row, the circles start right under it */
+@media (max-width: 700px) {
+  .view.scrollView .pg.one:has(.ohPit) .ohPit:not(#_):not(#_) { top: 60px; bottom: -10px; }
+  .view.scrollView .pg.one:has(.ohPit) .ohHero:not(#_):not(#_) { top: 4px; }
+}
+@media (min-width: 701px) {
+  .hero > nav > .workNote:not(#_):not(#_) { grid-area: 1 / 1; }
+  .hero > nav > ul:not(#_):not(#_) { grid-area: 2 / 1; }
+}
+
+/* About: a wider card on a light green taken from the About tab (#2FA05A, mostly white) */
+.aboutBack:not(#_) { background: #FFFFFF; }
+@media (max-width: 700px) { #about.homeSec:not(#_) { background: #FFFFFF; } }
+@media (min-width: 701px) { #about.homeSec:not(#_) { width: min(1160px, calc(100vw - 64px)); max-width: none; align-self: center; box-sizing: border-box; } }
+.workNote:not(#_) { color: #333333; }
+
+/* the site background is a light grey */
+:root:not(#_) { --bg: #F4F4F4; }
+body:not(#_) { background-color: #F4F4F4; }
+
+/* professional history is centred again */
+.homeSec .eyebrow:not(#_):not(#_) { align-self: center; text-align: center; }
+.homeSec .aboutJobs:not(#_):not(#_) { align-self: center; align-items: center; text-align: center; width: fit-content; }
+.homeSec .aboutJobs li:not(#_):not(#_) { justify-content: center; text-align: center; }
+@media (max-width: 700px) {
+  .homeSec .aboutJobs:not(#_):not(#_) { width: 100%; }
+  .homeSec .aboutJobs li:not(#_):not(#_) { align-items: center; }
+  .homeSec .aboutJobs span:not(#_):not(#_) { text-align: center; }
+}
+
+/* a thin divider (#333333 at 12%) in the middle of each 180px gap between the sections (desktop) */
+@media (min-width: 701px) {
+  .hero > header.intro:not(#_), .page > .below:not(#_), #about.homeSec:not(#_) { position: relative; }
+  .hero > header.intro::after, .page > .below::before, #about.homeSec::after {
+    content: ""; position: absolute; left: 50%; transform: translateX(-50%); width: 160px; height: 2px; border-radius: 999px; background: rgba(51, 51, 51, 0.12); pointer-events: none;
+  }
+  .hero > header.intro::after { bottom: -90px; }
+  .page > .below::before { top: -90px; }
+  #about.homeSec::after { bottom: -90px; }
+}
+
+
+/* the colour wash behind each section (Work blue, About green, Contact yellow); js/panels.js sets its strength from how far the section is from the middle of the screen */
+.secTint:not(#_) { position: absolute; z-index: -2; border-radius: 0; pointer-events: none; opacity: 0; }
+@media (max-width: 700px) { .secTint:not(#_) { display: none; } }
+
+/* narrower sections: the About card is a slim card, sitting on its (also narrower) colour wash */
+@media (min-width: 701px) { #about.homeSec:not(#_):not(#_) { width: min(680px, calc(100vw - 64px)); padding-left: 32px; padding-right: 32px; } }
+
+/* the About card is the same green wash as the tab colour, not white */
+.aboutBack:not(#_):not(#_) { background: rgba(47, 160, 90, 0.14); }
+@media (max-width: 700px) { #about.homeSec:not(#_):not(#_) { background: rgba(47, 160, 90, 0.14); } }
+
+/* the colour frame is the wash behind each section (js/panels.js); the old About card layer is no longer drawn */
+.aboutBack:not(#_):not(#_):not(#_) { background: transparent; }
+@media (min-width: 701px) { .secTint:not(#_) { opacity: 1; } }
+
+/* the face is exactly as tall as the name's line of text, with 2px of air around it */
+.who .whoLogo:not(#_) { box-sizing: border-box; height: 1.2em; width: 1.2em; padding: 2px; margin: 0; }
+@media (max-width: 700px) { .who .whoLogo:not(#_) { height: 1.2em; width: 1.2em; } }
+
+/* no dividers between the sections */
+.hero > header.intro:not(#_)::after, .page > .below:not(#_)::before, #about.homeSec:not(#_)::after { display: none; content: none; }
+
+/* the tinted frames reach 72px past each section, so desktop gaps leave room for two of them without touching */
+@media (min-width: 701px) {
+  #about.homeSec:not(#_) { margin-top: 70px; }
+  #contact.homeSec:not(#_) { margin-top: 240px; }
+}
+
+/* small screens: "happlycations" breaks as happly / cations, with the hand beside "happly" on the top row (clipped from the one lockup artwork) */
+.hlSplit:not(#_) { display: none; }
+@media (max-width: 700px) {
+}
+
+/* Connor Shopa sits dead centre of the screen (both ways) when the page is at the top */
+@media (min-width: 701px) { .intro > .filters:not(#_):not(#_) { margin-bottom: max(120px, calc(50dvh - 141px)); } }
+@media (max-width: 700px) { .introTop:not(#_):not(#_) { padding-top: max(100px, calc(50dvh - 62px)); } }
+@media (max-width: 700px) { :root:not(#_):not(#_) { --hdrH: max(278px, calc(50dvh + 102px)); } }
+
+/* phones get the same treatment as desktop: no card behind About, the bottom-of-screen glows, and even gaps between the sections */
+@media (max-width: 700px) {
+  .secTint:not(#_):not(#_) { display: block; }
+  #about.homeSec:not(#_):not(#_):not(#_) { background: transparent; margin-top: 110px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: 110px; }
+}
+
+/* the next section peeks up from the bottom of the screen while the current one is centred (desktop): the gap is whatever leaves a sliver of the next one showing */
+@media (min-width: 701px) {
+  .hero > nav:not(#_):not(#_) { margin-top: max(80px, calc(50dvh - 359px)); }
+  #about.homeSec:not(#_):not(#_) { margin-top: 120px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: 232px; }
+}
+
+/* phone: same peek, the next section shows above the tab bar while the current one is centred */
+@media (max-width: 700px) {
+  #about.homeSec:not(#_):not(#_):not(#_) { margin-top: 127px; }
+  #contact.homeSec:not(#_):not(#_) { margin-top: 132px; }
+}
+
+/* phone: the project links have no tile backgrounds */
+@media (max-width: 700px) {
+  #projectList li:not(.row-break):not(#_):not(#_):not(#_) { background: transparent !important; }
+}
+
+/* phone: with no tile backgrounds the links sit in an even two-column grid */
+@media (max-width: 700px) {
+  .hero > nav > #projectList:not(#_):not(#_):not(#_) { display: grid !important; grid-template-columns: 1fr 1fr; gap: 6px 8px; justify-items: stretch; }
+  #projectList li.row-break:not(#_):not(#_):not(#_) { display: none !important; }
+  #projectList li:not(.row-break):not(#_):not(#_):not(#_) { flex: none; width: auto; min-width: 0; }
+}
+
+/* phone: the small divider between the two links in each row, like on desktop (li:nth-child counts the hidden row-breaks, so every 4th li starting at the 1st is a left tile, plus the 12th link, which the deck order moves; Poll.in is the odd one out) */
+@media (max-width: 700px) {
+  #projectList li:not(.row-break):nth-child(4n + 1):not(:nth-child(25)):not(#_):not(#_):not(#_):not(#_)::after,
+  #projectList li:not(.row-break):nth-child(23):not(#_):not(#_):not(#_):not(#_)::after {
+    display: block !important; content: "" !important; position: absolute; left: 100%; top: 50%; margin: -3px 0 0 -4px; width: 2px; height: 6px; border-radius: 2px; background: rgba(51, 51, 51, 0.8); opacity: 1 !important; inset: auto auto auto 100%;
+  }
+  #projectList li:not(.row-break):not(#_):not(#_):not(#_) { position: relative !important; }
+}
+
+/* 701-900px wide: About sits 18px lower so Work -> About matches About -> Contact here too */
+@media (min-width: 701px) and (max-width: 900px) { #about.homeSec:not(#_):not(#_):not(#_) { margin-top: 129px; } }
+
+/* smaller screens: the "Over 3 million..." line balances its lines, so it never wraps a single word onto its own line */
+@media (max-width: 900px) { .workNote:not(#_):not(#_) { text-wrap: balance; } }
+
+/* Work's glow pulses (it rises and brightens, then settles) as a nudge to scroll; it only shows while Work is below the screen */
+@keyframes tintPulse {
+  0%, 100% { scale: 1 1; filter: saturate(1) brightness(1); }
+  50% { scale: 1.08 1.35; filter: saturate(1.7) brightness(0.96); }
+}
+.secTintPulse:not(#_) { transform-origin: 50% 100%; animation: tintPulse 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .secTintPulse:not(#_) { animation: none; } }
+
+/* the tagline and the "Over 3 million people..." line share one size: 20px, 15px on phones */
+.workNote:not(#_):not(#_), .intro .tagline:not(#_):not(#_), .tagline:not(#_):not(#_) { font-size: 20px; }
+@media (max-width: 700px) { .workNote:not(#_):not(#_), .intro .tagline:not(#_):not(#_), .tagline:not(#_):not(#_) { font-size: 15px; } }
+
+/* "Connor Shopa" is the same size as the About heading ("Designing products @ ..."): 34px, 28px under 900, 22px on phones */
+.who .name:not(#_):not(#_) { font-size: 34px; line-height: 1.2; }
+@media (max-width: 900px) { .who .name:not(#_):not(#_) { font-size: 28px; } }
+@media (max-width: 700px) { .who .name:not(#_):not(#_) { font-size: 22px; } }
+
+/* phone: the "Over 3 million..." line sits closer to the project links under it */
+@media (max-width: 700px) { .workNote:not(#_):not(#_):not(#_) { margin-bottom: 3px; } }
+
+/* "Connor Shopa" is one step lighter (600 -> 500) */
+.who .name:not(#_):not(#_) { font-weight: 500; }
+
+/* Poll.in keeps its logo but has no link for now: no hover bubble, no click, no pointer cursor */
+.hl.hlOff:not(#_):not(#_) { pointer-events: none; cursor: default; }
+
+/* phones: no visible scroll bar */
+@media (max-width: 700px) {
+  html, body, .hero > nav, .view, .view.scrollView, .cardFrame, * { scrollbar-width: none; -ms-overflow-style: none; }
+  html::-webkit-scrollbar, body::-webkit-scrollbar, .hero > nav::-webkit-scrollbar, .view::-webkit-scrollbar, .view.scrollView::-webkit-scrollbar, *::-webkit-scrollbar { display: none; width: 0; height: 0; }
+}
+
+/* phones: the top section starts 72px from the top of the screen */
+@media (max-width: 700px) {
+  .introTop:not(#_):not(#_):not(#_) { padding-top: 46px; }
+  :root:not(#_):not(#_):not(#_) { --hdrH: max(190px, calc(50dvh - 212px)); }
+}
+
+/* back at the top of the page the nav settles into its neutral state smoothly: a longer ease, no overshoot or bounce */
+.filters:not(.stuck):not(#_):not(#_), .filters:not(.stuck) .pill:not(#_):not(#_), .filters:not(.stuck) .filtersLogo:not(#_):not(#_), .filters:not(.stuck) .filtersLogo img:not(#_):not(#_),
+.filters.stuck.returning:not(#_):not(#_), .filters.stuck.returning .pill:not(#_):not(#_), .filters.stuck.returning .filtersLogo:not(#_):not(#_), .filters.stuck.returning .filtersLogo img:not(#_):not(#_) {
+  transition-property: background-color, color, box-shadow, font-size, padding, height, gap, margin-top, transform, top;
+  transition-duration: .5s; transition-timing-function: cubic-bezier(.33, 1, .68, 1);
+}
+.filtersLogo.atTop:not(#_):not(#_)::before { transition: transform .4s cubic-bezier(.33, 1, .68, 1), opacity .4s ease-out; }

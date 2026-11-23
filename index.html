@@ -6,330 +6,118 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="css/home.css" />
+    <link rel="icon" type="image/svg+xml" href="assets/homeAssets/icon_shopa.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <link rel="stylesheet" href="css/redesign.css?v=95" />
+    <link rel="stylesheet" href="css/views.responsive.css?v=10" />
+    <link rel="stylesheet" href="css/homeLogos.css?v=43" />
+    <link rel="stylesheet" href="css/homeSections.css?v=127" />
+    <link rel="stylesheet" href="css/nanniNav.css?v=6" />
+    <link rel="stylesheet" href="css/nanniTranslate.css?v=43" />
     <link rel="stylesheet" href="css/hostgrotesk.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Figtree:wght@600;700&family=Crimson+Pro:wght@600&display=swap">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.8.1/lottie.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/CustomEase.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 
     <title>Connor Shopa : home</title>
 </head>
 
 <body>
+    <!-- REDESIGN: v1 lives on main / tag v1-current. -->
+
     <!-- MOUSE FOLLOW CIRCLE -->
     <div id="mouse-circle"></div>
 
-    <!-- HEADER + LOGO CONTAINER -->
-    <div class="headerBox">
-        <!--LOGO-->
-        <div class="logoBox" onClick="etRefresh()">
-            <img src="assets/homeAssets/icon_shopa.svg" alt="" height="20px">
-            <div class="logoAnim"></div>
-        </div>
+    <main class="page">
 
-        <div class="navLinksContainer">
-            <h5 class="currentNavLink">HOME</h5>
-
-            <a class="navLink" href="./plunk.html">WORK</a>
-
-
-
-            <a class="navLink" href="./sketchbook.html">SKETCHBOOK</a>
-
-            <a class="navLink" href="./micro.html">MICRO + MOTION</a>
-
-        </div>
-
-        <div class="mobileMenuButton">
-            <div id="menuButtonAnim"></div>
-        </div>
-
-        <div class="mobileMenuScreen">
-            <div class="mobileLinks">
-
-
-                <h5 class="currentNavLink">HOME</h5>
-
-                <a class="navLink" href="./plunk.html">WORK</a>
-
-
-
-                <a class="navLink" href="./sketchbook.html">SKETCHBOOK</a>
-
-                <a class="navLink" href="./micro.html">MICRO + MOTION</a>
-
-
-            </div>
-
-
-
-        </div>
-
-    </div>
-
-    <div class="content">
-
-
-
-        <div class="aboutHelloSpan">
-            <div class="aboutBox">
-                <div class="aboutContent">
-
-                    <div class="boxTitle">
-                        <h3>HOWDY</h3>
-                        <h2>My name is</h2>
-                    </div>
-                    <h1>Connor Shopa</h1>
-                    <br>
-                    <h4>I'm a product designer helping good folk make good things.
-                        <br> <br>
-                        Right now I’m designing social music experiences at <a
-                            href="https://touchtunes.com/">TouchTunes</a>,
-                        and making homemade jam. <br>
-                    </h4>
+        <div class="hero">
+            <header class="intro">
+                <div class="filters" role="group" aria-label="Sections">
+                    <a class="filtersLogo" href="#top" aria-label="Back to the top" data-bubble="#D9E7FC"><img src="assets/homeAssets/icon_shopa.svg" alt=""></a>
+                    <button type="button" class="pill" data-work data-bubble="rgba(47, 91, 234, 0.28)" data-active="#2F5BEA" aria-pressed="true">Work</button>
+                    <button type="button" class="pill" data-panel="about" data-bubble="rgba(47, 160, 90, 0.28)" data-active="#2FA05A" aria-pressed="false">About</button>
+                    <button type="button" class="pill" data-panel="contact" data-bubble="rgba(255, 201, 40, 0.5)" data-active="#FFC928" aria-pressed="false">Contact</button>
                 </div>
-            </div>
-            <div class="sayHelloBox">
-                <div class="sayHelloContent">
-
-                    <div class="boxTitle">
-                        <h3>SAY HELLO</h3>
-                        <h2>Always up for chats about design, music, and big ideas</h2>
-
+                <div class="introTop">
+                    <div class="who">
+                        <h1 class="name">
+                            <img class="whoLogo" src="assets/homeAssets/icon_shopa.svg" alt="">
+                            <span>Connor Shopa</span>
+                        </h1>
+                        <p class="tagline"><span class="tl">Helping good folk make good things</span></p>
                     </div>
-
-                    <h4>Call me: 343.209.5337</h4>
-                    <h4>Email me: connorshopa@gmail.com</h4>
-                    <br> <br>
-                    <div class="socialBox">
-                        <div class="socialLink">
-                            <a href="https://www.figma.com/@connorshopa">Figma</a> <img
-                                src="assets/homeAssets/icon_socialLink.svg" alt="" height="10px">
-                        </div>
-
-                        <div class="socialLink">
-                            <a href="https://www.behance.net/connorshopa">Behance</a> <img
-                                src="assets/homeAssets/icon_socialLink.svg" alt="" height="10px">
-                        </div>
-
-                        <div class="socialLink">
-                            <a href="https://dribbble.com/connorshopa">Dribbble</a> <img
-                                src="assets/homeAssets/icon_socialLink.svg" alt="" height="10px">
-                        </div>
-
-
-
-
-
-
-                    </div>
-
-
-
                 </div>
-            </div>
+            </header>
 
+            <nav aria-label="Projects and pages">
+                <p class="workNote">Over 3 million people interact with my work each month</p>
+                <ul class="inline big" id="projectList">
+                    <li data-category="work"><a href="https://touchtunes.com/" rel="noopener" data-view="touchtunes" data-bubble-alpha="0.2" class="hl" style="--c:0 0 0;--z:0.55"><span class="hlLogo"><img class="hlMark" src="assets/homeAssets/touchtunes_mark.svg" alt=""><img class="hlWord wordmark tt" src="assets/homeAssets/touchtunes_wordmark.svg" alt="TouchTunes"></span><span class="hlSub">The world&rsquo;s jukebox</span></a></li>
+                    <li data-category="work projects"><a href="./rubin.html" data-view="rubin" class="hl" style="--c:44 34 83;--z:0.69"><span class="hlLogo"><img class="hlSticker" src="assets/homeAssets/rubin_sticker.svg?v=3" alt=""><img class="hlWord rubin" src="assets/homeAssets/rubin_wordmark.svg" alt="Rubin"></span><span class="hlSub">Code &harr; Design. Coming soon</span></a></li>
+                    <li data-category="work"><a href="https://apps.apple.com/us/app/sheep-counting-words/id6832144088" target="_blank" rel="noopener" aria-label="Sheep" class="hl" style="--c:47 74 163;--z:0.92"><span class="hlLogo"><img class="hlIcon" src="assets/homeAssets/sheep_app_icon.svg" alt=""><span class="hlT tSheep">sheep</span></span><span class="hlSub">How many words do you know?</span></a></li>
+                    <li data-category="projects"><a role="img" aria-label="Habbot" data-bubble="#FFFDFB" class="noLink hl" style="--c:221 141 50;--z:0.61"><span class="hlLogo"><img class="hlIcon" src="assets/homeAssets/habbot_app_icon.svg" alt=""><img class="hlWord habbot" src="assets/homeAssets/habbot_wordmark_orange.svg" alt="Habbot"></span><span class="hlSub">Collect yourself. Habit tracking</span></a></li>
+                    <li data-category="projects"><a role="img" aria-label="Drawl" class="noLink hl" style="--c:12 30 68;--z:0.75"><span class="hlLogo"><img class="hlIcon hlDrawl" src="assets/homeAssets/drawl_app_icon.svg?v=2" alt=""><span class="hlT tDrawl">drawl</span></span><span class="hlSub">Draw prompts, vote your favs</span></a></li>
+                    <li data-category="work"><a href="./plunk.html" data-view="plunk" data-bubble="#FAFAFA" data-bubble-fixed class="hl" style="--c:0 57 96;--z:0.87"><span class="hlLogo"><img class="hlPlunk" src="assets/homeAssets/plunk_logo_horizontal.svg" alt=""></span><span class="hlSub">Human friendly, real-estate</span></a></li>
+                    <li data-category="work"><a href="./seeds.html" data-view="seeds" data-bubble="#CEE1D6" class="hl" style="--c:49 116 146;--z:0.64"><span class="hlLogo"><span class="hlMask hlSeedsIcon" style="--m:url(../assets/homeAssets/seeds_projectImage.svg);--bg:#317492" aria-hidden="true"></span><span class="hlT tSeeds">Seeds</span></span><span class="hlSub">A living design system</span></a></li>
+                    <li data-category="work"><a href="./nanni.html" data-view="nanni" data-bubble="#E8EFF9" class="hl" style="--c:10 71 145;--z:0.68"><span class="hlLogo"><img class="hlIcon" src="assets/homeAssets/nanni_app_icon.svg" alt=""><img class="hlWord nanni" src="assets/homeAssets/nanni_wordmark.svg" alt="Nanni"></span><span class="hlSub">Translation for cries</span></a></li>
+                    <li data-category="projects"><a href="./overhand.html" data-view="overhand" data-bubble="#FFF0B2" class="hl" style="--c:27 36 48;--z:0.88"><span class="hlLogo"><img class="hlChip" src="assets/homeAssets/overhand_logo.svg" alt=""></span><span class="hlSub">Trade anything for anything</span></a></li>
+                    <li data-category="work"><a href="https://altq.ai" target="_blank" rel="noopener" aria-label="AltQ" data-bubble="#FBEBEB" class="hl" style="--c:38 43 51;--z:0.70"><span class="hlLogo"><img class="hlAltq" src="assets/homeAssets/altQ_Logo.svg" alt=""></span><span class="hlSub">Democratized private markets</span></a></li>
+                    <li data-category="projects"><a href="./happlycations.html" target="_blank" rel="noopener" data-bubble="#E9F4FD" aria-label="Happlycations" class="hl" style="--c:17 17 17;--z:0.43"><span class="hlLogo"><img class="hlHappy" src="assets/homeAssets/happlycations_lockup.svg?v=3" alt=""></span><span class="hlSplit" aria-hidden="true"><span class="hs1"></span><span class="hs2"></span></span><span class="hlSub">Where happy apps are born</span></a></li>
+                    <li data-category="projects"><a href="./spotifyDreams.html" data-view="spotify" data-bubble-fixed data-bubble="#E8F8EA" class="hl" style="--c:88 180 96;--z:0.76"><span class="hlLogo"><span class="hlMask hlSpotIcon" style="--m:url(../assets/homeAssets/spotifyDreams_projectImage.svg);--bg:#58B460" aria-hidden="true"></span><span class="hlT tSpot">Thoughtify</span></span><span class="hlSub">Ideas for spotify</span></a></li>
+                    <li data-category="work"><a aria-label="Poll.in" aria-disabled="true" class="hl hlOff" style="--c:60 119 188;--z:0.75"><span class="hlLogo"><img class="hlPollin" src="assets/homeAssets/pollin_logo_blue.svg" alt=""></span><span class="hlSub">Daily global polls</span></a></li>
+                    <li data-category="art"><a href="./sketchbook.html" data-view="sketchbook" aria-label="Sketchbook" class="hl" style="--c:51 51 51;--z:1"><span class="hlLogo"><span class="hlSketch" aria-hidden="true"><span class="rn rnCrimson" style="color:#E5483A">S</span><span class="rn rnNunito" style="color:#1B2430">k</span><span class="rn rnClash" style="color:#3351B3">e</span><span class="rn rnHost" style="color:#F29A1F">t</span><span class="rn rnSailec" style="color:#1DB954">c</span><span class="rn rnFigtree" style="color:#CE6F8B">h</span><span class="rn rnCrimson" style="color:#3C40C6">b</span><span class="rn rnNunito" style="color:#1B2430">o</span><span class="rn rnClash" style="color:#F2879F">o</span><span class="rn rnHost" style="color:#E5483A">k</span></span></span></a></li>
+                </ul>
+            </nav>
+        </div>
 
-
+        <div class="below">
 
         </div>
 
-        <div class="workBox">
-            <div class="workContent">
-                <div class="boxTitle">
-                    <h3>PRODUCTS</h3>
-                    <h2>Over 3 million people interact with my work every month</h2>
-                </div>
+    </main>
 
-                <div class="workItemSpan">
-
-                    <!-- <div class="workItem" id="AltQ">
-                        <div class="workItemImage" id="image_altQ" onclick="etGoAltQ()">
-                            <img src="assets/homeAssets/altQ_heroImage.png" alt="">
-                        </div>
-                        <a href="./altq.html">AltQ</a>
-
-                    </div> -->
-
-                    <div class="workItem" id="happlycations" onclick="etGoHapplycations()">
-                        <div class="workItemImage" id="image_happlycations">
-                            <!-- <img src="assets/homeAssets/happlycations_projectImage.svg" alt="" height="24px"> -->
-                        </div>
-                        <a href="./happlycations.html">Happlycations</a>
-                    </div>
-
-
-
-                    <div class="workItem" id="Nanni_AI" onclick="etGoNanni()">
-                        <div class="workItemImage" id="image_nanni">
-                            <img src="assets/homeAssets/nanni_projectImage.svg" alt="" height="48px">
-                        </div>
-                        <a href="./nanni.html">Nanni</a>
-
-                    </div>
-
-
-                    <div class="workItem" id="designSystem" onclick="etGoSeeds()">
-                        <div class="workItemImage" id="image_designSystem">
-                            <img src="assets/homeAssets/seeds_projectImage.svg" alt="" height="42px">
-                        </div>
-                        <a href="./seeds.html">Seeds </a>
-                        <h4>: design system</h4>
-
-                    </div>
-
-                    <div class="workItem" id="plunk" onclick="etGoPlunk()">
-                        <div class="workItemImage" id="image_plunk">
-                            <img src="assets/homeAssets/plunk_projectImage.svg" alt="" height="32px">
-                        </div>
-                        <a href="./plunk.html">Plunk®</a>
-
-                    </div>
-
-                    <div class="workItem" id="habbot" onclick="etGoHabbot()">
-                        <div class="workItemImage" id="image_habbot">
-                            <img src="assets/homeAssets/habbot_projectImage.svg" alt="" height="24px">
-                        </div>
-                        <a href="./habbot.html">Habbot</a>
-
-
-                    </div>
-
-                    <div class="workItem" id="spotifyDreams" onclick="etGoSpotify()">
-                        <div class="workItemImage" id="image_spotifyDreams">
-                            <img src="assets/homeAssets/spotifyDreams_projectImage.svg" alt="" height="60px">
-                        </div>
-                        <a href="./spotifyDreams.html">Spotify dreams</a>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-
-        <!-- <div class="workBox">
-            <div class="workContent">
-                <div class="boxTitle">
-                    <h3>PROJECTS</h3>
-                    <h2>Selected side-projects, case studies + musings</h2>
-                </div>
-
-                <div class="workItemSpan">
-
-
-
-
-                    <div class="workItem" id="pollin" onclick="etGoPollin()">
-                        <div class="workItemImage" id="image_pollin">
-                            <img src="assets/homeAssets/pollin_heroImage.png" alt="">
-                        </div>
-                        <a href="./pollin.html">Poll.in</a>
-                    </div>
-
-
-
-
-
-                    <div class="workItem" id="work_overhand">
-                        <div class="workItemImage" id="image_overhand">
-                            <img src="assets/homeAssets/overhand_heroImage.png" alt="">
-                        </div>
-                        <a href="">OverHand.io</a>
-                    </div>
-                </div>
-            </div>
-
-        </div> -->
-
-        <div class="historyBox">
-
-            <div class="historyContent">
-                <div class="boxTitle">
-                    <h3>PROFESSIONAL HISTORY</h3>
-
-                </div>
-
-                <div class="jobItemSpan">
-
-                    <div class="jobItem">
-
-                        <img src="assets/homeAssets/touchtunes_icon.png" alt="" height="24px">
-                        <h1>TouchTunes</h1>
-                        <h2>
-                            Product Designer
-                            <br>
-                            04/2025 – current
-                        </h2>
-                    </div>
-
-                    <div class="jobItem">
-
-                        <img src="assets/homeAssets/altQ_Logo.svg" alt="" height="16px">
-                        <h1>AltQ</h1>
-                        <h2>
-                            Product & Design Lead
-                            <br>
-                            04/2024 – 04/2025
-                        </h2>
-                    </div>
-
-                    <div class="jobItem">
-
-                        <img src="assets/homeAssets/ubenwa_logo.svg" alt="" height="16px">
-                        <h1>Ubenwa Health</h1>
-                        <h2>
-                            Product Designer
-                            <br>
-                            3 month contract
-                        </h2>
-                    </div>
-                    <!-- <div class="jobItem">
-
-
-                        <img src="assets/homeAssets/overhand_logo.svg" alt="" height="16px">
-                        <h1>OverHand.io</h1>
-                        <h2>
-
-                            Co-Founder & Design Lead
-                            <br>
-                            stealth
-                        </h2>
-                    </div> -->
-
-
-                    <div class="jobItem">
-                        <img src="assets/homeAssets/plunk_logo.png" alt="" height="16px">
-                        <h1>Plunk®</h1>
-                        <h2>
-                            Product Designer
-                            <br>
-                            05/2020 – 12/2023
-                        </h2>
-                    </div>
-
-                    <div class="jobItem">
-                        <img src="assets/homeAssets/albedo_logo.png" alt="" height="16px">
-                        <h1>Albedo Informatics</h1>
-                        <h2>
-                            AR/VR Designer
-                            <br>
-                            02/2020 – 05/2020
-                        </h2>
-                    </div>
-                </div>
-
-
-
-            </div>
-        </div>
-
-    </div>
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
-    <script src="js/home.js"></script>
+    <!-- IN-PAGE PROJECT VIEWS are built from js/projects.js by js/views.js -->
+    <script>
+        // the face logo in the tab menu: back to the top of the page
+        document.querySelector(".filtersLogo").addEventListener("click", function (e) {
+            e.preventDefault();
+            // a quick scroll to the top (about a third of a second however far down you are), not the browser's slow smooth scroll
+            var nav = document.querySelector(".hero > nav");
+            var phoneNav = window.innerWidth <= 700 && nav && nav.scrollHeight > nav.clientHeight;
+            var from = phoneNav ? nav.scrollTop : window.pageYOffset;
+            function set(y) { if (phoneNav) nav.scrollTop = y; else window.scrollTo(0, y); }
+            if (!from) return;
+            var bar = document.querySelector(".filters");
+            if (bar) bar.dispatchEvent(new Event("tabs:return")); // let go of the pinned look right now, not when the scroll lands
+            if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { set(0); return; }
+            var t0 = performance.now(), D = 320;
+            (function step(now) {
+                var k = Math.min(1, (now - t0) / D), ease = 1 - Math.pow(1 - k, 3);
+                set(from * (1 - ease));
+                if (k < 1) requestAnimationFrame(step); else if (bar) bar.dispatchEvent(new Event("tabs:returned"));
+            })(t0);
+        });
+    </script>
+    <script src="js/nanniNav.js?v=9"></script>
+    <script src="js/nanniTranslate.js?v=31"></script>
+    <script src="js/projects.js?v=79"></script>
+    <script src="js/views.js?v=16"></script>
+    <script src="js/dots.js"></script>
+    <script src="js/mouse.js?v=29"></script>
+    <script src="js/filter.js?v=11"></script>
+    <script src="js/project.js?v=23"></script>
+    <script src="js/panels.js?v=76"></script>
+    <script src="js/lotties.js?v=2"></script>
+    <script src="js/justified.js?v=2"></script>
+    <script src="js/overhand.js?v=7"></script>
 </body>
 
 </html>
