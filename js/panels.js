@@ -395,7 +395,14 @@ document.addEventListener("input", function (e) {
   function measure() {
     groups.forEach(function (g) {
       g.items = g.els();
-      g.items.forEach(function (el) { el.style.transform = ""; el.style.opacity = ""; el.style.willChange = "transform, opacity"; });
+      g.items.forEach(function (el) { el.style.transform = ""; el.style.opacity = ""; el.style.willChange = "transform, opacity"; el.style.transformOrigin = ""; });
+      // several elements in one section (the "Over 3 million" line + the project list on a phone) scale about one shared centre, so they move as one block
+      if (g.items.length > 1 && g.ref === "#projectList") {
+        var rs = g.items.map(function (el) { return el.getBoundingClientRect(); });
+        var cx = (Math.min.apply(null, rs.map(function (r) { return r.left; })) + Math.max.apply(null, rs.map(function (r) { return r.right; }))) / 2;
+        var cy = (Math.min.apply(null, rs.map(function (r) { return r.top; })) + Math.max.apply(null, rs.map(function (r) { return r.bottom; }))) / 2;
+        g.items.forEach(function (el, i) { el.style.transformOrigin = (cx - rs[i].left).toFixed(1) + "px " + (cy - rs[i].top).toFixed(1) + "px"; });
+      }
       var ref = document.querySelector(g.ref);
       if (!ref) { g.top = g.h = 0; return; }
       var r = ref.getBoundingClientRect();

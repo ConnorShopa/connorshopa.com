@@ -484,8 +484,3 @@ body:not(#_) { background-color: #F4F4F4; }
   .introTop:not(#_):not(#_):not(#_) { padding-top: 46px; }
   :root:not(#_):not(#_):not(#_) { --hdrH: max(190px, calc(50dvh - 212px)); }
 }
-
-/* phones: "Over 3 million…" reads as the Work section's title, not a floating caption */
-@media (max-width: 700px) {
-  .workNote:not(#_):not(#_):not(#_):not(#_) { font-weight: 500; color: rgb(47, 39, 37); margin-bottom: -12px; }
-}
