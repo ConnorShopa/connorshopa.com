@@ -478,3 +478,9 @@ body:not(#_) { background-color: #F4F4F4; }
   html, body, .hero > nav, .view, .view.scrollView, .cardFrame, * { scrollbar-width: none; -ms-overflow-style: none; }
   html::-webkit-scrollbar, body::-webkit-scrollbar, .hero > nav::-webkit-scrollbar, .view::-webkit-scrollbar, .view.scrollView::-webkit-scrollbar, *::-webkit-scrollbar { display: none; width: 0; height: 0; }
 }
+
+/* phones: the top section starts 72px from the top of the screen */
+@media (max-width: 700px) {
+  .introTop:not(#_):not(#_):not(#_) { padding-top: 46px; }
+  :root:not(#_):not(#_):not(#_) { --hdrH: calc(50dvh + 102px - 314px); }
+}
