@@ -296,7 +296,7 @@ document.addEventListener("input", function (e) {
     var t = group.classList.contains("atTop");
     if (t === wasTop) return;
     wasTop = t;
-    if (t) { gsap.killTweensOf(bg); gsap.to(bg, { scale: 0.6, autoAlpha: 0, duration: 0.2, ease: "power2.in", transformOrigin: "50% 50%" }); }
+    if (t) { gsap.killTweensOf(bg); gsap.to(bg, { scale: 0.85, autoAlpha: 0, duration: 0.4, ease: "power2.out", transformOrigin: "50% 50%" }); }
     else place(true);
   }
   new MutationObserver(topCheck).observe(group, { attributes: true, attributeFilter: ["class"] });

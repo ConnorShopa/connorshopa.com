@@ -484,3 +484,11 @@ body:not(#_) { background-color: #F4F4F4; }
   .introTop:not(#_):not(#_):not(#_) { padding-top: 46px; }
   :root:not(#_):not(#_):not(#_) { --hdrH: max(190px, calc(50dvh - 212px)); }
 }
+
+/* back at the top of the page the nav settles into its neutral state smoothly: a longer ease, no overshoot or bounce */
+.filters:not(.stuck):not(#_):not(#_), .filters:not(.stuck) .pill:not(#_):not(#_), .filters:not(.stuck) .filtersLogo:not(#_):not(#_), .filters:not(.stuck) .filtersLogo img:not(#_):not(#_),
+.filters.stuck.returning:not(#_):not(#_), .filters.stuck.returning .pill:not(#_):not(#_), .filters.stuck.returning .filtersLogo:not(#_):not(#_), .filters.stuck.returning .filtersLogo img:not(#_):not(#_) {
+  transition-property: background-color, color, box-shadow, font-size, padding, height, gap, margin-top, transform, top;
+  transition-duration: .5s; transition-timing-function: cubic-bezier(.33, 1, .68, 1);
+}
+.filtersLogo.atTop:not(#_):not(#_)::before { transition: transform .4s cubic-bezier(.33, 1, .68, 1), opacity .4s ease-out; }
