@@ -671,3 +671,11 @@ body {
 @media (max-width: 900px) {
   .imageTextSection > img[src*="plunk_gif_02"] { width: min(100%, 300px); height: auto; align-self: center; }
 }
+
+/* the statement and Audience / Team read as one block: tight between them, more air before the first screenshot */
+.textSection.statement:not(#_):not(#_) { margin-bottom: -36px; }
+.productDetails:not(#_):not(#_) { margin-bottom: 88px; }
+@media (max-width: 700px) {
+  .textSection.statement:not(#_):not(#_) { margin-bottom: -24px; }
+  .productDetails:not(#_):not(#_) { margin-bottom: 48px; }
+}
